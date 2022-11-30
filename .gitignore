@@ -1,0 +1,8 @@
+/.metadata/
+*.classpath
+# *.project
+/**/classes/
+**/META-INF/
+*.jar
+**/.settings/
+Servers/

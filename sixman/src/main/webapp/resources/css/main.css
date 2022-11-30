@@ -1,0 +1,233 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css");
+@import url("https://meyerweb.com/eric/tools/css/reset/reset.css");
+html{
+    overflow-x: hidden;
+}
+body{
+    --main-color: #12887A;
+    --main-color-dark: #0E6D62;
+    --bo-20: rgba(0, 0, 0, 0.2);
+    --bo-40: rgba(0, 0, 0, 0.4);
+    --bo-60: rgba(0, 0, 0, 0.6);
+    --bo-80: rgba(0, 0, 0, 0.8);
+    font-family: Pretendard;
+}
+body *{
+    box-sizing: border-box;
+    /* border: 1px solid red; */
+}
+a{
+    text-decoration: none;
+}
+.material-symbols-outlined {
+font-variation-settings:
+'FILL' 1,
+'wght' 200,
+'GRAD' 0,
+'opsz' 48
+}
+.box{
+    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+.center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#main-header,
+#main-aside,
+#side-menu{
+    position: fixed;
+    display: flex;
+}
+#main-header{
+    width: 100vw;
+    height: 50px;
+    top: 0;
+    background-color: white;
+    box-shadow: 0px 1px 4px 1px rgba(0, 0, 0, 0.1);
+    z-index: 30;
+
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+#main-aside{
+    width: 250px;
+    height: 100vh;
+    left: 0;
+    background-color: var(--main-color);
+
+    flex-direction: column;
+    justify-content: center;
+    z-index: 20;
+}
+#side-menu{
+    width: 250px;
+    height: 100vh;
+    left: 0px;
+    transition: 0.4s;
+    background-color: rgba(255, 255, 255, 0.8);
+
+    flex-direction: column;
+    padding-top: 150px;
+    gap: 20px;
+    z-index: 10;
+    box-shadow: 0px 0px 5px 0px #12887a42;
+}
+#logo{
+    height: 100%;
+}
+#event-msg-box{
+    height: 35px;
+    width: 60vw;
+    justify-self: center;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.03);
+}
+#my-menu{
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 20px;
+}
+#my-menu article{
+    width: 40px;
+    height: 40px;
+}
+#my-menu article span{
+    font-size: 35px;
+    color: var(--main-color);
+}
+#my-img{
+    border-radius: 50%;
+    border: 1px solid var(--bo-60)
+}
+#menu-list li a{
+    width: 100%;
+    height: 65px;
+    display: flex;
+    align-items: center;
+
+    font-style: none;
+    text-decoration: none;
+    color: white;
+    margin-left: 35px;
+    font-size: 1.1em;
+    font-weight: 200;
+}
+#menu-list li:hover{
+    background-color: var(--bo-20);
+}
+#menu-list li a::before{
+    content: "·";
+    position: relative;
+    left: -10px;
+}
+#menu-footer{
+    display: flex;
+    width: 250px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    position: absolute;
+    bottom: 20px;
+}
+#menu-footer a{
+    color: var(--bo-40);
+    font-size: 2em;
+}
+#menu-footer a:hover{
+    color: black
+}
+#foot-logo{
+    width: 100px;
+    height: 60px;
+    background: url("https://cdn.discordapp.com/attachments/1041505810334896232/1044881002473988097/002.png");
+    background-size: cover;
+    opacity: 80%;
+}
+#side-main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    align-self: center;
+    padding: 20px;
+    border-bottom: 1px solid var(--main-color-dark);
+    gap: 10px;
+}
+#side-main span{
+    color: var(--main-color-dark);
+    font-size: 5em;
+}
+#side-main #side-title{
+    color: var(--main-color-dark);
+    font-size: 2em;
+}
+#side-list li a{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    height: 65px;
+
+    font-style: none;
+    text-decoration: none;
+    color: var(--main-color-dark);
+    margin-left: 45px;
+    font-size: 1.1em;
+    font-weight: 300;
+}
+#side-list li:hover{
+    background-color: rgba(0, 0, 0, 0.2);
+}
+#side-list li a::before{
+    content: "·";
+    position: relative;
+    left: -10px;
+}
+#side-list > ul > li > ul > li > a{
+    margin-left: 65px;
+    height: 50px;
+    font-size: 1em;
+}
+.main-box{
+    position: absolute;
+    padding: 90px 40px 40px 290px;
+    width: 100vw;
+    min-height: 100vh;
+    display: grid;
+}
+.btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--main-color);
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
+}
+.btn *{
+    color: white;
+}
+.btn:hover{
+    background-color: #17a897;
+}
+.c-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
+}
+.c-btn *{
+    color: var(--bo-20);
+}
+.c-btn:hover{
+    border: 1px solid var(--main-color);
+}
