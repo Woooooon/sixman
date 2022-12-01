@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="${path}/resources/css/notice.css">
+<link rel="stylesheet" href="${path}/resources/css/noticeList.css">
 </head>
 <body>
 
