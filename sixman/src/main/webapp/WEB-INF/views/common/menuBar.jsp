@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var = "path" value = "${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<title>육남상사</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,200,1,0" />
-    <link rel="stylesheet" href="<c:url value='resources/css/main.css'/>">
+    <link rel="stylesheet" href="${path}/resources/css/main.css">
 </head>
 <body>
 

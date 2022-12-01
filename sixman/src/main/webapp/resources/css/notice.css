@@ -1,0 +1,135 @@
+@charset "UTF-8";
+#notice-box{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.title-box{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.b-title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 130px;
+    padding: 15px;
+    border-bottom: 1px solid var(--main-color);
+    font-size: 1.5em;
+    font-weight: 500;
+}
+
+.hilight{
+    color: var(--main-color);
+}
+
+.header-box{
+    padding: 0 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-box .btn{
+    padding-right: 15px;
+    width: 100px;
+}
+
+.search-bar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bo-20);
+    border-radius: 50px;
+    padding: 5px 10px;
+}
+
+.search-bar input{
+    width: 120px;
+    border: none;
+    background: none;
+    outline: none;
+    font-size: 15px;
+    color: var(--bo-80);
+}
+
+.search-bar span{
+    font-size: 1.3em;
+    color: gray;
+}
+
+.list-box{
+    width: 95%;
+    height: 78%;
+    align-self: center;
+}
+
+.list-item{
+    display: grid;
+    grid-template-columns: 1fr 8fr 1.5fr 1fr ;
+    height: 6%;
+    border-bottom: 1px solid var(--bo-20);
+    cursor: pointer;
+}
+.list-item p{
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+}
+.list-item p:not(:nth-of-type(2)){
+    justify-content: center;
+}
+.list-item:hover p{
+    color: var(--main-color);
+}
+.first-item{
+    display: grid;
+    grid-template-columns: 1fr 8fr 1.5fr 1fr ;
+    height: 8%;
+    border-top: 1px solid var(--bo-80);
+    border-bottom: 1px solid var(--bo-80);
+    font-size: 1em;
+    font-weight: 600;
+}
+.first-item p{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    align-self: center;
+}
+.page-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+}
+.page-btn:hover{
+    border: 1px solid var(--main-color);
+}
+.checked-p-btn{
+    background-color: var(--main-color);
+    color: white;
+}
+.page-box span{
+    color: var(--bo-60);
+    cursor: pointer;
+}
+.page-box span:hover{
+    color: black
+}
