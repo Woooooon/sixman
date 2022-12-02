@@ -11,6 +11,7 @@ body{
     --bo-60: rgba(0, 0, 0, 0.6);
     --bo-80: rgba(0, 0, 0, 0.8);
     font-family: Pretendard;
+    accent-color: #12887a;
 }
 body *{
     box-sizing: border-box;

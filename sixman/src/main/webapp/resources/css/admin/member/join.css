@@ -1,0 +1,46 @@
+#main-box-2 {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+#dept-tree {
+    width: 15%;
+    height: 100%;
+    margin-right: 40px;
+}
+
+#member-controller {
+    width: 85%;
+    height: 100%;
+}
+
+#member-controller form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+#member-info {
+    width: 70%;
+    height: 100%;
+    margin-right: 40px;
+}
+
+#member-file {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    height: 100%;
+}
+
+#required-file {
+    width: 100%;
+    height: 40%;
+}
+
+#add-file {
+    width: 100%;
+    height: 60%;
+}
