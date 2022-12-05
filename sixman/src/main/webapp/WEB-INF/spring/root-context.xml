@@ -26,5 +26,10 @@
 		<constructor-arg index="0" ref="sqlSessionFactory"/>
 	</bean>
 	
+	 <!-- 트랜잭션 -->   
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	   <property name="dataSource" ref="dbcpSource"/>
+	</bean>
+	
 		
 </beans>
