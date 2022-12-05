@@ -1,0 +1,147 @@
+@charset "UTF-8";
+#notice-box{
+    gap: 0;
+}
+#wirte-box{
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 15fr;
+    row-gap: 5px;
+    justify-items: center;
+    padding: 0 40px;
+    margin: 30px 0;
+}
+
+#wirte-box .btn{
+    width: 15px;
+    height: 15px;
+    border-radius: 3px;
+}
+
+#wirte-box p{
+    height: 25px;
+    justify-self: start;
+}
+
+#wirte-box .btn span{
+    font-size: 15px;
+    font-weight: 700;
+}
+
+input{
+    border: none;
+    width: 100%;
+    border-bottom: 1px solid var(--bo-40);
+    outline: none;
+}
+
+input{
+    margin: 0;
+    height: 15px;
+}
+
+#file-box{
+    width: 100%;
+    padding: 10px;
+
+    border: 1px solid var(--bo-20);
+    border-radius: 5px;
+}
+
+.file-item{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 13px;
+}
+
+.file-item span{
+    font-size: 13px;
+}
+
+.note-editor.note-frame{
+    border: none;
+    max-width: 100%;
+}
+
+.panel-default > .panel-heading{
+    border: none;
+}
+
+button.btn{
+    background: none;
+    width: 35px;
+    height: 30px;
+    border: none;
+    box-sizing: border-box;
+    border-radius: 0;
+}
+
+button.btn *{
+    color: var(--main-color);
+}
+
+button.btn:hover{
+    background: none;
+    border: 1px solid var(--main-color);
+}
+
+.note-resizebar{
+    display: none;
+}
+
+.note-editor, .note-editing-area{
+    max-width: 100%;
+}
+
+#resive-member{
+    display: flex;
+    width: 100%;
+    gap: 20px;
+    position: relative;
+}
+
+#resive-member .btn{
+    width: 50px;
+    font-size: 10px;
+    height: 20px;
+    position: relative;
+    bottom: 0;
+}
+#resive-member .btn p{
+    height: auto;
+}
+
+#members{
+    grid-column: 3/4;
+    justify-self: start;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.members-item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+.members-item span{
+    font-size: 12px;
+}
+
+.members-item input[type=email]{
+    width: 120px;
+    text-align:center;
+    border: none;
+}
+
+#btn-box{
+    display: flex;
+    width: 100%;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+#btn-box > *{
+    width: 100px;
+}

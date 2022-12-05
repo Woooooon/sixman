@@ -1,0 +1,103 @@
+@charset "UTF-8";
+#wirte-box{
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 15fr;
+    row-gap: 5px;
+    justify-items: center;
+    padding: 0 40px;
+    margin: 15px 0;
+}
+
+#wirte-box .btn{
+    width: 15px;
+    height: 15px;
+    border-radius: 3px;
+}
+
+#wirte-box p{
+    height: 25px;
+    justify-self: start;
+}
+
+#wirte-box .btn span{
+    font-size: 15px;
+    font-weight: 700;
+}
+
+#wirte-box input[type=text]{
+    border: none;
+    width: 100%;
+    border-bottom: 1px solid var(--bo-40);
+    outline: none;
+}
+
+#wirte-box input[type=checkbox]{
+    margin: 0;
+    height: 15px;
+    width: 15px;
+}
+
+#file-box{
+    width: 100%;
+    padding: 10px;
+
+    border: 1px solid var(--bo-20);
+    border-radius: 5px;
+}
+
+.file-item{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 13px;
+}
+
+.file-item span{
+    font-size: 13px;
+}
+
+.note-editor.note-frame{
+    border: none;
+    max-width: 100%;
+}
+
+.panel-default > .panel-heading{
+    border: none;
+}
+
+button.btn{
+    background: none;
+    width: 35px;
+    height: 30px;
+    border: none;
+    box-sizing: border-box;
+    border-radius: 0;
+}
+
+button.btn *{
+    color: var(--main-color);
+}
+
+button.btn:hover{
+    background: none;
+    border: 1px solid var(--main-color);
+}
+
+.note-resizebar{
+    display: none;
+}
+
+.note-editor, .note-editing-area{
+    max-width: 100%;
+}
+
+#btn-box{
+    display: flex;
+    width: 100%;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+#btn-box > *{
+    width: 100px;
+}

@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="${path}/resources/css/list.css">
-<link rel="stylesheet" href="${path}/resources/css/notice/noticeDetail.css">
+<link rel="stylesheet" href="${path}/resources/css/mail/mailDetail.css">
 </head>
 <body>
 
@@ -22,33 +22,42 @@
         </div>
         <div class="list-box">
             <div class="first-item">
-                <div id="board-title">이건 제목입니다.</div>
-                <div>조회수<p id="view-count">10</p></div>
+                <div class="t-btn">답장</div>
+                <div class="t-btn">삭제</div>
+                <div class="t-btn">이동<span class="material-symbols-outlined"> arrow_drop_down </span></div>
             </div>
-            <div id="file-box">
-                <div>
-                    <input id="list-check" type="checkbox">
-                    <label for="list-check" class="material-symbols-outlined"> arrow_drop_down </label>
-                    <div id="file-list">
-                        <div class="file-item">
-                            <div>파일제목asdfasdfasdfasdf</div>
-                            <span class="material-symbols-outlined"> download </span>
-                        </div>
-                        <div class="file-item">
-                            <div>파일제목</div>
-                            <span class="material-symbols-outlined"> download </span>
-                        </div>
-                        <div class="file-item">
-                            <div>파일제목</div>
-                            <span class="material-symbols-outlined"> download </span>
-                        </div>
-                        <div class="file-item">
-                            <div>파일제목</div>
-                            <span class="material-symbols-outlined"> download </span>
+            <div id="mail-header">
+                <div id="board-title">이건 제목입니다.</div>
+                <div id="send-member">
+                    <p>보낸사람</p>
+                    <input type="email">
+                    <div class="btn"><p>주소록</p></div>
+                </div>
+                <div id="file-box">
+                    <div>
+                        <input id="list-check" type="checkbox">
+                        <label for="list-check" class="material-symbols-outlined"> arrow_drop_down </label>
+                        <div id="file-list">
+                            <div class="file-item">
+                                <div>파일제목asdfasdfasdfasdf</div>
+                                <span class="material-symbols-outlined"> download </span>
+                            </div>
+                            <div class="file-item">
+                                <div>파일제목</div>
+                                <span class="material-symbols-outlined"> download </span>
+                            </div>
+                            <div class="file-item">
+                                <div>파일제목</div>
+                                <span class="material-symbols-outlined"> download </span>
+                            </div>
+                            <div class="file-item">
+                                <div>파일제목</div>
+                                <span class="material-symbols-outlined"> download </span>
+                            </div>
                         </div>
                     </div>
+                    <div>작성일<p id="enroll-date">2022-05-05 11:11</p></div>
                 </div>
-                <div>작성일<p id="enroll-date">2022-05-05 11:11</p></div>
             </div>
             <div id="content-box">
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit minus ullam inventore praesentium eum! Corrupti at veniam quaerat nostrum, molestiae quibusdam tempora quidem incidunt possimus minima, nemo distinctio eum id.

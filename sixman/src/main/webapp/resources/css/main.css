@@ -231,4 +231,25 @@ font-variation-settings:
 }
 .c-btn:hover{
     border: 1px solid var(--main-color);
+    color: var(--bo-40);
+}
+.c-btn:hover *{
+    color: var(--bo-40);
+}
+a:hover{
+    border: none;
+    outline: none;
+    text-decoration:none;
+}
+a{
+    border: none;
+    outline: none;
+    text-decoration:none;
+}
+.t-btn{
+    color: var(--bo-40);
+    cursor: pointer;
+}
+.t-btn:hover{
+    color: var(--bo-80);
 }

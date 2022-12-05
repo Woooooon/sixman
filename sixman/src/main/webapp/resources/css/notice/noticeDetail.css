@@ -19,7 +19,7 @@
     justify-content: space-between;
 
     padding: 0 20px;
-    height: 10%;
+    height: 65px;
 }
 
 .first-item div:nth-of-type(1){
@@ -37,7 +37,6 @@
     display: flex;
     justify-content: space-between;
     padding: 20px;
-    position: relative;
 }
 
 .file-item{
@@ -86,7 +85,6 @@ input[id=list-check]{
     padding-right: 10px;
     height: 40px;
     overflow: hidden;
-    position: absolute;
     left: 60px;
     z-index: 2;
 }
@@ -104,6 +102,9 @@ input[id=list-check]{
 
 .list-box{
     border-bottom: 1px solid black;
+    height: auto;
+    min-height: 70%;
+    padding-bottom: 100px;
 }
 
 #content-box{

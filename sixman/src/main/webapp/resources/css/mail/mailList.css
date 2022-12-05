@@ -1,0 +1,44 @@
+.b-title{
+    width: auto;
+}
+
+.first-item div{
+    display: flex;
+    align-items: center;
+}
+
+.first-item > div{
+    gap: 15px;
+}
+
+.first-item{
+    display: flex;
+    justify-content: space-between;
+}
+
+#mail-count{
+    gap: 5px;
+    color: var(--bo-60);
+}
+
+.none{
+    color: var(--bo-40);
+}
+
+.list-item{
+    grid-template-columns: 1fr 1fr 2fr 10fr 3fr;
+    align-items: center;
+}
+
+.list-item input[type=checkbox]{
+    width: 15px;
+    height: 15px;
+}
+
+.list-item span{
+    color: var(--main-color);
+}
+
+.read{
+    color: var(--bo-40);
+}
