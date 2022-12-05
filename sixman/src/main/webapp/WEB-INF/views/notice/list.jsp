@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="${path}/resources/css/noticeList.css">
+<link rel="stylesheet" href="${path}/resources/css/notice/noticeList.css">
 </head>
 <body>
 
@@ -19,7 +19,7 @@
             <div class="b-page-count hilight">50</div>
         </div>
         <div class="header-box">
-            <div class="btn" onclick="location.href='/sixman/notice/write'"><span class="material-symbols-outlined"> add </span><p>글쓰기</p></div>
+            <a href="${path}/notice/write" class="btn" onclick="location.href='/sixman/notice/write'"><span class="material-symbols-outlined"> add </span><p>글쓰기</p></a>
             <div class="search-bar"><input type="text" placeholder="검색"><span class="material-symbols-outlined"> search </span></div>
         </div>
         <div class="list-box">
