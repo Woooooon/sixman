@@ -1,5 +1,4 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css");
-@import url("https://meyerweb.com/eric/tools/css/reset/reset.css");
 html{
     overflow-x: hidden;
 }
@@ -198,6 +197,7 @@ font-variation-settings:
     position: absolute;
     padding: 90px 40px 40px 290px;
     width: 100vw;
+    max-width: 100vw;
     min-height: 100vh;
     display: grid;
 }
@@ -225,16 +225,17 @@ font-variation-settings:
     border-radius: 5px;
     padding: 5px;
     cursor: pointer;
+    font-weight: 700;
 }
 .c-btn *{
-    color: var(--bo-20);
+    color: var(--bo-40);
 }
 .c-btn:hover{
     border: 1px solid var(--main-color);
-    color: var(--bo-40);
+    color: var(--bo-80);
 }
 .c-btn:hover *{
-    color: var(--bo-40);
+    color: var(--bo-80);
 }
 a:hover{
     border: none;
@@ -248,8 +249,43 @@ a{
 }
 .t-btn{
     color: var(--bo-40);
+    font-weight: 700;
     cursor: pointer;
 }
 .t-btn:hover{
     color: var(--bo-80);
+}
+
+
+/* 페이징 */
+.page-box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    align-self: center;
+}
+.page-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+}
+.page-btn:hover{
+    border: 1px solid var(--main-color);
+}
+.checked-p-btn{
+    background-color: var(--main-color);
+    color: white;
+}
+.page-box span{
+    color: var(--bo-60);
+    cursor: pointer;
+}
+.page-box span:hover{
+    color: black
 }

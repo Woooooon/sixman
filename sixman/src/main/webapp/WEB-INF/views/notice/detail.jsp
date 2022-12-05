@@ -18,7 +18,7 @@
 	<div id="notice-box" class="box">
         <div class="title-box">
             <span class="material-symbols-outlined"> chevron_left </span>
-            <div class="b-title">글 작성</div>
+            <div class="b-title">글 목록</div>
         </div>
         <div class="list-box">
             <div class="first-item">

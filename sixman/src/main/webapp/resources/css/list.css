@@ -18,7 +18,7 @@
     justify-content: center;
 
     width: 130px;
-    padding: 15px;
+    padding: 10px 15px;
     border-bottom: 1px solid var(--main-color);
     font-size: 1.5em;
     font-weight: 500;
@@ -37,7 +37,7 @@
 
 .header-box .btn{
     padding-right: 15px;
-    width: 100px;
+    width: auto;
 }
 
 .search-bar{

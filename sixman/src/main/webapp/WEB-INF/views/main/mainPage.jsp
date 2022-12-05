@@ -67,6 +67,7 @@
                     <div class="box-item"><p>[공지사항]</p><p>ㅁ나어리ㅏㅣㅁㄴㅇㄻㄴㅇㄹ핳헤ㅔㅔㅔㅔ 처리해줘요</p><p>11:30</p></div>
                     <div class="box-item"><p>[공지사항]</p><p>ㅁ나어리ㅏㅣㅁㄴㅇㄻㄴㅇㄹ핳헤ㅔㅔㅔㅔ 처리해줘요</p><p>11:30</p></div>
                     <div class="box-item"><p>[공지사항]</p><p>ㅁ나어리ㅏㅣㅁㄴㅇㄻㄴㅇㄹ핳헤ㅔㅔㅔㅔ 처리해줘요</p><p>11:30</p></div>
+                    <div class="box-item"><p>[공지사항]</p><p>ㅁ나어리ㅏㅣㅁㄴㅇㄻㄴㅇㄹ핳헤ㅔㅔㅔㅔ 처리해줘요</p><p>11:30</p></div>
                 </div>
             </article>
         </section>

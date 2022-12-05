@@ -26,7 +26,7 @@
     <div  id="notice-box" class="box">
         <div class="title-box">
             <a href="${path}/mail/list" class="material-symbols-outlined"> chevron_left </a>
-            <div class="b-title">글 작성</div>
+            <div class="b-title">메일 작성</div>
         </div>
         <div id="wirte-box">
             <p>받는사람</p>

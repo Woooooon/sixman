@@ -1,4 +1,7 @@
 @charset "UTF-8";
+.b-title{
+    width: fit-content;
+}
 
 #notice-box{
     gap: 30px;
@@ -16,7 +19,7 @@
 .first-item{
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 20px;
     padding: 0 20px;
     height: 50px;
 }
@@ -29,6 +32,7 @@
 #file-box{
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
     padding: 20px;
 }
 
@@ -143,13 +147,13 @@ input[id=list-check]{
     flex-direction: column;
     gap: 10px;
     padding: 20px 20px 0px 20px;
-    border-bottom: 1px solid var(--bo-40);
+    border-bottom: 1px solid var(--bo-20);
 }
 
 #send-member{
     display: grid;
     align-items: center;
-    grid-template-columns: 2fr 10fr 1fr;
+    grid-template-columns: 1.5fr 20fr 1.5fr;
     gap: 10px;
 }
 
@@ -159,11 +163,14 @@ input[id=list-check]{
     border-bottom: 1px solid var(--bo-40);
     outline: none;
     margin: 0;
-    height: 15px;
+    height: 30px;
 }
-
 
 #board-title{
     font-size: 2em;
     font-weight: 600;
+}
+
+#board-footer{
+    justify-content: end;
 }

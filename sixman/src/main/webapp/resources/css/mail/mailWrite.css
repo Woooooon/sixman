@@ -1,6 +1,7 @@
 @charset "UTF-8";
 #notice-box{
     gap: 0;
+    max-width: 100%;
 }
 #wirte-box{
     display: grid;
@@ -27,16 +28,17 @@
     font-weight: 700;
 }
 
+.b-title{
+    width: fit-content;
+}
+
 input{
     border: none;
     width: 100%;
     border-bottom: 1px solid var(--bo-40);
     outline: none;
-}
-
-input{
     margin: 0;
-    height: 15px;
+    height: 100%;
 }
 
 #file-box{
@@ -56,11 +58,6 @@ input{
 
 .file-item span{
     font-size: 13px;
-}
-
-.note-editor.note-frame{
-    border: none;
-    max-width: 100%;
 }
 
 .panel-default > .panel-heading{
@@ -144,4 +141,23 @@ button.btn:hover{
 
 #btn-box > *{
     width: 100px;
+}
+
+/* class="note-editor note-frame panel panel-default" */
+.note-editor,
+.note-frame,
+.panel,
+.panel-default{
+    max-width: 100%;
+}
+
+.note-editor.note-frame.panel.panel-default{
+    border: 1px solid var(--bo-20);
+}
+
+
+.note-editor{
+    max-width: 100%  !important;
+    margin-left: 30px !important;
+    margin-right: 30px !important;
 }

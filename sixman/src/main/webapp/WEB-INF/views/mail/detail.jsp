@@ -18,7 +18,7 @@
 	<div id="notice-box" class="box">
         <div class="title-box">
             <span class="material-symbols-outlined"> chevron_left </span>
-            <div class="b-title">글 작성</div>
+            <div class="b-title">받은 메일함</div>
         </div>
         <div class="list-box">
             <div class="first-item">
@@ -30,8 +30,8 @@
                 <div id="board-title">이건 제목입니다.</div>
                 <div id="send-member">
                     <p>보낸사람</p>
-                    <input type="email">
-                    <div class="btn"><p>주소록</p></div>
+                    <input type="email" readonly>
+                    <div class="btn"><span class="material-symbols-outlined"> add </span><p>주소록</p></div>
                 </div>
                 <div id="file-box">
                     <div>
@@ -75,19 +75,7 @@
             </div>
         </div>
         <div id="board-footer">
-            <div id="before-next">
-                <div>
-                    <p>다음글</p>
-                    <p>제목제목제에에에에에목</p>
-                    <p>2022-05-05 11:11</p>
-                </div>
-                <div>
-                    <p>이전글</p>
-                    <p>제목제목제에에에에에목</p>
-                    <p>2022-05-05 11:11</p>
-                </div>
-            </div>
-            <div class="btn"><p>수정하기</p></div>
+            <div class="btn"><p>다시쓰기</p></div>
         </div>
     </div>
 
