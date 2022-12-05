@@ -1,0 +1,80 @@
+.main-box-2 {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    gap: 40px;
+}
+
+#dept-wrap {
+    width: 14%;
+    height: 100%;
+}
+
+#employee-wrap {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    height: 100%;
+    gap: 40px;
+}
+
+#detail-wrap {
+    display: flex;
+    flex-direction: column;
+    width: 16%;
+    height: 100%;
+    gap: 40px;
+}
+
+#employee-search {
+    width: 100%;
+    height: 10%;
+}
+
+#employee-list {
+    width: 100%;
+    height: 90%;
+    padding: 20px;
+}
+
+#employee-detail {
+    width: 100%;
+    height: 50%;
+}
+
+#dept-detail {
+    width: 100%;
+    height: 50%;
+}
+
+#companyLogo {
+    margin: 0px 0px 10px 10px;
+    width: 100px;
+}
+
+#companyLogo > img {
+    max-width: 100%;
+    object-fit: fill;
+}
+
+#employee-info-wrap {
+    width: 100%;
+    height: 90%;
+}
+#sortation {
+    font-weight: 600;
+    border-top: 1px solid var(--bo-60);
+    border-bottom: 1px solid var(--main-color);
+}
+.list-item {
+    width: 100%;
+    height: 7%;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr 2fr;
+    border-bottom: 1px solid var(--bo-20);
+    cursor: pointer;
+    align-items: flex-end;
+    text-align: center;
+    padding-bottom: 10px;
+    font-size: 15px;
+}
