@@ -28,33 +28,6 @@
             </article>
         </section>
     </header>
-    <div id="alarm-box">
-        <div id="inner-box">
-
-            <div class="alarm-item">
-                <div>
-                    <div class="item-header">
-                        <div>[카테고리]</div>
-                        <div>2022:00:00:00</div>
-                    </div>
-                    <div class="item-title">ooo님이 보낸메일 "제목 제sadfasdf목 제목"</div>
-                </div>
-                <span class="t-btn material-symbols-outlined"> close </span>
-            </div>
-
-            <div class="alarm-item">
-                <div>
-                    <div class="item-header">
-                        <div>[카테고리]</div>
-                        <div>2022:00:00:00</div>
-                    </div>
-                    <div class="item-title">ooo님이 보낸메일 "제목 제sadfasdf목 제목"</div>
-                </div>
-                <span class="t-btn material-symbols-outlined"> close </span>
-            </div>
-
-        </div>
-    </div>
     <aside id="main-aside">
         <ul id="menu-list">
             <li><a>근태관리</a></li>
@@ -106,8 +79,7 @@
 
     menuMap.set("메일함", [
         {icon: "mail", title: "메일함"},
-        {title: "메일작성", url: "${path}/mail/write"},
-        {title: "받은메일함", url: "${path}/mail/list"},
+        {title: "받은메일함", url: ""},
         {title: "보낸메일함", url: ""},
         {title: "임시보관함", url: ""},
         {title: "카테고리", url: "", subList:[
@@ -190,37 +162,5 @@
         }
         sideListBox.innerHTML = "<ul>"+liList+"</ul>"
     }
-
-    // 알람스크롤
-    const alarm = document.querySelector('#alarm-box');
-    const alarmBtn = document.querySelector('#alarm');
-
-    alarmBtn.addEventListener('mouseover', ()=>{
-        alarm.animate([
-            {},{
-                top:"50px",
-            }],{
-                duration: 300,
-                fill: "forwards"
-        });
-    })
-
-    alarm.addEventListener('mouseleave', ()=>{
-        alarm.animate([
-            {},{
-                top:"-500px",
-            }],{
-                duration: 300,
-                fill: "forwards"
-        });
-    })
-
-    const alarmItems = document.querySelectorAll('.alarm-item');
-    alarmItems.forEach(element => {
-        element.querySelector('span').addEventListener('click', ()=>{
-            element.remove();
-        });
-    });
-
 </script>
 </html>

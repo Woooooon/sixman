@@ -1,15 +1,11 @@
 @charset "UTF-8";
-#notice-box{
-    gap: 0;
-    max-width: 100%;
-}
 #wirte-box{
     display: grid;
-    grid-template-columns: 1.5fr 1fr 15fr;
+    grid-template-columns: 1fr 1fr 15fr;
     row-gap: 5px;
     justify-items: center;
     padding: 0 40px;
-    margin: 30px 0;
+    margin: 15px 0;
 }
 
 #wirte-box .btn{
@@ -28,17 +24,17 @@
     font-weight: 700;
 }
 
-.b-title{
-    width: fit-content;
-}
-
-input:not([type=submit]){
+#wirte-box input[type=text]{
     border: none;
     width: 100%;
     border-bottom: 1px solid var(--bo-40);
     outline: none;
+}
+
+#wirte-box input[type=checkbox]{
     margin: 0;
-    height: 100%;
+    height: 15px;
+    width: 15px;
 }
 
 #file-box{
@@ -86,52 +82,6 @@ button.btn:hover{
     display: none;
 }
 
-.note-editor, .note-editing-area{
-    max-width: 100%;
-}
-
-#resive-member{
-    display: flex;
-    width: 100%;
-    gap: 20px;
-    position: relative;
-}
-
-#resive-member .btn{
-    width: 50px;
-    font-size: 10px;
-    height: 20px;
-    position: relative;
-    bottom: 0;
-}
-#resive-member .btn p{
-    height: auto;
-}
-
-#members{
-    grid-column: 3/4;
-    justify-self: start;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.members-item{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-}
-
-.members-item span{
-    font-size: 12px;
-}
-
-.members-item input[type=email]{
-    width: 120px;
-    text-align:center;
-    border: none;
-}
-
 #btn-box{
     display: flex;
     width: 100%;
@@ -143,20 +93,11 @@ button.btn:hover{
     width: 100px;
 }
 
-/* class="note-editor note-frame panel panel-default" */
-.note-editor,
-.note-frame,
-.panel,
-.panel-default{
-    max-width: 100%;
-}
-
 .note-editor.note-frame.panel.panel-default{
     border: 1px solid var(--bo-20);
 }
 
-
-.note-editor{
+.note-editor,.note_editor{
     max-width: 100%  !important;
     margin-left: 30px !important;
     margin-right: 30px !important;

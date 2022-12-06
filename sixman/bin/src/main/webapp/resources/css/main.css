@@ -96,7 +96,7 @@ font-variation-settings:
     width: 40px;
     height: 40px;
 }
-#my-menu > article > span{
+#my-menu article span{
     font-size: 35px;
     color: var(--main-color);
 }
@@ -210,14 +210,12 @@ font-variation-settings:
     border-radius: 5px;
     padding: 5px;
     cursor: pointer;
-    color: white;
 }
 .btn *{
     color: white;
 }
 .btn:hover{
     background-color: #17a897;
-    color: white;
 }
 .c-btn{
     display: flex;
@@ -228,13 +226,9 @@ font-variation-settings:
     padding: 5px;
     cursor: pointer;
     font-weight: 700;
-    background-color: white;
-    border: none;
-    color: var(--bo-40);
 }
 .c-btn *{
     color: var(--bo-40);
-    background-color: white;
 }
 .c-btn:hover{
     border: 1px solid var(--main-color);
@@ -294,72 +288,4 @@ a{
 }
 .page-box span:hover{
     color: black
-}
-
-/* 메뉴바 알람 설정 */
-#alarm{
-    position: relative;
-}
-
-#alarm span:hover{
-    color: var(--main-color-dark);
-}
-
-#alarm-box{
-    position: absolute;
-    width: 300px;
-    height: 500px;
-    right: 10px;
-    background-color: white;
-    top: -500px;
-    z-index: 2;
-    border: 1px solid var(--main-color);
-}
-
-#inner-box{
-    width: 100%;
-    position: relative;
-    margin: auto;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    align-items: center;
-    padding: 5px;
-}
-
-.alarm-item{
-    width: 100%;
-    height: 50px;
-    border-bottom: 1px solid var(--bo-40);
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    cursor: pointer;
-}
-
-.alarm-item:hover{
-    color: var(--main-color);
-}
-
-.item-header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    font-size: 0.7em;
-}
-
-.item-header > div:last-child{
-    color: var(--bo-40);
-}
-
-.item-title{
-    font-size: 0.9em;
-    font-weight: 600;
-    width: 250px;
-    margin-top: 3px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
