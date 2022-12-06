@@ -17,7 +17,7 @@
 
 	<div id="notice-box" class="box">
         <div class="title-box">
-            <span class="material-symbols-outlined"> chevron_left </span>
+            <span class="material-symbols-outlined" onclick="location.href='${path}/notice/list'"> chevron_left </span>
             <div class="b-title">글 목록</div>
         </div>
         <div class="list-box">
@@ -78,7 +78,11 @@
                     <p>2022-05-05 11:11</p>
                 </div>
             </div>
-            <div class="btn"><p>수정하기</p></div>
+            <div id="btn-box">
+                <div class="btn"><p>수정하기</p></div>
+                <div class="c-btn"><p>삭제하기</p></div>
+            </div>
+
         </div>
     </div>
 

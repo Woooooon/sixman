@@ -135,7 +135,7 @@ button.btn:hover{
 }
 
 .members-item input[type=email]{
-    width: 120px;
+    width: fit-content;
     text-align:center;
     border: none;
 }

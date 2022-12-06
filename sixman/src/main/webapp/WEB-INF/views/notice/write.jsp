@@ -17,7 +17,7 @@
 <!-- summernote css/js-->
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>    
-<script defer src="${path}/resources/js/notice.js"></script>
+<script defer src="${path}/resources/js/notice/notice.js"></script>
 </head>
 <body>
 

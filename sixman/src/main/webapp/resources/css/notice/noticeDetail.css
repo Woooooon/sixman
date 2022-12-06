@@ -117,7 +117,8 @@ input[id=list-check]{
     padding: 0 30px;
 }
 
-#board-footer .btn{
+#board-footer .btn,
+#board-footer .c-btn{
     width: 120px;
     height: 40px;
 }
@@ -143,4 +144,9 @@ input[id=list-check]{
 #before-next > div > p:nth-of-type(3){
     font-size: 0.8em;
     color: var(--bo-40);
+}
+
+#btn-box{
+    display: flex;
+    gap: 10px;
 }

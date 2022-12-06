@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="${path}/resources/css/list.css">
 <link rel="stylesheet" href="${path}/resources/css/mail/mailList.css">
+<script defer src="${path}/resources/js/mail/mailList.js"></script>
 </head>
 <body>
 
@@ -28,12 +29,37 @@
                     <input type="checkbox">
                     <p>읽음</p>
                     <p>삭제</p>
-                    <div>이동<span class="material-symbols-outlined"> arrow_drop_down </span></div>
+                    <div class="category-btn checked click-able">
+                        이동
+                        <span class="material-symbols-outlined"> arrow_drop_down </span>
+                        <div id="category-box">
+                            <div class="category-items">
+                                <label>즐겨찾기<input name="category" type="radio"><span class='material-symbols-outlined'> close </span></label>
+                                <label>즐겨찾기<input name="category" type="radio"></label>
+                            </div>
+                            <div class="category-footer">
+                                <div>
+                                    <input type="text">
+                                    <div class="btn"><p>추가</p></div>
+                                </div>
+                                <div class="btn"><p>이동</p></div>
+                            </div>
+                        </div>
+                    </div>
                     <div id="mail-count"><p class="hilight">50</p>/<p>100</p>안읽은 메일</div>
                 </div>
                 <div>
-                    <div>필터<span class="material-symbols-outlined"> arrow_drop_down </span></div>
-                    <div>전체보기<span class="material-symbols-outlined"> arrow_drop_down </span></div>
+                    <div class="category-btn">
+                        필터
+                        <span class="material-symbols-outlined"> arrow_drop_down </span>
+                        <div id="category-box3">
+                            <div class="category-items">
+                                <button>모든메일</button>
+                                <button>읽은메일만</button>
+                                <button>안읽은메일만</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="list-item">

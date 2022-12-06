@@ -17,7 +17,7 @@
 <!-- summernote css/js-->
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>    
-<script defer src="${path}/resources/js/mail.js"></script>    
+<script defer src="${path}/resources/js/mail/mail.js"></script>    
 </head>
 <body>
 
@@ -36,22 +36,7 @@
                 <div></div>
                 <div id="resive-member"><input id="email-input" type="text"><div class="btn"><p>주소록</p></div></div>
                 <div id="members">
-                    <div class="members-item">
-                        <input type="email" value="asdfas@naver.com">
-                        <span class="t-btn material-symbols-outlined"> close </span>
-                    </div>
-                    <div class="members-item">
-                        <input type="email" value="asdfas@naver.com">
-                        <span class="t-btn material-symbols-outlined"> close </span>
-                    </div>
-                    <div class="members-item">
-                        <input type="email" value="asdfas@naver.com">
-                        <span class="t-btn material-symbols-outlined"> close </span>
-                    </div>
-                    <div class="members-item">
-                        <input type="email" value="asdfas@naver.com">
-                        <span class="t-btn material-symbols-outlined"> close </span>
-                    </div>
+                    
                 </div>
                 <p>제목</p>
                 <div></div>

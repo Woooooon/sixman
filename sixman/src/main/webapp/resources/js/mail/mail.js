@@ -37,12 +37,45 @@ function validateEmail(email) {
 }
 
 const emailInput = document.querySelector('#email-input');
-emailInput.addEventListener('keyup',()=>{
+emailInput.addEventListener('blur', createMailItem);
+emailInput.addEventListener('keyup', (event)=>{
+
+    emailInput.removeEventListener('blur', createMailItem);
+    if(event.keyCode == 13) createMailItem();
+    setTimeout(function(){
+        emailInput.addEventListener('blur', createMailItem);
+      }, 10)
+
+});
+
+function createMailItem(params) {
     const inputMail = document.createElement('input');
     inputMail.setAttribute('type','email');
     inputMail.setAttribute('name','email');
 
-    // 이어서
+    const email = emailInput.value;
+    if(validateEmail(email)){
+        inputMail.value = email
+        emailInput.value = '';
+    }else{
+        if(email==''){return}
+        alert("이메일 형식을 확인해주세요");
+        return;
+    }
 
-});
+    const span = document.createElement('span');
+    span.classList.add('t-btn');
+    span.classList.add('material-symbols-outlined');
+    span.innerHTML = 'close';
+
+    const div = document.createElement('div');
+    div.classList.add('members-item');
+    div.append(inputMail, span);
+
+    span.addEventListener('click', ()=>{
+        div.remove();
+    });
+
+    document.querySelector('#members').append(div);
+}
 
