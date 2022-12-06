@@ -326,6 +326,7 @@ a{
     gap: 5px;
     align-items: center;
     padding: 5px;
+    padding-left: 10px;
 }
 
 .alarm-item{
@@ -362,4 +363,20 @@ a{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+#alarm-count{
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 5px;
+    top: 5px;
+    color: white;
+    font-size: 0.5em;
+    font-weight: 700;
 }

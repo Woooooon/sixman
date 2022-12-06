@@ -19,6 +19,7 @@
         <section id="my-menu">
             <article id="alarm" class="center">
                 <span class="material-symbols-outlined"> notifications </span>
+                <div id="alarm-count">1</div>
             </article>
             <article id="msg" class="center">
                 <span class="material-symbols-outlined"> sms </span>
