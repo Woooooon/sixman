@@ -133,9 +133,8 @@
 
     menuMap.set("일정", [
         {icon: "calendar_month", title: "일정"},
-        {title: "", url: ""},
-        {title: "", url: ""},
-        {title: "", url: ""}
+        {title: "일정", url: "${path}/schedule/calendar"},
+        {title: "주간일정", url: ""},
     ]);
 
     menuMap.set("급여", [

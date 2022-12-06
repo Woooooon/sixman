@@ -9,8 +9,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%@include file="/WEB-INF/views/common/menuBar.jsp" %>
+    <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
+    <main class="main-box" id="main">
+        <div class="">
 
+        </div>
+
+    </main>
 
 </body>
 </html>
