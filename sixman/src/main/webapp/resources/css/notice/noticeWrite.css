@@ -1,4 +1,8 @@
 @charset "UTF-8";
+p{
+    display: flex;
+    align-items: center;
+}
 #wirte-box{
     display: grid;
     grid-template-columns: 1fr 1fr 15fr;
@@ -6,6 +10,7 @@
     justify-items: center;
     padding: 0 40px;
     margin: 15px 0;
+    align-items: center;
 }
 
 #wirte-box .btn{
@@ -50,10 +55,17 @@
     justify-content: space-between;
     width: 100%;
     font-size: 13px;
+    align-items: center;
+}
+
+.file-item p{
+    display: flex;
+    align-items: center;
 }
 
 .file-item span{
     font-size: 13px;
+    cursor: pointer;
 }
 
 .panel-default > .panel-heading{
