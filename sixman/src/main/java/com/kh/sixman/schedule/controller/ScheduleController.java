@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ScheduleController {
 
 	//일정 (화면)
-	@GetMapping("main")
+	@GetMapping("calendar")
 	public String main() {
-		return "schedule/main";
+		return "schedule/calendar";
 	}
 	
 }
