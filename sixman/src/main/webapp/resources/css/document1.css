@@ -63,18 +63,80 @@ p{
 }
 .documentbox > div{
     border-bottom: 1px solid #ddd; 
+    font-size: 0;
 }
 .documentbox > div.top{
     border-color: 1px solid #999;
 }
 .documentbox > div:last-child{
-    bor
-}
-.first-document{
-    display: inline-block;
+    border-color: 1px solid #000;
 }
 
-.docupagebox
+.documentbox > div > div{
+    display: inline-block;
+    font-size: 1.4rem;
+    text-align: center;
+}
+.documentbox > div.top > div{
+    font-weight: 600;
+}
+.documentbox .docudate{
+    width: 10%;
+}
+.documentbox .docutitle{
+    width: 60%;
+    text-align: left;
+}
+
+.documentbox .top .docutitle{
+    text-align: center;
+}
+.documentbox .docuno{
+    width: 10%;
+}
+.documentbox .docustate{
+    width: 10;
+}
+
+/* .first-document{
+    display: inline-block;
+} */
+
+.docupagebox{
+    margin-top: 30px;
+    text-align: center;
+    font-size: 0;
+
+}
+.docupagebox a{
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    border: 1px solid #ddd;
+    border-left: 0;
+    line-height:  100%;
+}
+
+.docupagebox a.bt{
+    padding-top: 10px;
+    font-size: 1.2rem;;
+    letter-spacing: -1px;
+}
+.docupagebox a.num{
+    padding-top: 9px;
+    font-size: 1.4rem;
+}
+.docupagebox a.num.on{
+    border-color: #000;
+    background-color: #000;
+    color: #fff;
+}
+
+.docupagebox a:first-child{
+    border-left: 1px solid #ddd;
+}
+
+
 
 
 
