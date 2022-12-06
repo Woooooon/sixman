@@ -17,6 +17,7 @@
 <!-- summernote css/js-->
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>    
+<script defer src="${path}/resources/js/mail.js"></script>    
 </head>
 <body>
 
@@ -33,7 +34,7 @@
             <div id="wirte-box">
                 <p>받는사람</p>
                 <div></div>
-                <div id="resive-member"><input type="email"><div class="btn"><p>주소록</p></div></div>
+                <div id="resive-member"><input id="email-input" type="text"><div class="btn"><p>주소록</p></div></div>
                 <div id="members">
                     <div class="members-item">
                         <input type="email" value="asdfas@naver.com">
@@ -54,20 +55,16 @@
                 </div>
                 <p>제목</p>
                 <div></div>
-                <input type="text">
+                <input name="title" type="text">
                 <p>파일첨부</p>
-                <div class="btn"><span class="material-symbols-outlined"> add </span></div>
+                <div id="file-btn" class="btn"><span class="material-symbols-outlined"> add </span></div>
                 <div id="file-box">
-                    <div class="file-item">
-                        <p>민아럼닝ㅁㄴ이ㅏㅓㄻㄴ;ㅇ라ㅣㅁㄴ.jpg</p>
-                        <span class="t-btn material-symbols-outlined"> close </span>
-                    </div>
                 </div>
             </div>
             <div name="" id="summernote"></div>
             <div id="btn-box">
-                <input class="btn" type="submit" value="작성하기">
-                <input class="c-btn" type="submit" value="임시저장">
+                <input name="submit" class="btn" type="submit" value="작성하기">
+                <input name="submit" class="c-btn" type="submit" value="임시저장">
             </div>
 
         </form>

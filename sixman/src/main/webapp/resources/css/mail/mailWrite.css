@@ -1,4 +1,10 @@
 @charset "UTF-8";
+
+p{
+    display: flex;
+    align-items: center;
+}
+
 #notice-box{
     gap: 0;
     max-width: 100%;
@@ -54,10 +60,12 @@ input:not([type=submit]){
     justify-content: space-between;
     width: 100%;
     font-size: 13px;
+    align-items: center;
 }
 
 .file-item span{
     font-size: 13px;
+    cursor: pointer;
 }
 
 .panel-default > .panel-heading{
