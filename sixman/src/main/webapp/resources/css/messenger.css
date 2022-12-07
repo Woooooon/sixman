@@ -1,7 +1,44 @@
 @charset "UTF-8";
 
 .messenger-whole{
-	width:200px;
-	height:1080px;
+	width:420px;
+	height:968px;
+	border: 2px solid black;
+	background-color: white;
+	box-sizing:border-box;
+	margin:0px;
+}
+.title-text01{
+	color:#0E6D62;
+	margin:10px;
+	font-size: 20px;
+}
+.bottom-area{
+
+	width:380px;
+	height:4px;
+	border:2px solid #0E6D62;
+	background-color: #0E6D62;
+	margin:10px;
+}
+
+#main-center-text1{
+	margin-top:450px;
+	text-align: center;
+}
+
+#main-center-text2{
+	margin-left:40px;
+}
+
+#who-chat{
+	margin:10px;
+}
+
+.btn{
 	
+}
+
+.textbox-messenger{
+	margin-left:40px;
 }
