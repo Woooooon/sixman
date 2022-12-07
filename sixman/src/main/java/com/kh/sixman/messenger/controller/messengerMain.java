@@ -11,6 +11,11 @@ public class messengerMain {
 	//메신저 화면
 	@GetMapping("/")
 	public String messengerMain() {
-		return "messengerMain";
+		return "/messenger/messengerMain";
+	}
+	
+	@GetMapping("/whochat")
+	public String whochat() {
+		return "/messenger/whoChat";
 	}
 }
