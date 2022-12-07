@@ -26,11 +26,10 @@
 .title span {
     color: var(--main-color);
     margin-right: 7px;
-    font-size: 19px;
 }
 .title label {
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 18px;
+    font-weight: 500;
     margin-bottom: 2px;
 }
 
@@ -77,11 +76,13 @@
 }
 
 .body {
+    margin-top: 10px;
     width: 100%;
     height: 80%;
     display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
-    gap: 5px;
+    gap: 100px 60px;
 }
 .body-controller {
     width: 100%;
@@ -92,92 +93,25 @@
     font-size: 12px;
 }
 
-.list-controller span,
 .body-controller span {
-    font-size: 18px;
+    font-size: 20px;
     margin-left: 3px;
     cursor: pointer;
     color: var(--bo-40);
 }
 
-.list-controller span:hover,
 .body-controller span:hover {
     color: #000;
 }
 
-.receive-address {
-    width: 100%;
-    height: 100%;
-    padding: 0 150px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.sender {
-    width: 100%;
-    height: 10%;
-    display: flex;
-    align-items: flex-end;
-    padding-left: 40px;
-    font-size: 12px;
-    margin-bottom: 5px;
-    font-weight: 700;
-}
-
-.sender p:first-child {
-    margin-right: 7px;
-}
-
-.sender p:last-child {
-    font-size: 10px;
-    font-weight: 400;
-    margin-left: 3px;
-}
-
-.card-list {
-    width: 100%;
-    height: 85%;
-    display: flex;
-    border: 1px solid var(--bo-40);
-    align-items: center;
-    overflow: hidden;
-    gap: 40px;
-}
-
-.list-controller {
-    width: 100%;
-    height: 5%;
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    font-size: 12px;
-    margin-top: 5px;
-}
-
-.left,
-.right {
-    width: 3%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-}
-
-.left span,
-.right span {
-    color: var(--bo-40);
-}
-
-.left:hover span,
-.right:hover span {
-    color: #000;
+.body-controller span:last-child {
+    font-size: 16px;
 }
 
 .card-container {
     position: relative;
-    width: 24%;
-    height: 80%;
+    width: 100%;
+    height: 100%;
     perspective: 600px;
 }
 
@@ -189,8 +123,6 @@
     width: 100%;
     height: 100%;
     position: absolute;
-    top: 0;
-    left: 0;
     transition: 1s ease-in-out;
     transform-style: preserve-3d;
     box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.3);
@@ -314,4 +246,117 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.share-modal.close {
+    display: none;
+}
+
+.share-modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999999;
+    background-color: var(--bo-60);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.share-modal form {
+    width: 40%;
+    height: 45%;
+    background-color: #fff;
+    box-shadow: 0px 0px 4px 1px var(--bo-40);
+    padding: 10px;
+}
+
+.receiver {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.receiver span {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+    color: var(--bo-40);
+}
+
+.receiver span:hover {
+    color: #000;
+}
+.receiver input[type='text'] {
+    border: 1px solid var(--bo-20);
+    border-radius: 2px;
+    height: 70%;
+    width: 40%;
+    outline-color: var(--main-color);
+    margin: 0 10px;
+}
+
+.receiver input[type='submit'] {
+    border: none;
+    border-radius: 2px;
+    height: 70%;
+    color: #fff;
+    background-color: var(--main-color);
+    padding: 0 15px;
+    cursor: pointer;
+}
+
+.receiver input[type='submit']:hover {
+    background-color: #17a897;
+}
+
+.select-list {
+    width: 100%;
+    height: 80%;
+    padding: 10px;
+}
+
+.list-title {
+    border-bottom: 1px solid var(--bo-20);
+    padding: 5px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.list-title span {
+    color: var(--main-color);
+    font-size: 18px;
+}
+
+.list-title label {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.list-sortation {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 2fr;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-bottom: 1px solid var(--main-color);
+    padding: 7px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.list-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 2fr;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-bottom: 1px solid var(--bo-20);
+    padding: 7px;
+    font-size: 14px;
 }
