@@ -36,39 +36,428 @@
                     <div class="body-controller">
                         <input type="checkbox" />
                         <label for="">전체선택</label>
-                        <span class="material-symbols-outlined"> add_box </span>
+                        <span class="material-symbols-outlined"> download_for_offline </span>
                         <span class="material-symbols-outlined"> delete </span>
                     </div>
                     <div class="body">
-                        <div class="card-container">
-                            <div class="card">
-                                <input type="checkbox" name="" checked />
-                                <div class="card-front">
-                                    <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
-                                    <div class="card-sortation">
-                                        <p>거래처</p>
+                        <div class="receive-address">
+                            <div class="sender">
+                                <p>영업부</p>
+                                <p>윤태원</p>
+                                <p>사원</p>
+                            </div>
+                            <div class="card-list">
+                                <div class="left">
+                                    <span class="material-symbols-outlined">chevron_left</span>
+                                </div>
+                                <div class="card-container">
+                                    <div class="card">
+                                        <input type="checkbox" name="" checked />
+                                        <div class="card-front">
+                                            <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
+                                            <div class="card-sortation">
+                                                <p>거래처</p>
+                                            </div>
+                                        </div>
+                                        <div class="card-back">
+                                            <div class="info-wrap">
+                                                <p>요기요</p>
+                                                <div class="card-sortation">
+                                                    <p>거래처</p>
+                                                </div>
+                                                <div class="card-info">
+                                                    <p>윤태원</p>
+                                                    <p>사원</p>
+                                                </div>
+                                                <p>010-8888-6666</p>
+                                                <p>asd@gmail.com</p>
+                                                <p>서울시 역삼동 어쩌고저쩌고 여기저기 어디저기</p>
+                                            </div>
+                                            <div class="card-controller">
+                                                <span class="material-symbols-outlined"> download_for_offline </span>
+                                                <span class="material-symbols-outlined"> delete </span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="card-back">
-                                    <div class="info-wrap">
-                                        <p>요기요</p>
-                                        <div class="card-sortation">
-                                            <p>거래처</p>
+                                <div class="card-container">
+                                    <div class="card">
+                                        <input type="checkbox" name="" checked />
+                                        <div class="card-front">
+                                            <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
+                                            <div class="card-sortation">
+                                                <p>거래처</p>
+                                            </div>
                                         </div>
-                                        <div class="card-info">
-                                            <p>윤태원</p>
-                                            <p>사원</p>
+                                        <div class="card-back">
+                                            <div class="info-wrap">
+                                                <p>요기요</p>
+                                                <div class="card-sortation">
+                                                    <p>거래처</p>
+                                                </div>
+                                                <div class="card-info">
+                                                    <p>윤태원</p>
+                                                    <p>사원</p>
+                                                </div>
+                                                <p>010-8888-6666</p>
+                                                <p>asd@gmail.com</p>
+                                                <p>서울시 역삼동 어쩌고저쩌고 여기저기 어디저기</p>
+                                            </div>
+                                            <div class="card-controller">
+                                                <span class="material-symbols-outlined"> download_for_offline </span>
+                                                <span class="material-symbols-outlined"> delete </span>
+                                            </div>
                                         </div>
-                                        <p>010-8888-6666</p>
-                                        <p>asd@gmail.com</p>
-                                        <p>서울시 역삼동 어쩌고저쩌고 여기저기 어디저기</p>
-                                    </div>
-                                    <div class="card-controller">
-                                        <a href=""><span class="material-symbols-outlined"> mail </span></a>
-                                        <span class="material-symbols-outlined"> share </span>
-                                        <a href=""><span class="material-symbols-outlined"> edit </span></a>
                                     </div>
                                 </div>
+                                <div class="card-container">
+                                    <div class="card">
+                                        <input type="checkbox" name="" checked />
+                                        <div class="card-front">
+                                            <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
+                                            <div class="card-sortation">
+                                                <p>거래처</p>
+                                            </div>
+                                        </div>
+                                        <div class="card-back">
+                                            <div class="info-wrap">
+                                                <p>요기요</p>
+                                                <div class="card-sortation">
+                                                    <p>거래처</p>
+                                                </div>
+                                                <div class="card-info">
+                                                    <p>윤태원</p>
+                                                    <p>사원</p>
+                                                </div>
+                                                <p>010-8888-6666</p>
+                                                <p>asd@gmail.com</p>
+                                                <p>서울시 역삼동 어쩌고저쩌고 여기저기 어디저기</p>
+                                            </div>
+                                            <div class="card-controller">
+                                                <span class="material-symbols-outlined"> download_for_offline </span>
+                                                <span class="material-symbols-outlined"> delete </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-container">
+                                    <div class="card">
+                                        <input type="checkbox" name="" checked />
+                                        <div class="card-front">
+                                            <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
+                                            <div class="card-sortation">
+                                                <p>거래처</p>
+                                            </div>
+                                        </div>
+                                        <div class="card-back">
+                                            <div class="info-wrap">
+                                                <p>요기요</p>
+                                                <div class="card-sortation">
+                                                    <p>거래처</p>
+                                                </div>
+                                                <div class="card-info">
+                                                    <p>윤태원</p>
+                                                    <p>사원</p>
+                                                </div>
+                                                <p>010-8888-6666</p>
+                                                <p>asd@gmail.com</p>
+                                                <p>서울시 역삼동 어쩌고저쩌고 여기저기 어디저기</p>
+                                            </div>
+                                            <div class="card-controller">
+                                                <span class="material-symbols-outlined"> download_for_offline </span>
+                                                <span class="material-symbols-outlined"> delete </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="right">
+                                    <span class="material-symbols-outlined">chevron_right</span>
+                                </div>
+                            </div>
+                            <div class="list-controller">
+                                <input type="checkbox" />
+                                <span class="material-symbols-outlined"> download_for_offline </span>
+                                <span class="material-symbols-outlined"> delete </span>
+                            </div>
+                        </div>
+                        <div class="receive-address">
+                            <div class="sender">
+                                <p>영업부</p>
+                                <p>윤태원</p>
+                                <p>사원</p>
+                            </div>
+                            <div class="card-list">
+                                <div class="left">
+                                    <span class="material-symbols-outlined">chevron_left</span>
+                                </div>
+                                <div class="card-container">
+                                    <div class="card">
+                                        <input type="checkbox" name="" checked />
+                                        <div class="card-front">
+                                            <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
+                                            <div class="card-sortation">
+                                                <p>거래처</p>
+                                            </div>
+                                        </div>
+                                        <div class="card-back">
+                                            <div class="info-wrap">
+                                                <p>요기요</p>
+                                                <div class="card-sortation">
+                                                    <p>거래처</p>
+                                                </div>
+                                                <div class="card-info">
+                                                    <p>윤태원</p>
+                                                    <p>사원</p>
+                                                </div>
+                                                <p>010-8888-6666</p>
+                                                <p>asd@gmail.com</p>
+                                                <p>서울시 역삼동 어쩌고저쩌고 여기저기 어디저기</p>
+                                            </div>
+                                            <div class="card-controller">
+                                                <span class="material-symbols-outlined"> download_for_offline </span>
+                                                <span class="material-symbols-outlined"> delete </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-container">
+                                    <div class="card">
+                                        <input type="checkbox" name="" checked />
+                                        <div class="card-front">
+                                            <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
+                                            <div class="card-sortation">
+                                                <p>거래처</p>
+                                            </div>
+                                        </div>
+                                        <div class="card-back">
+                                            <div class="info-wrap">
+                                                <p>요기요</p>
+                                                <div class="card-sortation">
+                                                    <p>거래처</p>
+                                                </div>
+                                                <div class="card-info">
+                                                    <p>윤태원</p>
+                                                    <p>사원</p>
+                                                </div>
+                                                <p>010-8888-6666</p>
+                                                <p>asd@gmail.com</p>
+                                                <p>서울시 역삼동 어쩌고저쩌고 여기저기 어디저기</p>
+                                            </div>
+                                            <div class="card-controller">
+                                                <span class="material-symbols-outlined"> download_for_offline </span>
+                                                <span class="material-symbols-outlined"> delete </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-container">
+                                    <div class="card">
+                                        <input type="checkbox" name="" checked />
+                                        <div class="card-front">
+                                            <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
+                                            <div class="card-sortation">
+                                                <p>거래처</p>
+                                            </div>
+                                        </div>
+                                        <div class="card-back">
+                                            <div class="info-wrap">
+                                                <p>요기요</p>
+                                                <div class="card-sortation">
+                                                    <p>거래처</p>
+                                                </div>
+                                                <div class="card-info">
+                                                    <p>윤태원</p>
+                                                    <p>사원</p>
+                                                </div>
+                                                <p>010-8888-6666</p>
+                                                <p>asd@gmail.com</p>
+                                                <p>서울시 역삼동 어쩌고저쩌고 여기저기 어디저기</p>
+                                            </div>
+                                            <div class="card-controller">
+                                                <span class="material-symbols-outlined"> download_for_offline </span>
+                                                <span class="material-symbols-outlined"> delete </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-container">
+                                    <div class="card">
+                                        <input type="checkbox" name="" checked />
+                                        <div class="card-front">
+                                            <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
+                                            <div class="card-sortation">
+                                                <p>거래처</p>
+                                            </div>
+                                        </div>
+                                        <div class="card-back">
+                                            <div class="info-wrap">
+                                                <p>요기요</p>
+                                                <div class="card-sortation">
+                                                    <p>거래처</p>
+                                                </div>
+                                                <div class="card-info">
+                                                    <p>윤태원</p>
+                                                    <p>사원</p>
+                                                </div>
+                                                <p>010-8888-6666</p>
+                                                <p>asd@gmail.com</p>
+                                                <p>서울시 역삼동 어쩌고저쩌고 여기저기 어디저기</p>
+                                            </div>
+                                            <div class="card-controller">
+                                                <span class="material-symbols-outlined"> download_for_offline </span>
+                                                <span class="material-symbols-outlined"> delete </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="right">
+                                    <span class="material-symbols-outlined">chevron_right</span>
+                                </div>
+                            </div>
+                            <div class="list-controller">
+                                <input type="checkbox" />
+                                <span class="material-symbols-outlined"> download_for_offline </span>
+                                <span class="material-symbols-outlined"> delete </span>
+                            </div>
+                        </div>
+                        <div class="receive-address">
+                            <div class="sender">
+                                <p>영업부</p>
+                                <p>윤태원</p>
+                                <p>사원</p>
+                            </div>
+                            <div class="card-list">
+                                <div class="left">
+                                    <span class="material-symbols-outlined">chevron_left</span>
+                                </div>
+                                <div class="card-container">
+                                    <div class="card">
+                                        <input type="checkbox" name="" checked />
+                                        <div class="card-front">
+                                            <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
+                                            <div class="card-sortation">
+                                                <p>거래처</p>
+                                            </div>
+                                        </div>
+                                        <div class="card-back">
+                                            <div class="info-wrap">
+                                                <p>요기요</p>
+                                                <div class="card-sortation">
+                                                    <p>거래처</p>
+                                                </div>
+                                                <div class="card-info">
+                                                    <p>윤태원</p>
+                                                    <p>사원</p>
+                                                </div>
+                                                <p>010-8888-6666</p>
+                                                <p>asd@gmail.com</p>
+                                                <p>서울시 역삼동 어쩌고저쩌고 여기저기 어디저기</p>
+                                            </div>
+                                            <div class="card-controller">
+                                                <span class="material-symbols-outlined"> download_for_offline </span>
+                                                <span class="material-symbols-outlined"> delete </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-container">
+                                    <div class="card">
+                                        <input type="checkbox" name="" checked />
+                                        <div class="card-front">
+                                            <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
+                                            <div class="card-sortation">
+                                                <p>거래처</p>
+                                            </div>
+                                        </div>
+                                        <div class="card-back">
+                                            <div class="info-wrap">
+                                                <p>요기요</p>
+                                                <div class="card-sortation">
+                                                    <p>거래처</p>
+                                                </div>
+                                                <div class="card-info">
+                                                    <p>윤태원</p>
+                                                    <p>사원</p>
+                                                </div>
+                                                <p>010-8888-6666</p>
+                                                <p>asd@gmail.com</p>
+                                                <p>서울시 역삼동 어쩌고저쩌고 여기저기 어디저기</p>
+                                            </div>
+                                            <div class="card-controller">
+                                                <span class="material-symbols-outlined"> download_for_offline </span>
+                                                <span class="material-symbols-outlined"> delete </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-container">
+                                    <div class="card">
+                                        <input type="checkbox" name="" checked />
+                                        <div class="card-front">
+                                            <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
+                                            <div class="card-sortation">
+                                                <p>거래처</p>
+                                            </div>
+                                        </div>
+                                        <div class="card-back">
+                                            <div class="info-wrap">
+                                                <p>요기요</p>
+                                                <div class="card-sortation">
+                                                    <p>거래처</p>
+                                                </div>
+                                                <div class="card-info">
+                                                    <p>윤태원</p>
+                                                    <p>사원</p>
+                                                </div>
+                                                <p>010-8888-6666</p>
+                                                <p>asd@gmail.com</p>
+                                                <p>서울시 역삼동 어쩌고저쩌고 여기저기 어디저기</p>
+                                            </div>
+                                            <div class="card-controller">
+                                                <span class="material-symbols-outlined"> download_for_offline </span>
+                                                <span class="material-symbols-outlined"> delete </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-container">
+                                    <div class="card">
+                                        <input type="checkbox" name="" checked />
+                                        <div class="card-front">
+                                            <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
+                                            <div class="card-sortation">
+                                                <p>거래처</p>
+                                            </div>
+                                        </div>
+                                        <div class="card-back">
+                                            <div class="info-wrap">
+                                                <p>요기요</p>
+                                                <div class="card-sortation">
+                                                    <p>거래처</p>
+                                                </div>
+                                                <div class="card-info">
+                                                    <p>윤태원</p>
+                                                    <p>사원</p>
+                                                </div>
+                                                <p>010-8888-6666</p>
+                                                <p>asd@gmail.com</p>
+                                                <p>서울시 역삼동 어쩌고저쩌고 여기저기 어디저기</p>
+                                            </div>
+                                            <div class="card-controller">
+                                                <span class="material-symbols-outlined"> download_for_offline </span>
+                                                <span class="material-symbols-outlined"> delete </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="right">
+                                    <span class="material-symbols-outlined">chevron_right</span>
+                                </div>
+                            </div>
+                            <div class="list-controller">
+                                <input type="checkbox" />
+                                <span class="material-symbols-outlined"> download_for_offline </span>
+                                <span class="material-symbols-outlined"> delete </span>
                             </div>
                         </div>
                     </div>
