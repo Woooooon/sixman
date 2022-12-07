@@ -11,4 +11,9 @@ public class AddressBookController {
 	public String list() {
 		return "addressBook/list";
 	}
+	
+	@GetMapping("receive")
+	public String receive() {
+		return "addressBook/receive";
+	}
 }
