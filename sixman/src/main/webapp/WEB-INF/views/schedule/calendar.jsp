@@ -66,6 +66,20 @@
         background-color: rgb(197, 197, 197);
         border-radius: 5px;
     }
+
+    .category-btn{
+        width: 48px;
+        height: 26px;
+        border: 1px solid #aaa;
+        background-color: #FFFFFF;
+        cursor: pointer;
+    }
+
+    .category-btn:hover{
+        background-color: #17a897;
+        color: #FFFFFF;
+        border: none;
+    }
     
     .go-prev , .go-next {
         color: #aaa;
@@ -151,18 +165,21 @@
         <div class="calendar">
             <div class="header">
                 <div class="nav-1">
-                    <button class="btn write" onclick=""><p>작성하기</p></button>
+                    <button class="btn write" onclick="location.href='${path}/schedule/write.jsp'"><p>작성하기</p></button>
                 </div>
                 <div class="year-month"></div>
+                <div>
                 <div class="nav">
                     <button class="nav-btn go-prev" onclick="prevMonth()">&lt;</button>
                     <button class="nav-btn go-today" onclick="goToday()">오늘</button>
                     <button class="nav-btn go-next" onclick="nextMonth()">&gt;</button>
                 </div>
                 <div class="category">
+                    <br>
                     <button class="category-btn">월간</button>
                     <button class="category-btn">주간</button>
                     <button class="category-btn">일간</button>
+                </div>
                 </div>
             </div>
             <div class="main">
