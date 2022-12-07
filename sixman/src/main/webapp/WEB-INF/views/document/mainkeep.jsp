@@ -20,19 +20,19 @@
 <main class="main-box">
     <div id="docu-main">
         <div class="main-head">
-            <div class="main-title">기안문서함</div>
+            <div class="main-title">임시보관함</div>
         </div>
 
         <div class="main-to">
           
             <!-- <a href="#" class="on">기안양식</a> -->
-            <div class="mid-box">
+            <!-- <div class="mid-box">
                 <div class="mid1"><a href="#">전체</a></div>
                 <div class="mid2"><a href="#">대기</a></div>
                 <div class="mid3"><a href="#">진행</a></div>
                 <div class="mid4"><a href="#">완료</a></div>
                 <div class="mid5"><a href="#">반려</a></div>
-            </div>
+            </div> -->
             
             <div class="search-bar"><span class="material-symbols-outlined"> search </span><input type="text" placeholder="검색"></div>
 

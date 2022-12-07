@@ -20,7 +20,7 @@
 <main class="main-box">
     <div id="docu-main">
         <div class="main-head">
-            <div class="main-title">기안문서함</div>
+            <div class="main-title">결재 문서함</div>
         </div>
 
         <div class="main-to">
