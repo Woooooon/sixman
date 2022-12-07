@@ -19,7 +19,7 @@
             <div class="b-page-count hilight">50</div>
         </div>
         <div class="header-box">
-            <a href="${path}/notice/write" class="btn" onclick="location.href='/sixman/notice/write'"><span class="material-symbols-outlined"> add </span><p>글쓰기</p></a>
+            <a href="/sixman/notice/write" class="btn" onclick="location.href='/sixman/notice/write'"><span class="material-symbols-outlined"> add </span><p>글쓰기</p></a>
             <div class="search-bar"><input type="text" placeholder="검색"><span class="material-symbols-outlined"> search </span></div>
         </div>
         <div class="list-box">
@@ -29,7 +29,7 @@
                 <p>작성일자</p>
                 <p>조회수</p>
             </div>
-            <div class="list-item"> <p>번호</p> <p>제목</p> <p>작성일자</p> <p>조회수</p> </div>
+            <div class="list-item"> <p class="important">번호</p> <p>제목</p> <p>작성일자</p> <p>조회수</p> </div>
             <div class="list-item"> <p>번호</p> <p>제목</p> <p>작성일자</p> <p>조회수</p> </div>
             <div class="list-item"> <p>번호</p> <p>제목</p> <p>작성일자</p> <p>조회수</p> </div>
             <div class="list-item"> <p>번호</p> <p>제목</p> <p>작성일자</p> <p>조회수</p> </div>

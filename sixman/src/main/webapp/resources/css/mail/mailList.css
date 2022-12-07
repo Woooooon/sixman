@@ -31,7 +31,7 @@
     align-items: center;
 }
 
-.list-item input[type=checkbox]{
+input[type=checkbox]{
     width: 15px;
     height: 15px;
 }
@@ -46,9 +46,10 @@
 
 .category-btn{
     position: relative;
+    cursor: pointer;
 }
 
-#category-box,#category-box2,#category-box3{
+#category-box,#category-box2{
     position: absolute;
     top: 35px;
     flex-direction: column;
@@ -57,8 +58,7 @@
     padding: 5px 0;
 }
 #category-box{width: 250px; max-height: 300px;}
-#category-box2{width: 100px; max-height: 300px;}
-#category-box3{width: 120px; max-height: 300px;}
+#category-box2{width: 120px; max-height: 300px;}
 
 .category-items{
     width: 100%;

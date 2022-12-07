@@ -17,7 +17,10 @@
 <main class="main-box">
 	<div id="notice-box" class="box">
         <div class="title-box">
-            <div class="b-title">받은메일함</div>
+        	<c:choose>
+        		<c:when test="${not empty listType}"><div class="b-title">${listType}</div></c:when>
+        		<c:otherwise><div class="b-title">받은메일함</div></c:otherwise>
+        	</c:choose>
         </div>
         <div class="header-box">
             <a href="${path}/mail/write" class="btn" onclick="location.href='/sixman/notice/write'"><span class="material-symbols-outlined"> add </span><p>메일쓰기</p></a>
@@ -25,42 +28,58 @@
         </div>
         <div class="list-box">
             <div class="first-item">
-                <div class="none">
+                <div id="checkbox-box" class="none">
                     <input type="checkbox">
-                    <p>읽음</p>
-                    <p>삭제</p>
-                    <div class="category-btn checked click-able">
-                        이동
-                        <span class="material-symbols-outlined"> arrow_drop_down </span>
-                        <div id="category-box">
-                            <div class="category-items">
-                                <label>즐겨찾기<input name="category" type="radio"><span class='material-symbols-outlined'> close </span></label>
-                                <label>즐겨찾기<input name="category" type="radio"></label>
-                            </div>
-                            <div class="category-footer">
-                                <div>
-                                    <input type="text">
-                                    <div class="btn"><p>추가</p></div>
-                                </div>
-                                <div class="btn"><p>이동</p></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="mail-count"><p class="hilight">50</p>/<p>100</p>안읽은 메일</div>
+                    <c:choose>
+                    	<c:when test="${listType == '임시보관함'}">
+		                    <p>전송</p>
+		                    <p>삭제</p>
+                    	</c:when>
+                    	<c:when test="${listType == '휴지통'}">
+		                    <p>복원</p>
+		                    <p>영구삭제</p>
+                    	</c:when>
+                    	<c:otherwise>
+	                    	<p>읽음</p>
+		                    <p>삭제</p>
+		                    <div class="category-btn">
+		                    	이동
+		                        <span class="material-symbols-outlined"> arrow_drop_down </span>
+		                        <div id="category-box" style="display: none;">
+		                            <div class="category-items">
+		                                <label>즐겨찾기<input name="category" type="radio"><span class='material-symbols-outlined'> close </span></label>
+		                                <label>즐겨찾기<input name="category" type="radio"></label>
+		                            </div>
+		                            <div class="category-footer">
+		                                <div>
+		                                    <input type="text">
+		                                    <div class="btn"><p>추가</p></div>
+		                                </div>
+		                                <div class="btn"><p>이동</p></div>
+		                            </div>
+		                        </div>
+		                    </div>
+		                    <c:if test="${not empty listType}"><div id="mail-count"><p class="hilight">50</p>보낸메일</div></c:if>
+		                    <c:if test="${empty listType}"><div id="mail-count"><p class="hilight">50</p>/<p>100</p>안읽은 메일</div></c:if>
+                    	</c:otherwise>
+                    </c:choose>
                 </div>
-                <div>
-                    <div class="category-btn">
-                        필터
-                        <span class="material-symbols-outlined"> arrow_drop_down </span>
-                        <div id="category-box3">
-                            <div class="category-items">
-                                <button>모든메일</button>
-                                <button>읽은메일만</button>
-                                <button>안읽은메일만</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
+                <c:if test="${empty listType}">
+	                <div>
+	                    <div class="category-btn click-able">
+							필터
+	                        <span class="material-symbols-outlined"> arrow_drop_down </span>
+	                        <div id="category-box2" style="display: none;">
+	                            <div class="category-items">
+	                                <button>모든메일</button>
+	                                <button>읽은메일만</button>
+	                                <button>안읽은메일만</button>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+                </c:if>
             </div>
             <div class="list-item">
                 <input type="checkbox">
