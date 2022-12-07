@@ -16,4 +16,14 @@ public class AddressBookController {
 	public String receive() {
 		return "addressBook/receive";
 	}
+	
+	@GetMapping("add")
+	public String add() {
+		return "addressBook/add";
+	}
+	
+	@GetMapping("detail")
+	public String detail() {
+		return "addressBook/add";
+	}
 }
