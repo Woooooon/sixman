@@ -16,15 +16,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.kh.sixman.common.PageVo;
-import com.kh.sixman.notice.service.NoticeService;
+import com.kh.sixman.notice.service.NoticeService2;
 import com.kh.sixman.notice.vo.NoticeVo;
 import com.kh.sixman.notice.vo.SearchVo;
 
 @Controller
-public class NoticeController {
+public class NoticeController2 {
 			
 	@Autowired
-	private NoticeService ns;
+	private NoticeService2 ns;
 
 	@GetMapping("notice/list")
 	public String list() {
@@ -43,18 +43,38 @@ public class NoticeController {
 	
 	@PostMapping("notice/list")
 	@ResponseBody
-	public String list(int page, String keyword) {
+	public String list(SearchVo sv, HttpSession session) {
 		
 		int pageLimit = 5;
 		int boardLimit = 15;
-		int listCount = ns.countList(keyword);
-		
-	    int offset = (page-1) * boardLimit;
+	
+	    int offset = (sv.getPage()-1) * boardLimit;
 	    RowBounds rb = new RowBounds(offset , boardLimit);
 	    
-	    PageVo pv = new PageVo(listCount,page,pageLimit,boardLimit);
-	    List<NoticeVo> list = ns.selectList(keyword, rb);
+	    List<NoticeVo> list = null;
+	    	    
+	    int listCount = 0;
+		switch(sv.getListType()) {
+		case "보낸메일함": 
+			listCount = ns.countSendList(sv); 
+			list = ns.selectSendList(rb, sv);
+			break;
+		case "임시보관함": 
+			listCount = ns.countTempList(sv); 
+			list = ns.selectTempList(rb, sv);
+			break;
+		case "휴지통": 
+			listCount = ns.countDeleteList(sv); 
+			list = ns.selectDeleteList(rb, sv);
+			break;
+		default: 
+			listCount = ns.countList(sv); 
+			list = ns.selectList(rb, sv);
+			break;
+		}
 
+		PageVo pv = new PageVo(listCount,sv.getPage(),pageLimit,boardLimit);
+		
 		Map<String, Object> map = new HashMap<>();
 		
 		map.put("pv", pv);
