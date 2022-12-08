@@ -26,8 +26,19 @@
 			<h3>팀명</h3>
 		</c:forEach>
 		
-		<div class="textbox-messenger"><input type="textbox"></div>
-		<div class="btn"></div>
+		<div class="textbox-messenger">
+			<select>
+				<!-- <option>주환</option> -->
+				<option>직책</option>
+				<option>이름</option>
+				<option>팀명</option>
+			</select>
+			<input type="textbox">
+			<div class="btn">
+				<input type="submit">
+			</div>
+		</div>
+		
 	</form>
 </body>
 </html>
