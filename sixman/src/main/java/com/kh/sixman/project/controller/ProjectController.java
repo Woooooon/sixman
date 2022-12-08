@@ -15,4 +15,11 @@ public class ProjectController {
 	public String main() {
 		return "project/main";
 	}
+
+	//프로젝트 생성(화면)
+	@GetMapping("create")
+	public String create(){
+		return "project/create";
+	}
+
 }
