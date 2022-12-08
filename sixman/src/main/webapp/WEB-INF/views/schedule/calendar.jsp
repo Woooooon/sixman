@@ -21,9 +21,15 @@
         align-items: center;
         min-height: 100vh;
     }
+    
+    #main-box{
+        border: 1px solid #aaa;
+        border-radius: 3px;
+        box-shadow: 1px 1px 1px 1px #DCDCDC;
+    }
 
     .calendar{
-        width: 950px;
+        width: 1050px;
         margin: 50px;
     }
 

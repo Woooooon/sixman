@@ -6,27 +6,38 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>프로젝트 승낙</title>
+<link rel="stylesheet" href="${path}\resources\css\admin\project\consent.css">
 </head>
 <body>
     <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
-    <main class="main-box">
+    <main id="main-box">
         <div class="consent-box">
             <div class="consent-title-box">
-                <div class="consent-title">프로젝트 승낙</div>
+                <div class="consent-title"><p>프로젝트 생성 승인</p></div>
+                <br>
             </div>
             <div class="header-box">
+                <div class="hidden"></div>
                 <label><input type="checkbox"><p>전체선택</p></label>    
             </div>
             <div class="project-list">
-                <label><input type="checkbox"><div class="project-name">프로젝트 - 회식은 언제 하는가에 대하여</div></label>
-                <label><input type="checkbox"><div class="project-name">프로젝트 - 마크로 java도 한다던데...</div></label>
-                <label><input type="checkbox"><div class="project-name">데프트 - 중요한건 꺾이지 않는 마음</div></label>
+                <label><input type="checkbox"><div class="project-item">프로젝트 - 회식은 언제 하는가에 대하여</div></label>
+                <label><input type="checkbox"><div class="project-item">프로젝트 - 마크로 java도 한다던데...</div></label>
+                <label><input type="checkbox"><div class="project-item">데프트 - 중요한건 꺾이지 않는 마음</div></label>
             </div>
+            
             <div class="consent-page-num">
                 <button class="page-num go-prev">&lt;</button>
+                &nbsp;
                 <button class="page-num">1</button>
+                &nbsp;
                 <button class="page-num go-next">&gt;</button>
+            </div>
+            <div class="footer">
+                <button class="btn footer-btn">승인하기</button>
+                &nbsp;
+                <button class="c-btn footer-btn">삭제하기</button>
             </div>
         </div>
     </main>
