@@ -23,7 +23,14 @@
         	</c:choose>
         </div>
         <div class="header-box">
-            <a href="${path}/mail/write" class="btn" onclick="location.href='/sixman/notice/write'"><span class="material-symbols-outlined"> add </span><p>메일쓰기</p></a>
+           	<c:choose>
+        		<c:when test="${listType=='휴지통'}">
+        			<a href="${path}/mail/write" class="btn" onclick=""><span class="material-symbols-outlined"> delete </span><p>비우기</p></a>
+        		</c:when>
+        		<c:otherwise>
+        			<a href="${path}/mail/write" class="btn" onclick="location.href='/sixman/notice/write'"><span class="material-symbols-outlined"> add </span><p>메일쓰기</p></a>
+        		</c:otherwise>
+        	</c:choose>
             <div class="search-bar"><input type="text" placeholder="검색"><span class="material-symbols-outlined"> search </span></div>
         </div>
         <div class="list-box">

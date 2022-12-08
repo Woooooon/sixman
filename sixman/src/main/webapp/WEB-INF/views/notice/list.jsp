@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="${path}/resources/css/notice/noticeList.css">
+<script src="${path}/resources/js/notice/noticeList.js"></script>
 </head>
 <body>
 
