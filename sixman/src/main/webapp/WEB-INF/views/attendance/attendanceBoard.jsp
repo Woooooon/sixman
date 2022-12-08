@@ -40,14 +40,6 @@
         </div>
         <div>
             <div id="notice-box" class="box">
-                <%-- <div class="title-box">
-                    <div class="b-title">공지사항</div>
-                    <div class="b-page-count hilight">50</div>
-                </div>
-                <div class="header-box">
-                    <a href="${path}/notice/write" class="btn" onclick="location.href='/sixman/notice/write'"><span class="material-symbols-outlined"> add </span><p>글쓰기</p></a>
-                    <div class="search-bar"><input type="text" placeholder="검색"><span class="material-symbols-outlined"> search </span></div>
-                </div> --%>
                 <div class="list-box">
                     <div class="first-item">
                         <p>날짜</p>
@@ -57,11 +49,11 @@
                         <p>추가근무시간</p>
                         <p>총 근무시간</p>
                     </div>
-                    <div class="list-item"> <p>2022-11-28</p> <p>&nbsp&nbsp 심원용</p> <p>09:00</p> <p>18:00</p> <p>0</p> <p>8</p></div>
-                    <div class="list-item"> <p>2022-11-27</p> <p>&nbsp&nbsp 심원용</p> <p>09:00</p> <p>18:00</p> <p>0</p> <p>8</p></div>
-                    <div class="list-item"> <p>2022-11-26</p> <p>&nbsp&nbsp 심원용</p> <p>09:00</p> <p>18:00</p> <p>0</p> <p>8</p></div>
-                    <div class="list-item"> <p>2022-11-25</p> <p>&nbsp&nbsp 심원용</p> <p>09:00</p> <p>18:00</p> <p>0</p> <p>8</p></div>
-                    <div class="list-item"> <p>2022-11-24</p> <p>&nbsp&nbsp 심원용</p> <p>09:00</p> <p>18:00</p> <p>0</p> <p>8</p></div>
+                    <div class="list-item"> <p>2022-11-28</p> <p>심원용</p> <p>09:00</p> <p>18:00</p> <p>0</p> <p>8</p></div>
+                    <div class="list-item"> <p>2022-11-27</p> <p>심원용</p> <p>09:00</p> <p>18:00</p> <p>0</p> <p>8</p></div>
+                    <div class="list-item"> <p>2022-11-26</p> <p>심원용</p> <p>09:00</p> <p>18:00</p> <p>0</p> <p>8</p></div>
+                    <div class="list-item"> <p>2022-11-25</p> <p>심원용</p> <p>09:00</p> <p>18:00</p> <p>0</p> <p>8</p></div>
+                    <div class="list-item"> <p>2022-11-24</p> <p>심원용</p> <p>09:00</p> <p>18:00</p> <p>0</p> <p>8</p></div>
                    
                 </div>
                 <div class="page-box">
