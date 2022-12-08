@@ -17,14 +17,14 @@
 <!-- summernote css/js-->
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>    
-<script defer src="${path}/resources/js/notice/notice.js"></script>
+<script defer src="${path}/resources/js/notice/noticeWrite.js"></script>
 </head>
 <body>
 
 <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
 <main class="main-box">
 
-    <form action="">
+    <form action="" method="post" enctype="multipart/form-data">
         <div  id="notice-box" class="box">
             <div class="title-box">
                 <a href="${path}/notice/list" class="material-symbols-outlined"> chevron_left </a>
@@ -32,7 +32,7 @@
             </div>
             <div id="wirte-box">
                 <p>중요</p>
-                <input name="important" type="checkbox">
+                <input name="inportantYn" type="checkbox" value="Y">
                 <div></div>
                 <p>제목</p>
                 <div></div>

@@ -15,24 +15,41 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.kh.sixman.common.AttachmentVo;
+import com.kh.sixman.common.FileUnit;
 import com.kh.sixman.common.PageVo;
+import com.kh.sixman.file.service.FileService;
+import com.kh.sixman.member.vo.MemberVo;
 import com.kh.sixman.notice.service.NoticeService;
 import com.kh.sixman.notice.vo.NoticeVo;
-import com.kh.sixman.notice.vo.SearchVo;
 
 @Controller
 public class NoticeController {
 			
 	@Autowired
 	private NoticeService ns;
+	@Autowired
+	private FileService fs;
 
-	@GetMapping("notice/list")
-	public String list() {
-		return "notice/list";
-	}
-	
 	@GetMapping("notice/write")
 	public String write() {
+		return "notice/write";
+	}
+	
+	@PostMapping("notice/write")
+	public String write(NoticeVo vo, HttpSession session) {
+		
+		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
+			
+		String rootPath = session.getServletContext().getRealPath("/");
+//		System.out.println(rootPath);
+//		D:\fainal\sixman\target\m2e-wtp\web-resources\
+		List<AttachmentVo> fileList = FileUnit.uploadFile(vo.getFile(), rootPath, "upload/notice");
+		
+		int result = fs.upload(fileList);
+		ns.write(vo, loginMember);
+		
+		
 		return "notice/write";
 	}
 	
@@ -40,8 +57,13 @@ public class NoticeController {
 	public String detail() {
 		return "notice/detail";
 	}
+
+	@GetMapping("notice/list")
+	public String list() {
+		return "notice/list";
+	}
 	
-	@PostMapping("notice/list")
+	@PostMapping(value = "notice/list", produces = "application/json; charset=utf8")
 	@ResponseBody
 	public String list(int page, String keyword) {
 		

@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.sixman.member.vo.MemberVo;
 import com.kh.sixman.notice.dao.NoticeDao;
 import com.kh.sixman.notice.vo.NoticeVo;
 
@@ -25,6 +26,11 @@ public class NoticeService {
 
 	public List<NoticeVo> selectList(String keyword, RowBounds rb) {
 		return dao.selectList(sst, keyword, rb);
+	}
+
+	public void write(NoticeVo vo, MemberVo loginMember) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	

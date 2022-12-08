@@ -20,7 +20,7 @@ import com.kh.sixman.notice.service.NoticeService2;
 import com.kh.sixman.notice.vo.NoticeVo;
 import com.kh.sixman.notice.vo.SearchVo;
 
-@Controller
+//@Controller
 public class NoticeController2 {
 			
 	@Autowired

@@ -12,7 +12,7 @@ import com.kh.sixman.notice.vo.NoticeVo;
 public class NoticeDao {
 
 	public int countList(SqlSessionTemplate sst, String keyword) {
-		return sst.selectOne("noticeMapper.countList", keyword);
+		return sst.selectOne("noticeMapper.selectCount", keyword);
 	}
 
 	public List<NoticeVo> selectList(SqlSessionTemplate sst, String keyword, RowBounds rb) {

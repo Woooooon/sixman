@@ -4,14 +4,22 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="noticeMapper">
 
-    <select id="selectCount" resultType="int">
+    <select id="selectCount" parameterType="String" resultType="int">
         SELECT COUNT(*)
-        FROM notice
+        FROM NOTICE
+        <if test=" keyword != '' ">
+	        WHERE TITLE LIKE '%${keyword}%'
+	        OR CONTENT LIKE '%${keyword}%'
+        </if>  
     </select>
     
-    <select id="selectBoardList" resultType="NoticeVo">
+    <select id="selectList" parameterType="String" resultType="NoticeVo">
         SELECT *
-        FROM notice
+        FROM NOTICE
+        <if test=" keyword != '' ">
+	        WHERE TITLE LIKE '%${keyword}%'
+	        OR CONTENT LIKE '%${keyword}%'
+        </if>   
     </select>
     
 </mapper>
