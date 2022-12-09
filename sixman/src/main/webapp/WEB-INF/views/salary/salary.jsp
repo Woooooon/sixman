@@ -129,11 +129,109 @@
     color: black
 }
 
+/*             모달창                  */
+
+.share-modal.close {
+    display: none;
+}
+
+.share-modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999999;
+    background-color: var(--bo-60);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.share-modal #modal {
+    width: 40%;
+    height: 60%;
+    background-color: #fff;
+    box-shadow: 0px 0px 4px 1px var(--bo-40);
+    padding: 10px;
+}
+
+#modal{
+    display: grid;
+    grid-template-rows: 1fr 1.5fr 1.5fr 5fr;
+    gap: 20px;
+}
+#modal-1{
+    display: grid;
+    grid-template-columns: 2fr 0.1fr; 
+}
+
+#modal-1 span {
+    float: right;
+    cursor: pointer;
+    color: var(--bo-40);
+}
+
+
+#modal-1 span:hover {
+    color: #000;
+}
+
+
+#modal-header{
+    font-size: 1.5em;
+    font-weight: 600;
+    display: flex; 
+    justify-content: center;
+    align-items: center; 
+}
+
+#modal-2{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+}
+
+.modal-2-1{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
 </style>
 
 <body>
 
     <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
+    
+    <div class="share-modal">
+        <div id="modal">
+            <div id="modal-1"> 
+                <div id="modal-header">&nbsp&nbsp&nbsp&nbsp 2022년 10월분 급여명세서</div>
+                <div>
+                    <span class="material-symbols-outlined"> close </span>
+                </div>
+            </div>
+            <div id="modal-2" class="box">
+                <div class="modal-2-1">
+                    <div>1</div>
+                    <div>2</div>
+                    <div>3</div>
+                    <div>4</div>
+                </div>
+                <div class="modal-2-1">
+                    <div>1</div>
+                    <div>2</div>
+                    <div>3</div>
+                    <div>4</div>
+                </div>
+            </div>
+            <div id="modal-3" class="box">
+
+            </div>
+            <div id="modal-4" class="box">
+
+            </div>
+        </div>
+    </div>
 <main class="main-box">
     <div id="main-content">
         <div>
