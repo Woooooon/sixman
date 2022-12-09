@@ -11,7 +11,7 @@
     </head>
     <body>
         <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
-        <div class="share-modal close">
+        <div class="share-modal">
             <form action="">
                 <div class="receiver">
                     <label for="">받는사람</label>
