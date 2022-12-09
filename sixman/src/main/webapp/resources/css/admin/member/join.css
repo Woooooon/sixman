@@ -97,13 +97,16 @@
     margin-right: 40px;
 }
 
-#birth > label,
 #bank > label {
     margin-right: 15px;
 }
 
+#birth > label {
+    margin-right: 13px;
+}
+
 #email > label {
-    margin-right: 19px;
+    margin-right: 27px;
 }
 
 #phone > label {
@@ -111,7 +114,7 @@
 }
 
 #team > label {
-    margin-right: 60px;
+    margin-right: 65px;
 }
 
 #birth > input,
@@ -124,7 +127,7 @@
 }
 
 #bank > input {
-    margin-left: 78px;
+    margin-left: 90px;
     margin-top: 20px;
 }
 
@@ -132,6 +135,8 @@
     width: 50%;
     height: 200px;
     object-fit: fill;
+    border-radius: 5px;
+    box-shadow: 0px 0px 1px 1px var(--bo-20);
 }
 
 #address {
@@ -307,4 +312,9 @@
 
 #controller span:nth-child(2):hover {
     color: #ff0000;
+}
+
+input,
+select {
+    outline-color: #17a897;
 }
