@@ -35,12 +35,12 @@
                     	<c:forEach items="${vo.fileList}" var="fv">
 	                    	<div class="file-item">
 	                            <div>${fv.originName}</div>
-	                            <span class="material-symbols-outlined" onclick="dounload(${fv.no})"> download </span>
+	                            <span class="material-symbols-outlined" onclick="download(${fv.no}, 'NOTICE')"> download </span>
 	                        </div>   
                     	</c:forEach>
                     </div>
                 </div>
-                <div>작성일<p id="enroll-date">${enrollDate}</p></div>
+                <div>작성일<p id="enroll-date">${vo.enrollDate}</p></div>
             </div>
             <div id="content-box">
                 ${vo.content}
@@ -60,8 +60,8 @@
                 </div>
             </div>
             <div id="btn-box">
-                <div class="btn"><p>수정하기</p></div>
-                <div class="c-btn"><p>삭제하기</p></div>
+                <div class="btn" onclick="location.href='/sixman/notice/update?no=${vo.no}'"><p>수정하기</p></div>
+                <div class="c-btn" onclick="deletePage(${vo.no})"><p>삭제하기</p></div>
             </div>
 
         </div>

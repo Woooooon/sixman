@@ -23,4 +23,8 @@ public class FileDao {
 		return sst.selectOne("fileMapper.getFile", map);
 	}
 
+	public int delete(SqlSessionTemplate sst, Map<String, String> map) {
+		return sst.delete("fileMapper.deleteFile", map);
+	}
+
 }

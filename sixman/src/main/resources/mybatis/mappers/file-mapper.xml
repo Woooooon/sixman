@@ -53,10 +53,9 @@
 		where NO = ${no}
 	</select>
 	
-	<update id="updateDelete" parameterType="String">
-		update notice
-		set delete_yn = 'Y'
+	<delete id="deleteFile">
+		delete ${tableName}_A
 		where no = ${no}
-	</update>
+	</delete>
     
 </mapper>

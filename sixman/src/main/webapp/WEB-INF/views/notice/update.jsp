@@ -18,6 +18,7 @@
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>    
 <script defer src="${path}/resources/js/notice/noticeWrite.js"></script>
+<script defer src="${path}/resources/js/file/file.js"></script>
 </head>
 <body>
 
@@ -32,7 +33,10 @@
             </div>
             <div id="wirte-box">
                 <p>중요</p>
-                <input name="inportantYn" type="checkbox" value="Y">
+                <c:if test="${vo.inportantYn == 'Y'}">
+                	<c:set var="checked" value="checked"/>
+                </c:if>
+                <input name="inportantYn" type="checkbox" value="Y" ${checked}>
                 <div></div>
                 <p>제목</p>
                 <div></div>
@@ -40,6 +44,12 @@
                 <p>파일첨부</p>
                 <div id="file-btn" class="btn"><span class="material-symbols-outlined"> add </span></div>
                 <div id="file-box">
+                    <c:forEach items="${vo.fileList}" var="fv">
+	                    <div class="file-item">
+	                        <p>${fv.originName}</p>
+	                        <span class='material-symbols-outlined' onclick="deleteFile(this, ${fv.no}, 'NOTICE')"> close </span>
+	                    </div>
+                    </c:forEach>
                 </div>
             </div>
             <textarea name="content" id="summernote">${vo.content}</textarea>

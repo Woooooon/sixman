@@ -47,6 +47,8 @@ public class NoticeController {
 		loginMember.setName("홍길동");
 		loginMember.setNo("1");
 				
+		if(vo.getInportantYn()==null)vo.setInportantYn("N");
+		
 		vo.setUserNo(loginMember.getNo());
 		vo.setName(loginMember.getName());
 		vo.setFileList(fileList);
@@ -98,12 +100,62 @@ public class NoticeController {
 		return json;
 	}
 	
-	@ResponseBody
 	@PostMapping("notice/delete")
 	public String delete(String no) {
 		
 		int result = ns.delete(no);
 		
-		return "";
+		if(result==1) {
+			
+		}else {
+			
+		}
+		
+		return "redirect:/notice/list";
 	}
+	
+	@GetMapping("notice/update")
+	public String update(String no, Model model) {
+		
+		NoticeVo vo = ns.selectOne(no);
+		model.addAttribute("vo",vo);
+				
+		return "notice/update";
+	}
+	
+	@PostMapping("notice/update")
+	public String update(NoticeVo vo, HttpSession session) {
+		
+		String rootPath = session.getServletContext().getRealPath("/");
+		List<AttachmentVo> fileList = FileUnit.uploadFile(vo.getFile(), rootPath, "upload/notice");
+		vo.setFileList(fileList);
+		
+		if(vo.getInportantYn()==null)vo.setInportantYn("N");
+		
+		int  result = ns.update(vo);
+		
+		if(result==1) {
+			
+		}else {
+			
+		}
+		
+		return "redirect:/notice/detail?no="+vo.getNo();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

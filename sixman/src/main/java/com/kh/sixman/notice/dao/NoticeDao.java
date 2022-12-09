@@ -34,4 +34,8 @@ public class NoticeDao {
 	public int delete(SqlSessionTemplate sst, String no) {
 		return sst.update("noticeMapper.updateDelete", no);
 	}
+
+	public int update(SqlSessionTemplate sst, NoticeVo vo) {
+		return sst.update("noticeMapper.updateOne", vo);
+	}
 }
