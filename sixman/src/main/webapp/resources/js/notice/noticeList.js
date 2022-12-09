@@ -27,7 +27,12 @@ function noticeListAjax(page, keyword) {
                 listBox.innerHTML = text;
 
                 const pageBox = document.querySelector('.page-box');
-                pageBox.inner
+                let text2 = "";
+                text2 += "<span class='material-symbols-outlined'> keyboard_double_arrow_left </span>";
+                text2 += "<span class='material-symbols-outlined'> chevron_left </span>";
+                text2 += "<span class='material-symbols-outlined'> chevron_right </span>";
+                text2 += "<span class='material-symbols-outlined'> keyboard_double_arrow_right </span>";
+                
 
                 } else {
                 alert('Request Error!');
