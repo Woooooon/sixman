@@ -11,7 +11,7 @@
 		(
 			"NO",
 			"ORIGIN_NAME",
-			"NOTICE_NO",
+			"${tableName}_NO",
 			"CHANGE_NAME",
 			"FILE_PATH",
 			"ENROLL_DATE"
@@ -29,9 +29,28 @@
 		select * from dual
 	</update>
 	
-	<select id="selectFileList">
-		select * from ${tableName}
-		where sub_no = ${no}
+	<select id="selectFileList" resultType="AttachmentVo">
+		select 
+			"NO",
+			"ORIGIN_NAME",
+			"${tableName}_NO" as subNo,
+			"CHANGE_NAME",
+			"FILE_PATH",
+			"ENROLL_DATE"
+ 		from ${tableName}_A
+		where ${tableName}_NO = ${no}
+	</select>
+	
+	<select id="getFile" resultType="AttachmentVo">
+		select 
+			"NO",
+			"ORIGIN_NAME",
+			"${tableName}_NO" as subNo,
+			"CHANGE_NAME",
+			"FILE_PATH",
+			"ENROLL_DATE"
+ 		from ${tableName}_A
+		where NO = ${no}
 	</select>
     
 </mapper>

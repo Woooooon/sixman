@@ -19,7 +19,6 @@ import com.google.gson.GsonBuilder;
 import com.kh.sixman.common.AttachmentVo;
 import com.kh.sixman.common.FileUnit;
 import com.kh.sixman.common.PageVo;
-import com.kh.sixman.file.service.FileService;
 import com.kh.sixman.member.vo.MemberVo;
 import com.kh.sixman.notice.service.NoticeService;
 import com.kh.sixman.notice.vo.NoticeVo;
@@ -29,8 +28,6 @@ public class NoticeController {
 			
 	@Autowired
 	private NoticeService ns;
-	@Autowired
-	private FileService fs;
 
 	@GetMapping("notice/write")
 	public String write() {
@@ -57,9 +54,9 @@ public class NoticeController {
 		int result = ns.write(vo);
 		
 		if(result==1) {
-			return "redirect:notice/list";
+			return "redirect:/notice/list";
 		}else {
-			return "redirect:notice/write";			
+			return "redirect:/notice/write";			
 		}
 	}
 	
@@ -67,6 +64,8 @@ public class NoticeController {
 	public String detail(String no, Model model) {
 		NoticeVo vo = ns.selectOne(no);
 		model.addAttribute("vo", vo);
+		
+		if(vo==null) {return "redirect:/notice/list";}
 		return "notice/detail";
 	}
 
@@ -78,7 +77,7 @@ public class NoticeController {
 	@PostMapping(value = "notice/list", produces = "application/json; charset=utf8")
 	@ResponseBody
 	public String list(int page, String keyword) {
-		
+				
 		int pageLimit = 5;
 		int boardLimit = 15;
 		int listCount = ns.countList(keyword);

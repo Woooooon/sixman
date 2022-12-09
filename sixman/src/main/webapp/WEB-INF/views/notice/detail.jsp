@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="${path}/resources/css/list.css">
 <link rel="stylesheet" href="${path}/resources/css/notice/noticeDetail.css">
+<script defer src="${path}/resources/js/file/file.js"></script>
 </head>
 <body>
 
@@ -33,7 +34,7 @@
                     	<c:forEach items="${vo.fileList}" var="fv">
 	                    	<div class="file-item">
 	                            <div>${fv.originName}</div>
-	                            <span class="material-symbols-outlined"> download </span>
+	                            <span class="material-symbols-outlined" onclick="dounload()"> download </span>
 	                        </div>   
                     	</c:forEach>
                     </div>

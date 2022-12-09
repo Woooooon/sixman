@@ -11,12 +11,16 @@ import com.kh.sixman.common.AttachmentVo;
 @Repository
 public class FileDao {
 
-	public int uploalAll(SqlSessionTemplate sst, List<AttachmentVo> fileList) {
-		return sst.insert("fileMapper.insertAll", fileList);
+	public int uploalAll(SqlSessionTemplate sst, Map<String, Object> map) {
+		return sst.insert("fileMapper.insertAll", map);
 	}
 
 	public List<AttachmentVo> selectFileList(SqlSessionTemplate sst, Map<String, String> map) {
 		return sst.selectList("fileMapper.selectFileList", map);
+	}
+
+	public AttachmentVo getFile(SqlSessionTemplate sst, Map<String, String> map) {
+		return sst.selectOne("fileMapper.getFile", map);
 	}
 
 }
