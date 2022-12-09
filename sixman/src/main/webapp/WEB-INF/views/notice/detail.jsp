@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="${path}/resources/css/list.css">
 <link rel="stylesheet" href="${path}/resources/css/notice/noticeDetail.css">
 <script defer src="${path}/resources/js/file/file.js"></script>
+<script defer src="${path}/resources/js/notice/noticeDetail.js"></script>
 </head>
 <body>
 
@@ -34,7 +35,7 @@
                     	<c:forEach items="${vo.fileList}" var="fv">
 	                    	<div class="file-item">
 	                            <div>${fv.originName}</div>
-	                            <span class="material-symbols-outlined" onclick="dounload()"> download </span>
+	                            <span class="material-symbols-outlined" onclick="dounload(${fv.no})"> download </span>
 	                        </div>   
                     	</c:forEach>
                     </div>
@@ -42,7 +43,7 @@
                 <div>작성일<p id="enroll-date">${enrollDate}</p></div>
             </div>
             <div id="content-box">
-                ${content}
+                ${vo.content}
             </div>
         </div>
         <div id="board-footer">

@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.sixman.common.AttachmentVo;
 import com.kh.sixman.file.service.FileService;
@@ -20,18 +19,14 @@ public class FileController {
 	@Autowired
 	private FileService fs;
 	
-	@ResponseBody
 	@PostMapping("download")
 	public void download(String no, HttpServletResponse response) throws Exception {
         try {
-        	
-        	System.out.println(no);
-        	
         	AttachmentVo vo = fs.getFile(no);
-        	String path = vo.getFilePath(); // 경로에 접근할 때 역슬래시('\') 사용
+        	String path = vo.getFilePath()+vo.getChangeName(); // 경로에 접근할 때 역슬래시('\') 사용
         	
         	File file = new File(path);
-        	response.setHeader("Content-Disposition", "attachment;filename=" + file.getName()); // 다운로드 되거나 로컬에 저장되는 용도로 쓰이는지를 알려주는 헤더
+        	response.setHeader("Content-Disposition", "attachment;filename=" + vo.getOriginName()); // 다운로드 되거나 로컬에 저장되는 용도로 쓰이는지를 알려주는 헤더
         	
         	FileInputStream fileInputStream = new FileInputStream(path); // 파일 읽어오기 
         	OutputStream out = response.getOutputStream();
@@ -43,7 +38,7 @@ public class FileController {
                 }
                 
         } catch (Exception e) {
-            throw new Exception("download error");
+        	e.printStackTrace();
         }
 	}
 

@@ -30,4 +30,8 @@ public class NoticeDao {
 	public NoticeVo selectOne(SqlSessionTemplate sst, String no) {
 		return sst.selectOne("noticeMapper.selectOne", no);
 	}
+
+	public int delete(SqlSessionTemplate sst, String no) {
+		return sst.update("noticeMapper.updateDelete", no);
+	}
 }

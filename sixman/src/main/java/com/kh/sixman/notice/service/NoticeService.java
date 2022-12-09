@@ -73,6 +73,10 @@ public class NoticeService {
 		return vo;
 	}
 
+	public int delete(String no) {
+		return dao.delete(sst, no);
+	}
+
 	
 	
 	

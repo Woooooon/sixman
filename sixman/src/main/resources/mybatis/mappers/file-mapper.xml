@@ -52,5 +52,11 @@
  		from ${tableName}_A
 		where NO = ${no}
 	</select>
+	
+	<update id="updateDelete" parameterType="String">
+		update notice
+		set delete_yn = 'Y'
+		where no = ${no}
+	</update>
     
 </mapper>

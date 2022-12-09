@@ -97,4 +97,13 @@ public class NoticeController {
 		String json = gson.toJson(map);
 		return json;
 	}
+	
+	@ResponseBody
+	@PostMapping("notice/delete")
+	public String delete(String no) {
+		
+		int result = ns.delete(no);
+		
+		return "";
+	}
 }
