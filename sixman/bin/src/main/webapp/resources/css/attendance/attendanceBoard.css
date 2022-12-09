@@ -41,7 +41,6 @@
     align-items: center;
 }
 
-
 #notice-box{
     padding: 20px;
     display: flex;
@@ -159,6 +158,21 @@
     gap: 20px;
 }
 
+.b-title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 130px;
+    padding: 15px;
+    border-bottom: 1px solid var(--main-color);
+    font-size: 1.5em;
+    font-weight: 500;
+}
+
+.hilight{
+    color: var(--main-color);
+}
 
 .header-box{
     padding: 0 50px;
@@ -170,6 +184,30 @@
 .header-box .btn{
     padding-right: 15px;
     width: 100px;
+}
+
+.search-bar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bo-20);
+    border-radius: 50px;
+    padding: 5px 10px;
+}
+
+.search-bar input{
+    width: 120px;
+    height: 15px;
+    border: none;
+    background: none;
+    outline: none;
+    font-size: 12px;
+    color: var(--bo-80);
+}
+
+.search-bar span{
+    font-size: 1.3em;
+    color: gray;
 }
 
 .list-box{
@@ -189,6 +227,7 @@
     padding: 0 20px;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 .list-item p:not(:nth-of-type(2)){
     justify-content: center;

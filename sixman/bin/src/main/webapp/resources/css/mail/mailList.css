@@ -2,7 +2,8 @@
     width: auto;
 }
 
-.first-item div{
+.first-item > div,
+.first-item > div > div{
     display: flex;
     align-items: center;
 }
@@ -30,7 +31,7 @@
     align-items: center;
 }
 
-.list-item input[type=checkbox]{
+input[type=checkbox]{
     width: 15px;
     height: 15px;
 }
@@ -41,4 +42,97 @@
 
 .read{
     color: var(--bo-40);
+}
+
+.category-btn{
+    position: relative;
+    cursor: pointer;
+}
+
+#category-box,#category-box2{
+    position: absolute;
+    top: 35px;
+    flex-direction: column;
+    background-color: white;
+    box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.1);
+    padding: 5px 0;
+}
+#category-box{width: 250px; max-height: 300px;}
+#category-box2{width: 120px; max-height: 300px;}
+
+.category-items{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.category-items > label,
+.category-items > button{
+    background: none;
+    border: none;
+    display: flex;
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+    align-items: center;
+    font-weight: 500;
+    color: var(--bo-80);
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.category-items > label:hover,
+.category-items > button:hover{
+    background-color: rgb(245, 245, 245);
+    color: var(--main-color);
+}
+
+.category-items > label:has(input:checked){
+    background-color: rgb(245, 245, 245);
+    color: var(--main-color);
+}
+
+.category-items input{
+    display: none;
+}
+
+.category-footer{
+    width: 100%;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.category-footer > div:nth-of-type(1){
+    width: 100%;
+    display: flex;
+    padding: 0 10px;
+    justify-content: space-around;
+}
+
+.category-footer > div:nth-of-type(1) > input{
+    width: 80%;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid var(--bo-20);
+}
+
+.category-footer .btn{
+    font-weight: 300;
+    font-size: 0.8em;
+}
+
+.category-footer .btn:nth-of-type(2){
+    width: 50%;
+}
+
+.checked{
+    box-shadow: 0 1px 0px 0px var(--main-color);
+}
+
+.click-able{
+    color: var(--bo-80);
 }

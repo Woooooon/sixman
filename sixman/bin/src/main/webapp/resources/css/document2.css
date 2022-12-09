@@ -1,0 +1,95 @@
+@charset "UTF-8";
+*{
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    
+}
+#docu-main{
+    width: 80vw;
+    height: 80vh;
+    margin: auto;
+    box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.2);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+}
+
+.main-title{
+    font-size: 3em;
+    font-weight: 700;
+    color: rgb(66, 66, 66);
+    gap: 10px;
+    border-bottom: 1px solid #ddd;
+    
+}
+
+.main-to{
+    display: flex;
+    justify-content: space-between;
+}
+.mid-box{
+    display: flex;
+    gap: 10px;
+}
+
+.search-bar{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+   
+}
+
+
+.list-box{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 25px 45px;
+    height: 70%;
+    border-bottom: 2px solid #ddd;
+
+}
+
+.list-item{
+    display: grid;
+    position: relative;
+    grid-template-columns:  1.5fr 1fr 10fr 1fr 1fr 1fr; 
+    border-bottom: 1px solid rgb(54, 54, 54);
+    align-items: center;
+    height: 10%;
+}
+.list-item input{
+    position: absolute;
+    left: -30px;
+}
+.list-item p:nth-of-type(3){
+    text-align: center;
+}
+
+.first{
+    color: black;
+    background-color: rgb(214, 214, 214);
+    height: 50px;
+    font-size: 1.2em;
+
+}
+.docu-write{
+    text-align: end;
+    padding: 25px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

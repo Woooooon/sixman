@@ -17,39 +17,37 @@
 <!-- summernote css/js-->
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>    
+<script defer src="${path}/resources/js/notice/noticeWrite.js"></script>
 </head>
 <body>
 
 <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
 <main class="main-box">
 
-    <div  id="notice-box" class="box">
-        <div class="title-box">
-            <a href="${path}/notice/list" class="material-symbols-outlined"> chevron_left </a>
-            <div class="b-title">글 작성</div>
-        </div>
-        <div id="wirte-box">
-            <p>중요</p>
-            <input type="checkbox">
-            <div></div>
-            <p>제목</p>
-            <div></div>
-            <input type="text">
-            <p>파일첨부</p>
-            <div class="btn"><span class="material-symbols-outlined"> add </span></div>
-            <div id="file-box">
-                <div class="file-item">
-                    <p>민아럼닝ㅁㄴ이ㅏㅓㄻㄴ;ㅇ라ㅣㅁㄴ.jpg</p>
-                    <span class="material-symbols-outlined"> close </span>
+    <form action="" method="post" enctype="multipart/form-data">
+        <div  id="notice-box" class="box">
+            <div class="title-box">
+                <a href="${path}/notice/list" class="material-symbols-outlined"> chevron_left </a>
+                <div class="b-title">글 작성</div>
+            </div>
+            <div id="wirte-box">
+                <p>중요</p>
+                <input name="inportantYn" type="checkbox" value="Y">
+                <div></div>
+                <p>제목</p>
+                <div></div>
+                <input name="title" type="text">
+                <p>파일첨부</p>
+                <div id="file-btn" class="btn"><span class="material-symbols-outlined"> add </span></div>
+                <div id="file-box">
                 </div>
             </div>
+            <textarea name="content" id="summernote"></textarea>
+            <div id="btn-box">
+                <input type="submit" class="btn" value="작성하기">
+            </div>
         </div>
-        <div name="" id="summernote"></div>
-        <div id="btn-box">
-            <div class="btn"><p>작성하기</p></div>
-        </div>
-    </div>
-
+    </form>
 </main>
 
 </body>

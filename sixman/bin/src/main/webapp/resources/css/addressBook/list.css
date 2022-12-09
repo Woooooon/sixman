@@ -1,0 +1,368 @@
+.main-box-2 {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    gap: 40px;
+    position: relative;
+}
+
+#myaddress-wrap {
+    width: 18%;
+    height: 100%;
+}
+
+#addressBook-wrap {
+    width: 82%;
+    height: 100%;
+    padding: 40px 30px 10px 30px;
+}
+
+.header {
+    width: 100%;
+    height: 5%;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--bo-20);
+}
+.title {
+    display: flex;
+    align-items: flex-end;
+    margin: 10px;
+}
+.title span {
+    color: var(--main-color);
+    margin-right: 7px;
+}
+.title label {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+
+.address-search {
+    display: flex;
+    align-items: flex-end;
+}
+
+.address-search form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    margin: 10px 0;
+}
+
+.address-search input[type='text'] {
+    width: 150px;
+    height: 25px;
+    margin: 0px 7px 0px 5px;
+    border: 1px solid var(--bo-40);
+    border-radius: 2px;
+    outline-color: var(--main-color);
+}
+
+.address-search select {
+    font-size: 12px;
+    border: 1px solid var(--bo-40);
+    border-radius: 2px;
+    outline-color: var(--main-color);
+}
+
+.address-search input[type='submit'] {
+    border: none;
+    color: #fff;
+    background-color: var(--main-color);
+    cursor: pointer;
+    padding: 3px 13px;
+    border-radius: 2px;
+}
+
+.address-search input[type='submit']:hover {
+    background-color: #17a897;
+}
+
+.body {
+    margin-top: 10px;
+    width: 100%;
+    height: 80%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 100px 60px;
+}
+.body-controller {
+    width: 100%;
+    height: 3%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    font-size: 12px;
+}
+
+.body-controller span {
+    font-size: 20px;
+    margin-left: 3px;
+    cursor: pointer;
+    color: var(--bo-40);
+}
+
+.body-controller span:hover {
+    color: #000;
+}
+
+.body-controller span:last-child {
+    font-size: 16px;
+}
+
+.card-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    perspective: 600px;
+}
+
+.card-container:hover .card {
+    transform: rotateY(180deg);
+}
+
+.card {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transition: 1s ease-in-out;
+    transform-style: preserve-3d;
+    box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.3);
+    border-radius: 1px;
+}
+.card input {
+    display: none;
+}
+
+.card:has(input:checked) {
+    box-shadow: 0px 0px 1px 2px #17a897;
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    border-radius: 1px;
+}
+.card-front {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}
+
+.card-back {
+    position: absolute;
+    background-color: #fff;
+    color: #3d3d3d;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0px 0px 10px;
+    border-radius: 1px;
+    overflow: hidden;
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+}
+
+.info-wrap > p {
+    margin: 3px 0;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.info-wrap {
+    width: 100%;
+    height: 82%;
+}
+
+.info-wrap > p:first-child {
+    margin-top: 0;
+    margin-bottom: 3%;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.card-sortation {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    background-color: #ffee93;
+    padding: 3px 5px;
+    border-radius: 2px;
+    color: #000;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.info-wrap p:nth-child(6) {
+    font-size: 10px;
+}
+
+.card-info {
+    display: flex;
+    align-items: flex-end;
+    margin: 10px 0;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.card-info > p:last-child {
+    font-size: 11px;
+    margin: 0 5px;
+}
+
+.card-info > p:first-child {
+    font-size: 13px;
+}
+
+.card-controller {
+    width: 100%;
+    height: 18%;
+    background: linear-gradient(-45deg, #000 45%, #fff 55%);
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    align-self: flex-end;
+    padding: 10px 0;
+}
+.card-controller span {
+    margin: 0px 5px 3px 0px;
+    font-size: 17px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.card-controller a {
+    text-decoration: none;
+}
+
+.card-controller span:hover {
+    color: var(--main-color);
+}
+
+.footer {
+    width: 100%;
+    height: 12%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.share-modal.close {
+    display: none;
+}
+
+.share-modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999999;
+    background-color: var(--bo-60);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.share-modal form {
+    width: 40%;
+    height: 45%;
+    background-color: #fff;
+    box-shadow: 0px 0px 4px 1px var(--bo-40);
+    padding: 10px;
+}
+
+.receiver {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.receiver span {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+    color: var(--bo-40);
+}
+
+.receiver span:hover {
+    color: #000;
+}
+.receiver input[type='text'] {
+    border: 1px solid var(--bo-20);
+    border-radius: 2px;
+    height: 70%;
+    width: 40%;
+    outline-color: var(--main-color);
+    margin: 0 10px;
+}
+
+.receiver input[type='submit'] {
+    border: none;
+    border-radius: 2px;
+    height: 70%;
+    color: #fff;
+    background-color: var(--main-color);
+    padding: 0 15px;
+    cursor: pointer;
+}
+
+.receiver input[type='submit']:hover {
+    background-color: #17a897;
+}
+
+.select-list {
+    width: 100%;
+    height: 80%;
+    padding: 10px;
+}
+
+.list-title {
+    border-bottom: 1px solid var(--bo-20);
+    padding: 5px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.list-title span {
+    color: var(--main-color);
+    font-size: 18px;
+}
+
+.list-title label {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.list-sortation {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 2fr;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-bottom: 1px solid var(--main-color);
+    padding: 7px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.list-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 2fr;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-bottom: 1px solid var(--bo-20);
+    padding: 7px;
+    font-size: 14px;
+}

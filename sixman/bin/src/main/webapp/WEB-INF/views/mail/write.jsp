@@ -17,56 +17,42 @@
 <!-- summernote css/js-->
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>    
+<script defer src="${path}/resources/js/mail/mail.js"></script>    
 </head>
 <body>
 
 <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
 <main class="main-box">
 
-    <div  id="notice-box" class="box">
-        <div class="title-box">
-            <a href="${path}/mail/list" class="material-symbols-outlined"> chevron_left </a>
-            <div class="b-title">메일 작성</div>
-        </div>
-        <div id="wirte-box">
-            <p>받는사람</p>
-            <div></div>
-            <div id="resive-member"><input type="email"><div class="btn"><p>주소록</p></div></div>
-            <div id="members">
-                <div class="members-item">
-                    <input type="email" value="asdfas@naver.com">
-                    <span class="t-btn material-symbols-outlined"> close </span>
+    <form action="">
+
+        <div  id="notice-box" class="box">
+            <div class="title-box">
+                <a href="${path}/mail/list" class="material-symbols-outlined"> chevron_left </a>
+                <div class="b-title">메일 작성</div>
+            </div>
+            <div id="wirte-box">
+                <p>받는사람</p>
+                <div></div>
+                <div id="resive-member"><input id="email-input" type="text"><div class="btn"><p>주소록</p></div></div>
+                <div id="members">
+                    
                 </div>
-                <div class="members-item">
-                    <input type="email" value="asdfas@naver.com">
-                    <span class="t-btn material-symbols-outlined"> close </span>
-                </div>
-                <div class="members-item">
-                    <input type="email" value="asdfas@naver.com">
-                    <span class="t-btn material-symbols-outlined"> close </span>
-                </div>
-                <div class="members-item">
-                    <input type="email" value="asdfas@naver.com">
-                    <span class="t-btn material-symbols-outlined"> close </span>
+                <p>제목</p>
+                <div></div>
+                <input name="title" type="text">
+                <p>파일첨부</p>
+                <div id="file-btn" class="btn"><span class="material-symbols-outlined"> add </span></div>
+                <div id="file-box">
                 </div>
             </div>
-            <p>제목</p>
-            <div></div>
-            <input type="text">
-            <p>파일첨부</p>
-            <div class="btn"><span class="material-symbols-outlined"> add </span></div>
-            <div id="file-box">
-                <div class="file-item">
-                    <p>민아럼닝ㅁㄴ이ㅏㅓㄻㄴ;ㅇ라ㅣㅁㄴ.jpg</p>
-                    <span class="t-btn material-symbols-outlined"> close </span>
-                </div>
+            <div name="" id="summernote"></div>
+            <div id="btn-box">
+                <input name="submit" class="btn" type="submit" value="작성하기">
+                <input name="submit" class="c-btn" type="submit" value="임시저장">
             </div>
-        </div>
-        <div name="" id="summernote"></div>
-        <div id="btn-box">
-            <div class="btn"><p>작성하기</p></div>
-            <div class="c-btn"><p>임시저장</p></div>
-        </div>
+
+        </form>
     </div>
 
 </main>
