@@ -2,43 +2,104 @@
 
 .messenger-whole{
 	width:420px;
-	height:968px;
+	height:80%;
+	position:absolute;
+	z-index:100%;
+	right:0;
+	top:6%;
 	border: 2px solid black;
 	background-color: white;
 	box-sizing:border-box;
 	margin:0px;
+	float:right;
 }
 .title-text01{
 	color:#0E6D62;
-	margin:10px;
-	font-size: 20px;
+	margin:4%;
+	margin-top:10%;
+	font-size: 200%;
 }
 .bottom-area{
 
-	width:380px;
-	height:4px;
+	width:88%;
+	height:0.6%;
 	border:2px solid #0E6D62;
 	background-color: #0E6D62;
-	margin:10px;
+	margin:4%;
 }
 
 #main-center-text1{
-	margin-top:450px;
+	margin-top:80%;
 	text-align: center;
 }
 
 #main-center-text2{
-	margin-left:40px;
+	margin-left:16%;
+
 }
 
 #who-chat{
-	margin:10px;
+	margin:4%;
 }
 
 .btn{
-	display: flex;
 }
 
-.textbox-messenger{
-	margin-left:40px;
+.textbox-messenger-area1{
+	margin-left:10%;
+	margin-right:20%;
+	display : flex;
+	justify-content : space-between; 
+	
+}
+
+.subtitle{
+	margin:10%;
+	font-size:200%;
+}
+
+.team-name{
+	margin-left:40%;
+	margin-right:10%;
+}
+
+.with-chat-name{
+	margin-left:40%;
+	margin-top:10%;
+}
+
+
+.with-chat-grade{
+	margin-right:30%;
+	margin-top:10%;
+}
+
+.with-chat-data{
+	display:flex;
+	justify-content : space-between;
+}
+
+.profile-circle{
+	margin:0 auto;
+	width:10%;
+	height:10%;
+	border-radius: 50%;
+	border : 10% solid #000000;
+}
+
+.team-area{
+	margin-left:10%;
+	
+}
+
+.team-whole-data{
+	display:flex;
+	font-size: 20px;
+}
+
+.text-messenger-settings{
+	border : 2px solid #000000;
+	margin:8%;
+	background-color: white;
+	z-index:20%;
 }
