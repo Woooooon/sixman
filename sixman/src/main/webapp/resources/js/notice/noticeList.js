@@ -26,6 +26,9 @@ function noticeListAjax(page, keyword) {
                 console.log(listBox);
                 listBox.innerHTML = text;
 
+                const pageBox = document.querySelector('.page-box');
+                pageBox.inner
+
                 } else {
                 alert('Request Error!');
                 }

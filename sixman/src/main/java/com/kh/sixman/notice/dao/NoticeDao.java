@@ -18,4 +18,16 @@ public class NoticeDao {
 	public List<NoticeVo> selectList(SqlSessionTemplate sst, String keyword, RowBounds rb) {
 		return sst.selectList("noticeMapper.selectList", keyword, rb);
 	}
+
+	public int write(SqlSessionTemplate sst, NoticeVo vo) {
+		return sst.insert("noticeMapper.write", vo);
+	}
+
+	public String getNoticeNo(SqlSessionTemplate sst, NoticeVo vo) {
+		return sst.selectOne("noticeMapper.getNo", vo);
+	}
+
+	public NoticeVo selectOne(SqlSessionTemplate sst, String no) {
+		return sst.selectOne("noticeMapper.selectOne");
+	}
 }

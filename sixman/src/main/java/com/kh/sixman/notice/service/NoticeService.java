@@ -1,13 +1,17 @@
 package com.kh.sixman.notice.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.kh.sixman.member.vo.MemberVo;
+import com.kh.sixman.common.AttachmentVo;
+import com.kh.sixman.file.dao.FileDao;
 import com.kh.sixman.notice.dao.NoticeDao;
 import com.kh.sixman.notice.vo.NoticeVo;
 
@@ -16,9 +20,10 @@ public class NoticeService {
 	
 	@Autowired
 	private SqlSessionTemplate sst;
-	
 	@Autowired
 	private NoticeDao dao;
+	@Autowired
+	private FileDao fDao;
 
 	public int countList(String keyword) {
 		return dao.countList(sst, keyword);
@@ -28,9 +33,38 @@ public class NoticeService {
 		return dao.selectList(sst, keyword, rb);
 	}
 
-	public void write(NoticeVo vo, MemberVo loginMember) {
-		// TODO Auto-generated method stub
+	@Transactional
+	public int write(NoticeVo vo) {
 		
+		int result1 = dao.write(sst, vo);
+		String no = dao.getNoticeNo(sst, vo);
+		
+//		System.out.println(result +"asdf"+ no);
+		List<AttachmentVo> fileList = vo.getFileList();
+		int result2 = 0;
+		if(fileList!=null) {
+			for(AttachmentVo fv : fileList) {
+				fv.setSubNo(no);
+			}
+			
+			result2 = fDao.uploalAll(sst, fileList);
+		}
+		
+		return result1 * result2;
+	}
+
+	public NoticeVo selectOne(String no) {
+		
+		NoticeVo vo = dao.selectOne(sst, no);
+		
+		Map<String, String> map = new HashMap<>();
+		map.put("no", no);
+		map.put("tableName","notice_a");
+		
+		List<AttachmentVo> fileList = fDao.selectFileList(sst, map);
+		vo.setFileList(fileList);
+		
+		return vo;
 	}
 
 	

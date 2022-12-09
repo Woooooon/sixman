@@ -24,27 +24,6 @@
             <div class="search-bar"><input type="text" placeholder="검색"><span class="material-symbols-outlined"> search </span></div>
         </div>
         <div class="list-box">
-            <div class="first-item">
-                <p>번호</p>
-                <p>제목</p>
-                <p>작성일자</p>
-                <p>조회수</p>
-            </div>
-            <div class="list-item"> <p class="important">번호</p> <p>제목</p> <p>작성일자</p> <p>조회수</p> </div>
-            <div class="list-item"> <p>번호</p> <p>제목</p> <p>작성일자</p> <p>조회수</p> </div>
-            <div class="list-item"> <p>번호</p> <p>제목</p> <p>작성일자</p> <p>조회수</p> </div>
-            <div class="list-item"> <p>번호</p> <p>제목</p> <p>작성일자</p> <p>조회수</p> </div>
-            <div class="list-item"> <p>번호</p> <p>제목</p> <p>작성일자</p> <p>조회수</p> </div>
-            <div class="list-item"> <p>번호</p> <p>제목</p> <p>작성일자</p> <p>조회수</p> </div>
-            <div class="list-item"> <p>번호</p> <p>제목</p> <p>작성일자</p> <p>조회수</p> </div>
-            <div class="list-item"> <p>번호</p> <p>제목</p> <p>작성일자</p> <p>조회수</p> </div>
-            <div class="list-item"> <p>번호</p> <p>제목</p> <p>작성일자</p> <p>조회수</p> </div>
-            <div class="list-item"> <p>번호</p> <p>제목</p> <p>작성일자</p> <p>조회수</p> </div>
-            <div class="list-item"> <p>번호</p> <p>제목</p> <p>작성일자</p> <p>조회수</p> </div>
-            <div class="list-item"> <p>번호</p> <p>제목</p> <p>작성일자</p> <p>조회수</p> </div>
-            <div class="list-item"> <p>번호</p> <p>제목</p> <p>작성일자</p> <p>조회수</p> </div>
-            <div class="list-item"> <p>번호</p> <p>제목</p> <p>작성일자</p> <p>조회수</p> </div>
-            <div class="list-item"> <p>번호</p> <p>제목</p> <p>작성일자</p> <p>조회수</p> </div>
         </div>
         <div class="page-box">
             <span class="material-symbols-outlined"> keyboard_double_arrow_left </span>

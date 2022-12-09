@@ -12,7 +12,7 @@ public class FileUnit {
 	public static List<AttachmentVo> uploadFile(List<MultipartFile> list, String rootPath, String filePath){
 			
 		List<AttachmentVo> voList = new ArrayList<>();
-		if(list.size()==0)return null;
+		if(list==null||list.size()==0)return null;
 		for(MultipartFile f : list) {
 			// 0. 준비
 			String originName = f.getOriginalFilename();
@@ -33,7 +33,7 @@ public class FileUnit {
 			AttachmentVo vo = new AttachmentVo();
 			vo.setChangeName(changeName);
 			vo.setOriginName(originName);
-			vo.setFilePath(filePath);
+			vo.setFilePath(path);
 			voList.add(vo);
 		}
 		

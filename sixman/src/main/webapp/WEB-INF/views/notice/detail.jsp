@@ -22,47 +22,26 @@
         </div>
         <div class="list-box">
             <div class="first-item">
-                <div id="board-title">이건 제목입니다.</div>
-                <div>조회수<p id="view-count">10</p></div>
+                <div id="board-title">${vo.title}</div>
+                <div>조회수<p id="view-count">${vo.view}</p></div>
             </div>
             <div id="file-box">
                 <div>
                     <input id="list-check" type="checkbox">
                     <label for="list-check" class="material-symbols-outlined"> arrow_drop_down </label>
                     <div id="file-list">
-                        <div class="file-item">
-                            <div>파일제목asdfasdfasdfasdf</div>
-                            <span class="material-symbols-outlined"> download </span>
-                        </div>
-                        <div class="file-item">
-                            <div>파일제목</div>
-                            <span class="material-symbols-outlined"> download </span>
-                        </div>
-                        <div class="file-item">
-                            <div>파일제목</div>
-                            <span class="material-symbols-outlined"> download </span>
-                        </div>
-                        <div class="file-item">
-                            <div>파일제목</div>
-                            <span class="material-symbols-outlined"> download </span>
-                        </div>
+                    	<c:forEach items="${vo.fileList}" var="fv">
+	                    	<div class="file-item">
+	                            <div>${fv.originName}</div>
+	                            <span class="material-symbols-outlined"> download </span>
+	                        </div>   
+                    	</c:forEach>
                     </div>
                 </div>
-                <div>작성일<p id="enroll-date">2022-05-05 11:11</p></div>
+                <div>작성일<p id="enroll-date">${enrollDate}</p></div>
             </div>
             <div id="content-box">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit minus ullam inventore praesentium eum! Corrupti at veniam quaerat nostrum, molestiae quibusdam tempora quidem incidunt possimus minima, nemo distinctio eum id.
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit minus ullam inventore praesentium eum! Corrupti at veniam quaerat nostrum, molestiae quibusdam tempora quidem incidunt possimus minima, nemo distinctio eum id.
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit minus ullam inventore praesentium eum! Corrupti at veniam quaerat nostrum, molestiae quibusdam tempora quidem incidunt possimus minima, nemo distinctio eum id.
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit minus ullam inventore praesentium eum! Corrupti at veniam quaerat nostrum, molestiae quibusdam tempora quidem incidunt possimus minima, nemo distinctio eum id.
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit minus ullam inventore praesentium eum! Corrupti at veniam quaerat nostrum, molestiae quibusdam tempora quidem incidunt possimus minima, nemo distinctio eum id.
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit minus ullam inventore praesentium eum! Corrupti at veniam quaerat nostrum, molestiae quibusdam tempora quidem incidunt possimus minima, nemo distinctio eum id.
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit minus ullam inventore praesentium eum! Corrupti at veniam quaerat nostrum, molestiae quibusdam tempora quidem incidunt possimus minima, nemo distinctio eum id.
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit minus ullam inventore praesentium eum! Corrupti at veniam quaerat nostrum, molestiae quibusdam tempora quidem incidunt possimus minima, nemo distinctio eum id.
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit minus ullam inventore praesentium eum! Corrupti at veniam quaerat nostrum, molestiae quibusdam tempora quidem incidunt possimus minima, nemo distinctio eum id.
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit minus ullam inventore praesentium eum! Corrupti at veniam quaerat nostrum, molestiae quibusdam tempora quidem incidunt possimus minima, nemo distinctio eum id.
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit minus ullam inventore praesentium eum! Corrupti at veniam quaerat nostrum, molestiae quibusdam tempora quidem incidunt possimus minima, nemo distinctio eum id.
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit minus ullam inventore praesentium eum! Corrupti at veniam quaerat nostrum, molestiae quibusdam tempora quidem incidunt possimus minima, nemo distinctio eum id.
+                ${content}
             </div>
         </div>
         <div id="board-footer">
