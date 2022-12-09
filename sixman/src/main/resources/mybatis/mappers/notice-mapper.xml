@@ -11,6 +11,7 @@
 	        WHERE TITLE LIKE '%${keyword}%'
 	        OR CONTENT LIKE '%${keyword}%'
         </if>  
+        ORDER BY ENROLL_DATE
     </select>
     
     <select id="selectList" parameterType="String" resultType="NoticeVo">
@@ -19,7 +20,45 @@
         <if test=" keyword != '' ">
 	        WHERE TITLE LIKE '%${keyword}%'
 	        OR CONTENT LIKE '%${keyword}%'
-        </if>   
+        </if>
+        ORDER BY ENROLL_DATE
+    </select>
+    
+    <insert id="write">
+    	INSERT INTO NOTICE
+    	(
+	    	"NO",
+			"TITLE",
+			"CONTENT",
+			ENROLL_DATE,
+			DELETE_YN,
+			INPORTANT_YN,
+			USER_NO,
+			"VIEW"
+    	)
+    	VALUES
+    	(
+    		SEQ_NOTICE_NO.NEXTVAL,
+    		#{title},
+    		#{content},
+    		SYSDATE,
+    		'N',
+    		#{inportantYn},
+    		#{userNo},
+    		0
+    	)
+    </insert>
+    
+    <select id="getNo" resultType="String">
+    	SELECT "NO"
+    	FROM NOTICE
+    	WHERE USER_NO = ${userNo}
+    	AND "TITLE" = #{title}
+    </select>
+    
+    <select id="selectOne" parameterType="String" resultType="NoticeVo">
+    	select * from notice
+    	where no = ${no}
     </select>
     
 </mapper>

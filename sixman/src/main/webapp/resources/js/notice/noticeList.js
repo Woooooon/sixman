@@ -1,4 +1,4 @@
-noticeListAjax(1, "a");
+noticeListAjax(1);
 
 function noticeListAjax(page, keyword) {
     const httpRequest = new XMLHttpRequest();
@@ -25,6 +25,9 @@ function noticeListAjax(page, keyword) {
                 }
                 console.log(listBox);
                 listBox.innerHTML = text;
+
+                const pageBox = document.querySelector('.page-box');
+                pageBox.inner
 
                 } else {
                 alert('Request Error!');

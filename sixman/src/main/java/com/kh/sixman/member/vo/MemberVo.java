@@ -1,5 +1,9 @@
 package com.kh.sixman.member.vo;
 
-public class MemberVo {
+import lombok.Data;
 
+@Data
+public class MemberVo {
+	private String name;
+	private String no;
 }

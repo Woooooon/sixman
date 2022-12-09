@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -42,19 +43,30 @@ public class NoticeController {
 		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
 			
 		String rootPath = session.getServletContext().getRealPath("/");
-//		System.out.println(rootPath);
-//		D:\fainal\sixman\target\m2e-wtp\web-resources\
 		List<AttachmentVo> fileList = FileUnit.uploadFile(vo.getFile(), rootPath, "upload/notice");
 		
-		int result = fs.upload(fileList);
-		ns.write(vo, loginMember);
+//		테스트
+		loginMember = new MemberVo();
+		loginMember.setName("홍길동");
+		loginMember.setNo("1");
+				
+		vo.setUserNo(loginMember.getNo());
+		vo.setName(loginMember.getName());
+		vo.setFileList(fileList);
 		
+		int result = ns.write(vo);
 		
-		return "notice/write";
+		if(result==1) {
+			return "redirect:notice/list";
+		}else {
+			return "redirect:notice/write";			
+		}
 	}
 	
 	@GetMapping("notice/detail")
-	public String detail() {
+	public String detail(String no, Model model) {
+		NoticeVo vo = ns.selectOne(no);
+		model.addAttribute("vo", vo);
 		return "notice/detail";
 	}
 

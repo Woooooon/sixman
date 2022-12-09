@@ -12,6 +12,7 @@ public class FileUnit {
 	public static List<AttachmentVo> uploadFile(List<MultipartFile> list, String rootPath, String filePath){
 			
 		List<AttachmentVo> voList = new ArrayList<>();
+		if(list==null||list.size()==0)return null;
 		for(MultipartFile f : list) {
 			// 0. 준비
 			String originName = f.getOriginalFilename();
@@ -19,7 +20,7 @@ public class FileUnit {
 			String changeName = System.currentTimeMillis() + "_" + (Math.random()*99999 + 1) + ext;
 			
 			// 1. 파일 객체 준비 (경로+파일명)
-			String path = rootPath.substring(0, rootPath.indexOf("sixman")) + filePath + "/";
+			String path = rootPath.substring(0, rootPath.lastIndexOf("sixman")) + filePath + "/";
 			File saveFile = new File(path, changeName);
 			
 			try {
@@ -32,7 +33,7 @@ public class FileUnit {
 			AttachmentVo vo = new AttachmentVo();
 			vo.setChangeName(changeName);
 			vo.setOriginName(originName);
-			vo.setFilePath(filePath);
+			vo.setFilePath(path);
 			voList.add(vo);
 		}
 		
