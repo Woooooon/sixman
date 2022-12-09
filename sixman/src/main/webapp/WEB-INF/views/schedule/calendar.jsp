@@ -8,38 +8,16 @@
 <meta charset="UTF-8">
 <title>일정</title>
 <style>
-    *{
-        margin: 0;
-        padding: 0;
-        font-family: sans-serif;
-        box-sizing: border-box;
-    }
-
-    body{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-    }
-    
-    #main-box{
-        border: 1px solid #aaa;
-        border-radius: 3px;
-        box-shadow: 1px 1px 1px 1px #DCDCDC;
-    }
-
     .calendar{
-        width: 1050px;
-        margin: 50px;
+        width: 100%;
+        height: 100%;
+        padding: 30px;
     }
 
     .header{
         display: flex;
         justify-content: space-between;
         align-items: center;
-    }
-    #main-box{
-        position: relative;
     }
 
     .year-month{
@@ -167,8 +145,8 @@
     <!-- 메뉴바 고정 -->
     <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
 
-    <main id="main-box">
-        <div class="calendar">
+    <main class="main-box">
+        <div class="calendar box">
             <div class="header">
                 <div class="nav-1">
                     <button class="btn write" onclick="location.href='${path}/schedule/write.jsp'"><p>작성하기</p></button>

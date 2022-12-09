@@ -11,20 +11,20 @@
 </head>
 <body>
     <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
-    <main id="main-box">
-        <div class="consent-box">
+    <main class="main-box">
+        <div class="consent-box box">
             <div class="consent-title-box">
                 <div class="consent-title"><p>프로젝트 생성 승인</p></div>
                 <br>
             </div>
             <div class="header-box">
                 <div class="hidden"></div>
-                <label><input type="checkbox"><p>전체선택</p></label>    
+                <label><p><input type="checkbox">&nbsp;전체선택</p></label>    
             </div>
             <div class="project-list">
-                <label><input type="checkbox"><div class="project-item">프로젝트 - 회식은 언제 하는가에 대하여</div></label>
-                <label><input type="checkbox"><div class="project-item">프로젝트 - 마크로 java도 한다던데...</div></label>
-                <label><input type="checkbox"><div class="project-item">데프트 - 중요한건 꺾이지 않는 마음</div></label>
+                <label><div class="project-item"><input type="checkbox">&nbsp;회식은 언제 하는가에 대하여</div></label>
+                <label><div class="project-item"><input type="checkbox">&nbsp;마크로 java도 한다던데...</div></label>
+                <label><div class="project-item"><input type="checkbox">&nbsp;중요한건 꺾이지 않는 마음</div></label>
             </div>
             
             <div class="consent-page-num">
