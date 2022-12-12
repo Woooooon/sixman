@@ -21,5 +21,11 @@ public class ProjectController {
 	public String create(){
 		return "project/create";
 	}
+	
+	//프로젝트 상세보기(화면)
+	@GetMapping("detail")
+	public String detail() {
+		return "project/detail";
+	}
 
 }

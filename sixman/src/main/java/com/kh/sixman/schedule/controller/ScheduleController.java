@@ -14,4 +14,10 @@ public class ScheduleController {
 		return "schedule/calendar";
 	}
 	
+	//주간일정(화면)
+	@GetMapping("weeks")
+	public String weeks() {
+		return "schedule/weeks";
+	}
+	
 }
