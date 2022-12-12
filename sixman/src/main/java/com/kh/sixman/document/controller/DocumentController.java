@@ -37,6 +37,11 @@ public class DocumentController {
 	public String Keep() {
 		return "document/keep";
 	}
+
+	@GetMapping("write")
+	public String Write(){
+		return "document/write";
+	}
 	
 	
 	
