@@ -1,0 +1,177 @@
+/* detail-box */
+.detail-box {
+    padding: 50px;
+}
+
+/* 프로젝트 제목 */
+
+.head {
+    margin-left: 50px;
+    margin-bottom: 10px;
+}
+
+.head > p {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+/* 프로젝트 상태 */
+
+.status {
+    margin: 10px;
+    display: flex;
+    color: #aaa;
+}
+
+.status-1 {
+    font-size: 17px;
+}
+
+.status-btn {
+    display: flex;
+    justify-content: space-between;
+    width: 20%;
+    margin-top: 8px;
+    margin-left: 10px;
+}
+
+.ing {
+    background-color: #62C276;
+    color: #FFFFFF;
+    width: 90px;
+    height: 25px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.delay {
+    background-color: #E95E51;
+    color: #FFFFFF;
+    width: 90px;
+    height: 25px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.complete {
+    background-color: #55BAE5;
+    color: #FFFFFF;
+    width: 90px;
+    height: 25px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+/* 프로젝트 멤버 */
+
+.member {
+    display: flex;
+    margin: 10px;
+    color: #aaa;
+    font-size: 17px;
+}
+
+.member-list {
+    display: flex;
+    margin-top: 8px;
+    margin-left: 10px;
+    width: 20%;
+    justify-content: space-between;
+}
+
+/* 플젝 날짜 */
+
+.date {
+    display: flex;
+    margin: 10px;
+    color: #aaa;
+    font-size: 17px;
+}
+
+.date > p {
+    margin: 8px 0 10px 10px;
+}
+
+#startdate,
+#enddate {
+    margin-top: 8px;
+    margin-left: 10px;
+    height: 15%;
+}
+
+
+/* 일정 bar */
+
+.percent {
+    display: flex;
+    margin: 10px;
+    color: #aaa;
+    font-size: 17px;
+}
+
+.progress {
+    margin-top: 8px;
+    margin-left: 10px;
+}
+
+/* 내용 */
+
+.hidden {
+    border-top: 2px solid #D3D3D3;
+    width: 65%;
+    height: 20px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+#prj-content {
+    margin: 15px;
+    resize: none;
+    width: 62%;
+    height: 200px;
+    border: 1px solid #D3D3D3;
+}
+
+/* to-do */
+
+.todo {
+    display: flex;
+    margin: 10px;
+    color: #aaa;
+    font-size: 17px;
+}
+
+.todo > span {
+    margin-right: 10px;
+}
+
+.todo-list {
+    display: flex;
+    width: 60%;
+}
+
+.todo-box {
+    border-radius: 5px;
+    box-shadow: 1px 1px #D3D3D3;
+    margin: 0px 10px 0 10px;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border: 1px solid #D3D3D3;
+}
+
+
+.todo-title {
+    margin: 5px;
+    font-weight: bold;
+}
+
+.todo-writer {
+    margin: 5px;
+    color: #aaa;
+    font-size: 17px;
+}
