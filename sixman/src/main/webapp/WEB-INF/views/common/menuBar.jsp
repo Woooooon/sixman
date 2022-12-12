@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,200,1,0" />    
     <link rel="stylesheet" href="${path}/resources/css/main.css">
     <link rel="stylesheet" href="${path}/resources/css/reset.css">
+    <script src="${path}/resources/js/main/main.js"></script>
 </head>
 <body>
 
