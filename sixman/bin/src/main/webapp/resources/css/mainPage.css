@@ -87,6 +87,10 @@
     margin-bottom: 4px;
     gap: 10px;
     width: 100%;
+    cursor: pointer;
+}
+.box-item:hover{
+    color: var(--main-color);
 }
 #mail-list > div:first-of-type{
     padding: 5px 0;

@@ -27,7 +27,7 @@
                 <div id="main-mail">
                     <div><span class="material-symbols-outlined">mail</span></div>
                     <div><p>20</p>/<p>30</p></div>
-                    <div class="btn"><p>메일작성</p></div>
+                    <div class="btn" onclick="location.href='${path}/mail/write'"><p>메일작성</p></div>
                 </div>
                 <div id="mail-list">
                     <div>최근메일</div>

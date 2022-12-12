@@ -1,4 +1,10 @@
 @charset "UTF-8";
+
+p{
+    display: flex;
+    align-items: center;
+}
+
 #notice-box{
     gap: 0;
     max-width: 100%;
@@ -32,7 +38,7 @@
     width: fit-content;
 }
 
-input{
+input:not([type=submit]){
     border: none;
     width: 100%;
     border-bottom: 1px solid var(--bo-40);
@@ -54,10 +60,12 @@ input{
     justify-content: space-between;
     width: 100%;
     font-size: 13px;
+    align-items: center;
 }
 
 .file-item span{
     font-size: 13px;
+    cursor: pointer;
 }
 
 .panel-default > .panel-heading{
@@ -127,7 +135,7 @@ button.btn:hover{
 }
 
 .members-item input[type=email]{
-    width: 120px;
+    width: fit-content;
     text-align:center;
     border: none;
 }

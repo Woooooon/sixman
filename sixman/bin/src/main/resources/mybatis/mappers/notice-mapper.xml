@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="noticeMapper">
+
+    <select id="selectCount" parameterType="String" resultType="int">
+        SELECT COUNT(*)
+        FROM NOTICE
+        <if test=" keyword != '' ">
+	        WHERE TITLE LIKE '%${keyword}%'
+	        OR CONTENT LIKE '%${keyword}%'
+        </if>  
+        ORDER BY ENROLL_DATE
+    </select>
+    
+    <select id="selectList" parameterType="String" resultType="NoticeVo">
+        SELECT *
+        FROM NOTICE
+        <if test=" keyword != '' ">
+	        WHERE TITLE LIKE '%${keyword}%'
+	        OR CONTENT LIKE '%${keyword}%'
+        </if>
+        ORDER BY ENROLL_DATE
+    </select>
+    
+    <insert id="write">
+    	INSERT INTO NOTICE
+    	(
+	    	"NO",
+			"TITLE",
+			"CONTENT",
+			ENROLL_DATE,
+			DELETE_YN,
+			INPORTANT_YN,
+			USER_NO,
+			"VIEW"
+    	)
+    	VALUES
+    	(
+    		SEQ_NOTICE_NO.NEXTVAL,
+    		#{title},
+    		#{content},
+    		SYSDATE,
+    		'N',
+    		#{inportantYn},
+    		#{userNo},
+    		0
+    	)
+    </insert>
+    
+    <select id="getNo" resultType="String">
+    	SELECT "NO"
+    	FROM NOTICE
+    	WHERE USER_NO = ${userNo}
+    	AND "TITLE" = #{title}
+    </select>
+    
+    <select id="selectOne" parameterType="String" resultType="NoticeVo">
+    	select * from notice
+    	where no = ${no}
+    </select>
+    
+</mapper>

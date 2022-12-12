@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="${path}/resources/css/notice/noticeList.css">
-<script src="${path}/resources/js/notice/noticeList.js"></script>
+<script defer src="${path}/resources/js/notice/noticeList.js"></script>
 </head>
 <body>
 
@@ -21,20 +21,11 @@
         </div>
         <div class="header-box">
             <a href="/sixman/notice/write" class="btn" onclick="location.href='/sixman/notice/write'"><span class="material-symbols-outlined"> add </span><p>글쓰기</p></a>
-            <div class="search-bar"><input type="text" placeholder="검색"><span class="material-symbols-outlined"> search </span></div>
+            <div class="search-bar"><input id="search-input" type="text" placeholder="검색"><span id="search-btn" class="material-symbols-outlined"> search </span></div>
         </div>
         <div class="list-box">
         </div>
         <div class="page-box">
-            <span class="material-symbols-outlined"> keyboard_double_arrow_left </span>
-            <span class="material-symbols-outlined"> chevron_left </span>
-            <div class="page-btn checked-p-btn">1</div>
-            <div class="page-btn">2</div>
-            <div class="page-btn">3</div>
-            <div class="page-btn">4</div>
-            <div class="page-btn">5</div>
-            <span class="material-symbols-outlined"> chevron_right </span>
-            <span class="material-symbols-outlined"> keyboard_double_arrow_right </span>
         </div>
     </div>
 </main>

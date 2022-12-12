@@ -17,7 +17,7 @@
 
 	<div id="notice-box" class="box">
         <div class="title-box">
-            <span class="material-symbols-outlined"> chevron_left </span>
+            <span class="material-symbols-outlined" onclick="location.href='${path}/mail/list'"> chevron_left </span>
             <div class="b-title">받은 메일함</div>
         </div>
         <div class="list-box">

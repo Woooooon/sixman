@@ -47,7 +47,11 @@ public class NoticeService {
 				fv.setSubNo(no);
 			}
 			
-			result2 = fDao.uploalAll(sst, fileList);
+			Map<String, Object> map = new HashMap<>();
+			map.put("list", fileList);
+			map.put("tableName","NOTICE");
+			
+			result2 = fDao.uploalAll(sst, map);
 		}
 		
 		return result1 * result2;
@@ -57,9 +61,11 @@ public class NoticeService {
 		
 		NoticeVo vo = dao.selectOne(sst, no);
 		
+		if(vo==null) return null;
+		
 		Map<String, String> map = new HashMap<>();
 		map.put("no", no);
-		map.put("tableName","notice_a");
+		map.put("tableName","NOTICE");
 		
 		List<AttachmentVo> fileList = fDao.selectFileList(sst, map);
 		vo.setFileList(fileList);
