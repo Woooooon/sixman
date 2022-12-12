@@ -8,6 +8,20 @@
     width: 18%;
     height: 100%;
     margin-right: 40px;
+    padding: 10px;
+}
+
+.icon-color {
+    color: var(--main-color);
+}
+
+#jstree ul li input {
+    border: none;
+    background-color: transparent;
+}
+
+#jstree ul li div {
+    display: flex;
 }
 
 #member-wrap {
@@ -92,9 +106,12 @@
 #position > label,
 #authorize > label,
 #id > label,
-#name > label,
-#address > label {
+#name > label {
     margin-right: 40px;
+}
+
+#address-wrap > label {
+    margin-right: 42px;
 }
 
 #bank > label {
@@ -136,16 +153,16 @@
     height: 200px;
     object-fit: fill;
     border-radius: 5px;
-    box-shadow: 0px 0px 1px 1px var(--bo-20);
+    box-shadow: 1px 1px 2px 1px var(--bo-20);
 }
 
-#address {
+#address-wrap {
     margin: 20px 0;
 }
-#address input {
+#address-wrap input {
     width: 65%;
 }
-#address > button {
+#address-wrap > button {
     margin-left: 10px;
     font-size: 15px;
     background-color: var(--main-color);
@@ -156,7 +173,7 @@
     color: #fff;
 }
 
-#address > button:hover {
+#address-wrap > button:hover {
     background-color: #17a897;
 }
 
@@ -317,4 +334,20 @@
 input,
 select {
     outline-color: #17a897;
+}
+
+.dept-guide {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.dept-guide span {
+    color: var(--main-color);
+    margin-right: 5px;
+}
+
+.dept-guide p {
+    font-size: 14px;
+    font-weight: 600;
 }

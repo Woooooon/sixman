@@ -6,28 +6,61 @@
         <title>Insert title here</title>
         <link rel="stylesheet" href="<c:url value='/resources/css/admin/member/join.css'/>" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
         <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+        <link rel="stylesheet" href="/sixman\resources\jstree\default\style.min.css" />
+        <script src="https://kit.fontawesome.com/ae846b135b.js" crossorigin="anonymous"></script>
+        <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     </head>
+
     <body>
         <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
         <main id="main-page" class="main-box">
             <div id="main-box-2">
                 <aside id="dept-wrap" class="box">
+                    <div class="dept-guide">
+                        <span class="material-symbols-outlined"> diversity_3 </span>
+                        <p>배달의 민족</p>
+                    </div>
                     <div id="jstree">
                         <ul>
-                            <li>
-                                Root node 1
+                            <li data-jstree='{"icon":"fa fa-folder-open icon-color"}'>
+                                <input type="text" value="영업부" disabled />
                                 <ul>
-                                    <li id="child_node_1">Child node 1</li>
-                                    <li>Child node 2</li>
+                                    <li data-jstree='{"icon":"fa fa-folder icon-color"}'>
+                                        <input type="text" value="영업 2팀" disabled />
+                                        <ul>
+                                            <li data-jstree='{"icon":"fa fa-user icon-color"}'>윤태원</li>
+                                            <li data-jstree='{"icon":"fa fa-user icon-color"}'>구기석</li>
+                                        </ul>
+                                    </li>
+                                    <li data-jstree='{"icon":"fa fa-folder icon-color"}'>
+                                        <input type="text" value="영업 3팀" disabled />
+                                        <ul>
+                                            <li data-jstree='{"icon":"fa fa-user icon-color"}'>윤태원</li>
+                                            <li data-jstree='{"icon":"fa fa-user icon-color"}'>구기석</li>
+                                        </ul>
+                                    </li>
                                 </ul>
                             </li>
-                            <li>Root node 2</li>
                         </ul>
                     </div>
-                    <button>demo button</button>
+                    <script>
+                        $('#jstree').on('open_node.jstree', function (e, data) {
+                            var icon = $('#' + data.node.id)
+                                .find('i.jstree-icon.jstree-themeicon')
+                                .first();
+                            icon.removeClass('fa-folder').addClass('fa-folder-open');
+                        });
+
+                        // bind customize icon change function in jsTree close_node event.
+                        $('#jstree').on('close_node.jstree', function (e, data) {
+                            var icon = $('#' + data.node.id)
+                                .find('i.jstree-icon.jstree-themeicon')
+                                .first();
+                            icon.removeClass('fa-folder-open').addClass('fa-folder');
+                        });
+                    </script>
                 </aside>
                 <section id="member-wrap">
                     <form action="">
@@ -116,10 +149,23 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="address" class="write">
+                                <div id="address-wrap" class="write">
                                     <label for="">주 소</label>
-                                    <input type="text" />
-                                    <button type="button">검 색</button>
+                                    <input type="text" id="address" />
+                                    <button type="button" id="address_kakao">검 색</button>
+                                    <script>
+                                        window.onload = function () {
+                                            document.getElementById('address_kakao').addEventListener('click', function () {
+                                                //주소입력칸을 클릭하면
+                                                //카카오 지도 발생
+                                                new daum.Postcode({
+                                                    oncomplete: function (data) {
+                                                        document.getElementById('address').value = data.address; // 주소 넣기
+                                                    },
+                                                }).open();
+                                            });
+                                        };
+                                    </script>
                                 </div>
                                 <div id="submit">
                                     <input type="submit" value="사원 등록" />
@@ -197,99 +243,29 @@
                                     <h2>첨부파일</h2>
                                     <input type="file" />
                                     <div id="controller">
-                                        <span class="material-symbols-outlined">add_circle</span>
-                                        <span class="material-symbols-outlined">delete</span>
+                                        <span id="add-attfile" class="material-symbols-outlined">add_circle</span>
+                                        <span id="remove-attfile" class="material-symbols-outlined">delete</span>
                                     </div>
                                 </div>
-                                <div class="filelist">
-                                    <div id="file-info">
-                                        <div class="checked">
-                                            <input type="checkbox" />
-                                            <span class="material-symbols-outlined">image</span>
-                                        </div>
-                                        <label for="">장화.png</label>
-                                        <button type="button" class="remove">
-                                            <span class="material-symbols-outlined">remove</span>
-                                            삭 제
-                                        </button>
-                                    </div>
-                                    <div id="file-info">
-                                        <div class="checked">
-                                            <input type="checkbox" />
-                                            <span class="material-symbols-outlined">image</span>
-                                        </div>
-                                        <label for="">장화.png</label>
-                                        <button type="button" class="remove">
-                                            <span class="material-symbols-outlined">remove</span>
-                                            삭 제
-                                        </button>
-                                    </div>
-                                    <div id="file-info">
-                                        <div class="checked">
-                                            <input type="checkbox" />
-                                            <span class="material-symbols-outlined">image</span>
-                                        </div>
-                                        <label for="">장화.png</label>
-                                        <button type="button" class="remove">
-                                            <span class="material-symbols-outlined">remove</span>
-                                            삭 제
-                                        </button>
-                                    </div>
-                                    <div id="file-info">
-                                        <div class="checked">
-                                            <input type="checkbox" />
-                                            <span class="material-symbols-outlined">image</span>
-                                        </div>
-                                        <label for="">장화.png</label>
-                                        <button type="button" class="remove">
-                                            <span class="material-symbols-outlined">remove</span>
-                                            삭 제
-                                        </button>
-                                    </div>
-                                    <div id="file-info">
-                                        <div class="checked">
-                                            <input type="checkbox" />
-                                            <span class="material-symbols-outlined">image</span>
-                                        </div>
-                                        <label for="">장화.png</label>
-                                        <button type="button" class="remove">
-                                            <span class="material-symbols-outlined">remove</span>
-                                            삭 제
-                                        </button>
-                                    </div>
-                                    <div id="file-info">
-                                        <div class="checked">
-                                            <input type="checkbox" />
-                                            <span class="material-symbols-outlined">image</span>
-                                        </div>
-                                        <label for="">장화.png</label>
-                                        <button type="button" class="remove">
-                                            <span class="material-symbols-outlined">remove</span>
-                                            삭 제
-                                        </button>
-                                    </div>
-                                    <div id="file-info">
-                                        <div class="checked">
-                                            <input type="checkbox" />
-                                            <span class="material-symbols-outlined">image</span>
-                                        </div>
-                                        <label for="">장화.png</label>
-                                        <button type="button" class="remove">
-                                            <span class="material-symbols-outlined">remove</span>
-                                            삭 제
-                                        </button>
-                                    </div>
-                                    <div id="file-info">
-                                        <div class="checked">
-                                            <input type="checkbox" />
-                                            <span class="material-symbols-outlined">image</span>
-                                        </div>
-                                        <label for="">장화.png</label>
-                                        <button type="button" class="remove">
-                                            <span class="material-symbols-outlined">remove</span>
-                                            삭 제
-                                        </button>
-                                    </div>
+                                <script>
+                                    $('#add-attfile').click(() => {
+                                        const addFileForm =
+                                            '<div id="file-info">' +
+                                            '<div class="checked">' +
+                                            '<input type="checkbox" />' +
+                                            '<span class="material-symbols-outlined">image</span>' +
+                                            '</div>' +
+                                            '<label for="">장화.png</label>' +
+                                            '<button type="button" class="remove">' +
+                                            '<span class="material-symbols-outlined">remove</span>' +
+                                            '삭 제' +
+                                            '</button>' +
+                                            '</div>';
+                                        $('.att-filelist').append(addFileForm);
+                                    });
+                                    $('#remove-attfile').click(() => {});
+                                </script>
+                                <div class="att-filelist">
                                     <div id="file-info">
                                         <div class="checked">
                                             <input type="checkbox" />
