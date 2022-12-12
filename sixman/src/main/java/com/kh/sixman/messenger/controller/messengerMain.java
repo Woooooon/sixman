@@ -14,8 +14,22 @@ public class messengerMain {
 		return "/messenger/messengerMain";
 	}
 	
+	//채팅방 생성 화면1
 	@GetMapping("/whochat")
 	public String whochat() {
 		return "/messenger/whoChat";
 	}
+	
+	//채팅방 생성 화면2
+	@GetMapping("/whochat/name")
+	public String whochatname() {
+		return "/messenger/whoChatName";
+	}
+	
+	//채팅방 생성 화면2
+	@GetMapping("/chattingroom")
+	public String chattingroom() {
+		return "/messenger/chattingRoom";
+	}
+		
 }
