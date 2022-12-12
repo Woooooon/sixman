@@ -1,6 +1,5 @@
 package com.kh.sixman.file.service;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -18,11 +17,12 @@ public class FileService {
 	@Autowired
 	private FileDao dao;
 
-	public AttachmentVo getFile(String no) {
-		Map<String, String> map = new HashMap<>();
-		map.put("no", no);
-		map.put("tableName", "NOTICE");
+	public AttachmentVo getFile(Map<String, String> map) {
 		return dao.getFile(sst, map);
+	}
+
+	public int delete(Map<String, String> map) {
+		return dao.delete(sst, map);
 	}
 	
 	

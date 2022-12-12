@@ -38,8 +38,7 @@ public class NoticeService {
 		
 		int result1 = dao.write(sst, vo);
 		String no = dao.getNoticeNo(sst, vo);
-		
-//		System.out.println(result +"asdf"+ no);
+
 		List<AttachmentVo> fileList = vo.getFileList();
 		int result2 = 0;
 		if(fileList!=null) {
@@ -71,6 +70,35 @@ public class NoticeService {
 		vo.setFileList(fileList);
 		
 		return vo;
+	}
+
+	public int delete(String no) {
+		return dao.delete(sst, no);
+	}
+
+	@Transactional
+	public int update(NoticeVo vo) {
+		
+		int result1 = dao.update(sst, vo);
+		
+		String no = vo.getNo();
+		
+		List<AttachmentVo> fileList = vo.getFileList();
+		int result2 = 0;
+		if(fileList!=null) {
+			for(AttachmentVo fv : fileList) {
+				System.out.println(1);
+				fv.setSubNo(no);
+			}
+			
+			Map<String, Object> map = new HashMap<>();
+			map.put("list", fileList);
+			map.put("tableName","NOTICE");
+			
+			result2 = fDao.uploalAll(sst, map);
+		}
+		
+		return result1 * result2;
 	}
 
 	

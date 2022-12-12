@@ -52,5 +52,10 @@
  		from ${tableName}_A
 		where NO = ${no}
 	</select>
+	
+	<delete id="deleteFile">
+		delete ${tableName}_A
+		where no = ${no}
+	</delete>
     
 </mapper>

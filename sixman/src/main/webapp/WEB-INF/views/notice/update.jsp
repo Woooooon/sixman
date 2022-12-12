@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="${path}/resources/css/list.css">
-<link rel="stylesheet" href="${path}/resources/css/mail/mailWrite.css">
+<link rel="stylesheet" href="${path}/resources/css/notice/noticeWrite.css">
 <!-- 섬머노트 -->
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
@@ -17,44 +17,47 @@
 <!-- summernote css/js-->
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>    
-<script defer src="${path}/resources/js/mail/mail.js"></script>    
+<script defer src="${path}/resources/js/notice/noticeWrite.js"></script>
+<script defer src="${path}/resources/js/file/file.js"></script>
 </head>
 <body>
 
 <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
 <main class="main-box">
 
-    <form action="">
-
+    <form action="" method="post" enctype="multipart/form-data">
         <div  id="notice-box" class="box">
             <div class="title-box">
-                <a href="${path}/mail/list" class="material-symbols-outlined"> chevron_left </a>
-                <div class="b-title">메일 작성</div>
+                <a href="${path}/notice/list" class="material-symbols-outlined"> chevron_left </a>
+                <div class="b-title">글 작성</div>
             </div>
             <div id="wirte-box">
-                <p>받는사람</p>
+                <p>중요</p>
+                <c:if test="${vo.inportantYn == 'Y'}">
+                	<c:set var="checked" value="checked"/>
+                </c:if>
+                <input name="inportantYn" type="checkbox" value="Y" ${checked}>
                 <div></div>
-                <div id="resive-member"><input id="email-input" type="text"><div class="btn"><p>주소록</p></div></div>
-                <div id="members">
-                    
-                </div>
                 <p>제목</p>
                 <div></div>
-                <input name="title" type="text">
+                <input name="title" type="text" value="${vo.title}">
                 <p>파일첨부</p>
                 <div id="file-btn" class="btn"><span class="material-symbols-outlined"> add </span></div>
                 <div id="file-box">
+                    <c:forEach items="${vo.fileList}" var="fv">
+	                    <div class="file-item">
+	                        <p>${fv.originName}</p>
+	                        <span class='material-symbols-outlined' onclick="deleteFile(this, ${fv.no}, 'NOTICE')"> close </span>
+	                    </div>
+                    </c:forEach>
                 </div>
             </div>
-            <div name="" id="summernote"></div>
+            <textarea name="content" id="summernote">${vo.content}</textarea>
             <div id="btn-box">
-                <input name="saveYn" class="btn" type="submit" value="작성하기">
-                <input name="saveYn" class="c-btn" type="submit" value="임시저장">
+                <input type="submit" class="btn" value="수정하기">
             </div>
-
-        </form>
-    </div>
-
+        </div>
+    </form>
 </main>
 
 </body>
