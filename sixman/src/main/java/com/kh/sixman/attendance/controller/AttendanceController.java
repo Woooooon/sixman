@@ -8,9 +8,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class AttendanceController {
 	
-	@GetMapping("attendanceBoard")
-	public String login(){
+	@GetMapping("board")
+	public String test(){
 		return "attendance/attendanceBoard";
+	}
+	
+	@GetMapping("admin")
+	public String test2(){
+		return "attendance/attendanceAdmin";
+	}
+	
+	@GetMapping("calendar")
+	public String test3(){
+		return "attendance/attendanceCalendar";
 	}
 	
 
