@@ -9,13 +9,19 @@
 <title>프로젝트 상세보기</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <link rel="stylesheet" href="${path}\resources\css\project\detail.css">
+<script defer src="${path}\resources\js\project\detail.js"></script>
 </head>
 <body>
     <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
+    <form action="">
 	<main class="main-box">
         <div class="box detail-box">
             <div class="head">
                 <p>프로젝트 제목</p>
+                <div class="detail-btn">
+                    <button class="btn">수정하기</button>
+                    <button class="c-btn">삭제하기</button>
+                </div>
             </div>
             <div class="status">
                 <div class="status-1"><span class="material-symbols-outlined">wb_incandescent</span>상태</div>
@@ -40,18 +46,18 @@
             <div class="percent">
                 <div class="clear"><span class="material-symbols-outlined">check_box</span>완료</div>
                 <div class="progress">
-                 <progress value="20" max="100" id="progress"/>
+                 <div class="progress-bar"></div>
                 </div>
-                <input type="range">
-                <script>
-                    function up() {
-                        document.querySelector('#progress').value = '70';
-                    }
-                </script>
-                <button onclick="up()">상승</button>
+            </div>
+            <div class="inputcontainer">
+                <div><span class="material-symbols-outlined">more_horiz</span>진행도</div>
+                <input  class="valueinput" type="number">
+
+                <div class="max">최대</div>
+                <input  class="maxinput" type="number">
             </div>
             <div class="todo">
-                <div class="todo-plus"><span class="material-symbols-outlined">add</span>TO-DO 추가</div>
+                <div class="todo-plus"><span class="material-symbols-outlined">add</span><a href="#">TO-DO 추가</a></div>
             </div>
             <div class="hidden"></div>
             <div class="content">
@@ -86,5 +92,17 @@
             </div>
         </div><!--detail box-->
     </main>
+    </form>
+    <!-- Modal -->
+    <div class="modal fade" id="todo-modal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p>TO-DO 제목</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
