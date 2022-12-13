@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="${path}/resources/css/list.css">
 <link rel="stylesheet" href="${path}/resources/css/mail/mailWrite.css">
 <link rel="stylesheet" href="${path}/resources/css/docuwrite.css">
+
 <!-- 섬머노트 -->
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
@@ -23,7 +24,7 @@
 <body>
 
 <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
-<main class="main-box">
+<div class="main-box">
 
     <form action="">
 
@@ -32,47 +33,99 @@
                 <div class="b-title">결재문서 작성</div>
                 <div class="tt"></div>
             </div>
-            <div id="write-box">
-                
-                    <div class="firwrite">
-                     <div class="firwrite-no">문서번호</div>
-                     <div class="firwrite-num">121212</div>
-                     <div class="firwrite-po">결재자</div>
-                     <div class="firwrite-fi">직급</div>
-                     <div class="firwrite-se">직급</div>
-                     <div class="firwrite-th">직급</div>
-                    </div>
-                    <div class="secwrite">
-                        <div class="secwrite-date">기안일</div>
-                        <div class="secwrite-num"> 2022-12-12</div>
-                        <div class="secwrite-img1">결재완료사인이미지</div>
-                        <div class="secwrite-img2">결재완료사인이미지</div>
-                        <div class="secwrite-img3">결재완료사인이미지</div>
-                    </div>
-                    <div class="thr-write">
-                        <div>기안자</div>
-                        <div>구기석 사원</div>
-                    </div>
-                    <div class="fou-write">
-                        <div>참조자</div>
-                        <div>ㅇㅇㅇ사원</div>
-                        <div>구기석 사원</div>
-                    </div>
-                    <div class="fif-write">
-                        <div>첨부파일</div>
-                    </div>
-                    <div class="sev-write">
-                        <div>제목</div>
-                    </div>
-                    
-                
+         
+            <br>
+            <br>
 
 
-                <div id="file-btn" class="btn"><span class="material-symbols-outlined"> add </span></div>
-                <div id="file-box"></div>
+          <div id="write-box" class="box2">
+            
+            <div class="writebx">
+                <div class="write-list">
+
+                    <div class="writelist">
+                        <div class="writelist-no">문서번호</div>
+                        
+                    </div>
+                    <div class="writedate">
+                        <div class="writedate-date">기안일</div>
+                        
+                    </div>
+                    <div class="writer">
+                        <div class="writer-er">기안자</div>
+                        
+                    </div>
+                    <div class="writech">
+                        <div class="writech-er">참조자</div>
+                    </div>
+
+                </div>
+                <div class="writelister">
+                    <div class="writelist">
+                        <div class="writelist-reno">121212</div>
+                    </div>
+
+                    <div class="writedate">
+                        <div class="writedate-reda">221212</div>
+                    </div>
+
+                    <div class="writer">
+                        <div class="writer-reer">심삼용</div>
+                    </div>
+
+                    <div class="writech">
+                        <div class="writech-list">구기석 , 심투용 부장</div>
+                    </div>
+
+
+                </div>
+                
+            
+                <div class="imageboxlist">
+                    <div class="imageboxlist-1">
+                        <div class="a-1">직급</div>
+                        <div class="a-2">사인 이미지</div>
+                        <div class="a-3">구기석 사원</div>
+                    </div>
+                    <div class="imageboxlist-2">
+                        <div class="b-1">직급</div>
+                        <div class="b-2">사인 이미지</div>
+                        <div class="b-3">구기석 사원</div>
+                    </div>
+                    <div class="imageboxlist-3">
+                        <div class="c-1">직급</div>
+                        <div class="c-2">사인 이미지</div>
+                        <div class="c-3">구기석 사원</div>
+                    </div>
+
+                </div>
             </div>
-           
+
+                <div class="filebox">
+
+                    <div class="writefile">
+                        <div>첨부파일</div>
+                        <div id="file-btn" class="btn">첨부파일<span class="material-symbols-outlined"> add </span></div>
+                    </div>
+        
+        
+                 
+        
+                        <div class="writetitlebox">
+                            <div class="writetitle">
+                                <div class="writetitle-ti">제목</div>
+                                <div class="writetitle-tle">아 몰루루루ㅜ루루루루루루루</div>
+                            </div>
+                            <div class="writecontent">내용</div>
+                        </div>
+                </div>
+
+                
+
+
         </div>
+      
+
 
         <div name="" id="summernote"></div>
         <div id="btn-box">
@@ -83,7 +136,7 @@
      </form>
     
 
-</main>
+    </div>
 
 </body>
 <script>

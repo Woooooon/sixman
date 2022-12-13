@@ -24,7 +24,7 @@
             <span class="material-symbols-outlined"> close </span>
         </div>
         <div class="approve-1">
-            <div class="ap-1"><span class="material-symbols-outlined">expand_more</span>세무.회계부
+            <div class="ap-1"><span class="material-symbols-outlined">expand_more</span>세무.회계부</div>
 
             <div><span class="material-symbols-outlined"> expand_less </span>영업1팀</div>
             <div><span class="material-symbols-outlined"> expand_less </span>영업2팀</div>
@@ -32,7 +32,7 @@
             <div><span class="material-symbols-outlined"> expand_less </span>영업4팀</div>
         </div>
         <div class="approve-2">
-            <div class="ap-2"><span class="material-symbols-outlined">expand_more</span>세무.회계부
+            <div class="ap-2"><span class="material-symbols-outlined">expand_more</span>세무.회계부</div>
 
             <div><span class="material-symbols-outlined"> expand_less </span>영업1팀</div>
             <div><span class="material-symbols-outlined"> expand_less </span>영업2팀</div>
@@ -40,7 +40,7 @@
             <div><span class="material-symbols-outlined"> expand_less </span>영업4팀</div>
         </div>
         <div class="approve-3">
-            <div class="ap-3"><span class="material-symbols-outlined">expand_more</span>세무.회계부
+            <div class="ap-3"><span class="material-symbols-outlined">expand_more</span>세무.회계부</div>
 
             <div><span class="material-symbols-outlined"> expand_less </span>영업1팀
                 <div><p>구기석 사원</p></div>

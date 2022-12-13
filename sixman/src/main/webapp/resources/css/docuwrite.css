@@ -1,73 +1,89 @@
 @charset "UTF-8";
 
+.writebx{
+    display: flex;
+}
 
 #write-box{
-    padding-top: 20px;
-    border: 2px solid rgb(58, 58, 58);
+    display: flex;
+    padding-top: 10px;
+    max-width: 60%;
 }
 
-.firwrite{
+
+.writelist{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgb(0, 0, 0);
+   
+
+}
+.writelist-no{
+    height: 40px;
+    display: flex;
+}
+
+.writedate{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgb(0, 0, 0);
+}
+
+.writer{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgb(0, 0, 0);
+}
+
+.writech{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgb(0, 0, 0);
+}
+
+.writelister{
+   
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgb(0, 0, 0);
     
+}
+
+.imageboxlist{
+    display: flex;
+    
+    
+}
+
+.writefile{
     display: flex;
     flex-direction: row;
-    padding-left: 40px;
-    align-items: center;
-    text-align: center;
-    height: 1.2em;
-   
+}
+.imageboxlist-1{
+    border: 1px solid rgb(0, 0, 0);
+}
+.imageboxlist-2{
+    border: 1px solid rgb(0, 0, 0);
+}
+.imageboxlist-3{
+    border: 1px solid rgb(0, 0, 0);
+}
+.writefile{
+    display: flex;
+   border: 1px solid black;
+   width: 100%;
 }
 
-.firwrite-no{
-    width: 10%;
-    border: 1px solid black;  
+
+.writetitle-ti{
+    display: flex;
+    color: white;
+    background-color: #ddd;
 }
 
-.firwrite-num{
-    border: 1px solid black;
-    width: 10%;
-    padding-left: 2px;
-}
 
-.firwrite-po{
-    border: 1px solid black;
-    width: 10%;
-    padding-left: 2px;
-}
 
-.firwrite-fi{
-    border: 1px solid black;
-    width: 23%;
-    padding-left: 2px;
-}
-.firwrite-se{
-    border: 1px solid black;
-    width: 23%;
-    padding-left: 2px;
-}
-.firwrite-th{
-    border: 1px solid black;
-    width: 23%;
-    padding-left: 2px;
-}
 
-.secwrite{
-   
-     display: flex;
-     flex-direction: row;
-     padding-left: 40px;
-     align-items: center;
-     text-align: center;
-    height: 1.2em;
 
-}
 
-.secwrite-date{
-    width: 10%;
-    border: 1px solid black;  
-}
 
-/* .firwrite-num{
-    border: 1px solid black;
-    width: 10%;
-    padding-left: 2px;
-} */
