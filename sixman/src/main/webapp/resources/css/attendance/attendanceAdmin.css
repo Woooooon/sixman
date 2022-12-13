@@ -26,14 +26,14 @@
 }
 #search-box{
     display: grid;
-    grid-template-columns: 1fr 0.7fr 0.7fr 0.7fr 0.7fr 3fr 1fr 4fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 4fr;
 }
 #search-box div{
     display: flex;
     justify-content: center;
     align-items: center;
 }
-#search-font{
+#search-font, #search-font{
     font-size: 1.2em;
     font-weight: 600;
     display: flex;
@@ -182,6 +182,11 @@
 }
 
 .header-box .btn{
+    padding-right: 15px;
+    width: 100px;
+}
+
+#date-btn{
     padding-right: 15px;
     width: 100px;
 }

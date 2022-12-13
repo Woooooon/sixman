@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>수당월별내역</title>
 <link rel="stylesheet" href="<c:url value='/resources/css/salary/salary.css'/>" />
 </head>
 
@@ -143,7 +143,7 @@
     background-color: var(--bo-60);
     width: 100%;
     height: 100%;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
 }
@@ -242,7 +242,7 @@
             <div id="modal-1"> 
                 <div id="modal-header">&nbsp&nbsp&nbsp&nbsp 2022년 10월분 급여명세서</div>
                 <div>
-                    <span class="material-symbols-outlined"> close </span>
+                    <span id="close" class="material-symbols-outlined"> close </span>
                 </div>
             </div>
             <div id="modal-2" class="box">
@@ -337,9 +337,9 @@
             <div id="search-box" class="box">
                 <div id="search-font">검색기간</div>
                 <div id="date">
-                    <input type="month" style="width: 100px;">
+                    <input id="start-month" type="month" style="width: 110px;">
                     ~
-                    <input type="month" style="width: 100px;">
+                    <input id="end-month" type="month" style="width: 110px;">
                 </div>
                 <div></div>
                 <div class="btn">검색</div>
@@ -380,6 +380,31 @@
             </div>
         </div>
     </div>
+
+    <script>
+        
+    //이번달 넘어가게 선택불가능
+    var now_utc = Date.now()
+    var timeOff = new Date().getTimezoneOffset()*60000; 
+    var today = new Date(now_utc-timeOff).toISOString().substring(0, 7);
+    document.getElementById("start-month").setAttribute("max", today);
+    document.getElementById("end-month").setAttribute("max", today);
+
+    //이번달
+    document.getElementById('end-month').value= new Date().toISOString().slice(0, 7);
+
+    //모달 닫기버튼
+    document.querySelector("#close").addEventListener("click", () => {
+        document.querySelector(".share-modal").style.display = "none"
+    })
+  
+    //모달 열기
+    document.querySelector(".list-item").addEventListener("click", () => {
+        document.querySelector(".share-modal").style.display = "flex"
+    })
+
+
+    </script>
     
 	
 </main>
