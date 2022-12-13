@@ -6,6 +6,7 @@
 /* 프로젝트 제목 */
 
 .head {
+    display: flex;
     margin-left: 50px;
     margin-bottom: 10px;
 }
@@ -14,6 +15,20 @@
     font-size: 30px;
     font-weight: bold;
 }
+
+.detail-btn {
+    display: flex;
+    margin-left: 500px;
+    justify-content: space-between;
+    width: 18%;
+}
+
+.btn, .c-btn {
+    border: none;
+    width: 120px;
+    height: 35px;
+}
+
 
 /* 프로젝트 상태 */
 
@@ -113,6 +128,47 @@
 }
 
 .progress {
+    margin-top: 8px;
+    margin-left: 10px;
+    background-color: #D3D3D3;
+    border-radius: 20px;
+    height: 20px;
+    width: 300px;
+}
+
+.progress-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: repeating-linear-gradient(
+    to left,
+    #12887A,
+    #2fa597,
+    #59c0b4);
+    box-shadow: 0 5px 5px -6px #12887A, 0 3px 7px #2fa597;
+    border-radius: 20px;
+    color: #fff;
+    height: 100%;
+    width: 0;
+    transition: 1s ease 0.3s;
+}
+
+.inputcontainer {
+    display: flex;
+    margin: 10px;
+    color: #aaa;
+    font-size: 17px;
+    width: 50%;
+}
+
+.valueinput,
+.maxinput {
+    margin-top: 8px;
+    margin-left: 10px;
+    width: 45px;
+    height: 25px;
+}
+.max {
     margin-top: 8px;
     margin-left: 10px;
 }

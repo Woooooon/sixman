@@ -157,23 +157,9 @@
             <div class="side-box">
                 <div class="calendar box">
                     <div class="header">
-                        <div class="nav-1">
-                            <button class="btn write" onclick="location.href='${path}/schedule/write.jsp'"><p>작성하기</p></button>
-                        </div>
+                        <button class="nav-btn go-prev" onclick="prevMonth()">&lt;</button>
                         <div class="year-month"></div>
-                        <div>
-                        <div class="nav">
-                            <button class="nav-btn go-prev" onclick="prevMonth()">&lt;</button>
-                            <button class="nav-btn go-today" onclick="goToday()">오늘</button>
-                            <button class="nav-btn go-next" onclick="nextMonth()">&gt;</button>
-                        </div>
-                        <div class="category">
-                            <br>
-                            <button class="category-btn">월간</button>
-                            <button class="category-btn">주간</button>
-                            <button class="category-btn">일간</button>
-                        </div>
-                        </div>
+                        <button class="nav-btn go-next" onclick="nextMonth()">&gt;</button>
                     </div>
                     <div class="main">
                         <div class="days">

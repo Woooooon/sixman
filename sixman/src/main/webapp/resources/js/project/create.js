@@ -5,9 +5,9 @@ const today = new Date().toISOString().split("T")[0];
 document.querySelector('#startDate').setAttribute("min", today);
 
 //오늘 날짜 이후 60일 하려했는데 안됨..
-const endline = new Date().toISOString.split("T")[0];
-document.querySelector('#endDate').setAttribute("max", endline + 60);
-
+// const endline = new Date().toISOString.split("T")[0];
+// document.querySelector('#endDate').setAttribute("max", endline + 60);
+ 
 
 //팀 목록 div 형식 option
 function onClickSelect(e) {
@@ -124,4 +124,6 @@ const goToday = () => {
     date = new Date();
     renderCalender();
 };
+
+
 
