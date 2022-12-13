@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="/sixman\resources\jstree\default\style.min.css" />
         <script src="https://kit.fontawesome.com/ae846b135b.js" crossorigin="anonymous"></script>
         <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+        <script defer src="<c:url value='/resources/js/admin/member/join.js'/>"></script>
     </head>
 
     <body>
@@ -45,22 +46,6 @@
                             </li>
                         </ul>
                     </div>
-                    <script>
-                        $('#jstree').on('open_node.jstree', function (e, data) {
-                            var icon = $('#' + data.node.id)
-                                .find('i.jstree-icon.jstree-themeicon')
-                                .first();
-                            icon.removeClass('fa-folder').addClass('fa-folder-open');
-                        });
-
-                        // bind customize icon change function in jsTree close_node event.
-                        $('#jstree').on('close_node.jstree', function (e, data) {
-                            var icon = $('#' + data.node.id)
-                                .find('i.jstree-icon.jstree-themeicon')
-                                .first();
-                            icon.removeClass('fa-folder-open').addClass('fa-folder');
-                        });
-                    </script>
                 </aside>
                 <section id="member-wrap">
                     <form action="">
@@ -153,19 +138,6 @@
                                     <label for="">주 소</label>
                                     <input type="text" id="address" />
                                     <button type="button" id="address_kakao">검 색</button>
-                                    <script>
-                                        window.onload = function () {
-                                            document.getElementById('address_kakao').addEventListener('click', function () {
-                                                //주소입력칸을 클릭하면
-                                                //카카오 지도 발생
-                                                new daum.Postcode({
-                                                    oncomplete: function (data) {
-                                                        document.getElementById('address').value = data.address; // 주소 넣기
-                                                    },
-                                                }).open();
-                                            });
-                                        };
-                                    </script>
                                 </div>
                                 <div id="submit">
                                     <input type="submit" value="사원 등록" />
@@ -180,124 +152,50 @@
                                 <div id="profile-pic">
                                     <div class="addfile">
                                         <span>프로필사진</span>
-                                        <input type="file" />
-                                        <button type="button" class="plus">
+                                        <button type="button" class="plus" id="add-pic">
                                             <span class="material-symbols-outlined">add</span>
                                             추 가
                                         </button>
-                                    </div>
-                                    <div class="filelist">
-                                        <div id="file-info">
-                                            <span class="material-symbols-outlined">image</span>
-                                            <label for="">장화.png</label>
-                                            <button type="button" class="remove">
-                                                <span class="material-symbols-outlined">remove</span>
-                                                삭 제
-                                            </button>
-                                        </div>
+                                        <input type="file" id="real-pic" />
                                     </div>
                                 </div>
                                 <div id="resume">
                                     <div class="addfile">
                                         <span>이력서</span>
                                         <input type="file" />
-                                        <button type="button" class="plus">
+                                        <button type="button" class="plus" id="add-resume">
                                             <span class="material-symbols-outlined">add</span>
                                             추 가
                                         </button>
-                                    </div>
-                                    <div class="filelist">
-                                        <div id="file-info">
-                                            <span class="material-symbols-outlined"> description</span>
-                                            <label for="">이력서.pdf</label>
-                                            <button type="button" class="remove">
-                                                <span class="material-symbols-outlined">remove</span>
-                                                삭 제
-                                            </button>
-                                        </div>
                                     </div>
                                 </div>
                                 <div id="copy-account">
                                     <div class="addfile">
                                         <span>통장사본</span>
                                         <input type="file" />
-                                        <button type="button" class="plus">
+                                        <button type="button" class="plus" id="add-account">
                                             <span class="material-symbols-outlined">add</span>
                                             추 가
                                         </button>
-                                    </div>
-                                    <div class="filelist">
-                                        <div id="file-info">
-                                            <span class="material-symbols-outlined">image</span>
-                                            <label for="">신한은행사본.png</label>
-                                            <button type="button" class="remove">
-                                                <span class="material-symbols-outlined">remove</span>
-                                                삭 제
-                                            </button>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div id="attachment-file" class="box">
                                 <div class="title">
                                     <h2>첨부파일</h2>
-                                    <input type="file" />
                                     <div id="controller">
+                                        <input type="checkbox" class="all_check" />
                                         <span id="add-attfile" class="material-symbols-outlined">add_circle</span>
                                         <span id="remove-attfile" class="material-symbols-outlined">delete</span>
                                     </div>
                                 </div>
-                                <script>
-                                    $('#add-attfile').click(() => {
-                                        const addFileForm =
-                                            '<div id="file-info">' +
-                                            '<div class="checked">' +
-                                            '<input type="checkbox" />' +
-                                            '<span class="material-symbols-outlined">image</span>' +
-                                            '</div>' +
-                                            '<label for="">장화.png</label>' +
-                                            '<button type="button" class="remove">' +
-                                            '<span class="material-symbols-outlined">remove</span>' +
-                                            '삭 제' +
-                                            '</button>' +
-                                            '</div>';
-                                        $('.att-filelist').append(addFileForm);
-                                    });
-                                    $('#remove-attfile').click(() => {});
-                                </script>
-                                <div class="att-filelist">
-                                    <div id="file-info">
-                                        <div class="checked">
-                                            <input type="checkbox" />
-                                            <span class="material-symbols-outlined">image</span>
-                                        </div>
-                                        <label for="">장화.png</label>
-                                        <button type="button" class="remove">
-                                            <span class="material-symbols-outlined">remove</span>
-                                            삭 제
-                                        </button>
-                                    </div>
-                                </div>
+
+                                <div class="att-filelist"></div>
                             </div>
                         </article>
                     </form>
                 </section>
             </div>
         </main>
-        <script>
-            $(function () {
-                $('#jstree').jstree();
-
-                $('#jstree').on('changed.jstree', function (e, data) {
-                    console.log(data.selected);
-                });
-
-                $('button').on('click', function () {
-                    $('#jstree').jstree(true).select_node('child_node_1');
-                    $('#jstree').jstree('select_node', 'child_node_1');
-                    $.jstree.reference('#jstree').select_node('child_node_1');
-                });
-            });
-        </script>
     </body>
 </html>
