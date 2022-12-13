@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
-<%@include file="/WEB-INF/views/common/menuBar.jsp" .checkbox-square input[type="checkbox"]{display : none}%>
+<%@include file="/WEB-INF/views/common/menuBar.jsp"%>
 	<form action="" class="messenger-whole" id="messenger-whole">
 		<div class="title-text01">사내 대화방</div>
 		
