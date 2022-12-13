@@ -232,9 +232,9 @@
 .list-item p:not(:nth-of-type(2)){
     justify-content: center;
 }
-.list-item:hover p{
+/* .list-item:hover p{
     color: var(--main-color);
-}
+} */
 .first-item{
     display: grid;
     grid-template-columns: 2fr 1fr 1.5fr 1.5fr 1.5fr 1.5fr ;
