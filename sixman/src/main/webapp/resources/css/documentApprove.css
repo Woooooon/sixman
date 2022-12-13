@@ -1,4 +1,9 @@
 
+.approve-modal{
+    z-index: 9999999;
+    position: absolute;
+}
+
 .main-box-2{
     width: 100%;
     height: 100%;
