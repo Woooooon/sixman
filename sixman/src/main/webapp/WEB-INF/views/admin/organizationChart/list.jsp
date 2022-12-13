@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,700,1,200" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
         <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+        <script defer src="<c:url value='/resources/js/admin/organizationChart/list.js'/>"></script>
     </head>
     <body>
         <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
@@ -45,14 +46,14 @@
                                     <button><span class="material-symbols-outlined">account_tree</span></button>
                                 </div>
                                 <div class="employee-controller">
-                                    <a href="" class="add-emp">사원 등록</a>
+                                    <a href="/sixman/admin/member/join" class="add-emp">사원 등록</a>
                                     <button class="remove-emp">삭 제</button>
                                 </div>
                             </div>
                         </div>
                         <div id="employee-info-wrap">
                             <div id="sortation">
-                                <input type="checkbox" />
+                                <input type="checkbox" class="selectAll" />
                                 <p>사번</p>
                                 <p>이름</p>
                                 <p>직급</p>
@@ -63,7 +64,7 @@
                             </div>
                             <label for="member1">
                                 <div class="list-item">
-                                    <input type="checkbox" id="member1" name="memberInfo" />
+                                    <input type="checkbox" id="member1" name="memberInfo" class="selectOne" />
                                     <p>P123123123</p>
                                     <p>윤태원</p>
                                     <select name="" id="">
@@ -88,7 +89,7 @@
                             </label>
                             <label for="member2">
                                 <div class="list-item">
-                                    <input type="checkbox" id="member2" name="memberInfo" />
+                                    <input type="checkbox" id="member2" name="memberInfo" class="selectOne" />
                                     <p>P123123123</p>
                                     <p>윤태원</p>
                                     <select name="" id="">
@@ -113,7 +114,7 @@
                             </label>
                             <label for="member3">
                                 <div class="list-item">
-                                    <input type="checkbox" id="member3" name="memberInfo" />
+                                    <input type="checkbox" id="member3" name="memberInfo" class="selectOne" />
                                     <p>P123123123</p>
                                     <p>윤태원</p>
                                     <select name="" id="">
@@ -138,7 +139,7 @@
                             </label>
                             <label for="member4">
                                 <div class="list-item">
-                                    <input type="checkbox" id="member4" name="memberInfo" />
+                                    <input type="checkbox" id="member4" name="memberInfo" class="selectOne" />
                                     <p>P123123123</p>
                                     <p>윤태원</p>
                                     <select name="" id="">
@@ -163,7 +164,7 @@
                             </label>
                             <label for="member5">
                                 <div class="list-item">
-                                    <input type="checkbox" id="member5" name="memberInfo" />
+                                    <input type="checkbox" id="member5" name="memberInfo" class="selectOne" />
                                     <p>P123123123</p>
                                     <p>윤태원</p>
                                     <select name="" id="">
@@ -188,7 +189,7 @@
                             </label>
                             <label for="member6">
                                 <div class="list-item">
-                                    <input type="checkbox" id="member6" name="memberInfo" />
+                                    <input type="checkbox" id="member6" name="memberInfo" class="selectOne" />
                                     <p>P123123123</p>
                                     <p>윤태원</p>
                                     <select name="" id="">
@@ -213,7 +214,7 @@
                             </label>
                             <label for="member7">
                                 <div class="list-item">
-                                    <input type="checkbox" id="member7" name="memberInfo" />
+                                    <input type="checkbox" id="member7" name="memberInfo" class="selectOne" />
                                     <p>P123123123</p>
                                     <p>윤태원</p>
                                     <select name="" id="">
@@ -238,7 +239,7 @@
                             </label>
                             <label for="member8">
                                 <div class="list-item">
-                                    <input type="checkbox" id="member8" name="memberInfo" />
+                                    <input type="checkbox" id="member8" name="memberInfo" class="selectOne" />
                                     <p>P123123123</p>
                                     <p>윤태원</p>
                                     <select name="" id="">
@@ -263,7 +264,7 @@
                             </label>
                             <label for="member9">
                                 <div class="list-item">
-                                    <input type="checkbox" id="member9" name="memberInfo" />
+                                    <input type="checkbox" id="member9" name="memberInfo" class="selectOne" />
                                     <p>P123123123</p>
                                     <p>윤태원</p>
                                     <select name="" id="">
@@ -288,7 +289,7 @@
                             </label>
                             <label for="member10">
                                 <div class="list-item">
-                                    <input type="checkbox" id="member10" name="memberInfo" />
+                                    <input type="checkbox" id="member10" name="memberInfo" class="selectOne" />
                                     <p>P123123123</p>
                                     <p>윤태원</p>
                                     <select name="" id="">
@@ -357,29 +358,7 @@
                             </ul>
                         </div>
                     </div>
-                    <script>
-                        function onClickSelect(e) {
-                            const isActive = e.currentTarget.className.indexOf('active') !== -1;
-                            if (isActive) {
-                                e.currentTarget.className = 'select';
-                            } else {
-                                e.currentTarget.className = 'select active';
-                            }
-                        }
 
-                        document.querySelector('.select').addEventListener('click', onClickSelect);
-
-                        function onClickOption(e) {
-                            const selectedValue = e.currentTarget.innerHTML;
-                            document.querySelector('.text').innerHTML = selectedValue;
-                        }
-
-                        var optionList = document.querySelectorAll('.option');
-                        for (var i = 0; i < optionList.length; i++) {
-                            var option = optionList[i];
-                            option.addEventListener('click', onClickOption);
-                        }
-                    </script>
                     <div id="select-wrap" class="box">
                         <div class="side-title">
                             <p>선택된 사원목록</p>
@@ -400,7 +379,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <span class="material-symbols-outlined">person_remove</span>
+                            <span class="material-symbols-outlined removeBtn">person_remove</span>
                         </div>
                         <div class="select-employee-list">
                             <div class="select-employee-box">
