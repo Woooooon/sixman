@@ -11,38 +11,39 @@
 </head>
 <body>
 <%@include file="/WEB-INF/views/common/menuBar.jsp"%>
-	<form action="" class="messenger-whole" id="messenger-whole">
-	
-		<div class="1st-box">
-			<div class="square"></div>
-			<div class="imfor">
-				<div class='who-chat-teamimfor'>영업부 영업4팀</div>
-				<div class='who-chat-name'>정ㅇㅇ 과장</div>
-			</div>
-			<div class="1st-button"></div>
-			<div class="2nd-button"></div>
-			<div class="3rd-button"></div>
-		</div>
-		<div class="2nd-box">
-			<div class="you">
-				<div class="chat-profile">
-					<div class="square"></div>
+	<form action="">
+		<div class="messenger-whole" id="messenger-whole">
+			<div class="first-box">
+				<div class="square"></div>
+				<div class="imfor">
+					<div class='who-chat-teamimfor'>영업부 영업4팀</div>
 					<div class='who-chat-name'>정ㅇㅇ 과장</div>
 				</div>
-				<div class="messenger-box1">
-					<div class="chat-box"></div>
-					<div class="send-time"></div>
+				<div class="1st-button"></div>
+				<div class="2nd-button"></div>
+				<div class="3rd-button"></div>
+			</div>
+			<div class="2nd-box">
+				<div class="you">
+					<div class="chat-profile">
+						<div class="square"></div>
+						<div class='who-chat-name'>정ㅇㅇ 과장</div>
+					</div>
+					<div class="messenger-box1">
+						<div class="chat-box"></div>
+						<div class="send-time"></div>
+					</div>
+				</div>
+				<div class="me">
+					<div class="messenger-box1">
+						<div class="chat-box"></div>
+						<div class="send-time"></div>
+					</div>
 				</div>
 			</div>
-			<div class="me">
-				<div class="messenger-box1">
-					<div class="chat-box"></div>
-					<div class="send-time"></div>
-				</div>
+			<div class="3rd-box">
+				<input type="textbox" name="wantchatdata" class="define-roomname">
 			</div>
-		</div>
-		<div class="3rd-box">
-			<input type="textbox" name="wantchatdata" class="define-roomname">
 		</div>
 	</form>
 	

@@ -2,6 +2,7 @@
 
 .messenger-whole{
 	width:30%;
+	height:80%;
 	
 	position:absolute;
 	z-index:100;
@@ -13,12 +14,28 @@
 	margin:0px;
 	float:right;
 }
+
+.title-box{
+	display : flex;
+}
+
+
 .title-text01{
 	color:#0E6D62;
 	margin:4%;
 	margin-top:10%;
-	font-size: 200%;
+	font-size: 28px;
 }
+
+#qwe{
+	color : var(--main-color);
+	font-size:40px;
+	margin-top:8%;
+	margin-left:35%;
+	background-color: white;
+	border: 1px solid white;
+}
+
 .bottom-area{
 
 	width:88%;
@@ -36,17 +53,18 @@
 	margin:4%;
 }
 #main-center-text1{
-	margin-top:80%;
+	margin-top:60%;
 	text-align: center;
 }
 
 #main-center-text2{
-	margin-left:16%;
-
+	margin-left:10%;
+	margin-right:10%;
+	text-align: center;
 }
 
 #who-chat{
-	margin:4%;
+	margin-right:8%;
 }
 
 .btn{
