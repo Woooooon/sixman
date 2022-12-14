@@ -26,7 +26,7 @@ attBtn.addEventListener('click', () => {
     const inputFile = document.createElement('input');
     if (attWrap.length < 10) {
         inputFile.setAttribute('type', 'file');
-        inputFile.setAttribute('name', 'attfile');
+        inputFile.setAttribute('name', 'evidenceFile');
         inputFile.style.display = 'none';
 
         attBox.append(inputFile);
@@ -138,6 +138,7 @@ function addFile(elem, parentElem, className, fileKind, fileName, fileId) {
                 parentElem.append(div);
             }
         });
+        fileView();
     });
 }
 
@@ -180,13 +181,15 @@ $('#jstree').on('close_node.jstree', function (e, data) {
     icon.removeClass('fa-folder-open').addClass('fa-folder');
 });
 
-const fileDOM = document.querySelector('#pic-add');
-const preview = document.querySelector('.image-box');
+function fileView() {
+    const fileDOM = document.querySelector('#pic-add');
+    const preview = document.querySelector('.image-box');
 
-fileDOM.addEventListener('change', () => {
-    const reader = new FileReader();
-    reader.onload = ({ target }) => {
-        preview.src = target.result;
-    };
-    reader.readAsDataURL(fileDOM.files[0]);
-});
+    fileDOM.addEventListener('change', () => {
+        const reader = new FileReader();
+        reader.onload = ({ target }) => {
+            preview.src = target.result;
+        };
+        reader.readAsDataURL(fileDOM.files[0]);
+    });
+}
