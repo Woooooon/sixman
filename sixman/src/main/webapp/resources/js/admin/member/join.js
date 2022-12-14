@@ -8,9 +8,9 @@ const attBtn = document.querySelector('#add-attfile');
 const attBox = document.querySelector('.att-filelist');
 const attFileDelete = document.querySelector('#remove-attfile');
 
-addFile(profileBtn, profileBox, 'pic-wrap', 'image', 'picFile');
-addFile(resumeBtn, resumeBox, 'resume-wrap', 'draft', 'resumeFile');
-addFile(accountBtn, accountBox, 'account-wrap', 'image', 'accountFile');
+addFile(profileBtn, profileBox, 'pic-wrap', 'image', 'picFile', 'pic-add');
+addFile(resumeBtn, resumeBox, 'resume-wrap', 'draft', 'resumeFile', 'resume-add');
+addFile(accountBtn, accountBox, 'account-wrap', 'image', 'accountFile', 'account-add');
 checkBoxToggleEvent('.all_check', '.check_list');
 
 attFileDelete.addEventListener('click', () => {
@@ -99,11 +99,12 @@ function checkBoxToggleEvent(all_selector, check_selector) {
     });
 }
 
-function addFile(elem, parentElem, className, fileKind, fileName) {
+function addFile(elem, parentElem, className, fileKind, fileName, fileId) {
     elem.addEventListener('click', () => {
         const inputFile = document.createElement('input');
         inputFile.setAttribute('type', 'file');
         inputFile.setAttribute('name', fileName);
+        inputFile.setAttribute('id', fileId);
         inputFile.style.display = 'none';
 
         parentElem.append(inputFile);
@@ -163,6 +164,7 @@ $(function () {
         $.jstree.reference('#jstree').select_node('child_node_1');
     });
 });
+
 $('#jstree').on('open_node.jstree', function (e, data) {
     var icon = $('#' + data.node.id)
         .find('i.jstree-icon.jstree-themeicon')
@@ -176,4 +178,15 @@ $('#jstree').on('close_node.jstree', function (e, data) {
         .find('i.jstree-icon.jstree-themeicon')
         .first();
     icon.removeClass('fa-folder-open').addClass('fa-folder');
+});
+
+const fileDOM = document.querySelector('#pic-add');
+const preview = document.querySelector('.image-box');
+
+fileDOM.addEventListener('change', () => {
+    const reader = new FileReader();
+    reader.onload = ({ target }) => {
+        preview.src = target.result;
+    };
+    reader.readAsDataURL(fileDOM.files[0]);
 });

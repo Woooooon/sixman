@@ -6,16 +6,46 @@
         <title>Insert title here</title>
         <link rel="stylesheet" href="<c:url value='/resources/css/admin/organizationChart/list.css'/>" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,700,1,200" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
         <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
         <script defer src="<c:url value='/resources/js/admin/organizationChart/list.js'/>"></script>
+        <link rel="stylesheet" href="/sixman\resources\jstree\default\style.min.css" />
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+        <script src="https://kit.fontawesome.com/ae846b135b.js" crossorigin="anonymous"></script>
     </head>
     <body>
         <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
 
         <main id="main-page" class="main-box">
             <div class="main-box-2">
-                <aside id="dept-wrap" class="box"></aside>
+                <aside id="dept-wrap" class="box">
+                    <div class="dept-guide">
+                        <span class="material-symbols-outlined"> diversity_3 </span>
+                        <p>배달의 민족</p>
+                    </div>
+                    <div id="jstree">
+                        <ul>
+                            <li data-jstree='{"icon":"fa fa-folder-open icon-color"}'>
+                                <input type="text" value="영업부" disabled />
+                                <ul>
+                                    <li data-jstree='{"icon":"fa fa-folder icon-color"}'>
+                                        <input type="text" value="영업 2팀" disabled />
+                                        <ul>
+                                            <li data-jstree='{"icon":"fa fa-user icon-color"}'>윤태원</li>
+                                            <li data-jstree='{"icon":"fa fa-user icon-color"}'>구기석</li>
+                                        </ul>
+                                    </li>
+                                    <li data-jstree='{"icon":"fa fa-folder icon-color"}'>
+                                        <input type="text" value="영업 3팀" disabled />
+                                        <ul>
+                                            <li data-jstree='{"icon":"fa fa-user icon-color"}'>윤태원</li>
+                                            <li data-jstree='{"icon":"fa fa-user icon-color"}'>구기석</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </aside>
                 <section id="employee-wrap">
                     <header id="employee-search" class="box">
                         <form action="" method="get">
@@ -360,7 +390,7 @@
                     </div>
 
                     <div id="select-wrap" class="box">
-                        <div class="side-title">
+                        <div class="side-title sep">
                             <p>선택된 사원목록</p>
                         </div>
                         <div class="select-employee-list">
@@ -380,172 +410,6 @@
                                 </div>
                             </div>
                             <span class="material-symbols-outlined removeBtn">person_remove</span>
-                        </div>
-                        <div class="select-employee-list">
-                            <div class="select-employee-box">
-                                <div class="select-employee-pic">
-                                    <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
-                                </div>
-                                <div class="info-box">
-                                    <div class="select-employee-info">
-                                        <p>영업부</p>
-                                        <p>영업 2팀</p>
-                                    </div>
-                                    <div class="select-employee-info">
-                                        <p>구기석</p>
-                                        <p>부장</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <span class="material-symbols-outlined">person_remove</span>
-                        </div>
-                        <div class="select-employee-list">
-                            <div class="select-employee-box">
-                                <div class="select-employee-pic">
-                                    <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
-                                </div>
-                                <div class="info-box">
-                                    <div class="select-employee-info">
-                                        <p>영업부</p>
-                                        <p>영업 2팀</p>
-                                    </div>
-                                    <div class="select-employee-info">
-                                        <p>구기석</p>
-                                        <p>부장</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <span class="material-symbols-outlined">person_remove</span>
-                        </div>
-                        <div class="select-employee-list">
-                            <div class="select-employee-box">
-                                <div class="select-employee-pic">
-                                    <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
-                                </div>
-                                <div class="info-box">
-                                    <div class="select-employee-info">
-                                        <p>영업부</p>
-                                        <p>영업 2팀</p>
-                                    </div>
-                                    <div class="select-employee-info">
-                                        <p>구기석</p>
-                                        <p>부장</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <span class="material-symbols-outlined">person_remove</span>
-                        </div>
-                        <div class="select-employee-list">
-                            <div class="select-employee-box">
-                                <div class="select-employee-pic">
-                                    <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
-                                </div>
-                                <div class="info-box">
-                                    <div class="select-employee-info">
-                                        <p>영업부</p>
-                                        <p>영업 2팀</p>
-                                    </div>
-                                    <div class="select-employee-info">
-                                        <p>구기석</p>
-                                        <p>부장</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <span class="material-symbols-outlined">person_remove</span>
-                        </div>
-                        <div class="select-employee-list">
-                            <div class="select-employee-box">
-                                <div class="select-employee-pic">
-                                    <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
-                                </div>
-                                <div class="info-box">
-                                    <div class="select-employee-info">
-                                        <p>영업부</p>
-                                        <p>영업 2팀</p>
-                                    </div>
-                                    <div class="select-employee-info">
-                                        <p>구기석</p>
-                                        <p>부장</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <span class="material-symbols-outlined">person_remove</span>
-                        </div>
-                        <div class="select-employee-list">
-                            <div class="select-employee-box">
-                                <div class="select-employee-pic">
-                                    <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
-                                </div>
-                                <div class="info-box">
-                                    <div class="select-employee-info">
-                                        <p>영업부</p>
-                                        <p>영업 2팀</p>
-                                    </div>
-                                    <div class="select-employee-info">
-                                        <p>구기석</p>
-                                        <p>부장</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <span class="material-symbols-outlined">person_remove</span>
-                        </div>
-                        <div class="select-employee-list">
-                            <div class="select-employee-box">
-                                <div class="select-employee-pic">
-                                    <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
-                                </div>
-                                <div class="info-box">
-                                    <div class="select-employee-info">
-                                        <p>영업부</p>
-                                        <p>영업 2팀</p>
-                                    </div>
-                                    <div class="select-employee-info">
-                                        <p>구기석</p>
-                                        <p>부장</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <span class="material-symbols-outlined">person_remove</span>
-                        </div>
-                        <div class="select-employee-list">
-                            <div class="select-employee-box">
-                                <div class="select-employee-pic">
-                                    <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
-                                </div>
-                                <div class="info-box">
-                                    <div class="select-employee-info">
-                                        <p>영업부</p>
-                                        <p>영업 2팀</p>
-                                    </div>
-                                    <div class="select-employee-info">
-                                        <p>구기석</p>
-                                        <p>부장</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <span class="material-symbols-outlined">person_remove</span>
-                        </div>
-                        <div class="select-employee-list">
-                            <div class="select-employee-box">
-                                <div class="select-employee-pic">
-                                    <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
-                                </div>
-                                <div class="info-box">
-                                    <div class="select-employee-info">
-                                        <p>영업부</p>
-                                        <p>영업 2팀</p>
-                                    </div>
-                                    <div class="select-employee-info">
-                                        <p>구기석</p>
-                                        <p>부장</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <span class="material-symbols-outlined">person_remove</span>
-                        </div>
-                        <div id="list-controller">
-                            <span class="material-symbols-outlined"> chevron_left </span>
-                            <span class="material-symbols-outlined"> chevron_right </span>
                         </div>
                     </div>
                 </aside>

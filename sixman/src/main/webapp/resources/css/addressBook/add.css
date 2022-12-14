@@ -5,10 +5,13 @@
     position: relative;
     gap: 40px;
 }
+
 #myaddress-wrap {
     width: 20%;
     height: 100%;
+    padding: 10px;
 }
+
 #card-wrap {
     width: 80%;
     height: 100%;
@@ -57,6 +60,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 2px;
+    overflow: hidden;
 }
 
 #card-pic img {
@@ -133,7 +137,7 @@
 
 .info-box label > input {
     height: 30px;
-    width: 80%;
+    width: 77%;
     padding-left: 10px;
 }
 
@@ -241,4 +245,37 @@ select {
     border-radius: 2px;
     outline-color: var(--main-color);
     padding: 0 10px;
+}
+
+/* jstree */
+.dept-guide {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.dept-guide span {
+    color: var(--main-color);
+    margin-right: 5px;
+}
+
+.dept-guide p {
+    font-size: 14px;
+    font-weight: 600;
+}
+#jstree {
+    width: 100%;
+}
+
+#jstree ul li input {
+    border: none;
+    background-color: transparent;
+}
+
+#jstree ul li div {
+    display: flex;
+}
+
+.icon-color {
+    color: var(--main-color);
 }
