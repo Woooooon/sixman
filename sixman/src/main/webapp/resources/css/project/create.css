@@ -85,84 +85,52 @@ input[name='prjDate2'] {
     margin: 15px;
 }
 
-select {
-    width: 15%;
-    height: 15%;
-}
 
 /* 팀 select */
-.select {
-    width: 15%;
-    height: 15%;
-    position: relative;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
-    border-radius: 3px;
-    cursor: pointer;
-    background-color: #fff;
-    display: flex;
-    padding: 5px 10px;
-    margin-right: 30px;
-    justify-content: center;
-    align-items: center;
+
+.hide{
+    display: none;
+}
+.show{
+    display: block;
 }
 
-.select .option-list {
+.select,
+.select2,
+.select3{
+    position: relative;
+    padding: 5px 10px;
+    width: 150px;
+    height: 30px;
+    border-radius: 5px;
+    border:1px solid #d3d3d3;
+    background-color: #ffffff;
+    background-image: url("https://img.icons8.com/material-rounded/24/000000/expand-arrow.png");
+    background-repeat: no-repeat;
+    background-position: 96% center;
+    cursor: pointer;
+}
+
+/* 옵션 영역 스타일 */
+.select ul{
     position: absolute;
-    top: 100%;
+    top: 30px;
     left: 0;
     width: 100%;
-    overflow: hidden;
-    max-height: 0;
-
-    background-color: #fff;
-}
-
-.select.active .option-list {
-    max-height: none;
-}
-.option-wrap {
-    display: flex;
-}
-.select:hover {
-    color: #333;
-}
-
-.select .text {
-    width: 100%;
-    font-size: 13px;
-    text-align: center;
-}
-.select .option-list {
-    font-size: 13px;
-    list-style: none;
-    padding: 0;
+    border:1px solid #d3d3d3;
     border-radius: 5px;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+    background-color: #ffffff;
+    cursor: pointer;
+    z-index: 1;
 }
-.select .option-list .option {
-    width: 100%;
-    display: flex;
-    padding: 3px 10px;
-    justify-content: center;
-    align-items: center;
-}
-
-.remove-position {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.select ul li{
+    padding: 10px;
+    
 }
 
-.remove-position:hover span {
-    color: #ff2e2e;
+.select ul li:hover{
+    background-color: floralwhite;
 }
-
-.select .option-list .option:hover + .remove-position,
-.select .option-list .option:hover {
-    background-color: #2e7aff;
-    color: #fff;
-}
-
 /* 프로젝트 내용 */
 .content {
     resize: none;
@@ -171,24 +139,35 @@ select {
 }
 
 /* 첨부파일 */
-#file-btn span {
-    width: 100%;
-}
 
 #file-btn{
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     text-align: center;
 }
 
 #file-box {
     margin-left: 50px;
+    padding: 10px;
     width: 51%;
     height: 100px;
     border: 1px solid black;
+}
+
+.file-item{
+    display: flex;
+    width: 100%;
+    font-size: 13px;
+    align-items: center;
+}
+
+.file-item span{
+    margin-left: 15px;
+    font-size: 13px;
+    cursor: pointer;
 }
 
 .line{
@@ -215,6 +194,7 @@ select {
 }
 
 .member {
+    display: flex;
     color: #2e7aff;
 }
 /* Side box 달력 */

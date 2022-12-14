@@ -52,9 +52,7 @@
             <div class="inputcontainer">
                 <div><span class="material-symbols-outlined">more_horiz</span>진행도</div>
                 <input  class="valueinput" type="number">
-
-                <div class="max">최대</div>
-                <input  class="maxinput" type="number">
+                <input  class="maxinput" type="hidden">
             </div>
             <div class="todo">
                 <div class="todo-plus"><span class="material-symbols-outlined">add</span><a href="#">TO-DO 추가</a></div>
@@ -100,6 +98,38 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <p>TO-DO 제목</p>
+                </div>
+                <div class="status">
+                    <div class="status-1"><span class="material-symbols-outlined">wb_incandescent</span>상태</div>
+                    <div class="status-btn">
+                        <button class="ing">진행중</button>
+                        <button class="delay">지연중</button>
+                        <button class="complete">완료</button>
+                    </div>
+                </div>
+                <div class="member">
+                    <div class="member-1"><span class="material-symbols-outlined">groups</span>인원</div>
+                    <div class="member-list">
+                        <div class="name">· 김민우</div>
+                        <div class="name">· 김민우</div>
+                        <div class="name">· 김민우</div>
+                    </div>
+                </div>
+                <div class="date">
+                    <div class="prjdate"><span class="material-symbols-outlined">calendar_today</span>날짜</div>
+                    <input type="date" id="startdate">
+                </div>
+                <div class="project">
+                    <div class="prjdate"><span class="material-symbols-outlined">double_arrow</span>프로젝트</div>
+                    <input type="text" id="prjname" value="프로젝트명">
+                </div>
+                <div class="hidden"></div>
+                <div class="content">
+                    <textarea name="content" id="prj-content">내용ㅋㅋ</textarea>
+                </div>
+                <div class="todo-btn">
+                    <button class="btn">작성하기</button>
+                    <button class="c-btn">취소하기</button>
                 </div>
             </div>
         </div>

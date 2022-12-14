@@ -8,30 +8,81 @@ document.querySelector('#startDate').setAttribute("min", today);
 // const endline = new Date().toISOString.split("T")[0];
 // document.querySelector('#endDate').setAttribute("max", endline + 60);
  
+//---------------------------------------------------------------
+//팀 목록 select 박스 보이게하기
+const selects = document.querySelectorAll('.select');
+const memberbox = document.querySelector('.team-member-box');
 
-//팀 목록 div 형식 option
-function onClickSelect(e) {
-    const isActive = e.currentTarget.className.indexOf('active') !== -1;
-    if (isActive) {
-        e.currentTarget.className = 'select';
-    } else {
-        e.currentTarget.className = 'select active';
-    }
+
+selects.forEach(element => {
+    const value = element.querySelector('.selected-option');
+    const option = element.querySelector('ul');
+    const opts = element.querySelectorAll('li');
+
+    element.addEventListener('click', ()=>{
+        
+        if(option.classList.contains('hide')){
+            option.classList.remove('hide');
+            option.classList.add('show');
+            selectOpt(opts, value, option);
+        }else{
+            option.classList.add('hide');
+            option.classList.remove('show');
+        }
+
+    })
+});
+    const divbox = document.createElement('div');
+    divbox.classList.add('member');
+    divbox.innerHTML = `<p>${value.value}</p>`
+                    +"<span class='material-symbols-outlined'> close </span>";
+
+    divbox.querySelector('span').addEventListener('click', ()=>{
+        divbox.remove();
+        value.remove();
+    })
+
+    memberbox.append(divbox);
+
+// if(inputFile.value!=null){
+//     const div = document.createElement('div');
+//     div.classList.add('file-item');
+//     div.innerHTML = `<p>${inputFile.value.substring(inputFile.value.lastIndexOf('\\')+1)}</p>`
+//                 +"<span class='material-symbols-outlined'> close </span>";
+
+//     div.querySelector('span').addEventListener('click', ()=>{
+//         div.remove();
+//         inputFile.remove();
+//     });
+
+//     fileBox.append(div);
+// }
+
+/* 옵션선택 */
+function selectOpt(opts, values, option){
+    opts.forEach(opts=>{
+        const innerValue = opts.innerHTML;
+        opts.addEventListener('click', (e)=>{
+            e.stopPropagation();
+            values.innerHTML = innerValue;
+            option.classList.add('hide');
+            option.classList.remove('show');
+        });
+    });
+
+    
 }
 
-document.querySelector('.select').addEventListener('click', onClickSelect);
+//인원 선택 하면 team-member-box 로 넘기기
+// const team = document.querySelector('#teamvalue').value;
+// const reader = document.querySelector('#readervalue').value;
+// const member = document.querySelector('#membervalue').value;
 
-function onClickOption(e) {
-    const selectedValue = e.currentTarget.innerHTML;
-    document.querySelector('.text').innerHTML = selectedValue;
-}
+// console.log(team);
+// console.log(reader);
+// console.log(member);
 
-var optionList = document.querySelectorAll('.option');
-for (var i = 0; i < optionList.length; i++) {
-    var option = optionList[i];
-    option.addEventListener('click', onClickOption);
-}
-
+//-----------------------------------------------
 
 // 사이드바 달력
 let date = new Date();
@@ -42,25 +93,14 @@ const renderCalender = () =>{
 
     document.querySelector('.year-month').textContent = `${viewYear}년 ${viewMonth + 1}월`;
 
-    console.log(viewYear);
-
     const prevLast = new Date(viewYear, viewMonth , 0);
     const thisLast = new Date(viewYear, viewMonth + 1 , 0);
-
-    console.log('prevLast : ' + prevLast);
-    console.log('thisLast : ' + thisLast);
 
     const PLDate = prevLast.getDate();
     const PLDay = prevLast.getDay();
 
-    console.log('PLDate : ' + PLDate);
-    console.log('PLDay : ' + PLDay);
-
     const TLDate = thisLast.getDate();
     const TLDay = thisLast.getDay();
-
-    console.log('TLDate : ' + TLDate);
-    console.log('TLDay : ' + TLDay);
 
     const prevDates = [];
     const thisDates = [...Array(TLDate + 1).keys()].slice(1);
@@ -75,19 +115,11 @@ const renderCalender = () =>{
     for(let i = 1; i < 7 - TLDay; i++) {
         nextDates.push(i);
     }
-    console.log('----------------');    
-    console.log(prevDates);
-    console.log('----------------');
-    console.log(thisDates);
-    console.log('----------------');
-    console.log(nextDates);
-    console.log('----------------');
 
     const dates = prevDates.concat(thisDates, nextDates);
     const firstDateIndex = dates.indexOf(1);
     const lastDateIndex = dates.lastIndexOf(TLDate);
 
-    console.log(dates);
     dates.forEach((date, i) => {
         const condition = i >= firstDateIndex && i < lastDateIndex + 1
                           ? 'this'
@@ -125,5 +157,38 @@ const goToday = () => {
     renderCalender();
 };
 
+// 파일 추가
 
+const fileBtn = document.querySelector('#file-btn');
+const fileBox = document.querySelector('#file-box');
+
+fileBtn.addEventListener('click',()=>{
+    const inputFile = document.createElement('input');
+    inputFile.setAttribute('type','file');
+    inputFile.setAttribute('name','file');
+    inputFile.style.display = 'none';
+
+    fileBox.append(inputFile);
+
+    inputFile.click();
+
+    inputFile.addEventListener('change',()=>{
+
+        if(inputFile.value!=null){
+            const div = document.createElement('div');
+            div.classList.add('file-item');
+            div.innerHTML = `<p>${inputFile.value.substring(inputFile.value.lastIndexOf('\\')+1)}</p>`
+                        +"<span class='material-symbols-outlined'> close </span>";
+
+            div.querySelector('span').addEventListener('click', ()=>{
+                div.remove();
+                inputFile.remove();
+            });
+
+            fileBox.append(div);
+        }
+
+    });
+
+});
 

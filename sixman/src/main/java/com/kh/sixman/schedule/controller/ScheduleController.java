@@ -20,4 +20,9 @@ public class ScheduleController {
 		return "schedule/weeks";
 	}
 	
+	@GetMapping("newcalendar")
+	public String calendar() {
+		return "schedule/newcalendar";
+	}
+	
 }

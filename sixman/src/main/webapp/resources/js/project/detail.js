@@ -3,7 +3,7 @@ const valueinput = document.querySelector('.valueinput');
 const maxIntput = document.querySelector('.maxinput');
 
 let finalValue = 0;
-let max = 0;
+let max = 100;
 
 function changeGuage(){
     progress.style.width = `${(finalValue / max) * 100}%`;
@@ -13,11 +13,5 @@ function changeGuage(){
 valueinput.addEventListener("keyup", function() {
     finalValue = parseInt(valueinput.value, 10);
     console.log("finalValue" + finalValue);
-    changeGuage();
-});
-
-maxIntput.addEventListener("keyup", function() {
-    max = parseInt(maxIntput.value, 10);
-    console.log("max" + max);
     changeGuage();
 });

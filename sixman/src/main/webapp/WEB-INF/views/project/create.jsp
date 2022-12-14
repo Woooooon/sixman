@@ -39,108 +39,37 @@
                     </div>
                     <div class="line">
                     <div class="prj">팀</div>
-                  
-                    <div class="select">
-                        <div class="text">팀 목록</div>
-                        <span class="material-symbols-outlined"> expand_more </span>
-                        <ul class="option-list">
-                            <li class="option-wrap">
-                                <div class="option">영업1팀</div>
-                                <div class="remove-position">
-                                    <span class="material-symbols-outlined">remove</span>
-                                </div>
-                            </li>
-                            <li class="option-wrap">
-                                <div class="option">영업2팀</div>
-                                <div class="remove-position">
-                                    <span class="material-symbols-outlined">remove</span>
-                                </div>
-                            </li>
-                            <li class="option-wrap">
-                                <div class="option">인사팀</div>
-                                <div class="remove-position">
-                                    <span class="material-symbols-outlined">remove</span>
-                                </div>
-                            </li>
-                        </ul>
+                    <div class="select" data-role="selectBox">
+                        <span date-value="optValue" class="selected-option" id="teamvalue"><!-- 선택된 옵션 값이 출력되는 부분 --></span>
+                    <ul class="hide">
+                        <li class="option-wrap">영업1팀</li>
+                        <li class="option-wrap">인사팀</li>
+                        <li class="option-wrap">회계팀</li>
+                    </ul>
                     </div>
-                    <!-- <div class="select">
-                        <div class="selected">
-                            <div class="selected-value">none</div>
-                            <div class="arrow"><span class="material-symbols-outlined">
-                                expand_more
-                                </span></div>
-                        </div>
-                        <ul>
-                            <li class="option">영업1팀</li>
-                            <li class="option">영업2팀</li>
-                            <li class="option">비품관리팀</li>
-                        </ul>
-                    </div> -->
+                    <div style="width: 30px;"></div>
                     <div class="prj">담당자</div>
-                    <div class="select">
-                        <div class="text">담당자</div>
-                        <span class="material-symbols-outlined"> expand_more </span>
-                        <ul class="option-list">
-                            <li class="option-wrap">
-                                <div class="option">구기석</div>
-                                <div class="remove-position">
-                                    <span class="material-symbols-outlined">remove</span>
-                                </div>
-                            </li>
-                            <li class="option-wrap">
-                                <div class="option">김민우</div>
-                                <div class="remove-position">
-                                    <span class="material-symbols-outlined">remove</span>
-                                </div>
-                            </li>
+                    <div class="select" data-role="selectBox">
+                        <span date-value="optValue" class="selected-option" id="readervalue"><!-- 선택된 옵션 값이 출력되는 부분 --></span>
+                        <!-- 옵션 영역 -->
+                        <ul class="hide">
+                          <li class="option-wrap">구기석</li>
+                          <li class="option-wrap">김민우</li>
                         </ul>
-                    </div>
+                      </div>
                     </div>
                     <div class="line">
                     <div class="prj">참여자</div>
-                    <div class="select">
-                        <div class="text">참여자</div>
-                        <span class="material-symbols-outlined"> expand_more </span>
-                        <ul class="option-list">
-                            <li class="option-wrap">
-                                <div class="option">주  환</div>
-                                <div class="remove-position">
-                                    <span class="material-symbols-outlined">remove</span>
-                                </div>
-                            </li>
-                            <li class="option-wrap">
-                                <div class="option">양수철</div>
-                                <div class="remove-position">
-                                    <span class="material-symbols-outlined">remove</span>
-                                </div>
-                            </li>
-                            <li class="option-wrap">
-                                <div class="option">윤태원</div>
-                                <div class="remove-position">
-                                    <span class="material-symbols-outlined">remove</span>
-                                </div>
-                            </li>
-                            <li class="option-wrap">
-                                <div class="option">임정한</div>
-                                <div class="remove-position">
-                                    <span class="material-symbols-outlined">remove</span>
-                                </div>
-                            </li>
+                    <div class="select" data-role="selectBox">
+                        <span date-value="optValue" class="selected-option" id="membervalue"><!-- 선택된 옵션 값이 출력되는 부분 --></span>
+                        <ul class="hide">
+                            <li class="option-wrap">주  환</li>
+                            <li class="option-wrap">양수철</li>
+                            <li class="option-wrap">윤태원</li>
+                            <li class="option-wrap">임정한</li>
                         </ul>
                     </div>
-                    <div class="team-member-box">
-                        <div class="member">김민우</div>
-                    </div>
-                    <!-- <div class="member_1">
-                        <select>
-                            <option name="member">주  환</option>
-                            <option name="member">임정한</option>
-                            <option name="member">윤태원</option>
-                            <option name="member">양수철</option>
-                        </select>
-                        <div class="team-member-box"></div>
-                    </div> -->
+                    <div class="team-member-box"></div>
                     </div>            
                     <div class="line">
                     <div class="prj">첨부파일</div>
@@ -157,9 +86,9 @@
             <div class="side-box">
                 <div class="calendar box">
                     <div class="header">
-                        <button class="nav-btn go-prev" onclick="prevMonth()">&lt;</button>
+                        <button class="nav-btn go-prev" onclick="prevMonth()" type="button">&lt;</button>
                         <div class="year-month"></div>
-                        <button class="nav-btn go-next" onclick="nextMonth()">&gt;</button>
+                        <button class="nav-btn go-next" onclick="nextMonth()" type="button">&gt;</button>
                     </div>
                     <div class="main">
                         <div class="days">
