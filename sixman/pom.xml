@@ -175,6 +175,27 @@
 		    <artifactId>spring-security-core</artifactId>
 		    <version>5.8.0</version>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+		<dependency>
+		    <groupId>com.google.code.gson</groupId>
+		    <artifactId>gson</artifactId>
+		    <version>2.10</version>
+		</dependency>
+		
+		<!-- 서블릿 3.0이상 사용 가능한 파일 업로드 api-->
+		<dependency>
+		    <groupId>commons-fileupload</groupId>
+		    <artifactId>commons-fileupload</artifactId>
+		    <version>1.3.1</version>
+		</dependency>
+		
+		<!-- commons-io -->
+		<dependency>
+		    <groupId>commons-io</groupId>
+		    <artifactId>commons-io</artifactId>
+		    <version>2.4</version>
+		</dependency>
 								       
 	</dependencies>
     <build>
