@@ -1,8 +1,8 @@
 
-.approve-modal{
+/* .approve-modal{
     z-index: 9999999;
     position: absolute;
-}
+} */
 
 .main-box-2{
     width: 100%;
@@ -12,16 +12,21 @@
     flex-direction: column;
 }
 .document-save{
-   
+    display: flex;
     font-size: 3em;
     font-weight: 600;
     color: rgb(83, 83, 83);
+    vertical-align: baseline;
+  
+    float: right;
+    
 }
-.document-save button{
+.document-save btn{
  
-    width: 1000px;
-    border-radius: 5px;
-    border-radius: 15%;
+    display: flex;
+    width: 100px;
+   
+   
 }
 .document-save :hover{
     background-color: gray;
@@ -54,6 +59,14 @@
 }
 .list-item{
     padding-left: 30px;
-    padding-top: 10px;
+    gap: 10px;
     align-items: center;
+    height: 3em;
+    
 }
+
+
+
+
+
+
