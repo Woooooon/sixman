@@ -22,7 +22,10 @@ public class MailVo {
 	private List<MultipartFile> file;
 	private List<AttachmentVo> fileList;
 	private List<String> sender;
-	private List<SenderVo> senders;
+	private String rNo;
 	private String category;
+	private String checkYn;
+	private String alarmYn;
+	private String rDeleteYn;
 
 }

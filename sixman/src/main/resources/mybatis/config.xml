@@ -13,6 +13,7 @@
 	<typeAliases>
 		<typeAlias type="com.kh.sixman.notice.vo.NoticeVo" alias="NoticeVo"/>
 		<typeAlias type="com.kh.sixman.common.AttachmentVo" alias="AttachmentVo"/>
+		<typeAlias type="com.kh.sixman.mail.vo.MailVo" alias="mailVo"/>
 	</typeAliases> 
 
 

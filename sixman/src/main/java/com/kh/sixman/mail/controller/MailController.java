@@ -71,12 +71,17 @@ public class MailController {
 	@PostMapping("write")
 	public String  write(MailVo vo, HttpSession session) {
 		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
-		vo.setSendUser(loginMember.getNo());
+//		vo.setSendUser(loginMember.getNo());
+		
+//		테스트
+		vo.setSendUser("1");
+		
+		System.err.println(vo.getSaveYn());
+		System.err.println(vo.getSender());
 		
 		String rootPath = session.getServletContext().getRealPath("/");
 		List<AttachmentVo> fileList = FileUnit.uploadFile(vo.getFile(), rootPath, "upload/notice");
 		vo.setFileList(fileList);
-		
 		int result = ms.write(vo);
 		return "";
 	}
@@ -93,38 +98,52 @@ public class MailController {
 	@ResponseBody
 	@PostMapping("delete")
 	public void delete(List<String> no) {
-		
+		int result = ms.delete(no);		
 	}
 	
 	@ResponseBody
 	@PostMapping("updateRead")
 	public void updateRead(List<String> no) {
-		
+		int result = ms.updateRead(no);	
 	}
 	
 	@ResponseBody
 	@PostMapping("changeCategory")
 	public void changeCategory(List<String> no, String category) {
-		
+		int result = ms.changeCategory(no, category);
 	}
 	
 	@ResponseBody
 	@PostMapping("createCategory")
-	public void createCategory(List<String> no, String category) {
+	public void createCategory(String category, HttpSession session) {
+		MemberVo loginMeber = (MemberVo) session.getAttribute("loginMember");
 		
+		int result = ms.createCategory(category, loginMeber.getNo());
+	}
+	
+	@ResponseBody
+	@PostMapping("categoryList")
+	public String categoryList(HttpSession session) {
+		MemberVo loginMeber = (MemberVo) session.getAttribute("loginMember");
+		
+		List<Map<String, String>> list = ms.categoryList(loginMeber.getNo());
+		Gson gson = new GsonBuilder().create();
+		String json = gson.toJson(list);
+		
+		return json;
 	}
 	
 	
 	@ResponseBody
 	@PostMapping("restore")
 	public void restore(List<String> no) {
-		
+		int result = ms.restore(no);
 	}
 	
 	@ResponseBody
 	@PostMapping("realDelete")
 	public void realDelete(List<String> no) {
-		
+		int result = ms.realDelete(no);
 	}
 	
 	

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mailMapper">
+
+	<insert id="write">
+	    <selectKey keyProperty="no" resultType="String" order="BEFORE">  
+        select SEQ_MAIL_NO.NEXTVAL FROM dual
+     	</selectKey>
+		INSERT INTO MAIL
+		VALUES
+		(
+			${no},
+			${sendUser},
+			'N',
+			<if test=" saveYn.equals('작성하기') ">
+			'N',
+			</if>
+			<if test=" saveYn.equals('임시저장') ">
+			'Y',
+			</if>
+			#{title},
+			#{content},
+			SYSDATE,
+			SYSDATE
+		)
+	</insert>
+	
+	<update id="send">
+		insert all
+		<foreach collection="sender" item="email" separator=" ">
+		into r_mail
+		(
+			no,
+			mail_no,
+			email,
+			check_yn,
+			alarm_yn
+		)
+		VALUES
+		(
+			get_seq_no('seq_r_mail_no'),
+			${no},
+			#{email},
+			'N',
+			'N'
+		)
+		</foreach>
+		select * from dual
+	</update>
+
+	<select id="selectOne" resultType="MailVo">
+		select *
+		from mail
+		where no = ${no}
+	</select>
+
+	<update id="updateRead">
+		update r_mail
+		set check_yn = 'Y'
+		where no
+	</update>
+	
+	<insert id="createCategory">
+		insert into m_category
+		values
+		(
+			seq_m_category_no.nextval,
+			${no},
+			#{category}
+		)
+	</insert>
+	
+	<select id="categoryList" resultType="Map">
+		select no, name from m_category
+		where user_no = ${no}
+	</select>
+
+    
+</mapper>
