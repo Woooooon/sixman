@@ -74,4 +74,38 @@ public class MailService {
 		return vo;
 	}
 
+	public int delete(List<String> no) {
+		return dao.delete(sst, no);
+	}
+
+	public int updateRead(List<String> no) {
+		return dao.updateRead(sst, no);
+	}
+
+	public int changeCategory(List<String> no, String category) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("noList", no);
+		map.put("category", category);
+		return dao.changeCategory(sst, map);
+	}
+
+	public int createCategory(String category, String no) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("userNo", no);
+		map.put("category", category);
+		return dao.createCategory(sst, map);
+	}
+
+	public List<Map<String, String>> categoryList(String no) {
+		return dao.categoryList(sst, no);
+	}
+
+	public int restore(List<String> no) {
+		return dao.restore(sst, no);
+	}
+
+	public int realDelete(List<String> no) {
+		return dao.realDelete(sst, no);
+	}
+
 }

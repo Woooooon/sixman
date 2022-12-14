@@ -51,7 +51,7 @@ emailInput.addEventListener('keyup', (event)=>{
 function createMailItem(params) {
     const inputMail = document.createElement('input');
     inputMail.setAttribute('type','email');
-    inputMail.setAttribute('name','email');
+    inputMail.setAttribute('name','sender');
 
     const email = emailInput.value;
     if(validateEmail(email)){
