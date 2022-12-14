@@ -104,8 +104,9 @@
                 <div class="filebox">
 
                     <div class="writefile">
-                        <div>첨부파일</div>
-                        <div id="file-btn" class="btn">첨부파일<span class="material-symbols-outlined"> add </span></div>
+                        <div class="fileaddd">파일추가</div>
+                        <div id="file-btn" class="btn"><span class="material-symbols-outlined"> add </span></div>
+                        <div id="file-box"></div>
                     </div>
         
         
