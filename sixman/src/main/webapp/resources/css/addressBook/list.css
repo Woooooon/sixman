@@ -9,6 +9,7 @@
 #myaddress-wrap {
     width: 18%;
     height: 100%;
+    padding: 10px;
 }
 
 #addressBook-wrap {
@@ -111,6 +112,9 @@
 }
 
 .body-controller span:last-child {
+    font-size: 20px;
+}
+#checkShare {
     font-size: 16px;
 }
 
@@ -365,4 +369,34 @@
     border-bottom: 1px solid var(--bo-20);
     padding: 7px;
     font-size: 14px;
+}
+
+/* jstree */
+.dept-guide {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.dept-guide span {
+    color: var(--main-color);
+    margin-right: 5px;
+}
+
+.dept-guide p {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+#jstree ul li input {
+    border: none;
+    background-color: transparent;
+}
+
+#jstree ul li div {
+    display: flex;
+}
+
+.icon-color {
+    color: var(--main-color);
 }
