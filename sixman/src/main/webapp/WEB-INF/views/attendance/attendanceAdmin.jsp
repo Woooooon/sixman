@@ -138,6 +138,11 @@
     font-size: 1.5em;
     font-weight: 500;
 }
+#select-week{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 #information-header{
     display: flex;
     justify-content: center;
@@ -148,7 +153,7 @@
 #work-time, #work-time2{
     display: flex;
     align-items: center;
-    font-size: 1.2em;
+    font-size: 1em;
     font-weight: 530;
 }
 #restinfo1, #restinfo2, #restinfo3,#restinfo4,#restinfo5{
@@ -440,14 +445,8 @@
         </div>
         <div id="work-week" class="box">
             <div id="week-header">이번주 근로시간</div>
-            <div>
+            <div id="select-week">
                 <select name="category">
-                    <option value="first">2022-12</option>
-                    <option value="second">2022-11</option>
-                    <option value="third">2022-10</option>
-                    <option value="four">2022-09</option>
-                </select>
-                <select name="category2">
                     <option value="first">2022-11-28 ~ 2022-12-04</option>
                     <option value="second">2022-12-05 ~ 2022-12-11</option>
                     <option value="third">2022-12-12 ~ 2022-12-18</option>
@@ -456,10 +455,10 @@
                 </select>
             </div>
             <div id="work-time">
-                소정 근로시간 &nbsp&nbsp&nbsp&nbsp<input type="text" style="width: 50px; height: 25px;">
+                소정 근로시간 &nbsp&nbsp&nbsp&nbsp<progress max="100" value="70" style="width:140px; height: 35px;"></progress>
             </div>
             <div id="work-time2">
-                소정 외근로시간 &nbsp<input type="text"style="width: 50px; height: 25px;">
+                소정 외근로시간&nbsp&nbsp<progress max="100" value="10" style="width:140px; height:35px;"></progress>
             </div>
         </div>
         <div id="rest-information" class="box">
