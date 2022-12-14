@@ -29,20 +29,20 @@ selects.forEach(element => {
             option.classList.add('hide');
             option.classList.remove('show');
         }
+        
+        const divbox = document.createElement('div');
+        divbox.classList.add('member');
+        divbox.innerHTML = `<p>${value.value}</p>`
+                         +"<span class='material-symbols-outlined'> close </span>";
 
+        divbox.querySelector('span').addEventListener('click', ()=>{
+            divbox.remove();
+            value.remove();
+        })
+
+        memberbox.append(divbox);
     })
 });
-    const divbox = document.createElement('div');
-    divbox.classList.add('member');
-    divbox.innerHTML = `<p>${value.value}</p>`
-                    +"<span class='material-symbols-outlined'> close </span>";
-
-    divbox.querySelector('span').addEventListener('click', ()=>{
-        divbox.remove();
-        value.remove();
-    })
-
-    memberbox.append(divbox);
 
 // if(inputFile.value!=null){
 //     const div = document.createElement('div');

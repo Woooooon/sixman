@@ -25,7 +25,7 @@
                 <div>
                 <div class="category">
                     <br>
-                    <button class="category-btn">월간</button>
+                    <button class="category-btn" onclick="location.href='${path}/schedule/calendar'">월간</button>
                     <button class="category-btn">주간</button>
                     <button class="category-btn">일간</button>
                 </div>

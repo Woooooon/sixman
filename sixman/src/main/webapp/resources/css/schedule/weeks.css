@@ -68,6 +68,8 @@
     display: flex;
     margin: 25px 0 10px;
     background-color: #d3d3d3;
+    height: 30px;
+    align-items: center;
 }
 
 .day{
@@ -78,14 +80,13 @@
 .schedules{
     display: flex;
     margin: 25px 0 10px;
-    height: 500px;
+    height: 600px;
 }
 
-.schedule {
+.schedule:not(div:first-child) {
     width: calc(100% / 7);
-     padding: 15px;
+    padding: 15px;
     text-align: center;
-    border-bottom: 1px solid #aaa;
     border-left: 1px solid #aaa;
 }
 

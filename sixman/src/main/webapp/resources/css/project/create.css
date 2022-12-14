@@ -13,8 +13,8 @@
 }
 
 .body-box{
-    padding: 40px;
-    border: 1px solid black;
+    --padding: 40px;
+    --border: 1px solid black;
     height: 650px;
 }
 
@@ -23,7 +23,7 @@
     height: 40px;
     font-size: 15px;
     font-weight: bold;
-    color: #aaa;
+    color: black;
     border: 1px solid #aaa;
     background-color: white;
     text-align: center;
@@ -38,9 +38,12 @@
 }
 
 input[name='prj_name']{
-    margin-top: 5px;
-    width: 250px;
-    height: 30px;
+    --margin-top: 5px;
+    width: 500px;    
+    height: 40px;
+    border: 1px solid #d3d3d3;
+    outline: none;
+    font-size: 18px;
 }
 
 /* span{
@@ -76,13 +79,16 @@ input[name='prj_name']{
 
 input[name='prjDate1'],
 input[name='prjDate2'] {
-    margin-top: 11px;
-    width: 20%;
-    height: 20%;
+    --margin-top: 11px;
+    width: 150px;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+    outline: none;
 }
 
 .line > p {
-    margin: 15px;
+    margin: 10px;
 }
 
 
@@ -91,17 +97,15 @@ input[name='prjDate2'] {
 .hide{
     display: none;
 }
-.show{
+/* .show{
     display: block;
-}
+} */
 
-.select,
-.select2,
-.select3{
+.select{
     position: relative;
     padding: 5px 10px;
     width: 150px;
-    height: 30px;
+    height: 40px;
     border-radius: 5px;
     border:1px solid #d3d3d3;
     background-color: #ffffff;
@@ -111,11 +115,17 @@ input[name='prjDate2'] {
     cursor: pointer;
 }
 
-/* 옵션 영역 스타일 */
+.select > span {
+    display: flex;
+    justify-content: center;
+    padding-top: 5px;
+    padding-right: 7px;
+}
+
 .select ul{
     position: absolute;
-    top: 30px;
-    left: 0;
+    top: 39px;
+    left: 1px;
     width: 100%;
     border:1px solid #d3d3d3;
     border-radius: 5px;
@@ -125,36 +135,32 @@ input[name='prjDate2'] {
 }
 .select ul li{
     padding: 10px;
-    
+    text-align: center;
 }
 
 .select ul li:hover{
     background-color: floralwhite;
 }
-/* 프로젝트 내용 */
-.content {
-    resize: none;
-    width: 75%;
-    height: 140px;
-}
+
 
 /* 첨부파일 */
 
-#file-btn{
+/* #file-btn{
     display: flex;
     align-items: center;
     justify-content: center;
     width: 20px;
     height: 20px;
     text-align: center;
-}
+} */
 
 #file-box {
-    margin-left: 50px;
     padding: 10px;
-    width: 51%;
+    width: 80.5%;
     height: 100px;
-    border: 1px solid black;
+    border: 1px solid #d3d3d3;
+    border-radius: 5px;
+    margin-bottom: 20px;
 }
 
 .file-item{
@@ -162,6 +168,7 @@ input[name='prjDate2'] {
     width: 100%;
     font-size: 13px;
     align-items: center;
+    margin-bottom: 5px;
 }
 
 .file-item span{
@@ -186,28 +193,38 @@ input[name='prjDate2'] {
 
 .team-member-box {
     padding: 10px;
-    margin-left: 50px;
     margin-bottom: 15px;
-    border: 1px solid black;
-    width: 36%;
-    height: 150px;
+    border: 1px solid #d3d3d3;
+    border-radius: 5px;
+    width: 94.5%;
+    height: 25%;
 }
 
 .member {
     display: flex;
     color: #2e7aff;
 }
+
+/* 프로젝트 내용 */
+.content {
+    padding: 10px;
+    resize: none;
+    width: 80.5%;
+    height: 250px;
+    border: 1px solid #d3d3d3;
+    border-radius: 5px;
+}
+
 /* Side box 달력 */
 .side-box{
     display: flex;
     width: 30%;
-    height: 100%;
+    height: 99%;
 }
 
 .calendar {
-    margin-top: 400px;
+    margin-top: 403px;
     width: 100%;
-    
 }
 
 .header {

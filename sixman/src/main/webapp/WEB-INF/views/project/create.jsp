@@ -23,62 +23,61 @@
             <div class="head-box">
                 <div class="name-box">
                     <div class="box1">
-                    <div class="prj">프로젝트명</div>
-                    <input type="text" name="prj_name">
+                        <div class="prj">프로젝트명</div>
+                        <input type="text" name="prj_name">
                     </div>
                     <div class="box2">
-                    <button class="btn create_btn cbtn">작성하기</button>
-                    <button class="c-btn cancel-btn cbtn" onclick="history.back()">취소하기</button>
+                        <button class="btn create_btn cbtn">작성하기</button>
+                        <button class="c-btn cancel-btn cbtn" onclick="history.back()">취소하기</button>
                     </div>
                 </div>
                 <div style="height: 20px;"></div>
                 <div class="body-box">
                     <div class="line">
-                    <div class="prj">일 정</div>
-                    <input type="date" name="prjDate1" id="startDate"> <p>~</p> <input type="date" name="prjDate2" id="endDate">
+                        <div class="prj">일 정</div>
+                        <input type="date" name="prjDate1" id="startDate"> <p>~</p> <input type="date" name="prjDate2" id="endDate">
                     </div>
                     <div class="line">
-                    <div class="prj">팀</div>
-                    <div class="select" data-role="selectBox">
-                        <span date-value="optValue" class="selected-option" id="teamvalue"><!-- 선택된 옵션 값이 출력되는 부분 --></span>
-                    <ul class="hide">
-                        <li class="option-wrap">영업1팀</li>
-                        <li class="option-wrap">인사팀</li>
-                        <li class="option-wrap">회계팀</li>
-                    </ul>
-                    </div>
-                    <div style="width: 30px;"></div>
-                    <div class="prj">담당자</div>
-                    <div class="select" data-role="selectBox">
-                        <span date-value="optValue" class="selected-option" id="readervalue"><!-- 선택된 옵션 값이 출력되는 부분 --></span>
-                        <!-- 옵션 영역 -->
-                        <ul class="hide">
-                          <li class="option-wrap">구기석</li>
-                          <li class="option-wrap">김민우</li>
-                        </ul>
-                      </div>
-                    </div>
-                    <div class="line">
-                    <div class="prj">참여자</div>
-                    <div class="select" data-role="selectBox">
-                        <span date-value="optValue" class="selected-option" id="membervalue"><!-- 선택된 옵션 값이 출력되는 부분 --></span>
-                        <ul class="hide">
-                            <li class="option-wrap">주  환</li>
-                            <li class="option-wrap">양수철</li>
-                            <li class="option-wrap">윤태원</li>
-                            <li class="option-wrap">임정한</li>
-                        </ul>
+                        <div class="prj">팀</div>
+                        <div class="select" data-role="selectBox">
+                            <span date-value="optValue" class="selected-option" id="teamvalue"><!-- 선택된 옵션 값이 출력되는 부분 --></span>
+                            <ul class="hide">
+                                <li class="option-wrap">영업1팀</li>
+                                <li class="option-wrap">인사팀</li>
+                                <li class="option-wrap">회계팀</li>
+                            </ul>
+                        </div>
+                        <div style="width: 30px;"></div>
+                        <div class="prj">담당자</div>
+                        <div class="select" data-role="selectBox">
+                            <span date-value="optValue" class="selected-option" id="readervalue"><!-- 선택된 옵션 값이 출력되는 부분 --></span>
+                            <!-- 옵션 영역 -->
+                            <ul class="hide">
+                            <li class="option-wrap">구기석</li>
+                            <li class="option-wrap">김민우</li>
+                            </ul>
+                        </div>
+                        <div style="width: 30px;"></div>
+                        <div class="prj">참여자</div>
+                        <div class="select" data-role="selectBox">
+                            <span date-value="optValue" class="selected-option" id="membervalue"><!-- 선택된 옵션 값이 출력되는 부분 --></span>
+                            <ul class="hide">
+                                <li class="option-wrap">주  환</li>
+                                <li class="option-wrap">양수철</li>
+                                <li class="option-wrap">윤태원</li>
+                                <li class="option-wrap">임정한</li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="team-member-box"></div>
+                    <div class="line">
+                        <div class="btn prj" id="file-btn">첨부파일</div>
+                        <!-- <div id="file-btn" class="btn"><span class="material-symbols-outlined"> add </span></div> -->
+                        <div id="file-box"></div>
                     </div>            
                     <div class="line">
-                    <div class="prj">첨부파일</div>
-                    <div id="file-btn" class="btn"><span class="material-symbols-outlined"> add </span></div>
-                    <div id="file-box"></div>
-                    </div>            
-                    <div>
-                    <div class="prj">내 용</div>
-                    <textarea name="content" class="content">으아악</textarea>
+                        <div class="prj">내 용</div>
+                        <textarea name="content" class="content">으아악</textarea>
                     </div>
                 </div>
             </div>
