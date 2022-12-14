@@ -101,11 +101,10 @@
 					<div class="bottom-area"></div>
 				</div>
 			</div>
-			</div>
 		</div>
-		<div class = "button-list">
-			<input type="submit" class="btn" value="이전 버튼">
-			<input type="submit" class="btn" value="다음 버튼">
+		<div class = "making-chatroom-button-list">
+			<input type="submit" class="btn" value="이전 버튼" id="makingroom-first-leave">
+			<input type="submit" class="btn" value="다음 버튼" id="makingroom-first-next">
 		</div>
 	</form>
 	
