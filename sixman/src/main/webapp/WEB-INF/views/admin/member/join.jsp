@@ -65,7 +65,7 @@
                                         </div>
                                         <div id="dept" class="write">
                                             <label for="">부 서</label>
-                                            <select name="dept_no" id="dept">
+                                            <select name="deptNo" id="dept">
                                                 <option value="1">영업부</option>
                                                 <option value="2">인사부</option>
                                                 <option value="3">관리부</option>
@@ -74,7 +74,7 @@
                                         </div>
                                         <div id="position" class="write">
                                             <label for="">직 급</label>
-                                            <select name="" id="">
+                                            <select name="positionNo">
                                                 <option value="1">사 원</option>
                                                 <option value="2">대 리</option>
                                                 <option value="3">과 장</option>
@@ -84,32 +84,32 @@
                                         </div>
                                         <div id="birth" class="write">
                                             <label for="">생년월일</label>
-                                            <input type="text" />
+                                            <input type="text" name="birthday" />
                                         </div>
                                         <div id="email" class="write">
                                             <label for="">E-MAIL</label>
-                                            <input type="text" />
+                                            <input type="text" name="email" />
                                         </div>
                                     </div>
                                     <div class="right-info">
                                         <div id="id" class="write">
                                             <label for="">사 번</label>
-                                            <input type="text" />
+                                            <input type="text" name="id" />
                                         </div>
                                         <div id="name" class="write">
                                             <label for="">성 명</label>
-                                            <input type="text" />
+                                            <input type="text" name="name" />
                                         </div>
                                         <div id="phone" class="write">
                                             <label for="">연락처</label>
-                                            <input type="text" />
+                                            <input type="text" name="phone" />
                                         </div>
                                         <div id="authorize" class="write">
                                             <label for="">권 한</label>
-                                            <select name="" id="dept">
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
+                                            <select name="authorizeNo">
+                                                <c:forEach items="${authorizeList}" var="i">
+                                                    <option value="${i.no}">${i.level}</option>
+                                                </c:forEach>
                                             </select>
                                         </div>
                                         <div id="team" class="write">
@@ -122,21 +122,18 @@
                                         </div>
                                         <div id="bank" class="write">
                                             <label for="">계좌번호</label>
-                                            <select name="" id="">
-                                                <option value="1">신 한</option>
-                                                <option value="2">기 업</option>
-                                                <option value="3">하 나</option>
-                                                <option value="4">농 협</option>
-                                                <option value="5">국 민</option>
-                                                <option value="5">카카오</option>
+                                            <select name="bankNo">
+                                                <c:forEach items="${bankList}" var="i">
+                                                    <option value="${i.no}">${i.name}</option>
+                                                </c:forEach>
                                             </select>
-                                            <input type="text" />
+                                            <input type="text" name="account" />
                                         </div>
                                     </div>
                                 </div>
                                 <div id="address-wrap" class="write">
                                     <label for="">주 소</label>
-                                    <input type="text" id="address" />
+                                    <input type="text" id="address" name="address" />
                                     <button type="button" id="address_kakao">검 색</button>
                                 </div>
                                 <div id="submit">
