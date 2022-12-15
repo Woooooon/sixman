@@ -19,7 +19,7 @@
         <div class="title-box">
         	<c:choose>
         		<c:when test="${not empty listType}"><div class="b-title">${listType}</div></c:when>
-        		<c:otherwise><div class="b-title">받은메일함</div></c:otherwise>
+        		<c:otherwise><div class="b-title">전체메일함</div></c:otherwise>
         	</c:choose>
         </div>
         <div class="header-box">
@@ -66,7 +66,7 @@
 		                            </div>
 		                        </div>
 		                    </div>
-		                    <c:if test="${not empty listType}"><div id="mail-count"><p class="hilight">50</p>보낸메일</div></c:if>
+		                    <c:if test="${not empty listType}"><div id="mail-count"><p class="hilight">50</p></div></c:if>
 		                    <c:if test="${empty listType}"><div id="mail-count"><p class="hilight">50</p>/<p>100</p>안읽은 메일</div></c:if>
                     	</c:otherwise>
                     </c:choose>
