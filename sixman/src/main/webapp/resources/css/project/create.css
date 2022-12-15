@@ -219,11 +219,11 @@ input[name='prjDate2'] {
 .side-box{
     display: flex;
     width: 30%;
-    height: 99%;
+    height: 100%;
+    align-items: flex-end;
 }
 
 .calendar {
-    margin-top: 403px;
     width: 100%;
 }
 
