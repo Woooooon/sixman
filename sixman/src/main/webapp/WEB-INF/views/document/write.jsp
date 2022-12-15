@@ -25,8 +25,8 @@
 
 <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
 <div class="main-box">
-
-    <form action="">
+    <div>
+    <div action="">
 
         <div  id="notice-box" class="box">
             <div class="title-box">
@@ -37,96 +37,64 @@
             <br>
             <br>
 
-
           <div id="write-box" class="box2">
             
-            <div class="writebx">
-                <div class="write-list">
-
-                    <div class="writelist">
-                        <div class="writelist-no">문서번호</div>
-                        
+                <div class="writelist">
+                    <div class="writeno">
+                        <div>문서번호</div>
+                        <div>20221214</div>
                     </div>
-                    <div class="writedate">
-                        <div class="writedate-date">기안일</div>
-                        
+                    <div class="writeno">
+                        <div>기안일</div>
+                        <div>2022</div>
                     </div>
-                    <div class="writer">
-                        <div class="writer-er">기안자</div>
-                        
+                    <div class="writeno">
+                        <div>기안자</div>
+                        <div>구기석</div>
                     </div>
-                    <div class="writech">
-                        <div class="writech-er">참조자</div>
+                    <div class="writeno">
+                        <div>참조자</div>
+                        <div>심원용</div>
                     </div>
-
                 </div>
-                <div class="writelister">
-                    <div class="writelist">
-                        <div class="writelist-reno">121212</div>
+                <div class="docbox">
+                    <div class="ppp">
+                        <div>직급</div>
+                        <div> + 이미지</div>
+                        <div>심원용</div>
                     </div>
-
-                    <div class="writedate">
-                        <div class="writedate-reda">221212</div>
+                    <div class="ppp">
+                        <div>직급</div>
+                        <div>+ 이미지</div>
+                        <div>심투용</div>
                     </div>
-
-                    <div class="writer">
-                        <div class="writer-reer">심삼용</div>
+                    <div class="ppp">
+                        <div>직급</div>
+                        <div>+ 이미지</div>
+                        <div>심삼용</div>
                     </div>
-
-                    <div class="writech">
-                        <div class="writech-list">구기석 , 심투용 부장</div>
-                    </div>
-
-
-                </div>
-                
-            
-                <div class="imageboxlist">
-                    <div class="imageboxlist-1">
-                        <div class="a-1">직급</div>
-                        <div class="a-2">사인 이미지</div>
-                        <div class="a-3">구기석 사원</div>
-                    </div>
-                    <div class="imageboxlist-2">
-                        <div class="b-1">직급</div>
-                        <div class="b-2">사인 이미지</div>
-                        <div class="b-3">구기석 사원</div>
-                    </div>
-                    <div class="imageboxlist-3">
-                        <div class="c-1">직급</div>
-                        <div class="c-2">사인 이미지</div>
-                        <div class="c-3">구기석 사원</div>
-                    </div>
-
                 </div>
             </div>
-
-                <div class="filebox">
-
-                    <div class="writefile">
-                        <div class="fileaddd">파일추가</div>
-                        <div id="file-btn" class="btn"><span class="material-symbols-outlined"> add </span></div>
-                        <div id="file-box"></div>
-                    </div>
-        
-        
-                 
-        
-                        <div class="writetitlebox">
-                            <div class="writetitle">
-                                <div class="writetitle-ti">제목</div>
-                                <div class="writetitle-tle">아 몰루루루ㅜ루루루루루루루</div>
-                            </div>
-                            <div class="writecontent">내용</div>
-                        </div>
-                </div>
-
-                
-
-
+            
         </div>
-      
+        <div class="docutitlebox">
+            <div class="docu-title">
+                <div class="ti-1">제목</div>
+                <div class="ti-2">아몰루?</div>
+            </div>
+            <div class="docu-content">파일추가</div>
+        </div>
 
+        <div class="filebox">
+
+             <div class="writefile">
+                
+                <div id="file-btn" class="btn"><span class="material-symbols-outlined"> add </span></div>
+                <div id="file-box"></div>
+             </div>
+     
+        </div>
+        </div>
 
         <div name="" id="summernote"></div>
         <div id="btn-box">

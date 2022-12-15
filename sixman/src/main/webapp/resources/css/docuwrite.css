@@ -1,170 +1,88 @@
 @charset "UTF-8";
 
-.writebx{
-    display: flex;
+.main-box{
+    width: 80%;
 }
+#notice-box{
+    padding-left: 100px;
+    width: 100%;
+}
+
+
 
 #write-box{
-    
     max-width: 98%;
     padding-left: 30px;
-    
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
 }
-
-
 .writelist{
-    display: flex;
-    width: 10em;
-    flex-direction: column;
-    
-    
-}
-.writelist-no{
-    height: 40px;
-    display: flex;
-    border-top: 1px solid rgb(0, 0, 0);
-    border-left: 1px solid rgb(0, 0, 0);
-    border-bottom: 1px solid rgb(0, 0, 0);
-    justify-content: center;
-    
-}
-.writelist-reno{
-    height: 40px;
-    display: flex;
-    justify-content: center;
-}
-
-.writedate{
+    width: 20%;
     display: flex;
     flex-direction: column;
-    height: 40px;
-    justify-content: center;
+    border-top: 1px solid var(--bo-40);
+
 }
-.writedate-date{
-    height: 40px;
-    display: flex;
-    border-left: 1px solid rgb(0, 0, 0);
-    justify-content: center;
+.writeno div:nth-child(1){
+    border-left: 1px solid var(--bo-40);
+    border-right: 1px solid var(--bo-40);
+    border-bottom: 1px solid var(--bo-40);
     
 }
+.writeno div:nth-child(2){
 
-.writedate-reda{
-    border-top: 1px solid rgb(0, 0, 0);
-    border-bottom: 1px solid rgb(0, 0, 0);
-    height: 40px;
-    text-align: center;
-}
+    border-right: 1px solid var(--bo-40);
+    border-bottom: 1px solid var(--bo-40);
+}   
 
-.writer{
+.writeno{
     display: flex;
-    flex-direction: column;
-    text-align: center;
+    flex-grow: 1;
+    width: 100%;
 }
-.writer-er{
-    border-top: 1px solid black;
-    border-left: 1px solid black;
-    border-bottom: 1px solid black;
-    height: 40px;
-    text-align: center;
-}
-.writer-reer{
-    height: 40px;
-    text-align: center;
-}
-
-.writech{
+.writeno div{
+    width: 50%;
     display: flex;
-    flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
-.writech-er{
-    border-bottom: 1px solid black;
-    border-left: 1px solid black;
-    height: 40px;
-    text-align: center;
+.docbox{
+    display: flex;
 }
-.writech-list{
-    height: 40px;
-    border-top: 1px solid black;
-    text-align: center;
-    
+.ppp div:nth-child(2){
+    height: 150px;
+    width: 150px;
+    border-top: 1px solid var(--bo-40);
+    border-bottom: 1px solid var(--bo-40); 
 }
-
-
-.writelister{
+.ppp div:nth-child(3){
    
+    border-bottom: 1px solid var(--bo-40); 
+    
+}
+
+.ppp{
     display: flex;
-    flex-direction: column;
+    flex-direction: column;   
+    flex-grow: 1;
     justify-content: center;
-    border: 1px solid rgb(0, 0, 0);
+    align-items: center;
+    border-top: 1px solid var(--bo-40);
+    border-left: 1px solid var(--bo-40);
+  
+    
+}
+.ppp div{
+    display: flex;
+    width: 100%;
     justify-content: center;
-    
+    align-items: center;
+    padding: 5px;
 }
-
-.imageboxlist{
-    display: flex;
-    
-    
-    
+.ppp:nth-child(3){
+    border-right: 1px solid var(--bo-40); 
 }
-
-.writefile{
-    display: flex;
-    flex-direction: row;
-    padding-top: 20px;
-}
-.writefile .file-btn{
-    display: flex;
-}
-.imageboxlist-1{
-    border: 1px solid rgb(0, 0, 0);
-    width: 28.7em;
-}
-.a-1{
-    height: 40px;
-    border-bottom: 1px solid black;
-    text-align: center;
-}
-.a-2{
-    height: 80px;
-    border-bottom: 1px solid black;
-    text-align: center;
-
-}
-.imageboxlist-2{
-    border: 1px solid rgb(0, 0, 0);
-    width: 28.7em;
-    text-align: center;
-}
-.b-1{
-    height: 40px;
-    border-bottom: 1px solid black;
-    text-align: center;
-}
-.b-2{
-    height: 80px;
-    border-bottom: 1px solid black;
-    text-align: center;
-}
-.imageboxlist-3{
-    border: 1px solid rgb(0, 0, 0);
-    width: 28.7em;
-    text-align: center;
-}
-.c-1{
-    height: 40px;
-    border-bottom: 1px solid black;
-    text-align: center;
-}
-.c-2{
-    height: 80px;
-    border-bottom: 1px solid black;
-    text-align: center;
-}
-.a-3{
-    text-align: center;
-}
-
 
 .writefile{
     display: inline-block;
@@ -173,32 +91,58 @@
 }
 
 
-.writetitle-ti{
+.ti-1{
     
     color: white;
-    background-color: #ddd;
+    background-color: var(--main-color);
     justify-content : center;
-    height: 2em;
+    height: 4em;
+    text-align: left;
+    padding-left: 150px;
+    padding-top: 10px;
+    gap: 10px;
 }
-.writetitle-tle{
+.ti-2{
     border: 1px solid black;
-    height: 2em;
+    height: 4em;
+    background-color: white;
+    padding-left: 150px;
+    padding-top: 10px;
+    gap: 10px;
 }
-.writecontent{
+.docu-content{
     color: white;
-    background-color: #ddd;
+    background-color:var(--main-color);
     justify-content : center;
-    height: 2em;
+    height: 4em;
+    padding-left: 150px;
+    padding-top: 10px;
+    gap: 10px;
 }
-
 .writefile{
     display: flex;
-    gap: 20px;
+    flex-direction: row;
+    padding-top: 20px;
+    gap: 10px;
+    height: 6em;
+    padding-left: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    gap: 30px;
+
+}
+.writefile .file-btn{
+    display: flex;
+    
+}
+.fileaddd{
+    display: flex;
 }
 
-.fileaddd{
-    width: 10%;
-    text-align: center;
+#file-btn span{
+    padding: 30px;
 }
+
+
 
 
