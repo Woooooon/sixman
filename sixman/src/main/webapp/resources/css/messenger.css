@@ -1,13 +1,23 @@
 @charset "UTF-8";
 
+
+
+
+
+
+
+
+/* 공통 */
+
+/* 공통-전체 화면 */
 .messenger-whole{
-	width:25%;
+	width:24%;
 	height:80%;
 	display:none;
 	position:absolute;
 	z-index:100;
 	right:0;
-	top:6%;
+	top:5%;
 	border: 2px solid black;
 	background-color: white;
  	box-sizing:border-box; 
@@ -15,7 +25,23 @@
 	float:right;
 	
 	overflow-y:scroll;
+	
 }
+
+/* 공통-스크롤바 안보이기 */
+.messenger-whole::-webkit-scrollbar{
+	display:none;
+}
+
+
+
+
+
+
+
+
+
+/* 대화방 리스트 해당 화면들 */
 
 .title-box{
 	display : flex;
@@ -44,16 +70,29 @@
 	height:0.2%;
 	border:2px solid #0E6D62;
 	background-color: #0E6D62;
-	margin:4%;
+	margin:0% auto;
+	margin-bottom:6%;
+	margin-top:6%;
 }
-.bottom-area2{
 
-	width:88%;
-	height:6%;
-	border:2% solid #0E6D62;
-	background-color: #0E6D62;
-	margin:4%;
+
+
+
+
+
+/* 대화방 목록 화면 */
+
+
+.chatroomlist-first-page{
+	
 }
+
+
+
+
+
+
+
 #main-center-text1{
 	margin-top:60%;
 	text-align: center;
@@ -65,13 +104,145 @@
 	text-align: center;
 }
 
+
+.chatroom-list-space{
+	display:flex;
+	justify-content: space-evenly;
+}
+
+.messenger-category01>select{
+	font-size:20px;
+	width:100%;
+	height:100%;
+}
+
+.chatroom-list-space>#wantchatdata{
+	width:48%;
+}
+
+.chatroom-list-space>.btn{
+	width:18%;
+	font-size:18px;
+}
+
+.chatroom-list-box{
+	
+	margin-top:2%;
+	position:absolute;
+	width:100%;
+	height:14%;
+	border-bottom:1px solid black;
+}
+
+.with-chat-data01{
+}
+
+/* .chatroom-introduce{ */
+/* 	font-size:28px; */
+/* 	margin:10%; */
+/* 	margin-bottom:6%; */
+/* } */
+
+.square-first{
+	width:60px;
+	height:60px;
+	position:absolute;
+	background-color: #0E6D62; 
+	border:2px solid #0E6D62;
+	border-radius: 100%;
+	margin-left:6%;
+	margin-top:4%;
+}
+
+.chatroom-list-two-to-two{
+	margin-left:28%;
+	margin-bottom:10%;
+	position:absolute;
+}
+
+.with-chat-subroomname2{
+	margin-top:6%;
+	margin-bottom:6%;
+	font-size:18px;
+}
+
+
+
+/* .chatroom-list-one{ */
+/* 	display : flex; */
+/* } */
+
+/* .with-chat-roomname{ */
+/* 	font-size:26px; */
+/* 	margin:6%; */
+/* 	margin-left:28%; */
+/* } */
+
+/* .with-chat-subroomname{ */
+/* 	margin:6%; */
+/* 	font-size:28px; */
+/* } */
+
+
+
+
+.chat-others-profile01{
+	display:flex;
+}
+
+.with-chat-name01{
+	margin-right:2%;
+	font-size:12px;
+}
+.with-chat-grade01{
+	margin-right:2%;
+	font-size:12px;
+}
+.chatroom-alarm-content{
+	font-size:12px;
+}
+.chatroom-exit-button{
+	margin-left:80%;
+/* 	margin-top:-32%; */
+	border:1px solid white;
+	height:20px;
+/* 	weight:20px; */
+}
+
+
+#chatroom-exit-icon{
+	font-size:40px;
+	margin-top:60%;
+}
+
+
+
+
+/* 사내 대화방생성 첫번째 화면 */
+
+
 #who-chat{
-	margin-right:8%;
-	margin:10%;
+	
+	margin-left:6%;
 	margin-bottom:2%;
 }
 
-.btn{
+
+.text-messenger-settings{
+	margin:4%;
+	background-color: white;
+	z-index:20;
+	box-shadow: 0px 0px 2px grey;
+/* 	overflow-y:scroll; */
+}
+
+.bottom-area2{
+
+	width:88%;
+	height:6%;
+	border:2% solid #0E6D62;
+	background-color: #0E6D62;
+	margin:4%;
 }
 
 .textbox-messenger-area1{
@@ -86,13 +257,13 @@
 
 }
 
-.textbox-messenger-area3{
+/* .textbox-messenger-area3{} */
 
-}
 
-.subtitle{
-	font-size:200%;
-	margin-top:4%;
+
+.showup>#subtitle1{
+	font-size:20px;
+	margin:8px;
 }
 
 .team-name{
@@ -102,9 +273,18 @@
 	font-size:100%;
 }
 
+.team-area{
+	margin-left:8%;
+	margin-bottom:20%;
+	font-size:28px;
+	color:#008000;
+	font-style: bold;
+	position:absolute;
+}
 .with-chat-name{
 	margin-top:10%;
 	width:25%;
+	margin-left:40%;
 }
 
 
@@ -112,6 +292,7 @@
 	margin-right:10%;
 	margin-top:10%;
 	width:25%;
+	margin-left:auto;
 }
 
 .with-chat-data{
@@ -127,12 +308,6 @@
 	border : 10% solid #000000;
 }
 
-.team-area{
-	margin-left:8%;
-	font-size:28px;
-	color:#008000;
-	font-style: bold;
-}
 
 .team-whole-data{
 	display:flex;
@@ -144,23 +319,16 @@
 	
 }
 
-.text-messenger-settings{
-	margin:8%;
-	background-color: white;
-	z-index:20;
-	box-shadow: 0px 0px 2px 2px grey;
-/* 	overflow-y:scroll; */
-}
 
-.team-people-data::-webkit-scrollbar{
-	width:10px;
-}
-.team-people-data::-webkit-scrollbar-thumb{
-/* 	background-color: #000000; */
-}
-.team-people-data::-webkit-scrollbar-track{
-	background-color: gray;
-}
+/* .team-people-data::-webkit-scrollbar{ */
+/* 	width:10px; */
+/* } */
+/* .team-people-data::-webkit-scrollbar-thumb{ */
+/* /* 	background-color: #000000; */ */
+/* } */
+/* .team-people-data::-webkit-scrollbar-track{ */
+/* 	background-color: gray; */
+/* } */
 
 .material-symbols-outlined {
   font-variation-settings:
@@ -180,108 +348,85 @@
 }
 
 .square{
-	width:20%;
-	background-color: #0E6D62; 
-	border:2px solid #0E6D62;
-	border-radius: 100%;
-	margin-left:10%;
-	margin-right:30%;
-}
-
-.button-list{
-	display:flex;
-	justify-content: space-around;
-	margin-bottom:10%;
-}
-
-.who-chat-roomname{
-	margin:10%;
-	font-size:200%;
-}
-
-.define-roomname{
-	margin-left:10%;
-	width:60%;
-}
-
-.btn-height{
-	margin:10%;
-	margin-left:50%;
-}
-
-.checkbox-square input[type="checkbox"]{display : none}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.chatroom-list-box{
-	
-	margin:8%;
-	position:absolute;
-	width:80%;
-	height:28%;
-	box-shadow: 0px 0px 2px 2px grey;
-}
-
-.with-chat-data01{
-}
-
-.chatroom-introduce{
-	font-size:28px;
-	margin:10%;
-	margin-bottom:6%;
-}
-
-.square-one{
 	width:60px;
 	height:60px;
 	position:absolute;
 	background-color: #0E6D62; 
 	border:2px solid #0E6D62;
 	border-radius: 100%;
-	margin-left:2%;
-	margin-top:4%;
+	margin-right:60%;
+	margin-bottom:10%;
 }
 
-.chatroom-list-one{
-	display : flex;
+.chatting-button-list01{
+	display:flex;
+	justify-content: space-around;
 }
 
-.with-chat-roomname{
-	font-size:26px;
-	margin:6%;
-	margin-left:28%;
+/* 채팅방 이름 생성 */
+.who-chat-roomname{
+	margin:10%;
+	font-size:20px;
 }
 
-.with-chat-subroomname{
-	margin:6%;
+.define-roomname{
+	margin-left:10%;
+	width:80%;
 	font-size:28px;
 }
 
-.with-chat-subroomname2{
-	margin:8%;
-	font-size:18px;;
+.btn-height{
+	margin:10%;
+	margin-left:64%;
 }
 
-.chatroom-list-two-to-two{
-	margin-left:28%;
-	margin-right:40%;
-	display: flex;
+.chatbutton01{
+	margin-bottom:10%;
 }
+
+
+/* 채팅방 화면 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.chatting-room{
+	background-color: black;
+}
+
+.chatting-room-first{
+	width:100%;
+	height:10%;
+	backgrond-color:#A1DBDB;
+}
+
