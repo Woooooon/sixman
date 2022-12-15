@@ -1,0 +1,250 @@
+/* detail-box */
+.detail-box {
+    padding: 50px;
+}
+
+/* 프로젝트 제목 */
+
+.head {
+    display: flex;
+    margin-left: 50px;
+    margin-bottom: 10px;
+}
+
+.head > p {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.detail-btn {
+    display: flex;
+    margin-left: 500px;
+    justify-content: space-between;
+    width: 18%;
+}
+
+.btn, .c-btn {
+    border: none;
+    width: 120px;
+    height: 35px;
+}
+
+
+/* 프로젝트 상태 */
+
+.status {
+    margin: 10px;
+    display: flex;
+    color: #aaa;
+}
+
+.status-1 {
+    font-size: 17px;
+}
+
+.status-btn {
+    display: flex;
+    justify-content: space-between;
+    width: 20%;
+    margin-top: 8px;
+    margin-left: 10px;
+}
+
+.ing {
+    background-color: #62C276;
+    color: #FFFFFF;
+    width: 90px;
+    height: 25px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.delay {
+    background-color: #E95E51;
+    color: #FFFFFF;
+    width: 90px;
+    height: 25px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.complete {
+    background-color: #55BAE5;
+    color: #FFFFFF;
+    width: 90px;
+    height: 25px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+/* 프로젝트 멤버 */
+
+.member {
+    display: flex;
+    margin: 10px;
+    color: #aaa;
+    font-size: 17px;
+}
+
+.member-list {
+    display: flex;
+    margin-top: 8px;
+    margin-left: 10px;
+    width: 20%;
+    justify-content: space-between;
+}
+
+/* 플젝 날짜 */
+
+.date {
+    display: flex;
+    margin: 10px;
+    color: #aaa;
+    font-size: 17px;
+}
+
+.date > p {
+    margin: 8px 0 10px 10px;
+}
+
+#startdate,
+#enddate {
+    margin-top: 8px;
+    margin-left: 10px;
+    height: 15%;
+}
+
+
+/* 일정 bar */
+
+.percent {
+    display: flex;
+    margin: 10px;
+    color: #aaa;
+    font-size: 17px;
+}
+
+.progress {
+    margin-top: 8px;
+    margin-left: 10px;
+    background-color: #D3D3D3;
+    border-radius: 20px;
+    height: 20px;
+    width: 300px;
+}
+
+.progress-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: repeating-linear-gradient(
+    to left,
+    #12887A,
+    #2fa597,
+    #59c0b4);
+    box-shadow: 0 5px 5px -6px #12887A, 0 3px 7px #2fa597;
+    border-radius: 20px;
+    color: #fff;
+    height: 100%;
+    width: 0;
+    transition: 1s ease 0.3s;
+}
+
+.inputcontainer {
+    display: flex;
+    margin: 10px;
+    color: #aaa;
+    font-size: 17px;
+    width: 50%;
+}
+
+.valueinput,
+.maxinput {
+    margin-top: 8px;
+    margin-left: 10px;
+    width: 45px;
+    height: 25px;
+}
+.max {
+    margin-top: 8px;
+    margin-left: 10px;
+}
+
+/* 내용 */
+
+.hidden {
+    border-top: 2px solid #D3D3D3;
+    width: 65%;
+    height: 20px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+#prj-content {
+    margin: 15px;
+    resize: none;
+    width: 62%;
+    height: 200px;
+    border: 1px solid #D3D3D3;
+}
+
+/* to-do */
+
+.todo {
+    display: flex;
+    margin: 10px;
+    color: #aaa;
+    font-size: 17px;
+}
+
+.todo > span {
+    margin-right: 10px;
+}
+
+.todo-list {
+    display: flex;
+    width: 60%;
+}
+
+.todo-box {
+    border-radius: 5px;
+    box-shadow: 1px 1px #D3D3D3;
+    margin: 0px 10px 0 10px;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border: 1px solid #D3D3D3;
+}
+
+
+.todo-title {
+    margin: 5px;
+    font-weight: bold;
+}
+
+.todo-writer {
+    margin: 5px;
+    color: #aaa;
+    font-size: 17px;
+}
+
+/* modal */
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>프로젝트 승낙</title>
+<title>프로젝트 승인</title>
 <link rel="stylesheet" href="${path}\resources\css\admin\project\consent.css">
 </head>
 <body>

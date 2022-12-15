@@ -1,0 +1,204 @@
+@charset "UTF-8";
+
+.writebx{
+    display: flex;
+}
+
+#write-box{
+    
+    max-width: 98%;
+    padding-left: 30px;
+    
+}
+
+
+.writelist{
+    display: flex;
+    width: 10em;
+    flex-direction: column;
+    
+    
+}
+.writelist-no{
+    height: 40px;
+    display: flex;
+    border-top: 1px solid rgb(0, 0, 0);
+    border-left: 1px solid rgb(0, 0, 0);
+    border-bottom: 1px solid rgb(0, 0, 0);
+    justify-content: center;
+    
+}
+.writelist-reno{
+    height: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.writedate{
+    display: flex;
+    flex-direction: column;
+    height: 40px;
+    justify-content: center;
+}
+.writedate-date{
+    height: 40px;
+    display: flex;
+    border-left: 1px solid rgb(0, 0, 0);
+    justify-content: center;
+    
+}
+
+.writedate-reda{
+    border-top: 1px solid rgb(0, 0, 0);
+    border-bottom: 1px solid rgb(0, 0, 0);
+    height: 40px;
+    text-align: center;
+}
+
+.writer{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.writer-er{
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+    height: 40px;
+    text-align: center;
+}
+.writer-reer{
+    height: 40px;
+    text-align: center;
+}
+
+.writech{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.writech-er{
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    height: 40px;
+    text-align: center;
+}
+.writech-list{
+    height: 40px;
+    border-top: 1px solid black;
+    text-align: center;
+    
+}
+
+
+.writelister{
+   
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid rgb(0, 0, 0);
+    justify-content: center;
+    
+}
+
+.imageboxlist{
+    display: flex;
+    
+    
+    
+}
+
+.writefile{
+    display: flex;
+    flex-direction: row;
+    padding-top: 20px;
+}
+.writefile .file-btn{
+    display: flex;
+}
+.imageboxlist-1{
+    border: 1px solid rgb(0, 0, 0);
+    width: 28.7em;
+}
+.a-1{
+    height: 40px;
+    border-bottom: 1px solid black;
+    text-align: center;
+}
+.a-2{
+    height: 80px;
+    border-bottom: 1px solid black;
+    text-align: center;
+
+}
+.imageboxlist-2{
+    border: 1px solid rgb(0, 0, 0);
+    width: 28.7em;
+    text-align: center;
+}
+.b-1{
+    height: 40px;
+    border-bottom: 1px solid black;
+    text-align: center;
+}
+.b-2{
+    height: 80px;
+    border-bottom: 1px solid black;
+    text-align: center;
+}
+.imageboxlist-3{
+    border: 1px solid rgb(0, 0, 0);
+    width: 28.7em;
+    text-align: center;
+}
+.c-1{
+    height: 40px;
+    border-bottom: 1px solid black;
+    text-align: center;
+}
+.c-2{
+    height: 80px;
+    border-bottom: 1px solid black;
+    text-align: center;
+}
+.a-3{
+    text-align: center;
+}
+
+
+.writefile{
+    display: inline-block;
+   border: 1px solid black;
+   width: 100%;
+}
+
+
+.writetitle-ti{
+    
+    color: white;
+    background-color: #ddd;
+    justify-content : center;
+    height: 2em;
+}
+.writetitle-tle{
+    border: 1px solid black;
+    height: 2em;
+}
+.writecontent{
+    color: white;
+    background-color: #ddd;
+    justify-content : center;
+    height: 2em;
+}
+
+.writefile{
+    display: flex;
+    gap: 20px;
+}
+
+.fileaddd{
+    width: 10%;
+    text-align: center;
+}
+
+

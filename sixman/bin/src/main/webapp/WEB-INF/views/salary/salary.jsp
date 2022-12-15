@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>수당월별내역</title>
 <link rel="stylesheet" href="<c:url value='/resources/css/salary/salary.css'/>" />
 </head>
 
@@ -129,7 +129,7 @@
     color: black
 }
 
-/*             모달창                  */
+/*-------------------------------------------------  모달창     ------------------------------------------------    */
 
 .share-modal.close {
     display: none;
@@ -143,7 +143,7 @@
     background-color: var(--bo-60);
     width: 100%;
     height: 100%;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
 }
@@ -160,6 +160,7 @@
     display: grid;
     grid-template-rows: 1fr 1.5fr 1.5fr 5fr;
     gap: 20px;
+
 }
 #modal-1{
     display: grid;
@@ -186,15 +187,49 @@
     align-items: center; 
 }
 
-#modal-2{
+#modal-2, #modal-3, #modal-4{
     display: grid;
     grid-template-rows: 1fr 1fr;
 }
 
-.modal-2-1{
+#modal-2-1,#modal-2-2,#modal-3-2,#modal-4-2,#modal-4-3,#modal-4-4,#modal-4-5,#modal-4-6,#modal-4-7, #modal-4-8{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
+    
 }
+
+#modal-2-1 div,#modal-2-2 div,#modal-3-2 div,#modal-4-2 div,#modal-4-3 div,#modal-4-4 div,#modal-4-5 div,#modal-4-6 div,#modal-4-7 div, #modal-4-8 div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#modal-4{
+    display: grid;
+    grid-template-rows: repeat(9, 1fr);
+}
+
+#modal-3-1,#modal-4-1,#modal-4-9{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    background-color: #E2E2E2;
+    font-size: 1em;
+    font-weight: 600;
+}
+
+#modal-3-1 div,#modal-4-1 div,#modal-4-9 div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#modal-4-8-1,#modal-4-8-2{
+    background-color: #E2E2E2;
+}
+
+
+
 
 </style>
 
@@ -207,28 +242,92 @@
             <div id="modal-1"> 
                 <div id="modal-header">&nbsp&nbsp&nbsp&nbsp 2022년 10월분 급여명세서</div>
                 <div>
-                    <span class="material-symbols-outlined"> close </span>
+                    <span id="close" class="material-symbols-outlined"> close </span>
                 </div>
             </div>
             <div id="modal-2" class="box">
-                <div class="modal-2-1">
-                    <div>1</div>
-                    <div>2</div>
-                    <div>3</div>
-                    <div>4</div>
+                <div id="modal-2-1">
+                    <div>성명: 심원용</div>
+                    <div>생년월일: 2002-01-01</div>
+                    <div>입사날짜: 2019-0321</div>
+                    <div>이메일: abc@naver.com</div>
                 </div>
-                <div class="modal-2-1">
-                    <div>1</div>
-                    <div>2</div>
-                    <div>3</div>
-                    <div>4</div>
+                <div id="modal-2-2">
+                    <div>직책: 차장</div>
+                    <div>부서: 제1영업</div>
+                    <div>은행명: 국민은행</div>
+                    <div>계좌번호: 00-00-0000000</div>
                 </div>
             </div>
             <div id="modal-3" class="box">
-
+                <div id="modal-3-1">
+                    <div>연장근로시간</div>
+                    <div>휴일근로시간</div>
+                    <div>총 근로시간</div>
+                    <div>통상시급(원)</div>
+                </div>
+                <div id="modal-3-2">
+                    <div>22</div>
+                    <div>6</div>
+                    <div>170</div>
+                    <div>11,123</div>
+                </div>
             </div>
             <div id="modal-4" class="box">
-
+                <div id="modal-4-1">
+                    <div>지급내역</div>
+                    <div>지급액(원)</div>
+                    <div>공제내역</div>
+                    <div>공제액(원)</div>
+                </div>
+                <div id="modal-4-2">
+                    <div>기본급</div>
+                    <div>1,000,000</div>
+                    <div>국민연금</div>
+                    <div>20,000</div>
+                </div>
+                <div id="modal-4-3">
+                    <div>연장근로수당</div>
+                    <div>1,000,000</div>
+                    <div>건강보험</div>
+                    <div>20,000</div>
+                </div>
+                <div id="modal-4-4">
+                    <div>휴일근로수당</div>
+                    <div>200,000</div>
+                    <div>고용보험</div>
+                    <div>20,000</div>
+                </div>
+                <div id="modal-4-5">
+                    <div>식대보조금</div>
+                    <div>100,000</div>
+                    <div>장기요양보험료</div>
+                    <div>20,000</div>
+                </div>
+                <div id="modal-4-6">
+                    <div></div>
+                    <div></div>
+                    <div>소득세</div>
+                    <div>20,000</div>
+                </div>
+                <div id="modal-4-7">
+                    <div></div>
+                    <div></div>
+                    <div>지방소득세</div>
+                    <div>20,000</div>
+                </div>
+                <div id="modal-4-8">
+                    <div></div>
+                    <div></div>
+                    <div id="modal-4-8-1">공제액계</div>
+                    <div id="modal-4-8-2">120,000</div>
+                </div>
+                <div id="modal-4-9">
+                    <div>지급액계</div>
+                    <div>1,400,000</div>
+                    <div>차인지급액</div>
+                    <div>1,370,000</div>
+                </div>
             </div>
         </div>
     </div>
@@ -238,9 +337,9 @@
             <div id="search-box" class="box">
                 <div id="search-font">검색기간</div>
                 <div id="date">
-                    <input type="month" style="width: 100px;">
+                    <input id="start-month" type="month" style="width: 110px;">
                     ~
-                    <input type="month" style="width: 100px;">
+                    <input id="end-month" type="month" style="width: 110px;">
                 </div>
                 <div></div>
                 <div class="btn">검색</div>
@@ -281,6 +380,31 @@
             </div>
         </div>
     </div>
+
+    <script>
+        
+    //이번달 넘어가게 선택불가능
+    var now_utc = Date.now()
+    var timeOff = new Date().getTimezoneOffset()*60000; 
+    var today = new Date(now_utc-timeOff).toISOString().substring(0, 7);
+    document.getElementById("start-month").setAttribute("max", today);
+    document.getElementById("end-month").setAttribute("max", today);
+
+    //이번달
+    document.getElementById('end-month').value= new Date().toISOString().slice(0, 7);
+
+    //모달 닫기버튼
+    document.querySelector("#close").addEventListener("click", () => {
+        document.querySelector(".share-modal").style.display = "none"
+    })
+  
+    //모달 열기
+    document.querySelector(".list-item").addEventListener("click", () => {
+        document.querySelector(".share-modal").style.display = "flex"
+    })
+
+
+    </script>
     
 	
 </main>

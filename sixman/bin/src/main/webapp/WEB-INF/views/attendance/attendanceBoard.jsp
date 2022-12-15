@@ -5,8 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>일별근무시간</title>
 <link rel="stylesheet" href="<c:url value='/resources/css/attendance/attendanceBoard.css'/>" />
+<script src="${path}/resources/js/attendance/board.js" defer ></script>
 </head>
 
 <body>
@@ -30,9 +31,9 @@
                     <button>1년</button>
                 </div>
                 <div id="date">
-                    <input type="date" placeholder="2022-12-02" style="width: 100px;">
+                    <input id="start-day" type="date" style="width: 100px;">
                     ~
-                    <input type="date" placeholder="2022-12-02" style="width: 100px;">
+                    <input id="end-day" type="date" style="width: 100px;">
                 </div>
                 <div class="btn">검색</div>
                 <div></div>
@@ -54,7 +55,7 @@
                     <div class="list-item"> <p>2022-11-26</p> <p>심원용</p> <p>09:00</p> <p>18:00</p> <p>0</p> <p>8</p></div>
                     <div class="list-item"> <p>2022-11-25</p> <p>심원용</p> <p>09:00</p> <p>18:00</p> <p>0</p> <p>8</p></div>
                     <div class="list-item"> <p>2022-11-24</p> <p>심원용</p> <p>09:00</p> <p>18:00</p> <p>0</p> <p>8</p></div>
-                   
+                    
                 </div>
                 <div class="page-box">
                     <span class="material-symbols-outlined"> keyboard_double_arrow_left </span>
@@ -75,8 +76,8 @@
             <div id="date-box">2022-11-30</div>
             <div id="time-box">11:00</div>
             <div id="btn-box">
-                <div class="btn">출근</div>
-                <div class="c-btn">퇴근</div>
+                <div id="start-btn" class="btn">출근</div>
+                <div id="end-btn" class="c-btn">퇴근</div>
             </div>
             <div id="result-box">
                 <div>시작: &nbsp<input type="text" style="width: 50px; height: 25px;"></div>
@@ -85,14 +86,8 @@
         </div>
         <div id="work-week" class="box">
             <div id="week-header">이번주 근로시간</div>
-            <div>
+            <div id="select-week">
                 <select name="category">
-                    <option value="first">2022-12</option>
-                    <option value="second">2022-11</option>
-                    <option value="third">2022-10</option>
-                    <option value="four">2022-09</option>
-                </select>
-                <select name="category2">
                     <option value="first">2022-11-28 ~ 2022-12-04</option>
                     <option value="second">2022-12-05 ~ 2022-12-11</option>
                     <option value="third">2022-12-12 ~ 2022-12-18</option>
@@ -101,10 +96,10 @@
                 </select>
             </div>
             <div id="work-time">
-                소정 근로시간 &nbsp&nbsp&nbsp&nbsp<input type="text" style="width: 50px; height: 25px;">
+                소정 근로시간 &nbsp&nbsp&nbsp&nbsp<progress max="100" value="70" style="width:140px; height: 35px;"></progress>
             </div>
             <div id="work-time2">
-                소정 외근로시간 &nbsp<input type="text"style="width: 50px; height: 25px;">
+                소정 외근로시간&nbsp&nbsp<progress max="100" value="10" style="width:140px; height:35px;"></progress>
             </div>
         </div>
         <div id="rest-information" class="box">
@@ -131,9 +126,37 @@
             </div>
         </div>
     </div>
-    
-	
+
+
 </main>
+
+<script>
+
+    //오늘날짜 이후는 선택못하게 제한설정
+    var now_utc = Date.now()
+    var timeOff = new Date().getTimezoneOffset()*60000;
+    var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
+    console.log(today)
+    document.getElementById("end-day").setAttribute("max", today);
+    document.getElementById("start-day").setAttribute("max", today);
+
+    //오늘날짜
+    document.getElementById('end-day').value = new Date().toISOString().substring(0, 10);
+
+    //출근버튼
+    document.querySelector("#start-btn").addEventListener("click", () => {
+        popup.alertPop("출근","시간나오게");
+    })
+
+    //퇴근버튼
+    document.querySelector("#end-btn").addEventListener("click", () => {
+        popup.alertPop("퇴근","시간나오게");
+    })
+
+
+
+
+</script>
 
 </body>
 </html>
