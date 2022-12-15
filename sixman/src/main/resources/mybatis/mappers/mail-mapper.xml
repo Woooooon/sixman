@@ -4,6 +4,125 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mailMapper">
 
+	<select id="countList" resultType="MailVo">
+		SELECT 
+			COUNT(*)
+		FROM MAIL M
+		LEFT JOIN R_MAIL R 		ON M.NO = R.MAIL_NO
+		LEFT JOIN M_DRAWER D 	ON M.NO = D.MAIL_NO
+		LEFT JOIN M_CATEGORY C 	ON D.CATEGORY_NO = C.NO
+		WHERE
+        (
+        <trim prefixOverrides="OR">
+        	<if test="!categoryName.equals('받는메일함')">
+		    	-- 보낸메일
+			    (
+				    (SEND_USER = ${sendUser} AND (USER_NO = ${sendUser} OR USER_NO IS NULL)) 
+				    AND 
+				    <if test="categoryName.equals('휴지통')">
+				    	M.DELETE_YN = 'Y'
+				    </if>
+				    <if test="!categoryName.equals('휴지통')">
+				    	M.DELETE_YN = 'N'
+				    </if>
+				    AND
+				    <if test="categoryName.equals('임시보관함')">
+				    	M.SAVE_YN = 'Y'
+				    </if>
+				    <if test="!categoryName.equals('임시보관함')">
+				    	M.SAVE_YN = 'N'
+				    </if>
+			    )
+		    </if>
+		    OR 
+			<if test="!categoryName.equals('보낸메일함') and !categoryName.equals('임시보관함')">
+				-- 받는메일
+			    (
+				    (EMAIL = #{email} AND (USER_NO = ${sendUser} OR USER_NO IS NULL)) 
+				    AND 
+				    <if test="categoryName.equals('휴지통')">
+				    	M.DELETE_YN = 'Y'
+				    </if>
+				    <if test="!categoryName.equals('휴지통')">
+				    	M.DELETE_YN = 'N'
+				    </if>
+			    )
+			</if>
+		</trim>
+        )
+        <if test=" category != '' ">
+            AND
+        	CATEGORY_NO = ${category}
+        </if>
+	</select>
+
+	<select id="selectList" resultType="MailVo">
+		SELECT 
+		    	M.NO AS NO
+		    ,	SEND_USER
+		    ,	M.DELETE_YN AS DELETE_YN
+		    ,	TITLE
+		    ,	CONTENT
+		    ,	SAVE_YN
+		    ,	SEND_TIME
+		    ,	MODIFY_TIME
+		    ,	R.NO AS R_NO
+		    ,	"EMAIL"
+		    ,	CHECK_YN
+		    ,	ALARM_YN
+		    ,	R.DELETE_YN AS R_DELETE_YN
+		    ,	CATEGORY_NO AS CATEGORY
+		    ,	NAME AS CATEGORY_NAME
+		FROM MAIL M
+		LEFT JOIN R_MAIL R 		ON M.NO = R.MAIL_NO
+		LEFT JOIN M_DRAWER D 	ON M.NO = D.MAIL_NO
+		LEFT JOIN M_CATEGORY C 	ON D.CATEGORY_NO = C.NO
+		WHERE
+        (
+        <trim prefixOverrides="OR">
+        	<if test="!categoryName.equals('받는메일함')">
+		    	-- 보낸메일
+			    (
+				    (SEND_USER = ${sendUser} AND (USER_NO = ${sendUser} OR USER_NO IS NULL)) 
+				    AND 
+				    <if test="categoryName.equals('휴지통')">
+				    	M.DELETE_YN = 'Y'
+				    </if>
+				    <if test="!categoryName.equals('휴지통')">
+				    	M.DELETE_YN = 'N'
+				    </if>
+				    AND
+				    <if test="categoryName.equals('임시보관함')">
+				    	M.SAVE_YN = 'Y'
+				    </if>
+				    <if test="!categoryName.equals('임시보관함')">
+				    	M.SAVE_YN = 'N'
+				    </if>
+			    )
+		    </if>
+		    OR 
+			<if test="!categoryName.equals('보낸메일함') and !categoryName.equals('임시보관함')">
+				-- 받는메일
+			    (
+				    (EMAIL = #{email} AND (USER_NO = ${sendUser} OR USER_NO IS NULL)) 
+				    AND 
+				    <if test="categoryName.equals('휴지통')">
+				    	M.DELETE_YN = 'Y'
+				    </if>
+				    <if test="!categoryName.equals('휴지통')">
+				    	M.DELETE_YN = 'N'
+				    </if>
+			    )
+			</if>
+		</trim>
+        )
+        <if test=" category != '' ">
+            AND
+        	CATEGORY_NO = ${category}
+        </if>
+		ORDER BY SEND_TIME DESC
+	</select>
+
 	<insert id="write">
 	    <selectKey keyProperty="no" resultType="String" order="BEFORE">  
         select SEQ_MAIL_NO.NEXTVAL FROM dual

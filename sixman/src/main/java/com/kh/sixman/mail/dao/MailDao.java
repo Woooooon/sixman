@@ -21,13 +21,13 @@ public class MailDao {
 		return sst.update("mailMapper.send", vo);
 	}
 
-	public int countList(SqlSessionTemplate sst, Map<String, String> map) {
-		return sst.selectOne("mailMapper.countList", map);
+	public int countList(SqlSessionTemplate sst, MailVo vo) {
+		return sst.selectOne("mailMapper.countList", vo);
 	}
 
 //	
-	public List<NoticeVo> selectList(SqlSessionTemplate sst, Map<String, String> map, RowBounds rb) {
-		return sst.selectList("mailMapper.selectList", map, rb);
+	public List<MailVo> selectList(SqlSessionTemplate sst, MailVo vo, RowBounds rb) {
+		return sst.selectList("mailMapper.selectList", vo, rb);
 	}
 
 //	

@@ -24,7 +24,6 @@ import com.kh.sixman.common.PageVo;
 import com.kh.sixman.mail.service.MailService;
 import com.kh.sixman.mail.vo.MailVo;
 import com.kh.sixman.member.vo.MemberVo;
-import com.kh.sixman.notice.vo.NoticeVo;
 
 @RequestMapping("mail")
 @Controller
@@ -34,24 +33,39 @@ public class MailController {
 	private MailService ms;
 	
 	@GetMapping("list")
-	public String list() {
+	public String list(String listType, Model model) {
+		
+		if(listType!=null) {
+			model.addAttribute("listType", listType);
+		}
 		return "mail/list";
 	}
 	
 	@ResponseBody
 	@PostMapping("list")
-	public String list(@RequestParam Map<String, String> map) {
+	public String list(@RequestParam Map<String, String> map, HttpSession session) {
+		
+		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
+		
+		MailVo vo = new MailVo();
+//		vo.setSendUser(loginMember.getNo());
+//		vo.setEmail(loginMember.getEmail());
+		vo.setSendUser("1");
+		vo.setEmail("a@naver.com");
+		vo.setCategory(map.get("category"));
+		vo.setSearch(map.get("search"));
+		
 //		category, keyword, page
 		int pageLimit = 5;
 		int boardLimit = 15;
-		int listCount = ms.countList(map);
+		int listCount = ms.countList(vo);
 		
 		int page = Integer.parseInt(map.get("page"));
 	    int offset = (page-1) * boardLimit;
 	    RowBounds rb = new RowBounds(offset , boardLimit);
 	    
 	    PageVo pv = new PageVo(listCount,page,pageLimit,boardLimit);
-	    List<NoticeVo> list = ms.selectList(map, rb);
+	    List<MailVo> list = ms.selectList(vo, rb);
 
 		Map<String, Object> resultMap = new HashMap<>();
 		

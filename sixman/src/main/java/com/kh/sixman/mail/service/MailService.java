@@ -50,12 +50,12 @@ public class MailService {
 		return result1 * result2 * result3;
 	}
 
-	public int countList(Map<String, String> map) {
-		return dao.countList(sst, map);
+	public int countList(MailVo vo) {
+		return dao.countList(sst, vo);
 	}
 
-	public List<NoticeVo> selectList(Map<String, String> map, RowBounds rb) {
-		return dao.selectList(sst, map, rb);
+	public List<MailVo> selectList(MailVo vo, RowBounds rb) {
+		return dao.selectList(sst, vo, rb);
 	}
 
 	public MailVo selectOne(String no) {

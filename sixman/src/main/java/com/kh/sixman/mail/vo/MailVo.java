@@ -19,13 +19,18 @@ public class MailVo {
 	private String saveYn;
 	private String sendTime;
 	private String modifyTime;
+	
 	private List<MultipartFile> file;
 	private List<AttachmentVo> fileList;
 	private List<String> sender;
+	
 	private String rNo;
-	private String category;
+	private String email;
 	private String checkYn;
 	private String alarmYn;
 	private String rDeleteYn;
 
+	private String category;
+	private String categoryName;
+	private String search;
 }
