@@ -7,7 +7,7 @@
 	<update id="insertAll">
 		insert all
 		<foreach collection="list" item="vo" separator=" ">
-			into NOTICE_A
+			into ${tableName}
 		(
 			"NO",
 			"ORIGIN_NAME",
@@ -18,7 +18,7 @@
 		)
 		VALUES
 		(
-			get_seq_no('seq_notice_a_no'),
+			get_seq_no('seq_${tableName}_no'),
 			#{vo.originName},
 			${vo.subNo},
 			#{vo.changeName},

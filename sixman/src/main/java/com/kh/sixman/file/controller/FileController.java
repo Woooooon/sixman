@@ -35,10 +35,10 @@ public class FileController {
         	OutputStream out = response.getOutputStream();
         	
         	int read = 0;
-                byte[] buffer = new byte[1024];
-                while ((read = fileInputStream.read(buffer)) != -1) { // 1024바이트씩 계속 읽으면서 outputStream에 저장, -1이 나오면 더이상 읽을 파일이 없음
-                    out.write(buffer, 0, read);
-                }
+            byte[] buffer = new byte[1024];
+            while ((read = fileInputStream.read(buffer)) != -1) { // 1024바이트씩 계속 읽으면서 outputStream에 저장, -1이 나오면 더이상 읽을 파일이 없음
+                out.write(buffer, 0, read);
+            }
                 
         } catch (Exception e) {
         	e.printStackTrace();

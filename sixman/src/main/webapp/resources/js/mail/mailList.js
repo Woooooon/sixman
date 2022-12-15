@@ -69,12 +69,39 @@ checkArr.forEach(element => {
 
 
 // AJAX
-function mailAjax(page, search, category, categoryNo) {
+function mailAjax(page, search, listTpye, categoryNo) {
+    if(typeof listTpye == 'undefined') {listTpye = '';}
+    if(typeof categoryNo == 'undefined') {categoryNo = '';}
+    if(typeof search == 'undefined') {search = '';}
     const httpRequest = new XMLHttpRequest();
     httpRequest.onreadystatechange = () => {
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
                 if (httpRequest.status === 200) {
-                
+                    var result = httpRequest.response;
+                    const pv = result.pv;
+                    const list = result.list;
+
+                    const listBox = document.querySelector('.list-box');
+                    for(let i = 0; i < list.length; i++){
+                        const div = document.createElement('div');
+                        const vo = list[i];
+                        div.classList.add('list-item');
+
+                        let text = "";
+                        text += `<input type="checkbox">`;
+                        if(vo.checkYn == null || vo.checkYn=='Y'){
+                            text += `<span class="material-symbols-outlined"> drafts </span>`;
+                        }else{
+                            text += `<span class="material-symbols-outlined"> mail </span>`;
+                        }
+                        text += `<p>김부장</p>`;
+                        text += `<p>${vo.title}</p>`;
+                        text += `<p>${vo.sendTime}</p>`;
+
+                        div.innerHTML = text;
+                        listBox.append(div);
+                    }
+
                 } else {
                 alert('Request Error!');
                 }
@@ -84,5 +111,5 @@ function mailAjax(page, search, category, categoryNo) {
     httpRequest.open('post', '/sixman/mail/list');
     httpRequest.responseType = "json";
     httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
-    httpRequest.send(`page=${page}&search=${search}`);
+    httpRequest.send(`page=${page}&search=${search}&listTpye=${listTpye}&categoryNo=${categoryNo}`);
 }

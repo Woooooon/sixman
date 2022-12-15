@@ -16,12 +16,21 @@
 <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
 <main class="main-box">
 	<div id="notice-box" class="box">
-        <div class="title-box">
-        	<c:choose>
-        		<c:when test="${not empty listType}"><div class="b-title">${listType}</div></c:when>
-        		<c:otherwise><div class="b-title">전체메일함</div></c:otherwise>
-        	</c:choose>
-        </div>
+		<div id="title-header">
+			<div class="title-box">
+				<c:choose>
+					<c:when test="${not empty listType}"><div class="b-title">${listType}</div></c:when>
+					<c:otherwise><div class="b-title">전체메일함</div></c:otherwise>
+				</c:choose>
+			</div>
+			<div id="category-list">
+				<div class="category-item cate-checked">전체 메일</div>
+				<div class="category-item">카테고리 1</div>
+				<div class="category-item">카테고리 2</div>
+				<div class="category-item">카테고리 3</div>
+				<label for=""></label>
+			</div>
+		</div>
         <div class="header-box">
            	<c:choose>
         		<c:when test="${listType=='휴지통'}">

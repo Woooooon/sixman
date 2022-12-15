@@ -14,7 +14,6 @@ import com.kh.sixman.common.AttachmentVo;
 import com.kh.sixman.file.dao.FileDao;
 import com.kh.sixman.mail.dao.MailDao;
 import com.kh.sixman.mail.vo.MailVo;
-import com.kh.sixman.notice.vo.NoticeVo;
 
 @Service
 public class MailService {
@@ -32,9 +31,9 @@ public class MailService {
 		int result1 = dao.write(sst, vo);
 		int result2 = dao.send(sst, vo);
 		
-		String no = vo.getNo();
+		String no = Integer.toString(result1);
 		List<AttachmentVo> fileList = vo.getFileList();
-		int result3 = 0;
+		int result3 = -1;
 		if(fileList!=null) {
 			for(AttachmentVo fv : fileList) {
 				fv.setSubNo(no);
@@ -44,7 +43,7 @@ public class MailService {
 			map.put("list", fileList);
 			map.put("tableName","MAIL");
 			
-			result2 = fDao.uploalAll(sst, map);
+			result3 = fDao.uploadAll(sst, map);
 		}
 		
 		return result1 * result2 * result3;

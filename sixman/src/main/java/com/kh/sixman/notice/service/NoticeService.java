@@ -40,7 +40,7 @@ public class NoticeService {
 		String no = dao.getNoticeNo(sst, vo);
 
 		List<AttachmentVo> fileList = vo.getFileList();
-		int result2 = 0;
+		int result2 = -1;
 		if(fileList!=null) {
 			for(AttachmentVo fv : fileList) {
 				fv.setSubNo(no);
@@ -50,7 +50,7 @@ public class NoticeService {
 			map.put("list", fileList);
 			map.put("tableName","NOTICE");
 			
-			result2 = fDao.uploalAll(sst, map);
+			result2 = fDao.uploadAll(sst, map);
 		}
 		
 		return result1 * result2;
@@ -95,7 +95,7 @@ public class NoticeService {
 			map.put("list", fileList);
 			map.put("tableName","NOTICE");
 			
-			result2 = fDao.uploalAll(sst, map);
+			result2 = fDao.uploadAll(sst, map);
 		}
 		
 		return result1 * result2;

@@ -52,7 +52,7 @@ public class MailController {
 //		vo.setEmail(loginMember.getEmail());
 		vo.setSendUser("1");
 		vo.setEmail("a@naver.com");
-		vo.setCategory(map.get("category"));
+		vo.setCategory(map.get("listTpye"));
 		vo.setSearch(map.get("search"));
 		
 //		category, keyword, page

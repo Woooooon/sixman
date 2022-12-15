@@ -8,7 +8,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.sixman.mail.vo.MailVo;
-import com.kh.sixman.notice.vo.NoticeVo;
 
 @Repository
 public class MailDao {
