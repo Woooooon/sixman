@@ -11,7 +11,7 @@ import com.kh.sixman.common.AttachmentVo;
 @Repository
 public class FileDao {
 
-	public int uploalAll(SqlSessionTemplate sst, Map<String, Object> map) {
+	public int uploadAll(SqlSessionTemplate sst, Map<String, Object> map) {
 		return sst.insert("fileMapper.insertAll", map);
 	}
 

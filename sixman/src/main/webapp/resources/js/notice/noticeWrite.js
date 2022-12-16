@@ -26,7 +26,5 @@ fileBtn.addEventListener('click',()=>{
 
             fileBox.append(div);
         }
-
     });
-
 });

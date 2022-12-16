@@ -52,7 +52,7 @@ public class MailController {
 //		vo.setEmail(loginMember.getEmail());
 		vo.setSendUser("1");
 		vo.setEmail("a@naver.com");
-		vo.setCategory(map.get("category"));
+		vo.setCategory(map.get("listTpye"));
 		vo.setSearch(map.get("search"));
 		
 //		category, keyword, page
@@ -90,14 +90,16 @@ public class MailController {
 //		테스트
 		vo.setSendUser("1");
 		
-		System.err.println(vo.getSaveYn());
-		System.err.println(vo.getSender());
-		
 		String rootPath = session.getServletContext().getRealPath("/");
 		List<AttachmentVo> fileList = FileUnit.uploadFile(vo.getFile(), rootPath, "upload/notice");
 		vo.setFileList(fileList);
 		int result = ms.write(vo);
-		return "";
+		
+		if(result == 1) {
+			return "mail/list";
+		}else {
+			return "";
+		}
 	}
 	
 	@GetMapping("detail")
@@ -105,7 +107,7 @@ public class MailController {
 		MailVo vo = ms.selectOne(no);
 		model.addAttribute("vo", vo);
 		
-		if(vo==null) {return "redirect:/mail/list";}
+		if(vo==null) {return 	"redirect:/mail/list";}
 		return "mail/detail";
 	}
 	

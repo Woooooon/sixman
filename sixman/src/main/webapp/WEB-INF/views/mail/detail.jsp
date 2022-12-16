@@ -27,10 +27,10 @@
                 <div class="t-btn">이동<span class="material-symbols-outlined"> arrow_drop_down </span></div>
             </div>
             <div id="mail-header">
-                <div id="board-title">이건 제목입니다.</div>
+                <div id="board-title">${vo.title}</div>
                 <div id="send-member">
                     <p>보낸사람</p>
-                    <input type="email" readonly>
+                    <input type="email" readonly value="${vo.sendUser}">
                     <div class="btn"><span class="material-symbols-outlined"> add </span><p>주소록</p></div>
                 </div>
                 <div id="file-box">
@@ -38,40 +38,19 @@
                         <input id="list-check" type="checkbox">
                         <label for="list-check" class="material-symbols-outlined"> arrow_drop_down </label>
                         <div id="file-list">
-                            <div class="file-item">
-                                <div>파일제목asdfasdfasdfasdf</div>
-                                <span class="material-symbols-outlined"> download </span>
-                            </div>
-                            <div class="file-item">
-                                <div>파일제목</div>
-                                <span class="material-symbols-outlined"> download </span>
-                            </div>
-                            <div class="file-item">
-                                <div>파일제목</div>
-                                <span class="material-symbols-outlined"> download </span>
-                            </div>
-                            <div class="file-item">
-                                <div>파일제목</div>
-                                <span class="material-symbols-outlined"> download </span>
-                            </div>
+                            <c:forEach items="${vo.fileList}" var="fv">
+	                    	    <div class="file-item">
+	                                <div>${fv.orginName}</div>
+	                                <span class="material-symbols-outlined" onclick="download(${fv.no}, 'MAIL')"> download </span>
+	                            </div>
+                            </c:forEach>
                         </div>
                     </div>
-                    <div>작성일<p id="enroll-date">2022-05-05 11:11</p></div>
+                    <div>작성일<p id="enroll-date">${vo.sendTime}</p></div>
                 </div>
             </div>
             <div id="content-box">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit minus ullam inventore praesentium eum! Corrupti at veniam quaerat nostrum, molestiae quibusdam tempora quidem incidunt possimus minima, nemo distinctio eum id.
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit minus ullam inventore praesentium eum! Corrupti at veniam quaerat nostrum, molestiae quibusdam tempora quidem incidunt possimus minima, nemo distinctio eum id.
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit minus ullam inventore praesentium eum! Corrupti at veniam quaerat nostrum, molestiae quibusdam tempora quidem incidunt possimus minima, nemo distinctio eum id.
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit minus ullam inventore praesentium eum! Corrupti at veniam quaerat nostrum, molestiae quibusdam tempora quidem incidunt possimus minima, nemo distinctio eum id.
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit minus ullam inventore praesentium eum! Corrupti at veniam quaerat nostrum, molestiae quibusdam tempora quidem incidunt possimus minima, nemo distinctio eum id.
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit minus ullam inventore praesentium eum! Corrupti at veniam quaerat nostrum, molestiae quibusdam tempora quidem incidunt possimus minima, nemo distinctio eum id.
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit minus ullam inventore praesentium eum! Corrupti at veniam quaerat nostrum, molestiae quibusdam tempora quidem incidunt possimus minima, nemo distinctio eum id.
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit minus ullam inventore praesentium eum! Corrupti at veniam quaerat nostrum, molestiae quibusdam tempora quidem incidunt possimus minima, nemo distinctio eum id.
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit minus ullam inventore praesentium eum! Corrupti at veniam quaerat nostrum, molestiae quibusdam tempora quidem incidunt possimus minima, nemo distinctio eum id.
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit minus ullam inventore praesentium eum! Corrupti at veniam quaerat nostrum, molestiae quibusdam tempora quidem incidunt possimus minima, nemo distinctio eum id.
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit minus ullam inventore praesentium eum! Corrupti at veniam quaerat nostrum, molestiae quibusdam tempora quidem incidunt possimus minima, nemo distinctio eum id.
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit minus ullam inventore praesentium eum! Corrupti at veniam quaerat nostrum, molestiae quibusdam tempora quidem incidunt possimus minima, nemo distinctio eum id.
+                ${vo.content}
             </div>
         </div>
         <div id="board-footer">
