@@ -27,5 +27,11 @@ public class ProjectController {
 	public String detail() {
 		return "project/detail";
 	}
+	
+	//프로젝트 전체(화면)
+	@GetMapping("allprj")
+	public String allprj() {
+		return "project/allprj";
+	}
 
 }

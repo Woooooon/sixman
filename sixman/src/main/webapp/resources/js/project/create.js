@@ -13,36 +13,90 @@ document.querySelector('#startDate').setAttribute("min", today);
 const selects = document.querySelectorAll('.select');
 const memberbox = document.querySelector('.team-member-box');
 
-
-selects.forEach(element => {
+selects.forEach(function (element, index, array) {
     const value = element.querySelector('.selected-option');
     const option = element.querySelector('ul');
-    const opts = element.querySelectorAll('li');
+    const opts = option.querySelectorAll('li');
 
-    element.addEventListener('click', ()=>{
-        
+    element.addEventListener('click', (e)=>{
+        e.stopPropagation();
         if(option.classList.contains('hide')){
             option.classList.remove('hide');
             option.classList.add('show');
-            selectOpt(opts, value, option);
+            opts.forEach(optsItem=>{
+                const innerValue = optsItem.innerHTML;
+                optsItem.addEventListener('click', (e)=>{
+                    e.stopImmediatePropagation();
+                    console.log(123);
+                    value.innerHTML = innerValue;
+                    option.classList.add('hide');
+                    option.classList.remove('show');
+                    if(index===array.length-1){
+                        createMemberBox();
+                    }
+                });
+            });
         }else{
             option.classList.add('hide');
             option.classList.remove('show');
         }
-        
-        const divbox = document.createElement('div');
-        divbox.classList.add('member');
-        divbox.innerHTML = `<p>${value.value}</p>`
-                         +"<span class='material-symbols-outlined'> close </span>";
-
-        divbox.querySelector('span').addEventListener('click', ()=>{
-            divbox.remove();
-            value.remove();
-        })
-
-        memberbox.append(divbox);
     })
 });
+
+function createMemberBox() {
+    const divbox = document.createElement('div');
+    divbox.classList.add('member');
+
+    let text = "";
+
+    for(let i = 0; i < selects.length; i++){
+        const item = selects[i];
+        const v = item.querySelector('.selected-option');
+        text += `<p>${v.innerHTML}</p>`;
+        if(i!=selects.length-1){
+            text += ' / ';
+        }
+    }
+
+    text += `<span class='material-symbols-outlined'> close </span>`;
+    divbox.innerHTML = text;
+
+    divbox.querySelector('span').addEventListener('click', ()=>{
+        divbox.remove();
+    })
+
+    memberbox.append(divbox);
+}
+
+// selects.forEach(element => {
+//     const value = element.querySelector('.selected-option');
+//     const option = element.querySelector('ul');
+//     const opts = element.querySelectorAll('li');
+
+//     element.addEventListener('click', ()=>{
+        
+//         if(option.classList.contains('hide')){
+//             option.classList.remove('hide');
+//             option.classList.add('show');
+//             selectOpt(opts, value, option);
+//         }else{
+//             option.classList.add('hide');
+//             option.classList.remove('show');
+//         }
+        
+//         const divbox = document.createElement('div');
+//         divbox.classList.add('member');
+//         divbox.innerHTML = `<p>${value.value}</p>`
+//                          +"<span class='material-symbols-outlined'> close </span>";
+
+//         divbox.querySelector('span').addEventListener('click', ()=>{
+//             divbox.remove();
+//             value.remove();
+//         })
+
+//         memberbox.append(divbox);
+//     })
+// });
 
 // if(inputFile.value!=null){
 //     const div = document.createElement('div');
@@ -58,20 +112,6 @@ selects.forEach(element => {
 //     fileBox.append(div);
 // }
 
-/* 옵션선택 */
-function selectOpt(opts, values, option){
-    opts.forEach(opts=>{
-        const innerValue = opts.innerHTML;
-        opts.addEventListener('click', (e)=>{
-            e.stopPropagation();
-            values.innerHTML = innerValue;
-            option.classList.add('hide');
-            option.classList.remove('show');
-        });
-    });
-
-    
-}
 
 //인원 선택 하면 team-member-box 로 넘기기
 // const team = document.querySelector('#teamvalue').value;
