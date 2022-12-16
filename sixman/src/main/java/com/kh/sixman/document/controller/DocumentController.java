@@ -20,6 +20,12 @@ public class DocumentController {
 		return "document/approve";
 	}
 	
+	//결재상신()
+	@GetMapping("approvemy")
+	public String ApproveMyPage() {
+		return "document/approvemy";
+	}
+	
 	//결재문서함
 	@GetMapping("payment")
 	public String mainDocu() {
@@ -38,6 +44,7 @@ public class DocumentController {
 		return "document/keep";
 	}
 
+	//결재선 작성
 	@GetMapping("write")
 	public String Write(){
 		return "document/write";

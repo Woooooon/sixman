@@ -17,8 +17,10 @@
     font-weight: 600;
     color: rgb(83, 83, 83);
     vertical-align: baseline;
-  
     float: right;
+    flex-direction: row-reverse;
+    padding-top: 20px;
+    
     
 }
 .document-save btn{
