@@ -1,13 +1,19 @@
 package com.kh.sixman.member.vo;
 
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
+import com.kh.sixman.common.AttachmentVo;
+
 import lombok.Data;
 
 @Data
 public class MemberVo {
 	private String no;
-	private String name;
 	private String id;
 	private String pwd;
+	private String name;
 	private String email;
 	private String phone;
 	private String birthday;
@@ -15,14 +21,27 @@ public class MemberVo {
 	private String account;
 	private String address;
 	private String deptNo;
+	private String deptName;
 	private String positionNo;
+	private String positionName;
 	private String authorizeNo;
+	private String authorizeName;
 	private String joinDate;
 	private String modifyDate;
 	private String resignationYn;
 	private String entrustNo;
-	private String accountFile;
-	private String resumeFile;
-	private String picFile;
-	private String[] evidenceFile;
+	private MemberVo entrustInfo;
+	
+	private List<MultipartFile> accountFile;
+	private List<AttachmentVo> accountFileInfo;
+	
+	private List<MultipartFile> resumeFile;
+	private List<AttachmentVo> resumeFileInfo;
+	
+	private List<MultipartFile> picFile;
+	private List<AttachmentVo> picFileInfo;
+	
+	private List<MultipartFile> evidenceFile;
+	private List<AttachmentVo> evidenceFileList;
+	
 }

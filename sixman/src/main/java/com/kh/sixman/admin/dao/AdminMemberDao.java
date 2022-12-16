@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.sixman.member.vo.AuthorizeVo;
 import com.kh.sixman.member.vo.BankVo;
+import com.kh.sixman.member.vo.MemberVo;
 
 @Repository
 public class AdminMemberDao {
@@ -19,6 +20,14 @@ public class AdminMemberDao {
 	public List<AuthorizeVo> authorizeList(SqlSessionTemplate sst) {
 		
 		return sst.selectList("memberMapper.authorizeList");
+	}
+
+	public int join(SqlSessionTemplate sst, MemberVo vo) {
+		return sst.insert("memberMapper.join");
+	}
+
+	public String getMemberNo(SqlSessionTemplate sst, MemberVo vo) {
+		return sst.selectOne("memberMapper.getNo");
 	}
 
 }

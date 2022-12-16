@@ -9,21 +9,68 @@
 			*
 		FROM 
 		MEMBER
-		WHERE ID = #{id}	
+		WHERE "ID" = #{id}	
 	</select>
 	
 	<select id="bankList" resultType="BankVo">
 		SELECT 
-			NO
-			, NAME
+			"NO"
+			, "NAME"
 		FROM BANK
 	</select>
 	
 	<select id="authorizeList" resultType="AuthorizeVo">
 		SELECT 
-			NO
+			"NO"
 			, "LEVEL"
 		FROM AUTHORIZE
 	</select>
 	
+	<insert id="join">
+		INSERT INTO
+		MEMBER
+		(
+			"NO"
+			, "ID"
+			, "PWD"
+			, "NAME"
+			, "EMAIL"
+			, "PHONE"
+			, "BIRTHDAY"
+			, "BANK_NO"
+			, "ACCOUNT"
+			, "DEPT_N0"
+			, "POSITION_N0"
+			, "AUTHORIZE_N0"
+			, "JOIN_DATE"
+			, "MODIFY_DATE"
+			, "RESIGNATION_YN"
+			, "ENTRUST_N0"
+		)
+		VALUES 
+		(
+			SEQ_MEMBER_NO.NEXTVAL
+			, #{id}
+			, #{id}
+			, #{name}
+			, #{email}
+			, #{phone}
+			, #{birthDay}
+			, #{bankNo}
+			, #{account}
+			, #{deptNo}
+			, #{positionNo}
+			, #{authorizeNo}
+			, SYSDATE
+			, SYSDATE
+			, 'N'
+			, #{entrustNo}
+		)
+	</insert>
+	<select id="getNo" resultType="String">
+		SELECT "NO"
+    	FROM MEMBER
+    	WHERE "ID" = #{id}
+    	AND "NAME" = #{name}
+	</select>
 </mapper>
