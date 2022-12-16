@@ -83,7 +83,7 @@
     height: 600px;
 }
 
-.schedule:not(div:first-child) {
+.schedule {
     width: calc(100% / 7);
     padding: 15px;
     text-align: center;
@@ -98,5 +98,9 @@
 .day:nth-child(7n),
 .date:nth-child(7n){
     color: #396EE2;
+}
+
+.schedules div:first-child {
+    border-left: none;
 }
 

@@ -19,20 +19,26 @@
             <div class="head">
                 <p>프로젝트 제목</p>
                 <div class="detail-btn">
-                    <button class="btn">수정하기</button>
-                    <button class="c-btn">삭제하기</button>
+                    <button class="btn" type="button">수정하기</button>
+                    <button class="c-btn" type="button">삭제하기</button>
                 </div>
             </div>
             <div class="status">
-                <div class="status-1"><span class="material-symbols-outlined">wb_incandescent</span>상태</div>
+                <div class="status-1">
+                    <span class="material-symbols-outlined">wb_incandescent</span>
+                    <p>상태</p>
+                </div>
                 <div class="status-btn">
-                    <button class="ing">진행중</button>
-                    <button class="delay">지연중</button>
-                    <button class="complete">완료</button>
+                    <div class="ing">진행중</div>
+                    <div class="delay">지연중</div>
+                    <div class="complete">완료</div>
                 </div>
             </div>
             <div class="member">
-                <div class="member-1"><span class="material-symbols-outlined">groups</span>인원</div>
+                <div class="member-1">
+                    <span class="material-symbols-outlined">groups</span>
+                    <p>인원</p>
+                </div>
                 <div class="member-list">
                     <div class="name">· 김민우</div>
                     <div class="name">· 김민우</div>
@@ -40,22 +46,34 @@
                 </div>
             </div>
             <div class="date">
-                <div class="prjdate"><span class="material-symbols-outlined">calendar_today</span>날짜</div>
+                <div class="prjdate">
+                    <span class="material-symbols-outlined">calendar_today</span>
+                    <p>날짜</p>
+                </div>
                 <input type="date" id="startdate"><p>~</p><input type="date" id="enddate">
             </div>
             <div class="percent">
-                <div class="clear"><span class="material-symbols-outlined">check_box</span>완료</div>
+                <div class="clear">
+                    <span class="material-symbols-outlined">check_box</span>
+                    <p>완료</p>
+                </div>
                 <div class="progress">
                  <div class="progress-bar"></div>
                 </div>
             </div>
             <div class="inputcontainer">
-                <div><span class="material-symbols-outlined">more_horiz</span>진행도</div>
+                <div class="statusinput">
+                    <span class="material-symbols-outlined">more_horiz</span>
+                    <p>진행도</p>
+                </div>
                 <input  class="valueinput" type="number">
                 <input  class="maxinput" type="hidden">
             </div>
             <div class="todo">
-                <div class="todo-plus"><span class="material-symbols-outlined">add</span><a href="#">TO-DO 추가</a></div>
+                <div class="todo-plus">
+                    <span class="material-symbols-outlined">add</span>
+                    <p><a href="#">TO-DO 추가</a></p>
+                </div>
             </div>
             <div class="hidden"></div>
             <div class="content">
@@ -100,7 +118,10 @@
                     <p>TO-DO 제목</p>
                 </div>
                 <div class="status">
-                    <div class="status-1"><span class="material-symbols-outlined">wb_incandescent</span>상태</div>
+                    <div class="status-1">
+                        <span class="material-symbols-outlined">wb_incandescent</span>
+                        <p>상태</p>
+                    </div>
                     <div class="status-btn">
                         <button class="ing">진행중</button>
                         <button class="delay">지연중</button>
@@ -108,7 +129,10 @@
                     </div>
                 </div>
                 <div class="member">
-                    <div class="member-1"><span class="material-symbols-outlined">groups</span>인원</div>
+                    <div class="member-1">
+                        <span class="material-symbols-outlined">groups</span>
+                        <p>인원</p>
+                    </div>
                     <div class="member-list">
                         <div class="name">· 김민우</div>
                         <div class="name">· 김민우</div>
