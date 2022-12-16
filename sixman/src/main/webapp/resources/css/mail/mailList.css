@@ -27,7 +27,7 @@
 }
 
 .list-item{
-    grid-template-columns: 1fr 1fr 2fr 20fr 3fr;
+    grid-template-columns: 1fr 1fr 2fr 20fr 4fr;
     align-items: center;
 }
 
@@ -157,7 +157,14 @@ input[type=checkbox]{
     color: var(--main-color);
     font-size: 0.8em;
     cursor: pointer;
+    display: flex;
+    align-items: center;
 }
+
+.category-item span{
+    font-size: 1.2em;
+}
+
 
 .category-item:hover,
 .category-item.cate-checked{

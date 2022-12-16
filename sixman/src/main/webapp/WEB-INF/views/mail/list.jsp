@@ -10,6 +10,16 @@
 <link rel="stylesheet" href="${path}/resources/css/list.css">
 <link rel="stylesheet" href="${path}/resources/css/mail/mailList.css">
 <script defer src="${path}/resources/js/mail/mailList.js"></script>
+<script>
+	window.onload = ()=>{
+		const listType = ${listType};
+		if(listType!=null){
+			mailAjax(1, listType);
+		}else{
+			mailAjax(1);
+		}
+	}
+</script>
 </head>
 <body>
 
@@ -28,6 +38,7 @@
 				<div class="category-item">카테고리 1</div>
 				<div class="category-item">카테고리 2</div>
 				<div class="category-item">카테고리 3</div>
+				<div class="category-item"><span class="material-symbols-outlined"> add </span>추가</div>
 				<label for=""></label>
 			</div>
 		</div>
@@ -113,18 +124,8 @@
             </div>
         </div>
         <div class="page-box">
-            <span class="material-symbols-outlined"> keyboard_double_arrow_left </span>
-            <span class="material-symbols-outlined"> chevron_left </span>
-            <div class="page-btn checked-p-btn">1</div>
-            <div class="page-btn">2</div>
-            <div class="page-btn">3</div>
-            <div class="page-btn">4</div>
-            <div class="page-btn">5</div>
-            <span class="material-symbols-outlined"> chevron_right </span>
-            <span class="material-symbols-outlined"> keyboard_double_arrow_right </span>
         </div>
     </div>
 </main>
-
 </body>
 </html>

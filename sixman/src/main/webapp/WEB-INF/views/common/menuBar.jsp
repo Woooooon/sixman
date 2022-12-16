@@ -109,14 +109,11 @@
     menuMap.set("메일함", [
         {icon: "mail", title: "메일함"},
         {title: "메일작성", url: "${path}/mail/write"},
-        {title: "받은메일함", url: "${path}/mail/list"},
-        {title: "보낸메일함", url: ""},
-        {title: "임시보관함", url: ""},
-        {title: "카테고리", url: "", subList:[
-            {title: "", url: ""},
-            {title: "", url: ""}
-        ]},
-        {title: "휴지통", url: ""}
+        {title: "전체메일함", url: "${path}/mail/list"},
+        {title: "받은메일함", url: "${path}/mail/list?listType=받은메일함"},
+        {title: "보낸메일함", url: "${path}/mail/list?listType=보낸메일함"},
+        {title: "임시보관함", url: "${path}/mail/list?listType=임시보관함"},
+        {title: "휴지통", url: "${path}/mail/list?listType=휴지통"}
     ]);
 
     menuMap.set("조직도", [

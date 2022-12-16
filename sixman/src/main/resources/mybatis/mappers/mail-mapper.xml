@@ -4,7 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mailMapper">
 
-	<select id="countList" resultType="MailVo">
+	<select id="countList" resultType="int">
 		SELECT 
 			COUNT(*)
 		FROM MAIL M
@@ -14,43 +14,41 @@
 		WHERE
         (
         <trim prefixOverrides="OR">
-        	<if test="!categoryName.equals('받는메일함')">
-		    	-- 보낸메일
+        	<if test="!'받는메일함'.equals(categoryName)">
 			    (
 				    (SEND_USER = ${sendUser} AND (USER_NO = ${sendUser} OR USER_NO IS NULL)) 
 				    AND 
-				    <if test="categoryName.equals('휴지통')">
+				    <if test="'휴지통'.equals(categoryName)">
 				    	M.DELETE_YN = 'Y'
 				    </if>
-				    <if test="!categoryName.equals('휴지통')">
+				    <if test="!'휴지통'.equals(categoryName)">
 				    	M.DELETE_YN = 'N'
 				    </if>
 				    AND
-				    <if test="categoryName.equals('임시보관함')">
+				    <if test="'임시보관함'.equals(categoryName)">
 				    	M.SAVE_YN = 'Y'
 				    </if>
-				    <if test="!categoryName.equals('임시보관함')">
+				    <if test="!'임시보관함'.equals(categoryName)">
 				    	M.SAVE_YN = 'N'
 				    </if>
 			    )
 		    </if>
 		    OR 
-			<if test="!categoryName.equals('보낸메일함') and !categoryName.equals('임시보관함')">
-				-- 받는메일
+			<if test="!'보낸메일함'.equals(categoryName) and !'임시보관함'.equals(categoryName)">
 			    (
 				    (EMAIL = #{email} AND (USER_NO = ${sendUser} OR USER_NO IS NULL)) 
 				    AND 
-				    <if test="categoryName.equals('휴지통')">
+				    <if test="'휴지통'.equals(categoryName)">
 				    	M.DELETE_YN = 'Y'
 				    </if>
-				    <if test="!categoryName.equals('휴지통')">
+				    <if test="!'휴지통'.equals(categoryName)">
 				    	M.DELETE_YN = 'N'
 				    </if>
 			    )
 			</if>
 		</trim>
         )
-        <if test=" category != '' ">
+        <if test=" category!=null and category != '' ">
             AND
         	CATEGORY_NO = ${category}
         </if>
@@ -80,43 +78,43 @@
 		WHERE
         (
         <trim prefixOverrides="OR">
-        	<if test="!categoryName.equals('받는메일함')">
+        	<if test="!'받는메일함'.equals(categoryName)">
 		    	-- 보낸메일
 			    (
 				    (SEND_USER = ${sendUser} AND (USER_NO = ${sendUser} OR USER_NO IS NULL)) 
 				    AND 
-				    <if test="categoryName.equals('휴지통')">
+				    <if test="'휴지통'.equals(categoryName)">
 				    	M.DELETE_YN = 'Y'
 				    </if>
-				    <if test="!categoryName.equals('휴지통')">
+				    <if test="!'휴지통'.equals(categoryName)">
 				    	M.DELETE_YN = 'N'
 				    </if>
 				    AND
-				    <if test="categoryName.equals('임시보관함')">
+				    <if test="'임시보관함'.equals(categoryName)">
 				    	M.SAVE_YN = 'Y'
 				    </if>
-				    <if test="!categoryName.equals('임시보관함')">
+				    <if test="!'임시보관함'.equals(categoryName)">
 				    	M.SAVE_YN = 'N'
 				    </if>
 			    )
 		    </if>
 		    OR 
-			<if test="!categoryName.equals('보낸메일함') and !categoryName.equals('임시보관함')">
+			<if test="!'보낸메일함'.equals(categoryName) and !'임시보관함'.equals(categoryName)">
 				-- 받는메일
 			    (
 				    (EMAIL = #{email} AND (USER_NO = ${sendUser} OR USER_NO IS NULL)) 
 				    AND 
-				    <if test="categoryName.equals('휴지통')">
+				    <if test="'휴지통'.equals(categoryName)">
 				    	M.DELETE_YN = 'Y'
 				    </if>
-				    <if test="!categoryName.equals('휴지통')">
+				    <if test="!'휴지통'.equals(categoryName)">
 				    	M.DELETE_YN = 'N'
 				    </if>
 			    )
 			</if>
 		</trim>
         )
-        <if test=" category != '' ">
+        <if test=" category!=null and category != '' ">
             AND
         	CATEGORY_NO = ${category}
         </if>

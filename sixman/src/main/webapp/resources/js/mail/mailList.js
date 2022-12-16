@@ -45,7 +45,6 @@ mainCheck.addEventListener('change',()=>{
     }
 });
 
-console.log(btnArr);
 checkArr.forEach(element => {
     element.addEventListener('change',()=>{
         let boolean = false;
@@ -70,6 +69,7 @@ checkArr.forEach(element => {
 
 // AJAX
 function mailAjax(page, search, listTpye, categoryNo) {
+    console.log(11);
     if(typeof listTpye == 'undefined') {listTpye = '';}
     if(typeof categoryNo == 'undefined') {categoryNo = '';}
     if(typeof search == 'undefined') {search = '';}
@@ -81,15 +81,21 @@ function mailAjax(page, search, listTpye, categoryNo) {
                     const pv = result.pv;
                     const list = result.list;
 
+                    console.log(result);
+
                     const listBox = document.querySelector('.list-box');
                     for(let i = 0; i < list.length; i++){
                         const div = document.createElement('div');
                         const vo = list[i];
                         div.classList.add('list-item');
+                        div.onclick = ()=>{
+                            location.href = `/sixman/mail/detail?no=${vo.no}`
+                        }
 
                         let text = "";
                         text += `<input type="checkbox">`;
                         if(vo.checkYn == null || vo.checkYn=='Y'){
+                            div.classList.add('read');
                             text += `<span class="material-symbols-outlined"> drafts </span>`;
                         }else{
                             text += `<span class="material-symbols-outlined"> mail </span>`;
@@ -101,6 +107,33 @@ function mailAjax(page, search, listTpye, categoryNo) {
                         div.innerHTML = text;
                         listBox.append(div);
                     }
+
+                    const pageBox = document.querySelector('.page-box');
+
+                    let backPage = pv.currentPage-1;
+                    let nextPage = pv.currentPage+1;
+                    if(pv.currentPage==1){backPage = 1}
+                    if(pv.currentPage==pv.maxPage){nextPage = pv.maxPage}
+    
+                    let text2 = "";
+                    text2 += `<span class="material-symbols-outlined" onclick="mailAjax(1, ${search}, ${listTpye}, ${categoryNo})"> keyboard_double_arrow_left </span>`;
+                    text2 += `<span class="material-symbols-outlined" onclick="mailAjax(${backPage}, ${search}, ${listTpye}, ${categoryNo})"> chevron_left </span>`;
+    
+                    for(let i = pv.startPage; i <= pv.endPage; i++){
+                        let currentClass = ""
+                        if(i==pv.currentPage) {
+                            currentClass = " checked-p-btn";
+                        }
+    
+                        text2 += `<div class="page-btn${currentClass}" onclick="mailAjax(${i}, ${search}, ${listTpye}, ${categoryNo})">${i}</div>`;
+                    }
+    
+                    text2 += `<span class="material-symbols-outlined" onclick="mailAjax(${nextPage}, ${search}, ${listTpye}, ${categoryNo})"> chevron_right </span>`;
+                    text2 += `<span class="material-symbols-outlined" onclick="mailAjax(${pv.maxPage}, ${search}, ${listTpye}, ${categoryNo})"> keyboard_double_arrow_right </span>`;
+    
+                    pageBox.innerHTML = text2;
+                    
+                    document.querySelector("#search-input").value = keyword;
 
                 } else {
                 alert('Request Error!');
