@@ -20,7 +20,9 @@
 
  <div class="approve-modal close">
 
-  <div class="savetop"></div>
+  <div class="savetop">
+    <div class="svtt"></div>
+  </div>
        
 
     <form action="">
@@ -28,43 +30,42 @@
             <!-- <span class="material-symbols-outlined"> close </span> -->
         </div>
         <div id="savelistbox">
-          <div class="listtitle">결재선 리스트</div>
-          <div>
-            
+          <div class="listtitle ">결재선</div>
+          <div class="listtitle first">
             <p>순서</p>
             <p>이름</p>
             <p>직책</p>
             <p>부서</p>
           </div>
-          <div>
+          <div class="listtitle">
             <input type="checkbox">
             <p>1</p>
             <p>구기석</p>
             <p>사원</p>
             <p>외무부</p>
           </div>
-          <div>
+          <div class="listtitle">
             <input type="checkbox">
             <p>2</p>
             <p>구기석</p>
             <p>사원</p>
             <p>외무부</p>
           </div>
-          <div>
+          <div class="listtitle">
             <input type="checkbox">
             <p>3</p>
             <p>구기석</p>
             <p>사원</p>
             <p>외무부</p>
           </div>
-          <div>
+          <div class="listtitle">
             <input type="checkbox">
             <p>4</p>
             <p>구기석</p>
             <p>사원</p>
             <p>외무부</p>
           </div>
-          <div>
+          <div class="listtitle">
             <input type="checkbox">
             <p>5</p>
             <p>구기석</p>

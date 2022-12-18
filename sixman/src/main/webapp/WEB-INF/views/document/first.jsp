@@ -12,6 +12,9 @@
 <style>
 @charset "UTF-8";
 </style>
+<script>
+   
+    </script>
 
 
 <body>
@@ -44,7 +47,10 @@
         <div class="list-box">
 
             <div class="list-item first">
-                <input type="checkbox">
+                <input type='checkbox'
+                name='dddd' 
+                value='selectall'
+                onclick='selectAll(this)'/> 
                 <!-- <span></span> -->
                 <p>기안일</p>
                 <p>기안 양식</p>
@@ -54,7 +60,7 @@
             </div>
 
             <div class="list-item">
-                <input type="checkbox">
+                <input type="checkbox" name="dddd">
                 <!-- <span></span> -->
                 <p>2022/12/05</p>
                 <p>아몰루</p>
@@ -63,7 +69,7 @@
                 <p>결재대기</p>
             </div>
             <div class="list-item">
-                <input type="checkbox">
+                <input type="checkbox" name="dddd">
                 <!-- <span></span> -->
                 <p>2022/12/05</p>
                 <p>아몰루</p>
@@ -72,7 +78,7 @@
                 <p>결재대기</p>
             </div>
             <div class="list-item">
-                <input type="checkbox">
+                <input type="checkbox" name="dddd">
                 <!-- <span></span> -->
                 <p>2022/12/05</p>
                 <p>아몰루</p>
@@ -81,7 +87,7 @@
                 <p>결재대기</p>
             </div>
             <div class="list-item">
-                <input type="checkbox">
+                <input type="checkbox" name="dddd">
                 <!-- <span></span> -->
                 <p>2022/12/05</p>
                 <p>아몰루</p>
@@ -90,7 +96,7 @@
                 <p>결재대기</p>
             </div>
             <div class="list-item">
-                <input type="checkbox">
+                <input type="checkbox" name="dddd">
                 <!-- <span></span> -->
                 <p>2022/12/05</p>
                 <p>아몰루</p>
@@ -99,7 +105,7 @@
                 <p>결재대기</p>
             </div>
             <div class="list-item">
-                <input type="checkbox">
+                <input type="checkbox" name="dddd">
                 <!-- <span></span> -->
                 <p>2022/12/05</p>
                 <p>아몰루</p>
@@ -108,7 +114,7 @@
                 <p>결재대기</p>
             </div>
             <div class="list-item">
-                <input type="checkbox">
+                <input type="checkbox"name="dddd">
                 <!-- <span></span> -->
                 <p>2022/12/05</p>
                 <p>아몰루</p>
@@ -117,7 +123,7 @@
                 <p>결재대기</p>
             </div>
             <div class="list-item">
-                <input type="checkbox">
+                <input type="checkbox" name="dddd">
                 <!-- <span></span> -->
                 <p>2022/12/05</p>
                 <p>아몰루</p>
@@ -159,5 +165,18 @@
 
     
 </main>
+
+
 </body>
+
+<script>
+function selectAll(selectAll)  {
+    const checkboxes 
+       = document.querySelectorAll('input[type="checkbox"]');
+    
+    checkboxes.forEach((checkbox) => {
+      checkbox.checked = selectAll.checked
+    })
+  }
+</script>
 </html>
