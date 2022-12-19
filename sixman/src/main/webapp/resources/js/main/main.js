@@ -46,13 +46,17 @@ class Popup{
         this.open();
     }
 
-    confirmPop(title, text, callback){
+    confirmPop(title, text, callback, color){
         if(text == null || text.trim() == "") return;
         if(callback == null ||  typeof callback != 'function') return;
 
         this.itemBox.innerHTML = '<span class="material-symbols-outlined"> error_circle_rounded </span>'
                                 +`<div class='popup-title'>${title}</div>`
                                 +`<div class='popup-text'>${text}</div>`;
+
+        if(color){
+            this.itemBox.querySelector('span').classList.add('red');
+        }
 
         this.createYesBtn();
         this.createNoBtn();

@@ -4,10 +4,17 @@ const caBtn2 = categoryBtns[1];
 const caBox1 = document.querySelector('#category-box');
 const caBox2 = document.querySelector('#category-box2');
 
-if(caBtn1!=null) caBtn1.addEventListener('click', ()=>{openTogle(caBtn1,caBox1)});
-if(caBtn2!=null) caBtn2.addEventListener('click', ()=>{openTogle(caBtn2,caBox2)});
+if(caBtn1!=null) caBtn1.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    openTogle(e,caBtn1,caBox1);
+});
+if(caBtn2!=null) caBtn2.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    openTogle(e,caBtn2,caBox2);
+});
 
-function openTogle(caBtn2,caBox2) {
+function openTogle(e,caBtn2,caBox2) {
+    e.stopPropagation();
     if(!caBtn2.className.includes('click-able')) return;
 
     if(caBox2.style.display=='none'){
@@ -158,9 +165,11 @@ function mailAjax(page, search, listTpye, categoryNo) {
                     for(item in category){
                         text += `<div class="category-item" onclick="mailAjax(${page}, ${search}, ${listTpye}, ${item.no})" >${item.name}</div>`;
                     }
-                    text += '<div class="category-item"><span class="material-symbols-outlined"> add </span>추가</div>';
+                    text += '<div class="category-item create-btn"><span class="material-symbols-outlined"> add </span>추가</div>';
 
                     categoryList.innerHTML = text;
+
+                    categoryList.querySelector('.create-btn').addEventListener('click', createCategoryModal);
 
                 } else {
                 alert('Request Error!');
@@ -208,4 +217,57 @@ function deleteAjax() {
 function search() {
     const text = document.querySelector('#search-input').value;
     mailAjax(cPage, text, cListTpye, cCategoryNo);
+}
+
+function createCategoryModal() {
+    const div = document.createElement('div');
+    div.id = 'category-modal-box';
+    div.innerHTML = `	<div id="modal-main-box" class="box">
+                            <div>
+                                <div>추가하실 카테고리를 입력하세요.</div>
+                                <span class="material-symbols-outlined"> close </span>
+                            </div>
+                            <div>
+                                <input type="text">
+                                <button class="btn">추가</button>
+                            </div>
+                        </div>`;
+
+    const close = div.querySelector('span');
+    close.addEventListener('click', ()=>{div.remove();});
+
+    const btn = div.querySelector('button');
+    const input = div.querySelector('input');
+    const category = input.value;
+    btn.addEventListener('click', ()=>{createCategoryAjax(category);})
+
+    const body = document.querySelector('body');
+    console.log(body);
+    body.append(div);
+    
+}
+
+const createBtns = document.querySelectorAll('.create-btn');
+createBtns.forEach(element => {
+    element.addEventListener('click', createCategoryModal);
+});
+
+function createCategoryAjax(category) {
+    const httpRequest = new XMLHttpRequest();
+    httpRequest.onreadystatechange = () => {
+        if (httpRequest.readyState === XMLHttpRequest.DONE) {
+                if (httpRequest.status === 200) {
+                    
+                    popup.alertPop("추가하기", "카테고리가 추가되었습니다.");
+                    mailAjax(cPage, cSearch, cListTpye, cCategoryNo);
+
+                } else {
+                alert('Request Error!');
+                }
+        }
+    };
+
+    httpRequest.open('post', '/sixman/mail/createCategory');
+    httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
+    httpRequest.send(`category=${category}`);
 }

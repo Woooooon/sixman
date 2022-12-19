@@ -125,6 +125,7 @@ public class MailController {
 		map.put("loginMember", loginMember);
 		map.put("no", no);
 		int result = ms.delete(map);
+		
 		if(result!=1) {
 			
 		}
@@ -148,6 +149,10 @@ public class MailController {
 		MemberVo loginMeber = (MemberVo) session.getAttribute("loginMember");
 		
 		int result = ms.createCategory(category, loginMeber.getNo());
+		
+		if(result!=1) {
+			
+		}
 	}
 	
 	@ResponseBody

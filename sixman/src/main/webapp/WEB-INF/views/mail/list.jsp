@@ -35,11 +35,7 @@
 			</div>
 			<div id="category-list">
 				<div class="category-item cate-checked">전체 메일</div>
-				<div class="category-item">카테고리 1</div>
-				<div class="category-item">카테고리 2</div>
-				<div class="category-item">카테고리 3</div>
-				<div class="category-item"><span class="material-symbols-outlined"> add </span>추가</div>
-				<label for=""></label>
+				<div class="category-item create-btn"><span class="material-symbols-outlined"> add </span>추가</div>
 			</div>
 		</div>
         <div class="header-box">
@@ -78,10 +74,7 @@
 		                                <label>즐겨찾기<input name="category" type="radio"></label>
 		                            </div>
 		                            <div class="category-footer">
-		                                <div>
-		                                    <input type="text">
-		                                    <div class="btn"><p>추가</p></div>
-		                                </div>
+										<div class="c-btn create-btn"><p>추가</p></div>
 		                                <div class="btn"><p>이동</p></div>
 		                            </div>
 		                        </div>
@@ -115,5 +108,6 @@
         </div>
     </div>
 </main>
+
 </body>
 </html>

@@ -48,17 +48,17 @@ public class AdminMemberService {
 		int join = adminMemberDao.join(sst, vo);
 		String no = adminMemberDao.getMemberNo(sst, vo);
 		
-		Map<String,Object> picFileUpload = dbUploadFile(vo.getPicFileInfo(), no, "PROFILE");
-		Map<String,Object> resumeFileUpload = dbUploadFile(vo.getResumeFileInfo(), no, "RESUME");
-		Map<String,Object> accountFileUpload = dbUploadFile(vo.getAccountFileInfo(), no, "ACCOUNT");
-		Map<String,Object> evidenceFileUpload = dbUploadFile(vo.getEvidenceFileList(), no, "EVIDENCE");
+//		Map<String,Object> picFileUpload = dbUploadFile(vo.getPicFileInfo(), no, "PROFILE");
+//		Map<String,Object> resumeFileUpload = dbUploadFile(vo.getResumeFileInfo(), no, "RESUME");
+//		Map<String,Object> accountFileUpload = dbUploadFile(vo.getAccountFileInfo(), no, "ACCOUNT");
+//		Map<String,Object> evidenceFileUpload = dbUploadFile(vo.getEvidenceFileList(), no, "EVIDENCE");
+//		
+//		int picFileUploadResult = adminMemberDao.uploadAll(sst, picFileUpload);
+//		int resumeFileUploadResult = adminMemberDao.uploadAll(sst, resumeFileUpload);
+//		int accountFileUploadResult = adminMemberDao.uploadAll(sst, accountFileUpload);
+//		int evidenceFileUploadResult = adminMemberDao.uploadAll(sst, evidenceFileUpload);
 		
-		int picFileUploadResult = adminMemberDao.uploadAll(sst, picFileUpload);
-		int resumeFileUploadResult = adminMemberDao.uploadAll(sst, resumeFileUpload);
-		int accountFileUploadResult = adminMemberDao.uploadAll(sst, accountFileUpload);
-		int evidenceFileUploadResult = adminMemberDao.uploadAll(sst, evidenceFileUpload);
-		
-		return join * picFileUploadResult * resumeFileUploadResult * accountFileUploadResult * evidenceFileUploadResult;
+		return join;
 	}
 	
 	private Map<String,Object> dbUploadFile(List<AttachmentVo> fileInfo, String no, String tableName) {
