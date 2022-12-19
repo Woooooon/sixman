@@ -1,16 +1,23 @@
 package com.kh.sixman.document.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.kh.sixman.document.service.DocumentService;
 import com.kh.sixman.document.vo.DocumentVo;
 
 @RequestMapping("document")
 @Controller
 public class DocumentController {
 
+	
+	@Autowired
+	private DocumentService ds;
+	
+	
 	//기안문서함(화면)
 	@GetMapping("first")
 	public String First() {
@@ -93,6 +100,15 @@ public class DocumentController {
 	//결재선 작성 (찐)
 	@PostMapping("write")
 	public String Write(DocumentVo dvo) {
+		
+		int result = ds.write(dvo);
+		
+		if(result ==1) {
+			return "document/first";
+		}else {
+			return "에러페이지 작성해야함";
+		}
+		
 		return "";
 	}
 	
