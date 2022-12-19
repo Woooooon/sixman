@@ -9,20 +9,24 @@
 
 /* 공통 */
 
+#msg{
+	cursor:pointer;
+}
 /* 공통-전체 화면 */
 .messenger-whole{
 	width:24%;
-	height:80%;
+	height:92%;
 	display:none;
 	position:absolute;
-	z-index:100;
+	z-index:2;
 	right:0;
-	top:5%;
-	border: 2px solid black;
+	top:50px;
+ 	border: 1px solid var(--main-color);
 	background-color: white;
  	box-sizing:border-box; 
 	margin:0px;
 	float:right;
+/* 	box-shadow:0px 2px 5px 1px rgb(0 0 0 / 10%); */
 	
 	overflow-y:scroll;
 	
@@ -41,7 +45,7 @@
 
 
 
-/* 대화방 리스트 해당 화면들 */
+/* 대화방 리스트 공통 해당 화면들 */
 
 .title-box{
 	display : flex;
@@ -53,13 +57,14 @@
 	margin:4%;
 	margin-top:10%;
 	font-size: 28px;
+	margin-left:5%;
 }
 
 #qwe{
 	color : var(--main-color);
 	font-size:40px;
 	margin-top:8%;
-	margin-left:80%;
+	margin-left:84%;
 	background-color: white;
 	border: 1px solid white;
 	position:absolute;
@@ -175,6 +180,7 @@
 	margin-top:6%;
 	margin-bottom:6%;
 	font-size:18px;
+	cursor:pointer;
 }
 
 
@@ -224,6 +230,7 @@
 #chatroom-exit-icon{
 	font-size:40px;
 	margin-top:60%;
+	cursor: pointer;
 }
 
 
@@ -413,6 +420,7 @@
 	width:80%;
 	font-size:28px;
 	position:absolute;
+	margin-bottom:10%;
 }
 
 .btn-height{
@@ -467,7 +475,7 @@
 
 
 .chatting-room{
-	background-color: gray;
+	background-color: white;
 	width:100%;
 	height:100%;
 	
@@ -476,7 +484,7 @@
 .chatting-room-first{
 	width:100%;
 	height:8%;
-	background-color:#A1DBDB;
+	background-color:var(--main-color);
 	margin-top:0%;
 	
 }
@@ -485,35 +493,43 @@
 	width:48px;
 	height:48px;
 	position:absolute;
-	background-color: white;
+	background-color: gray;
 	border-radius: 100%;
-	margin:1%;
+	margin:3%;
 }
 
 .chatroom-box1-1-profile-data{
-	margin-left:16%;
+	margin-left:18%;
 	position: absolute;
-	margin-top: 4%;
+	margin-top: 5%;
 }
 
 .chatroom-one-to-one{
 	display:flex;
+	
 }
-
+.chatroom1-1-1text{
+	color:white;
+}
 .chatroom1-1-2text{
 	display:flex;
+	color:white;
 }
 
 #chatroom-1-2-icon{
 	font-size:60px;
-	margin-left:68%;
+	margin-left:75%;
 	cursor: pointer;
+	margin-top:2%;
 }
 
+.chatroom1-1-2text-1-1{
+	margin-right:10%;
+}
 #chatroom-1-3-icon{
 	font-size:40px;
 	margin-left:0%;
-	margin-top:2%;
+	margin-top:4%;
 	cursor: pointer;
 }
 /* 82+4 */
@@ -521,10 +537,337 @@
 	height:86%;
 	width:100%;
 	background-color: white;
+	overflow-y:scroll;
+	-ms-overflow-style:none;
+}
+.chatroom-one-to-two::-webkit-scrollbar{
+	display:none;
 }
 
-.chatroom-one-to-three{
+.chatroom-1-2-white-area{
+	width:100%;
+	height:10%;
+	background-color: white;
+}
+
+
+/* 채팅룸 공통 */
+.chatroom{
+	margin-top:4%;
+
+}
+
+.chatroom2-1text{
+/* 	margin-left:15%; */
+	color:black;
 	display:flex;
+}
+
+.chatroom-square2{
+	width:40px;
+	height:40px;
+/* 	position:absolute; */
+	background-color:grey;
+	border-radius:60%;
+	margin-top:1%;
+	margin-left:3%;
+	cursor:pointer;
+}
+.chatroom2-1-1-1text{
+	margin-right:1%;
+	margin-top:6%;
+	margin-left:2%;
+}
+
+.chatroom2-1-1-2text{
+	margin-top:6%;
+}
+
+.chatroom2-1-2textbox{
+	width:48%;
+	margin-top:2%;
+	background-color:#12887a2e;
+	margin-left:4%;
+	border-radius: 10% 10% 10% 10% / 20% 20% 20% 20%;
+/* 	border:1px solid 12887a2e; */
+	
+}
+.chatroom2-1-2-1textbox{
+	width:48%;
+	margin-top:2%;
+	background-color:#12887a2e;
+	margin-left:4%;
+	border-radius: 10% 10% 10% 10% / 20% 20% 20% 20%;
+}
+
+.chatroom-upload-box{
+	display:flex;
+	margin-left:2%;
+}
+
+
+.chatroom2-1-2-text{
+	padding:6%;
+/* 	background-color:#12887a2e; */
+}
+.chatroom2-2-2textbox{
+	width:48%;
+	margin-top:2%;
+	background-color:#12887a2e;
+	margin-left:48%;
+	border-radius: 10% 10% 10% 10% / 20% 20% 20% 20%;
+/* 	border:1px solid 12887a2e; */
+	
+}
+
+.chatroom2-2-2-text{
+	margin-left:48%;
+}
+
+.chatroom2-2-3textbox{
+	margin-left:74%;
+	font-size:14px;
+	margin-top:1%;
+}
+.chatroom-one-to-three{
+	position:absolute;
+	display:flex;
+	width:88%;
 	height:6%;
-	background-color: #dcfefc;
+	border: 1px solid var(--main-color);
+	background-color:white;
+	justify-content: space-around;
+	margin:6%;
+	margin-top:-6%;
+	border-radius: 6% 6% 6% 6% / 40% 40% 40% 40%;
+	box-shadow: 1px 1px 0px 0px;
+	margin-left:6%;
+	margin-right:5%;
+}
+#chatroom-1-3-1{
+	font-size:40px;
+	margin:2%;
+/* 	border: 1px solid var(--main-color); */
+/* 	border-radius:50%; */
+	margin-left:6%;
+	cursor:pointer;
+}
+#chatroom1-3-text{
+	align-content: center;
+	width:70%;
+	height:100%;
+	border:1px solid white;
+}
+#chatroom-1-3-3{
+	font-size:40px;
+	margin:2%;
+	margin-right:6%;
+}
+.chatroom2-1-3textbox{
+	margin-left:4%;
+	font-size:14px;
+	margin-top:1%;
+}
+
+.chatroom-one-to-three-2{
+	width:100%;
+	height:10%;
+	background-color: white;
+	border: 1px solid black;
+	position: absolute;
+	z-index:20;
+	margin-top:155%;
+	display:flex;
+}
+.chatroom-4-1-box{
+	margin-left:6%;
+	margin-top:2%;
+}
+#chatroom-4-1-icon1{
+	
+	font-size: 40px;
+	margin-left:9%;
+	margin-top:4%;
+	cursor:pointer;
+}
+#chatroom-4-1-icon2{
+	
+	font-size: 40px;
+	margin-left:15%;
+	margin-top:4%;
+	cursor:pointer;
+}
+#chatroom-4-1-icon3{
+	
+	font-size: 40px;
+	margin-left:15%;
+	margin-top:4%;
+	cursor:pointer;
+}
+
+
+/*사내대화방 프로필(연락처, 프로필 링크 선택)모달창*/
+
+.chatlist-modal{
+	
+	margin:20%;
+	margin-left:15%;
+	margin-top:70%;
+	width:70%;
+	height:20%;
+/* 	align-items:center; */
+	background-color: #12887a;
+	position:absolute;
+	border-radius:10% 10% 10% 10% /16% 16%;
+}
+
+.chatlist-modal-text01{
+/* 	margin:30%; */
+	margin-top:16%;
+	text-align:center;
+	font-size:20px;
+	color:white;
+}
+
+.chatlist-modal-text02-1{
+	margin:20%;
+	margin-left:16%;
+/* 	margin-top:70%; */
+	width:68%;
+	height:16%;
+/* 	align-items:center; */
+	background-color: white;
+	position:absolute;
+	border-radius:6% 6% 6% 6% /16% 16%;
+	padding:2%;
+	text-align:center;
+}
+
+
+.chatlist-modal-text02-2{
+	margin:20%;
+	margin-left:16%;
+	margin-top:8%;
+	width:68%;
+	height:16%;
+/* 	align-items:center; */
+	background-color: white;
+	position:absolute;
+	border-radius:6% 6% 6% 6% /16% 16%;
+	padding:2%;
+	text-align:center;
+}
+
+/* 채팅방 안의 설정 */
+
+#chatroom-setting-out{
+	margin-left:80%;
+	padding-top:2%;
+	padding-bottom:2%;
+	padding-left:4%;
+	padding-right:4%;
+}
+
+.chatroom-setting-box1{
+	display:flex;
+}
+
+#chatroom-setting-icon-1{
+	margin-top:9%;
+	font-size:40px;
+	margin-left:45%;
+	cursor:pointer;
+}
+.chatroom-setting-2-1{
+	display:flex;
+}
+.chatroom-setting-2-1-1{
+	margin-top:9%;
+	font-size:20px;
+	margin-left:8%;
+/* 	cursor:pointer; */
+	
+}
+
+input[id="chat-setting-check01"]{
+	width:6%;
+	height:6%;
+	border-radius: 50%;
+	margin-left:80%;
+	margin-top:6%;
+	position:absolute;
+}
+input[id="chat-setting-check02"]{
+	width:6%;
+	height:6%;
+	border-radius: 50%;
+	margin-left:80%;
+	margin-top:6%;
+	position:absolute;
+}
+.chatroom-setting-2-2{
+	display:flex;
+}
+
+.chatroom-setting-2-2-1{
+	margin-top:9%;
+	margin-bottom:20%;
+	font-size:20px;
+	margin-left:8%;
+/* 	cursor:pointer; */
+}
+
+.chatroom-setting-nametitle{
+	margin-top:10%;
+	margin-left:8%;
+	margin-bottom:6%;
+	font-size:24px;
+}
+.chatroom-setting>.btn-height{
+	margin-top:20%;
+}
+
+/* 사용자 프로필 정보 */
+.chatroom-person-profile-title-1{
+	color:#0E6D62;
+	margin:4%;
+	font-size:28px;
+	margin-left:5%;
+	margin-top:10%
+}
+
+#chatroom-setting-icon-2{
+	margin-top:9%;
+	font-size:40px;
+	margin-left:20%;
+	cursor:pointer;
+}
+
+.chat-profile-site>#chatroom-square02-big{
+	width:100px;
+	height:100px;
+/* 	border:1px solid black; */
+	background-color:grey;
+	margin-left:10%;
+	border-radius: 50%;
+}
+
+
+.chatroom-person-profile-text{
+/* 	display:flex; */
+}
+
+.chatroom-profile{
+	margin:10%;
+	font-size:28px;
+}
+
+.chatroom-profile1{
+	margin:10%;
+	margin-top:-14%;
+/* 	margin-bottom:40%; */
+	font-size:18px;
+	position: absolute;
+	margin-left:60%;
+/* 	margin-top:12%; */
 }
