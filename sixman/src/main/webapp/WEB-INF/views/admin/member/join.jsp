@@ -48,7 +48,7 @@
                     </div>
                 </aside>
                 <section id="member-wrap">
-                    <form action="">
+                    <form action="/sixman/admin/member/join" method="POST" enctype="multipart/form-data">
                         <article id="member-info" class="box">
                             <figure id="companyLogo">
                                 <img alt="기업로고" src="<c:url value='/resources/img/google.png'/>" />
@@ -66,7 +66,7 @@
                                         <div id="dept" class="write">
                                             <label for="">부 서</label>
                                             <select name="deptNo" id="dept">
-                                                <option value="1">영업부</option>
+                                                <option value="1">부 서</option>
                                                 <option value="2">인사부</option>
                                                 <option value="3">관리부</option>
                                                 <option value="4">마케팅부</option>

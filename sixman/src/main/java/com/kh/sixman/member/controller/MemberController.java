@@ -1,14 +1,50 @@
 package com.kh.sixman.member.controller;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.kh.sixman.member.service.MemberService;
+import com.kh.sixman.member.vo.MemberVo;
 
 @Controller
 public final class MemberController {
-
-	@GetMapping("")
+	@Autowired
+	private MemberService memberService;
+	
+	@GetMapping("") 
 	public String login(){
 		return "member/login";
 	}
+	
+	@PostMapping("")
+	public String login(MemberVo vo, HttpSession session, Model model) {
+		
+		MemberVo loginMember = memberService.login(vo);
+		
+		if(loginMember == null) {
+			model.addAttribute("alert", "존재하지 않는 회원입니다.");
+			return "member/login";
+		}
+	
+		session.setAttribute("loginMember", loginMember);
+		
+		//아이디 비번 일치했을 시 비번 최신화 
+		if(vo.getId().equals(vo.getPwd())) {
+			return "redirect:/member/switch";
+		}
+		
+		return "redirect:/main/mainPage";
+	}
+	
+	@GetMapping("member/switch")
+	public String switchPwd () {
+		return "member/switch";
+	}
+	
 	
 }

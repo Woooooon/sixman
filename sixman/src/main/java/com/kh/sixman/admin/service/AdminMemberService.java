@@ -6,8 +6,9 @@ import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.sixman.admin.dao.AdminMemberDao;
 import com.kh.sixman.common.AttachmentVo;
@@ -25,8 +26,9 @@ public class AdminMemberService {
 	@Autowired
 	private SqlSessionTemplate sst;
 	
-	@Autowired
-	private FileDao fileDao;
+	@Autowired 
+	private BCryptPasswordEncoder enc;
+	
 	
 	public List<BankVo> bankList() {
 		
@@ -37,36 +39,41 @@ public class AdminMemberService {
 		
 		return adminMemberDao.authorizeList(sst);
 	}
-
+	
+	@Transactional
 	public int join(MemberVo vo) {
+		String newPwd = enc.encode(vo.getPwd());
+		vo.setPwd(newPwd);
+		
 		int join = adminMemberDao.join(sst, vo);
 		String no = adminMemberDao.getMemberNo(sst, vo);
 		
-		int picFileUploadResult = dbUploadFile(vo.getAccountFileInfo(), no, "PROFILE");
-		int resumeFileUploadResult = dbUploadFile(vo.getAccountFileInfo(), no, "RESUME");
-		int accountFileUploadResult = dbUploadFile(vo.getAccountFileInfo(), no, "ACCOUNT");
-		int evidenceFileUploadResult = dbUploadFile(vo.getAccountFileInfo(), no, "EVIDENCE");
+		Map<String,Object> picFileUpload = dbUploadFile(vo.getPicFileInfo(), no, "PROFILE");
+		Map<String,Object> resumeFileUpload = dbUploadFile(vo.getResumeFileInfo(), no, "RESUME");
+		Map<String,Object> accountFileUpload = dbUploadFile(vo.getAccountFileInfo(), no, "ACCOUNT");
+		Map<String,Object> evidenceFileUpload = dbUploadFile(vo.getEvidenceFileList(), no, "EVIDENCE");
+		
+		int picFileUploadResult = adminMemberDao.uploadAll(sst, picFileUpload);
+		int resumeFileUploadResult = adminMemberDao.uploadAll(sst, resumeFileUpload);
+		int accountFileUploadResult = adminMemberDao.uploadAll(sst, accountFileUpload);
+		int evidenceFileUploadResult = adminMemberDao.uploadAll(sst, evidenceFileUpload);
 		
 		return join * picFileUploadResult * resumeFileUploadResult * accountFileUploadResult * evidenceFileUploadResult;
 	}
 	
-	
-	private int dbUploadFile(List<AttachmentVo> fileInfo, String no, String tableName) {
+	private Map<String,Object> dbUploadFile(List<AttachmentVo> fileInfo, String no, String tableName) {
 		List<AttachmentVo> fileList = fileInfo;
-		int result = 1;
+		Map<String, Object> map = null;
 		if(fileList!=null) {
 			for(AttachmentVo fv : fileList) {
 				fv.setSubNo(no);
 			}
-			
-			Map<String, Object> map = new HashMap<>();
+			map = new HashMap<>();
 			map.put("list", fileList);
 			map.put("tableName", tableName);
-			
-			result = fileDao.uploadAll(sst, map);
 		}
 		
-		return result;
+		return map;
 	}
 	
 }

@@ -1,6 +1,7 @@
 package com.kh.sixman.admin.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -23,11 +24,14 @@ public class AdminMemberDao {
 	}
 
 	public int join(SqlSessionTemplate sst, MemberVo vo) {
-		return sst.insert("memberMapper.join");
+		return sst.insert("memberMapper.join", vo);
 	}
 
 	public String getMemberNo(SqlSessionTemplate sst, MemberVo vo) {
-		return sst.selectOne("memberMapper.getNo");
+		return sst.selectOne("memberMapper.getNo", vo);
 	}
-
+	
+	public int uploadAll(SqlSessionTemplate sst, Map<String, Object> map) {
+		return sst.insert("memberMapper.insertAllFile", map);
+	}
 }

@@ -18,6 +18,7 @@ public class MemberVo {
 	private String phone;
 	private String birthday;
 	private String bankNo;
+	private String bankName;
 	private String account;
 	private String address;
 	private String deptNo;

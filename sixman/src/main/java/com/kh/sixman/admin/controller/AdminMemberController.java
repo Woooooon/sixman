@@ -40,17 +40,24 @@ public class AdminMemberController {
 	public String join(MemberVo vo, HttpSession session) {
 		
 		String rootPath = session.getServletContext().getRealPath("/");
+		
 		List<AttachmentVo> picFileInfo = FileUnit.uploadFile(vo.getPicFile(), rootPath, "upload/profile");
 		List<AttachmentVo> resumeFileInfo = FileUnit.uploadFile(vo.getResumeFile(), rootPath, "upload/resume");
 		List<AttachmentVo> accountFileInfo = FileUnit.uploadFile(vo.getAccountFile(), rootPath, "upload/account");
 		List<AttachmentVo> evidenceFileList = FileUnit.uploadFile(vo.getEvidenceFile(), rootPath, "upload/evidence");
 		
+		vo.setPwd(vo.getId());
 		vo.setPicFileInfo(picFileInfo);
 		vo.setResumeFileInfo(resumeFileInfo);
 		vo.setAccountFileInfo(accountFileInfo);
 		vo.setEvidenceFileList(evidenceFileList);
 		
 		int result = adminMemberService.join(vo);
-		return "";
+		
+		if(result > 0) {
+			return "redirect:/admin/employee/list"; 
+		}
+		
+		return "redirect:/main/mainPage";
 	}
 }
