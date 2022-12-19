@@ -13,6 +13,8 @@ public class MailVo {
 	
 	private String no;
 	private String sendUser;
+	private String sendUserName;
+	private String sendUserMail;
 	private String deleteYn;
 	private String title;
 	private String content;
@@ -25,7 +27,7 @@ public class MailVo {
 	private List<String> sender;
 	
 	private String rNo;
-	private String email;
+	private String rMail;
 	private String checkYn;
 	private String alarmYn;
 	private String rDeleteYn;

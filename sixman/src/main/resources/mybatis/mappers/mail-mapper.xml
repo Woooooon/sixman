@@ -8,6 +8,7 @@
 		SELECT 
 			COUNT(*)
 		FROM MAIL M
+        LEFT JOIN MEMBER MM     ON M.NO = MM.NO
 		LEFT JOIN R_MAIL R 		ON M.NO = R.MAIL_NO
 		LEFT JOIN M_DRAWER D 	ON M.NO = D.MAIL_NO
 		LEFT JOIN M_CATEGORY C 	ON D.CATEGORY_NO = C.NO
@@ -33,10 +34,10 @@
 				    </if>
 			    )
 		    </if>
-		    OR 
 			<if test="!'보낸메일함'.equals(categoryName) and !'임시보관함'.equals(categoryName)">
+			OR 
 			    (
-				    (EMAIL = #{email} AND (USER_NO = ${sendUser} OR USER_NO IS NULL)) 
+				    (R.EMAIL = #{rMail} AND (USER_NO = ${sendUser} OR USER_NO IS NULL)) 
 				    AND 
 				    <if test="'휴지통'.equals(categoryName)">
 				    	M.DELETE_YN = 'Y'
@@ -57,28 +58,31 @@
 	<select id="selectList" resultType="MailVo">
 		SELECT 
 		    	M.NO AS NO
-		    ,	SEND_USER
+		    ,	M.SEND_USER
+            ,   MM.NAME AS SEND_USER_NAME
+            ,   MM.EMAIL AS SEND_USER_MAIL
 		    ,	M.DELETE_YN AS DELETE_YN
-		    ,	TITLE
-		    ,	CONTENT
-		    ,	SAVE_YN
-		    ,	SEND_TIME
-		    ,	MODIFY_TIME
+		    ,	M.TITLE
+		    ,	M.CONTENT
+		    ,	M.SAVE_YN
+		    ,	M.SEND_TIME
+		    ,	M.MODIFY_TIME
 		    ,	R.NO AS R_NO
-		    ,	"EMAIL"
-		    ,	CHECK_YN
-		    ,	ALARM_YN
+		    ,	R.EMAIL AS R_MAIL
+		    ,	R.CHECK_YN
+		    ,	R.ALARM_YN
 		    ,	R.DELETE_YN AS R_DELETE_YN
 		    ,	CATEGORY_NO AS CATEGORY
-		    ,	NAME AS CATEGORY_NAME
+		    ,	C.NAME AS CATEGORY_NAME
 		FROM MAIL M
+        LEFT JOIN MEMBER MM     ON M.NO = MM.NO
 		LEFT JOIN R_MAIL R 		ON M.NO = R.MAIL_NO
 		LEFT JOIN M_DRAWER D 	ON M.NO = D.MAIL_NO
 		LEFT JOIN M_CATEGORY C 	ON D.CATEGORY_NO = C.NO
 		WHERE
         (
         <trim prefixOverrides="OR">
-        	<if test="!'받는메일함'.equals(categoryName)">
+        	<if test="!'받은메일함'.equals(categoryName)">
 		    	-- 보낸메일
 			    (
 				    (SEND_USER = ${sendUser} AND (USER_NO = ${sendUser} OR USER_NO IS NULL)) 
@@ -97,12 +101,12 @@
 				    	M.SAVE_YN = 'N'
 				    </if>
 			    )
-		    </if>
-		    OR 
+		    </if> 
 			<if test="!'보낸메일함'.equals(categoryName) and !'임시보관함'.equals(categoryName)">
+			OR
 				-- 받는메일
 			    (
-				    (EMAIL = #{email} AND (USER_NO = ${sendUser} OR USER_NO IS NULL)) 
+				    (R.EMAIL = #{rMail} AND (USER_NO = ${sendUser} OR USER_NO IS NULL)) 
 				    AND 
 				    <if test="'휴지통'.equals(categoryName)">
 				    	M.DELETE_YN = 'Y'
@@ -159,7 +163,7 @@
 		(
 			get_seq_no('seq_r_mail_no'),
 			${no},
-			#{email},
+			#{rMail},
 			'N',
 			'N'
 		)
@@ -168,9 +172,20 @@
 	</update>
 
 	<select id="selectOne" resultType="MailVo">
-		select *
-		from mail
-		where no = ${no}
+		SELECT 
+		    	M.NO AS NO
+		    ,	M.SEND_USER
+            ,   MM.NAME AS SEND_USER_NAME
+            ,   MM.EMAIL AS SEND_USER_MAIL
+		    ,	M.DELETE_YN AS DELETE_YN
+		    ,	M.TITLE
+		    ,	M.CONTENT
+		    ,	M.SAVE_YN
+		    ,	M.SEND_TIME
+		    ,	M.MODIFY_TIME
+		FROM MAIL M
+        LEFT JOIN MEMBER MM     ON M.NO = MM.NO
+		where M.NO = ${no}
 	</select>
 
 	<update id="updateRead">

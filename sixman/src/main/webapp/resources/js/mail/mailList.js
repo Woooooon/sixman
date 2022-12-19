@@ -4,8 +4,8 @@ const caBtn2 = categoryBtns[1];
 const caBox1 = document.querySelector('#category-box');
 const caBox2 = document.querySelector('#category-box2');
 
-caBtn1.addEventListener('click', ()=>{openTogle(caBtn1,caBox1)});
-caBtn2.addEventListener('click', ()=>{openTogle(caBtn2,caBox2)});
+if(caBtn1!=null) caBtn1.addEventListener('click', ()=>{openTogle(caBtn1,caBox1)});
+if(caBtn2!=null) caBtn2.addEventListener('click', ()=>{openTogle(caBtn2,caBox2)});
 
 function openTogle(caBtn2,caBox2) {
     if(!caBtn2.className.includes('click-able')) return;
@@ -23,10 +23,10 @@ function openTogle(caBtn2,caBox2) {
 // 
 
 const mainCheck = document.querySelector('.first-item input[type=checkbox]');
-const checkArr = document.querySelectorAll('.list-item input[type=checkbox]');
 const btnArr = document.querySelectorAll('#checkbox-box > *');
 
 mainCheck.addEventListener('change',()=>{
+    const checkArr = document.querySelectorAll('#list-item-box input[type=checkbox]');
     console.log(mainCheck.checked);    
     if(mainCheck.checked){
         checkArr.forEach(element => {
@@ -45,31 +45,8 @@ mainCheck.addEventListener('change',()=>{
     }
 });
 
-checkArr.forEach(element => {
-    element.addEventListener('change',()=>{
-        let boolean = false;
-        checkArr.forEach(element => {
-            if(element.checked) {
-                boolean = true;
-            }
-        });
-
-        if(boolean){
-            btnArr.forEach(element => {
-                element.classList.add('click-able');
-            });
-        }else{
-            btnArr.forEach(element => {
-                element.classList.remove('click-able');
-            });
-        }
-    });
-});
-
-
 // AJAX
 function mailAjax(page, search, listTpye, categoryNo) {
-    console.log(11);
     if(typeof listTpye == 'undefined') {listTpye = '';}
     if(typeof categoryNo == 'undefined') {categoryNo = '';}
     if(typeof search == 'undefined') {search = '';}
@@ -80,34 +57,59 @@ function mailAjax(page, search, listTpye, categoryNo) {
                     var result = httpRequest.response;
                     const pv = result.pv;
                     const list = result.list;
+                    const category =  result.category;
 
-                    console.log(result);
+                    const listItemBox = document.querySelector('#list-item-box');
+                    while ( listItemBox.hasChildNodes() ){
+                        listItemBox.removeChild( listItemBox.firstChild );       
+                    }
 
-                    const listBox = document.querySelector('.list-box');
                     for(let i = 0; i < list.length; i++){
                         const div = document.createElement('div');
                         const vo = list[i];
                         div.classList.add('list-item');
-                        div.onclick = ()=>{
-                            location.href = `/sixman/mail/detail?no=${vo.no}`
-                        }
+                        // div.onclick = ()=>{
+                        //     location.href = `/sixman/mail/detail?no=${vo.no}`
+                        // }
 
                         let text = "";
                         text += `<input type="checkbox">`;
-                        if(vo.checkYn == null || vo.checkYn=='Y'){
+                        if(vo.sendUserMail != vo.rMail || vo.checkYn=='Y'){
                             div.classList.add('read');
                             text += `<span class="material-symbols-outlined"> drafts </span>`;
                         }else{
                             text += `<span class="material-symbols-outlined"> mail </span>`;
                         }
-                        text += `<p>김부장</p>`;
-                        text += `<p>${vo.title}</p>`;
+                        text += `<p>${vo.sendUserName}</p>`;
+                        text += `<p onclick="location.href = '/sixman/mail/detail?no=${vo.no}'">${vo.title}</p>`;
                         text += `<p>${vo.sendTime}</p>`;
 
                         div.innerHTML = text;
-                        listBox.append(div);
+                        listItemBox.append(div);
+
+                        div.querySelector('input[type=checkbox]').addEventListener('change',()=>{
+                            let boolean = false;
+                            const checkArr = document.querySelectorAll('#list-item-box input[type=checkbox]');
+                            checkArr.forEach(element => {
+                                if(element.checked) {
+                                    boolean = true;
+                                }
+                            });
+                    
+                            if(boolean){
+                                btnArr.forEach(element => {
+                                    element.classList.add('click-able');
+                                });
+                            }else{
+                                btnArr.forEach(element => {
+                                    mainCheck.checked = false;
+                                    element.classList.remove('click-able');
+                                });
+                            }
+                        });
                     }
 
+                    // 페이지
                     const pageBox = document.querySelector('.page-box');
 
                     let backPage = pv.currentPage-1;
@@ -133,7 +135,19 @@ function mailAjax(page, search, listTpye, categoryNo) {
     
                     pageBox.innerHTML = text2;
                     
-                    document.querySelector("#search-input").value = keyword;
+                    // 검색어
+                    document.querySelector("#search-input").value = search;
+
+                    // 카테고리
+                    const categoryList = document.querySelector('#category-list');
+
+                    let text = '<div class="category-item cate-checked">전체 메일</div>';
+                    for(item in category){
+                        text += `<div class="category-item" onclick="mailAjax(${page}, ${search}, ${listTpye}, ${item.no})" >${item.name}</div>`;
+                    }
+                    text += '<div class="category-item"><span class="material-symbols-outlined"> add </span>추가</div>';
+
+                    categoryList.innerHTML = text;
 
                 } else {
                 alert('Request Error!');
@@ -145,4 +159,32 @@ function mailAjax(page, search, listTpye, categoryNo) {
     httpRequest.responseType = "json";
     httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
     httpRequest.send(`page=${page}&search=${search}&listTpye=${listTpye}&categoryNo=${categoryNo}`);
+}
+
+function getChecked() {
+    const itemBox = document.querySelector('#list-item-box');
+    const checkBoxs = itemBox.querySelectorAll('input[type=checkbox]');
+
+    return checkBoxs.filter((element)=>{
+        return element.checked;
+    });
+}
+
+function deleteAjax() {
+    const httpRequest = new XMLHttpRequest();
+    httpRequest.onreadystatechange = () => {
+        if (httpRequest.readyState === XMLHttpRequest.DONE) {
+                if (httpRequest.status === 200) {
+                    var result = httpRequest.response;
+
+                } else {
+                alert('Request Error!');
+                }
+        }
+    };
+
+    httpRequest.open('post', '/sixman/mail/delete');
+    httpRequest.responseType = "json";
+    httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
+    httpRequest.send(`no=${getChecked()}`);
 }
