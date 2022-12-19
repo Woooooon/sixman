@@ -16,14 +16,20 @@
         <main id="main-page" class="main-box">
             <div id="main-box-2">
                 <section id="switch-wrap" class="box">
-                    <form action="" method="get">
+                    <form action="" method="post">
                         <div class="header">
                             <span class="material-symbols-outlined"> lock </span>
                             <h2>비밀번호 재설정</h2>
                         </div>
                         <div class="body">
-                            <input type="password" placeholder="새 비밀번호" name="pwd" id="pwd" />
-                            <input type="password" placeholder="새 비밀번호 확인" id="pwdCheck" />
+                            <div class="newpwd">
+                                <input type="password" placeholder="새 비밀번호" name="pwd" id="pwd" class="success" />
+                                <p id="p1-comment"></p>
+                            </div>
+                            <div class="newpwdCheck">
+                                <input type="password" placeholder="새 비밀번호 확인" id="pwdCheck" class="success" />
+                                <p id="p2-comment"></p>
+                            </div>
                         </div>
                         <div class="footer">
                             <span>

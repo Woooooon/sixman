@@ -101,6 +101,17 @@
     	AND "NAME" = #{name}
 	</select>
 	
+	<update id="updatePwd">
+
+		UPDATE member
+		
+		SET "PWD" = #{pwd}
+		
+		WHERE "NO" = #{no}
+	
+	</update>
+
+	
 	<update id="insertAllFile">
 		insert all
 		<foreach collection="list" item="vo" separator=" ">

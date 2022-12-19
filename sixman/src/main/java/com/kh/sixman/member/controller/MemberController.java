@@ -1,5 +1,8 @@
 package com.kh.sixman.member.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +41,7 @@ public final class MemberController {
 			return "redirect:/member/switch";
 		}
 		
-		return "redirect:/main/mainPage";
+		return "redirect:/main";
 	}
 	
 	@GetMapping("member/switch")
@@ -46,5 +49,18 @@ public final class MemberController {
 		return "member/switch";
 	}
 	
+	@PostMapping("member/switch")
+	public String switchPwd (String pwd, HttpSession session, Model model) {
+		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
+		
+		int updatePwd = memberService.updatePwd(loginMember.getNo(), pwd);
+		
+		if(updatePwd != 1) {
+			model.addAttribute("msg", "비밀번호 변경에 실패 하였습니다.");
+			return "redirect:/member/switch";
+		}
+		
+		return "redirect:/";
+	}
 	
 }

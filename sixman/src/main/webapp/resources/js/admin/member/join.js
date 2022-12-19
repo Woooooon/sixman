@@ -8,6 +8,114 @@ const attBtn = document.querySelector('#add-attfile');
 const attBox = document.querySelector('.att-filelist');
 const attFileDelete = document.querySelector('#remove-attfile');
 
+const form = document.querySelector('#form');
+
+const id = document.querySelector('input[name="id"]');
+const username = document.querySelector('input[name="name"]');
+const phone = document.querySelector('input[name="phone"]');
+const account = document.querySelector('input[name="account"]');
+const birthday = document.querySelector('input[name="birthday"]');
+const email = document.querySelector('input[name="email"]');
+
+const idRegex = /^[a-z|A-Z|0-9|]+$/;
+const nameRegex = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|]+$/;
+const phoneRegex = /^\d{2,3}\d{3,4}\d{4}$/;
+const emailRegex = /^[a-zA-z0-9._+-]+@[a-zA-z0-9-]+\.[a-zA-z0-9.]+$/;
+const accountRegex = /^[0-9]+$/;
+const birthRegex = /^\d{2}\d{2}\d{2}$/;
+
+id.addEventListener('blur', () => {
+    const errorMsg = document.createElement('p');
+    if (id.value == '') {
+        errorMsg.innerText = '필수입력 항목입니다.';
+        id.parentElement.append(errorMsg);
+        id.classList.add('error');
+        return;
+    }
+    errorMsg.remove();
+    match(id, idRegex, '영문, 숫자만 작성하세요.');
+});
+
+username.addEventListener('blur', () => {
+    const errorMsg = document.createElement('p');
+    if (username.value == '') {
+        errorMsg.innerText = '필수입력 항목입니다.';
+        username.parentElement.append(errorMsg);
+        username.classList.add('error');
+        return;
+    }
+    errorMsg.remove();
+    match(username, nameRegex, '한글 또는 영어만 작성하세요.');
+});
+
+phone.addEventListener('blur', () => {
+    match(phone, phoneRegex, "'-'를 제외하고 작성하세요");
+});
+
+account.addEventListener('blur', () => {
+    match(account, accountRegex, "'-'를 제외하고 작성하세요");
+});
+
+birthday.addEventListener('blur', () => {
+    match(birthday, birthRegex, '230115형식으로 작성하세요.');
+});
+
+email.addEventListener('blur', () => {
+    match(email, emailRegex, '메일형식에 맞추어 작성하세요.');
+});
+
+function match(elem, regx, messege) {
+    const errorMsg = document.createElement('p');
+
+    elem.classList.remove('error');
+    const value = elem.value;
+
+    if (value != '') {
+        if (!regx.test(value)) {
+            errorMsg.innerText = messege;
+            elem.parentElement.append(errorMsg);
+            elem.classList.add('error');
+            return;
+        }
+    }
+    errorMsg.remove();
+}
+
+form.onsubmit = () => {
+    const checkId = id.classList.contains('error');
+    const checkPhone = phone.classList.contains('error');
+    const checkName = username.classList.contains('error');
+    const checkAccount = account.classList.contains('error');
+    const checkBirthday = birthday.classList.contains('error');
+    const checkEmail = email.classList.contains('error');
+
+    if (checkId) {
+        return false;
+    }
+
+    if (checkPhone) {
+        return false;
+    }
+
+    if (checkName) {
+        return false;
+    }
+
+    if (checkAccount) {
+        return false;
+    }
+
+    if (checkBirthday) {
+        return false;
+    }
+
+    if (checkEmail) {
+        return false;
+    }
+
+    return true;
+};
+
 addFile(profileBtn, profileBox, 'pic-wrap', 'image', 'picFile', 'pic-add');
 addFile(resumeBtn, resumeBox, 'resume-wrap', 'draft', 'resumeFile', 'resume-add');
 addFile(accountBtn, accountBox, 'account-wrap', 'image', 'accountFile', 'account-add');

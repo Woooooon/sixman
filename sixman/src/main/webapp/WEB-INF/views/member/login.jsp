@@ -14,10 +14,10 @@
                 </figure>
                 <form action="" method="POST">
                     <div id="memberId">
-                        <input type="text" name="Id" placeholder="Username" />
+                        <input type="text" name="id" placeholder="Username" />
                     </div>
                     <div id="memberPwd">
-                        <input type="text" name="pwd" placeholder="Password" />
+                        <input type="password" name="pwd" placeholder="Password" />
                     </div>
                     <input type="submit" value="Login" />
                 </form>
