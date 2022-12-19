@@ -38,12 +38,15 @@
 }
 
 input[name='prj_name']{
-    --margin-top: 5px;
-    width: 500px;    
+    width: 400px;    
     height: 40px;
     border: 1px solid #d3d3d3;
     outline: none;
     font-size: 18px;
+}
+
+.box2 {
+    margin-right: 55px;
 }
 
 /* span{

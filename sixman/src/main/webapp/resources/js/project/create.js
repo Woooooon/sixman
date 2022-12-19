@@ -27,7 +27,6 @@ selects.forEach(function (element, index, array) {
                 const innerValue = optsItem.innerHTML;
                 optsItem.addEventListener('click', (e)=>{
                     e.stopImmediatePropagation();
-                    console.log(123);
                     value.innerHTML = innerValue;
                     option.classList.add('hide');
                     option.classList.remove('show');
