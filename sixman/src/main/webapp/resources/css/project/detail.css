@@ -18,9 +18,10 @@
 
 .detail-btn {
     display: flex;
-    margin-left: 500px;
+    margin-left: 390px;
     justify-content: space-between;
     width: 18%;
+
 }
 
 .btn, .c-btn {
@@ -52,9 +53,30 @@
     vertical-align: middle;
 }
 
+.status-btn > div {
+    padding-top: 4px;
+    font-size: 14px;
+}
+
 /* 버튼 toggle 상태 */
-.ing {
+
+.backgray {
+    background-color: #d3d3d3;
+}
+
+.backgreen {
     background-color: #62C276;
+}
+
+.backred {
+    background-color: #E95E51;
+}
+
+.backblue {
+    background-color: #55BAE5;
+}
+
+.ing {
     color: #FFFFFF;
     width: 90px;
     height: 25px;
@@ -64,7 +86,6 @@
 }
 
 .delay {
-    background-color: #E95E51;
     color: #FFFFFF;
     width: 90px;
     height: 25px;
@@ -74,7 +95,6 @@
 }
 
 .complete {
-    background-color: #55BAE5;
     color: #FFFFFF;
     width: 90px;
     height: 25px;
@@ -117,13 +137,16 @@
 }
 
 .date > p {
-    margin: 8px 0 10px 10px;
+    margin-left: 25px;
 }
 
-#startdate,
-#enddate {
-    margin-left: 10px;
-    height: 15%;
+.startdate,
+.enddate {
+    margin-left: 25px;
+    padding: 5px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    outline: none;
 }
 
 
@@ -145,10 +168,9 @@
 }
 
 .progress {
-    margin-top: 8px;
-    margin-left: 10px;
+    margin-left: 25px;
     background-color: #D3D3D3;
-    border-radius: 20px;
+    border-radius: 15px;
     height: 20px;
     width: 300px;
 }
@@ -163,7 +185,7 @@
     #2fa597,
     #59c0b4);
     box-shadow: 0 5px 5px -6px #12887A, 0 3px 7px #2fa597;
-    border-radius: 20px;
+    border-radius: 15px;
     color: #fff;
     height: 100%;
     width: 0;
@@ -179,7 +201,6 @@
 }
 
 .valueinput {
-    margin-top: 8px;
     margin-left: 10px;
     width: 45px;
     height: 25px;
@@ -203,18 +224,19 @@ input::-webkit-inner-spin-button {
 
 .hidden {
     border-top: 2px solid #D3D3D3;
-    width: 65%;
+    width: 58.7%;
     height: 20px;
     margin-top: 10px;
     margin-left: 10px;
 }
 
 #prj-content {
-    margin: 15px;
+    margin: 10px;
     resize: none;
-    width: 62%;
+    width: 58.7%;
     height: 200px;
     border: 1px solid #D3D3D3;
+    padding: 10px;
 }
 
 /* to-do */
@@ -230,8 +252,18 @@ input::-webkit-inner-spin-button {
     display: flex;
 }
 
-.todo > span {
-    margin-right: 10px;
+.todo-plus > p {
+    margin-top: 3px;
+    margin-left: 10px;
+}
+
+a{
+    color: #aaa;
+    font-weight: bold;
+}
+
+a:hover{
+    color: #12887A;
 }
 
 .todo-list {
@@ -240,6 +272,8 @@ input::-webkit-inner-spin-button {
 }
 
 .todo-box {
+    width: 300px;
+    height: 180px;
     border-radius: 5px;
     box-shadow: 1px 1px #D3D3D3;
     margin: 0px 10px 0 10px;
@@ -264,18 +298,107 @@ input::-webkit-inner-spin-button {
 
 /* modal */
 
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+#modal.modal-overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  }
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 8px 0 #2fa597;
+    backdrop-filter: blur(1.5px);
+    --webkit-backdrop-filter: blur(1.5px);
+    border-radius: 10px;
+    border: 1px solid #aaa;
+}
+#modal .modal-window {
+    background: #FFFFFF;
+    box-shadow: 3px 5px 10px 0 #2fa597;
+    --backdrop-filter: blur( 13.5px );
+    --webkit-backdrop-filter: blur( 13.5px );
+    border: 1px solid #d3d3d3;
+    border-radius: 5px;
+    width: 850px;
+    height: 780px;
+    position: relative;
+    padding: 10px;
+}
+#modal .title {
+    padding-top: 80px;
+    padding-left: 40px;
+    padding-bottom: 20px;
+    --display: inline; 
+    display: flex;
+    font-size: 35px;
+    font-weight: bolder;
+    justify-content: space-between;
 
+}
+
+#modal span {
+    --display: inline;
+    --float: right;
+    padding-right: 40px;
+    cursor: pointer;
+}
+
+#modal .status {
+    display: flex;
+    margin-left: 40px;
+    margin-bottom: 30px;
+}
+
+#modal .member {
+    display: flex;
+    margin-left: 40px;
+    margin-bottom: 30px;
+}
+
+#modal .date {
+    display: flex;
+    margin-left: 40px;
+    margin-bottom: 30px;
+}
+
+#modal input{
+    margin-left: 30px;
+    border: none;
+    outline: 1px #aaa;
+}
+
+#modal .hidden{
+    margin-left: 40px;
+    width: 84%;
+}
+
+#modal .status-btn {
+    display: flex;
+}
+
+#modal .contentbox {
+    width: 80%;
+    height: 40%;
+}
+
+#modal .content {
+    margin-left: 55px;
+    padding: 10px;
+    resize: none;
+    width: 100%;
+    height: 90%;
+}
+
+#modal .footer-btn {
+    display: flex;
+    justify-content: center;
+}
+
+.footer-btn .btn,
+.footer-btn .c-btn {
+    margin-right: 15px;
+}
  

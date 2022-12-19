@@ -29,9 +29,9 @@
                     <p>상태</p>
                 </div>
                 <div class="status-btn">
-                    <div class="ing">진행중</div>
-                    <div class="delay">지연중</div>
-                    <div class="complete">완료</div>
+                    <div class="ing backgray">진행중</div>
+                    <div class="delay backgray">지연중</div>
+                    <div class="complete backgray">완료</div>
                 </div>
             </div>
             <div class="member">
@@ -50,7 +50,7 @@
                     <span class="material-symbols-outlined">calendar_today</span>
                     <p>날짜</p>
                 </div>
-                <input type="date" id="startdate"><p>~</p><input type="date" id="enddate">
+                <input type="date" class="startdate"><p>~</p><input type="date" class="enddate">
             </div>
             <div class="percent">
                 <div class="clear">
@@ -72,7 +72,7 @@
             <div class="todo">
                 <div class="todo-plus">
                     <span class="material-symbols-outlined">add</span>
-                    <p><a href="#">TO-DO 추가</a></p>
+                    <p><a href="#" id="btn-modal">TO-DO 추가</a></p>
                 </div>
             </div>
             <div class="hidden"></div>
@@ -106,55 +106,55 @@
                     <div class="todo"><input type="checkbox"checked>밥먹기 성공</div>
                 </div>
             </div>
+            
         </div><!--detail box-->
     </main>
     </form>
     <!-- Modal -->
-    <div class="modal fade" id="todo-modal" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content -->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <p>TO-DO 제목</p>
+    <div id="container">
+        <h2>ㅋㅋ</h2>
+        <div id="lorem-ipsum"></div>
+    </div>
+    <div id="modal" class="modal-overlay">
+        <div class="modal-window">
+            <div class="title">
+                <p>TO-DO 제목란</p>
+                <div class="close-area"><span class="material-symbols-outlined">close</span></div>
+            </div>
+            <div class="status">
+                <div class="status-1">
+                    <span class="material-symbols-outlined">wb_incandescent</span>
+                    <p>상태</p>
                 </div>
-                <div class="status">
-                    <div class="status-1">
-                        <span class="material-symbols-outlined">wb_incandescent</span>
-                        <p>상태</p>
-                    </div>
-                    <div class="status-btn">
-                        <button class="ing">진행중</button>
-                        <button class="delay">지연중</button>
-                        <button class="complete">완료</button>
-                    </div>
+                <div class="status-btn">
+                    <div class="ing backgray">진행중</div>
+                    <div class="delay backgray">지연중</div>
+                    <div class="complete backgray">완료</div>
                 </div>
-                <div class="member">
-                    <div class="member-1">
-                        <span class="material-symbols-outlined">groups</span>
-                        <p>인원</p>
-                    </div>
-                    <div class="member-list">
-                        <div class="name">· 김민우</div>
-                        <div class="name">· 김민우</div>
-                        <div class="name">· 김민우</div>
-                    </div>
+            </div>
+            <div class="member">
+                <div class="member-1">
+                    <span class="material-symbols-outlined">groups</span>
+                    <p>인원</p>
                 </div>
-                <div class="date">
-                    <div class="prjdate"><span class="material-symbols-outlined">calendar_today</span>날짜</div>
-                    <input type="date" id="startdate">
+                <div class="member-list">
+                    <div class="name">김민우</div>
                 </div>
-                <div class="project">
-                    <div class="prjdate"><span class="material-symbols-outlined">double_arrow</span>프로젝트</div>
-                    <input type="text" id="prjname" value="프로젝트명">
+            </div>
+            <div class="date">
+                <div class="prjdate">
+                    <span class="material-symbols-outlined">calendar_today</span>
+                    <p>날짜</p>
                 </div>
-                <div class="hidden"></div>
-                <div class="content">
-                    <textarea name="content" id="prj-content">내용ㅋㅋ</textarea>
-                </div>
-                <div class="todo-btn">
-                    <button class="btn">작성하기</button>
-                    <button class="c-btn">취소하기</button>
-                </div>
+                <input type="date">
+            </div>
+            <div class="hidden"></div>
+            <div class="contentbox">
+                <textarea name="content" class="content"></textarea>
+            </div>
+            <div class="footer-btn">
+                <button class="btn" type="button">수정하기</button>
+                <button class="c-btn" type="button">삭제하기</button>
             </div>
         </div>
     </div>
