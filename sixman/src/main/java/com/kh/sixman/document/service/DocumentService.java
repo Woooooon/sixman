@@ -2,10 +2,12 @@ package com.kh.sixman.document.service;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.kh.sixman.document.dao.DocumentDao;
 import com.kh.sixman.document.vo.DocumentVo;
 
+@Service
 public class DocumentService {
 
 	@Autowired
