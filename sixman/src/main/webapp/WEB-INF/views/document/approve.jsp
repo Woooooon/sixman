@@ -21,10 +21,13 @@
 
  <div class="approve-modal close">
 
-  <div class="savetop"></div>
+ 
        
 
     <form action="">
+      <div class="modaltop"> 
+        <div class="savetop"></div>
+      </div>
         <div class="docu-save">
           
             결재선<input type="subit" value="입력">
