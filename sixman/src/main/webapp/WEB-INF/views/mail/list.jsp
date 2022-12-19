@@ -12,9 +12,9 @@
 <script defer src="${path}/resources/js/mail/mailList.js"></script>
 <script>
 	window.onload = ()=>{
-		const listType = ${listType};
+		const listType = '${listType}';
 		if(listType!=null){
-			mailAjax(1, listType);
+			mailAjax(1, null, listType);
 		}else{
 			mailAjax(1);
 		}
@@ -51,7 +51,7 @@
         			<a href="${path}/mail/write" class="btn" onclick="location.href='/sixman/notice/write'"><span class="material-symbols-outlined"> add </span><p>메일쓰기</p></a>
         		</c:otherwise>
         	</c:choose>
-            <div class="search-bar"><input type="text" placeholder="검색"><span class="material-symbols-outlined"> search </span></div>
+            <div class="search-bar"><input id="search-input" type="text" placeholder="검색"><span class="material-symbols-outlined"> search </span></div>
         </div>
         <div class="list-box">
             <div class="first-item">
@@ -60,7 +60,7 @@
                     <c:choose>
                     	<c:when test="${listType == '임시보관함'}">
 		                    <p>전송</p>
-		                    <p>삭제</p>
+		                    <p onclick="deleteAjax()">삭제</p>
                     	</c:when>
                     	<c:when test="${listType == '휴지통'}">
 		                    <p>복원</p>
@@ -68,7 +68,7 @@
                     	</c:when>
                     	<c:otherwise>
 	                    	<p>읽음</p>
-		                    <p>삭제</p>
+		                    <p onclick="deleteAjax()">삭제</p>
 		                    <div class="category-btn">
 		                    	이동
 		                        <span class="material-symbols-outlined"> arrow_drop_down </span>
@@ -108,20 +108,8 @@
 	                </div>
                 </c:if>
             </div>
-            <div class="list-item">
-                <input type="checkbox">
-                <span class="material-symbols-outlined"> mail </span>
-                <p>김부장</p>
-                <p>제목제목</p>
-                <p>11.23 16:30</p>
-            </div>
-            <div class="list-item read">
-                <input type="checkbox">
-                <span class="material-symbols-outlined"> drafts </span>
-                <p>김부장</p>
-                <p>제목제목</p>
-                <p>11.23 16:30</p>
-            </div>
+			<div id="list-item-box">
+			</div>
         </div>
         <div class="page-box">
         </div>

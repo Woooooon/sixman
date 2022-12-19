@@ -71,6 +71,10 @@
     align-self: center;
 }
 
+#list-item-box{
+    height: 100%;
+}
+
 .list-item{
     display: grid;
     grid-template-columns: 1fr 8fr 1.5fr 1fr ;

@@ -51,8 +51,9 @@ public class MailController {
 //		vo.setSendUser(loginMember.getNo());
 //		vo.setEmail(loginMember.getEmail());
 		vo.setSendUser("1");
-		vo.setEmail("a@naver.com");
-		vo.setCategory(map.get("listTpye"));
+		vo.setRMail("a@naver.com");
+		vo.setCategoryName(map.get("listTpye"));
+		vo.setCategory(map.get("categoryNo"));
 		vo.setSearch(map.get("search"));
 		
 //		category, keyword, page
@@ -66,11 +67,14 @@ public class MailController {
 	    
 	    PageVo pv = new PageVo(listCount,page,pageLimit,boardLimit);
 	    List<MailVo> list = ms.selectList(vo, rb);
+	    
+	    List<Map<String, String>> cateogryList = ms.categoryList("1");
 
 		Map<String, Object> resultMap = new HashMap<>();
 		
 		resultMap.put("pv", pv);
 		resultMap.put("list", list);
+		resultMap.put("cateogryList", cateogryList);
 		
 		Gson gson = new GsonBuilder().create();
 		String json = gson.toJson(resultMap);
@@ -114,7 +118,8 @@ public class MailController {
 	@ResponseBody
 	@PostMapping("delete")
 	public void delete(List<String> no) {
-		int result = ms.delete(no);		
+		System.out.println(no);
+//		int result = ms.delete(no);		
 	}
 	
 	@ResponseBody
