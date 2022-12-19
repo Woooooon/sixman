@@ -43,9 +43,9 @@ public class NoticeController {
 		List<AttachmentVo> fileList = FileUnit.uploadFile(vo.getFile(), rootPath, "upload/notice");
 		
 //		테스트
-		loginMember = new MemberVo();
-		loginMember.setName("홍길동");
-		loginMember.setNo("1");
+//		loginMember = new MemberVo();
+//		loginMember.setName("홍길동");
+//		loginMember.setNo("1");
 				
 		if(vo.getInportantYn()==null)vo.setInportantYn("N");
 		

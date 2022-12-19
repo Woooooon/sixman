@@ -63,6 +63,7 @@
 .search-bar span{
     font-size: 1.3em;
     color: gray;
+    cursor: pointer;
 }
 
 .list-box{

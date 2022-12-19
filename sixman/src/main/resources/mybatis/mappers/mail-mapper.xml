@@ -8,7 +8,7 @@
 		SELECT 
 			COUNT(*)
 		FROM MAIL M
-        LEFT JOIN MEMBER MM     ON M.NO = MM.NO
+        LEFT JOIN MEMBER MM     ON M.SEND_USER = MM.NO
 		LEFT JOIN R_MAIL R 		ON M.NO = R.MAIL_NO
 		LEFT JOIN M_DRAWER D 	ON M.NO = D.MAIL_NO
 		LEFT JOIN M_CATEGORY C 	ON D.CATEGORY_NO = C.NO
@@ -40,19 +40,26 @@
 				    (R.EMAIL = #{rMail} AND (USER_NO = ${sendUser} OR USER_NO IS NULL)) 
 				    AND 
 				    <if test="'휴지통'.equals(categoryName)">
-				    	M.DELETE_YN = 'Y'
+				    	R.DELETE_YN = 'Y'
 				    </if>
 				    <if test="!'휴지통'.equals(categoryName)">
-				    	M.DELETE_YN = 'N'
+				    	R.DELETE_YN = 'N'
 				    </if>
 			    )
 			</if>
 		</trim>
         )
-        <if test=" category!=null and category != '' ">
+        <if test=" category!=null and category != '' and category != 'null' ">
             AND
         	CATEGORY_NO = ${category}
         </if>
+        <if test=" search!=null and search != '' and search != 'null' ">
+        	AND
+	        (
+	        TITLE LIKE '%${search}%'
+	        OR CONTENT LIKE '%${search}%'
+	        )
+	    </if>
 	</select>
 
 	<select id="selectList" resultType="MailVo">
@@ -75,7 +82,7 @@
 		    ,	CATEGORY_NO AS CATEGORY
 		    ,	C.NAME AS CATEGORY_NAME
 		FROM MAIL M
-        LEFT JOIN MEMBER MM     ON M.NO = MM.NO
+        LEFT JOIN MEMBER MM     ON M.SEND_USER = MM.NO
 		LEFT JOIN R_MAIL R 		ON M.NO = R.MAIL_NO
 		LEFT JOIN M_DRAWER D 	ON M.NO = D.MAIL_NO
 		LEFT JOIN M_CATEGORY C 	ON D.CATEGORY_NO = C.NO
@@ -109,19 +116,26 @@
 				    (R.EMAIL = #{rMail} AND (USER_NO = ${sendUser} OR USER_NO IS NULL)) 
 				    AND 
 				    <if test="'휴지통'.equals(categoryName)">
-				    	M.DELETE_YN = 'Y'
+				    	R.DELETE_YN = 'Y'
 				    </if>
 				    <if test="!'휴지통'.equals(categoryName)">
-				    	M.DELETE_YN = 'N'
+				    	R.DELETE_YN = 'N'
 				    </if>
 			    )
 			</if>
 		</trim>
         )
-        <if test=" category!=null and category != '' ">
+        <if test=" category!=null and category != '' and category != 'null' ">
             AND
         	CATEGORY_NO = ${category}
         </if>
+        <if test=" search!=null and search != '' and search != 'null' ">
+        	AND
+	        (
+	        TITLE LIKE '%${search}%'
+	        OR CONTENT LIKE '%${search}%'
+	        )
+	    </if>
 		ORDER BY SEND_TIME DESC
 	</select>
 
@@ -163,7 +177,7 @@
 		(
 			get_seq_no('seq_r_mail_no'),
 			${no},
-			#{rMail},
+			#{email},
 			'N',
 			'N'
 		)
@@ -184,14 +198,38 @@
 		    ,	M.SEND_TIME
 		    ,	M.MODIFY_TIME
 		FROM MAIL M
-        LEFT JOIN MEMBER MM     ON M.NO = MM.NO
+        LEFT JOIN MEMBER MM     ON M.SEND_USER = MM.NO
 		where M.NO = ${no}
 	</select>
+	
+	<update id="delete">
+		DECLARE BEGIN
+		UPDATE MAIL
+		SET DELETE_YN = 'Y'
+		WHERE NO IN 
+		<foreach collection="no" item="n" separator="," open="(" close=")">
+			${n}
+		</foreach>
+		AND
+		SEND_USER = #{loginMember.no};
+		UPDATE MAIL_VIEW
+		SET R_DELETE_YN = 'Y'
+		WHERE NO IN 
+		<foreach collection="no" item="n" separator="," open="(" close=")">
+			${n}
+		</foreach>
+		AND
+		R_MAIL = #{loginMember.email};
+		END;
+	</update>
 
 	<update id="updateRead">
 		update r_mail
 		set check_yn = 'Y'
-		where no
+		where no in 
+		<foreach collection="no" item="n" separator="," open="(" close=")">
+			n
+		</foreach>
 	</update>
 	
 	<insert id="createCategory">

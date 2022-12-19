@@ -48,13 +48,16 @@ public class MailController {
 		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
 		
 		MailVo vo = new MailVo();
-//		vo.setSendUser(loginMember.getNo());
-//		vo.setEmail(loginMember.getEmail());
-		vo.setSendUser("1");
-		vo.setRMail("a@naver.com");
+		vo.setSendUser(loginMember.getNo());
+		vo.setRMail(loginMember.getEmail());
+//		vo.setSendUser("1");
+//		vo.setRMail("a@naver.com");
 		vo.setCategoryName(map.get("listTpye"));
 		vo.setCategory(map.get("categoryNo"));
 		vo.setSearch(map.get("search"));
+		
+		System.out.println(map.get("search")==null);
+		System.out.println(vo);
 		
 //		category, keyword, page
 		int pageLimit = 5;
@@ -89,17 +92,17 @@ public class MailController {
 	@PostMapping("write")
 	public String  write(MailVo vo, HttpSession session) {
 		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
-//		vo.setSendUser(loginMember.getNo());
+		vo.setSendUser(loginMember.getNo());
 		
 //		테스트
-		vo.setSendUser("1");
+//		vo.setSendUser("1");
 		
 		String rootPath = session.getServletContext().getRealPath("/");
 		List<AttachmentVo> fileList = FileUnit.uploadFile(vo.getFile(), rootPath, "upload/notice");
 		vo.setFileList(fileList);
 		int result = ms.write(vo);
 		
-		if(result == 1) {
+		if(result > 0) {
 			return "mail/list";
 		}else {
 			return "";
@@ -110,16 +113,21 @@ public class MailController {
 	public String detail(String no, Model model) {
 		MailVo vo = ms.selectOne(no);
 		model.addAttribute("vo", vo);
-		
 		if(vo==null) {return 	"redirect:/mail/list";}
 		return "mail/detail";
 	}
 	
 	@ResponseBody
 	@PostMapping("delete")
-	public void delete(List<String> no) {
-		System.out.println(no);
-//		int result = ms.delete(no);		
+	public void delete(@RequestParam List<String> no, HttpSession session) {
+		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
+		Map<String, Object> map = new HashMap<>();
+		map.put("loginMember", loginMember);
+		map.put("no", no);
+		int result = ms.delete(map);
+		if(result!=1) {
+			
+		}
 	}
 	
 	@ResponseBody

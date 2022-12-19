@@ -33,7 +33,7 @@ public class MailService {
 		
 		String no = Integer.toString(result1);
 		List<AttachmentVo> fileList = vo.getFileList();
-		int result3 = -1;
+		int result3 = 1;
 		if(fileList!=null) {
 			for(AttachmentVo fv : fileList) {
 				fv.setSubNo(no);
@@ -73,8 +73,8 @@ public class MailService {
 		return vo;
 	}
 
-	public int delete(List<String> no) {
-		return dao.delete(sst, no);
+	public int delete(Map<String,Object> map) {
+		return dao.delete(sst, map);
 	}
 
 	public int updateRead(List<String> no) {

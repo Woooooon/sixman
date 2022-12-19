@@ -40,7 +40,7 @@ public class NoticeService {
 		String no = dao.getNoticeNo(sst, vo);
 
 		List<AttachmentVo> fileList = vo.getFileList();
-		int result2 = -1;
+		int result2 = 1;
 		if(fileList!=null) {
 			for(AttachmentVo fv : fileList) {
 				fv.setSubNo(no);

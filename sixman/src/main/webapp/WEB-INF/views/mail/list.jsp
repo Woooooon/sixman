@@ -51,7 +51,7 @@
         			<a href="${path}/mail/write" class="btn" onclick="location.href='/sixman/notice/write'"><span class="material-symbols-outlined"> add </span><p>메일쓰기</p></a>
         		</c:otherwise>
         	</c:choose>
-            <div class="search-bar"><input id="search-input" type="text" placeholder="검색"><span class="material-symbols-outlined"> search </span></div>
+            <div class="search-bar"><input id="search-input" type="text" placeholder="검색"><span class="material-symbols-outlined" onclick="search()"> search </span></div>
         </div>
         <div class="list-box">
             <div class="first-item">

@@ -45,16 +45,29 @@ mainCheck.addEventListener('change',()=>{
     }
 });
 
+let cPage = '';
+let cSearch = '';
+let cListTpye = '';
+let cCategoryNo = '';
+
 // AJAX
 function mailAjax(page, search, listTpye, categoryNo) {
     if(typeof listTpye == 'undefined') {listTpye = '';}
     if(typeof categoryNo == 'undefined') {categoryNo = '';}
     if(typeof search == 'undefined') {search = '';}
+
+    cPage = page;
+    cCategoryNo = categoryNo;
+    cListTpye = listTpye;
+    cSearch = search;
+
     const httpRequest = new XMLHttpRequest();
     httpRequest.onreadystatechange = () => {
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
                 if (httpRequest.status === 200) {
                     var result = httpRequest.response;
+
+                    console.log(result);
                     const pv = result.pv;
                     const list = result.list;
                     const category =  result.category;
@@ -73,7 +86,7 @@ function mailAjax(page, search, listTpye, categoryNo) {
                         // }
 
                         let text = "";
-                        text += `<input type="checkbox">`;
+                        text += `<input type="checkbox" value=${vo.no}>`;
                         if(vo.sendUserMail != vo.rMail || vo.checkYn=='Y'){
                             div.classList.add('read');
                             text += `<span class="material-symbols-outlined"> drafts </span>`;
@@ -164,10 +177,12 @@ function mailAjax(page, search, listTpye, categoryNo) {
 function getChecked() {
     const itemBox = document.querySelector('#list-item-box');
     const checkBoxs = itemBox.querySelectorAll('input[type=checkbox]');
+    let arr = [];
 
-    return checkBoxs.filter((element)=>{
-        return element.checked;
+    checkBoxs.forEach(element => {
+        if(element.checked){arr.push(element.value)};
     });
+    return arr;
 }
 
 function deleteAjax() {
@@ -175,7 +190,9 @@ function deleteAjax() {
     httpRequest.onreadystatechange = () => {
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
                 if (httpRequest.status === 200) {
-                    var result = httpRequest.response;
+                    
+                    popup.alertPop("삭제하기", "메일을 삭제 완료 하였습니다.");
+                    mailAjax(cPage, cSearch, cListTpye, cCategoryNo);
 
                 } else {
                 alert('Request Error!');
@@ -184,7 +201,11 @@ function deleteAjax() {
     };
 
     httpRequest.open('post', '/sixman/mail/delete');
-    httpRequest.responseType = "json";
     httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
     httpRequest.send(`no=${getChecked()}`);
+}
+
+function search() {
+    const text = document.querySelector('#search-input').value;
+    mailAjax(cPage, text, cListTpye, cCategoryNo);
 }
