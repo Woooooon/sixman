@@ -34,7 +34,7 @@ const btnArr = document.querySelectorAll('#checkbox-box > *');
 
 mainCheck.addEventListener('change',()=>{
     const checkArr = document.querySelectorAll('#list-item-box input[type=checkbox]');
-    console.log(mainCheck.checked);    
+    // console.log(mainCheck.checked);    
     if(mainCheck.checked){
         checkArr.forEach(element => {
             element.checked = true;
@@ -52,16 +52,16 @@ mainCheck.addEventListener('change',()=>{
     }
 });
 
-let cPage = '';
-let cSearch = '';
-let cListTpye = '';
-let cCategoryNo = '';
+let cPage = null;
+let cSearch = null;
+let cListTpye = null;
+let cCategoryNo = null;
 
 // AJAX
 function mailAjax(page, search, listTpye, categoryNo) {
-    if(typeof listTpye == 'undefined') {listTpye = '';}
-    if(typeof categoryNo == 'undefined') {categoryNo = '';}
-    if(typeof search == 'undefined') {search = '';}
+    if(typeof listTpye == 'undefined') {listTpye = null;}
+    if(typeof categoryNo == 'undefined') {categoryNo = null;}
+    if(typeof search == 'undefined') {search = null;}
 
     cPage = page;
     cCategoryNo = categoryNo;
@@ -74,10 +74,10 @@ function mailAjax(page, search, listTpye, categoryNo) {
                 if (httpRequest.status === 200) {
                     var result = httpRequest.response;
 
-                    console.log(result);
+                    // console.log(result);
                     const pv = result.pv;
                     const list = result.list;
-                    const category =  result.category;
+                    const category =  result.categoryList;
 
                     const listItemBox = document.querySelector('#list-item-box');
                     while ( listItemBox.hasChildNodes() ){
@@ -88,9 +88,6 @@ function mailAjax(page, search, listTpye, categoryNo) {
                         const div = document.createElement('div');
                         const vo = list[i];
                         div.classList.add('list-item');
-                        // div.onclick = ()=>{
-                        //     location.href = `/sixman/mail/detail?no=${vo.no}`
-                        // }
 
                         let text = "";
                         text += `<input type="checkbox" value=${vo.no}>`;
@@ -161,15 +158,40 @@ function mailAjax(page, search, listTpye, categoryNo) {
                     // 카테고리
                     const categoryList = document.querySelector('#category-list');
 
-                    let text = '<div class="category-item cate-checked">전체 메일</div>';
-                    for(item in category){
-                        text += `<div class="category-item" onclick="mailAjax(${page}, ${search}, ${listTpye}, ${item.no})" >${item.name}</div>`;
+                    let text = `<div class="category-item" onclick="mailAjax(${page}, null, ${listTpye})">전체 메일</div>`;
+
+                    for(item of category){
+                        text += `<div no="${item.NO}" class="category-item" onclick="mailAjax(${page}, ${search}, ${listTpye}, ${item.NO})" >${item.NAME}</div>`;
                     }
                     text += '<div class="category-item create-btn"><span class="material-symbols-outlined"> add </span>추가</div>';
 
                     categoryList.innerHTML = text;
 
                     categoryList.querySelector('.create-btn').addEventListener('click', createCategoryModal);
+                    const itemList = categoryList.querySelectorAll('.category-item');
+                    let hasNo = false;
+                    for(let i = 0; i < itemList.length; i++){
+                        const element = itemList[i];
+                        if(element.getAttribute("no")==categoryNo){
+                            element.classList.add('cate-checked');
+                            hasNo = true;
+                            break;
+                        }
+                    }
+
+                    if(!hasNo){
+                        categoryList.querySelector('.category-item').classList.add('cate-checked');
+                    }
+
+                    const categoryItem = document.querySelector('#category-box .category-items');
+                    let text3 = ``;
+
+                    for(item of category){
+                        text3 += `<label>${item.NAME}<input name="category" type="radio" value="${item.no}"><span class='material-symbols-outlined'> close </span></label>`;
+                    }
+
+                    categoryItem.innerHTML = text3;
+
 
                 } else {
                 alert('Request Error!');
@@ -238,11 +260,13 @@ function createCategoryModal() {
 
     const btn = div.querySelector('button');
     const input = div.querySelector('input');
-    const category = input.value;
-    btn.addEventListener('click', ()=>{createCategoryAjax(category);})
+    btn.addEventListener('click', ()=>{
+        createCategoryAjax();
+        div.remove();
+    })
 
     const body = document.querySelector('body');
-    console.log(body);
+    // console.log(body);
     body.append(div);
     
 }
@@ -252,7 +276,9 @@ createBtns.forEach(element => {
     element.addEventListener('click', createCategoryModal);
 });
 
-function createCategoryAjax(category) {
+function createCategoryAjax() {
+    const modalBox = document.querySelector('#category-modal-box');
+    const category = modalBox.querySelector('input').value;
     const httpRequest = new XMLHttpRequest();
     httpRequest.onreadystatechange = () => {
         if (httpRequest.readyState === XMLHttpRequest.DONE) {

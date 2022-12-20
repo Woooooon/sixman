@@ -40,9 +40,9 @@ public class MailController {
 		}
 		return "mail/list";
 	}
-	
+		
 	@ResponseBody
-	@PostMapping("list")
+	@PostMapping(value = "list", produces = "application/json; charset=utf8")
 	public String list(@RequestParam Map<String, String> map, HttpSession session) {
 		
 		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
@@ -50,15 +50,10 @@ public class MailController {
 		MailVo vo = new MailVo();
 		vo.setSendUser(loginMember.getNo());
 		vo.setRMail(loginMember.getEmail());
-//		vo.setSendUser("1");
-//		vo.setRMail("a@naver.com");
 		vo.setCategoryName(map.get("listTpye"));
 		vo.setCategory(map.get("categoryNo"));
 		vo.setSearch(map.get("search"));
-		
-		System.out.println(map.get("search")==null);
-		System.out.println(vo);
-		
+				
 //		category, keyword, page
 		int pageLimit = 5;
 		int boardLimit = 15;
@@ -71,13 +66,13 @@ public class MailController {
 	    PageVo pv = new PageVo(listCount,page,pageLimit,boardLimit);
 	    List<MailVo> list = ms.selectList(vo, rb);
 	    
-	    List<Map<String, String>> cateogryList = ms.categoryList("1");
+	    List<Map<String, String>> categoryList = ms.categoryList(loginMember.getNo());
 
 		Map<String, Object> resultMap = new HashMap<>();
 		
 		resultMap.put("pv", pv);
 		resultMap.put("list", list);
-		resultMap.put("cateogryList", cateogryList);
+		resultMap.put("categoryList", categoryList);
 		
 		Gson gson = new GsonBuilder().create();
 		String json = gson.toJson(resultMap);
@@ -153,20 +148,7 @@ public class MailController {
 		if(result!=1) {
 			
 		}
-	}
-	
-	@ResponseBody
-	@PostMapping("categoryList")
-	public String categoryList(HttpSession session) {
-		MemberVo loginMeber = (MemberVo) session.getAttribute("loginMember");
-		
-		List<Map<String, String>> list = ms.categoryList(loginMeber.getNo());
-		Gson gson = new GsonBuilder().create();
-		String json = gson.toJson(list);
-		
-		return json;
-	}
-	
+	}	
 	
 	@ResponseBody
 	@PostMapping("restore")

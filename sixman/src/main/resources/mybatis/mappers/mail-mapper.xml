@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mailMapper">
-
+	
 	<select id="countList" resultType="int">
 		SELECT 
 			COUNT(*)
@@ -237,7 +237,7 @@
 		values
 		(
 			seq_m_category_no.nextval,
-			${no},
+			${userNo},
 			#{category}
 		)
 	</insert>

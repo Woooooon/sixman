@@ -12,8 +12,9 @@
 <script defer src="${path}/resources/js/mail/mailList.js"></script>
 <script>
 	window.onload = ()=>{
-		const listType = '${listType}';
+		let listType = '${listType}';
 		if(listType!=null){
+			if(listType == '') {listType = null;}
 			mailAjax(1, null, listType);
 		}else{
 			mailAjax(1);
@@ -34,7 +35,6 @@
 				</c:choose>
 			</div>
 			<div id="category-list">
-				<div class="category-item cate-checked">전체 메일</div>
 				<div class="category-item create-btn"><span class="material-symbols-outlined"> add </span>추가</div>
 			</div>
 		</div>
@@ -70,8 +70,6 @@
 		                        <span class="material-symbols-outlined"> arrow_drop_down </span>
 		                        <div id="category-box" style="display: none;">
 		                            <div class="category-items">
-		                                <label>즐겨찾기<input name="category" type="radio"><span class='material-symbols-outlined'> close </span></label>
-		                                <label>즐겨찾기<input name="category" type="radio"></label>
 		                            </div>
 		                            <div class="category-footer">
 										<div class="c-btn create-btn"><p>추가</p></div>
