@@ -248,6 +248,48 @@
 		select no, name from m_category
 		where user_no = ${no}
 	</select>
+	
+	<update id="restore">
+		DECLARE BEGIN
+		UPDATE MAIL
+		SET DELETE_YN = 'N'
+		WHERE NO IN 
+		<foreach collection="no" item="n" separator="," open="(" close=")">
+			${n}
+		</foreach>
+		AND
+		SEND_USER = #{loginMember.no};
+		UPDATE MAIL_VIEW
+		SET R_DELETE_YN = 'N'
+		WHERE NO IN 
+		<foreach collection="no" item="n" separator="," open="(" close=")">
+			${n}
+		</foreach>
+		AND
+		R_MAIL = #{loginMember.email};
+		END;
+	</update>
+		
+	<update id="realDelete">
+		DECLARE BEGIN
+		UPDATE MAIL
+		SET DELETE_YN = 'R'
+		WHERE NO IN 
+		<foreach collection="no" item="n" separator="," open="(" close=")">
+			${n}
+		</foreach>
+		AND
+		SEND_USER = #{loginMember.no};
+		UPDATE MAIL_VIEW
+		SET R_DELETE_YN = 'R'
+		WHERE NO IN 
+		<foreach collection="no" item="n" separator="," open="(" close=")">
+			${n}
+		</foreach>
+		AND
+		R_MAIL = #{loginMember.email};
+		END;
+	</update>
 
     
 </mapper>

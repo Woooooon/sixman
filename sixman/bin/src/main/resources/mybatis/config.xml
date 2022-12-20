@@ -7,12 +7,17 @@
 
 	<settings>
 		<setting name="mapUnderscoreToCamelCase" value="true"/>
+		<setting value="NULL" name="jdbcTypeForNull"/>
 	</settings>
 	
 	
 	<typeAliases>
 		<typeAlias type="com.kh.sixman.notice.vo.NoticeVo" alias="NoticeVo"/>
 		<typeAlias type="com.kh.sixman.common.AttachmentVo" alias="AttachmentVo"/>
+		<typeAlias type="com.kh.sixman.mail.vo.MailVo" alias="mailVo"/>
+		<typeAlias type="com.kh.sixman.member.vo.BankVo" alias="BankVo"/>
+		<typeAlias type="com.kh.sixman.member.vo.AuthorizeVo" alias="AuthorizeVo"/>
+		<typeAlias type="com.kh.sixman.member.vo.MemberVo" alias="MemberVo"/>
 	</typeAliases> 
 
 

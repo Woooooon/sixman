@@ -128,14 +128,23 @@ public class MailController {
 	
 	@ResponseBody
 	@PostMapping("updateRead")
-	public void updateRead(List<String> no) {
-		int result = ms.updateRead(no);	
+	public void updateRead(List<String> no, HttpSession session) {
+		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
+		Map<String, Object> map = new HashMap<>();
+		map.put("loginMember", loginMember);
+		map.put("no", no);
+		int result = ms.updateRead(map);	
 	}
 	
 	@ResponseBody
 	@PostMapping("changeCategory")
-	public void changeCategory(List<String> no, String category) {
-		int result = ms.changeCategory(no, category);
+	public void changeCategory(List<String> no, String category, HttpSession session) {
+		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
+		Map<String, Object> map = new HashMap<>();
+		map.put("loginMember", loginMember);
+		map.put("no", no);
+		map.put("category", category);
+		int result = ms.changeCategory(map);
 	}
 	
 	@ResponseBody
@@ -152,14 +161,22 @@ public class MailController {
 	
 	@ResponseBody
 	@PostMapping("restore")
-	public void restore(List<String> no) {
-		int result = ms.restore(no);
+	public void restore(List<String> no, HttpSession session) {
+		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
+		Map<String, Object> map = new HashMap<>();
+		map.put("loginMember", loginMember);
+		map.put("no", no);
+		int result = ms.restore(map);
 	}
 	
 	@ResponseBody
 	@PostMapping("realDelete")
-	public void realDelete(List<String> no) {
-		int result = ms.realDelete(no);
+	public void realDelete(List<String> no, HttpSession session) {
+		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
+		Map<String, Object> map = new HashMap<>();
+		map.put("loginMember", loginMember);
+		map.put("no", no);
+		int result = ms.realDelete(map);
 	}
 	
 	

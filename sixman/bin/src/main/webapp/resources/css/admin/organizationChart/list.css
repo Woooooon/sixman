@@ -8,6 +8,36 @@
 #dept-wrap {
     width: 14%;
     height: 100%;
+    padding: 10px;
+}
+
+.icon-color {
+    color: var(--main-color);
+}
+
+#jstree ul li input {
+    border: none;
+    background-color: transparent;
+}
+
+#jstree ul li div {
+    display: flex;
+}
+
+.dept-guide {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.dept-guide span {
+    color: var(--main-color);
+    margin-right: 5px;
+}
+
+.dept-guide p {
+    font-size: 14px;
+    font-weight: 600;
 }
 
 #employee-wrap {
@@ -316,7 +346,7 @@
 .select-employee-list {
     display: flex;
     width: 100%;
-    height: 12%;
+    height: 8%;
     border-bottom: 1px solid var(--bo-20);
     padding: 5px 5px 3px 5px;
     justify-content: space-between;

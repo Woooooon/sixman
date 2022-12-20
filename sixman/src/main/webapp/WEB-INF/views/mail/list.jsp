@@ -55,15 +55,14 @@
                     <input type="checkbox">
                     <c:choose>
                     	<c:when test="${listType == '임시보관함'}">
-		                    <p>전송</p>
 		                    <p onclick="deleteAjax()">삭제</p>
                     	</c:when>
                     	<c:when test="${listType == '휴지통'}">
-		                    <p>복원</p>
-		                    <p>영구삭제</p>
+		                    <p onclick="restoreAjax()">복원</p>
+		                    <p onclick="realDelete()">영구삭제</p>
                     	</c:when>
                     	<c:otherwise>
-	                    	<p>읽음</p>
+	                    	<p onclick="updateRead()">읽음</p>
 		                    <p onclick="deleteAjax()">삭제</p>
 		                    <div class="category-btn">
 		                    	이동

@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="${path}/resources/css/list.css">
 <link rel="stylesheet" href="${path}/resources/css/notice/noticeDetail.css">
 <script defer src="${path}/resources/js/file/file.js"></script>
+<script defer src="${path}/resources/js/notice/noticeDetail.js"></script>
 </head>
 <body>
 
@@ -34,15 +35,15 @@
                     	<c:forEach items="${vo.fileList}" var="fv">
 	                    	<div class="file-item">
 	                            <div>${fv.originName}</div>
-	                            <span class="material-symbols-outlined" onclick="dounload()"> download </span>
+	                            <span class="material-symbols-outlined" onclick="download(${fv.no}, 'NOTICE')"> download </span>
 	                        </div>   
                     	</c:forEach>
                     </div>
                 </div>
-                <div>작성일<p id="enroll-date">${enrollDate}</p></div>
+                <div>작성일<p id="enroll-date">${vo.enrollDate}</p></div>
             </div>
             <div id="content-box">
-                ${content}
+                ${vo.content}
             </div>
         </div>
         <div id="board-footer">
@@ -59,8 +60,8 @@
                 </div>
             </div>
             <div id="btn-box">
-                <div class="btn"><p>수정하기</p></div>
-                <div class="c-btn"><p>삭제하기</p></div>
+                <div class="btn" onclick="location.href='/sixman/notice/update?no=${vo.no}'"><p>수정하기</p></div>
+                <div class="c-btn" onclick="deletePage(${vo.no})"><p>삭제하기</p></div>
             </div>
 
         </div>

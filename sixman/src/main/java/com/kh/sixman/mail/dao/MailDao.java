@@ -32,13 +32,13 @@ public class MailDao {
 		return sst.selectOne("mailMapper.selectOne", no);
 	}
 
-//	
+
 	public int delete(SqlSessionTemplate sst, Map<String, Object> map) {
 		return sst.update("mailMapper.delete", map);
 	}
 
-	public int updateRead(SqlSessionTemplate sst, List<String> no) {
-		return sst.update("mailMapper.updateRead", no);
+	public int updateRead(SqlSessionTemplate sst, Map<String, Object> map) {
+		return sst.update("mailMapper.updateRead", map);
 	}
 
 //	
@@ -55,13 +55,13 @@ public class MailDao {
 	}
 
 //	
-	public int restore(SqlSessionTemplate sst, List<String> no) {
-		return sst.update("mailMapper.restore", no);
+	public int restore(SqlSessionTemplate sst, Map<String, Object> map) {
+		return sst.update("mailMapper.restore", map);
 	}
 
 //	
-	public int realDelete(SqlSessionTemplate sst, List<String> no) {
-		return sst.delete("mailMapper.realDelete", no);
+	public int realDelete(SqlSessionTemplate sst, Map<String, Object> map) {
+		return sst.update("mailMapper.realDelete", map);
 	}
 
 }

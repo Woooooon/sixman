@@ -24,7 +24,7 @@
 <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
 <main class="main-box">
 
-    <form action="">
+    <form action="" method="POST" enctype="multipart/form-data">
 
         <div  id="notice-box" class="box">
             <div class="title-box">
@@ -46,10 +46,10 @@
                 <div id="file-box">
                 </div>
             </div>
-            <div name="" id="summernote"></div>
+            <textarea name="content" id="summernote"></textarea>
             <div id="btn-box">
-                <input name="submit" class="btn" type="submit" value="작성하기">
-                <input name="submit" class="c-btn" type="submit" value="임시저장">
+                <input name="saveYn" class="btn" type="submit" value="작성하기">
+                <input name="saveYn" class="c-btn" type="submit" value="임시저장">
             </div>
 
         </form>

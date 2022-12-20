@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="<c:url value='/resources/css/messenger.css'/>">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
 <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
@@ -35,18 +36,34 @@
 		</div>
 		<div class="text-messenger-settings">
 			<div class="textbox-messenger-area2">
+				<div class="showup">
+				<span class="material-symbols-outlined" style="font-size:300%">expand_more</span>
 				<div class="subtitle" id="subtitle1">전체 목록</div>
+				</div>
+			
 				<div class="team-people-data">
 					<div class="team-whole-data">
 						<div class="team-area">영업부</div>
 						<div class="team-name">영업 2팀</div>
 					</div>
+					<div class='bottom-area2' id='ba'></div>
 					<div class="with-chat-data">
+						<div class="square" style=""></div>
 						<div class="with-chat-name">구기석</div>
 						<div class="with-chat-grade">부장</div>
 					</div>
 					<div class="bottom-area"></div>
 					<div class="with-chat-data">
+						<div class="square" style=""></div>
+						<div class="with-chat-name">구기석</div>
+						<div class="with-chat-grade">부장</div>
+						<div class="checkbox-square">
+							<input type="checkbox" id="checkbox-square">
+						</div>
+					</div>
+					<div class="bottom-area"></div>
+					<div class="with-chat-data">
+						<div class="square" style=""></div>
 						<div class="with-chat-name">구기석</div>
 						<div class="with-chat-grade">부장</div>
 					</div>
@@ -54,30 +71,40 @@
 				</div>
 			</div>
 			<div class="textbox-messenger-area3">
-				<div class="subtitle" id="subtitle2">친구 목록</div>
+				<div class="showup">
+					<span class="material-symbols-outlined" style="font-size:50px">expand_more</span>
+					<div class="subtitle" id="subtitle1">친구 목록</div>
+				</div>
 				<div class="team-people-data">
 					<div class="team-whole-data">
 						<div class="team-area">영업부</div>
 						<div class="team-name">영업 2팀</div>
 					</div>
+					<div class='bottom-area2' id='ba'></div>
 					<div class="with-chat-data">
+						<div class="square" style=""></div>
 						<div class="with-chat-name">구기석</div>
 						<div class="with-chat-grade">부장</div>
 					</div>
 					<div class="bottom-area"></div>
 					<div class="with-chat-data">
+						<div class="square" style=""></div>
 						<div class="with-chat-name">구기석</div>
 						<div class="with-chat-grade">부장</div>
 					</div>
 					<div class="bottom-area"></div>
 					<div class="with-chat-data">
+						<div class="square" style=""></div>
 						<div class="with-chat-name">구기석</div>
 						<div class="with-chat-grade">부장</div>
 					</div>
 					<div class="bottom-area"></div>
-					</div>
 				</div>
 			</div>
+		</div>
+		<div class = "making-chatroom-button-list">
+			<input type="submit" class="btn" value="이전 버튼" id="makingroom-first-leave">
+			<input type="submit" class="btn" value="다음 버튼" id="makingroom-first-next">
 		</div>
 	</form>
 	

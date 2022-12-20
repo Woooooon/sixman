@@ -13,7 +13,9 @@
 }
 
 .body-box{
-    border: 1px solid black;
+    --padding: 40px;
+    --border: 1px solid black;
+    height: 650px;
 }
 
 .prj{
@@ -21,46 +23,309 @@
     height: 40px;
     font-size: 15px;
     font-weight: bold;
-    color: #aaa;
+    color: black;
     border: 1px solid #aaa;
     background-color: white;
     text-align: center;
     line-height: 40px;
     border-radius: 5px;    
+    margin-right: 20px;
+    margin-bottom: 20px;
 }
 
-span{
-    width: 60%;
+.box1 div:first-child{
+    margin-right: 20px;
 }
 
+input[name='prj_name']{
+    width: 400px;    
+    height: 40px;
+    border: 1px solid #d3d3d3;
+    outline: none;
+    font-size: 18px;
+}
+
+.box2 {
+    margin-right: 55px;
+}
+
+/* span{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} */
+
+/* 프로젝트명 box */
 .name-box{
+    display: flex;
+    justify-content: space-between;
+}
+
+.box1 , .box2 {
     display: flex;
 }
 
+.box2 button:first-child{
+    margin-right: 10px;
+}
+
+/* 버튼 */
 .cbtn{
     width: 120px;
     height: 40px;
     display: flex;
     justify-content: end;
+    border: none;
 }
 
-.content{
-    width: 60%;
-    height: 300px;
-}
+/* 일정 */
 
-#file-btn{
-    width: 40px;
+input[name='prjDate1'],
+input[name='prjDate2'] {
+    --margin-top: 11px;
+    width: 150px;
     height: 40px;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+    outline: none;
+}
+
+.line > p {
+    margin: 10px;
+}
+
+
+/* 팀 select */
+
+.hide{
+    display: none;
+}
+/* .show{
+    display: block;
+} */
+
+.select{
+    position: relative;
+    padding: 5px 10px;
+    width: 150px;
+    height: 40px;
+    border-radius: 5px;
+    border:1px solid #d3d3d3;
+    background-color: #ffffff;
+    background-image: url("https://img.icons8.com/material-rounded/24/000000/expand-arrow.png");
+    background-repeat: no-repeat;
+    background-position: 96% center;
+    cursor: pointer;
+}
+
+.select > span {
+    display: flex;
+    justify-content: center;
+    padding-top: 5px;
+    padding-right: 7px;
+}
+
+.select ul{
+    position: absolute;
+    top: 39px;
+    left: 1px;
+    width: 100%;
+    border:1px solid #d3d3d3;
+    border-radius: 5px;
+    background-color: #ffffff;
+    cursor: pointer;
+    z-index: 1;
+}
+.select ul li{
+    padding: 10px;
     text-align: center;
+}
+
+.select ul li:hover{
+    background-color: floralwhite;
+}
+
+
+/* 첨부파일 */
+
+/* #file-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+} */
+
+#file-box {
+    padding: 10px;
+    width: 80.5%;
+    height: 100px;
+    border: 1px solid #d3d3d3;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.file-item{
+    display: flex;
+    width: 100%;
+    font-size: 13px;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.file-item span{
+    margin-left: 15px;
+    font-size: 13px;
+    cursor: pointer;
 }
 
 .line{
     display: flex;
 }
 
+
+/* 참여자 멤버 */
+.member_1 {
+    display: flex;
+}
+
+.line {
+    display: flex;
+}
+
+.team-member-box {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #d3d3d3;
+    border-radius: 5px;
+    width: 94.5%;
+    height: 25%;
+}
+
+.member {
+    display: flex;
+    color: #2e7aff;
+}
+
+/* 프로젝트 내용 */
+.content {
+    padding: 10px;
+    resize: none;
+    width: 80.5%;
+    height: 250px;
+    border: 1px solid #d3d3d3;
+    border-radius: 5px;
+}
+
+/* Side box 달력 */
 .side-box{
+    display: flex;
     width: 30%;
     height: 100%;
-    background-color: #D3D3D3;
+    align-items: flex-end;
 }
+
+.calendar {
+    width: 100%;
+}
+
+.header {
+    display: flex;
+}
+
+/* 사이드바 달력 */
+.calendar{
+    width: 100%;
+    height: 52%;
+    padding: 30px;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.year-month{
+    font-size: 15px;
+}
+
+.nav-btn{
+    width: 28px;
+    height: 30px;
+    border: none;
+    font-size: 16px;
+    line-height: 34px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.nav-btn:hover{
+    background-color: rgb(197, 197, 197);
+    border-radius: 5px;
+}
+
+
+.days{
+    display: flex;
+    margin: 25px 0 10px;
+}
+
+.day{
+    width: calc(100% / 7);
+    text-align: center;
+    z-index: 50;
+}
+
+.dates{
+    display: flex;
+    flex-flow: row wrap;
+    height: 100%;
+    border-top: 1px solid #aaa;
+    border-right: 1px solid #aaa;
+
+}
+
+.date{
+    width: calc(100% / 7);
+    padding: 15px;
+    text-align: right;
+    border-bottom: 1px solid #aaa;
+    border-left: 1px solid #aaa;
+}
+
+.day:nth-child(7n + 1),
+.date:nth-child(7n + 1){
+    color: #d13e3e;
+}
+
+.day:nth-child(7n),
+.date:nth-child(7n){
+    color: #396EE2;
+}
+
+.other{
+    opacity: 0.3;
+}
+
+.today{
+    position: relative;
+    color: #FFFFFF;
+    z-index: 1;
+}
+
+.today::before{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    width: 30px;
+    height: 30px;
+    display: block;
+    background-color: #FF0000;
+    border-radius: 50%;
+    content: '';
+}
+

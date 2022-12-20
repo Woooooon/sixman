@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="<c:url value='/resources/css/addressBook/receive.css'/>" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
-        <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+        <script defer src="<c:url value='/resources/js/address/receive.js'/>"></script>
     </head>
     <body>
         <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
@@ -34,10 +34,10 @@
                         </div>
                     </div>
                     <div class="body-controller">
-                        <input type="checkbox" />
+                        <input type="checkbox" class="selectAll" />
                         <label for="">전체선택</label>
                         <span class="material-symbols-outlined"> download_for_offline </span>
-                        <span class="material-symbols-outlined"> delete </span>
+                        <span class="material-symbols-outlined deleteAllBtn"> delete </span>
                     </div>
                     <div class="body">
                         <div class="receive-address">
@@ -52,7 +52,7 @@
                                 </div>
                                 <div class="card-container">
                                     <div class="card">
-                                        <input type="checkbox" name="" checked />
+                                        <input type="checkbox" name="" class="selectOne selectBoxOne" />
                                         <div class="card-front">
                                             <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
                                             <div class="card-sortation">
@@ -82,7 +82,7 @@
                                 </div>
                                 <div class="card-container">
                                     <div class="card">
-                                        <input type="checkbox" name="" checked />
+                                        <input type="checkbox" name="" class="selectOne selectBoxOne" />
                                         <div class="card-front">
                                             <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
                                             <div class="card-sortation">
@@ -112,7 +112,7 @@
                                 </div>
                                 <div class="card-container">
                                     <div class="card">
-                                        <input type="checkbox" name="" checked />
+                                        <input type="checkbox" name="" class="selectOne selectBoxOne" />
                                         <div class="card-front">
                                             <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
                                             <div class="card-sortation">
@@ -142,7 +142,7 @@
                                 </div>
                                 <div class="card-container">
                                     <div class="card">
-                                        <input type="checkbox" name="" checked />
+                                        <input type="checkbox" name="" class="selectOne selectBoxOne" />
                                         <div class="card-front">
                                             <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
                                             <div class="card-sortation">
@@ -175,7 +175,7 @@
                                 </div>
                             </div>
                             <div class="list-controller">
-                                <input type="checkbox" />
+                                <input type="checkbox" class="selectBoxAll" />
                                 <span class="material-symbols-outlined"> download_for_offline </span>
                                 <span class="material-symbols-outlined"> delete </span>
                             </div>
@@ -192,7 +192,7 @@
                                 </div>
                                 <div class="card-container">
                                     <div class="card">
-                                        <input type="checkbox" name="" checked />
+                                        <input type="checkbox" name="" class="selectOne selectBox2" />
                                         <div class="card-front">
                                             <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
                                             <div class="card-sortation">
@@ -222,7 +222,7 @@
                                 </div>
                                 <div class="card-container">
                                     <div class="card">
-                                        <input type="checkbox" name="" checked />
+                                        <input type="checkbox" name="" class="selectOne selectBox2" />
                                         <div class="card-front">
                                             <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
                                             <div class="card-sortation">
@@ -252,7 +252,7 @@
                                 </div>
                                 <div class="card-container">
                                     <div class="card">
-                                        <input type="checkbox" name="" checked />
+                                        <input type="checkbox" name="" class="selectOne selectBox2" />
                                         <div class="card-front">
                                             <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
                                             <div class="card-sortation">
@@ -282,7 +282,7 @@
                                 </div>
                                 <div class="card-container">
                                     <div class="card">
-                                        <input type="checkbox" name="" checked />
+                                        <input type="checkbox" name="" class="selectOne selectBox2" />
                                         <div class="card-front">
                                             <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
                                             <div class="card-sortation">
@@ -315,7 +315,7 @@
                                 </div>
                             </div>
                             <div class="list-controller">
-                                <input type="checkbox" />
+                                <input type="checkbox" class="selectBoxAll2" />
                                 <span class="material-symbols-outlined"> download_for_offline </span>
                                 <span class="material-symbols-outlined"> delete </span>
                             </div>
@@ -332,7 +332,7 @@
                                 </div>
                                 <div class="card-container">
                                     <div class="card">
-                                        <input type="checkbox" name="" checked />
+                                        <input type="checkbox" name="" class="selectOne selectBox3" />
                                         <div class="card-front">
                                             <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
                                             <div class="card-sortation">
@@ -362,7 +362,7 @@
                                 </div>
                                 <div class="card-container">
                                     <div class="card">
-                                        <input type="checkbox" name="" checked />
+                                        <input type="checkbox" name="" class="selectOne selectBox3" />
                                         <div class="card-front">
                                             <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
                                             <div class="card-sortation">
@@ -392,7 +392,7 @@
                                 </div>
                                 <div class="card-container">
                                     <div class="card">
-                                        <input type="checkbox" name="" checked />
+                                        <input type="checkbox" name="" class="selectOne selectBox3" />
                                         <div class="card-front">
                                             <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
                                             <div class="card-sortation">
@@ -422,7 +422,7 @@
                                 </div>
                                 <div class="card-container">
                                     <div class="card">
-                                        <input type="checkbox" name="" checked />
+                                        <input type="checkbox" name="" class="selectOne selectBox3" />
                                         <div class="card-front">
                                             <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
                                             <div class="card-sortation">
@@ -455,7 +455,7 @@
                                 </div>
                             </div>
                             <div class="list-controller">
-                                <input type="checkbox" />
+                                <input type="checkbox" class="selectBoxAll3" />
                                 <span class="material-symbols-outlined"> download_for_offline </span>
                                 <span class="material-symbols-outlined"> delete </span>
                             </div>

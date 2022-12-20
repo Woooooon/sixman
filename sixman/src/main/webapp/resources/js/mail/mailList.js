@@ -297,3 +297,90 @@ function createCategoryAjax() {
     httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
     httpRequest.send(`category=${category}`);
 }
+
+function restoreAjax() {
+    const httpRequest = new XMLHttpRequest();
+    httpRequest.onreadystatechange = () => {
+        if (httpRequest.readyState === XMLHttpRequest.DONE) {
+                if (httpRequest.status === 200) {
+                    
+                    popup.alertPop("복구하기", "메일들이 복구가 완료되었습니다.");
+                    mailAjax(cPage, cSearch, cListTpye, cCategoryNo);
+
+                } else {
+                alert('Request Error!');
+                }
+        }
+    };
+
+    httpRequest.open('post', '/sixman/mail/restore');
+    httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
+    httpRequest.send(`no=${getChecked()}`);
+}
+
+function realDelete() {
+    const httpRequest = new XMLHttpRequest();
+    httpRequest.onreadystatechange = () => {
+        if (httpRequest.readyState === XMLHttpRequest.DONE) {
+                if (httpRequest.status === 200) {
+                    
+                    popup.alertPop("비우기", "휴지통을 비웠습니다.");
+                    mailAjax(cPage, cSearch, cListTpye, cCategoryNo);
+
+                } else {
+                alert('Request Error!');
+                }
+        }
+    };
+
+    httpRequest.open('post', '/sixman/mail/realDelete');
+    httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
+    httpRequest.send(`no=${getChecked()}`);
+}
+
+function updateRead() {
+    const httpRequest = new XMLHttpRequest();
+    httpRequest.onreadystatechange = () => {
+        if (httpRequest.readyState === XMLHttpRequest.DONE) {
+                if (httpRequest.status === 200) {
+
+                    mailAjax(cPage, cSearch, cListTpye, cCategoryNo);
+
+                } else {
+                alert('Request Error!');
+                }
+        }
+    };
+
+    httpRequest.open('post', '/sixman/mail/updateRead');
+    httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
+    httpRequest.send(`no=${getChecked()}`);
+}
+
+function changeCategory() {
+    const categoryItem = document.querySelector('#category-box .category-items');
+    const radios = categoryItem.querySelectorAll('input[type=radio]');
+    let category = 0;
+    for(let i = 0; i < radios.length; i++){
+        if(radios[i].checked){
+            no = radios.value;
+            break;
+        }
+    }
+    const httpRequest = new XMLHttpRequest();
+    httpRequest.onreadystatechange = () => {
+        if (httpRequest.readyState === XMLHttpRequest.DONE) {
+                if (httpRequest.status === 200) {
+
+                    mailAjax(cPage, cSearch, cListTpye, cCategoryNo);
+
+                } else {
+                alert('Request Error!');
+                }
+        }
+    };
+
+    httpRequest.open('post', '/sixman/mail/changeCategory');
+    httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
+    httpRequest.send(`no=${getChecked()}&category=${category}`);
+}

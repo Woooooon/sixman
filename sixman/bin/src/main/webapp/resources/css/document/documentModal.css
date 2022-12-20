@@ -1,0 +1,105 @@
+.approve-modal {
+    display: none;
+}
+
+.modaltop{
+
+}
+.savetop{
+
+   
+    
+    display: flex;
+    width: 40.1%;
+    position: absolute;
+    border: 1px solid var(--bo-40);
+    align-items: center;
+    height: 10%;
+    color: black;
+    background-color: var(--main-color);
+    height: 30px;
+    font-size: 1.2em;
+    padding-left: 10px;
+    top: 238px;
+    left: 575px;
+    
+}
+
+
+.approve-modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999999;
+    background-color: var(--bo-60);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.approve-modal form{
+    width: 40%;
+    height: 45%;
+    background-color: #fff;
+    box-shadow: 0px 0px 4px 1px var(--bo-60);
+    padding: 10px;
+}
+
+.docusave{
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+
+.docusave span{
+    position: absolute;
+    top: 5px;
+    right: -40px;
+    cursor: pointer;
+    color: var(--bo-40);
+}
+
+.docusave span :hover{
+    color: #000;
+}
+
+.docusave input[type='submit']{
+    border: none;
+    border-radius: 2px;
+    height: 70%;
+    color: #fff;
+    background-color: var(--main-color);
+    padding: 0 15px;
+    cursor: pointer;
+}
+
+.docusave input[type='submit']:hover{
+    background-color: #17a897;
+}
+
+.tree{
+    width: 100%;
+    height: 80%;
+    padding: 10px;
+}
+
+.savebutton{
+    display: flex;
+    flex-direction: row-reverse;
+    position: absolute;
+    top: 30%;
+    left: 57%;
+    gap: 10px;
+}
+.btn{
+    width: 100px;
+    border: 1px solid var(--bo-40);
+}
+

@@ -140,8 +140,8 @@
     justify-self: center;
     align-self: center;
     background-color: var(--main-color);
-    width: 60%;
-    height: 80%;
-    border-radius: 10px;
+    width: 45%;
+    height: 75%;
+    border-radius: 15px;
     color: white;
 }
