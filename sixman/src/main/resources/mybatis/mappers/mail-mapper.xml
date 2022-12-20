@@ -224,12 +224,14 @@
 	</update>
 
 	<update id="updateRead">
-		update r_mail
-		set check_yn = 'Y'
-		where no in 
+		UPDATE MAIL_VIEW
+		SET CHECK_YN = 'Y'
+		WHERE NO IN 
 		<foreach collection="no" item="n" separator="," open="(" close=")">
-			n
+			${n}
 		</foreach>
+		AND
+		R_MAIL = #{loginMember.email};
 	</update>
 	
 	<insert id="createCategory">
