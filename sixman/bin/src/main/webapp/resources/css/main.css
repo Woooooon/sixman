@@ -382,3 +382,78 @@ a{
     font-size: 0.5em;
     font-weight: 700;
 }
+
+.popup-section{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bo-80);
+    z-index: 99;
+}
+
+.popup-item{
+    padding: 30px 50px;
+    border-radius: 5px;
+
+    width: 600px;
+    height: 300px;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1.5fr 1fr 1fr 2fr;
+    justify-items: center;
+    align-content: center;
+    gap: 15px;
+
+    background-color: white;
+
+    overflow: hidden;
+
+}
+
+.popup-item span,
+.popup-item .popup-title,
+.popup-text{
+    grid-column: 1/3;
+}
+
+.popup-item span{
+    color: var(--main-color);
+    font-size: 5em;
+}
+
+.popup-item .popup-title{
+    font-weight: 700;
+    font-size: 2em;
+    color: var(--bo-80);
+    justify-self: start;
+}
+
+.popup-item .popup-text{
+    color: var(--bo-60);
+    justify-self: start;
+    font-weight: 300;
+    font-size: 1.2em;
+}
+
+.popup-item .popup-btn-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+}
+
+.popup-item #yesBtn,
+.popup-item #noBtn{
+    width: 100%;
+    height: 100%;
+}
+
+.red{
+    color: #e85c5c;
+}

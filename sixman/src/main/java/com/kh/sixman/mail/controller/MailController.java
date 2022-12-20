@@ -40,22 +40,20 @@ public class MailController {
 		}
 		return "mail/list";
 	}
-	
+		
 	@ResponseBody
-	@PostMapping("list")
+	@PostMapping(value = "list", produces = "application/json; charset=utf8")
 	public String list(@RequestParam Map<String, String> map, HttpSession session) {
 		
 		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
 		
 		MailVo vo = new MailVo();
-//		vo.setSendUser(loginMember.getNo());
-//		vo.setEmail(loginMember.getEmail());
-		vo.setSendUser("1");
-		vo.setRMail("a@naver.com");
+		vo.setSendUser(loginMember.getNo());
+		vo.setRMail(loginMember.getEmail());
 		vo.setCategoryName(map.get("listTpye"));
 		vo.setCategory(map.get("categoryNo"));
 		vo.setSearch(map.get("search"));
-		
+				
 //		category, keyword, page
 		int pageLimit = 5;
 		int boardLimit = 15;
@@ -68,13 +66,13 @@ public class MailController {
 	    PageVo pv = new PageVo(listCount,page,pageLimit,boardLimit);
 	    List<MailVo> list = ms.selectList(vo, rb);
 	    
-	    List<Map<String, String>> cateogryList = ms.categoryList("1");
+	    List<Map<String, String>> categoryList = ms.categoryList(loginMember.getNo());
 
 		Map<String, Object> resultMap = new HashMap<>();
 		
 		resultMap.put("pv", pv);
 		resultMap.put("list", list);
-		resultMap.put("cateogryList", cateogryList);
+		resultMap.put("categoryList", categoryList);
 		
 		Gson gson = new GsonBuilder().create();
 		String json = gson.toJson(resultMap);
@@ -89,17 +87,17 @@ public class MailController {
 	@PostMapping("write")
 	public String  write(MailVo vo, HttpSession session) {
 		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
-//		vo.setSendUser(loginMember.getNo());
+		vo.setSendUser(loginMember.getNo());
 		
 //		테스트
-		vo.setSendUser("1");
+//		vo.setSendUser("1");
 		
 		String rootPath = session.getServletContext().getRealPath("/");
 		List<AttachmentVo> fileList = FileUnit.uploadFile(vo.getFile(), rootPath, "upload/notice");
 		vo.setFileList(fileList);
 		int result = ms.write(vo);
 		
-		if(result == 1) {
+		if(result > 0) {
 			return "mail/list";
 		}else {
 			return "";
@@ -110,28 +108,43 @@ public class MailController {
 	public String detail(String no, Model model) {
 		MailVo vo = ms.selectOne(no);
 		model.addAttribute("vo", vo);
-		
 		if(vo==null) {return 	"redirect:/mail/list";}
 		return "mail/detail";
 	}
 	
 	@ResponseBody
 	@PostMapping("delete")
-	public void delete(List<String> no) {
-		System.out.println(no);
-//		int result = ms.delete(no);		
+	public void delete(@RequestParam List<String> no, HttpSession session) {
+		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
+		Map<String, Object> map = new HashMap<>();
+		map.put("loginMember", loginMember);
+		map.put("no", no);
+		int result = ms.delete(map);
+		
+		if(result!=1) {
+			
+		}
 	}
 	
 	@ResponseBody
 	@PostMapping("updateRead")
-	public void updateRead(List<String> no) {
-		int result = ms.updateRead(no);	
+	public void updateRead(List<String> no, HttpSession session) {
+		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
+		Map<String, Object> map = new HashMap<>();
+		map.put("loginMember", loginMember);
+		map.put("no", no);
+		int result = ms.updateRead(map);	
 	}
 	
 	@ResponseBody
 	@PostMapping("changeCategory")
-	public void changeCategory(List<String> no, String category) {
-		int result = ms.changeCategory(no, category);
+	public void changeCategory(List<String> no, String category, HttpSession session) {
+		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
+		Map<String, Object> map = new HashMap<>();
+		map.put("loginMember", loginMember);
+		map.put("no", no);
+		map.put("category", category);
+		int result = ms.changeCategory(map);
 	}
 	
 	@ResponseBody
@@ -140,31 +153,30 @@ public class MailController {
 		MemberVo loginMeber = (MemberVo) session.getAttribute("loginMember");
 		
 		int result = ms.createCategory(category, loginMeber.getNo());
-	}
-	
-	@ResponseBody
-	@PostMapping("categoryList")
-	public String categoryList(HttpSession session) {
-		MemberVo loginMeber = (MemberVo) session.getAttribute("loginMember");
 		
-		List<Map<String, String>> list = ms.categoryList(loginMeber.getNo());
-		Gson gson = new GsonBuilder().create();
-		String json = gson.toJson(list);
-		
-		return json;
-	}
-	
+		if(result!=1) {
+			
+		}
+	}	
 	
 	@ResponseBody
 	@PostMapping("restore")
-	public void restore(List<String> no) {
-		int result = ms.restore(no);
+	public void restore(List<String> no, HttpSession session) {
+		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
+		Map<String, Object> map = new HashMap<>();
+		map.put("loginMember", loginMember);
+		map.put("no", no);
+		int result = ms.restore(map);
 	}
 	
 	@ResponseBody
 	@PostMapping("realDelete")
-	public void realDelete(List<String> no) {
-		int result = ms.realDelete(no);
+	public void realDelete(List<String> no, HttpSession session) {
+		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
+		Map<String, Object> map = new HashMap<>();
+		map.put("loginMember", loginMember);
+		map.put("no", no);
+		int result = ms.realDelete(map);
 	}
 	
 	

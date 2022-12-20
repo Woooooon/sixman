@@ -14,6 +14,7 @@ import com.kh.sixman.common.AttachmentVo;
 import com.kh.sixman.file.dao.FileDao;
 import com.kh.sixman.mail.dao.MailDao;
 import com.kh.sixman.mail.vo.MailVo;
+import com.kh.sixman.member.vo.MemberVo;
 
 @Service
 public class MailService {
@@ -33,7 +34,7 @@ public class MailService {
 		
 		String no = Integer.toString(result1);
 		List<AttachmentVo> fileList = vo.getFileList();
-		int result3 = -1;
+		int result3 = 1;
 		if(fileList!=null) {
 			for(AttachmentVo fv : fileList) {
 				fv.setSubNo(no);
@@ -73,12 +74,12 @@ public class MailService {
 		return vo;
 	}
 
-	public int delete(List<String> no) {
-		return dao.delete(sst, no);
+	public int delete(Map<String,Object> map) {
+		return dao.delete(sst, map);
 	}
 
-	public int updateRead(List<String> no) {
-		return dao.updateRead(sst, no);
+	public int updateRead(Map<String, Object> map) {
+		return dao.updateRead(sst, map);
 	}
 
 	public int changeCategory(List<String> no, String category) {
@@ -99,12 +100,22 @@ public class MailService {
 		return dao.categoryList(sst, no);
 	}
 
-	public int restore(List<String> no) {
-		return dao.restore(sst, no);
+	public int restore(Map<String, Object> map) {
+		return dao.restore(sst, map);
 	}
 
-	public int realDelete(List<String> no) {
-		return dao.realDelete(sst, no);
+	public int realDelete(Map<String, Object> map) {
+		return dao.realDelete(sst, map);
+	}
+
+	public int changeCategory(Map<String, Object> map) {
+		
+		MemberVo loginMember = (MemberVo) map.get("loginMember");
+		
+		List<Map<String,String>>list = dao.categoryList(sst, loginMember.getNo());
+		
+		
+		return 0;
 	}
 
 }

@@ -1,0 +1,404 @@
+/* detail-box */
+.detail-box {
+    padding: 50px;
+}
+
+/* 프로젝트 제목 */
+
+.head {
+    display: flex;
+    margin-left: 50px;
+    margin-bottom: 10px;
+}
+
+.head > p {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.detail-btn {
+    display: flex;
+    margin-left: 390px;
+    justify-content: space-between;
+    width: 18%;
+
+}
+
+.btn, .c-btn {
+    border: none;
+    width: 120px;
+    height: 35px;
+}
+
+
+/* 상태 */
+
+.status {
+    margin: 10px;
+    display: flex;
+    color: #aaa;
+}
+
+.status-1 {
+    display: flex;
+    font-size: 17px;
+}
+
+.status-btn {
+    display: flex;
+    justify-content: space-between;
+    width: 20%;
+    margin-left: 25px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.status-btn > div {
+    padding-top: 4px;
+    font-size: 14px;
+}
+
+/* 버튼 toggle 상태 */
+
+.backgray {
+    background-color: #d3d3d3;
+}
+
+.backgreen {
+    background-color: #62C276;
+}
+
+.backred {
+    background-color: #E95E51;
+}
+
+.backblue {
+    background-color: #55BAE5;
+}
+
+.ing {
+    color: #FFFFFF;
+    width: 90px;
+    height: 25px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.delay {
+    color: #FFFFFF;
+    width: 90px;
+    height: 25px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.complete {
+    color: #FFFFFF;
+    width: 90px;
+    height: 25px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+/* 프로젝트 멤버 */
+
+.member {
+    display: flex;
+    margin: 10px;
+    color: #aaa;
+    font-size: 17px;
+}
+
+.member-1 {
+    display: flex;
+}
+
+.member-list {
+    display: flex;
+    margin-left: 25px;
+    width: 20%;
+    justify-content: space-between;
+}
+
+/* 플젝 날짜 */
+
+.date {
+    display: flex;
+    margin: 10px;
+    color: #aaa;
+    font-size: 17px;
+}
+
+.prjdate {
+    display: flex;
+}
+
+.date > p {
+    margin-left: 25px;
+}
+
+.startdate,
+.enddate {
+    margin-left: 25px;
+    padding: 5px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    outline: none;
+}
+
+
+/* 일정 bar */
+
+.percent {
+    display: flex;
+    margin: 10px;
+    color: #aaa;
+    font-size: 17px;
+}
+
+.clear {
+    display: flex;
+}
+
+.statusinput {
+    display: flex;
+}
+
+.progress {
+    margin-left: 25px;
+    background-color: #D3D3D3;
+    border-radius: 15px;
+    height: 20px;
+    width: 300px;
+}
+
+.progress-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: repeating-linear-gradient(
+    to left,
+    #12887A,
+    #2fa597,
+    #59c0b4);
+    box-shadow: 0 5px 5px -6px #12887A, 0 3px 7px #2fa597;
+    border-radius: 15px;
+    color: #fff;
+    height: 100%;
+    width: 0;
+    transition: 1s ease 0.3s;
+}
+
+.inputcontainer {
+    display: flex;
+    margin: 10px;
+    color: #aaa;
+    font-size: 17px;
+    width: 50%;
+}
+
+.valueinput {
+    margin-left: 10px;
+    width: 45px;
+    height: 25px;
+    outline: none;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.max {
+    margin-top: 8px;
+    margin-left: 10px;
+}
+
+/* 내용 */
+
+.hidden {
+    border-top: 2px solid #D3D3D3;
+    width: 58.7%;
+    height: 20px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+#prj-content {
+    margin: 10px;
+    resize: none;
+    width: 58.7%;
+    height: 200px;
+    border: 1px solid #D3D3D3;
+    padding: 10px;
+}
+
+/* to-do */
+
+.todo {
+    display: flex;
+    margin: 10px;
+    color: #aaa;
+    font-size: 17px;
+}
+
+.todo-plus {
+    display: flex;
+}
+
+.todo-plus > p {
+    margin-top: 3px;
+    margin-left: 10px;
+}
+
+a{
+    color: #aaa;
+    font-weight: bold;
+}
+
+a:hover{
+    color: #12887A;
+}
+
+.todo-list {
+    display: flex;
+    width: 60%;
+}
+
+.todo-box {
+    width: 300px;
+    height: 180px;
+    border-radius: 5px;
+    box-shadow: 1px 1px #D3D3D3;
+    margin: 0px 10px 0 10px;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border: 1px solid #D3D3D3;
+}
+
+
+.todo-title {
+    margin: 5px;
+    font-weight: bold;
+}
+
+.todo-writer {
+    margin: 5px;
+    color: #aaa;
+    font-size: 17px;
+}
+
+/* modal */
+
+#modal.modal-overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 8px 0 #2fa597;
+    backdrop-filter: blur(1.5px);
+    --webkit-backdrop-filter: blur(1.5px);
+    border-radius: 10px;
+    border: 1px solid #aaa;
+}
+#modal .modal-window {
+    background: #FFFFFF;
+    box-shadow: 3px 5px 10px 0 #2fa597;
+    --backdrop-filter: blur( 13.5px );
+    --webkit-backdrop-filter: blur( 13.5px );
+    border: 1px solid #d3d3d3;
+    border-radius: 5px;
+    width: 850px;
+    height: 780px;
+    position: relative;
+    padding: 10px;
+}
+#modal .title {
+    padding-top: 80px;
+    padding-left: 40px;
+    padding-bottom: 20px;
+    --display: inline; 
+    display: flex;
+    font-size: 35px;
+    font-weight: bolder;
+    justify-content: space-between;
+
+}
+
+#modal span {
+    --display: inline;
+    --float: right;
+    padding-right: 40px;
+    cursor: pointer;
+}
+
+#modal .status {
+    display: flex;
+    margin-left: 40px;
+    margin-bottom: 30px;
+}
+
+#modal .member {
+    display: flex;
+    margin-left: 40px;
+    margin-bottom: 30px;
+}
+
+#modal .date {
+    display: flex;
+    margin-left: 40px;
+    margin-bottom: 30px;
+}
+
+#modal input{
+    margin-left: 30px;
+    border: none;
+    outline: 1px #aaa;
+}
+
+#modal .hidden{
+    margin-left: 40px;
+    width: 84%;
+}
+
+#modal .status-btn {
+    display: flex;
+}
+
+#modal .contentbox {
+    width: 80%;
+    height: 40%;
+}
+
+#modal .content {
+    margin-left: 55px;
+    padding: 10px;
+    resize: none;
+    width: 100%;
+    height: 90%;
+}
+
+#modal .footer-btn {
+    display: flex;
+    justify-content: center;
+}
+
+.footer-btn .btn,
+.footer-btn .c-btn {
+    margin-right: 15px;
+}
+ 

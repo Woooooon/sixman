@@ -12,13 +12,16 @@
 <style>
 @charset "UTF-8";
 </style>
+<script>
+   
+    </script>
 
 
 <body>
 
 <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
 <main class="main-box">
-    <div id="docu-main">
+    <div id="docu-main" class="box">
         <div class="main-head">
             <div class="main-title">기안문서함</div>
         </div>
@@ -44,7 +47,10 @@
         <div class="list-box">
 
             <div class="list-item first">
-                
+                <input type='checkbox'
+                name='dddd' 
+                value='selectall'
+                onclick='selectAll(this)'/> 
                 <!-- <span></span> -->
                 <p>기안일</p>
                 <p>기안 양식</p>
@@ -54,7 +60,7 @@
             </div>
 
             <div class="list-item">
-                <input type="checkbox">
+                <input type="checkbox" name="dddd">
                 <!-- <span></span> -->
                 <p>2022/12/05</p>
                 <p>아몰루</p>
@@ -63,7 +69,7 @@
                 <p>결재대기</p>
             </div>
             <div class="list-item">
-                <input type="checkbox">
+                <input type="checkbox" name="dddd">
                 <!-- <span></span> -->
                 <p>2022/12/05</p>
                 <p>아몰루</p>
@@ -72,7 +78,7 @@
                 <p>결재대기</p>
             </div>
             <div class="list-item">
-                <input type="checkbox">
+                <input type="checkbox" name="dddd">
                 <!-- <span></span> -->
                 <p>2022/12/05</p>
                 <p>아몰루</p>
@@ -81,7 +87,7 @@
                 <p>결재대기</p>
             </div>
             <div class="list-item">
-                <input type="checkbox">
+                <input type="checkbox" name="dddd">
                 <!-- <span></span> -->
                 <p>2022/12/05</p>
                 <p>아몰루</p>
@@ -90,7 +96,7 @@
                 <p>결재대기</p>
             </div>
             <div class="list-item">
-                <input type="checkbox">
+                <input type="checkbox" name="dddd">
                 <!-- <span></span> -->
                 <p>2022/12/05</p>
                 <p>아몰루</p>
@@ -99,7 +105,7 @@
                 <p>결재대기</p>
             </div>
             <div class="list-item">
-                <input type="checkbox">
+                <input type="checkbox" name="dddd">
                 <!-- <span></span> -->
                 <p>2022/12/05</p>
                 <p>아몰루</p>
@@ -107,7 +113,24 @@
                 <p>3222</p>
                 <p>결재대기</p>
             </div>
-            
+            <div class="list-item">
+                <input type="checkbox"name="dddd">
+                <!-- <span></span> -->
+                <p>2022/12/05</p>
+                <p>아몰루</p>
+                <p>기안서 올립니다.</p>
+                <p>3222</p>
+                <p>결재대기</p>
+            </div>
+            <div class="list-item">
+                <input type="checkbox" name="dddd">
+                <!-- <span></span> -->
+                <p>2022/12/05</p>
+                <p>아몰루</p>
+                <p>기안서 올립니다.</p>
+                <p>3222</p>
+                <p>결재대기</p>
+            </div>
 
             
         </div>
@@ -123,14 +146,16 @@
             <div class="page-btn">5</div>
             <span class="material-symbols-outlined"> chevron_right </span>
             <span class="material-symbols-outlined"> keyboard_double_arrow_right </span>
+       
         </div>
-        
 
         <div class="docu-write">
             <!-- <button onclick="" id="documentwrite"><a href="">결재 상신</a></button> -->
-           <input type="button" value="결재상신">
-
+           <!-- <input type="button" value="결재상신"> -->
+           <input name="submit" class="btn" type="submit" value="결재상신">
+           <input name="subit" class="btn" type="submit" value="삭제">
         </div>
+    
 
 
 
@@ -140,5 +165,18 @@
 
     
 </main>
+
+
 </body>
+
+<script>
+function selectAll(selectAll)  {
+    const checkboxes 
+       = document.querySelectorAll('input[type="checkbox"]');
+    
+    checkboxes.forEach((checkbox) => {
+      checkbox.checked = selectAll.checked
+    })
+  }
+</script>
 </html>

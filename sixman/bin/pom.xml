@@ -27,14 +27,6 @@
 				 </exclusion>
 			</exclusions>
 		</dependency>
-		
-		<!-- 트랜잭션 -->
-		<dependency>
-		    <groupId>org.springframework</groupId>
-		    <artifactId>spring-tx</artifactId>
-		    <version>${org.springframework-version}</version>
-		</dependency>
-		
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
@@ -123,9 +115,9 @@
 			<artifactId>junit</artifactId>
 			<version>4.7</version>
 			<scope>test</scope>
-		</dependency>    
+		</dependency>
 		
-		<!-- 디비 관련 설정 -->
+		<!-- 디비 관련 설정 --> 
 		<!-- ojdbc8 -->
 		<dependency>
 		    <groupId>com.oracle.database.jdbc</groupId>
@@ -135,9 +127,9 @@
 		
 		<!-- spring-jdbc -->
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-jdbc</artifactId>
-			<version>${org.springframework-version}</version>
+		   <groupId>org.springframework</groupId>
+		   <artifactId>spring-jdbc</artifactId>
+		   <version>${org.springframework-version}</version>
 		</dependency>
 		
 		<!-- dbcp -->
@@ -161,12 +153,27 @@
 		    <version>2.0.6</version>
 		</dependency>
 		
-		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+		<!-- lombok -->
 		<dependency>
 		    <groupId>org.projectlombok</groupId>
 		    <artifactId>lombok</artifactId>
 		    <version>1.18.24</version>
 		    <scope>provided</scope>
+		</dependency>
+		
+		<!-- tx -->
+		<!-- transaction -->
+		<dependency>
+		   <groupId>org.springframework</groupId>
+		   <artifactId>spring-tx</artifactId>
+		   <version>${org.springframework-version}</version>
+		</dependency>
+		
+		<!-- 암호화 -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-core</artifactId>
+		    <version>5.8.0</version>
 		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
@@ -180,7 +187,7 @@
 		<dependency>
 		    <groupId>commons-fileupload</groupId>
 		    <artifactId>commons-fileupload</artifactId>
-		    <version>1.3.1</version>
+		    <version>1.4</version>
 		</dependency>
 		
 		<!-- commons-io -->
@@ -189,7 +196,7 @@
 		    <artifactId>commons-io</artifactId>
 		    <version>2.4</version>
 		</dependency>
-		
+								       
 	</dependencies>
     <build>
         <plugins>

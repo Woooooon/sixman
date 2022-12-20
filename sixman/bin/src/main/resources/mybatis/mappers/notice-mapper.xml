@@ -7,21 +7,31 @@
     <select id="selectCount" parameterType="String" resultType="int">
         SELECT COUNT(*)
         FROM NOTICE
-        <if test=" keyword != '' ">
-	        WHERE TITLE LIKE '%${keyword}%'
-	        OR CONTENT LIKE '%${keyword}%'
-        </if>  
-        ORDER BY ENROLL_DATE
+        <trim prefix="WHERE" prefixOverrides="OR||AND">
+	        <if test=" keyword != '' ">
+		        (
+		        TITLE LIKE '%${keyword}%'
+		        OR CONTENT LIKE '%${keyword}%'
+		        )
+	        </if>
+	        AND DELETE_YN = 'N' 
+		</trim>
+        order by inportant_yn DESC, enroll_date
     </select>
     
     <select id="selectList" parameterType="String" resultType="NoticeVo">
         SELECT *
         FROM NOTICE
-        <if test=" keyword != '' ">
-	        WHERE TITLE LIKE '%${keyword}%'
-	        OR CONTENT LIKE '%${keyword}%'
-        </if>
-        ORDER BY ENROLL_DATE
+        <trim prefix="WHERE" prefixOverrides="OR||AND">
+	        <if test=" keyword != '' ">
+		        (
+		        TITLE LIKE '%${keyword}%'
+		        OR CONTENT LIKE '%${keyword}%'
+		        )
+	        </if>
+	        AND DELETE_YN = 'N' 
+		</trim>
+        order by inportant_yn DESC, enroll_date
     </select>
     
     <insert id="write">
@@ -60,5 +70,20 @@
     	select * from notice
     	where no = ${no}
     </select>
+    
+    <update id="updateOne">
+		update notice
+		set 
+		"TITLE" = #{title},
+		"CONTENT" = #{content},
+		INPORTANT_YN = #{inportantYn}
+		where no = ${no}
+	</update>
+	
+	<update id="updateDelete" parameterType="String">
+		update notice
+		set delete_yn = 'Y'
+		where no = ${no}
+	</update>
     
 </mapper>

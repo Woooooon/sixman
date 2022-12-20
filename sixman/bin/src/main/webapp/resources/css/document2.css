@@ -16,12 +16,15 @@
 
 }
 
+
 .main-title{
+    width: fit-content;
+    padding: 10px;
+    /* border-bottom: 1px solid var(--main-color); */
     font-size: 3em;
     font-weight: 700;
-    color: rgb(66, 66, 66);
-    gap: 10px;
-    border-bottom: 1px solid #ddd;
+    padding-left: 40px;
+    padding-top: 30px;
     
 }
 
@@ -32,12 +35,14 @@
 .mid-box{
     display: flex;
     gap: 10px;
+    padding-left: 40px;
 }
 
 .search-bar{
     display: flex;
     gap: 10px;
     justify-content: center;
+    padding-right: 45px;
    
 }
 
@@ -60,6 +65,10 @@
     align-items: center;
     height: 10%;
 }
+.list-item p:nth-of-type(1){
+    padding-left: 10px;
+}
+
 .list-item input{
     position: absolute;
     left: -30px;
@@ -73,11 +82,26 @@
     background-color: rgb(214, 214, 214);
     height: 50px;
     font-size: 1.2em;
-
+    padding-left: 10px;
 }
 .docu-write{
-    text-align: end;
-    padding: 25px;
+    display: flex;
+    width: 100%;
+    gap: 10px;
+    justify-content: flex-end;
+    padding-right: 45px;
+    top: 30px;
+}
+.docu-write > *{
+    width: 100px;
+}
+button.btn *{
+    color: var(--main-color);
+}
+
+button.btn:hover{
+    background: none;
+    border: 1px solid var(--main-color);
 }
 
 

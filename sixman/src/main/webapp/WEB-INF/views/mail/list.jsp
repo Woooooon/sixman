@@ -12,8 +12,9 @@
 <script defer src="${path}/resources/js/mail/mailList.js"></script>
 <script>
 	window.onload = ()=>{
-		const listType = '${listType}';
+		let listType = '${listType}';
 		if(listType!=null){
+			if(listType == '') {listType = null;}
 			mailAjax(1, null, listType);
 		}else{
 			mailAjax(1);
@@ -34,12 +35,7 @@
 				</c:choose>
 			</div>
 			<div id="category-list">
-				<div class="category-item cate-checked">전체 메일</div>
-				<div class="category-item">카테고리 1</div>
-				<div class="category-item">카테고리 2</div>
-				<div class="category-item">카테고리 3</div>
-				<div class="category-item"><span class="material-symbols-outlined"> add </span>추가</div>
-				<label for=""></label>
+				<div class="category-item create-btn"><span class="material-symbols-outlined"> add </span>추가</div>
 			</div>
 		</div>
         <div class="header-box">
@@ -51,7 +47,7 @@
         			<a href="${path}/mail/write" class="btn" onclick="location.href='/sixman/notice/write'"><span class="material-symbols-outlined"> add </span><p>메일쓰기</p></a>
         		</c:otherwise>
         	</c:choose>
-            <div class="search-bar"><input id="search-input" type="text" placeholder="검색"><span class="material-symbols-outlined"> search </span></div>
+            <div class="search-bar"><input id="search-input" type="text" placeholder="검색"><span class="material-symbols-outlined" onclick="search()"> search </span></div>
         </div>
         <div class="list-box">
             <div class="first-item">
@@ -59,29 +55,23 @@
                     <input type="checkbox">
                     <c:choose>
                     	<c:when test="${listType == '임시보관함'}">
-		                    <p>전송</p>
 		                    <p onclick="deleteAjax()">삭제</p>
                     	</c:when>
                     	<c:when test="${listType == '휴지통'}">
-		                    <p>복원</p>
-		                    <p>영구삭제</p>
+		                    <p onclick="restoreAjax()">복원</p>
+		                    <p onclick="realDelete()">영구삭제</p>
                     	</c:when>
                     	<c:otherwise>
-	                    	<p>읽음</p>
+	                    	<p onclick="updateRead()">읽음</p>
 		                    <p onclick="deleteAjax()">삭제</p>
 		                    <div class="category-btn">
 		                    	이동
 		                        <span class="material-symbols-outlined"> arrow_drop_down </span>
 		                        <div id="category-box" style="display: none;">
 		                            <div class="category-items">
-		                                <label>즐겨찾기<input name="category" type="radio"><span class='material-symbols-outlined'> close </span></label>
-		                                <label>즐겨찾기<input name="category" type="radio"></label>
 		                            </div>
 		                            <div class="category-footer">
-		                                <div>
-		                                    <input type="text">
-		                                    <div class="btn"><p>추가</p></div>
-		                                </div>
+										<div class="c-btn create-btn"><p>추가</p></div>
 		                                <div class="btn"><p>이동</p></div>
 		                            </div>
 		                        </div>
@@ -115,5 +105,6 @@
         </div>
     </div>
 </main>
+
 </body>
 </html>

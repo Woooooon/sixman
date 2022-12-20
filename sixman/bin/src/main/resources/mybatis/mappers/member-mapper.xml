@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="memberMapper">
+	
+	<select id="login" resultType="MemberVo">
+		SELECT 
+		    M.NO
+		    , M.ID
+		    , M.PWD
+		    , M.NAME
+		    , M.EMAIL
+		    , M.PHONE
+		    , M.BIRTHDAY
+		    , M.BANK_NO
+		    , B.NAME AS BANK_NAME
+		    , M.ACCOUNT
+		    , M.ADDRESS
+		    , M.DEPT_NO
+		    , D.NAME AS DEPT_NAME
+		    , M.POSITION_NO
+		    , P.POSITION AS POSITION_NAME
+		    , M.AUTHORIZE_NO
+		    , A."LEVEL" AS AUTHORIZE_NAME
+		    , M.JOIN_DATE
+		    , M.MODIFY_DATE
+		    , M.RESIGNATION_YN
+		    , M.ENTRUST_NO
+		FROM MEMBER M
+		JOIN BANK B ON B.NO = M.BANK_NO
+		JOIN POSITION P ON P.NO = M.POSITION_NO
+		JOIN DEPARTMENT D ON D.NO = M.DEPT_NO
+		JOIN AUTHORIZE A ON A.NO = M.AUTHORIZE_NO
+		WHERE M.ID = #{id}
+		AND M.RESIGNATION_YN = 'N'	
+	</select>
+	
+	<select id="bankList" resultType="BankVo">
+		SELECT 
+			"NO"
+			, "NAME"
+		FROM BANK
+	</select>
+	
+	<select id="authorizeList" resultType="AuthorizeVo">
+		SELECT 
+			"NO"
+			, "LEVEL"
+		FROM AUTHORIZE
+	</select>
+	
+	<insert id="join">
+		INSERT INTO
+		MEMBER
+		(
+			"NO" 
+			, "ID"
+			, "PWD"
+			, "NAME"
+			, "EMAIL"
+			, "PHONE"
+			, "BIRTHDAY"
+			, "BANK_NO"
+			, "ACCOUNT"
+			, "ADDRESS"
+			, "DEPT_NO"
+			, "POSITION_NO"
+			, "AUTHORIZE_NO"
+			, "JOIN_DATE"
+			, "MODIFY_DATE"
+			, "RESIGNATION_YN"
+			, "ENTRUST_NO"
+		)
+		VALUES 
+		(
+			SEQ_MEMBER_NO.NEXTVAL
+			, #{id}
+			, #{pwd}
+			, #{name}
+			, #{email}
+			, #{phone}
+			, #{birthday}
+			, #{bankNo}
+			, #{account}
+			, #{address}
+			, #{deptNo}
+			, #{positionNo}
+			, #{authorizeNo}
+			, SYSDATE
+			, SYSDATE
+			, 'N'
+			, #{entrustNo}
+		)
+	</insert>
+	
+	<select id="getNo" resultType="String">
+		SELECT "NO"
+    	FROM MEMBER
+    	WHERE "ID" = #{id}
+    	AND "NAME" = #{name}
+	</select>
+	
+	<update id="insertAllFile">
+		insert all
+		<foreach collection="list" item="vo" separator=" ">
+			into ${tableName}_A
+		(
+			"NO",
+			"ORIGIN_NAME",
+			"MEMBER_NO",
+			"CHANGE_NAME",
+			"FILE_PATH",
+			"ENROLL_DATE"
+		)
+		VALUES
+		(
+			get_seq_no('seq_${tableName}_a_no'),
+			#{vo.originName},
+			${vo.subNo},
+			#{vo.changeName},
+			#{vo.filePath},
+			SYSDATE
+		)
+		</foreach>
+		select * from dual
+	</update>
+	
+	<select id="selectFileOne" resultType="AttachmentVo">
+		select 
+			* from 
+			(
+				select 
+					"NO",
+					"ORIGIN_NAME",
+					"MEMBER_NO" as subNo,
+					"CHANGE_NAME",
+					"FILE_PATH",
+					"ENROLL_DATE"
+		 		from ${tableName}_A
+				where MEMBER_NO = ${no}
+				order by "ENROLL_DATE" DESC
+			)
+		 where rownum = 1
+	</select>
+	
+	<select id="getFile" resultType="AttachmentVo">
+		select 
+			"NO",
+			"ORIGIN_NAME",
+			"MEMBER_NO_NO" as subNo,
+			"CHANGE_NAME",
+			"FILE_PATH",
+			"ENROLL_DATE"
+ 		from ${tableName}_A
+		where NO = ${no}
+	</select>
+</mapper>

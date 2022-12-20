@@ -6,31 +6,49 @@
         <title>Insert title here</title>
         <link rel="stylesheet" href="<c:url value='/resources/css/admin/member/join.css'/>" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
         <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+        <link rel="stylesheet" href="/sixman\resources\jstree\default\style.min.css" />
+        <script src="https://kit.fontawesome.com/ae846b135b.js" crossorigin="anonymous"></script>
+        <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+        <script defer src="<c:url value='/resources/js/admin/member/join.js'/>"></script>
     </head>
+
     <body>
         <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
         <main id="main-page" class="main-box">
             <div id="main-box-2">
                 <aside id="dept-wrap" class="box">
+                    <div class="dept-guide">
+                        <span class="material-symbols-outlined"> diversity_3 </span>
+                        <p>배달의 민족</p>
+                    </div>
                     <div id="jstree">
                         <ul>
-                            <li>
-                                Root node 1
+                            <li data-jstree='{"icon":"fa fa-folder-open icon-color"}'>
+                                <input type="text" value="영업부" disabled />
                                 <ul>
-                                    <li id="child_node_1">Child node 1</li>
-                                    <li>Child node 2</li>
+                                    <li data-jstree='{"icon":"fa fa-folder icon-color"}'>
+                                        <input type="text" value="영업 2팀" disabled />
+                                        <ul>
+                                            <li data-jstree='{"icon":"fa fa-user icon-color"}'>윤태원</li>
+                                            <li data-jstree='{"icon":"fa fa-user icon-color"}'>구기석</li>
+                                        </ul>
+                                    </li>
+                                    <li data-jstree='{"icon":"fa fa-folder icon-color"}'>
+                                        <input type="text" value="영업 3팀" disabled />
+                                        <ul>
+                                            <li data-jstree='{"icon":"fa fa-user icon-color"}'>윤태원</li>
+                                            <li data-jstree='{"icon":"fa fa-user icon-color"}'>구기석</li>
+                                        </ul>
+                                    </li>
                                 </ul>
                             </li>
-                            <li>Root node 2</li>
                         </ul>
                     </div>
-                    <button>demo button</button>
                 </aside>
                 <section id="member-wrap">
-                    <form action="">
+                    <form action="/sixman/admin/member/join" method="POST" enctype="multipart/form-data">
                         <article id="member-info" class="box">
                             <figure id="companyLogo">
                                 <img alt="기업로고" src="<c:url value='/resources/img/google.png'/>" />
@@ -43,12 +61,12 @@
                                 <div class="info-wrap">
                                     <div class="left-info">
                                         <div id="profile-view">
-                                            <img alt="프로필사진" src="<c:url value='/resources/img/cat.png'/>" />
+                                            <img alt="프로필사진" src="<c:url value='/resources/img/cat.png'/>" class="image-box" />
                                         </div>
                                         <div id="dept" class="write">
                                             <label for="">부 서</label>
-                                            <select name="dept_no" id="dept">
-                                                <option value="1">영업부</option>
+                                            <select name="deptNo" id="dept">
+                                                <option value="1">부 서</option>
                                                 <option value="2">인사부</option>
                                                 <option value="3">관리부</option>
                                                 <option value="4">마케팅부</option>
@@ -56,7 +74,7 @@
                                         </div>
                                         <div id="position" class="write">
                                             <label for="">직 급</label>
-                                            <select name="" id="">
+                                            <select name="positionNo">
                                                 <option value="1">사 원</option>
                                                 <option value="2">대 리</option>
                                                 <option value="3">과 장</option>
@@ -66,32 +84,32 @@
                                         </div>
                                         <div id="birth" class="write">
                                             <label for="">생년월일</label>
-                                            <input type="text" />
+                                            <input type="text" name="birthday" />
                                         </div>
                                         <div id="email" class="write">
                                             <label for="">E-MAIL</label>
-                                            <input type="text" />
+                                            <input type="text" name="email" />
                                         </div>
                                     </div>
                                     <div class="right-info">
                                         <div id="id" class="write">
                                             <label for="">사 번</label>
-                                            <input type="text" />
+                                            <input type="text" name="id" />
                                         </div>
                                         <div id="name" class="write">
                                             <label for="">성 명</label>
-                                            <input type="text" />
+                                            <input type="text" name="name" />
                                         </div>
                                         <div id="phone" class="write">
                                             <label for="">연락처</label>
-                                            <input type="text" />
+                                            <input type="text" name="phone" />
                                         </div>
                                         <div id="authorize" class="write">
                                             <label for="">권 한</label>
-                                            <select name="" id="dept">
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
+                                            <select name="authorizeNo">
+                                                <c:forEach items="${authorizeList}" var="i">
+                                                    <option value="${i.no}">${i.level}</option>
+                                                </c:forEach>
                                             </select>
                                         </div>
                                         <div id="team" class="write">
@@ -104,22 +122,19 @@
                                         </div>
                                         <div id="bank" class="write">
                                             <label for="">계좌번호</label>
-                                            <select name="" id="">
-                                                <option value="1">신 한</option>
-                                                <option value="2">기 업</option>
-                                                <option value="3">하 나</option>
-                                                <option value="4">농 협</option>
-                                                <option value="5">국 민</option>
-                                                <option value="5">카카오</option>
+                                            <select name="bankNo">
+                                                <c:forEach items="${bankList}" var="i">
+                                                    <option value="${i.no}">${i.name}</option>
+                                                </c:forEach>
                                             </select>
-                                            <input type="text" />
+                                            <input type="text" name="account" />
                                         </div>
                                     </div>
                                 </div>
-                                <div id="address" class="write">
+                                <div id="address-wrap" class="write">
                                     <label for="">주 소</label>
-                                    <input type="text" />
-                                    <button type="button">검 색</button>
+                                    <input type="text" id="address" name="address" />
+                                    <button type="button" id="address_kakao">검 색</button>
                                 </div>
                                 <div id="submit">
                                     <input type="submit" value="사원 등록" />
@@ -134,194 +149,50 @@
                                 <div id="profile-pic">
                                     <div class="addfile">
                                         <span>프로필사진</span>
-                                        <input type="file" />
-                                        <button type="button" class="plus">
+                                        <button type="button" class="plus" id="add-pic">
                                             <span class="material-symbols-outlined">add</span>
                                             추 가
                                         </button>
-                                    </div>
-                                    <div class="filelist">
-                                        <div id="file-info">
-                                            <span class="material-symbols-outlined">image</span>
-                                            <label for="">장화.png</label>
-                                            <button type="button" class="remove">
-                                                <span class="material-symbols-outlined">remove</span>
-                                                삭 제
-                                            </button>
-                                        </div>
+                                        <input type="file" id="real-pic" />
                                     </div>
                                 </div>
                                 <div id="resume">
                                     <div class="addfile">
                                         <span>이력서</span>
                                         <input type="file" />
-                                        <button type="button" class="plus">
+                                        <button type="button" class="plus" id="add-resume">
                                             <span class="material-symbols-outlined">add</span>
                                             추 가
                                         </button>
-                                    </div>
-                                    <div class="filelist">
-                                        <div id="file-info">
-                                            <span class="material-symbols-outlined"> description</span>
-                                            <label for="">이력서.pdf</label>
-                                            <button type="button" class="remove">
-                                                <span class="material-symbols-outlined">remove</span>
-                                                삭 제
-                                            </button>
-                                        </div>
                                     </div>
                                 </div>
                                 <div id="copy-account">
                                     <div class="addfile">
                                         <span>통장사본</span>
                                         <input type="file" />
-                                        <button type="button" class="plus">
+                                        <button type="button" class="plus" id="add-account">
                                             <span class="material-symbols-outlined">add</span>
                                             추 가
                                         </button>
-                                    </div>
-                                    <div class="filelist">
-                                        <div id="file-info">
-                                            <span class="material-symbols-outlined">image</span>
-                                            <label for="">신한은행사본.png</label>
-                                            <button type="button" class="remove">
-                                                <span class="material-symbols-outlined">remove</span>
-                                                삭 제
-                                            </button>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div id="attachment-file" class="box">
                                 <div class="title">
                                     <h2>첨부파일</h2>
-                                    <input type="file" />
                                     <div id="controller">
-                                        <span class="material-symbols-outlined">add_circle</span>
-                                        <span class="material-symbols-outlined">delete</span>
+                                        <input type="checkbox" class="all_check" />
+                                        <span id="add-attfile" class="material-symbols-outlined">add_circle</span>
+                                        <span id="remove-attfile" class="material-symbols-outlined">delete</span>
                                     </div>
                                 </div>
-                                <div class="filelist">
-                                    <div id="file-info">
-                                        <div class="checked">
-                                            <input type="checkbox" />
-                                            <span class="material-symbols-outlined">image</span>
-                                        </div>
-                                        <label for="">장화.png</label>
-                                        <button type="button" class="remove">
-                                            <span class="material-symbols-outlined">remove</span>
-                                            삭 제
-                                        </button>
-                                    </div>
-                                    <div id="file-info">
-                                        <div class="checked">
-                                            <input type="checkbox" />
-                                            <span class="material-symbols-outlined">image</span>
-                                        </div>
-                                        <label for="">장화.png</label>
-                                        <button type="button" class="remove">
-                                            <span class="material-symbols-outlined">remove</span>
-                                            삭 제
-                                        </button>
-                                    </div>
-                                    <div id="file-info">
-                                        <div class="checked">
-                                            <input type="checkbox" />
-                                            <span class="material-symbols-outlined">image</span>
-                                        </div>
-                                        <label for="">장화.png</label>
-                                        <button type="button" class="remove">
-                                            <span class="material-symbols-outlined">remove</span>
-                                            삭 제
-                                        </button>
-                                    </div>
-                                    <div id="file-info">
-                                        <div class="checked">
-                                            <input type="checkbox" />
-                                            <span class="material-symbols-outlined">image</span>
-                                        </div>
-                                        <label for="">장화.png</label>
-                                        <button type="button" class="remove">
-                                            <span class="material-symbols-outlined">remove</span>
-                                            삭 제
-                                        </button>
-                                    </div>
-                                    <div id="file-info">
-                                        <div class="checked">
-                                            <input type="checkbox" />
-                                            <span class="material-symbols-outlined">image</span>
-                                        </div>
-                                        <label for="">장화.png</label>
-                                        <button type="button" class="remove">
-                                            <span class="material-symbols-outlined">remove</span>
-                                            삭 제
-                                        </button>
-                                    </div>
-                                    <div id="file-info">
-                                        <div class="checked">
-                                            <input type="checkbox" />
-                                            <span class="material-symbols-outlined">image</span>
-                                        </div>
-                                        <label for="">장화.png</label>
-                                        <button type="button" class="remove">
-                                            <span class="material-symbols-outlined">remove</span>
-                                            삭 제
-                                        </button>
-                                    </div>
-                                    <div id="file-info">
-                                        <div class="checked">
-                                            <input type="checkbox" />
-                                            <span class="material-symbols-outlined">image</span>
-                                        </div>
-                                        <label for="">장화.png</label>
-                                        <button type="button" class="remove">
-                                            <span class="material-symbols-outlined">remove</span>
-                                            삭 제
-                                        </button>
-                                    </div>
-                                    <div id="file-info">
-                                        <div class="checked">
-                                            <input type="checkbox" />
-                                            <span class="material-symbols-outlined">image</span>
-                                        </div>
-                                        <label for="">장화.png</label>
-                                        <button type="button" class="remove">
-                                            <span class="material-symbols-outlined">remove</span>
-                                            삭 제
-                                        </button>
-                                    </div>
-                                    <div id="file-info">
-                                        <div class="checked">
-                                            <input type="checkbox" />
-                                            <span class="material-symbols-outlined">image</span>
-                                        </div>
-                                        <label for="">장화.png</label>
-                                        <button type="button" class="remove">
-                                            <span class="material-symbols-outlined">remove</span>
-                                            삭 제
-                                        </button>
-                                    </div>
-                                </div>
+
+                                <div class="att-filelist"></div>
                             </div>
                         </article>
                     </form>
                 </section>
             </div>
         </main>
-        <script>
-            $(function () {
-                $('#jstree').jstree();
-
-                $('#jstree').on('changed.jstree', function (e, data) {
-                    console.log(data.selected);
-                });
-
-                $('button').on('click', function () {
-                    $('#jstree').jstree(true).select_node('child_node_1');
-                    $('#jstree').jstree('select_node', 'child_node_1');
-                    $.jstree.reference('#jstree').select_node('child_node_1');
-                });
-            });
-        </script>
     </body>
 </html>

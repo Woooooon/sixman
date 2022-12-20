@@ -4,26 +4,26 @@
     <head>
         <meta charset="UTF-8" />
         <title>Insert title here</title>
-        <link rel="stylesheet" href="<c:url value='resources/css/member/login.css'/>" />
+        <link rel="stylesheet" href="/sixman/resources/css/member/login.css"/>
     </head>
     <body>
         <main>
             <section id="loginBox">
                 <figure id="companyLogo">
-                    <img alt="기업로고" src="<c:url value='/resources/img/google.png'/>" />
+                    <img src="/sixman/resources/img/google.png" alt="기업로고" />
                 </figure>
-                <form action="/sixman" method="POST">
+                <form action="" method="POST">
                     <div id="memberId">
                         <input type="text" name="Id" placeholder="Username" />
                     </div>
                     <div id="memberPwd">
-                        <input type="text" name="PWD" placeholder="Password" />
+                        <input type="text" name="pwd" placeholder="Password" />
                     </div>
                     <input type="submit" value="Login" />
                 </form>
             </section>
             <figure id="sixman">
-                <img src="<c:url value='resources/img/logo.png'/>" alt="SIXMAN" />
+                <img src="/sixman/resources/img/logo.png" alt="SIXMAN" />
             </figure>
         </main>
     </body>

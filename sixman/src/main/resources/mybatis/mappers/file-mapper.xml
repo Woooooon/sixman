@@ -7,7 +7,7 @@
 	<update id="insertAll">
 		insert all
 		<foreach collection="list" item="vo" separator=" ">
-			into ${tableName}
+			into ${tableName}_A
 		(
 			"NO",
 			"ORIGIN_NAME",
