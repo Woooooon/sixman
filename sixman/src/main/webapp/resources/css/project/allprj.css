@@ -1,15 +1,16 @@
 
 .myprj {
     padding: 35px;
-    border: 1px solid green;
+    --border: 1px solid green;
     display: grid;
     grid-template-columns: repeat(5, 280px);
-    row-gap: 20px;
+    gap: 20px;
 }
 
 .prjtype {
     display: flex;
     margin: 10px 0 10px 0;
+    cursor: pointer;
 }
 
 .prjtype p {
@@ -35,6 +36,10 @@
     margin: 15px;
 }
 
+.box-header > span {
+    margin-right: 5px;
+}
+
 .box-header p {
     margin-top: 4px;
 }
@@ -51,11 +56,60 @@
     background-color: yellow;
 }
 
+.hidden {
+    width: 100%;
+    height: 10px;
+    border-top: 1px solid #aaa;
+}
+
 .prj-all-box {
     padding: 35px;
-    border: 1px solid red;
+    --border: 1px solid red;
     display: grid;
     grid-template-columns: repeat(5, 280px);
+    gap: 20px;
+}
+
+.date {
+    display: flex;
+    margin: 40px 10px 10px 15px;
+}
+
+.prjdate,
+.date > p,
+.prjdate2 {
+    margin-top: 3px;
+    color: #6FA8B5;
+}
+
+.date > p {
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.date > span {
+    color: #12887A;
+    margin-right: 5px;
+}
+
+.reader {
+    display: flex;
+    margin: 20px 10px 10px 15px;
+}
+
+.reader > span {
+    margin-right: 5px;
+}
+
+.reader > p {
+    font-weight: bold;
+}
+
+.status {
+    margin-left: 50px;
+    display: flex;
+    justify-content: center;
+    padding-top: 5px;
 }
 
 .status-progress {
@@ -63,4 +117,35 @@
     height: 12px;
     border-radius: 15px;
     background-color: #d9d9d9;
+    margin: 30px 15px 10px;
+}
+
+.ing {
+    background-color: #62C276;
+    color: #FFFFFF;
+    width: 90px;
+    height: 25px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.delay {
+    background-color: #E95E51;
+    color: #FFFFFF;
+    width: 90px;
+    height: 25px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.complete {
+    background-color: #55BAE5;
+    color: #FFFFFF;
+    width: 90px;
+    height: 25px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
 }

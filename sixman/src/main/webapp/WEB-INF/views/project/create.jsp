@@ -16,7 +16,7 @@
 </head>
 <body>
     <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
-    <form action="" method="">
+    <form action="" method="post" enctype="multipart/form-data">
     <main class="main-box">
         <div class="main-box2">
         <div class="create-box box">

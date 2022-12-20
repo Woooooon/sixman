@@ -43,7 +43,6 @@ complete.addEventListener('click', ()=>{btnchange('backblue', complete);});
 
 // 모달
 
-const todomodal = document.querySelector('.todo-plus');
 const modal = document.getElementById("modal");
 
 function modalOn() {

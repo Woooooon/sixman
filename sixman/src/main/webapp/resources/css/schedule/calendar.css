@@ -128,3 +128,181 @@
     content: '';
 }
 
+/* modal */
+
+#modal.modal-overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 8px 0 #2fa597;
+    backdrop-filter: blur(1.5px);
+    --webkit-backdrop-filter: blur(1.5px);
+    border-radius: 10px;
+    border: 1px solid #aaa;
+    z-index: 5;
+}
+#modal .modal-window {
+    background: #FFFFFF;
+    box-shadow: 3px 5px 10px 0 #2fa597;
+    --backdrop-filter: blur( 13.5px );
+    --webkit-backdrop-filter: blur( 13.5px );
+    border: 1px solid #d3d3d3;
+    border-radius: 5px;
+    width: 850px;
+    height: 780px;
+    position: relative;
+    padding: 10px;
+}
+#modal .title {
+    padding-top: 80px;
+    padding-left: 40px;
+    padding-bottom: 20px;
+    --display: inline; 
+    display: flex;
+    font-size: 35px;
+    font-weight: bolder;
+    justify-content: space-between;
+}
+
+#modal .title p {
+    margin: 15px;
+    color: black;
+    font-size: 32px;
+}
+
+#modal p {
+    margin-top: 2px;
+    margin-left: 15px;
+    color: #aaa;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#modal .close-area {
+    --display: inline;
+    --float: right;
+    padding-right: 40px;
+    cursor: pointer;
+}
+
+#modal .status {
+    display: flex;
+    margin-left: 40px;
+    margin-bottom: 30px;
+}
+
+#modal .member {
+    display: flex;
+    margin-left: 40px;
+    margin-bottom: 30px;
+}
+
+#modal .scheduledate {
+    display: flex;
+    margin-left: 40px;
+    margin-bottom: 30px;
+}
+
+#modal .schedule-title {
+    display: flex;
+}
+
+#modal input{
+    margin-left: 30px;
+    border: none;
+    outline: 1px #aaa;
+}
+
+#modal .hidden{
+    margin-left: 40px;
+    width: 84%;
+}
+
+#modal .status-btn {
+    display: flex;
+}
+
+#modal .contentbox {
+    width: 80%;
+    height: 40%;
+}
+
+#modal .content {
+    margin-left: 55px;
+    padding: 10px;
+    resize: none;
+    width: 100%;
+    height: 90%;
+}
+
+#modal .footer-btn {
+    display: flex;
+    justify-content: center;
+}
+
+.footer-btn .btn,
+.footer-btn .c-btn {
+    margin-right: 15px;
+    width: 125px;
+    height: 50px;
+}
+ 
+#modal .schedule-title span {
+    columns: #12887A;
+}
+
+/* modal 색상 옵션 */
+.hide {
+    display: none;
+}
+/* .show{
+    display: block;
+} */
+
+.select{
+    position: relative;
+    padding: 5px 10px;
+    width: 150px;
+    height: 40px;
+    border-radius: 5px;
+    border:1px solid #d3d3d3;
+    background-color: #ffffff;
+    background-image: url("https://img.icons8.com/material-rounded/24/000000/expand-arrow.png");
+    background-repeat: no-repeat;
+    background-position: 96% center;
+    cursor: pointer;
+}
+
+.select > span {
+    display: flex;
+    justify-content: center;
+    padding-top: 5px;
+    padding-right: 7px;
+}
+
+.select ul{
+    position: absolute;
+    top: 39px;
+    left: 1px;
+    width: 100%;
+    border:1px solid #d3d3d3;
+    border-radius: 5px;
+    background-color: #ffffff;
+    cursor: pointer;
+    z-index: 1;
+}
+.select ul li{
+    padding: 10px;
+    text-align: center;
+}
+
+.select ul li:hover{
+    background-color: floralwhite;
+}

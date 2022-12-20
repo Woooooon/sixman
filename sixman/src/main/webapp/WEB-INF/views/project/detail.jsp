@@ -111,10 +111,6 @@
     </main>
     </form>
     <!-- Modal -->
-    <div id="container">
-        <h2>ㅋㅋ</h2>
-        <div id="lorem-ipsum"></div>
-    </div>
     <div id="modal" class="modal-overlay">
         <div class="modal-window">
             <div class="title">

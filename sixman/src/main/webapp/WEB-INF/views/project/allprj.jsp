@@ -7,13 +7,16 @@
 <head>
 <meta charset="UTF-8">
 <title>전체 프로젝트</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <link rel="stylesheet" href="${path}\resources\css\project\allprj.css">
+<script defer src="${path}\resources\js\project\allprj.js"></script>
 </head>
 <body>
     <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
     <main class="main-box">
-        <div class="prjtype">
+        <div class="hidden"></div>
+        <div class="prjtype my">
             <span class="material-symbols-outlined">expand_more</span>
             <p>내 프로젝트</p>
         </div>
@@ -28,12 +31,15 @@
                     </div>
                     <div class="box-body">
                         <div class="date">
-                            <span class="material-symbols-outlined">calendar_today</span><div class="period"></div>
+                            <span class="material-symbols-outlined">calendar_today</span>
+                            <div class="prjdate">2022-12-20</div>
+                            <p>~</p>
+                            <div class="prjdate2">2022-12-30</div>
                         </div>
                         <div class="reader">
                             <span class="material-symbols-outlined">person</span>
-                            <p>리더이름</p>
-                            <div class="status" value=""></div>
+                            <p>구기석</p>
+                            <div class="status complete" value="">완료</div>
                         </div>
                         <div class="status-progress"></div>
                     </div>
@@ -49,12 +55,15 @@
                     </div>
                     <div class="box-body">
                         <div class="date">
-                            <span class="material-symbols-outlined">calendar_today</span><div class="period"></div>
+                            <span class="material-symbols-outlined">calendar_today</span>
+                            <div class="prjdate">2022-12-20</div>
+                            <p>~</p>
+                            <div class="prjdate2">2022-12-30</div>
                         </div>
                         <div class="reader">
                             <span class="material-symbols-outlined">person</span>
                             <p>미누킴</p>
-                            <div class="status" value="">지연중</div>
+                            <div class="status ing" value="">진행중</div>
                         </div>
                         <div class="status-progress"></div>
                     </div>
@@ -70,12 +79,15 @@
                     </div>
                     <div class="box-body">
                         <div class="date">
-                            <span class="material-symbols-outlined">calendar_today</span><div class="period"></div>
+                            <span class="material-symbols-outlined">calendar_today</span>
+                            <div class="prjdate">2022-12-20</div>
+                            <p>~</p>
+                            <div class="prjdate2">2022-12-30</div>
                         </div>
                         <div class="reader">
                             <span class="material-symbols-outlined">person</span>
                             <p>미누킴</p>
-                            <div class="status" value="">지연중</div>
+                            <div class="status complete" value="">완료</div>
                         </div>
                         <div class="status-progress"></div>
                     </div>
@@ -83,7 +95,7 @@
             </div>
         </div>
         <div class="hidden"></div> <!-- hr 용으로 줄 만들것-->
-        <div class="prjtype">
+        <div class="prjtype all">
             <span class="material-symbols-outlined">expand_more</span>
             <p>전체 프로젝트</p>
         </div>
@@ -99,12 +111,15 @@
                     </div>
                     <div class="box-body">
                         <div class="date">
-                            <span class="material-symbols-outlined">calendar_today</span><div class="period"></div>
+                            <span class="material-symbols-outlined">calendar_today</span>
+                            <div class="prjdate">2022-12-20</div>
+                            <p>~</p>
+                            <div class="prjdate2">2022-12-30</div>
                         </div>
                         <div class="reader">
                             <span class="material-symbols-outlined">person</span>
                             <p>미누킴</p>
-                            <div class="status" value="">지연중</div>
+                            <div class="status ing" value="">진행중</div>
                         </div>
                         <div class="status-progress"></div>
                     </div>
@@ -119,12 +134,15 @@
                     </div>
                     <div class="box-body">
                         <div class="date">
-                            <span class="material-symbols-outlined">calendar_today</span><div class="period"></div>
+                            <span class="material-symbols-outlined">calendar_today</span>
+                            <div class="prjdate">2022-12-20</div>
+                            <p>~</p>
+                            <div class="prjdate2">2022-12-30</div>
                         </div>
                         <div class="reader">
                             <span class="material-symbols-outlined">person</span>
                             <p>미누킴</p>
-                            <div class="status" value="">지연중</div>
+                            <div class="status ing" value="">진행중</div>
                         </div>
                         <div class="status-progress"></div>
                     </div>
@@ -139,12 +157,15 @@
                     </div>
                     <div class="box-body">
                         <div class="date">
-                            <span class="material-symbols-outlined">calendar_today</span><div class="period"></div>
+                            <span class="material-symbols-outlined">calendar_today</span>
+                            <div class="prjdate">2022-12-20</div>
+                            <p>~</p>
+                            <div class="prjdate2">2022-12-30</div>
                         </div>
                         <div class="reader">
                             <span class="material-symbols-outlined">person</span>
                             <p>미누킴</p>
-                            <div class="status" value="">지연중</div>
+                            <div class="status ing" value="">진행중</div>
                         </div>
                         <div class="status-progress"></div>
                     </div>
@@ -159,33 +180,15 @@
                     </div>
                     <div class="box-body">
                         <div class="date">
-                            <span class="material-symbols-outlined">calendar_today</span><div class="period"></div>
+                            <span class="material-symbols-outlined">calendar_today</span>
+                            <div class="prjdate">2022-12-20</div>
+                            <p>~</p>
+                            <div class="prjdate2">2022-12-30</div>
                         </div>
                         <div class="reader">
                             <span class="material-symbols-outlined">person</span>
                             <p>미누킴</p>
-                            <div class="status" value="">지연중</div>
-                        </div>
-                        <div class="status-progress"></div>
-                    </div>
-                </div>
-
-                <div class="project-box">
-                    <div class="prj-box">
-                        <div class="box-header">
-                            <span class="material-symbols-outlined">public</span>
-                            <p>프로젝트 이름</p>
-                        </div>
-                        <div class="favorite"><span class="material-symbols-outlined">star</span></div>
-                    </div>
-                    <div class="box-body">
-                        <div class="date">
-                            <span class="material-symbols-outlined">calendar_today</span><div class="period"></div>
-                        </div>
-                        <div class="reader">
-                            <span class="material-symbols-outlined">person</span>
-                            <p>미누킴</p>
-                            <div class="status" value="">지연중</div>
+                            <div class="status delay" value="">지연중</div>
                         </div>
                         <div class="status-progress"></div>
                     </div>
@@ -201,12 +204,15 @@
                     </div>
                     <div class="box-body">
                         <div class="date">
-                            <span class="material-symbols-outlined">calendar_today</span><div class="period"></div>
+                            <span class="material-symbols-outlined">calendar_today</span>
+                            <div class="prjdate">2022-12-20</div>
+                            <p>~</p>
+                            <div class="prjdate2">2022-12-30</div>
                         </div>
                         <div class="reader">
                             <span class="material-symbols-outlined">person</span>
                             <p>미누킴</p>
-                            <div class="status" value="">지연중</div>
+                            <div class="status ing" value="">진행중</div>
                         </div>
                         <div class="status-progress"></div>
                     </div>
@@ -222,12 +228,39 @@
                     </div>
                     <div class="box-body">
                         <div class="date">
-                            <span class="material-symbols-outlined">calendar_today</span><div class="period"></div>
+                            <span class="material-symbols-outlined">calendar_today</span>
+                            <div class="prjdate">2022-12-20</div>
+                            <p>~</p>
+                            <div class="prjdate2">2022-12-30</div>
                         </div>
                         <div class="reader">
                             <span class="material-symbols-outlined">person</span>
                             <p>미누킴</p>
-                            <div class="status" value="">지연중</div>
+                            <div class="status delay" value="">지연중</div>
+                        </div>
+                        <div class="status-progress"></div>
+                    </div>
+                </div>
+
+                <div class="project-box">
+                    <div class="prj-box">
+                        <div class="box-header">
+                            <span class="material-symbols-outlined">public</span>
+                            <p>프로젝트 이름</p>
+                        </div>
+                        <div class="favorite"><span class="material-symbols-outlined">star</span></div>
+                    </div>
+                    <div class="box-body">
+                        <div class="date">
+                            <span class="material-symbols-outlined">calendar_today</span>
+                            <div class="prjdate">2022-12-20</div>
+                            <p>~</p>
+                            <div class="prjdate2">2022-12-30</div>
+                        </div>
+                        <div class="reader">
+                            <span class="material-symbols-outlined">person</span>
+                            <p>미누킴</p>
+                            <div class="status ing" value="">진행중</div>
                         </div>
                         <div class="status-progress"></div>
                     </div>
