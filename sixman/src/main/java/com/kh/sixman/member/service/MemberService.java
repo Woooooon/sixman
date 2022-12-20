@@ -48,4 +48,15 @@ public class MemberService {
 		return dbMember;
 	}
 
+
+	public int updatePwd(String no, String pwd) {
+		String newPwd = enc.encode(pwd);
+		
+		Map<String, String> map = new HashMap<>();
+		map.put("no", no);
+		map.put("pwd", newPwd);
+		
+		return memberDao.updatePwd(sst, map);
+	}
+
 }

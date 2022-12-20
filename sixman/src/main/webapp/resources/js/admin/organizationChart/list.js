@@ -1,7 +1,9 @@
 const removeMember = document.querySelector('.remove-emp');
 const selectCencle = document.querySelector('.removeBtn');
 
+
 //전체석택
+
 checkBoxToggleEvent('.selectAll', '.selectOne');
 
 function checkAllToggle(all_selector, check_selector) {
@@ -14,6 +16,31 @@ function checkAllToggle(all_selector, check_selector) {
             if (checkbox.disabled !== true) {
                 checkbox.setAttribute('checked', 'checked');
                 checkbox.checked = true;
+                const parentElem = document.querySelector('.sep');
+                const div = document.createElement('div');
+                div.classList.add('select-employee-list');
+                div.innerHTML =
+                    '<div class="select-employee-box">' +
+                    '<div class="select-employee-pic">' +
+                    '<img src="/sixman/resources/img/jang.jpg" alt="" />' +
+                    '</div>' +
+                    '<div class="info-box">' +
+                    '<div class="select-dept-info">' +
+                    '<p>영업부</p>' +
+                    '<p>영업 2팀</p>' +
+                    '</div>' +
+                    '<div class="select-employee-info">' +
+                    '<p>구기석</p>' +
+                    '<p>부장</p>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '<span class="material-symbols-outlined removeBtn">person_remove</span>';
+
+                div.querySelector('.removeBtn').addEventListener('click', () => {
+                    div.remove();
+                });
+                parentElem.after(div);
             }
         });
     } else {
@@ -23,6 +50,7 @@ function checkAllToggle(all_selector, check_selector) {
         });
     }
 }
+
 
 function checkBoxToggleEvent(all_selector, check_selector) {
     const selectAll = document.querySelector(all_selector);
@@ -37,6 +65,19 @@ function checkBoxToggleEvent(all_selector, check_selector) {
             checkBoxToggle(all_selector, check_selector);
         });
     });
+}
+
+function checkBoxToggle(all_selector, check_selector){
+    const selectAll = document.querySelector(all_selector);
+    const checkbox_ln = document.querySelectorAll(check_selector+':enabled').length;
+    const check_ln = document.querySelectorAll(check_selector+':checked:enabled').length;
+    if( checkbox_ln === check_ln ){
+        selectAll.setAttribute('checked', 'checked');
+        selectAll.checked = true;
+    } else {
+        selectAll.removeAttribute('checked', 'checked');
+        selectAll.checked = false;
+    }
 }
 
 //전체선택된것 삭제
@@ -98,41 +139,51 @@ $('#jstree').on('close_node.jstree', function (e, data) {
     icon.removeClass('fa-folder-open').addClass('fa-folder');
 });
 
-addSelectMember();
-//checkbox 클릭시 선택된 사원목록에 appand
-function addSelectMember() {
+function selectMember() {
     const selectOne = document.querySelectorAll('.selectOne');
-    selectOne.forEach((elem) => {
-        elem.addEventListener('click', () => {
-            const parentElem = document.querySelector('.sep');
-            const div = document.createElement('div');
-            if ((elem.checked = true)) {
-                div.classList.add('select-employee-list');
-                div.innerHTML =
-                    '<div class="select-employee-box">' +
-                    '<div class="select-employee-pic">' +
-                    '<img src="/sixman/resources/img/jang.jpg" alt="" />' +
-                    '</div>' +
-                    '<div class="info-box">' +
-                    '<div class="select-dept-info">' +
-                    '<p>영업부</p>' +
-                    '<p>영업 2팀</p>' +
-                    '</div>' +
-                    '<div class="select-employee-info">' +
-                    '<p>구기석</p>' +
-                    '<p>부장</p>' +
-                    '</div>' +
-                    '</div>' +
-                    '</div>' +
-                    '<span class="material-symbols-outlined removeBtn">person_remove</span>';
+    selectOne.forEach((checkBox)=>{
+        if(checkBox.checked){
+            checkBox.parentElement.querySelector
 
-                div.querySelector('.removeBtn').addEventListener('click', () => {
-                    div.remove();
-                });
-                parentElem.after(div);
-            } else {
-                div.remove();
-            }
-        });
+        }
     });
 }
+
+// addSelectMember();
+// //checkbox 클릭시 선택된 사원목록에 appand
+// function addSelectMember() {
+//     const selectOne = document.querySelectorAll('.selectOne');
+//     selectOne.forEach((elem) => {
+//         elem.addEventListener('click', () => {
+//             const parentElem = document.querySelector('.sep');
+//             const div = document.createElement('div');
+//             if ((elem.checked = true)) {
+//                 div.classList.add('select-employee-list');
+//                 div.innerHTML =
+//                     '<div class="select-employee-box">' +
+//                     '<div class="select-employee-pic">' +
+//                     '<img src="/sixman/resources/img/jang.jpg" alt="" />' +
+//                     '</div>' +
+//                     '<div class="info-box">' +
+//                     '<div class="select-dept-info">' +
+//                     '<p>영업부</p>' +
+//                     '<p>영업 2팀</p>' +
+//                     '</div>' +
+//                     '<div class="select-employee-info">' +
+//                     '<p>구기석</p>' +
+//                     '<p>부장</p>' +
+//                     '</div>' +
+//                     '</div>' +
+//                     '</div>' +
+//                     '<span class="material-symbols-outlined removeBtn">person_remove</span>';
+
+//                 div.querySelector('.removeBtn').addEventListener('click', () => {
+//                     div.remove();
+//                 });
+//                 parentElem.after(div);
+//             } else {
+//                 div.remove();
+//             }
+//         });
+//     });
+// }

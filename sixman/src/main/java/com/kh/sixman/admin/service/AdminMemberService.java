@@ -48,17 +48,37 @@ public class AdminMemberService {
 		int join = adminMemberDao.join(sst, vo);
 		String no = adminMemberDao.getMemberNo(sst, vo);
 		
-//		Map<String,Object> picFileUpload = dbUploadFile(vo.getPicFileInfo(), no, "PROFILE");
-//		Map<String,Object> resumeFileUpload = dbUploadFile(vo.getResumeFileInfo(), no, "RESUME");
-//		Map<String,Object> accountFileUpload = dbUploadFile(vo.getAccountFileInfo(), no, "ACCOUNT");
-//		Map<String,Object> evidenceFileUpload = dbUploadFile(vo.getEvidenceFileList(), no, "EVIDENCE");
-//		
-//		int picFileUploadResult = adminMemberDao.uploadAll(sst, picFileUpload);
-//		int resumeFileUploadResult = adminMemberDao.uploadAll(sst, resumeFileUpload);
-//		int accountFileUploadResult = adminMemberDao.uploadAll(sst, accountFileUpload);
-//		int evidenceFileUploadResult = adminMemberDao.uploadAll(sst, evidenceFileUpload);
+		List<AttachmentVo> picFile = vo.getPicFileInfo();
+		List<AttachmentVo> resumeFile = vo.getResumeFileInfo();
+		List<AttachmentVo> accountFile = vo.getAccountFileInfo();
+		List<AttachmentVo> evidenceFile = vo.getEvidenceFileList();
 		
-		return join;
+		int picFileUploadResult = 1;
+		int resumeFileUploadResult = 1;
+		int accountFileUploadResult = 1;
+		int evidenceFileUploadResult = 1;
+		
+		if(picFile != null) {
+			Map<String,Object> picFileUpload = dbUploadFile(picFile, no, "PROFILE");
+			picFileUploadResult = adminMemberDao.uploadAll(sst, picFileUpload);
+		}
+		
+		if(resumeFile != null) {
+			Map<String,Object> resumeFileUpload = dbUploadFile(resumeFile, no, "RESUME");
+			resumeFileUploadResult = adminMemberDao.uploadAll(sst, resumeFileUpload);
+		}
+		
+		if(accountFile != null) {
+			Map<String,Object> accountFileUpload = dbUploadFile(accountFile, no, "ACCOUNT");
+			accountFileUploadResult = adminMemberDao.uploadAll(sst, accountFileUpload);
+		}
+		
+		if(evidenceFile != null) {
+			Map<String,Object> evidenceFileUpload = dbUploadFile(evidenceFile, no, "EVIDENCE");
+			evidenceFileUploadResult = adminMemberDao.uploadAll(sst, evidenceFileUpload);
+		}
+		
+		return join * picFileUploadResult * resumeFileUploadResult * accountFileUploadResult * evidenceFileUploadResult;
 	}
 	
 	private Map<String,Object> dbUploadFile(List<AttachmentVo> fileInfo, String no, String tableName) {

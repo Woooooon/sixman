@@ -5,13 +5,15 @@
         <meta charset="UTF-8" />
         <title>Insert title here</title>
         <link rel="stylesheet" href="<c:url value='/resources/css/admin/member/join.css'/>" />
+        <script defer src="<c:url value='/resources/js/admin/member/join.js'/>"></script>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-        <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+        <!-- kakao -->
+        <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+        <!-- jstree -->
+        <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
         <link rel="stylesheet" href="/sixman\resources\jstree\default\style.min.css" />
         <script src="https://kit.fontawesome.com/ae846b135b.js" crossorigin="anonymous"></script>
-        <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-        <script defer src="<c:url value='/resources/js/admin/member/join.js'/>"></script>
     </head>
 
     <body>
@@ -48,7 +50,7 @@
                     </div>
                 </aside>
                 <section id="member-wrap">
-                    <form action="/sixman/admin/member/join" method="POST" enctype="multipart/form-data">
+                    <form action="/sixman/admin/member/join" method="POST" enctype="multipart/form-data" id="form">
                         <article id="member-info" class="box">
                             <figure id="companyLogo">
                                 <img alt="기업로고" src="<c:url value='/resources/img/google.png'/>" />
@@ -61,7 +63,7 @@
                                 <div class="info-wrap">
                                     <div class="left-info">
                                         <div id="profile-view">
-                                            <img alt="프로필사진" src="<c:url value='/resources/img/cat.png'/>" class="image-box" />
+                                            <img alt="프로필사진" src="<c:url value='/resources/img/defaultProfilePic.jpg'/>" class="image-box" />
                                         </div>
                                         <div id="dept" class="write">
                                             <label for="">부 서</label>
@@ -84,7 +86,7 @@
                                         </div>
                                         <div id="birth" class="write">
                                             <label for="">생년월일</label>
-                                            <input type="text" name="birthday" />
+                                            <input type="text" name="birthday" placeholder="YYMMDD" />
                                         </div>
                                         <div id="email" class="write">
                                             <label for="">E-MAIL</label>
@@ -94,15 +96,17 @@
                                     <div class="right-info">
                                         <div id="id" class="write">
                                             <label for="">사 번</label>
-                                            <input type="text" name="id" />
+                                            <input type="text" name="id" placeholder="영,숫자로만 입력하세요." />
+                                            <span>*</span>
                                         </div>
                                         <div id="name" class="write">
                                             <label for="">성 명</label>
                                             <input type="text" name="name" />
+                                            <span>*</span>
                                         </div>
                                         <div id="phone" class="write">
                                             <label for="">연락처</label>
-                                            <input type="text" name="phone" />
+                                            <input type="text" name="phone" placeholder="'-'를 제외하고 입력하세요." />
                                         </div>
                                         <div id="authorize" class="write">
                                             <label for="">권 한</label>
@@ -127,13 +131,13 @@
                                                     <option value="${i.no}">${i.name}</option>
                                                 </c:forEach>
                                             </select>
-                                            <input type="text" name="account" />
+                                            <input type="text" name="account" placeholder="'-'를 제외하고 입력하세요." />
                                         </div>
                                     </div>
                                 </div>
                                 <div id="address-wrap" class="write">
                                     <label for="">주 소</label>
-                                    <input type="text" id="address" name="address" />
+                                    <input type="text" id="address" name="address" readonly />
                                     <button type="button" id="address_kakao">검 색</button>
                                 </div>
                                 <div id="submit">

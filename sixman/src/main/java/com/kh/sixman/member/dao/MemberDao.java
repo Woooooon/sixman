@@ -20,4 +20,8 @@ public class MemberDao {
 		return sst.selectList("memberMapper.selectFileOne", map);
 	}
 
+	public int updatePwd(SqlSessionTemplate sst, Map<String, String> map) {
+		return sst.update("memberMapper.updatePwd", map);
+	}
+
 }

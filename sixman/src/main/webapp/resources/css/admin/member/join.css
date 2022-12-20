@@ -79,11 +79,19 @@
     height: 200px;
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
 }
 
 .write {
     font-size: 17px;
+    position: relative;
+}
+
+.write p {
+    position: absolute;
+    color: #e85c5c;
+    font-size: 12px;
+    bottom: -15px;
+    left: 90px;
 }
 
 .write input {
@@ -145,7 +153,7 @@
 
 #bank > input {
     margin-left: 90px;
-    margin-top: 20px;
+    margin-top: 25px;
 }
 
 #profile-view > img {
@@ -190,6 +198,7 @@
 
 .right-info {
     width: 50%;
+    margin-top: 3px;
     display: flex;
     flex-direction: column;
     gap: 25px;
@@ -370,4 +379,12 @@ select {
 .dept-guide p {
     font-size: 14px;
     font-weight: 600;
+}
+
+.write .error {
+    border: 1px solid #e85c5c;
+}
+
+.error:focus {
+    outline-color: #e85c5c;
 }
