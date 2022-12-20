@@ -1,7 +1,20 @@
 const removeMember = document.querySelector('.remove-emp');
 const selectCencle = document.querySelector('.removeBtn');
-
-
+selectMemberOne();
+function selectMemberOne() {
+    const parentElem = document.querySelector('.sep');
+    const selectMemberBox = document.querySelectorAll('.selectOne');
+    const selectMemberAll = document.querySelector('.selectAll')
+    selectMemberBox.forEach((target)=>{
+        target.addEventListener('change',()=>{
+            if(target.checked==true){
+                selectMember(selectMemberAll, target);
+            }else{
+                
+            }
+        });
+    });
+}
 //전체석택
 
 checkBoxToggleEvent('.selectAll', '.selectOne');
@@ -12,42 +25,18 @@ function checkAllToggle(all_selector, check_selector) {
     const is_check = selectAll.checked;
 
     if (is_check === true) {
-        checkBox.forEach((checkbox) => {
-            if (checkbox.disabled !== true) {
-                checkbox.setAttribute('checked', 'checked');
-                checkbox.checked = true;
-                const parentElem = document.querySelector('.sep');
-                const div = document.createElement('div');
-                div.classList.add('select-employee-list');
-                div.innerHTML =
-                    '<div class="select-employee-box">' +
-                    '<div class="select-employee-pic">' +
-                    '<img src="/sixman/resources/img/jang.jpg" alt="" />' +
-                    '</div>' +
-                    '<div class="info-box">' +
-                    '<div class="select-dept-info">' +
-                    '<p>영업부</p>' +
-                    '<p>영업 2팀</p>' +
-                    '</div>' +
-                    '<div class="select-employee-info">' +
-                    '<p>구기석</p>' +
-                    '<p>부장</p>' +
-                    '</div>' +
-                    '</div>' +
-                    '</div>' +
-                    '<span class="material-symbols-outlined removeBtn">person_remove</span>';
-
-                div.querySelector('.removeBtn').addEventListener('click', () => {
-                    div.remove();
-                });
-                parentElem.after(div);
-            }
+        checkBox.forEach((check) => {
+            selectMember(selectAll, check);
         });
     } else {
-        checkBox.forEach((checkbox) => {
-            checkbox.removeAttribute('checked', 'checked');
-            checkbox.checked = false;
+        checkBox.forEach((check) => {
+            check.removeAttribute('checked', 'checked');
+            check.checked = false;
         });
+        const selectMember = document.querySelectorAll('.select-employee-list');
+        selectMember.forEach((div)=>{
+            div.remove();
+        })
     }
 }
 
@@ -65,6 +54,38 @@ function checkBoxToggleEvent(all_selector, check_selector) {
             checkBoxToggle(all_selector, check_selector);
         });
     });
+}
+
+function selectMember(selectAll, checkbox) {
+        checkbox.setAttribute('checked', 'checked');
+        checkbox.checked = true;
+        const div = document.createElement('div');
+        div.classList.add('select-employee-list');
+        div.innerHTML =
+            '<div class="select-employee-box">' +
+            '<div class="select-employee-pic">' +
+            '<img src="/sixman/resources/img/jang.jpg" alt="" />' +
+            '</div>' +
+            '<div class="info-box">' +
+            '<div class="select-dept-info">' +
+            '<p>영업부</p>' +
+            '<p>영업 2팀</p>' +
+            '</div>' +
+            '<div class="select-employee-info">' +
+            '<p>구기석</p>' +
+            '<p>부장</p>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '<span class="material-symbols-outlined removeBtn">person_remove</span>';
+
+        div.querySelector('.removeBtn').addEventListener('click', () => {
+            checkbox.checked = false;
+            selectAll.checked = false;
+            console.log(checkbox);
+            div.remove();
+        });
+        return div;
 }
 
 function checkBoxToggle(all_selector, check_selector){
@@ -139,51 +160,5 @@ $('#jstree').on('close_node.jstree', function (e, data) {
     icon.removeClass('fa-folder-open').addClass('fa-folder');
 });
 
-function selectMember() {
-    const selectOne = document.querySelectorAll('.selectOne');
-    selectOne.forEach((checkBox)=>{
-        if(checkBox.checked){
-            checkBox.parentElement.querySelector
 
-        }
-    });
-}
 
-// addSelectMember();
-// //checkbox 클릭시 선택된 사원목록에 appand
-// function addSelectMember() {
-//     const selectOne = document.querySelectorAll('.selectOne');
-//     selectOne.forEach((elem) => {
-//         elem.addEventListener('click', () => {
-//             const parentElem = document.querySelector('.sep');
-//             const div = document.createElement('div');
-//             if ((elem.checked = true)) {
-//                 div.classList.add('select-employee-list');
-//                 div.innerHTML =
-//                     '<div class="select-employee-box">' +
-//                     '<div class="select-employee-pic">' +
-//                     '<img src="/sixman/resources/img/jang.jpg" alt="" />' +
-//                     '</div>' +
-//                     '<div class="info-box">' +
-//                     '<div class="select-dept-info">' +
-//                     '<p>영업부</p>' +
-//                     '<p>영업 2팀</p>' +
-//                     '</div>' +
-//                     '<div class="select-employee-info">' +
-//                     '<p>구기석</p>' +
-//                     '<p>부장</p>' +
-//                     '</div>' +
-//                     '</div>' +
-//                     '</div>' +
-//                     '<span class="material-symbols-outlined removeBtn">person_remove</span>';
-
-//                 div.querySelector('.removeBtn').addEventListener('click', () => {
-//                     div.remove();
-//                 });
-//                 parentElem.after(div);
-//             } else {
-//                 div.remove();
-//             }
-//         });
-//     });
-// }
