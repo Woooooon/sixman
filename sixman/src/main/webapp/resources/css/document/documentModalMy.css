@@ -4,9 +4,9 @@
 
 .svtt{
     display: flex;
-    width: 40.1%;
+    width: 40%;
     position: absolute;
-    border: 1px solid var(--bo-40);
+    
     align-items: center;
     height: 10%;
     color: black;
