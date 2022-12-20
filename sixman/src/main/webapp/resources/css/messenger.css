@@ -676,7 +676,7 @@
 	border: 1px solid black;
 	position: absolute;
 	z-index:20;
-	margin-top:155%;
+	margin-top:167%;
 	display:flex;
 }
 .chatroom-4-1-box{
@@ -709,7 +709,7 @@
 /*사내대화방 프로필(연락처, 프로필 링크 선택)모달창*/
 
 .chatlist-modal{
-	
+	display:none;
 	margin:20%;
 	margin-left:15%;
 	margin-top:70%;
@@ -732,21 +732,6 @@
 .chatlist-modal-text02-1{
 	margin:20%;
 	margin-left:16%;
-/* 	margin-top:70%; */
-	width:68%;
-	height:16%;
-/* 	align-items:center; */
-	background-color: white;
-	position:absolute;
-	border-radius:6% 6% 6% 6% /16% 16%;
-	padding:2%;
-	text-align:center;
-}
-
-
-.chatlist-modal-text02-2{
-	margin:20%;
-	margin-left:16%;
 	margin-top:8%;
 	width:68%;
 	height:16%;
@@ -755,7 +740,22 @@
 	position:absolute;
 	border-radius:6% 6% 6% 6% /16% 16%;
 	padding:2%;
-	text-align:center;
+	text-align:center;	cursor:pointer;
+}
+
+
+.chatlist-modal-text02-2{
+	margin:20%;
+	margin-left:16%;
+	margin-top:20%;
+	width:68%;
+	height:16%;
+/* 	align-items:center; */
+	background-color: white;
+	position:absolute;
+	border-radius:6% 6% 6% 6% /16% 16%;
+	padding:2%;
+	text-align:center;	cursor:pointer;
 }
 
 /* 채팅방 안의 설정 */
@@ -833,7 +833,7 @@ input[id="chat-setting-check02"]{
 	margin:4%;
 	font-size:28px;
 	margin-left:5%;
-	margin-top:10%
+	margin-top:10%;
 }
 
 #chatroom-setting-icon-2{
@@ -871,3 +871,23 @@ input[id="chat-setting-check02"]{
 	margin-left:60%;
 /* 	margin-top:12%; */
 }
+
+/*프로필 보내기*/
+.text-messenger-send-profile-page-01{
+	display:none;
+/* 	margin:4%; */
+	background-color:white;
+	box-shadow:0px 0px 2px grey;
+
+}
+
+.chatbutton02-sendprofilelink{
+	margin-top:6%;
+	margin-bottom:16%;
+	cursor:pointer;
+}
+
+/* .chatbutton02-sendprofilelink>#sendprofilelink-go{ */
+/* /* 	padding-left:2%; */ */
+/* /* 	padding-right:2%; */ */
+/* } */
