@@ -1,13 +1,21 @@
 package com.kh.sixman.document.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.kh.sixman.common.AttachmentVo;
+import com.kh.sixman.common.FileUnit;
 import com.kh.sixman.document.service.DocumentService;
 import com.kh.sixman.document.vo.DocumentVo;
+import com.kh.sixman.member.vo.MemberVo;
 
 @RequestMapping("document")
 @Controller
@@ -21,6 +29,7 @@ public class DocumentController {
 	//기안문서함(화면)
 	@GetMapping("first")
 	public String First() {
+
 		return "document/first";
 	}
 	//기안문서함 (찐)
@@ -99,8 +108,14 @@ public class DocumentController {
 	}
 	//결재선 작성 (찐)
 	@PostMapping("write")
-	public String Write(DocumentVo dvo) {
+	public String Write(DocumentVo dvo , HttpSession session) {
 		
+		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+		
+		String rootPath = session.getServletContext().getRealPath("/");
+		List<AttachmentVo> fileList = FileUnit.uploadFile(dvo.getFile(), rootPath, "upload/notice");
+		//이부분이 뭔지 잘 모르겠어요 찾는중이긴한데
+		dvo.setFileList(fileList);
 		int result = ds.write(dvo);
 		
 		if(result ==1) {
