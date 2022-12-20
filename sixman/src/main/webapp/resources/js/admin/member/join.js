@@ -25,61 +25,66 @@ const accountRegex = /^[0-9]+$/;
 const birthRegex = /^\d{2}\d{2}\d{2}$/;
 
 id.addEventListener('blur', () => {
-    const errorMsg = document.createElement('p');
-    if (id.value == '') {
-        errorMsg.innerText = '필수입력 항목입니다.';
-        id.parentElement.append(errorMsg);
-        id.classList.add('error');
-        return;
-    }
-    errorMsg.remove();
-    match(id, idRegex, '영문, 숫자만 작성하세요.');
+    doubleMatch(id, idRegex, '영문, 숫자만 작성하세요.');
 });
 
 username.addEventListener('blur', () => {
-    const errorMsg = document.createElement('p');
-    if (username.value == '') {
-        errorMsg.innerText = '필수입력 항목입니다.';
-        username.parentElement.append(errorMsg);
-        username.classList.add('error');
-        return;
-    }
-    errorMsg.remove();
-    match(username, nameRegex, '한글 또는 영어만 작성하세요.');
+    doubleMatch(username, nameRegex, '한글 또는 영어만 작성하세요.');
 });
 
 phone.addEventListener('blur', () => {
-    match(phone, phoneRegex, "'-'를 제외하고 작성하세요");
+    
+    match(phone, phoneRegex, "제시한 형식에 맞게 작성하세요");
 });
 
 account.addEventListener('blur', () => {
-    match(account, accountRegex, "'-'를 제외하고 작성하세요");
+    match(account, accountRegex, "제시한 형식에 맞게 작성하세요");
 });
 
 birthday.addEventListener('blur', () => {
-    match(birthday, birthRegex, '230115형식으로 작성하세요.');
+    match(birthday, birthRegex, '제시한 형식에 맞게 작성하세요.');
 });
 
 email.addEventListener('blur', () => {
     match(email, emailRegex, '메일형식에 맞추어 작성하세요.');
 });
 
+function doubleMatch(elem,regex, messege) {
+    const errors = elem.parentElement.querySelectorAll('p');
+    errors.forEach(error => {
+        error.remove();
+    });
+
+    if (elem.value == '') {
+        const errorMsg = document.createElement('p');
+        errorMsg.innerText = '필수입력 항목입니다.';
+        elem.parentElement.append(errorMsg);
+        elem.classList.add('error');
+        return;
+    }
+    
+    match(elem, regex, messege);
+};
+
 function match(elem, regx, messege) {
-    const errorMsg = document.createElement('p');
-
     elem.classList.remove('error');
+    
     const value = elem.value;
-
+    
     if (value != '') {
         if (!regx.test(value)) {
+            const errorMsg = document.createElement('p');
             errorMsg.innerText = messege;
             elem.parentElement.append(errorMsg);
             elem.classList.add('error');
             return;
         }
     }
-    errorMsg.remove();
-}
+    const errors = elem.parentElement.querySelectorAll('p');
+    errors.forEach(error => {
+        error.remove();
+    });
+};
 
 form.onsubmit = () => {
     const checkId = id.classList.contains('error');

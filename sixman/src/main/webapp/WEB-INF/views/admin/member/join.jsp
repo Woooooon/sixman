@@ -63,7 +63,7 @@
                                 <div class="info-wrap">
                                     <div class="left-info">
                                         <div id="profile-view">
-                                            <img alt="프로필사진" src="<c:url value='/resources/img/cat.png'/>" class="image-box" />
+                                            <img alt="프로필사진" src="<c:url value='/resources/img/defaultProfilePic.jpg'/>" class="image-box" />
                                         </div>
                                         <div id="dept" class="write">
                                             <label for="">부 서</label>
