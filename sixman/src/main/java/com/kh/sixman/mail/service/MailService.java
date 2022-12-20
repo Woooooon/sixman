@@ -109,13 +109,7 @@ public class MailService {
 	}
 
 	public int changeCategory(Map<String, Object> map) {
-		
-		MemberVo loginMember = (MemberVo) map.get("loginMember");
-		
-		List<Map<String,String>>list = dao.categoryList(sst, loginMember.getNo());
-		
-		
-		return 0;
+		return dao.changeCategory(sst, map);
 	}
 
 }

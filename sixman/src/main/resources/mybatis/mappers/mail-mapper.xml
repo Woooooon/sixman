@@ -290,6 +290,30 @@
 		R_MAIL = #{loginMember.email};
 		END;
 	</update>
+	
+	<update id="changeCategory">
+		DECLARE BEGIN
+		<foreach collection="no" item="n" separator=";">
+			MERGE
+			INTO M_DRAWER M
+			USING 
+			(
+			    SELECT M.NO AS NO FROM M_DRAWER M
+			    JOIN M_CATEGORY MC ON M.CATEGORY_NO = MC.NO
+			    WHERE USER_NO = ${loginMember.no};
+			    AND MAIL_NO = ${n}
+			) MV
+			ON (M.NO = MV.NO)
+			WHEN MATCHED THEN
+			UPDATE SET CATEGORY_NO = ${category}
+			WHEN NOT MATCHED THEN
+			INSERT 
+			(NO, CATEGORY_NO, MAIL_NO)
+			VALUES
+			(SEQ_M_DRAWER_NO.NEXTVAL, ${category}, ${n})
+		</foreach>
+		END;
+	</update>
 
     
 </mapper>

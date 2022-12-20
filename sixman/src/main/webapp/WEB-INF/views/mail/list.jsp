@@ -72,7 +72,7 @@
 		                            </div>
 		                            <div class="category-footer">
 										<div class="c-btn create-btn"><p>추가</p></div>
-		                                <div class="btn"><p>이동</p></div>
+		                                <div class="btn" onclick="changeCategory()"><p>이동</p></div>
 		                            </div>
 		                        </div>
 		                    </div>

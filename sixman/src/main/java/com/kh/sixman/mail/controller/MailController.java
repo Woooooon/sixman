@@ -139,6 +139,8 @@ public class MailController {
 	@ResponseBody
 	@PostMapping("changeCategory")
 	public void changeCategory(List<String> no, String category, HttpSession session) {
+		System.out.println(no);
+		System.out.println(category);
 		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
 		Map<String, Object> map = new HashMap<>();
 		map.put("loginMember", loginMember);
@@ -151,9 +153,7 @@ public class MailController {
 	@PostMapping("createCategory")
 	public void createCategory(String category, HttpSession session) {
 		MemberVo loginMeber = (MemberVo) session.getAttribute("loginMember");
-		
 		int result = ms.createCategory(category, loginMeber.getNo());
-		
 		if(result!=1) {
 			
 		}
