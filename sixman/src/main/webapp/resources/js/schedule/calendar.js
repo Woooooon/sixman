@@ -6,25 +6,14 @@ const renderCalender = () =>{
 
     document.querySelector('.year-month').textContent = `${viewYear}년 ${viewMonth + 1}월`;
 
-    console.log(viewYear);
-
     const prevLast = new Date(viewYear, viewMonth , 0);
     const thisLast = new Date(viewYear, viewMonth + 1 , 0);
-
-    console.log('prevLast : ' + prevLast);
-    console.log('thisLast : ' + thisLast);
 
     const PLDate = prevLast.getDate();
     const PLDay = prevLast.getDay();
 
-    console.log('PLDate : ' + PLDate);
-    console.log('PLDay : ' + PLDay);
-
     const TLDate = thisLast.getDate();
     const TLDay = thisLast.getDay();
-
-    console.log('TLDate : ' + TLDate);
-    console.log('TLDay : ' + TLDay);
 
     const prevDates = [];
     const thisDates = [...Array(TLDate + 1).keys()].slice(1);
@@ -39,19 +28,11 @@ const renderCalender = () =>{
     for(let i = 1; i < 7 - TLDay; i++) {
         nextDates.push(i);
     }
-    console.log('----------------');    
-    console.log(prevDates);
-    console.log('----------------');
-    console.log(thisDates);
-    console.log('----------------');
-    console.log(nextDates);
-    console.log('----------------');
 
     const dates = prevDates.concat(thisDates, nextDates);
     const firstDateIndex = dates.indexOf(1);
     const lastDateIndex = dates.lastIndexOf(TLDate);
 
-    console.log(dates);
     dates.forEach((date, i) => {
         const condition = i >= firstDateIndex && i < lastDateIndex + 1
                           ? 'this'

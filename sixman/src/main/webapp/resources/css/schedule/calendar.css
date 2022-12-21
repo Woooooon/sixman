@@ -20,6 +20,11 @@
     height: 30px;
 }
 
+.write {
+    width: 120px;
+    height: 40px;
+}
+
 
 .nav{
     display: flex;

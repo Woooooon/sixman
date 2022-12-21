@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>전체 프로젝트</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <link rel="stylesheet" href="${path}\resources\css\project\allprj.css">
 <script defer src="${path}\resources\js\project\allprj.js"></script>
 </head>
@@ -27,7 +27,7 @@
                             <span class="material-symbols-outlined">public</span>
                             <p>프로젝트 이름</p>
                         </div>
-                        <div class="favorite"><span class="material-symbols-outlined">star</span></div>
+                        <div class="favorite"><span class="material-symbols-outlined like">star</span></div>
                     </div>
                     <div class="box-body">
                         <div class="date">
@@ -51,7 +51,7 @@
                             <span class="material-symbols-outlined">public</span>
                             <p>프로젝트 이름</p>
                         </div>
-                        <div class="favorite"><span class="material-symbols-outlined" style="color: #2fa597;">star</span></div>
+                        <div class="favorite"><span class="material-symbols-outlined like">star</span></div>
                     </div>
                     <div class="box-body">
                         <div class="date">
@@ -75,7 +75,9 @@
                             <span class="material-symbols-outlined">public</span>
                             <p>프로젝트 이름</p>
                         </div>
-                        <div class="favorite"><span class="material-symbols-outlined">star</span></div>
+                        <div class="favorite">
+                            <span class="material-symbols-outlined like">star</span>
+                        </div>
                     </div>
                     <div class="box-body">
                         <div class="date">
