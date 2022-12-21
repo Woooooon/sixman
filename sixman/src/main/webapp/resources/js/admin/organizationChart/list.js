@@ -1,18 +1,13 @@
 const removeMember = document.querySelector('.remove-emp');
 const selectCencle = document.querySelector('.removeBtn');
+// const parentElem = document.querySelector('.sep');
+
 selectMemberOne();
 function selectMemberOne() {
-    const parentElem = document.querySelector('.sep');
     const selectMemberBox = document.querySelectorAll('.selectOne');
-    const selectMemberAll = document.querySelector('.selectAll')
-    selectMemberBox.forEach((target)=>{
-        target.addEventListener('change',()=>{
-            if(target.checked==true){
-                selectMember(selectMemberAll, target);
-            }else{
-                
-            }
-        });
+    const selectMemberAll = document.querySelector('.selectAll');
+    selectMemberBox.forEach((target) => {
+        selectMember(selectMemberAll, target);
     });
 }
 //전체석택
@@ -23,23 +18,18 @@ function checkAllToggle(all_selector, check_selector) {
     const selectAll = document.querySelector(all_selector);
     const checkBox = document.querySelectorAll(check_selector);
     const is_check = selectAll.checked;
-
     if (is_check === true) {
         checkBox.forEach((check) => {
-            selectMember(selectAll, check);
+            check.setAttribute('checked', 'checked');
+            check.checked = true;
         });
     } else {
         checkBox.forEach((check) => {
             check.removeAttribute('checked', 'checked');
             check.checked = false;
         });
-        const selectMember = document.querySelectorAll('.select-employee-list');
-        selectMember.forEach((div)=>{
-            div.remove();
-        })
     }
 }
-
 
 function checkBoxToggleEvent(all_selector, check_selector) {
     const selectAll = document.querySelector(all_selector);
@@ -57,42 +47,60 @@ function checkBoxToggleEvent(all_selector, check_selector) {
 }
 
 function selectMember(selectAll, checkbox) {
-        checkbox.setAttribute('checked', 'checked');
-        checkbox.checked = true;
-        const div = document.createElement('div');
-        div.classList.add('select-employee-list');
-        div.innerHTML =
-            '<div class="select-employee-box">' +
-            '<div class="select-employee-pic">' +
-            '<img src="/sixman/resources/img/jang.jpg" alt="" />' +
-            '</div>' +
-            '<div class="info-box">' +
-            '<div class="select-dept-info">' +
-            '<p>영업부</p>' +
-            '<p>영업 2팀</p>' +
-            '</div>' +
-            '<div class="select-employee-info">' +
-            '<p>구기석</p>' +
-            '<p>부장</p>' +
-            '</div>' +
-            '</div>' +
-            '</div>' +
-            '<span class="material-symbols-outlined removeBtn">person_remove</span>';
+    const div = document.createElement('div');
+    const memberInfoList = document.querySelector('.sep');
+    const parentElem = checkbox.closest('div');
+    const name = parentElem.querySelector('p[name="memberName"]').innerHTML;
+    const position = '';
+    const dept = '';
+    const team = '';
+    div.classList.add('select-employee-list');
+    div.innerHTML =
+        '<div class="select-employee-box">' +
+        '<div class="select-employee-pic">' +
+        '<img src="/sixman/resources/img/jang.jpg" alt="" />' +
+        '</div>' +
+        '<div class="info-box">' +
+        '<div class="select-dept-info">' +
+        '<p>' +
+        dept +
+        '</p>' +
+        '<p>' +
+        team +
+        '</p>' +
+        '</div>' +
+        '<div class="select-employee-info">' +
+        '<p>' +
+        name +
+        '</p>' +
+        '<p>' +
+        position +
+        '</p>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '<span class="material-symbols-outlined removeBtn">person_remove</span>';
 
-        div.querySelector('.removeBtn').addEventListener('click', () => {
-            checkbox.checked = false;
-            selectAll.checked = false;
-            console.log(checkbox);
+    div.querySelector('.removeBtn').addEventListener('click', () => {
+        checkbox.checked = false;
+        selectAll.checked = false;
+        div.remove();
+    });
+
+    checkbox.addEventListener('change', () => {
+        if (checkbox.checked) {
+            memberInfoList.after(div);
+        } else {
             div.remove();
-        });
-        return div;
+        }
+    });
 }
 
-function checkBoxToggle(all_selector, check_selector){
+function checkBoxToggle(all_selector, check_selector) {
     const selectAll = document.querySelector(all_selector);
-    const checkbox_ln = document.querySelectorAll(check_selector+':enabled').length;
-    const check_ln = document.querySelectorAll(check_selector+':checked:enabled').length;
-    if( checkbox_ln === check_ln ){
+    const checkbox_ln = document.querySelectorAll(check_selector + ':enabled').length;
+    const check_ln = document.querySelectorAll(check_selector + ':checked:enabled').length;
+    if (checkbox_ln === check_ln) {
         selectAll.setAttribute('checked', 'checked');
         selectAll.checked = true;
     } else {
@@ -159,6 +167,3 @@ $('#jstree').on('close_node.jstree', function (e, data) {
         .first();
     icon.removeClass('fa-folder-open').addClass('fa-folder');
 });
-
-
-
