@@ -187,7 +187,7 @@ function mailAjax(page, search, listTpye, categoryNo) {
                     let text3 = ``;
 
                     for(item of category){
-                        text3 += `<label>${item.NAME}<input name="category" type="radio" value="${item.no}"><span class='material-symbols-outlined'> close </span></label>`;
+                        text3 += `<label>${item.NAME}<input name="category" type="radio" value="${item.NO}"><span class='material-symbols-outlined'> close </span></label>`;
                     }
 
                     categoryItem.innerHTML = text3;
@@ -363,7 +363,8 @@ function changeCategory() {
     let category = 0;
     for(let i = 0; i < radios.length; i++){
         if(radios[i].checked){
-            no = radios.value;
+            category = radios[i].value;
+            console.log(radios[i]);
             break;
         }
     }

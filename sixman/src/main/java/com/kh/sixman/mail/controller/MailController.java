@@ -73,6 +73,7 @@ public class MailController {
 		resultMap.put("pv", pv);
 		resultMap.put("list", list);
 		resultMap.put("categoryList", categoryList);
+		resultMap.put("listCount", listCount);
 		
 		Gson gson = new GsonBuilder().create();
 		String json = gson.toJson(resultMap);
@@ -128,25 +129,34 @@ public class MailController {
 	
 	@ResponseBody
 	@PostMapping("updateRead")
-	public void updateRead(List<String> no, HttpSession session) {
+	public void updateRead(@RequestParam List<String> no, HttpSession session) {
 		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
 		Map<String, Object> map = new HashMap<>();
 		map.put("loginMember", loginMember);
 		map.put("no", no);
 		int result = ms.updateRead(map);	
+		
+		if(result!=1) {
+			
+		}
 	}
 	
 	@ResponseBody
 	@PostMapping("changeCategory")
-	public void changeCategory(List<String> no, String category, HttpSession session) {
-		System.out.println(no);
-		System.out.println(category);
+	public void changeCategory(@RequestParam List<String> no, @RequestParam String category, HttpSession session) {
 		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
 		Map<String, Object> map = new HashMap<>();
 		map.put("loginMember", loginMember);
 		map.put("no", no);
 		map.put("category", category);
+		
+		System.out.println(map);
+		
 		int result = ms.changeCategory(map);
+		
+		if(result!=1) {
+			
+		}
 	}
 	
 	@ResponseBody
@@ -161,7 +171,7 @@ public class MailController {
 	
 	@ResponseBody
 	@PostMapping("restore")
-	public void restore(List<String> no, HttpSession session) {
+	public void restore(@RequestParam List<String> no, HttpSession session) {
 		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
 		Map<String, Object> map = new HashMap<>();
 		map.put("loginMember", loginMember);
@@ -171,7 +181,7 @@ public class MailController {
 	
 	@ResponseBody
 	@PostMapping("realDelete")
-	public void realDelete(List<String> no, HttpSession session) {
+	public void realDelete(@RequestParam List<String> no, HttpSession session) {
 		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
 		Map<String, Object> map = new HashMap<>();
 		map.put("loginMember", loginMember);
