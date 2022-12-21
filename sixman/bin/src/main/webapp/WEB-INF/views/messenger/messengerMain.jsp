@@ -226,8 +226,8 @@
 					<div class="chatlist-modal">
 						<div class="chatlist-modal-text01">어느것을 선택하시겠습니까?</div>	
 						<div class="chatlist-modal-text02">
-							<div class="chatlist-modal-text02-1">연락처 링크</div>
-							<div class="chatlist-modal-text02-2">프로필 링크</div>
+							<div class="chatlist-modal-text02-1">프로필 링크</div>
+							<div class="chatlist-modal-text02-2">연락처 링크</div>
 						</div>	
 					</div>
 					

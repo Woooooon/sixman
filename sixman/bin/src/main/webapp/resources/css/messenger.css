@@ -676,7 +676,7 @@
 	border: 1px solid black;
 	position: absolute;
 	z-index:20;
-	margin-top:155%;
+	margin-top:147%;
 	display:flex;
 }
 .chatroom-4-1-box{
@@ -863,6 +863,17 @@ input[id="chat-setting-check02"]{
 }
 
 .chatroom-profile1{
+	margin:10%;
+	margin-top:-14%;
+/* 	margin-bottom:40%; */
+	font-size:18px;
+	position: absolute;
+	margin-left:60%;
+/* 	margin-top:12%; */
+}
+
+.text-messenger-send-contacts-page-01{
+	display:none;
 	margin:10%;
 	margin-top:-14%;
 /* 	margin-bottom:40%; */

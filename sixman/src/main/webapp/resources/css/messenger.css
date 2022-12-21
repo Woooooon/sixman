@@ -872,7 +872,7 @@ input[id="chat-setting-check02"]{
 /* 	margin-top:12%; */
 }
 
-/*프로필 보내기*/
+/*연락처 보내기*/
 .text-messenger-send-profile-page-01{
 	display:none;
 /* 	margin:4%; */
@@ -891,3 +891,39 @@ input[id="chat-setting-check02"]{
 /* /* 	padding-left:2%; */ */
 /* /* 	padding-right:2%; */ */
 /* } */
+
+
+#text-messenger-send-contactss-page-01{
+	display:none;
+	margin:10%;
+	margin-top:-14%;
+/* 	margin-bottom:40%; */
+	font-size:18px;
+	position: absolute;
+	margin-left:60%;
+/* 	margin-top:12%; */
+}
+
+
+
+<!--삭제 메시지 -->
+
+.with-chat-data01-1{
+	display:none;
+}
+
+.width-chat-subroomname2-1{
+	margin-top:6%;
+	margin-bottom:6%;
+	font-size:18px;
+	margin-left:18%;
+}
+
+.button-list-chatroom-delete{
+	display: flex;
+	justify-content: space-around;
+}
+.button-list-chatroom-delete>.btn{
+	width:16%;
+	height:10%;
+}
