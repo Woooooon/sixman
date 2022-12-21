@@ -31,6 +31,7 @@
 }
 
 #search-box{
+    gap: 10px;
 	padding: 20px;
     display: flex;
     width: 100%;
@@ -308,18 +309,10 @@
         <div>
             <div id="search-box" class="box">
                 <div id="search-font">검색기간</div>
-                <div>
-                    <button>7일</button>
-                </div>
-                <div>
-                    <button>1개월</button>
-                </div>
-                <div>
-                    <button>3개월</button>
-                </div>
-                <div>
-                    <button>1년</button>
-                </div>
+                <div class="btn">7일</div>
+                <div class="btn">1개월</div>
+                <div class="btn">3개월</div>
+                <div class="btn">1년</div>
                 <div id="date">
                     <input id="start-day" type="date" style="width: 100px;">
                     ~
