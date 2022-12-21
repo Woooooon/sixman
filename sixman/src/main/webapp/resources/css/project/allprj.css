@@ -18,7 +18,7 @@
 }
 
 .project-box {
-    border: 2px solid #aaa;
+    border: 1px solid #aaa;
     width: 250px;
     height: 250px;
     background-color: #FFFFFF;
@@ -47,13 +47,13 @@
 .favorite {
     width: 30px;
     height: 30px;
-    border: 2px solid #aaa;
+    border: 1px solid #aaa;
     border-radius: 0 15px 0 0;
     margin-left: 2px;
 }
 
 .like {
-    background-color: yellow;
+   color: yellow;
 }
 
 .hidden {
