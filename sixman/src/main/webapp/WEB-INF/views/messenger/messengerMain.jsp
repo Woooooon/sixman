@@ -68,7 +68,17 @@
 									
 								</div>
 
+								<div class="with-chat-data01-1" style="display:none;">
+<!-- 								<div class="square-first" style=""></div> -->
+									<div class="width-chat-subroomname2-1">해당 대화창을 삭제하시겠습니까?</div>
+									<div class="button-list-chatroom-delete">
+										<button type="button" class="btn" id="deletechatroom-ok">예</button>
+										<button type="button" class="btn" id="deletechatroom-no">아니오</button>
+									</div>
+									
+								</div>
 						</div>
+						
 
 					</div>
 
@@ -226,8 +236,8 @@
 					<div class="chatlist-modal">
 						<div class="chatlist-modal-text01">어느것을 선택하시겠습니까?</div>	
 						<div class="chatlist-modal-text02">
-							<div class="chatlist-modal-text02-1">연락처 링크</div>
-							<div class="chatlist-modal-text02-2">프로필 링크</div>
+							<div class="chatlist-modal-text02-1">프로필 링크</div>
+							<div class="chatlist-modal-text02-2">연락처 링크</div>
 						</div>	
 					</div>
 					
@@ -452,12 +462,12 @@
 					<div class="text-messenger-send-profile-page-01">
 					
 						<div class="title-box" id="who-send-profile-inchatroom">
-							<div class="title-text01">대화방 생성</div>
+							<div class="title-text01">프로필 링크 전달</div>
 						</div>
 
 						<div class='bottom-area' id='ba'></div>
 
-						<div id='who-chat'>누구와 대화하시겠습니까?</div>
+						<div id='who-chat'>어느 분의 프로필을 전달하시겠어요?</div>
 
 						<!-- 카탈로그, textarea, button -->
 
@@ -558,7 +568,122 @@
 							<div class="white_display_01"></div>
 						</div>
 					</div>
+					
+					
+					
+					
 					<!-- 연락처 보내기 사이트 -->
+					
+					<!-- 누구와 대화하시겠습니까? -->
+					<div class="text-messenger-send-contactss-page-01" id="text-messenger-send-contactss-page-01" style="display:none">
+					
+						<div class="title-box" id="who-send-profile-inchatroom">
+							<div class="title-text01">연락처 링크 전달</div>
+						</div>
+
+						<div class='bottom-area' id='ba'></div>
+
+						<div id='who-chat'>어느 분의 프로필을 전달하시겠어요?</div>
+
+						<!-- 카탈로그, textarea, button -->
+
+						<div class="chatroom-list-space">
+							<!-- <div class="chatroom-introduce">대화방 목록</div> -->
+							<!-- <div class="textbox-messenger-area1"> -->
+
+							<div class="messenger-category01">
+								<select>
+									<option>직책</option>
+									<option>이름</option>
+									<option>팀명</option>
+								</select>
+							</div>
+							<input type="text" name="wantchatdata" id="wantchatdata">
+							<input type="submit" class="btn" value="검색">
+						</div>
+
+
+						<!-- 프로필 설정 창, 클래스 바꿔야 -->
+						<div class="text-messenger-send-contacts-page-01">
+							<div class="textbox-messenger-area2">
+								<div class="showup" id="showup01">
+									<span class="material-symbols-outlined" style="font-size:300%" id="chatsetting-slide01">expand_more</span>
+									<div class="chatsetting-02-subtitle" id="subtitle1">전체 목록</div>
+								</div>
+								<div class="team-people-data">
+ 								<div class="team-whole-data">
+									<div class="team-area">영업부</div>
+									<div class="team-name">영업 2팀</div>
+								</div>
+								<div class="bottom-area2"></div>
+								<div class="with-chat-data">
+									<div class="square" style=""></div>
+									<div class="with-chat-name">구기석</div>
+									<div class="with-chat-grade">부장</div>
+									<input type="checkbox" class="checkbox-square-one" name="withfriend01">
+								</div>
+								<div class="bottom-area2"></div>
+								<div class="with-chat-data">
+									<div class="square" style=""></div>
+									<div class="with-chat-name">구기석</div>
+									<div class="with-chat-grade">부장</div>
+									<input type="checkbox" class="checkbox-square-one" name="withfriend01">
+								</div>
+								<div class="bottom-area2"></div>
+								</div>
+								<div class="with-chat-data">
+									<div class="square" style=""></div>
+									<div class="with-chat-name">구기석</div>
+									<div class="with-chat-grade">부장</div>
+									<input type="checkbox" class="checkbox-square-one" name="withfriend01">
+								</div>
+								<div class="bottom-area2"></div>
+							</div>
+							<div class="textbox-messenger-area3">
+								<div class="showup" id="showup02">
+									<span class="material-symbols-outlined" style="font-size:50px" id="chatsetting-slide01">expand_more</span>
+									<div class="chatsetting-02-subtitle" id="subtitle1">친구 목록</div>
+								</div>
+								<div class="team-people-data">
+									<div class="team-whole-data">
+										<div class="team-area">영업부</div>
+										<div class="team-name">영업 2팀</div>
+									</div>
+									<div class='bottom-area2' id='ba'></div>
+									<div class="with-chat-data">
+										<div class="square" style=""></div>
+										<div class="with-chat-name">구기석</div>
+										<div class="with-chat-grade">부장</div>
+										<input type="checkbox" class="checkbox-square-one" name="withfriend01">
+									</div>
+									<div class="bottom-area2"></div>
+									<div class="with-chat-data">
+										<div class="square" style=""></div>
+										<div class="with-chat-name">구기석</div>
+										<div class="with-chat-grade">부장</div>
+										<input type="checkbox" class="checkbox-square-one" name="withfriend01">
+									</div>
+									<div class="bottom-area2"></div>
+									<div class="with-chat-data">
+										<div class="square" style=""></div>
+										<div class="with-chat-name">구기석</div>
+										<div class="with-chat-grade">부장</div>
+										<input type="checkbox" class="checkbox-square-one" name="withfriend01">
+ 									</div>
+									<div class="bottom-area2"></div>
+								</div>
+							</div>
+							<div class="chatting-button-list01">
+								<div class="chatbutton01">
+									<input type="submit" class="btn" value="이전 화면" id="sendcontactslink-leave">
+								</div>
+								<div class="chatbutton01">
+									<input type="submit" class="btn" value=" 보내기 " id="sendcontactslink-go">
+								</div>
+							</div>
+							<div class="white_display_01"></div>
+						</div>
+					</div>
 					
 				</main>
 
@@ -774,12 +899,60 @@ if (messenger.style.display == 'none') {
 			})
 			
 			$('.chatlist-modal-text02-2').click(function(){
-				$(".chatlist-modal").fadeOut();
+				$(".chatlist-modal").hide();
+				$(".chatting-room").hide();
+				$("#text-messenger-send-contactss-page-01").show();
 
 			})
 			
+// 			프로필 링크-이전화면, 이후화면
 			$('#sendprofilelink-leave').click(function(){
+// 				alert('dd');
+				$(".text-messenger-send-profile-page-01").hide();
 				$(".chatting-room").show();
+				$('.chatroom-one-to-three-2').hide();
+			})
+			$('#sendprofilelink-go').click(function(){
+// 				alert('dd');
+				$(".text-messenger-send-profile-page-01").hide();
+				$(".chatting-room").show();
+				$('.chatroom-one-to-three-2').hide();
+			})
+			
+// 			"text-messenger-send-contacts-page-01"
+
+			$('#sendcontactslink-leave').click(function(){
+// 				alert('dd');
+				$("#text-messenger-send-contactss-page-01").hide();
+				$(".chatting-room").show();
+				$('.chatroom-one-to-three-2').hide();
+			})
+			$('#sendcontactslink-go').click(function(){
+// 				alert('dd');
+				$("#text-messenger-send-contactss-page-01").hide();
+				$(".chatting-room").show();
+				$('.chatroom-one-to-three-2').hide();
+			})
+			
+			<!--대화창목록 삭제-->
+			$('#chatroom-exit-icon').click(function(){
+ 				$(".with-chat-data01").hide();
+ 				$(".with-chat-data01-1").show();
+// 				$('.chatroom-one-to-three-2').hide();
+			})
+			
+			$('#deletechatroom-ok').click(function(){
+ 				$(".with-chat-data01-1").hide();
+ 				$(".with-chat-data01").show();
+// 				$('.chatroom-one-to-three-2').hide();
+			})
+			
+			$('#deletechatroom-no').click(function(){
+//  				$(".with-chat-data01").hide();
+//  				$(".with-chat-data01-1").show();
+				$(".with-chat-data01-1").hide();
+ 				$(".with-chat-data01").show();
+// 				$('.chatroom-one-to-three-2').hide();
 			})
 			</script>
 
