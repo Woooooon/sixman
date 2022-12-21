@@ -22,14 +22,12 @@ public class DocumentVo {
 	private String startDate;
 	private String endDate;
 	private String apNo;
-	public List<MultipartFile> getFile() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	public void setFileList(List<AttachmentVo> fileList) {
-		// TODO Auto-generated method stub
-		
-	}
+	
+	
+	private List<AttachmentVo> fileList;
+	private List<MultipartFile> file;
+	private List<String> sender;
+	
 	
 	
 }

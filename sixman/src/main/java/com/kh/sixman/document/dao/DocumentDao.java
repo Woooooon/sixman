@@ -8,9 +8,14 @@ import com.kh.sixman.document.vo.DocumentVo;
 @Repository
 public class DocumentDao {
 
+	
+
+	public int send(SqlSessionTemplate sst, DocumentVo dvo) {
+		return 0;
+	}
+
 	public int write(SqlSessionTemplate sst, DocumentVo dvo) {
-		
-		return sst.insert("boardMapper.write",dvo);
+		return sst.insert("documentMapper.write",dvo);
 	}
 
 }
