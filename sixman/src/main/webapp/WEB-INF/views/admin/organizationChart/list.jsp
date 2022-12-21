@@ -96,16 +96,16 @@
                                 <div class="list-item">
                                     <input type="checkbox" id="member1" name="memberInfo" class="selectOne" />
                                     <p>P123123123</p>
-                                    <p>윤태원</p>
-                                    <select name="" id="">
+                                    <p name="memberName">윤태원</p>
+                                    <select name="position" id="">
                                         <option value="">사원</option>
                                         <option value="">부장</option>
                                     </select>
-                                    <select name="" id="">
+                                    <select name="dept" id="">
                                         <option value="">영업부</option>
                                         <option value="">인사부</option>
                                     </select>
-                                    <select name="" id="">
+                                    <select name="team" id="">
                                         <option value="">영업 1팀</option>
                                         <option value="">영업 2팀</option>
                                     </select>
@@ -121,7 +121,7 @@
                                 <div class="list-item">
                                     <input type="checkbox" id="member2" name="memberInfo" class="selectOne" />
                                     <p>P123123123</p>
-                                    <p>윤태원</p>
+                                    <p name="memberName">윤태원</p>
                                     <select name="" id="">
                                         <option value="">사원</option>
                                         <option value="">부장</option>
@@ -146,7 +146,7 @@
                                 <div class="list-item">
                                     <input type="checkbox" id="member3" name="memberInfo" class="selectOne" />
                                     <p>P123123123</p>
-                                    <p>윤태원</p>
+                                    <p name="memberName">윤태원</p>
                                     <select name="" id="">
                                         <option value="">사원</option>
                                         <option value="">부장</option>
@@ -171,7 +171,7 @@
                                 <div class="list-item">
                                     <input type="checkbox" id="member4" name="memberInfo" class="selectOne" />
                                     <p>P123123123</p>
-                                    <p>윤태원</p>
+                                    <p name="memberName">윤태원</p>
                                     <select name="" id="">
                                         <option value="">사원</option>
                                         <option value="">부장</option>
@@ -196,7 +196,7 @@
                                 <div class="list-item">
                                     <input type="checkbox" id="member5" name="memberInfo" class="selectOne" />
                                     <p>P123123123</p>
-                                    <p>윤태원</p>
+                                    <p name="memberName">윤태원</p>
                                     <select name="" id="">
                                         <option value="">사원</option>
                                         <option value="">부장</option>
@@ -221,7 +221,7 @@
                                 <div class="list-item">
                                     <input type="checkbox" id="member6" name="memberInfo" class="selectOne" />
                                     <p>P123123123</p>
-                                    <p>윤태원</p>
+                                    <p name="memberName">윤태원</p>
                                     <select name="" id="">
                                         <option value="">사원</option>
                                         <option value="">부장</option>
@@ -246,7 +246,7 @@
                                 <div class="list-item">
                                     <input type="checkbox" id="member7" name="memberInfo" class="selectOne" />
                                     <p>P123123123</p>
-                                    <p>윤태원</p>
+                                    <p name="memberName">윤태원</p>
                                     <select name="" id="">
                                         <option value="">사원</option>
                                         <option value="">부장</option>
@@ -271,7 +271,7 @@
                                 <div class="list-item">
                                     <input type="checkbox" id="member8" name="memberInfo" class="selectOne" />
                                     <p>P123123123</p>
-                                    <p>윤태원</p>
+                                    <p name="memberName">윤태원</p>
                                     <select name="" id="">
                                         <option value="">사원</option>
                                         <option value="">부장</option>
@@ -296,7 +296,7 @@
                                 <div class="list-item">
                                     <input type="checkbox" id="member9" name="memberInfo" class="selectOne" />
                                     <p>P123123123</p>
-                                    <p>윤태원</p>
+                                    <p name="memberName">윤태원</p>
                                     <select name="" id="">
                                         <option value="">사원</option>
                                         <option value="">부장</option>
@@ -321,7 +321,7 @@
                                 <div class="list-item">
                                     <input type="checkbox" id="member10" name="memberInfo" class="selectOne" />
                                     <p>P123123123</p>
-                                    <p>윤태원</p>
+                                    <p name="memberName">임정한</p>
                                     <select name="" id="">
                                         <option value="">사원</option>
                                         <option value="">부장</option>
@@ -392,24 +392,6 @@
                     <div id="select-wrap" class="box">
                         <div class="side-title sep">
                             <p>선택된 사원목록</p>
-                        </div>
-                        <div class="select-employee-list">
-                            <div class="select-employee-box">
-                                <div class="select-employee-pic">
-                                    <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
-                                </div>
-                                <div class="info-box">
-                                    <div class="select-dept-info">
-                                        <p>영업부</p>
-                                        <p>영업 2팀</p>
-                                    </div>
-                                    <div class="select-employee-info">
-                                        <p>구기석</p>
-                                        <p>부장</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <span class="material-symbols-outlined removeBtn">person_remove</span>
                         </div>
                     </div>
                 </aside>
