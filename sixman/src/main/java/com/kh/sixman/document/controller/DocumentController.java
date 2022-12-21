@@ -113,16 +113,19 @@ public class DocumentController {
 		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
 		
 		String rootPath = session.getServletContext().getRealPath("/");
-		List<AttachmentVo> fileList = FileUnit.uploadFile(dvo.getFile(), rootPath, "upload/notice");
-		//이부분이 뭔지 잘 모르겠어요 찾는중이긴한데
+		List<AttachmentVo> fileList = FileUnit.uploadFile(dvo.getFile(), rootPath, "upload/document");
+		
+		
+		
 		dvo.setFileList(fileList);
 		int result = ds.write(dvo);
 		
 		if(result ==1) {
 			return "document/first";
 		}else {
-			return "에러페이지 작성해야함";
+			return "에러페이지";
 		}
+		
 		
 		
 	}
