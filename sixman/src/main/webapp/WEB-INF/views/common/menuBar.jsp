@@ -84,6 +84,11 @@
 <script>
     const menuMap = new Map();
 
+    menuMap.set("공지사항", [
+        {icon: "approval", title: "공지사항"},
+        {title: "", url: ""}
+    ]);
+
     menuMap.set("근태관리", [
         {icon: "approval", title: "근태관리"},
         {title: "", url: ""},
