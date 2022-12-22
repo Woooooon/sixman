@@ -6,9 +6,9 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.sixman.admin.vo.AuthorizeVo;
 import com.kh.sixman.admin.vo.DeptVo;
 import com.kh.sixman.admin.vo.PositionVo;
-import com.kh.sixman.member.vo.AuthorizeVo;
 import com.kh.sixman.member.vo.BankVo;
 import com.kh.sixman.member.vo.MemberVo;
 

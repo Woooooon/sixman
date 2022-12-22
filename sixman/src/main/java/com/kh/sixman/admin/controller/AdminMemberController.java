@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.sixman.admin.service.AdminMemberService;
+import com.kh.sixman.admin.vo.AuthorizeVo;
 import com.kh.sixman.admin.vo.DeptVo;
 import com.kh.sixman.admin.vo.PositionVo;
 import com.kh.sixman.common.AttachmentVo;
 import com.kh.sixman.common.FileUnit;
-import com.kh.sixman.member.vo.AuthorizeVo;
 import com.kh.sixman.member.vo.BankVo;
 import com.kh.sixman.member.vo.MemberVo;
 @RequestMapping("admin/member")
@@ -61,7 +61,7 @@ public class AdminMemberController {
 		int result = adminMemberService.join(vo);
 		
 		if(result > 0) {
-			return "redirect:/admin/employee/list"; 
+			return "redirect:/admin/employee/list?page=1"; 
 		}
 		
 		return "redirect:/main/mainPage";

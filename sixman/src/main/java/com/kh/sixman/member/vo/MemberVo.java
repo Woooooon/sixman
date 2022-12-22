@@ -23,6 +23,8 @@ public class MemberVo {
 	private String address;
 	private String deptNo;
 	private String deptName;
+	private String teamNo;
+	private String teamName;
 	private String positionNo;
 	private String positionName;
 	private String authorizeNo;

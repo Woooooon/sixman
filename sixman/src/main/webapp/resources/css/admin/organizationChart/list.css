@@ -190,7 +190,8 @@ p[name='imgName'] {
 
 .newbie-list .newbie-box {
     width: 140.469px;
-    float: left;
+    display: flex;
+    justify-content: center;
     list-style: none;
 }
 

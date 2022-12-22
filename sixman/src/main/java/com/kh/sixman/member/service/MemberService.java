@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -58,15 +59,20 @@ public class MemberService {
 	}
 
 
-	public List<MemberVo> selectMemberList() {
+	public List<MemberVo> selectMemberList(RowBounds rb) {
 		
-		return memberDao.selectMemberList(sst);
+		return memberDao.selectMemberList(sst,rb);
 	}
 
 
 	public List<MemberVo> selectNewbieList() {
 		
 		return memberDao.selectNewbieList(sst);
+	}
+
+
+	public int countList() {
+		return memberDao.countList(sst);
 	}
 
 }

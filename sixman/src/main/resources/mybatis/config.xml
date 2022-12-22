@@ -16,7 +16,7 @@
 		<typeAlias type="com.kh.sixman.common.AttachmentVo" alias="AttachmentVo"/>
 		<typeAlias type="com.kh.sixman.mail.vo.MailVo" alias="mailVo"/>
 		<typeAlias type="com.kh.sixman.member.vo.BankVo" alias="BankVo"/>
-		<typeAlias type="com.kh.sixman.member.vo.AuthorizeVo" alias="AuthorizeVo"/>
+		<typeAlias type="com.kh.sixman.admin.vo.AuthorizeVo" alias="AuthorizeVo"/>
 		<typeAlias type="com.kh.sixman.member.vo.MemberVo" alias="MemberVo"/>
 		<typeAlias type="com.kh.sixman.admin.vo.PositionVo" alias="PositionVo"/>
 		<typeAlias type="com.kh.sixman.admin.vo.DeptVo" alias="DeptVo"/>

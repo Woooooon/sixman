@@ -68,8 +68,9 @@
                                         <div id="dept" class="write">
                                             <label for="">부 서</label>
                                             <select name="deptNo" id="dept">
+                                            	<option value="1" selected>부서</option>
                                             	<c:forEach items="${deptList}" var="i">
-                                                <option value="${i.no}" <c:if test="${i.no eq 1}">selected</c:if>>${i.name}</option>
+                                                <option value="${i.deptNo}">${i.deptName}</option>
                                             	</c:forEach>
                                             </select>
                                         </div>
@@ -115,10 +116,10 @@
                                         </div>
                                         <div id="team" class="write">
                                             <label for="">팀</label>
-                                            <select name="" id="">
-                                                <option value="1">영업 1팀</option>
-                                                <option value="2">영업 2팀</option>
-                                                <option value="3">영업 3팀</option>
+                                            <select name="teamNo" id="">
+                                                <option value="">영업 1팀</option>
+                                                <option value="">영업 2팀</option>
+                                                <option value="">영업 3팀</option>
                                             </select>
                                         </div>
                                         <div id="bank" class="write">

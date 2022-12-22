@@ -4,7 +4,8 @@ import lombok.Data;
 
 @Data
 public class DeptVo {
-	private String no;
-	private String name;
+	private String teamNo;
+	private String teamName;
 	private String deptNo;
+	private String deptName;
 }

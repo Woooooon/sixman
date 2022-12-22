@@ -3,6 +3,7 @@ package com.kh.sixman.member.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -24,13 +25,17 @@ public class MemberDao {
 		return sst.update("memberMapper.updatePwd", map);
 	}
 
-	public List<MemberVo> selectMemberList(SqlSessionTemplate sst) {
+	public List<MemberVo> selectMemberList(SqlSessionTemplate sst, RowBounds rb) {
 		return sst.selectList("memberMapper.selectMemberList");
 	}
 
 	public List<MemberVo> selectNewbieList(SqlSessionTemplate sst) {
 		
 		return sst.selectList("memberMapper.selectNewbieList");
+	}
+
+	public int countList(SqlSessionTemplate sst) {
+		return sst.selectOne("memberMapper.countList");
 	}
 
 }

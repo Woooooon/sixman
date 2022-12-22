@@ -4,6 +4,11 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="memberMapper">
 	
+	<select id="countList" resultType="int">
+		SELECT COUNT(*)
+        FROM MEMBER
+	</select>
+	
 	<select id="login" resultType="MemberVo">
 		SELECT 
 		    M.NO
@@ -59,22 +64,24 @@
 	
 	<select id="deptList" resultType="DeptVo">
 		SELECT 
-			"NO"
-			, "DEPT_NO"
-			, "NAME"
-		FROM DEPARTMENT
-	</select>
-	
-	<select id="teamList" resultType="teamVo">
-		SELECT 
-		    D.NO AS DEPT_NO,
-		    D.NAME AS DEPT_NAME,
-		    P.NO AS TEAM_NO,
-		    P.NAME AS TEAM_NAME
+		    P.NO AS DEPT_NO,
+		    P.NAME AS DEPT_NAME
 		FROM DEPARTMENT D,DEPARTMENT P
 		WHERE D.NO = P.DEPT_NO
-		AND D.NO = #{no}
+		AND D.NO = 1
 	</select>
+	
+	<select id="subDeptList" resultType="DeptVo">
+		SELECT 
+		    P.NO TEAM_NO,
+		    P.NAME AS TEAM_NAME ,
+		    P.DEPT_NO,
+		    D.NAME AS DEPT_NAME
+		FROM DEPARTMENT D,DEPARTMENT P
+		WHERE D.NO = P.DEPT_NO
+		AND D.NO = #{deptNo};
+	</select>
+	
 	
 	<insert id="join">
 		INSERT INTO
@@ -110,7 +117,12 @@
 			, #{bankNo}
 			, #{account}
 			, #{address}
+			<if test="teamNo == ''">
 			, #{deptNo}
+			</if>
+			<if test="teamNo != ''">
+			, #{teamNo}
+			</if>
 			, #{positionNo}
 			, #{authorizeNo}
 			, SYSDATE
@@ -168,7 +180,7 @@
 		JOIN POSITION P ON P.NO = M.POSITION_NO
 		JOIN DEPARTMENT D ON D.NO = M.DEPT_NO
 		JOIN AUTHORIZE A ON A.NO = M.AUTHORIZE_NO
-		JOIN (select 
+		LEFT JOIN (select 
 		    "NO",
 		    "ORIGIN_NAME",
 		    "MEMBER_NO",
@@ -212,7 +224,7 @@
 			JOIN POSITION P ON P.NO = M.POSITION_NO
 			JOIN DEPARTMENT D ON D.NO = M.DEPT_NO
 			JOIN AUTHORIZE A ON A.NO = M.AUTHORIZE_NO
-			JOIN 
+			LEFT JOIN 
 				(
 				select 
 				    "NO",

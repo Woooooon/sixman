@@ -103,35 +103,29 @@
                                         <option value="2">부장</option>
                                     </select>
                                     <select name="deptNo" id="">
+                                    	<option value="1">부서</option>
                                         <c:forEach items="${deptList}" var="j">
-                                        <option value="${j.no}" <c:if test="${j.no eq i.deptNo}">selected</c:if>>${j.name}</option>
+                                        <option value="${j.deptNo}" <c:if test="${j.deptNo eq i.deptNo}">selected</c:if>>${j.deptName}</option>
                                         </c:forEach>
                                     </select>
                                     <select name="teamNo" id="">
-                                        <c:if test="${i.deptNo eq j.no}"></c:if>
-                                        <c:forEach items="${deptList}" var="j">
-                                        <c:if test="${j.deptNo eq j.no}">
-                                        <option value="${j.no}" <c:if test="${j.no eq i.deptNo}">selected</c:if>>${j.name}</option>
-                                        </c:if>
-                                        </c:forEach>
+                                        <option value="${i.teamNo}">${i.teamName}</option>
                                     </select>
                                     <select name="authorizeList" id="">
                                     <c:forEach items="${authorizeList}" var="j">
                                         <option value="${j.no}" <c:if test="${j.no eq i.authorizeNo}">selected</c:if>>${j.level}</option>
                                         </c:forEach>
                                     </select>
-                                    <p>2022년 11월 20일</p>
+                                    <p>${i.joinDate}</p>
                                 </div>
                             </c:forEach>
                         </div>
                         <div class="page-box">
                             <span class="material-symbols-outlined"> keyboard_double_arrow_left </span>
                             <span class="material-symbols-outlined"> chevron_left </span>
-                            <div class="page-btn checked-p-btn">1</div>
-                            <div class="page-btn">2</div>
-                            <div class="page-btn">3</div>
-                            <div class="page-btn">4</div>
-                            <div class="page-btn">5</div>
+                            <c:forEach var="i" begin="${pv.startPage}" end="${pv.endPage}">
+                            <div class="page-btn <c:if test="${i eq pv.currentPage}"> checked-p-btn</c:if>">${i}</div>
+                            </c:forEach>
                             <span class="material-symbols-outlined"> chevron_right </span>
                             <span class="material-symbols-outlined"> keyboard_double_arrow_right </span>
                         </div>
@@ -170,108 +164,9 @@
                                     </a>
                                 </li>
 								</c:forEach>
-                                <li class="newbie-box" id="asd">
-                                    <a href="" class="newbie-detail">
-                                        <div class="newbie-pic">
-                                            <img src="/sixman/resources/img/defaultProfilePic.png" alt="" />
-                                        </div>
-                                        <div class="info-box">
-                                            <div class="select-dept-info">
-                                                <p>deptNam</p>
-                                                <p>teamNam</p>
-                                            </div>
-                                            <div class="select-employee-info">
-                                                <p>name</p>
-                                                <p>positionNam</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="newbie-box" id="asd">
-                                    <a href="" class="newbie-detail">
-                                        <div class="newbie-pic">
-                                            <img src="/sixman/resources/img/defaultProfilePic.png" alt="" />
-                                        </div>
-                                        <div class="info-box">
-                                            <div class="select-dept-info">
-                                                <p>deptNam</p>
-                                                <p>teamNam</p>
-                                            </div>
-                                            <div class="select-employee-info">
-                                                <p>name</p>
-                                                <p>positionNam</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="newbie-box" id="asd">
-                                    <a href="" class="newbie-detail">
-                                        <div class="newbie-pic">
-                                            <img src="/sixman/resources/img/defaultProfilePic.png" alt="" />
-                                        </div>
-                                        <div class="info-box">
-                                            <div class="select-dept-info">
-                                                <p>deptNam</p>
-                                                <p>teamNam</p>
-                                            </div>
-                                            <div class="select-employee-info">
-                                                <p>name</p>
-                                                <p>positionNam</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="newbie-box" id="asd">
-                                    <a href="" class="newbie-detail">
-                                        <div class="newbie-pic">
-                                            <img src="/sixman/resources/img/defaultProfilePic.png" alt="" />
-                                        </div>
-                                        <div class="info-box">
-                                            <div class="select-dept-info">
-                                                <p>deptNam</p>
-                                                <p>teamNam</p>
-                                            </div>
-                                            <div class="select-employee-info">
-                                                <p>name</p>
-                                                <p>positionNam</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
                             </ul>
                         </div>
-                        <!-- <div class="side-title">
-                            <p>직급 설정</p>
-                            <span class="material-symbols-outlined"> add_box </span>
-                        </div>
-                        <div class="side-body">
-                            <div class="select">
-                                <div class="text">직급 목록</div>
-                                <span class="material-symbols-outlined"> expand_more </span>
-                                <ul class="option-list">
-                                    <li class="option-wrap">
-                                        <div class="option">대표</div>
-                                        <div class="remove-position">
-                                            <span class="material-symbols-outlined">remove</span>
-                                        </div>
-                                    </li>
-                                    <li class="option-wrap">
-                                        <div class="option">부장</div>
-                                        <div class="remove-position">
-                                            <span class="material-symbols-outlined">remove</span>
-                                        </div>
-                                    </li>
-                                    <li class="option-wrap">
-                                        <div class="option">사원</div>
-                                        <div class="remove-position">
-                                            <span class="material-symbols-outlined">remove</span>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div> -->
                     </div>
-
                     <div id="select-wrap" class="box">
                         <div class="side-title sep">
                             <p>선택된 사원목록</p>
@@ -283,6 +178,3 @@
     </body>
 </html>
 
-<script>
-    $('');
-</script>
