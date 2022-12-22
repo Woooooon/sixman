@@ -63,15 +63,14 @@
                                 <div class="info-wrap">
                                     <div class="left-info">
                                         <div id="profile-view">
-                                            <img alt="프로필사진" src="<c:url value='/resources/img/defaultProfilePic.jpg'/>" class="image-box" />
+                                            <img alt="프로필사진" src="<c:url value='/resources/img/defaultProfilePic.png'/>" class="image-box" />
                                         </div>
                                         <div id="dept" class="write">
                                             <label for="">부 서</label>
                                             <select name="deptNo" id="dept">
-                                                <option value="1">부 서</option>
-                                                <option value="2">인사부</option>
-                                                <option value="3">관리부</option>
-                                                <option value="4">마케팅부</option>
+                                            	<c:forEach items="${deptList}" var="i">
+                                                <option value="${i.no}" <c:if test="${i.no eq 1}">selected</c:if>>${i.name}</option>
+                                            	</c:forEach>
                                             </select>
                                         </div>
                                         <div id="position" class="write">
@@ -157,7 +156,6 @@
                                             <span class="material-symbols-outlined">add</span>
                                             추 가
                                         </button>
-                                        <input type="file" id="real-pic" />
                                     </div>
                                 </div>
                                 <div id="resume">

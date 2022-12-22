@@ -68,7 +68,7 @@
                         <div class="header">
                             <div class="title">
                                 <span class="material-symbols-outlined">diversity_3</span>
-                                <label>조직도</label>
+                                <h1>조직도</h1>
                             </div>
                             <div class="controller-wrap">
                                 <div class="view-controller">
@@ -92,14 +92,15 @@
                                 <p>권한</p>
                                 <p>입사날짜</p>
                             </div>
-                            <label for="member1">
+                            <c:forEach items="${MemberList}" var="i">
                                 <div class="list-item">
                                     <input type="checkbox" id="member1" name="memberInfo" class="selectOne" />
-                                    <p>P123123123</p>
-                                    <p name="memberName">윤태원</p>
+                                    <p>${i.id}</p>
+                                    <a name="memberName" href="">${i.name}</a>
+                                    <p name="imgPath">${i.fileName}</p>
                                     <select name="position" id="">
-                                        <option value="">사원</option>
-                                        <option value="">부장</option>
+                                        <option value="1">사원</option>
+                                        <option value="2">부장</option>
                                     </select>
                                     <select name="dept" id="">
                                         <option value="">영업부</option>
@@ -109,239 +110,14 @@
                                         <option value="">영업 1팀</option>
                                         <option value="">영업 2팀</option>
                                     </select>
-                                    <select name="" id="">
-                                        <option value="">1</option>
-                                        <option value="">2</option>
-                                        <option value="">3</option>
+                                    <select name="authorizeList" id="">
+                                    <c:forEach items="${authorizeList}" var="a">
+                                        <option value="${a.no}" <c:if test="${a.no eq i.authorizeNo}">selected</c:if>>${a.level}</option>
+                                        </c:forEach>
                                     </select>
                                     <p>2022년 11월 20일</p>
                                 </div>
-                            </label>
-                            <label for="member2">
-                                <div class="list-item">
-                                    <input type="checkbox" id="member2" name="memberInfo" class="selectOne" />
-                                    <p>P123123123</p>
-                                    <p name="memberName">윤태원</p>
-                                    <select name="" id="">
-                                        <option value="">사원</option>
-                                        <option value="">부장</option>
-                                    </select>
-                                    <select name="" id="">
-                                        <option value="">영업부</option>
-                                        <option value="">인사부</option>
-                                    </select>
-                                    <select name="" id="">
-                                        <option value="">영업 1팀</option>
-                                        <option value="">영업 2팀</option>
-                                    </select>
-                                    <select name="" id="">
-                                        <option value="">1</option>
-                                        <option value="">2</option>
-                                        <option value="">3</option>
-                                    </select>
-                                    <p>2022년 11월 20일</p>
-                                </div>
-                            </label>
-                            <label for="member3">
-                                <div class="list-item">
-                                    <input type="checkbox" id="member3" name="memberInfo" class="selectOne" />
-                                    <p>P123123123</p>
-                                    <p name="memberName">윤태원</p>
-                                    <select name="" id="">
-                                        <option value="">사원</option>
-                                        <option value="">부장</option>
-                                    </select>
-                                    <select name="" id="">
-                                        <option value="">영업부</option>
-                                        <option value="">인사부</option>
-                                    </select>
-                                    <select name="" id="">
-                                        <option value="">영업 1팀</option>
-                                        <option value="">영업 2팀</option>
-                                    </select>
-                                    <select name="" id="">
-                                        <option value="">1</option>
-                                        <option value="">2</option>
-                                        <option value="">3</option>
-                                    </select>
-                                    <p>2022년 11월 20일</p>
-                                </div>
-                            </label>
-                            <label for="member4">
-                                <div class="list-item">
-                                    <input type="checkbox" id="member4" name="memberInfo" class="selectOne" />
-                                    <p>P123123123</p>
-                                    <p name="memberName">윤태원</p>
-                                    <select name="" id="">
-                                        <option value="">사원</option>
-                                        <option value="">부장</option>
-                                    </select>
-                                    <select name="" id="">
-                                        <option value="">영업부</option>
-                                        <option value="">인사부</option>
-                                    </select>
-                                    <select name="" id="">
-                                        <option value="">영업 1팀</option>
-                                        <option value="">영업 2팀</option>
-                                    </select>
-                                    <select name="" id="">
-                                        <option value="">1</option>
-                                        <option value="">2</option>
-                                        <option value="">3</option>
-                                    </select>
-                                    <p>2022년 11월 20일</p>
-                                </div>
-                            </label>
-                            <label for="member5">
-                                <div class="list-item">
-                                    <input type="checkbox" id="member5" name="memberInfo" class="selectOne" />
-                                    <p>P123123123</p>
-                                    <p name="memberName">윤태원</p>
-                                    <select name="" id="">
-                                        <option value="">사원</option>
-                                        <option value="">부장</option>
-                                    </select>
-                                    <select name="" id="">
-                                        <option value="">영업부</option>
-                                        <option value="">인사부</option>
-                                    </select>
-                                    <select name="" id="">
-                                        <option value="">영업 1팀</option>
-                                        <option value="">영업 2팀</option>
-                                    </select>
-                                    <select name="" id="">
-                                        <option value="">1</option>
-                                        <option value="">2</option>
-                                        <option value="">3</option>
-                                    </select>
-                                    <p>2022년 11월 20일</p>
-                                </div>
-                            </label>
-                            <label for="member6">
-                                <div class="list-item">
-                                    <input type="checkbox" id="member6" name="memberInfo" class="selectOne" />
-                                    <p>P123123123</p>
-                                    <p name="memberName">윤태원</p>
-                                    <select name="" id="">
-                                        <option value="">사원</option>
-                                        <option value="">부장</option>
-                                    </select>
-                                    <select name="" id="">
-                                        <option value="">영업부</option>
-                                        <option value="">인사부</option>
-                                    </select>
-                                    <select name="" id="">
-                                        <option value="">영업 1팀</option>
-                                        <option value="">영업 2팀</option>
-                                    </select>
-                                    <select name="" id="">
-                                        <option value="">1</option>
-                                        <option value="">2</option>
-                                        <option value="">3</option>
-                                    </select>
-                                    <p>2022년 11월 20일</p>
-                                </div>
-                            </label>
-                            <label for="member7">
-                                <div class="list-item">
-                                    <input type="checkbox" id="member7" name="memberInfo" class="selectOne" />
-                                    <p>P123123123</p>
-                                    <p name="memberName">윤태원</p>
-                                    <select name="" id="">
-                                        <option value="">사원</option>
-                                        <option value="">부장</option>
-                                    </select>
-                                    <select name="" id="">
-                                        <option value="">영업부</option>
-                                        <option value="">인사부</option>
-                                    </select>
-                                    <select name="" id="">
-                                        <option value="">영업 1팀</option>
-                                        <option value="">영업 2팀</option>
-                                    </select>
-                                    <select name="" id="">
-                                        <option value="">1</option>
-                                        <option value="">2</option>
-                                        <option value="">3</option>
-                                    </select>
-                                    <p>2022년 11월 20일</p>
-                                </div>
-                            </label>
-                            <label for="member8">
-                                <div class="list-item">
-                                    <input type="checkbox" id="member8" name="memberInfo" class="selectOne" />
-                                    <p>P123123123</p>
-                                    <p name="memberName">윤태원</p>
-                                    <select name="" id="">
-                                        <option value="">사원</option>
-                                        <option value="">부장</option>
-                                    </select>
-                                    <select name="" id="">
-                                        <option value="">영업부</option>
-                                        <option value="">인사부</option>
-                                    </select>
-                                    <select name="" id="">
-                                        <option value="">영업 1팀</option>
-                                        <option value="">영업 2팀</option>
-                                    </select>
-                                    <select name="" id="">
-                                        <option value="">1</option>
-                                        <option value="">2</option>
-                                        <option value="">3</option>
-                                    </select>
-                                    <p>2022년 11월 20일</p>
-                                </div>
-                            </label>
-                            <label for="member9">
-                                <div class="list-item">
-                                    <input type="checkbox" id="member9" name="memberInfo" class="selectOne" />
-                                    <p>P123123123</p>
-                                    <p name="memberName">윤태원</p>
-                                    <select name="" id="">
-                                        <option value="">사원</option>
-                                        <option value="">부장</option>
-                                    </select>
-                                    <select name="" id="">
-                                        <option value="">영업부</option>
-                                        <option value="">인사부</option>
-                                    </select>
-                                    <select name="" id="">
-                                        <option value="">영업 1팀</option>
-                                        <option value="">영업 2팀</option>
-                                    </select>
-                                    <select name="" id="">
-                                        <option value="">1</option>
-                                        <option value="">2</option>
-                                        <option value="">3</option>
-                                    </select>
-                                    <p>2022년 11월 20일</p>
-                                </div>
-                            </label>
-                            <label for="member10">
-                                <div class="list-item">
-                                    <input type="checkbox" id="member10" name="memberInfo" class="selectOne" />
-                                    <p>P123123123</p>
-                                    <p name="memberName">임정한</p>
-                                    <select name="" id="">
-                                        <option value="">사원</option>
-                                        <option value="">부장</option>
-                                    </select>
-                                    <select name="" id="">
-                                        <option value="">영업부</option>
-                                        <option value="">인사부</option>
-                                    </select>
-                                    <select name="" id="">
-                                        <option value="">영업 1팀</option>
-                                        <option value="">영업 2팀</option>
-                                    </select>
-                                    <select name="" id="">
-                                        <option value="">1</option>
-                                        <option value="">2</option>
-                                        <option value="">3</option>
-                                    </select>
-                                    <p>2022년 11월 20일</p>
-                                </div>
-                            </label>
+                            </c:forEach>
                         </div>
                         <div class="page-box">
                             <span class="material-symbols-outlined"> keyboard_double_arrow_left </span>
@@ -357,36 +133,132 @@
                     </article>
                 </section>
                 <aside id="detail-wrap">
-                    <div id="set-position" class="box">
+                    <div id="newbie" class="box">
                         <div class="side-title">
-                            <p>직급 설정</p>
-                            <span class="material-symbols-outlined"> add_box </span>
+                            <p>최근 입사 한 사원</p>
                         </div>
+                        <span class="material-symbols-outlined" id="prev"> chevron_left </span>
+                        <span class="material-symbols-outlined" id="next"> chevron_right </span>
+                        <div class="newbie-wrapper">
+                            <ul class="newbie-list">
+                                <li class="newbie-box" id="asd">
+                                    <a href="" class="newbie-detail">
+                                        <div class="newbie-pic">
+                                            <img src="/sixman/resources/img/defaultProfilePic.png" alt="" />
+                                        </div>
+                                        <div class="info-box">
+                                            <div class="select-dept-info">
+                                                <p>deptNam</p>
+                                                <p>teamNam</p>
+                                            </div>
+                                            <div class="select-employee-info">
+                                                <p>name</p>
+                                                <p>positionNam</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
 
-                        <div class="select">
-                            <div class="text">직급 목록</div>
-                            <span class="material-symbols-outlined"> expand_more </span>
-                            <ul class="option-list">
-                                <li class="option-wrap">
-                                    <div class="option">대표</div>
-                                    <div class="remove-position">
-                                        <span class="material-symbols-outlined">remove</span>
-                                    </div>
+                                <li class="newbie-box" id="asd">
+                                    <a href="" class="newbie-detail">
+                                        <div class="newbie-pic">
+                                            <img src="/sixman/resources/img/defaultProfilePic.png" alt="" />
+                                        </div>
+                                        <div class="info-box">
+                                            <div class="select-dept-info">
+                                                <p>deptNam</p>
+                                                <p>teamNam</p>
+                                            </div>
+                                            <div class="select-employee-info">
+                                                <p>name</p>
+                                                <p>positionNam</p>
+                                            </div>
+                                        </div>
+                                    </a>
                                 </li>
-                                <li class="option-wrap">
-                                    <div class="option">부장</div>
-                                    <div class="remove-position">
-                                        <span class="material-symbols-outlined">remove</span>
-                                    </div>
+                                <li class="newbie-box" id="asd">
+                                    <a href="" class="newbie-detail">
+                                        <div class="newbie-pic">
+                                            <img src="/sixman/resources/img/defaultProfilePic.png" alt="" />
+                                        </div>
+                                        <div class="info-box">
+                                            <div class="select-dept-info">
+                                                <p>deptNam</p>
+                                                <p>teamNam</p>
+                                            </div>
+                                            <div class="select-employee-info">
+                                                <p>name</p>
+                                                <p>positionNam</p>
+                                            </div>
+                                        </div>
+                                    </a>
                                 </li>
-                                <li class="option-wrap">
-                                    <div class="option">사원</div>
-                                    <div class="remove-position">
-                                        <span class="material-symbols-outlined">remove</span>
-                                    </div>
+                                <li class="newbie-box" id="asd">
+                                    <a href="" class="newbie-detail">
+                                        <div class="newbie-pic">
+                                            <img src="/sixman/resources/img/defaultProfilePic.png" alt="" />
+                                        </div>
+                                        <div class="info-box">
+                                            <div class="select-dept-info">
+                                                <p>deptNam</p>
+                                                <p>teamNam</p>
+                                            </div>
+                                            <div class="select-employee-info">
+                                                <p>name</p>
+                                                <p>positionNam</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="newbie-box" id="asd">
+                                    <a href="" class="newbie-detail">
+                                        <div class="newbie-pic">
+                                            <img src="/sixman/resources/img/defaultProfilePic.png" alt="" />
+                                        </div>
+                                        <div class="info-box">
+                                            <div class="select-dept-info">
+                                                <p>deptNam</p>
+                                                <p>teamNam</p>
+                                            </div>
+                                            <div class="select-employee-info">
+                                                <p>name</p>
+                                                <p>positionNam</p>
+                                            </div>
+                                        </div>
+                                    </a>
                                 </li>
                             </ul>
                         </div>
+                        <!-- <div class="side-title">
+                            <p>직급 설정</p>
+                            <span class="material-symbols-outlined"> add_box </span>
+                        </div>
+                        <div class="side-body">
+                            <div class="select">
+                                <div class="text">직급 목록</div>
+                                <span class="material-symbols-outlined"> expand_more </span>
+                                <ul class="option-list">
+                                    <li class="option-wrap">
+                                        <div class="option">대표</div>
+                                        <div class="remove-position">
+                                            <span class="material-symbols-outlined">remove</span>
+                                        </div>
+                                    </li>
+                                    <li class="option-wrap">
+                                        <div class="option">부장</div>
+                                        <div class="remove-position">
+                                            <span class="material-symbols-outlined">remove</span>
+                                        </div>
+                                    </li>
+                                    <li class="option-wrap">
+                                        <div class="option">사원</div>
+                                        <div class="remove-position">
+                                            <span class="material-symbols-outlined">remove</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div> -->
                     </div>
 
                     <div id="select-wrap" class="box">
@@ -399,3 +271,7 @@
         </main>
     </body>
 </html>
+
+<script>
+    $('');
+</script>

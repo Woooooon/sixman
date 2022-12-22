@@ -38,11 +38,9 @@ public class MemberService {
 			return null;
 		}
 		
-		Map<String, String> map = new HashMap<>();
-		map.put("no", dbMember.getNo());
-		map.put("tableName","PROFILE");
+		String no = dbMember.getNo();
 		
-		List<AttachmentVo> fileInfo = memberDao.selectFileOne(sst, map);
+		List<AttachmentVo> fileInfo = memberDao.selectFileOne(sst, no);
 		vo.setPicFileInfo(fileInfo);
 		
 		return dbMember;
@@ -57,6 +55,18 @@ public class MemberService {
 		map.put("pwd", newPwd);
 		
 		return memberDao.updatePwd(sst, map);
+	}
+
+
+	public List<MemberVo> selectMemberList() {
+		
+		return memberDao.selectMemberList(sst);
+	}
+
+
+	public List<MemberVo> selectNewbieList() {
+		
+		return memberDao.selectNewbieList(sst);
 	}
 
 }

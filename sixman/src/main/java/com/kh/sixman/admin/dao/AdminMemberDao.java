@@ -6,6 +6,8 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.sixman.admin.vo.DeptVo;
+import com.kh.sixman.admin.vo.PositionVo;
 import com.kh.sixman.member.vo.AuthorizeVo;
 import com.kh.sixman.member.vo.BankVo;
 import com.kh.sixman.member.vo.MemberVo;
@@ -33,5 +35,13 @@ public class AdminMemberDao {
 	
 	public int uploadAll(SqlSessionTemplate sst, Map<String, Object> map) {
 		return sst.insert("memberMapper.insertAllFile", map);
+	}
+
+	public List<PositionVo> positionList(SqlSessionTemplate sst) {
+		return sst.selectList("memberMapper.positionList");
+	}
+
+	public List<DeptVo> daptList(SqlSessionTemplate sst) {
+		return sst.selectList("memberMapper.deptList");
 	}
 }
