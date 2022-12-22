@@ -68,7 +68,7 @@
         <div id="write-header">
             <div id="header-title">
                 <div class="header-item-title">제목</div>
-                <input type="text">
+                <input name="title" type="text">
             </div>
             <div id="file-box">
                 <div class="header-item-title">파일추가

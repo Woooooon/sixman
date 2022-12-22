@@ -172,7 +172,7 @@ button.btn{
     background: none;
     width: 35px;
     height: 30px;
-    border: none;
+   
     box-sizing: border-box;
     border-radius: 0;
 }
@@ -185,6 +185,7 @@ button.btn:hover{
     background: none;
     border: 1px solid var(--main-color);
 }
+
 #btn-box{
     display: flex;
     width: 100%;
