@@ -14,7 +14,6 @@ import com.kh.sixman.common.AttachmentVo;
 import com.kh.sixman.file.dao.FileDao;
 import com.kh.sixman.mail.dao.MailDao;
 import com.kh.sixman.mail.vo.MailVo;
-import com.kh.sixman.member.vo.MemberVo;
 
 @Service
 public class MailService {
@@ -70,6 +69,9 @@ public class MailService {
 		
 		List<AttachmentVo> fileList = fDao.selectFileList(sst, map);
 		vo.setFileList(fileList);
+		
+		List<String> sender = dao.getSender(sst, no);
+		vo.setSender(sender);
 		
 		return vo;
 	}

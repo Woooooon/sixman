@@ -3,55 +3,75 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mailMapper">
-	
+		
 	<select id="countList" resultType="int">
-		SELECT 
-			COUNT(*)
-		FROM MAIL M
-        LEFT JOIN MEMBER MM     ON M.SEND_USER = MM.NO
-		LEFT JOIN R_MAIL R 		ON M.NO = R.MAIL_NO
-		LEFT JOIN M_DRAWER D 	ON M.NO = D.MAIL_NO
-		LEFT JOIN M_CATEGORY C 	ON D.CATEGORY_NO = C.NO
-		WHERE
-        (
-        <trim prefixOverrides="OR">
-        	<if test="!'받는메일함'.equals(categoryName)">
-			    (
-				    (SEND_USER = ${sendUser} AND (USER_NO = ${sendUser} OR USER_NO IS NULL)) 
-				    AND 
-				    <if test="'휴지통'.equals(categoryName)">
-				    	M.DELETE_YN = 'Y'
-				    </if>
-				    <if test="!'휴지통'.equals(categoryName)">
-				    	M.DELETE_YN = 'N'
-				    </if>
-				    AND
-				    <if test="'임시보관함'.equals(categoryName)">
-				    	M.SAVE_YN = 'Y'
-				    </if>
-				    <if test="!'임시보관함'.equals(categoryName)">
-				    	M.SAVE_YN = 'N'
-				    </if>
-			    )
+	    SELECT COUNT(*)
+	    FROM
+	    (
+	    <trim prefixOverrides="UNION ALL">
+	    <if test="!'받는메일함'.equals(categoryName)">
+	        select 
+	            M.NO AS MAIL_NO
+	            ,M.SEND_USER AS USER_NO
+	            ,MM.NAME AS USER_NAME
+	            ,MM.EMAIL AS USER_EMAIL
+	            ,M.DELETE_YN
+	            ,M.TITLE
+	            ,M.CONTENT
+	            ,M.SEND_TIME
+	            ,C.NO AS CATEGORY_NO
+	            ,C.NAME AS CATEGORY_NAME
+	            ,'Y' as ISSENDER
+	            ,'Y' as CHECK_YN
+	        from mail m
+	        join member mm on mm.no = m.SEND_USER
+	        LEFT JOIN M_DRAWER D ON M.NO = D.MAIL_NO 
+	        LEFT JOIN M_CATEGORY C ON C.NO = D.CATEGORY_NO
+	        WHERE MM.NO = ${userNo}
+	        AND (USER_NO = ${userNo} OR USER_NO IS NULL)
+	        AND 
+		    <if test="'임시보관함'.equals(categoryName)">
+		    	SAVE_YN = 'Y'
 		    </if>
-			<if test="!'보낸메일함'.equals(categoryName) and !'임시보관함'.equals(categoryName)">
-			OR 
-			    (
-				    (R.EMAIL = #{rMail} AND (USER_NO = ${sendUser} OR USER_NO IS NULL)) 
-				    AND 
-				    <if test="'휴지통'.equals(categoryName)">
-				    	R.DELETE_YN = 'Y'
-				    </if>
-				    <if test="!'휴지통'.equals(categoryName)">
-				    	R.DELETE_YN = 'N'
-				    </if>
-			    )
-			</if>
+		    <if test="!'임시보관함'.equals(categoryName)">
+		    	SAVE_YN = 'N'
+		    </if>
+		</if>
+		<if test="!'보낸메일함'.equals(categoryName) and !'임시보관함'.equals(categoryName)">
+	        UNION ALL
+	        select 
+	            M.NO AS MAIL_NO
+	            ,M.SEND_USER AS USER_NO
+	            ,M2.NAME AS USER_NAME
+	            ,M2.EMAIL AS USER_EMAIL
+	            ,R.DELETE_YN
+	            ,M.TITLE
+	            ,M.CONTENT
+	            ,M.SEND_TIME
+	            ,C.NO AS CATEGORY_NO
+	            ,C.NAME AS CATEGORY_NAME
+	            ,'N' as ISSENDER
+	            ,R.CHECK_YN as CHECK_YN
+	        from R_MAIL R
+	        JOIN MEMBER M1 ON M1.EMAIL = R.EMAIL
+	        JOIN MAIL M ON R.MAIL_NO = M.NO
+	        JOIN MEMBER M2 ON M2.NO = M.SEND_USER
+	        LEFT JOIN M_DRAWER D ON M.NO = D.MAIL_NO 
+	        LEFT JOIN M_CATEGORY C ON C.NO = D.CATEGORY_NO
+	        WHERE  R.EMAIL = #{userEmail}
+	        AND (USER_NO = ${userNo} OR USER_NO IS NULL)
+		</if>
 		</trim>
-        )
-        <if test=" category!=null and category != '' and category != 'null' ">
-            AND
-        	CATEGORY_NO = ${category}
+	    )
+	    WHERE
+	    <if test="'휴지통'.equals(categoryName)">
+	    	DELETE_YN = 'Y'
+	    </if>
+	    <if test="!'휴지통'.equals(categoryName)">
+	    	DELETE_YN = 'N'
+	    </if>
+		<if test=" category!=null and category != '' and category != 'null' ">
+            AND CATEGORY_NO = ${category}
         </if>
         <if test=" search!=null and search != '' and search != 'null' ">
         	AND
@@ -61,93 +81,112 @@
 	        )
 	    </if>
 	</select>
-
+	
 	<select id="selectList" resultType="MailVo">
 		SELECT 
-		    	M.NO AS NO
-		    ,	M.SEND_USER
-            ,   MM.NAME AS SEND_USER_NAME
-            ,   MM.EMAIL AS SEND_USER_MAIL
-		    ,	M.DELETE_YN AS DELETE_YN
-		    ,	M.TITLE
-		    ,	M.CONTENT
-		    ,	M.SAVE_YN
-		    ,	M.SEND_TIME
-		    ,	M.MODIFY_TIME
-		    ,	R.NO AS R_NO
-		    ,	R.EMAIL AS R_MAIL
-		    ,	R.CHECK_YN
-		    ,	R.ALARM_YN
-		    ,	R.DELETE_YN AS R_DELETE_YN
-		    ,	CATEGORY_NO AS CATEGORY
-		    ,	C.NAME AS CATEGORY_NAME
-		FROM MAIL M
-        LEFT JOIN MEMBER MM     ON M.SEND_USER = MM.NO
-		LEFT JOIN R_MAIL R 		ON M.NO = R.MAIL_NO
-		LEFT JOIN M_DRAWER D 	ON M.NO = D.MAIL_NO
-		LEFT JOIN M_CATEGORY C 	ON D.CATEGORY_NO = C.NO
-		WHERE
-        (
-        <trim prefixOverrides="OR">
-        	<if test="!'받은메일함'.equals(categoryName)">
-		    	-- 보낸메일
-			    (
-				    (SEND_USER = ${sendUser} AND (USER_NO = ${sendUser} OR USER_NO IS NULL)) 
-				    AND 
-				    <if test="'휴지통'.equals(categoryName)">
-				    	M.DELETE_YN = 'Y'
-				    </if>
-				    <if test="!'휴지통'.equals(categoryName)">
-				    	M.DELETE_YN = 'N'
-				    </if>
-				    AND
-				    <if test="'임시보관함'.equals(categoryName)">
-				    	M.SAVE_YN = 'Y'
-				    </if>
-				    <if test="!'임시보관함'.equals(categoryName)">
-				    	M.SAVE_YN = 'N'
-				    </if>
-			    )
-		    </if> 
-			<if test="!'보낸메일함'.equals(categoryName) and !'임시보관함'.equals(categoryName)">
-			OR
-				-- 받는메일
-			    (
-				    (R.EMAIL = #{rMail} AND (USER_NO = ${sendUser} OR USER_NO IS NULL)) 
-				    AND 
-				    <if test="'휴지통'.equals(categoryName)">
-				    	R.DELETE_YN = 'Y'
-				    </if>
-				    <if test="!'휴지통'.equals(categoryName)">
-				    	R.DELETE_YN = 'N'
-				    </if>
-			    )
+		    ROWNUM
+		    , MAIL_NO
+		    , USER_NO
+		    , USER_NAME
+		    , USER_EMAIL
+		    , DELETE_YN
+		    , TITLE
+		    , CONTENT
+		    , SEND_TIME
+		    , CATEGORY_NO
+		    , CATEGORY_NAME
+		    , ISSENDER
+		    , CHECK_YN
+		FROM 
+		(
+		    SELECT *
+		    FROM
+		    (
+		    <trim prefixOverrides="UNION ALL">
+		    <if test="!'받는메일함'.equals(categoryName)">
+		        select 
+		            M.NO AS MAIL_NO
+		            ,M.SEND_USER AS USER_NO
+		            ,MM.NAME AS USER_NAME
+		            ,MM.EMAIL AS USER_EMAIL
+		            ,M.DELETE_YN
+		            ,M.TITLE
+		            ,M.CONTENT
+		            ,M.SEND_TIME
+		            ,C.NO AS CATEGORY_NO
+		            ,C.NAME AS CATEGORY_NAME
+		            ,'Y' as ISSENDER
+		            ,'Y' as CHECK_YN
+		        from mail m
+		        join member mm on mm.no = m.SEND_USER
+		        LEFT JOIN M_DRAWER D ON M.NO = D.MAIL_NO 
+		        LEFT JOIN M_CATEGORY C ON C.NO = D.CATEGORY_NO
+		        WHERE MM.NO = ${userNo}
+		        AND (USER_NO = ${userNo} OR USER_NO IS NULL)
+		        AND 
+			    <if test="'임시보관함'.equals(categoryName)">
+			    	SAVE_YN = 'Y'
+			    </if>
+			    <if test="!'임시보관함'.equals(categoryName)">
+			    	SAVE_YN = 'N'
+			    </if>
 			</if>
-		</trim>
-        )
-        <if test=" category!=null and category != '' and category != 'null' ">
-            AND
-        	CATEGORY_NO = ${category}
-        </if>
-        <if test=" search!=null and search != '' and search != 'null' ">
-        	AND
-	        (
-	        TITLE LIKE '%${search}%'
-	        OR CONTENT LIKE '%${search}%'
-	        )
-	    </if>
-		ORDER BY SEND_TIME DESC
+			<if test="!'보낸메일함'.equals(categoryName) and !'임시보관함'.equals(categoryName)">
+		        UNION ALL
+		        select 
+		            M.NO AS MAIL_NO
+		            ,M.SEND_USER AS USER_NO
+		            ,M2.NAME AS USER_NAME
+		            ,M2.EMAIL AS USER_EMAIL
+		            ,R.DELETE_YN
+		            ,M.TITLE
+		            ,M.CONTENT
+		            ,M.SEND_TIME
+		            ,C.NO AS CATEGORY_NO
+		            ,C.NAME AS CATEGORY_NAME
+		            ,'N' AS ISSENDER
+		            ,R.CHECK_YN AS CHECK_YN
+		        from R_MAIL R
+		        JOIN MEMBER M1 ON M1.EMAIL = R.EMAIL
+		        JOIN MAIL M ON R.MAIL_NO = M.NO
+		        JOIN MEMBER M2 ON M2.NO = M.SEND_USER
+		        LEFT JOIN M_DRAWER D ON M.NO = D.MAIL_NO 
+		        LEFT JOIN M_CATEGORY C ON C.NO = D.CATEGORY_NO
+		        WHERE  R.EMAIL = #{userEmail}
+		        AND (USER_NO = ${userNo} OR USER_NO IS NULL)
+			</if>
+			</trim>
+		    )
+		    WHERE
+		    <if test="'휴지통'.equals(categoryName)">
+		    	DELETE_YN = 'Y'
+		    </if>
+		    <if test="!'휴지통'.equals(categoryName)">
+		    	DELETE_YN = 'N'
+		    </if>
+			<if test=" category!=null and category != '' and category != 'null' ">
+	            AND CATEGORY_NO = ${category}
+	        </if>
+	        <if test=" search!=null and search != '' and search != 'null' ">
+	        	AND
+		        (
+		        TITLE LIKE '%${search}%'
+		        OR CONTENT LIKE '%${search}%'
+		        )
+		    </if>
+		    ORDER BY SEND_TIME DESC
+		)
 	</select>
 
 	<insert id="write">
-	    <selectKey keyProperty="no" resultType="String" order="BEFORE">  
+	    <selectKey keyProperty="mailNo" resultType="String" order="BEFORE">  
         select SEQ_MAIL_NO.NEXTVAL FROM dual
      	</selectKey>
 		INSERT INTO MAIL
 		VALUES
 		(
-			${no},
-			${sendUser},
+			${mailNo},
+			${userNo},
 			'N',
 			<if test=" saveYn.equals('작성하기') ">
 			'N',
@@ -165,32 +204,36 @@
 	<update id="send">
 		insert all
 		<foreach collection="sender" item="email" separator=" ">
-		into r_mail
-		(
-			no,
-			mail_no,
-			email,
-			check_yn,
-			alarm_yn
-		)
-		VALUES
-		(
-			get_seq_no('seq_r_mail_no'),
-			${no},
-			#{email},
-			'N',
-			'N'
-		)
+		<if test=" email != '' ">
+			into r_mail
+			(
+				no,
+				mail_no,
+				email,
+				check_yn,
+				alarm_yn,
+				DELETE_YN
+			)
+			VALUES
+			(
+				get_seq_no('seq_r_mail_no'),
+				${mailNo},
+				#{email},
+				'N',
+				'N',
+				'N'
+			)
+		</if>
 		</foreach>
 		select * from dual
 	</update>
 
 	<select id="selectOne" resultType="MailVo">
 		SELECT 
-		    	M.NO AS NO
-		    ,	M.SEND_USER
-            ,   MM.NAME AS SEND_USER_NAME
-            ,   MM.EMAIL AS SEND_USER_MAIL
+		    	M.NO AS MAIL_NO
+		    ,	M.SEND_USER AS USER_NO
+            ,   MM.NAME AS USER_NAME
+            ,   MM.EMAIL AS USER_EMAIL
 		    ,	M.DELETE_YN AS DELETE_YN
 		    ,	M.TITLE
 		    ,	M.CONTENT
@@ -273,7 +316,7 @@
 	<update id="realDelete">
 		DECLARE BEGIN
 		UPDATE MAIL
-		SET DELETE_YN = 'R'
+		SET DELETE_YN = NULL
 		WHERE NO IN 
 		<foreach collection="no" item="n" separator="," open="(" close=")">
 			${n}
@@ -325,6 +368,11 @@
 		</foreach>
 		END;
 	</update>
+	
+	<select id="getSender" resultType="String">
+		SELECT EMAIL FROM R_MAIL
+		WHERE MAIL_NO = ${no}
+	</select>
 
     
 </mapper>
