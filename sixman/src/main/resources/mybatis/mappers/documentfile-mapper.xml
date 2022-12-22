@@ -8,7 +8,7 @@
 		insert all
 		<foreach collection="list" item="dvo" separator=" ">
 			into ${tableName}_A
-			<!-- 여기는 저도  db테이블 새로 만들어야하는거 맞나요?SQL -->
+			
 			(
 				"NO"
 				,"ORGIN_NAME"
