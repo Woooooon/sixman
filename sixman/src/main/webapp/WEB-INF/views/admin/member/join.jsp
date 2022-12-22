@@ -76,11 +76,9 @@
                                         <div id="position" class="write">
                                             <label for="">직 급</label>
                                             <select name="positionNo">
-                                                <option value="1">사 원</option>
-                                                <option value="2">대 리</option>
-                                                <option value="3">과 장</option>
-                                                <option value="4">차 장</option>
-                                                <option value="5">부 장</option>
+                                                <c:forEach items="${positionList}" var="i">
+                                                <option value="${i.no}" <c:if test="${i.no eq 1}">selected</c:if>>${i.position}</option>
+                                            	</c:forEach>
                                             </select>
                                         </div>
                                         <div id="birth" class="write">

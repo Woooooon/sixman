@@ -14,7 +14,6 @@ import com.kh.sixman.admin.dao.AdminMemberDao;
 import com.kh.sixman.admin.vo.DeptVo;
 import com.kh.sixman.admin.vo.PositionVo;
 import com.kh.sixman.common.AttachmentVo;
-import com.kh.sixman.file.dao.FileDao;
 import com.kh.sixman.member.vo.AuthorizeVo;
 import com.kh.sixman.member.vo.BankVo;
 import com.kh.sixman.member.vo.MemberVo;

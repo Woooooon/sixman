@@ -4,7 +4,7 @@
     height: 100%;
     gap: 40px;
 }
-p[name='imgPath'] {
+p[name='imgName'] {
     display: none;
 }
 #dept-wrap {

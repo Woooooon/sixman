@@ -97,22 +97,27 @@
                                     <input type="checkbox" id="member1" name="memberInfo" class="selectOne" />
                                     <p>${i.id}</p>
                                     <a name="memberName" href="">${i.name}</a>
-                                    <p name="imgPath">${i.fileName}</p>
+                                    <p name="imgName">${i.fileName}</p>
                                     <select name="position" id="">
                                         <option value="1">사원</option>
                                         <option value="2">부장</option>
                                     </select>
-                                    <select name="dept" id="">
-                                        <option value="">영업부</option>
-                                        <option value="">인사부</option>
+                                    <select name="deptNo" id="">
+                                        <c:forEach items="${deptList}" var="j">
+                                        <option value="${j.no}" <c:if test="${j.no eq i.deptNo}">selected</c:if>>${j.name}</option>
+                                        </c:forEach>
                                     </select>
-                                    <select name="team" id="">
-                                        <option value="">영업 1팀</option>
-                                        <option value="">영업 2팀</option>
+                                    <select name="teamNo" id="">
+                                        <c:if test="${i.deptNo eq j.no}"></c:if>
+                                        <c:forEach items="${deptList}" var="j">
+                                        <c:if test="${j.deptNo eq j.no}">
+                                        <option value="${j.no}" <c:if test="${j.no eq i.deptNo}">selected</c:if>>${j.name}</option>
+                                        </c:if>
+                                        </c:forEach>
                                     </select>
                                     <select name="authorizeList" id="">
-                                    <c:forEach items="${authorizeList}" var="a">
-                                        <option value="${a.no}" <c:if test="${a.no eq i.authorizeNo}">selected</c:if>>${a.level}</option>
+                                    <c:forEach items="${authorizeList}" var="j">
+                                        <option value="${j.no}" <c:if test="${j.no eq i.authorizeNo}">selected</c:if>>${j.level}</option>
                                         </c:forEach>
                                     </select>
                                     <p>2022년 11월 20일</p>
@@ -141,24 +146,30 @@
                         <span class="material-symbols-outlined" id="next"> chevron_right </span>
                         <div class="newbie-wrapper">
                             <ul class="newbie-list">
+                                <c:forEach items="${newbieList}" var="i">
                                 <li class="newbie-box" id="asd">
                                     <a href="" class="newbie-detail">
                                         <div class="newbie-pic">
-                                            <img src="/sixman/resources/img/defaultProfilePic.png" alt="" />
+                                        	<c:if test="${empty i.fileName}">
+                                        		<img src="/sixman/resources/img/defaultProfilePic.png" alt="" />
+                                        	</c:if>
+                                        	<c:if test="${not empty i.fileName}">
+                                            	<img src="/sixman/resources/img/profile/${i.fileName}" alt="" />
+                                            </c:if>
                                         </div>
                                         <div class="info-box">
                                             <div class="select-dept-info">
-                                                <p>deptNam</p>
-                                                <p>teamNam</p>
+                                                <p>${i.deptName}</p>
+                                                <p>${i.deptName}</p>
                                             </div>
                                             <div class="select-employee-info">
-                                                <p>name</p>
-                                                <p>positionNam</p>
+                                                <p>${i.name}</p>
+                                                <p>${i.positionName}</p>
                                             </div>
                                         </div>
                                     </a>
                                 </li>
-
+								</c:forEach>
                                 <li class="newbie-box" id="asd">
                                     <a href="" class="newbie-detail">
                                         <div class="newbie-pic">

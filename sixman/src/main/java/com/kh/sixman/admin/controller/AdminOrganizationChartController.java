@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.sixman.admin.service.AdminMemberService;
+import com.kh.sixman.admin.vo.DeptVo;
+import com.kh.sixman.admin.vo.PositionVo;
 import com.kh.sixman.member.service.MemberService;
 import com.kh.sixman.member.vo.AuthorizeVo;
-import com.kh.sixman.member.vo.BankVo;
 import com.kh.sixman.member.vo.MemberVo;
 @RequestMapping("admin/employee")
 @Controller
@@ -19,6 +20,7 @@ public class AdminOrganizationChartController {
 	
 	@Autowired
 	private MemberService memberService;
+	
 	@Autowired
 	private AdminMemberService adminMemberService;
 	
@@ -26,11 +28,14 @@ public class AdminOrganizationChartController {
 	public String OrganizationChart(Model model) {
 		List<MemberVo> MemberList = memberService.selectMemberList();
 		List<MemberVo> newbieList = memberService.selectNewbieList();
-		List<BankVo> bankList = adminMemberService.bankList();
 		List<AuthorizeVo> authorizeList = adminMemberService.authorizeList();
+		List<PositionVo> positionList = adminMemberService.positionList();
+		List<DeptVo> deptList = adminMemberService.daptList();
 		
-		model.addAttribute("bankList", bankList);
+		model.addAttribute("deptList", deptList);
+		model.addAttribute("positionList", positionList);
 		model.addAttribute("authorizeList", authorizeList);
+		model.addAttribute("newbieList", newbieList);
 		model.addAttribute("MemberList", MemberList);
 		return "admin/organizationChart/list";
 	}

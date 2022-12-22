@@ -53,11 +53,19 @@ function selectMember(selectAll, checkbox) {
     const name = parentElem.querySelector('a[name="memberName"]').innerHTML;
     const position = parentElem.querySelector('select[name="position"]');
     const positionName = position.options[position.selectedIndex].text;
-    const dept = parentElem.querySelector('select[name="dept"]');
+    const dept = parentElem.querySelector('select[name="deptNo"]');
     const deptName = dept.options[dept.selectedIndex].text;
-    const team = parentElem.querySelector('select[name="team"]');
-    const teamName = team.options[team.selectedIndex].text;
-    const imgName = parentElem.querySelector('p[name="imgPath"]').innerText;
+    const team = parentElem.querySelector('select[name="teamNo"]');
+    function teamName() {
+        const teamOption = team.querySelector('option');
+        if (teamOption != null) {
+            const teamName = team.options[team.selectedIndex].text;
+            return teamName;
+        }
+        return '';
+    }
+
+    const imgName = parentElem.querySelector('p[name="imgName"]').innerText;
     div.classList.add('select-employee-list');
     div.innerHTML =
         '<div class="select-employee-box">' +
@@ -72,7 +80,7 @@ function selectMember(selectAll, checkbox) {
         deptName +
         '</p>' +
         '<p>' +
-        teamName +
+        teamName() +
         '</p>' +
         '</div>' +
         '<div class="select-employee-info">' +
