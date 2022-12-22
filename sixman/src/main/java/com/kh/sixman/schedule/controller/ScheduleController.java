@@ -1,9 +1,12 @@
 package com.kh.sixman.schedule.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,22 +24,19 @@ public class ScheduleController {
 	
 	//일정 (화면)
 	@GetMapping("calendar")
-	public String calendar() {
-		return "schedule/calendar";
-	}
-	
-	//일정 정보 보내기
-	@PostMapping("calendar")
-	public String calendar(ScheduleVo vo, HttpSession session) {
+	public String calendar(ScheduleVo vo, Model model) {
 		
-		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
+		//로그인 멤버 정보 꺼내기
+		MemberVo loginMember = (MemberVo) model.getAttribute("loginMember");
 		
 		ScheduleVo svo = new ScheduleVo();
 		svo.setWriter(loginMember.getNo());
 		
+		List<ScheduleVo> voList = ss.selectList(vo);
 		
-		return "";
+		return "schedule/calendar";
 	}
+	
 	
 	//주간일정(화면)
 	@GetMapping("weeks")

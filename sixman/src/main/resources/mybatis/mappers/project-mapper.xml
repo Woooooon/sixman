@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="projectMapper">
+	
+	<select id="selectList" resultType="ProjectVo">
+		SELECT
+			*
+		FROM PROJECT
+	</select>
+   <!-- 
+   	SELECT 
+    * FROM 
+    ( SELECT 
+        ROWNUM AS RNUM 
+         , T .* FROM
+            ( SELECT 
+                P.NO 
+                ,P.TITLE 
+                ,P.CONTENT 
+                ,P.ENROLL_DATE 
+                ,P.CONSENT_YN 
+                ,P.GOAL
+                ,P.ENROLL_DATE
+                ,P.START_DATE 
+                ,P.END_DATE 
+                ,M.NAME AS WRITER 
+                FROM PROJECT P JOIN MEMBER M ON P.WRITER = M.NO 
+                WHERE P.CONSENT_YN = 'N'
+                ORDER BY P.NO DESC ) T )
+    WHERE RNUM BETWEEN 0 AND 5
+    -->
+    
+    <insert id="insertOne">
+    	INSERT INTO PROJECT
+    	(
+    	
+    	)
+    	VALUES
+    	(
+    	
+    	)
+    </insert>
+    
+</mapper>
