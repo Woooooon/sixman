@@ -41,12 +41,7 @@ public class NoticeController {
 			
 		String rootPath = session.getServletContext().getRealPath("/");
 		List<AttachmentVo> fileList = FileUnit.uploadFile(vo.getFile(), rootPath, "upload/notice");
-		
-//		테스트
-//		loginMember = new MemberVo();
-//		loginMember.setName("홍길동");
-//		loginMember.setNo("1");
-				
+						
 		if(vo.getInportantYn()==null)vo.setInportantYn("N");
 		
 		vo.setUserNo(loginMember.getNo());
@@ -64,10 +59,10 @@ public class NoticeController {
 	
 	@GetMapping("notice/detail")
 	public String detail(String no, Model model) {
-		NoticeVo vo = ns.selectOne(no);
-		model.addAttribute("vo", vo);
+		Map<String, NoticeVo> resultMap = ns.selectOne(no);
+		model.addAttribute("resultMap", resultMap);
 		
-		if(vo==null) {return "redirect:/notice/list";}
+		if(resultMap==null) {return "redirect:/notice/list";}
 		return "notice/detail";
 	}
 
@@ -117,8 +112,8 @@ public class NoticeController {
 	@GetMapping("notice/update")
 	public String update(String no, Model model) {
 		
-		NoticeVo vo = ns.selectOne(no);
-		model.addAttribute("vo",vo);
+		Map resultMap = ns.selectOne(no);
+		model.addAttribute("vo",resultMap.get("vo"));
 				
 		return "notice/update";
 	}

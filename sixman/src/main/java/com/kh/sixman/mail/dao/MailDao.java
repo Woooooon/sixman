@@ -31,8 +31,7 @@ public class MailDao {
 	public MailVo selectOne(SqlSessionTemplate sst, String no) {
 		return sst.selectOne("mailMapper.selectOne", no);
 	}
-
-
+	
 	public int delete(SqlSessionTemplate sst, Map<String, Object> map) {
 		return sst.update("mailMapper.delete", map);
 	}
@@ -41,7 +40,6 @@ public class MailDao {
 		return sst.update("mailMapper.updateRead", map);
 	}
 
-//	
 	public int changeCategory(SqlSessionTemplate sst, Map<String, Object> map) {
 		return sst.update("mailMapper.changeCategory", map);
 	}
@@ -54,14 +52,16 @@ public class MailDao {
 		return sst.selectList("mailMapper.categoryList", no);
 	}
 
-//	
 	public int restore(SqlSessionTemplate sst, Map<String, Object> map) {
 		return sst.update("mailMapper.restore", map);
 	}
 
-//	
 	public int realDelete(SqlSessionTemplate sst, Map<String, Object> map) {
 		return sst.update("mailMapper.realDelete", map);
+	}
+
+	public List<String> getSender(SqlSessionTemplate sst, String no) {
+		return sst.selectList("mailMapper.getSender", no);
 	}
 
 }

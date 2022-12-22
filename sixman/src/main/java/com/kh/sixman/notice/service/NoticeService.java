@@ -56,11 +56,28 @@ public class NoticeService {
 		return result1 * result2;
 	}
 
-	public NoticeVo selectOne(String no) {
+	public Map<String, NoticeVo> selectOne(String no) {
 		
+		int result = dao.viewCount(sst, no);
 		NoticeVo vo = dao.selectOne(sst, no);
 		
 		if(vo==null) return null;
+		
+		List<NoticeVo> list = dao.nextAndPre(sst, no);
+		NoticeVo next = null;
+		NoticeVo pre = null;
+		
+		if(list.size()>=1) {
+			for(NoticeVo n : list) {
+				int a = Integer.parseInt(n.getNo());
+				int b = Integer.parseInt(no);
+				if(a>b) {
+					next  = n;
+				}else {
+					pre  = n;
+				}
+			}
+		}
 		
 		Map<String, String> map = new HashMap<>();
 		map.put("no", no);
@@ -69,7 +86,12 @@ public class NoticeService {
 		List<AttachmentVo> fileList = fDao.selectFileList(sst, map);
 		vo.setFileList(fileList);
 		
-		return vo;
+		Map<String, NoticeVo> resultMap = new HashMap<>();
+		resultMap.put("vo", vo);
+		resultMap.put("next", next);
+		resultMap.put("pre", pre);
+		
+		return resultMap;
 	}
 
 	public int delete(String no) {

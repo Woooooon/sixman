@@ -18,6 +18,10 @@ public class NoticeDao {
 	public List<NoticeVo> selectList(SqlSessionTemplate sst, String keyword, RowBounds rb) {
 		return sst.selectList("noticeMapper.selectList", keyword, rb);
 	}
+	
+	public List<NoticeVo> nextAndPre(SqlSessionTemplate sst, String no) {
+		return sst.selectList("noticeMapper.nextAndPre", no);
+	}
 
 	public int write(SqlSessionTemplate sst, NoticeVo vo) {
 		return sst.insert("noticeMapper.write", vo);
@@ -37,5 +41,9 @@ public class NoticeDao {
 
 	public int update(SqlSessionTemplate sst, NoticeVo vo) {
 		return sst.update("noticeMapper.updateOne", vo);
+	}
+	
+	public int viewCount(SqlSessionTemplate sst, String no) {
+		return sst.update("noticeMapper.viewCount", no);
 	}
 }
