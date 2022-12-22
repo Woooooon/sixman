@@ -50,7 +50,7 @@
 
 
 #notice-box{
-    padding: 20px;
+    padding: 40px;
     display: flex;
     flex-direction: column;
     width: 100%;
