@@ -38,11 +38,14 @@
    	</beans:bean>
    	
  	<websocket:handlers>
-		<websocket:mapping handler="myHandler" path="/alarm" />
+		<websocket:mapping handler="alarmHandler" path="/alarmSocket" />
+		<websocket:handshake-interceptors>
+			<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
+		</websocket:handshake-interceptors>
 		<websocket:sockjs websocket-enabled="true"/>
 	</websocket:handlers>	
     
-  	<beans:bean id="myHandler" class="com.kh.sixman.alarm.handler.AlarmHandler" />
+  	<beans:bean id="alarmHandler" class="com.kh.sixman.alarm.handler.AlarmHandler" />
 	
 
 	

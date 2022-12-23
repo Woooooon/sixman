@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="${path}/resources/css/main.css">
     <link rel="stylesheet" href="${path}/resources/css/reset.css">
     <script src="${path}/resources/js/main/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 </head>
 <body>
 
@@ -227,6 +228,57 @@
 
     window.onload = ()=>{
         alarmAjax();
+        connectSC();
+    }
+
+    // 웹소켓
+    var socket = null;
+
+    function connectSC() {
+        socket = new SockJS("${path}/alarmSocket");
+
+        
+        socket.onmessage = onMessage;
+        socket.onopen = onOpen;
+        socket.onclose = onClose;
+
+        console.log(socket);
+    }
+
+    function onMessage(msg) {
+        const data = msg.data;
+        const curMember = '${loginMember.no}';
+
+        console.log(data);
+    }
+
+    function onOpen(params) {
+            
+    }
+
+    function onClose(params) {
+            
+    }
+
+    function sendMsg(name, title, type, sender) {
+
+        let msg = ``;
+        switch (type) {
+            case 'MAIL':
+                msg = name + '(이)가 메일을 보냈습니다. "' + title + '"';
+                break;
+            case 'DOCUMENT':
+                msg = name + '(이)가 결재를 요청하였습니다. "' + title + '"';
+                break;
+            case 'ADRESS':
+                msg = name + '(이)가 주소록을 공유하였습니다. "' + title + '"';
+                break;
+            case 'SCHEDULE':
+                msg = name + '(이)가 일정을 공유하였습니다. "' + title + '"';
+                break;
+        }
+        
+        socket.send('${loginMember.no}#'+ type + '#' + msg + '#' + sender);
     }
 </script>
 </html>

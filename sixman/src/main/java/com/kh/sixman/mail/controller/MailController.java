@@ -114,7 +114,7 @@ public class MailController {
 		int result = ms.write(vo);
 		
 		if(result > 0) {
-			return "mail/list";
+			return "redirect:/mail/list";
 		}else {
 			return "";
 		}
