@@ -34,21 +34,19 @@
             <div id="wirte-box">
                 <p>받는사람</p>
                 <div></div>
-                <div id="resive-member"><input id="email-input" type="text" value="${email}"><div class="btn"><p>주소록</p></div></div>
+                <div id="resive-member"><input id="email-input" type="text"><div class="btn"><p>주소록</p></div></div>
                 <div id="members">
-                	<c:forEach items="${vo.sender}" var="sender">
-                		<div class="members-item"><input type="email" name="sender" value="${sender}"><span class="t-btn material-symbols-outlined">close</span></div>
-                	</c:forEach>
+                    
                 </div>
                 <p>제목</p>
                 <div></div>
-                <input name="title" type="text" value="${vo.title}">
+                <input name="title" type="text">
                 <p>파일첨부</p>
                 <div id="file-btn" class="btn"><span class="material-symbols-outlined"> add </span></div>
                 <div id="file-box">
                 </div>
             </div>
-            <textarea name="content" id="summernote">${vo.content}</textarea>
+            <textarea name="content" id="summernote"></textarea>
             <div id="btn-box">
                 <input name="saveYn" class="btn" type="submit" value="작성하기">
                 <input name="saveYn" class="c-btn" type="submit" value="임시저장">

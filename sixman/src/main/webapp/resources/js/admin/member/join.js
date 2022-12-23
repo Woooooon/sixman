@@ -33,11 +33,12 @@ username.addEventListener('blur', () => {
 });
 
 phone.addEventListener('blur', () => {
-    match(phone, phoneRegex, '제시한 형식에 맞게 작성하세요');
+    
+    match(phone, phoneRegex, "제시한 형식에 맞게 작성하세요");
 });
 
 account.addEventListener('blur', () => {
-    match(account, accountRegex, '제시한 형식에 맞게 작성하세요');
+    match(account, accountRegex, "제시한 형식에 맞게 작성하세요");
 });
 
 birthday.addEventListener('blur', () => {
@@ -48,9 +49,9 @@ email.addEventListener('blur', () => {
     match(email, emailRegex, '메일형식에 맞추어 작성하세요.');
 });
 
-function doubleMatch(elem, regex, messege) {
+function doubleMatch(elem,regex, messege) {
     const errors = elem.parentElement.querySelectorAll('p');
-    errors.forEach((error) => {
+    errors.forEach(error => {
         error.remove();
     });
 
@@ -61,15 +62,15 @@ function doubleMatch(elem, regex, messege) {
         elem.classList.add('error');
         return;
     }
-
+    
     match(elem, regex, messege);
-}
+};
 
 function match(elem, regx, messege) {
     elem.classList.remove('error');
-
+    
     const value = elem.value;
-
+    
     if (value != '') {
         if (!regx.test(value)) {
             const errorMsg = document.createElement('p');
@@ -80,10 +81,10 @@ function match(elem, regx, messege) {
         }
     }
     const errors = elem.parentElement.querySelectorAll('p');
-    errors.forEach((error) => {
+    errors.forEach(error => {
         error.remove();
     });
-}
+};
 
 form.onsubmit = () => {
     const checkId = id.classList.contains('error');
@@ -120,7 +121,7 @@ form.onsubmit = () => {
     return true;
 };
 
-// addFile(profileBtn, profileBox, 'pic-wrap', 'image', 'picFile', 'pic-add');
+addFile(profileBtn, profileBox, 'pic-wrap', 'image', 'picFile', 'pic-add');
 addFile(resumeBtn, resumeBox, 'resume-wrap', 'draft', 'resumeFile', 'resume-add');
 addFile(accountBtn, accountBox, 'account-wrap', 'image', 'accountFile', 'account-add');
 checkBoxToggleEvent('.all_check', '.check_list');
@@ -208,50 +209,6 @@ function checkBoxToggleEvent(all_selector, check_selector) {
         el_check.addEventListener('change', function () {
             checkBoxToggle(all_selector, check_selector);
         });
-    });
-}
-addProFile();
-function addProFile() {
-    profileBtn.addEventListener('click', () => {
-        const defaulltPic = document.querySelector('.image-box');
-        console.log(defaulltPic);
-        const inputFile = document.createElement('input');
-        inputFile.setAttribute('type', 'file');
-        inputFile.setAttribute('name', 'picFile');
-        inputFile.setAttribute('id', 'pic-add');
-        inputFile.style.display = 'none';
-
-        profileBox.append(inputFile);
-
-        inputFile.click();
-
-        inputFile.addEventListener('change', () => {
-            if (inputFile.value != null) {
-                const div = document.createElement('div');
-                div.classList.add('pic-wrap');
-                div.innerHTML =
-                    '<div id="file-info">' +
-                    '<span class="material-symbols-outlined">image</span>' +
-                    '<label for="">' +
-                    inputFile.value.substring(inputFile.value.lastIndexOf('\\') + 1) +
-                    '</label>' +
-                    '<button type="button" class="remove">' +
-                    '<span id="remove-file" class="material-symbols-outlined">remove</span>삭 제' +
-                    '</button>' +
-                    '</div>';
-
-                profileBtn.style.display = 'none';
-                div.querySelector('.remove').addEventListener('click', () => {
-                    defaulltPic.setAttribute('src', '/sixman/resources/img/defaultProfilePic.png');
-                    div.remove();
-                    inputFile.remove();
-                    profileBtn.style.display = 'flex';
-                });
-
-                profileBox.append(div);
-            }
-        });
-        fileView();
     });
 }
 

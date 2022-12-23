@@ -80,8 +80,8 @@ input[name='prj_name']{
 
 /* 일정 */
 
-input[name='prjDate1'],
-input[name='prjDate2'] {
+#startDate,
+#endDate {
     --margin-top: 11px;
     width: 150px;
     height: 40px;

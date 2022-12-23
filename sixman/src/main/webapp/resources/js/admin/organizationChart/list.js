@@ -50,29 +50,23 @@ function selectMember(selectAll, checkbox) {
     const div = document.createElement('div');
     const memberInfoList = document.querySelector('.sep');
     const parentElem = checkbox.closest('div');
-    const name = parentElem.querySelector('a[name="memberName"]').innerHTML;
-    const position = parentElem.querySelector('select[name="position"]');
-    const positionName = position.options[position.selectedIndex].text;
-    const dept = parentElem.querySelector('select[name="dept"]');
-    const deptName = dept.options[dept.selectedIndex].text;
-    const team = parentElem.querySelector('select[name="team"]');
-    const teamName = team.options[team.selectedIndex].text;
-    const imgName = parentElem.querySelector('p[name="imgPath"]').innerText;
+    const name = parentElem.querySelector('p[name="memberName"]').innerHTML;
+    const position = '';
+    const dept = '';
+    const team = '';
     div.classList.add('select-employee-list');
     div.innerHTML =
         '<div class="select-employee-box">' +
         '<div class="select-employee-pic">' +
-        '<img src="/sixman/resources/img/profile/' +
-        imgName +
-        '" alt="" />' +
+        '<img src="/sixman/resources/img/jang.jpg" alt="" />' +
         '</div>' +
         '<div class="info-box">' +
         '<div class="select-dept-info">' +
         '<p>' +
-        deptName +
+        dept +
         '</p>' +
         '<p>' +
-        teamName +
+        team +
         '</p>' +
         '</div>' +
         '<div class="select-employee-info">' +
@@ -80,7 +74,7 @@ function selectMember(selectAll, checkbox) {
         name +
         '</p>' +
         '<p>' +
-        positionName +
+        position +
         '</p>' +
         '</div>' +
         '</div>' +
@@ -124,25 +118,25 @@ removeMember.addEventListener('click', () => {
 });
 
 // div select박스
-// document.querySelector('.select').addEventListener('click', onClickSelect);
-// function onClickSelect(e) {
-//     const isActive = e.currentTarget.className.indexOf('active') !== -1;
-//     if (isActive) {
-//         e.currentTarget.className = 'select';
-//     } else {
-//         e.currentTarget.className = 'select active';
-//     }
-// }
-// function onClickOption(e) {
-//     const selectedValue = e.currentTarget.innerHTML;
-//     document.querySelector('.text').innerHTML = selectedValue;
-// }
+document.querySelector('.select').addEventListener('click', onClickSelect);
+function onClickSelect(e) {
+    const isActive = e.currentTarget.className.indexOf('active') !== -1;
+    if (isActive) {
+        e.currentTarget.className = 'select';
+    } else {
+        e.currentTarget.className = 'select active';
+    }
+}
+function onClickOption(e) {
+    const selectedValue = e.currentTarget.innerHTML;
+    document.querySelector('.text').innerHTML = selectedValue;
+}
 
-// var optionList = document.querySelectorAll('.option');
-// for (var i = 0; i < optionList.length; i++) {
-//     var option = optionList[i];
-//     option.addEventListener('click', onClickOption);
-// }
+var optionList = document.querySelectorAll('.option');
+for (var i = 0; i < optionList.length; i++) {
+    var option = optionList[i];
+    option.addEventListener('click', onClickOption);
+}
 
 //jstree
 $(function () {
@@ -173,70 +167,3 @@ $('#jstree').on('close_node.jstree', function (e, data) {
         .first();
     icon.removeClass('fa-folder-open').addClass('fa-folder');
 });
-
-//slide
-
-const slides = document.querySelector('.newbie-list');
-const slide = document.querySelectorAll('.newbie-box');
-let currentIdx = 0,
-    slideCount = slide.length,
-    slideWidth = 140.469,
-    slideMargin = 30;
-const prev = document.querySelector('#prev');
-const next = document.querySelector('#next');
-
-makeClone();
-function makeClone() {
-    slide.forEach((target) => {
-        const cloneSlide = target.cloneNode(true);
-        cloneSlide.classList.add('clone');
-        slides.appendChild(cloneSlide);
-    });
-    slide.forEach((target) => {
-        const cloneSlide = target.cloneNode(true);
-        cloneSlide.classList.add('clone');
-        slides.prepend(cloneSlide);
-    });
-
-    updateWidth();
-    setInitialPos();
-    setTimeout(() => {
-        slides.classList.add('animated');
-    }, 100);
-}
-
-function updateWidth() {
-    const currentSlides = document.querySelectorAll('.newbie-box');
-    const newSlideCount = currentSlides.length;
-
-    const newWidth = (slideWidth + slideMargin) * newSlideCount - slideMargin + 'px';
-    slides.style.width = newWidth;
-}
-
-function setInitialPos() {
-    const initialTranslatValue = -(slideWidth + slideMargin) * slideCount;
-    slides.style.transform = 'translateX(' + initialTranslatValue + 'px)';
-}
-
-next.addEventListener('click', () => {
-    moveSlide(currentIdx + 1);
-});
-
-prev.addEventListener('click', () => {
-    moveSlide(currentIdx - 1);
-});
-
-function moveSlide(num) {
-    slides.style.left = -num * (slideWidth + slideMargin) + 'px';
-    currentIdx = num;
-    if (currentIdx == slideCount || currentIdx == -slideCount) {
-        setTimeout(() => {
-            slides.classList.remove('animated');
-            slides.style.left = '0px';
-            currentIdx = 0;
-        }, 500);
-        setTimeout(() => {
-            slides.classList.add('animated');
-        }, 600);
-    }
-}

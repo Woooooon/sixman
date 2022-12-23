@@ -32,8 +32,6 @@ public class MemberVo {
 	private String resignationYn;
 	private String entrustNo;
 	private MemberVo entrustInfo;
-	private String fileNo;
-	private String fileName;
 	
 	private List<MultipartFile> accountFile;
 	private List<AttachmentVo> accountFileInfo;

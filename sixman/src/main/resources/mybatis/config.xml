@@ -18,8 +18,8 @@
 		<typeAlias type="com.kh.sixman.member.vo.BankVo" alias="BankVo"/>
 		<typeAlias type="com.kh.sixman.member.vo.AuthorizeVo" alias="AuthorizeVo"/>
 		<typeAlias type="com.kh.sixman.member.vo.MemberVo" alias="MemberVo"/>
-		<typeAlias type="com.kh.sixman.admin.vo.PositionVo" alias="PositionVo"/>
-		<typeAlias type="com.kh.sixman.admin.vo.DeptVo" alias="DeptVo"/>
+		<typeAlias type="com.kh.sixman.schedule.vo.ScheduleVo" alias="ScheduleVo"/>
+		<typeAlias type="com.kh.sixman.project.vo.ProjectVo" alias="ProjectVo"/>
 	</typeAliases> 
 
 

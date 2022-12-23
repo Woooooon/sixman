@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="projectMapper">
+	
+	<select id="selectList" resultType="ProjectVo">
+		SELECT 
+		    P.NO  
+		    , M.NAME LEADER
+		    , M.NAME NAME
+		    , P.TITLE
+		    , P.CONTENT
+		    , P.START_DATE
+		    , P.END_DATE
+		    , P.GOAL
+		    , P.FAVORITES_YN
+		FROM PROJECT P
+		JOIN MEMBER M ON M.NO = P.WRITER
+		ORDER BY NO DESC
+	</select>
+    
+    <insert id="insertOne">
+    	INSERT INTO PROJECT
+			(
+			    NO
+			    , LEADER
+			    , WRITER
+			    , TITLE
+			    , CONTENT
+			    , GOAL
+			    , START_DATE
+			    , END_DATE
+			)
+			VALUES
+			(
+			    SEQ_PROJECT_NO.NEXTVAL
+			    , #{leader}
+			    , #{writer}
+			    , #{title}
+			    , #{content}
+			    , 'zz'
+			    , #{startDate}
+			    , #{endDate}
+			)   
+    </insert>
+    
+</mapper>

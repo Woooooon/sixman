@@ -9,7 +9,6 @@
 
 /* 공통 */
 
-
 #msg{
 	cursor:pointer;
 }
@@ -140,7 +139,6 @@
 .chatroom-list-space>.btn{
 	width:18%;
 	font-size:18px;
-	border:1px solid white;
 }
 
 .chatroom-list-box{
@@ -234,10 +232,6 @@
 	margin-top:60%;
 	cursor: pointer;
 }
-
-
-
-
 
 
 
@@ -391,7 +385,6 @@
 	display:flex;
 	justify-content: space-around;
 	margin-bottom:10%;
-	border:1px solid white;
 }
 
 .with-chat-data>.checkbox-square-one{
@@ -412,27 +405,7 @@
 	margin-top:6%;
 	margin-bottom:16%;
 	cursor: pointer;
-	border:1px solid white;
 }
-
-
-.chatbutton01>.btn{
-	border:1px solid white;
-	padding:16%;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -457,15 +430,8 @@
 	justify-content: space-between;
 	align-items:flex-end;
 	margin-top:28%;
-	border:1px solid white;
 }
 
-.btn-height>.btn{
-	padding:3%;
-	padding-left:6%;
-	padding-right:6%;
-	border:1px solid white;
-}
 
 
 #makingroom-second-leave{
@@ -555,7 +521,6 @@
 	margin-left:75%;
 	cursor: pointer;
 	margin-top:2%;
-	color:white;
 }
 
 .chatroom1-1-2text-1-1{
@@ -566,17 +531,14 @@
 	margin-left:0%;
 	margin-top:4%;
 	cursor: pointer;
-	color:white;
 }
 /* 82+4 */
 .chatroom-one-to-two{
-	height:84%;
+	height:86%;
 	width:100%;
 	background-color: white;
 	overflow-y:scroll;
 	-ms-overflow-style:none;
-	display:flex;
-	flex-direction: column-reverse;
 }
 .chatroom-one-to-two::-webkit-scrollbar{
 	display:none;
@@ -587,24 +549,6 @@
 	height:10%;
 	background-color: white;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* 채팅룸 공통 */
@@ -642,7 +586,7 @@
 .chatroom2-1-2textbox{
 	width:48%;
 	margin-top:2%;
-	background-color:#6cd5c82e;
+	background-color:#12887a2e;
 	margin-left:4%;
 	border-radius: 10% 10% 10% 10% / 20% 20% 20% 20%;
 /* 	border:1px solid 12887a2e; */
@@ -651,10 +595,9 @@
 .chatroom2-1-2-1textbox{
 	width:48%;
 	margin-top:2%;
-	background-color:#6cd5c82e;
+	background-color:#12887a2e;
 	margin-left:4%;
 	border-radius: 10% 10% 10% 10% / 20% 20% 20% 20%;
-	border:1px solid white;
 }
 
 .chatroom-upload-box{
@@ -670,8 +613,7 @@
 .chatroom2-2-2textbox{
 	width:48%;
 	margin-top:2%;
-/* 	background-color:#12887a2e; */
-	background-color : #00f7da2e;
+	background-color:#12887a2e;
 	margin-left:48%;
 	border-radius: 10% 10% 10% 10% / 20% 20% 20% 20%;
 /* 	border:1px solid 12887a2e; */
@@ -696,7 +638,7 @@
 	background-color:white;
 	justify-content: space-around;
 	margin:6%;
-	margin-top:0%;
+	margin-top:-6%;
 	border-radius: 6% 6% 6% 6% / 40% 40% 40% 40%;
 	box-shadow: 1px 1px 0px 0px;
 	margin-left:6%;
@@ -709,7 +651,6 @@
 /* 	border-radius:50%; */
 	margin-left:6%;
 	cursor:pointer;
-	color:#12887a;
 }
 #chatroom1-3-text{
 	align-content: center;
@@ -721,75 +662,48 @@
 	font-size:40px;
 	margin:2%;
 	margin-right:6%;
-	color:#12887a;
 }
 .chatroom2-1-3textbox{
 	margin-left:4%;
 	font-size:14px;
 	margin-top:1%;
-	margin-bottom:8%;
 }
 
 .chatroom-one-to-three-2{
 	width:100%;
 	height:10%;
 	background-color: white;
-	border-top: 1px solid #12887a;
+	border: 1px solid black;
 	position: absolute;
 	z-index:20;
-	margin-top:166%;
+	margin-top:167%;
 	display:flex;
 }
-<!-- 폰트 텍스트 메뉴바 -->
-
-
-
-.chatroom-one-to-two>.chatroom-one-to-three-2>.chatroom-4-1-box{
+.chatroom-4-1-box{
 	margin-left:6%;
 	margin-top:2%;
 }
-
 #chatroom-4-1-icon1{
 	
 	font-size: 40px;
-	margin-left:26%;
+	margin-left:9%;
 	margin-top:4%;
 	cursor:pointer;
-	color:#12887a;
-	
 }
 #chatroom-4-1-icon2{
 	
 	font-size: 40px;
-	margin-left:16%;
+	margin-left:15%;
 	margin-top:4%;
-	cursor:pointer;color:#12887a;
+	cursor:pointer;
 }
 #chatroom-4-1-icon3{
 	
 	font-size: 40px;
 	margin-left:15%;
 	margin-top:4%;
-	cursor:pointer;color:#12887a;
+	cursor:pointer;
 }
-
-.chatroom-menubar-text-green{
-	color:#12887a;
-	font-weight:600;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /*사내대화방 프로필(연락처, 프로필 링크 선택)모달창*/
@@ -958,22 +872,6 @@ input[id="chat-setting-check02"]{
 /* 	margin-top:12%; */
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*연락처 보내기*/
 .text-messenger-send-profile-page-01{
 	display:none;
@@ -1028,35 +926,4 @@ input[id="chat-setting-check02"]{
 .button-list-chatroom-delete>.btn{
 	width:16%;
 	height:10%;
-	border:white;
-	padding-top:1%;
-	padding-bottom:1%;
 }
-
-
-
-
-
-
-
-
-<!--추가-->
-
-<!--채팅 색깔 다르게 하기-- 616번째라인>
-
-
-
-
-
-
-<!-- 버튼 흰색 -->
-
-
-/* #makingroom-first-leave{ */
-/* 	border:1px solid white; */
-/* } */
-
-
-
-
-

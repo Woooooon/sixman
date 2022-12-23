@@ -10,7 +10,6 @@
 <link rel="stylesheet" href="${path}/resources/css/list.css">
 <link rel="stylesheet" href="${path}/resources/css/mail/mailList.css">
 <script defer src="${path}/resources/js/mail/mailList.js"></script>
-<script defer src="${path}/resources/js/mail/mailAjax.js"></script>
 <script>
 	window.onload = ()=>{
 		let listType = '${listType}';
@@ -77,8 +76,8 @@
 		                            </div>
 		                        </div>
 		                    </div>
-		                    <c:if test="${not empty listType}"><div id="mail-count"><p class="hilight">${listCount}</p></div></c:if>
-		                    <c:if test="${empty listType}"><div id="mail-count"><p class="hilight">50</p>/<p>${listCount}</p>안읽은 메일</div></c:if>
+		                    <c:if test="${not empty listType}"><div id="mail-count"><p class="hilight">50</p></div></c:if>
+		                    <c:if test="${empty listType}"><div id="mail-count"><p class="hilight">50</p>/<p>100</p>안읽은 메일</div></c:if>
                     	</c:otherwise>
                     </c:choose>
                 </div>

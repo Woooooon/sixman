@@ -28,17 +28,13 @@ public class DocumentController {
 	
 	//기안문서함(화면)
 	@GetMapping("first")
-	public String First(String firstType,Model model) {
+	public String First() {
 
-		if(firstType !=null) {
-			model.addAttribute("firstType" , firstType);
-		}
-		
 		return "document/first";
 	}
 	//기안문서함 (찐)
 	@PostMapping("first")
-	public String First(DocumentVo dvo) {
+	public String Frist(DocumentVo dvo) {
 		
 		
 		return "";
@@ -115,22 +111,24 @@ public class DocumentController {
 	public String Write(DocumentVo dvo , HttpSession session) {
 		
 		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
-		dvo.setSendPay(loginMember.getNo());
 		
 		String rootPath = session.getServletContext().getRealPath("/");
 		List<AttachmentVo> fileList = FileUnit.uploadFile(dvo.getFile(), rootPath, "upload/document");
+		
+		
+		
 		dvo.setFileList(fileList);
 		int result = ds.write(dvo);
 		
-		if(result > 0) {
+		if(result ==1) {
 			return "document/first";
 		}else {
 			return "에러페이지";
 		}
 		
+		
+		
 	}
-
-	
 	
 	
 	/////////////////////////////////////////////////////////

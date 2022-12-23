@@ -11,21 +11,26 @@ import lombok.Data;
 @Data
 public class MailVo {
 	
-	private String mailNo;
-	private String userNo;
-	private String userName;
-	private String userEmail;
+	private String no;
+	private String sendUser;
+	private String sendUserName;
+	private String sendUserMail;
 	private String deleteYn;
 	private String title;
 	private String content;
+	private String saveYn;
 	private String sendTime;
 	private String modifyTime;
-	private String isSender;
-	private String checkYn;
 	
 	private List<MultipartFile> file;
 	private List<AttachmentVo> fileList;
 	private List<String> sender;
+	
+	private String rNo;
+	private String rMail;
+	private String checkYn;
+	private String alarmYn;
+	private String rDeleteYn;
 
 	private String category;
 	private String categoryName;

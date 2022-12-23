@@ -30,15 +30,15 @@ public class DocumentService {
 		int result2 = dao.send(sst,dvo);
 		
 		String no = Integer.toString(result1);
-		List<AttachmentVo> fileLists = dvo.getFileList();
+		List<AttachmentVo> fileList = dvo.getFileList();
 		int result3 = 1;
-		if(fileLists != null) {
-			for(AttachmentVo fv : fileLists) {
+		if(fileList != null) {
+			for(AttachmentVo fv : fileList) {
 				fv.setSubNo(no);
 			}
 			
 			Map<String, Object> map = new HashMap<>();
-			map.put("list",fileLists);
+			map.put("list",fileList);
 			map.put("tableName","DOCUMENT");
 			
 			result3= fdao.uploadAll(sst,map);

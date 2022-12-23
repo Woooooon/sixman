@@ -24,9 +24,9 @@
                 <div class="year-month"></div>
                 <div>
                 <div class="nav">
-                    <button class="nav-btn go-prev" onclick="prevMonth()">&lt;</button>
-                    <button class="nav-btn go-today" onclick="goToday()">오늘</button>
-                    <button class="nav-btn go-next" onclick="nextMonth()">&gt;</button>
+                    <button class="nav-btn go-prev" onclick="prevMonth()" type="button">&lt;</button>
+                    <button class="nav-btn go-today" onclick="goToday()" type="button">오늘</button>
+                    <button class="nav-btn go-next" onclick="nextMonth()" type="button">&gt;</button>
                 </div>
                 <div class="category">
                     <br>

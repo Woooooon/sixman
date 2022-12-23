@@ -16,21 +16,12 @@ public class MemberDao {
 		return sst.selectOne("memberMapper.login", vo);
 	}
 
-	public List<AttachmentVo> selectFileOne(SqlSessionTemplate sst, String no) {
-		return sst.selectList("memberMapper.selectFileOne", no);
+	public List<AttachmentVo> selectFileOne(SqlSessionTemplate sst, Map<String, String> map) {
+		return sst.selectList("memberMapper.selectFileOne", map);
 	}
 
 	public int updatePwd(SqlSessionTemplate sst, Map<String, String> map) {
 		return sst.update("memberMapper.updatePwd", map);
-	}
-
-	public List<MemberVo> selectMemberList(SqlSessionTemplate sst) {
-		return sst.selectList("memberMapper.selectMemberList");
-	}
-
-	public List<MemberVo> selectNewbieList(SqlSessionTemplate sst) {
-		
-		return sst.selectList("memberMapper.selectNewbieList");
 	}
 
 }

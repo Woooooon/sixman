@@ -85,34 +85,5 @@
 		set delete_yn = 'Y'
 		where no = ${no}
 	</update>
-	
-	<update id="viewCount">
-		UPDATE NOTICE
-		SET "VIEW" = "VIEW" + 1
-		WHERE NO = ${no}
-	</update>
-	
-	<select id="nextAndPre" resultType="NoticeVo">
-		SELECT NO, TITLE, ENROLL_DATE
-		FROM NOTICE
-		WHERE NO IN
-		(
-			SELECT MIN(NO)
-			FROM 
-			(
-				SELECT NO
-				FROM NOTICE
-				WHERE NO > ${no}
-			)
-			UNION ALL
-			SELECT MAX(NO)
-			FROM 
-			(
-				SELECT NO
-				FROM NOTICE
-				WHERE NO <![CDATA[<]]> ${no}
-			)
-		)
-	</select>
     
 </mapper>

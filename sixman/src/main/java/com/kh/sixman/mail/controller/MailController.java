@@ -1,6 +1,5 @@
 package com.kh.sixman.mail.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,8 +48,8 @@ public class MailController {
 		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
 		
 		MailVo vo = new MailVo();
-		vo.setUserNo(loginMember.getNo());
-		vo.setUserEmail(loginMember.getEmail());
+		vo.setSendUser(loginMember.getNo());
+		vo.setRMail(loginMember.getEmail());
 		vo.setCategoryName(map.get("listTpye"));
 		vo.setCategory(map.get("categoryNo"));
 		vo.setSearch(map.get("search"));
@@ -82,31 +81,17 @@ public class MailController {
 	}
 	
 	@GetMapping("write")
-	public String write(String email, Model model) {
-		if(email!=null) {
-			model.addAttribute("email", email);
-		}
-		return "mail/write";
-	}
-	
-	@GetMapping("update")
-	public String update(String no , Model model) {
-		MailVo vo = ms.selectOne(no);
-		if(no!=null) {
-			model.addAttribute("vo", vo);			
-		}
+	public String write() {
 		return "mail/write";
 	}
 	
 	@PostMapping("write")
-	public String  write(MailVo vo, HttpSession session, Model model) {
+	public String  write(MailVo vo, HttpSession session) {
 		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
-		vo.setUserNo(loginMember.getNo());
+		vo.setSendUser(loginMember.getNo());
 		
-		if(vo.getSender()==null || vo.getSender().size()==0) {
-			model.addAttribute("msg", "보낼사람을 입력해 주세요");
-			return "mail/wirte";
-		}
+//		테스트
+//		vo.setSendUser("1");
 		
 		String rootPath = session.getServletContext().getRealPath("/");
 		List<AttachmentVo> fileList = FileUnit.uploadFile(vo.getFile(), rootPath, "upload/notice");
@@ -121,16 +106,7 @@ public class MailController {
 	}
 	
 	@GetMapping("detail")
-	public String detail(String no, Model model, HttpSession session) {
-		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
-		Map<String, Object> map = new HashMap<>();
-		map.put("loginMember", loginMember);
-		List<String> noList = new ArrayList<String>();
-		noList.add(no);
-		map.put("no", noList);
-		
-		int result = ms.updateRead(map);
-		
+	public String detail(String no, Model model) {
 		MailVo vo = ms.selectOne(no);
 		model.addAttribute("vo", vo);
 		if(vo==null) {return 	"redirect:/mail/list";}
@@ -188,7 +164,6 @@ public class MailController {
 	public void createCategory(String category, HttpSession session) {
 		MemberVo loginMeber = (MemberVo) session.getAttribute("loginMember");
 		int result = ms.createCategory(category, loginMeber.getNo());
-		
 		if(result!=1) {
 			
 		}
@@ -202,10 +177,6 @@ public class MailController {
 		map.put("loginMember", loginMember);
 		map.put("no", no);
 		int result = ms.restore(map);
-		
-		if(result!=1) {
-			
-		}
 	}
 	
 	@ResponseBody
@@ -216,22 +187,6 @@ public class MailController {
 		map.put("loginMember", loginMember);
 		map.put("no", no);
 		int result = ms.realDelete(map);
-		
-		if(result!=1) {
-			
-		}
-	}
-	
-	@ResponseBody
-	@PostMapping(value = "getCategoryList", produces = "application/json; charset=utf8")
-	public String getCategoryList(HttpSession session) {
-		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
-
-		List<Map<String, String>> result = ms.categoryList(loginMember.getNo());
-		
-		Gson gson = new GsonBuilder().create();
-		String json = gson.toJson(result);
-		return json;
 	}
 	
 	
