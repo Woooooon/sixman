@@ -145,11 +145,12 @@
 
 .chatroom-list-box{
 	
-	margin-top:2%;
-	position:absolute;
+/* 	margin-top:2%; */
+/* 	position:absolute; */
 	width:100%;
 	height:14%;
-	border-bottom:1px solid black;
+/* 	border-bottom:1px solid black; */
+	margin-bottom:20%;
 }
 
 .with-chat-data01{
@@ -1008,7 +1009,7 @@ input[id="chat-setting-check02"]{
 
 
 
-<!--삭제 메시지 -->
+/* <!--삭제 메시지 --> */
 
 .with-chat-data01-1{
 	display:none;
@@ -1056,7 +1057,11 @@ input[id="chat-setting-check02"]{
 /* 	border:1px solid white; */
 /* } */
 
-
+/* .chatlist-big{ */
+/* 	align-items:flex-start; */
+/* 	display:flex; */
+/* 	flex-direction:column; */
+/* } */
 
 
 
