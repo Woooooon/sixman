@@ -55,8 +55,8 @@
 									<div class="chatroom-list-two-to-two" id="chatroom-list-two-to-two">
 										<div class="with-chat-subroomname2">야 지금 뭐해?</div>
 										<div class="chat-others-profile01">
-											<div class="with-chat-name01">구기석</div>
-											<div class="with-chat-grade01">부장</div>
+											<div class="with-chat-name01">정인제</div>
+											<div class="with-chat-grade01">과장</div>
 										</div>
 										<div class="chatroom-alarm-content">님께서 첨부파일을 보내셨습니다.</div>
 										<br>
@@ -66,6 +66,15 @@
 										<span class="material-symbols-outlined" id="chatroom-exit-icon">exit_to_app</span>
 									</div>
 									
+								</div>
+								<div class="with-chat-data01-1" style="display:none;">
+	<!-- 								<div class="square-first" style=""></div> -->
+										<div class="width-chat-subroomname2-1">해당 대화창을 삭제하시겠습니까?</div>
+										<div class="button-list-chatroom-delete">
+											<button type="button" class="btn" id="deletechatroom-ok">예</button>
+											<button type="button" class="btn" id="deletechatroom-no">아니오</button>
+										</div>
+										
 								</div>
 							</div>
 							<div class="chatroom-list-box">
@@ -87,8 +96,6 @@
 									</div>
 									
 								</div>
-							</div>
-						</div>
 								<div class="with-chat-data01-1" style="display:none;">
 	<!-- 								<div class="square-first" style=""></div> -->
 										<div class="width-chat-subroomname2-1">해당 대화창을 삭제하시겠습니까?</div>
@@ -97,7 +104,11 @@
 											<button type="button" class="btn" id="deletechatroom-no">아니오</button>
 										</div>
 										
-									</div>
+								</div>
+								
+							</div>
+						</div>
+								
 							</div>
 							
 							
@@ -255,33 +266,34 @@
 				
 				
 					<!-- chattingroom -->
-				<!-- 사내대화방 프로필(연락처, 프로필 링크 선택)모달창 -->
 					
-					<div class="chatlist-modal">
-						<div class="chatlist-modal-text01">어느것을 선택하시겠습니까?</div>	
-						<div class="chatlist-modal-text02">
-							<div class="chatlist-modal-text02-1">프로필 링크</div>
-							<div class="chatlist-modal-text02-2">연락처 링크</div>
-						</div>	
-					</div>
+					<!-- 사내대화방 프로필(연락처, 프로필 링크 선택)모달창 -->
 					
-					<div class="chatting-room" style="display:none">
-						<div class="chatting-room-first">
-							<div class="chatroom-one-to-one">
-								<div class="chatroom-square"></div>
-								<div class="chatroom-box1-1-profile-data">
-									<div class="chatroom1-1-1text">영업부 영업4팀</div>
-									<div class="chatroom1-1-2text">
-										<div class="chatroom1-1-2text-1-1">정인제</div>
-										<div>과장</div>
-									</div>
-								</div>
-								<div class="material-symbols-outlined" id="chatroom-1-2-icon">chevron_right</div>
-								<span class="material-symbols-outlined" id="chatroom-1-3-icon">settings</span>
-							</div>
-							
-							
+						<div class="chatlist-modal">
+							<div class="chatlist-modal-text01">어느것을 선택하시겠습니까?</div>	
+							<div class="chatlist-modal-text02">
+								<div class="chatlist-modal-text02-1">프로필 링크</div>
+								<div class="chatlist-modal-text02-2">연락처 링크</div>
+							</div>	
 						</div>
+					
+						<div class="chatting-room" style="display:none">
+							<div class="chatting-room-first">
+								<div class="chatroom-one-to-one">
+									<div class="chatroom-square"></div>
+									<div class="chatroom-box1-1-profile-data">
+										<div class="chatroom1-1-1text">영업부 영업4팀</div>
+										<div class="chatroom1-1-2text">
+											<div class="chatroom1-1-2text-1-1">정인제</div>
+											<div>과장</div>
+										</div>
+									</div>
+									<div class="material-symbols-outlined" id="chatroom-1-2-icon">chevron_right</div>
+									<span class="material-symbols-outlined" id="chatroom-1-3-icon">settings</span>
+								</div>
+							
+							
+							</div>
 						
 						
 						<div class="chatroom-one-to-two">
@@ -401,6 +413,142 @@
 						
 					</div>
 					
+					
+					<div class="chatting-room" style="display:none">
+							<div class="chatting-room-first">
+								<div class="chatroom-one-to-one">
+									<div class="chatroom-square"></div>
+									<div class="chatroom-box1-1-profile-data">
+										<div class="chatroom1-1-1text">영업부 영업4팀</div>
+										<div class="chatroom1-1-2text">
+											<div class="chatroom1-1-2text-1-1">구기석</div>
+											<div>부장</div>
+										</div>
+									</div>
+									<div class="material-symbols-outlined" id="chatroom-1-2-icon">chevron_right</div>
+									<span class="material-symbols-outlined" id="chatroom-1-3-icon">settings</span>
+								</div>
+							
+							
+							</div>
+						
+						
+						<div class="chatroom-one-to-two">
+							<div class="chatroom-one-to-three-2"  style="display:none">
+								<div class="chatroom-4-1-box" style="margin-left:4%; margin-right:4%;">	
+									<span class="material-symbols-outlined" id="chatroom-4-1-icon1">contacts</span>
+									<div class="chatroom-menubar-text-green"">명함 보내기</div>
+								</div>
+								<div class="chatroom-4-1-box" style="margin-left:4%; margin-right:4%;">
+									<span class="material-symbols-outlined" id="chatroom-4-1-icon2">upload</span>
+									<div class="chatroom-menubar-text-green">첨부파일</div>
+								</div>
+								<div class="chatroom-4-1-box" style="margin-left:4%; margin-right:4%;">
+									<span class="material-symbols-outlined" id="chatroom-4-1-icon3">exit_to_app</span>
+									<div class="chatroom-menubar-text-green">취소하기</div>
+								</div>
+							</div>
+							<div class="chatroom" id="chatroom-1">
+								<div class="chatroom-1-2-white-area"></div>
+								
+								<div class="chatroom2-1text">
+								<div class="chatroom-square2" id="chatroom-square02"></div>
+										<div class="chatroom2-1-1-1text">구기석</div>
+										<div class="chatroom2-1-1-2text">부장</div>
+										
+								</div>
+								<div class="chatroom2-1-2textbox">
+									<div class="chatroom2-1-2-text">안녕하세요~</div>
+								</div>
+								<div class="chatroom2-1-3textbox">오전 10:00 보냄</div>
+								
+								
+							</div>
+							<div class="chatroom" id="chatroom-2">
+								<div class="chatroom-1-2-white-area"></div>
+								
+								
+								<div class="chatroom2-2-2textbox">
+									<div class="chatroom2-1-2-text">안녕하세요~</div>
+								</div>
+								<div class="chatroom2-2-3textbox">오전 10:00 보냄</div>
+								
+								
+							</div>
+							
+							<div class="chatroom" id="chatroom-2">
+								<div class="chatroom-1-2-white-area"></div>
+								
+								
+								<div class="chatroom2-2-2textbox">
+									<div class="chatroom2-1-2-text">첨부파일 송부합니다~</div>
+									<div class="chatroom2-1-2-text">구기석 부장님께서 첨부파일을 보내셨습니다</div>
+									<div class="chatroom-upload-box">
+									<div class="material-symbols-outlined">upload_file</div>
+									<div>dd.jpg</div>
+								</div>
+								</div>
+								<div class="chatroom2-2-3textbox">오전 10:00 보냄</div>
+								
+								
+							</div>
+							
+							<div class="chatroom" id="chatroom-1">
+								<div class="chatroom-1-2-white-area"></div>
+								
+								<div class="chatroom2-1text">
+								<div class="chatroom-square2" id="chatroom-square02"></div>
+										<div class="chatroom2-1-1-1text">구기석</div>
+										<div class="chatroom2-1-1-2text">부장</div>
+										
+								</div>
+								<div class="chatroom2-1-2-1textbox">
+									<div class="chatroom2-1-2-text">구기석 과장님께서 머머리 과장님의 명함을 보내셨습니다</div>
+									<div class="chatroom-upload-box">
+										<div class="material-symbols-outlined">contacts</div>
+										<div>프로필 확인하기</div>
+									</div>
+								</div>
+								
+								<div class="chatroom2-1-2-1textbox">
+									<div class="chatroom2-1-2-text">구기석 과장님께서 머머리 과장님의 명함을 보내셨습니다</div>
+									<div class="chatroom-upload-box">
+										<div class="material-symbols-outlined">contacts</div>
+										<div>프로필 확인하기</div>
+									</div>
+								</div>
+								
+								<div class="chatroom2-1-3textbox">오전 10:00 보냄</div>
+								<div class="chatroom2-1text">
+								<div class="chatroom-square2" id="chatroom-square02"></div>
+										<div class="chatroom2-1-1-1text">정인제</div>
+										<div class="chatroom2-1-1-2text">과장</div>
+										
+								</div>
+								<div class="chatroom2-1-2-1textbox">
+									<div class="chatroom2-1-2-text">구기석 과장님께서 첨부파일을 보내셨습니다</div>
+									<div class="chatroom-upload-box">
+										<div class="material-symbols-outlined">upload_file</div>
+										<div>dd.jpg</div>
+									</div>
+								</div>
+								<div class="chatroom2-1-3textbox">오전 10:00 보냄</div>
+								
+								
+								
+							</div>
+							
+						</div>
+						
+						
+						<div class="chatroom-one-to-three">
+							<span class="material-symbols-outlined" id="chatroom-1-3-1">menu</span>
+							<input type="text" id="chatroom1-3-text">
+							<span class="material-symbols-outlined" id="chatroom-1-3-3">send</span>
+						</div>
+						
+						
+					</div>
 
 
 
@@ -813,15 +961,101 @@ if (messenger.style.display == 'none') {
 // 				alert("changed");
 // 			}
 			<!-- 채팅방 목록 화면에서 채팅 화면으로 진입-->
-			const chatlist_to_chattingroom = document.getElementById("chatroom-list-two-to-two");
-			chatlist_to_chattingroom.onclick = function () {
+// 			const chatlist_to_chattingroom = document.getElementById('chatroom-list-two-to-two');
+// 			chatlist_to_chattingroom.onclick = function () {
+// 				$('.chatroomlist-first-page').hide();
+// 			 	$('.chatting-room').show();
+// 			 }
+
+			//인덱스 배열
+			const chatListAll = document.querySelectorAll("#chatroom-list-two-to-two");
+			const chatRoomAll = document.querySelectorAll(".chatting-room");
+// // 			const chatListAllIndex = document.querySelectorAll(".with-chat-subroomname2").index;
+// // 			const chatRoomAllIndex = document.querySelectorAll(".chatting-room").index();
+ 			const chatListAllIndex = chatListAll.length;
+ 			
+ 			
+// 			const chatlist_to_chattingroom = document.getElementById('chatroom-list-two-to-two');
+// 			chatlist_to_chattingroom.onclick = function () {
+// // 		 		var chatrn = $(this).index();
+// // 		 		alert(chartrn);
+// 				$('.chatroomlist-first-page').hide();
+// 			 	$('.chatting-room').show();
+// 			 }
+ 			
+ 			
+// 			var chatrn=0;
+			
+			
+			chatListAll[0].onclick = function () {
+				var chatrn = $(this).index();
 				$('.chatroomlist-first-page').hide();
-				$('.chatting-room').show();
-			}
+				$(chatRoomAll[0]).show();
+				
+				alert(chatListAllIndex);
+// 				var indexchatr = $(this).index();
+// 				alert(indexchatr);
+
+			 } 	
+			
+			chatListAll[1].onclick = function () {
+				$('.chatroomlist-first-page').hide();
+			 	$(chatRoomAll[1]).show();
+			 	alert(chatListAllIndex);
+// 			 	var indexchatr = $(this).index();
+// 				alert(indexchatr);
+			 } 
+			
+// 			for(int i=0; i<chatListAllIndex; i++){
+// 				chatListAll[i].onclick = function () {
+// 					$('.chatroomlist-first-page').hide();
+// 					$(chatRoomAll[i]).show();
+// 				 } 	
+// 			}
+
+
+
+
+
+
+// 			${'.with-chat-subroomname2'}.onclick = function () {
+// //  				var chatrn = $(this).index();
+// 				${'.chatroomlist-first-page'}.hide();
+// 				${'.chatting-room'}.show();
+// //  				alert(chatListAllIndex);
+// //  				var indexchatr = $(this).index();
+// //  				alert(indexchatr);
+//  			 } 	
 			
 			
 			
 			
+			
+			
+			
+			
+			
+			
+			
+			
+
+			
+			
+			
+// 			${".with-chat-subroomname2"}.click(function(){
+				
+// 			})
+			
+
+			
+			
+			
+			
+			
+			
+			
+			
+
 			
 			
 			
