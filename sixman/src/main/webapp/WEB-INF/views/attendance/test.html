@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>테스트</h1>
+	
+    <h1 id="clock"></h1>
+
+
+    <script>
+        const clock = document.querySelector("#clock")
+
+        function getClock() {
+            const date = new Date();
+            const hours = String(date.getHours()).padStart(2, "0");
+            const min = String(date.getMinutes()).padStart(2, "0");
+            const sec = String(date.getSeconds()).padStart(2, "0");
+            clock.innerText = `${hours}:${min}:${sec}`;
+        }
+
+        getClock();
+        setInterval(getClock, 1000);
+
+    </script>
+    
+</body>
+</html>

@@ -21,4 +21,8 @@ public class AttendanceService {
 		return dao.selectList(sst);
 	}
 
+	public int insertStart() {
+		return dao.insertStart(sst);
+	}
+
 }

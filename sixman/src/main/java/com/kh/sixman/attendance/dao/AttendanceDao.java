@@ -13,6 +13,11 @@ public class AttendanceDao {
 	public List<AttendanceVo> selectList(SqlSessionTemplate sst) {
 		return sst.selectList("attendanceMapper.selectList");
 	}
+
+	public int insertStart(SqlSessionTemplate sst) {
+		return sst.insert("attendanceMapper.insertStart");
+	}
+
 	
 
 }
