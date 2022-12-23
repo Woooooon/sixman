@@ -98,6 +98,7 @@
 			, "ACCOUNT"
 			, "ADDRESS"
 			, "DEPT_NO"
+			, "TEAM_NO"
 			, "POSITION_NO"
 			, "AUTHORIZE_NO"
 			, "JOIN_DATE"
@@ -117,12 +118,8 @@
 			, #{bankNo}
 			, #{account}
 			, #{address}
-			<if test="teamNo == ''">
 			, #{deptNo}
-			</if>
-			<if test="teamNo != ''">
 			, #{teamNo}
-			</if>
 			, #{positionNo}
 			, #{authorizeNo}
 			, SYSDATE
@@ -152,44 +149,50 @@
 
 	<select id="selectMemberList" resultType="MemberVo">
 		SELECT 
-		    M.NO
-		    , M.ID
-		    , M.PWD
-		    , M.NAME
-		    , M.EMAIL
-		    , M.PHONE
-		    , M.BIRTHDAY
-		    , M.BANK_NO
-		    , B.NAME AS BANK_NAME
-		    , M.ACCOUNT
-		    , M.ADDRESS
-		    , M.DEPT_NO
-		    , D.NAME AS DEPT_NAME
-		    , M.POSITION_NO
-		    , P.POSITION AS POSITION_NAME
-		    , M.AUTHORIZE_NO
-		    , A."LEVEL" AS AUTHORIZE_NAME
-		    , M.JOIN_DATE
-		    , M.MODIFY_DATE
-		    , M.RESIGNATION_YN
-		    , M.ENTRUST_NO
-		    , F.NO as FILE_NO 
-		    , F.CHANGE_NAME as FILE_NAME
-		FROM MEMBER M
-		JOIN BANK B ON B.NO = M.BANK_NO
-		JOIN POSITION P ON P.NO = M.POSITION_NO
-		JOIN DEPARTMENT D ON D.NO = M.DEPT_NO
-		JOIN AUTHORIZE A ON A.NO = M.AUTHORIZE_NO
-		LEFT JOIN (select 
-		    "NO",
-		    "ORIGIN_NAME",
-		    "MEMBER_NO",
-		    "CHANGE_NAME",
-		    "FILE_PATH",
-		    "ENROLL_DATE",
-		    "THUMB_YN"
-		from PROFILE_A
-		WHERE "THUMB_YN" = 'Y') F ON M.NO = F.MEMBER_NO
+	    M.NO
+	    , M.ID
+	    , M.PWD
+	    , M.NAME
+	    , M.EMAIL
+	    , M.PHONE
+	    , M.BIRTHDAY
+	    , M.BANK_NO
+	    , B.NAME AS BANK_NAME
+	    , M.ACCOUNT
+	    , M.ADDRESS
+	    , D.NO AS DEPT_NO
+	    , D.NAME AS DEPT_NAME
+	    , T.NO AS TEAM_NO
+	    , T.NAME AS TEAM_NAME
+	    , M.POSITION_NO
+	    , P.POSITION AS POSITION_NAME
+	    , M.AUTHORIZE_NO
+	    , A."LEVEL" AS AUTHORIZE_NAME
+	    , M.JOIN_DATE
+	    , M.MODIFY_DATE
+	    , M.RESIGNATION_YN
+	    , M.ENTRUST_NO
+	    , F.FILE_PATH 
+	    , F.CHANGE_NAME as FILE_NAME
+	FROM MEMBER M
+	JOIN BANK B ON B.NO = M.BANK_NO
+	JOIN POSITION P ON P.NO = M.POSITION_NO
+	JOIN AUTHORIZE A ON A.NO = M.AUTHORIZE_NO
+	JOIN DEPARTMENT D ON D.NO = M.DEPT_NO
+	JOIN DEPARTMENT T ON T.NO = M.TEAM_NO
+	LEFT JOIN 
+	(
+	    SELECT 
+	        "NO",
+	        "ORIGIN_NAME",
+	        "MEMBER_NO",
+	        "CHANGE_NAME",
+	        "FILE_PATH",
+	        "ENROLL_DATE",
+	        "THUMB_YN"
+	    FROM PROFILE_A
+	    WHERE "THUMB_YN" = 'Y'
+	) F ON M.NO = F.MEMBER_NO
 	</select>
 	
 	<select id="selectNewbieList" resultType="MemberVo">
@@ -236,8 +239,8 @@
 				    "THUMB_YN"
 				from PROFILE_A
 				WHERE "THUMB_YN" = 'Y'
-				) F
-			 ON M.NO = F.MEMBER_NO
+				) F ON M.NO = F.MEMBER_NO
+			 ORDER BY M.JOIN_DATE DESC 
 		)
 		where rownum <![CDATA[<]]> 11
 	</select>

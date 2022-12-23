@@ -16,8 +16,11 @@ import com.kh.sixman.admin.vo.PositionVo;
 import com.kh.sixman.common.PageVo;
 import com.kh.sixman.member.service.MemberService;
 import com.kh.sixman.member.vo.MemberVo;
+
+import lombok.extern.slf4j.Slf4j;
 @RequestMapping("admin/employee")
 @Controller
+@Slf4j
 public class AdminOrganizationChartController {
 	
 	@Autowired
@@ -33,12 +36,17 @@ public class AdminOrganizationChartController {
 		int boardLimit = 10;
 		int listCount = memberService.countList();
 		
+		log.info("listCount : " + listCount);
+		
 	    int offset = (page-1) * boardLimit;
 	    
 	    PageVo pv = new PageVo(listCount,page,pageLimit,boardLimit);
 	    RowBounds rb = new RowBounds(offset , boardLimit);
 
 		List<MemberVo> MemberList = memberService.selectMemberList(rb);
+		
+		log.info("memberList size : " + MemberList.size());
+		
 		List<MemberVo> newbieList = memberService.selectNewbieList();
 		List<AuthorizeVo> authorizeList = adminMemberService.authorizeList();
 		List<PositionVo> positionList = adminMemberService.positionList();

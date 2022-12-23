@@ -26,7 +26,7 @@ public class MemberDao {
 	}
 
 	public List<MemberVo> selectMemberList(SqlSessionTemplate sst, RowBounds rb) {
-		return sst.selectList("memberMapper.selectMemberList");
+		return sst.selectList("memberMapper.selectMemberList",null, rb);
 	}
 
 	public List<MemberVo> selectNewbieList(SqlSessionTemplate sst) {

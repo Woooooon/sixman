@@ -2,40 +2,32 @@ const removeMember = document.querySelector('.remove-emp');
 const selectCencle = document.querySelector('.removeBtn');
 // const parentElem = document.querySelector('.sep');
 
-selectMemberOne();
+//개별선택
 function selectMemberOne() {
     const selectMemberBox = document.querySelectorAll('.selectOne');
     const selectMemberAll = document.querySelector('.selectAll');
+    const memberInfoList = document.querySelector('.sep');
     selectMemberBox.forEach((target) => {
-        selectMember(selectMemberAll, target);
+        const div = selectMember(selectMemberAll, target)
+        target.addEventListener('change', ()=>{
+            if (target.checked) {
+                memberInfoList.after(div);
+            } else {
+                div.remove();
+            }
+        });
     });
 }
 //전체석택
 
+selectMemberOne();
 checkBoxToggleEvent('.selectAll', '.selectOne');
-
-function checkAllToggle(all_selector, check_selector) {
-    const selectAll = document.querySelector(all_selector);
-    const checkBox = document.querySelectorAll(check_selector);
-    const is_check = selectAll.checked;
-    if (is_check === true) {
-        checkBox.forEach((check) => {
-            check.setAttribute('checked', 'checked');
-            check.checked = true;
-        });
-    } else {
-        checkBox.forEach((check) => {
-            check.removeAttribute('checked', 'checked');
-            check.checked = false;
-        });
-    }
-}
 
 function checkBoxToggleEvent(all_selector, check_selector) {
     const selectAll = document.querySelector(all_selector);
 
     selectAll.addEventListener('change', function () {
-        checkAllToggle(all_selector, check_selector);
+        checkAllToggle(all_selector);
     });
 
     const checkBox = document.querySelectorAll(check_selector);
@@ -46,9 +38,39 @@ function checkBoxToggleEvent(all_selector, check_selector) {
     });
 }
 
+function checkAllToggle(all_selector) {
+    const selectAll = document.querySelector(all_selector);
+    const none_check = document.querySelectorAll('.selectOne:not(:checked)');
+    const is_check = document.querySelectorAll('.selectOne:checked');
+    console.log(is_check);
+    const is_Allcheck = selectAll.checked;
+    if (is_Allcheck === true) {
+        none_check.forEach((check) => {
+            check.click();
+        });
+    } else {
+        is_check.forEach((check) => {
+            check.click();
+        });
+    }
+}
+
+
+function checkBoxToggle(all_selector, check_selector) {
+    const selectAll = document.querySelector(all_selector);
+    const checkbox_ln = document.querySelectorAll(check_selector + ':enabled').length;
+    const check_ln = document.querySelectorAll(check_selector + ':checked:enabled').length;
+    if (checkbox_ln === check_ln) {
+        selectAll.setAttribute('checked', 'checked');
+        selectAll.checked = true;
+    } else {
+        selectAll.removeAttribute('checked', 'checked');
+        selectAll.checked = false;
+    }
+}
+
 function selectMember(selectAll, checkbox) {
     const div = document.createElement('div');
-    const memberInfoList = document.querySelector('.sep');
     const parentElem = checkbox.closest('div');
     const name = parentElem.querySelector('a[name="memberName"]').innerHTML;
     const position = parentElem.querySelector('select[name="position"]');
@@ -56,6 +78,7 @@ function selectMember(selectAll, checkbox) {
     const dept = parentElem.querySelector('select[name="deptNo"]');
     const deptName = dept.options[dept.selectedIndex].text;
     const team = parentElem.querySelector('select[name="teamNo"]');
+    
     function teamName() {
         const teamOption = team.querySelector('option');
         if (teamOption != null) {
@@ -65,14 +88,21 @@ function selectMember(selectAll, checkbox) {
         return '';
     }
 
-    const imgName = parentElem.querySelector('p[name="imgName"]').innerText;
+    function imgName() {
+        const imgName = parentElem.querySelector('p[name="imgName"]').innerHTML;
+        if (imgName != '') {
+            return '<img src="/sixman/resources/img/profile/'+imgName+'" art="" />';
+        }
+        return '<img src="/sixman/resources/img/defaultProfilePic.png" alt="" />';
+    }
+
+    
+
     div.classList.add('select-employee-list');
     div.innerHTML =
         '<div class="select-employee-box">' +
         '<div class="select-employee-pic">' +
-        '<img src="/sixman/resources/img/profile/' +
-        imgName +
-        '" alt="" />' +
+        imgName()+
         '</div>' +
         '<div class="info-box">' +
         '<div class="select-dept-info">' +
@@ -101,27 +131,10 @@ function selectMember(selectAll, checkbox) {
         div.remove();
     });
 
-    checkbox.addEventListener('change', () => {
-        if (checkbox.checked) {
-            memberInfoList.after(div);
-        } else {
-            div.remove();
-        }
-    });
+    return div;
 }
 
-function checkBoxToggle(all_selector, check_selector) {
-    const selectAll = document.querySelector(all_selector);
-    const checkbox_ln = document.querySelectorAll(check_selector + ':enabled').length;
-    const check_ln = document.querySelectorAll(check_selector + ':checked:enabled').length;
-    if (checkbox_ln === check_ln) {
-        selectAll.setAttribute('checked', 'checked');
-        selectAll.checked = true;
-    } else {
-        selectAll.removeAttribute('checked', 'checked');
-        selectAll.checked = false;
-    }
-}
+
 
 //전체선택된것 삭제
 removeMember.addEventListener('click', () => {
