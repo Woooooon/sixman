@@ -7,5 +7,27 @@
 	<select id="selectList" resultType="com.kh.sixman.attendance.vo.AttendanceVo">
 		SELECT * FROM ATTENDANCE
 	</select>
+	
+	<insert id="insertStart">
+		INSERT INTO ATTENDANCE
+		(
+		   "NO",
+			"MEMBER_NO",
+			STATUS,
+			"START",
+			"END",
+			"WORK_TIME"
+		)
+		VALUES
+		(
+		    SEQ_ATTENDANCE_NO.NEXTVAL,
+		    1,
+		    1,
+		    SYSDATE,
+		    SYSDATE,
+		    1
+		)
+	
+	</insert>
 
 </mapper>

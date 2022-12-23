@@ -90,14 +90,14 @@
     justify-content: center;
     gap: 30px;
 }
-#btn-box > .btn{
+#btn-box > form > .btn{
     width: 120px;
     height: 70px;
     cursor: pointer;
     font-size: 1.7em;
     font-weight: 500;
 }
-#btn-box > .c-btn{
+#btn-box > form > .c-btn{
     width: 120px;
     height: 70px;
     cursor: pointer;
@@ -359,8 +359,10 @@
             <div id="date-box">${day}</div>
             <div id="time-box">${time}</div>
             <div id="btn-box">
-                <div id="start-btn" class="btn">출근</div>
-                <div id="end-btn" class="c-btn">퇴근</div>
+                <form action="/sixman/attendance/board" method="post"><input type="submit" name="" id="start-btn" class="btn" value="출근"></form>
+                <!-- <form action="attendance/board"><div id="start-btn" class="btn">출근</div></form> -->
+                <form action="/sixman/attendance/board2" method="post"><input type="submit" name="" id="end-btn" class="c-btn" value="퇴근"></form>
+                <!-- <form action=""><div id="end-btn" class="c-btn">퇴근</div></form> -->
             </div>
             <div id="result-box">
                 <div>시작: &nbsp<input type="text" style="width: 50px; height: 25px;"></div>
@@ -427,17 +429,14 @@
     document.getElementById('end-day').value = new Date().toISOString().substring(0, 10);
 
     //출근버튼
-    document.querySelector("#start-btn").addEventListener("click", () => {
-        popup.alertPop("출근","시간나오게");
-    })
+    // document.querySelector("#start-btn").addEventListener("click", () => {
+    //     popup.alertPop("출근","시간나오게");
+    // })
 
     //퇴근버튼
     document.querySelector("#end-btn").addEventListener("click", () => {
         popup.alertPop("퇴근","시간나오게");
     })
-
-
-
 
 </script>
 
