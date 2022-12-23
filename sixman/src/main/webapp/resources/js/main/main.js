@@ -131,26 +131,35 @@ function alarmAjax() {
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
                 if (httpRequest.status === 200) {
                     const result = httpRequest.response;
+                    // console.log(result);
+                    const itemCount = document.querySelector('#alarm-count');
+                    const count = result.length;
+
+                    if(count==null || count==0){
+                        itemCount.style.display = 'none';
+                    }else{
+                        itemCount.innerHTML = count;
+                    }
 
                     for(vo of result){
 
                         let msg = ``;
                         let f = null;
                         switch (vo.type) {
-                            case 'mail':
-                                msg = `${vo.sender}(이)가 메일을 보냈습니다. "${vo.title}"`;
+                            case 'MAIL':
+                                msg = `${vo.senderName}(이)가 메일을 보냈습니다. "${vo.title}"`;
                                 f = ()=>{location.href='';}
                                 break;
-                            case 'document':
-                                msg = `${vo.sender}(이)가 결재를 요청하였습니다. "${vo.title}"`;
+                            case 'DOCUMENT':
+                                msg = `${vo.senderName}(이)가 결재를 요청하였습니다. "${vo.title}"`;
                                 f = ()=>{location.href='';}
                                 break;
-                            case 'adress':
-                                msg = `${vo.sender}(이)가 주소록을 공유하였습니다. "${vo.title}"`;
+                            case 'ADRESS':
+                                msg = `${vo.senderName}(이)가 주소록을 공유하였습니다. "${vo.title}"`;
                                 f = ()=>{location.href='';}
                                 break;
-                            case 'schedual':
-                                msg = `${vo.sender}(이)가 일정을 공유하였습니다. "${vo.title}"`;
+                            case 'SCHEDULE':
+                                msg = `${vo.senderName}(이)가 일정을 공유하였습니다. "${vo.title}"`;
                                 f = ()=>{location.href='';}
                                 break;
                         }
@@ -192,6 +201,7 @@ function alarmAjax() {
 }
 
 function checkAjax(no, type) {
+    console.log(no, type);
     const httpRequest = new XMLHttpRequest();
     httpRequest.onreadystatechange = () => {
         if (httpRequest.readyState === XMLHttpRequest.DONE) {

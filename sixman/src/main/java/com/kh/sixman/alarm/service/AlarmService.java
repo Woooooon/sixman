@@ -25,5 +25,4 @@ public class AlarmService {
 	public int check(Map<String, String> map) {
 		return dao.check(sst, map);
 	}
-
 }

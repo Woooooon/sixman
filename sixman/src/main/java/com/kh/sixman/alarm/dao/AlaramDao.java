@@ -16,6 +16,7 @@ public class AlaramDao {
 	}
 
 	public int check(SqlSessionTemplate sst, Map<String, String> map) {
+		System.out.println(map);
 		return sst.update("alarmMapper.check", map);
 	}
 

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="alarmMapper">
+
+	<select id="selectList" resultType="AlarmVo">
+		SELECT * FROM
+		(
+		    SELECT 
+		        R.NO,
+		        M.SEND_USER AS SENDER,
+		        SE_U.NAME AS SENDER_NAME,
+		        R.ALARM_YN AS CHECK_YN,
+		        M.SEND_TIME AS ENROLL_DATE,
+		        M.TITLE,
+		        RE_U.NO AS USER_NO,
+		        'MAIL' AS TYPE
+		    FROM R_MAIL R
+		    JOIN MAIL M ON R.MAIL_NO = M.NO
+		    JOIN MEMBER RE_U ON RE_U.EMAIL = R.EMAIL
+		    JOIN MEMBER SE_U ON SE_U.NO = M.SEND_USER
+		    UNION ALL
+		    SELECT 
+		        R.NO,
+		        S.WRITER AS SENDER,
+		        SE_U.NAME AS SENDER_NAME,
+		        CHECK_YN,
+		        S.ENROLL_DATE,
+		        S.TITLE,
+		        RE_U.NO AS USER_NO,
+		        'SCHEDULE' AS TYPE
+		    FROM R_SCHEDULE R
+		    JOIN SCHEDULE S ON R.S_NO = S.NO
+		    JOIN MEMBER RE_U ON RE_U.NO = R.USER_NO
+		    JOIN MEMBER SE_U ON SE_U.NO = S.WRITER
+		    UNION ALL
+		    SELECT
+		        DS.NO,
+		        D.SEND_PAY AS SENDER,
+		        SE_U.NAME AS SENDER_NAME,
+		        DS.A_YN AS CHECK_YN,
+		        D.ENROLL_DATE,
+		        D.TITLE,
+		        A.A_MAN AS USER_NO,
+		        'DOCUMENT' AS TYPE
+		    FROM DOC_SAVE DS
+		    JOIN APRPROVAL A ON  DS.AP_NO = A.NO
+		    JOIN DOCUMENT D ON DS.DOC_NO = D.NO
+		    JOIN MEMBER SE_U ON D.SEND_PAY = SE_U.NO
+		    UNION ALL
+		    SELECT
+		        R.NO,
+		        R.SENDER_NO AS SENDER,
+		        SE_U.NAME AS SENDER_NAME,
+		        R.CHECK_YN,
+		        R.ENROLL_DATE,
+		        SE_U.NAME||'의 주소록' AS TITLE,
+		        R.RECIVER_NO AS USER_NO,
+		        'ADDRESS' AS TYPE
+		    FROM R_ADDRESS R
+		    JOIN MEMBER SE_U ON SE_U.NO = R.SENDER_NO
+		)
+		WHERE USER_NO = ${no}
+		AND CHECK_YN = 'N'
+		ORDER BY ENROLL_DATE DESC
+	</select>
+	
+	<update id="check">
+		<choose>
+			<when test="'MAIL'.equals(type)">
+				UPDATE R_MAIL
+				SET ALARM_YN = 'Y'
+				WHERE NO = ${no}
+			</when>
+			<when test="'DOCUMENT'.equals(type)">
+				UPDATE DOC_SAVE
+				SET A_YN = 'Y'
+				WHERE NO = ${no}
+			</when>
+			<when test="'SCHEDULE'.equals(type)">
+				UPDATE R_SCHEDULE
+				SET CHECK_YN = 'Y'
+				WHERE NO = ${no}
+			</when>
+			<when test="'ADDRESS'.equals(type)">
+				UPDATE R_ADDRESS
+				SET CHECK_YN = 'Y'
+				WHERE NO = ${no}
+			</when>
+		</choose>
+	</update>
+
+</mapper>

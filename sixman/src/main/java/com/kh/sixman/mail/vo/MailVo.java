@@ -22,6 +22,7 @@ public class MailVo {
 	private String modifyTime;
 	private String isSender;
 	private String checkYn;
+	private String saveYn;
 	
 	private List<MultipartFile> file;
 	private List<AttachmentVo> fileList;

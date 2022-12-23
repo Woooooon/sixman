@@ -7,6 +7,7 @@ public class AlarmVo {
 
 	private String no;
 	private String sender;
+	private String senderName;
 	private String checkYn;
 	private String enrollDate;
 	private String userNo;

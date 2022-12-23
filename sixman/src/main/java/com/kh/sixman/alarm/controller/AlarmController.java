@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
@@ -23,7 +24,7 @@ public class AlarmController {
 	private AlarmService as;
 
 	@ResponseBody
-	@PostMapping(value = "alarm")
+	@PostMapping(value = "alarm", produces = "application/json; charset=utf8")
 	public String alarm(HttpSession session) {
 		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
 		String no = loginMember.getNo();
@@ -37,7 +38,7 @@ public class AlarmController {
 	
 	@ResponseBody
 	@PostMapping("alarm/check")
-	public void check(Map<String,String> map) {
+	public void check(@RequestParam Map<String,String> map) {
 		int result = as.check(map);
 	}
 	

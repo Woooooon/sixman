@@ -178,6 +178,13 @@
 		    <artifactId>commons-io</artifactId>
 		    <version>2.4</version>
 		</dependency>
+		
+		<!-- socket -->
+		<dependency>
+    		<groupId>org.springframework</groupId>
+    		<artifactId>spring-websocket</artifactId>
+    		<version>${org.springframework-version}</version>
+		</dependency>
 								       
 	</dependencies>
     <build>

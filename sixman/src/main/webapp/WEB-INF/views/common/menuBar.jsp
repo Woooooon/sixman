@@ -20,7 +20,7 @@
         <section id="my-menu">
             <article id="alarm" class="center">
                 <span class="material-symbols-outlined"> notifications </span>
-                <div id="alarm-count">1</div>
+                <div id="alarm-count"></div>
             </article>
             <article id="msg" class="center">
                 <span class="material-symbols-outlined"> sms </span>
@@ -33,7 +33,7 @@
     <div id="alarm-box">
         <div id="inner-box">
 
-            <div class="alarm-item">
+            <!-- <div class="alarm-item">
                 <div>
                     <div class="item-header">
                         <div>[카테고리]</div>
@@ -53,7 +53,7 @@
                     <div class="item-title">ooo님이 보낸메일 "제목 제sadfasdf목 제목"</div>
                 </div>
                 <span class="t-btn material-symbols-outlined"> close </span>
-            </div>
+            </div> -->
 
         </div>
     </div>
@@ -225,5 +225,8 @@
         });
     });
 
+    window.onload = ()=>{
+        alarmAjax();
+    }
 </script>
 </html>
