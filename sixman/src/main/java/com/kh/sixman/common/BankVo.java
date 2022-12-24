@@ -1,4 +1,4 @@
-package com.kh.sixman.member.vo;
+package com.kh.sixman.common;
 
 import lombok.Data;
 

@@ -154,7 +154,7 @@
                                         <div class="info-box">
                                             <div class="select-dept-info">
                                                 <p>${i.deptName}</p>
-                                                <p>${i.deptName}</p>
+                                                <p>${i.teamName}</p>
                                             </div>
                                             <div class="select-employee-info">
                                                 <p>${i.name}</p>

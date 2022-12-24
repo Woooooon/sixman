@@ -11,12 +11,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.sixman.admin.dao.AdminMemberDao;
-import com.kh.sixman.admin.vo.AuthorizeVo;
-import com.kh.sixman.admin.vo.DeptVo;
-import com.kh.sixman.admin.vo.PositionVo;
 import com.kh.sixman.common.AttachmentVo;
-import com.kh.sixman.member.vo.BankVo;
+import com.kh.sixman.common.AuthorizeVo;
+import com.kh.sixman.common.BankVo;
+import com.kh.sixman.dept.vo.DeptVo;
 import com.kh.sixman.member.vo.MemberVo;
+import com.kh.sixman.position.vo.PositionVo;
 
 @Service
 public class AdminMemberService {
@@ -95,15 +95,6 @@ public class AdminMemberService {
 		}
 		
 		return map;
-	}
-
-	public List<PositionVo> positionList() {
-		
-		return adminMemberDao.positionList(sst);
-	}
-
-	public List<DeptVo> daptList() {
-		return adminMemberDao.daptList(sst);
 	}
 
 	

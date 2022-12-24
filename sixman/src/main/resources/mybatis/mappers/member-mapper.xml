@@ -36,6 +36,7 @@
 		JOIN BANK B ON B.NO = M.BANK_NO
 		JOIN POSITION P ON P.NO = M.POSITION_NO
 		JOIN DEPARTMENT D ON D.NO = M.DEPT_NO
+		LEFT JOIN DEPARTMENT T ON T.NO = M.DEPT_NO
 		JOIN AUTHORIZE A ON A.NO = M.AUTHORIZE_NO
 		WHERE M.ID = #{id}
 		AND M.RESIGNATION_YN = 'N'	
@@ -54,34 +55,6 @@
 			, "LEVEL"
 		FROM AUTHORIZE
 	</select>
-	
-	<select id="positionList" resultType="PositionVo">
-		SELECT 
-			"NO"
-			, "POSITION"
-		FROM POSITION
-	</select>
-	
-	<select id="deptList" resultType="DeptVo">
-		SELECT 
-		    P.NO AS DEPT_NO,
-		    P.NAME AS DEPT_NAME
-		FROM DEPARTMENT D,DEPARTMENT P
-		WHERE D.NO = P.DEPT_NO
-		AND D.NO = 1
-	</select>
-	
-	<select id="subDeptList" resultType="DeptVo">
-		SELECT 
-		    P.NO TEAM_NO,
-		    P.NAME AS TEAM_NAME ,
-		    P.DEPT_NO,
-		    D.NAME AS DEPT_NAME
-		FROM DEPARTMENT D,DEPARTMENT P
-		WHERE D.NO = P.DEPT_NO
-		AND D.NO = #{deptNo};
-	</select>
-	
 	
 	<insert id="join">
 		INSERT INTO
@@ -179,7 +152,7 @@
 	JOIN POSITION P ON P.NO = M.POSITION_NO
 	JOIN AUTHORIZE A ON A.NO = M.AUTHORIZE_NO
 	JOIN DEPARTMENT D ON D.NO = M.DEPT_NO
-	JOIN DEPARTMENT T ON T.NO = M.TEAM_NO
+	LEFT JOIN DEPARTMENT T ON T.NO = M.TEAM_NO
 	LEFT JOIN 
 	(
 	    SELECT 
@@ -193,6 +166,7 @@
 	    FROM PROFILE_A
 	    WHERE "THUMB_YN" = 'Y'
 	) F ON M.NO = F.MEMBER_NO
+	WHERE M.RESIGNATION_YN = 'N' 
 	</select>
 	
 	<select id="selectNewbieList" resultType="MemberVo">
@@ -240,16 +214,11 @@
 				from PROFILE_A
 				WHERE "THUMB_YN" = 'Y'
 				) F ON M.NO = F.MEMBER_NO
-			 ORDER BY M.JOIN_DATE DESC 
+			WHERE M.RESIGNATION_YN = 'N'
+			ORDER BY M.JOIN_DATE DESC 
 		)
 		where rownum <![CDATA[<]]> 11
 	</select>
-
-
-
-
-
-
 
 
 

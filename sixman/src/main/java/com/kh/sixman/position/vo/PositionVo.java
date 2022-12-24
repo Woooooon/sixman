@@ -1,4 +1,4 @@
-package com.kh.sixman.admin.vo;
+package com.kh.sixman.position.vo;
 
 import lombok.Data;
 

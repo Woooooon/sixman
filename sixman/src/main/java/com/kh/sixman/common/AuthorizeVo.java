@@ -1,4 +1,4 @@
-package com.kh.sixman.admin.vo;
+package com.kh.sixman.common;
 
 import lombok.Data;
 

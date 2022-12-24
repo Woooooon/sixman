@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="deptMapper">
+	
+	<select id="deptList" resultType="DeptVo">
+		SELECT 
+		    P.NO AS DEPT_NO,
+		    P.NAME AS DEPT_NAME
+		FROM DEPARTMENT D,DEPARTMENT P
+		WHERE D.NO = P.DEPT_NO
+		AND D.NO = 1
+	</select>
+	
+	<select id="selectSubList" resultType="DeptVo">
+		SELECT 
+		    P.NO TEAM_NO,
+		    P.NAME AS TEAM_NAME 
+		FROM DEPARTMENT D,DEPARTMENT P
+		WHERE D.NO = P.DEPT_NO
+		AND D.NO = #{no}
+	</select>
+	
+</mapper>

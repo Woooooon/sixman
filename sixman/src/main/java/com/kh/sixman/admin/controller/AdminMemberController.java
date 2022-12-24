@@ -12,13 +12,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.sixman.admin.service.AdminMemberService;
-import com.kh.sixman.admin.vo.AuthorizeVo;
-import com.kh.sixman.admin.vo.DeptVo;
-import com.kh.sixman.admin.vo.PositionVo;
 import com.kh.sixman.common.AttachmentVo;
+import com.kh.sixman.common.AuthorizeVo;
+import com.kh.sixman.common.BankVo;
 import com.kh.sixman.common.FileUnit;
-import com.kh.sixman.member.vo.BankVo;
+import com.kh.sixman.dept.service.DeptService;
+import com.kh.sixman.dept.vo.DeptVo;
 import com.kh.sixman.member.vo.MemberVo;
+import com.kh.sixman.position.service.PositionService;
+import com.kh.sixman.position.vo.PositionVo;
 @RequestMapping("admin/member")
 @Controller
 public class AdminMemberController {
@@ -26,13 +28,19 @@ public class AdminMemberController {
 	@Autowired 
 	private AdminMemberService adminMemberService;
 	
+	@Autowired 
+	private DeptService deptService;
+	
+	@Autowired
+	private PositionService positionService;
+	
 	@GetMapping("join")
 	public String join(Model model) {
 		
 		List<BankVo> bankList = adminMemberService.bankList();
 		List<AuthorizeVo> authorizeList = adminMemberService.authorizeList();
-		List<PositionVo> positionList = adminMemberService.positionList();
-		List<DeptVo> deptList = adminMemberService.daptList();
+		List<PositionVo> positionList = positionService.positionList();
+		List<DeptVo> deptList = deptService.daptList();
 		
 		model.addAttribute("deptList", deptList);
 		model.addAttribute("positionList", positionList);

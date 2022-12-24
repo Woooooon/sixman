@@ -1,3 +1,27 @@
+$('select[name="deptNo"]').on('change', () => {
+    $('select[name="teamNo"]').html('');
+    if ($('select[name="deptNo"]').val() != 1) {
+        $.ajax({
+            url: '/sixman/dept/sublist',
+            method: 'POST',
+            data: {
+                no: $('select[name="deptNo"]').val(),
+            },
+            success: (teamList) => {
+                teamList.forEach((element) => {
+                    const option = document.createElement('option');
+                    option.setAttribute('value', element.teamNo);
+                    option.innerHTML = element.teamName;
+                    $('select[name="teamNo"]').append(option);
+                });
+            },
+            error: (teamList) => {
+                console.log('hi');
+            },
+        });
+    }
+});
+
 const profileBtn = document.querySelector('#add-pic');
 const profileBox = document.querySelector('#profile-pic');
 const resumeBtn = document.querySelector('#add-resume');
@@ -123,7 +147,7 @@ form.onsubmit = () => {
 // addFile(profileBtn, profileBox, 'pic-wrap', 'image', 'picFile', 'pic-add');
 addFile(resumeBtn, resumeBox, 'resume-wrap', 'draft', 'resumeFile', 'resume-add');
 addFile(accountBtn, accountBox, 'account-wrap', 'image', 'accountFile', 'account-add');
-checkBoxToggleEvent('.all_check', '.check_list');
+addProFile();
 
 attFileDelete.addEventListener('click', () => {
     const checkBox = document.querySelectorAll('.att-wrap:has(input:checked)');
@@ -176,41 +200,6 @@ attBtn.addEventListener('click', () => {
     }
 });
 
-function checkAllToggle(all_selector, check_selector) {
-    const selectAll = document.querySelector(all_selector);
-    const checkBox = document.querySelectorAll(check_selector);
-    const is_check = selectAll.checked;
-
-    if (is_check === true) {
-        checkBox.forEach((checkbox) => {
-            if (checkbox.disabled !== true) {
-                checkbox.setAttribute('checked', 'checked');
-                checkbox.checked = true;
-            }
-        });
-    } else {
-        checkBox.forEach((checkbox) => {
-            checkbox.removeAttribute('checked', 'checked');
-            checkbox.checked = false;
-        });
-    }
-}
-
-function checkBoxToggleEvent(all_selector, check_selector) {
-    const selectAll = document.querySelector(all_selector);
-
-    selectAll.addEventListener('change', function () {
-        checkAllToggle(all_selector, check_selector);
-    });
-
-    const checkBox = document.querySelectorAll(check_selector);
-    checkBox.forEach((el_check, idx) => {
-        el_check.addEventListener('change', function () {
-            checkBoxToggle(all_selector, check_selector);
-        });
-    });
-}
-addProFile();
 function addProFile() {
     profileBtn.addEventListener('click', () => {
         const defaulltPic = document.querySelector('.image-box');
@@ -298,6 +287,7 @@ function addFile(elem, parentElem, className, fileKind, fileName, fileId) {
     });
 }
 
+//카카오지도
 document.getElementById('address_kakao').addEventListener('click', function () {
     //주소입력칸을 클릭하면
     //카카오 지도 발생
@@ -308,6 +298,7 @@ document.getElementById('address_kakao').addEventListener('click', function () {
     }).open();
 });
 
+//jstree
 $(function () {
     $('#jstree').jstree();
 
@@ -337,6 +328,7 @@ $('#jstree').on('close_node.jstree', function (e, data) {
     icon.removeClass('fa-folder-open').addClass('fa-folder');
 });
 
+//파일미리보기
 function fileView() {
     const fileDOM = document.querySelector('#pic-add');
     const preview = document.querySelector('.image-box');

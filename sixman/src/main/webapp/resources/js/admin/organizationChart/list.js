@@ -1,6 +1,39 @@
+const memberDept = document.querySelectorAll('.list-item select[name="deptNo"]');
+memberSelectController();
+function memberSelectController() {
+    memberDept.forEach((target) => {
+        const team = target.parentElement.querySelector('select[name="teamNo"]');
+        target.addEventListener('change', () => {
+            team.innerHTML = '';
+            if (target.value != 1) {
+                $.ajax({
+                    url: '/sixman/dept/sublist',
+                    method: 'POST',
+                    data: {
+                        no: target.value,
+                    },
+                    success: (teamList) => {
+                        teamList.forEach((element) => {
+                            const option = document.createElement('option');
+                            option.setAttribute('value', element.teamNo);
+                            option.innerHTML = element.teamName;
+                            team.append(option);
+                        });
+                    },
+                    error: (teamList) => {
+                        console.log('hi');
+                    },
+                });
+            }
+        });
+    });
+}
+
 const removeMember = document.querySelector('.remove-emp');
 const selectCencle = document.querySelector('.removeBtn');
-// const parentElem = document.querySelector('.sep');
+
+selectMemberOne();
+checkBoxToggleEvent('.selectAll', '.selectOne');
 
 //개별선택
 function selectMemberOne() {
@@ -8,8 +41,8 @@ function selectMemberOne() {
     const selectMemberAll = document.querySelector('.selectAll');
     const memberInfoList = document.querySelector('.sep');
     selectMemberBox.forEach((target) => {
-        const div = selectMember(selectMemberAll, target)
-        target.addEventListener('change', ()=>{
+        const div = selectMember(selectMemberAll, target);
+        target.addEventListener('change', () => {
             if (target.checked) {
                 memberInfoList.after(div);
             } else {
@@ -18,11 +51,8 @@ function selectMemberOne() {
         });
     });
 }
+
 //전체석택
-
-selectMemberOne();
-checkBoxToggleEvent('.selectAll', '.selectOne');
-
 function checkBoxToggleEvent(all_selector, check_selector) {
     const selectAll = document.querySelector(all_selector);
 
@@ -55,7 +85,6 @@ function checkAllToggle(all_selector) {
     }
 }
 
-
 function checkBoxToggle(all_selector, check_selector) {
     const selectAll = document.querySelector(all_selector);
     const checkbox_ln = document.querySelectorAll(check_selector + ':enabled').length;
@@ -78,7 +107,7 @@ function selectMember(selectAll, checkbox) {
     const dept = parentElem.querySelector('select[name="deptNo"]');
     const deptName = dept.options[dept.selectedIndex].text;
     const team = parentElem.querySelector('select[name="teamNo"]');
-    
+
     function teamName() {
         const teamOption = team.querySelector('option');
         if (teamOption != null) {
@@ -91,18 +120,16 @@ function selectMember(selectAll, checkbox) {
     function imgName() {
         const imgName = parentElem.querySelector('p[name="imgName"]').innerHTML;
         if (imgName != '') {
-            return '<img src="/sixman/resources/img/profile/'+imgName+'" art="" />';
+            return '<img src="/sixman/resources/img/profile/' + imgName + '" art="" />';
         }
         return '<img src="/sixman/resources/img/defaultProfilePic.png" alt="" />';
     }
-
-    
 
     div.classList.add('select-employee-list');
     div.innerHTML =
         '<div class="select-employee-box">' +
         '<div class="select-employee-pic">' +
-        imgName()+
+        imgName() +
         '</div>' +
         '<div class="info-box">' +
         '<div class="select-dept-info">' +
@@ -133,8 +160,6 @@ function selectMember(selectAll, checkbox) {
 
     return div;
 }
-
-
 
 //전체선택된것 삭제
 removeMember.addEventListener('click', () => {
@@ -195,8 +220,7 @@ $('#jstree').on('close_node.jstree', function (e, data) {
     icon.removeClass('fa-folder-open').addClass('fa-folder');
 });
 
-//slide
-
+//newbie slide
 const slides = document.querySelector('.newbie-list');
 const slide = document.querySelectorAll('.newbie-box');
 let currentIdx = 0,
