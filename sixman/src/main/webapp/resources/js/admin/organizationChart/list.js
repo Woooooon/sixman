@@ -1,6 +1,6 @@
-const memberDept = document.querySelectorAll('.list-item select[name="deptNo"]');
 memberSelectController();
 function memberSelectController() {
+    const memberDept = document.querySelectorAll('.list-item select[name="deptNo"]');
     memberDept.forEach((target) => {
         const team = target.parentElement.querySelector('select[name="teamNo"]');
         target.addEventListener('change', () => {
@@ -12,6 +12,7 @@ function memberSelectController() {
                     data: {
                         no: target.value,
                     },
+                    dataType: 'json',
                     success: (teamList) => {
                         teamList.forEach((element) => {
                             const option = document.createElement('option');
@@ -20,15 +21,46 @@ function memberSelectController() {
                             team.append(option);
                         });
                     },
-                    error: (teamList) => {
-                        console.log('hi');
+                    error: () => {
+                        popup.alertPop('실패', '부서목록을 조회하지 못하였습니다.');
                     },
                 });
             }
         });
     });
 }
+memberUpdate();
 
+function memberUpdate() {
+    const updateBtn = document.querySelectorAll('.update');
+    updateBtn.forEach((target) => {
+        target.addEventListener('click', () => {
+            const memberNo = target.parentElement.querySelector('input[type="checkbox"]').value;
+            const memberDept = target.parentElement.querySelector('select[name="deptNo"]').value;
+            const memberTeam = target.parentElement.querySelector('select[name="teamNo"]').value;
+            const memberLevel = target.parentElement.querySelector('select[name="authorizeList"]').value;
+            const memberPosition = target.parentElement.querySelector('select[name="positionNo"]').value;
+            $.ajax({
+                url: '/sixman/admin/member/update',
+                method: 'POST',
+                data: {
+                    no: memberNo,
+                    positionNo: memberPosition,
+                    deptNo: memberDept,
+                    teamNo: memberTeam,
+                    authorizeNo: memberLevel,
+                },
+                dataType: 'text',
+                success: (msg) => {
+                    popup.alertPop('성공', msg);
+                },
+                error: (error) => {
+                    popup.alertPop('실패', '수정을 실패했습니다.');
+                },
+            }); //ajas
+        }); //event
+    }); //foreach
+} //function
 const removeMember = document.querySelector('.remove-emp');
 const selectCencle = document.querySelector('.removeBtn');
 
@@ -72,7 +104,7 @@ function checkAllToggle(all_selector) {
     const selectAll = document.querySelector(all_selector);
     const none_check = document.querySelectorAll('.selectOne:not(:checked)');
     const is_check = document.querySelectorAll('.selectOne:checked');
-    console.log(is_check);
+
     const is_Allcheck = selectAll.checked;
     if (is_Allcheck === true) {
         none_check.forEach((check) => {
@@ -102,7 +134,7 @@ function selectMember(selectAll, checkbox) {
     const div = document.createElement('div');
     const parentElem = checkbox.closest('div');
     const name = parentElem.querySelector('a[name="memberName"]').innerHTML;
-    const position = parentElem.querySelector('select[name="position"]');
+    const position = parentElem.querySelector('select[name="positionNo"]');
     const positionName = position.options[position.selectedIndex].text;
     const dept = parentElem.querySelector('select[name="deptNo"]');
     const deptName = dept.options[dept.selectedIndex].text;
@@ -163,9 +195,35 @@ function selectMember(selectAll, checkbox) {
 
 //전체선택된것 삭제
 removeMember.addEventListener('click', () => {
-    const checkBox = document.querySelectorAll('.list-item:has(input:checked)');
-    checkBox.forEach((selectBox) => {
-        selectBox.remove();
+    popup.confirmPop('제안', '선택된 사원을 퇴사 처리하시겠습니까?', () => {
+        const checkBox = document.querySelectorAll('.list-item:has(input:checked)');
+        let memberArray = [];
+        checkBox.forEach((box) => {
+            const selectMemberNum = box.querySelector('input[type="checkbox"]').value;
+            memberArray.push(selectMemberNum);
+        });
+        console.log(memberArray);
+        $.ajax({
+            url: '/sixman/admin/member/delete',
+            method: 'POST',
+            traditional: true,
+            data: {
+                no: memberArray,
+            },
+            dataType: 'text',
+            success: (msg) => {
+                popup.alertPop('성공', msg);
+
+                checkBox.forEach((selectBox) => {
+                    selectBox.remove();
+                });
+            },
+            error: function (request, status, error) {
+                console.log('code: ' + request.status);
+                console.log('message: ' + request.responseText);
+                console.log('error: ' + error);
+            },
+        });
     });
 });
 
@@ -279,9 +337,9 @@ function moveSlide(num) {
             slides.classList.remove('animated');
             slides.style.left = '0px';
             currentIdx = 0;
-        }, 500);
+        }, 400);
         setTimeout(() => {
             slides.classList.add('animated');
-        }, 600);
+        }, 500);
     }
 }

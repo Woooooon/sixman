@@ -59,9 +59,9 @@ public class MemberService {
 	}
 
 
-	public List<MemberVo> selectMemberList(RowBounds rb) {
+	public List<MemberVo> selectMemberList(RowBounds rb, Map<String, String> search) {
 		
-		return memberDao.selectMemberList(sst,rb);
+		return memberDao.selectMemberList(sst, search, rb);
 	}
 
 
@@ -71,8 +71,17 @@ public class MemberService {
 	}
 
 
-	public int countList() {
-		return memberDao.countList(sst);
+	public int countList(Map<String, String> search) {
+		return memberDao.countList(sst, search);
 	}
+
+
+	public List<MemberVo> selectMemberListAll() {
+		
+		return memberDao.selectMemberListAll(sst);
+	}
+
+
+	
 
 }

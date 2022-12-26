@@ -36,6 +36,7 @@ public class MemberVo {
 	private MemberVo entrustInfo;
 	private String fileNo;
 	private String fileName;
+	private String fileOriginName;
 	
 	private List<MultipartFile> accountFile;
 	private List<AttachmentVo> accountFileInfo;

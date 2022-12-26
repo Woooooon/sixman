@@ -25,8 +25,8 @@ public class MemberDao {
 		return sst.update("memberMapper.updatePwd", map);
 	}
 
-	public List<MemberVo> selectMemberList(SqlSessionTemplate sst, RowBounds rb) {
-		return sst.selectList("memberMapper.selectMemberList",null, rb);
+	public List<MemberVo> selectMemberList(SqlSessionTemplate sst, Map<String, String> search, RowBounds rb) {
+		return sst.selectList("memberMapper.selectMemberList",search, rb);
 	}
 
 	public List<MemberVo> selectNewbieList(SqlSessionTemplate sst) {
@@ -34,8 +34,14 @@ public class MemberDao {
 		return sst.selectList("memberMapper.selectNewbieList");
 	}
 
-	public int countList(SqlSessionTemplate sst) {
-		return sst.selectOne("memberMapper.countList");
+	public int countList(SqlSessionTemplate sst, Map<String, String> search) {
+		return sst.selectOne("memberMapper.countList", search);
 	}
+
+	public List<MemberVo> selectMemberListAll(SqlSessionTemplate sst) {
+		return sst.selectList("memberMapper.selectMemberList");
+	}
+
+	
 
 }

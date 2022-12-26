@@ -26,19 +26,22 @@ p[name='imgName'] {
     display: flex;
 }
 
-.dept-guide {
+.dept-title {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    border-bottom: 1px solid var(--main-color-dark);
+    padding: 3px 0;
+    margin-bottom: 10px;
 }
 
-.dept-guide span {
+.dept-title span {
     color: var(--main-color);
     margin-right: 5px;
 }
 
-.dept-guide p {
-    font-size: 14px;
+.dept-title p {
+    font-size: 15px;
     font-weight: 600;
 }
 
@@ -293,7 +296,7 @@ p[name='imgName'] {
 .add-emp:hover {
     background-color: #17a897;
 }
-
+.list-item button,
 .remove-emp {
     border: none;
     font-size: 14px;
@@ -303,7 +306,7 @@ p[name='imgName'] {
     cursor: pointer;
     padding: 3px 4px;
 }
-
+.list-item button:hover,
 .remove-emp:hover {
     border-radius: 3px;
     border: 1px solid var(--main-color);
@@ -348,18 +351,17 @@ p[name='imgName'] {
     width: 100%;
     height: 10%;
     display: grid;
-    grid-template-columns: 0.5fr 1.5fr 1fr 1fr 1fr 1fr 1fr 2fr;
+    grid-template-columns: 0.5fr 1.5fr 1fr 1fr 1.3fr 1.3fr 1fr 2fr 0.5fr;
     cursor: pointer;
-    align-items: flex-end;
+    align-items: center;
     justify-items: center;
-    padding-bottom: 10px;
 }
 
 .list-item {
     width: 100%;
     height: 9%;
     display: grid;
-    grid-template-columns: 0.5fr 1.5fr 1fr 1fr 1fr 1fr 1fr 2fr;
+    grid-template-columns: 0.5fr 1.5fr 1fr 1fr 1.3fr 1.3fr 1fr 2fr 0.5fr;
     border-bottom: 1px solid var(--bo-20);
     align-items: flex-end;
     padding-bottom: 10px;
@@ -537,92 +539,102 @@ p[name='imgName'] {
 .page-box span:hover {
     color: black;
 }
-.side-body {
+/* 부서목록 */
+.teamList-item,
+.deptList-item {
+    width: 70%;
+    border: 1px solid var(--main-color);
+    border-radius: 2px;
+    margin: 4px 0;
+    transition: 0.2s ease-in-out;
+}
+
+.teamList-item label > input,
+.deptList-item label > input {
+    display: none;
+}
+
+.teamList-item .toggleBtn,
+.deptList-item .toggleBtn {
+    padding: 3px 4px;
+    display: flex;
+    background-color: var(--main-color);
+    align-items: center;
+    color: #fff;
+    margin-right: 5px;
+    transition: 0.2s ease-in-out;
+}
+
+.teamList-item .toggleBtn > span,
+.deptList-item .toggleBtn > span {
+    font-size: 15px;
+    transition: 0.4s ease-in-out;
+}
+
+.teamList-item > label,
+.deptList-item > label {
     width: 100%;
-    height: 100%;
-    justify-content: center;
+    font-size: 12px;
     display: flex;
     align-items: center;
-}
-.select {
-    width: 50%;
-    height: 35%;
-    position: relative;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
-    border-radius: 3px;
     cursor: pointer;
-    background-color: #fff;
-    display: flex;
-    padding: 5px 10px;
-    justify-content: center;
-    align-items: center;
+}
+.teamList-item {
+    margin-left: 23px;
 }
 
-.select .option-list {
-    position: absolute;
-    top: 120%;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
-    max-height: 0;
-
-    background-color: #fff;
+.teamList-item ~ li > .memberList-item {
+    width: 70%;
+    border: 1px solid var(--main-color);
+    border-radius: 2px;
+    margin: 4px 0;
+    margin-left: 46px;
 }
 
-.select.active .option-list {
-    max-height: none;
+.deptList-item ~ li > .memberList-item {
+    width: 70%;
+    border: 1px solid var(--main-color);
+    border-radius: 2px;
+    margin: 4px 0;
+    margin-left: 23px;
 }
-.option-wrap {
-    display: flex;
-}
-.select:hover {
-    color: #333;
-}
-.select .text {
-    width: 100%;
-    font-size: 13px;
-    text-align: center;
-}
-.select .option-list {
-    font-size: 13px;
-    list-style: none;
-    padding: 0;
-    border-radius: 5px;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
-}
-.select .option-list .option {
+
+.memberList-item > a {
+    font-size: 12px;
     width: 100%;
     display: flex;
-    padding: 3px 10px;
-    justify-content: center;
     align-items: center;
+    text-decoration: none;
+    color: #000;
+}
+.memberList-item > a > span {
+    margin-right: 4px;
+    color: var(--main-color);
 }
 
-.remove-position {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.remove-position:hover span {
-    color: #ff2e2e;
-}
-
-.select .option-list .option:hover + .remove-position,
-.select .option-list .option:hover {
-    background-color: #2e7aff;
+.teamList-item:has(input:checked),
+.deptList-item:has(input:checked) {
+    border: 1px solid var(--main-color-dark);
+    background-color: var(--main-color-dark);
     color: #fff;
 }
 
-.modal-wrap {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 999999;
-    background-color: var(--bo-60);
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.teamList-item:has(input:checked) .toggleBtn,
+.deptList-item:has(input:checked) .toggleBtn {
+    background-color: var(--main-color-dark);
+}
+.teamList-item:has(input:checked) .toggleBtn span,
+.deptList-item:has(input:checked) .toggleBtn span {
+    transform: rotate(180deg);
+}
+
+.teamList-item ~ li,
+.deptList-item ~ li {
+    max-height: 0px;
+    overflow: hidden;
+}
+
+.teamList-item:has(input:checked) ~ li,
+.deptList-item:has(input:checked) ~ li {
+    max-height: none;
 }

@@ -16,10 +16,21 @@
 	<select id="selectSubList" resultType="DeptVo">
 		SELECT 
 		    P.NO TEAM_NO,
-		    P.NAME AS TEAM_NAME 
+		    P.NAME AS TEAM_NAME, 
+		    P.DEPT_NO DEPT_NO
 		FROM DEPARTMENT D,DEPARTMENT P
 		WHERE D.NO = P.DEPT_NO
 		AND D.NO = #{no}
+	</select>
+	
+	<select id="subList" resultType="DeptVo">
+		SELECT 
+		    P.NO TEAM_NO,
+		    P.NAME AS TEAM_NAME,
+		    P.DEPT_NO DEPT_NO
+		FROM DEPARTMENT D, DEPARTMENT P
+		WHERE D.NO = P.DEPT_NO
+		AND D.NO != 1
 	</select>
 	
 </mapper>

@@ -21,7 +21,7 @@ public class DeptController {
 	@PostMapping(value = "dept/sublist", produces = "application/json; charset=utf8")
 	@ResponseBody
 	public String subList(String no) {
-		List<DeptVo> subDeptList = deptService.subList(no);  
+		List<DeptVo> subDeptList = deptService.selectSubList(no);  
 		Gson gson = new GsonBuilder().create();
 		String json = gson.toJson(subDeptList);
 		return json;

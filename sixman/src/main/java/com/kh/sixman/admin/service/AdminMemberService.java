@@ -14,6 +14,7 @@ import com.kh.sixman.admin.dao.AdminMemberDao;
 import com.kh.sixman.common.AttachmentVo;
 import com.kh.sixman.common.AuthorizeVo;
 import com.kh.sixman.common.BankVo;
+import com.kh.sixman.common.FileUnit;
 import com.kh.sixman.dept.vo.DeptVo;
 import com.kh.sixman.member.vo.MemberVo;
 import com.kh.sixman.position.vo.PositionVo;
@@ -95,6 +96,56 @@ public class AdminMemberService {
 		}
 		
 		return map;
+	}
+
+	public int updateMember(MemberVo vo) {
+		
+		return adminMemberDao.updateMember(sst, vo);
+	}
+
+	public int deleteAll(List<String> no) {
+		
+		return adminMemberDao.deleteAll(sst, no);
+	}
+
+	public MemberVo selectOne(String no) {
+		MemberVo selectMember = adminMemberDao.selectOne(sst, no);
+		
+		List<AttachmentVo> resumeFile = adminMemberDao.getfile(sst, no,"RESUME");
+		List<AttachmentVo> accountFile = adminMemberDao.getfile(sst, no,"ACCOUNT");
+		List<AttachmentVo> evidenceFile = adminMemberDao.getfile(sst, no,"EVIDENCE");
+		
+		selectMember.setResumeFileInfo(resumeFile);
+		selectMember.setAccountFileInfo(accountFile);
+		selectMember.setEvidenceFileList(evidenceFile);
+		
+		return selectMember;
+	}
+
+	@Transactional
+	public int updateMemberDetail(MemberVo vo
+								  , String profileNo
+								  , String accountNo
+								  , String resumeNo,
+							  	  List<String> evidenceNo) {
+	
+		if(profileNo != null) {
+			
+		}
+		return 0;
+	}
+
+	
+	private void nullFileCheck(String no) {
+		
+	}
+	
+	public void deleteFile(Map<String, String> map) {
+		AttachmentVo vo = adminMemberDao.getFile(map);
+		
+		FileUnit.deleteFile(vo.getFilePath()+vo.getChangeName());
+		
+		int result = adminMemberDao.delete(map);
 	}
 
 	

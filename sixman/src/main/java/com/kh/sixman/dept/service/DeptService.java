@@ -16,12 +16,16 @@ public class DeptService {
 	@Autowired
 	private SqlSessionTemplate sst;
 	
-	public List<DeptVo> subList(String no) {
-		return deptDao.subList(sst, no);
+	public List<DeptVo> selectSubList(String no) {
+		return deptDao.selectSubList(sst, no);
 	}
 	
 	public List<DeptVo> daptList() {
 		return deptDao.daptList(sst);
+	}
+
+	public List<DeptVo> subList() {
+		return deptDao.subList(sst);
 	}
 
 }

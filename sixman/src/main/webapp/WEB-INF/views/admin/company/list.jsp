@@ -39,7 +39,7 @@
                                     <c:if test="${j.deptNo eq i.deptNo and empty i.teamName}">
                                         <li>
                                             <div class="memberList-item">
-                                                <a href="/sixman/admin/member/detail?no=${i.no}"><span class="material-symbols-outlined">account_box</span>${i.name} ${i.positionName}</a>
+                                                <a href=""><span class="material-symbols-outlined">account_box</span>${i.name} ${i.positionName}</a>
                                             </div>
                                         </li>													
                                     </c:if>
@@ -145,7 +145,7 @@
                                 <div class="list-item">
                                     <input type="checkbox" value="${i.no}" name="memberInfo" class="selectOne" />
                                     <p>${i.id}</p>
-                                    <a name="memberName" href="/sixman/admin/member/detail?no=${i.no}">${i.name}</a>
+                                    <a name="memberName" href="">${i.name}</a>
                                     <p name="imgName">${i.fileName}</p>
                                     <select name="positionNo" id="">
                                     <c:forEach items="${positionList}" var="j">

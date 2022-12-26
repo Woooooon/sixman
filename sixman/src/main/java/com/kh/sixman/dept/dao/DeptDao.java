@@ -9,11 +9,17 @@ import com.kh.sixman.dept.vo.DeptVo;
 @Repository
 public class DeptDao {
 
-	public List<DeptVo> subList(SqlSessionTemplate sst, String no) {
+	public List<DeptVo> selectSubList(SqlSessionTemplate sst, String no) {
 		return sst.selectList("deptMapper.selectSubList", no);
 	}
 	
 	public List<DeptVo> daptList(SqlSessionTemplate sst) {
 		return sst.selectList("deptMapper.deptList");
 	}
+
+	public List<DeptVo> subList(SqlSessionTemplate sst) {
+		return sst.selectList("deptMapper.subList");
+		
+	}
+	
 }

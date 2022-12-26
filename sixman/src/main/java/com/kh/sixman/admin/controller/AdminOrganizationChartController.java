@@ -1,6 +1,8 @@
 package com.kh.sixman.admin.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,20 +40,31 @@ public class AdminOrganizationChartController {
 	private PositionService positionService;
 	
 	@GetMapping("list")
-	public String OrganizationChart(Model model, int page) {
+	public String OrganizationChart(Model model, String page, String keyword, String category) {
+		
+		if(page == null) {
+			page = "1";
+		}
+		
+		log.info(keyword);
+		log.info(category);
+		
+		Map<String, String> search = new HashMap<String, String>();
+		search.put("keword", keyword);
+		search.put("category", category);
 		
 		int pageLimit = 5;
 		int boardLimit = 10;
-		int listCount = memberService.countList();
+		int listCount = memberService.countList(search);
 		
 		log.info("listCount : " + listCount);
 		
-	    int offset = (page-1) * boardLimit;
+	    int offset = (Integer.parseInt(page)-1) * boardLimit;
 	    
-	    PageVo pv = new PageVo(listCount,page,pageLimit,boardLimit);
+	    PageVo pv = new PageVo(listCount,Integer.parseInt(page),pageLimit,boardLimit);
 	    RowBounds rb = new RowBounds(offset , boardLimit);
 
-		List<MemberVo> MemberList = memberService.selectMemberList(rb);
+		List<MemberVo> MemberList = memberService.selectMemberList(rb, search);
 		
 		log.info("memberList size : " + MemberList.size());
 		
@@ -59,14 +72,20 @@ public class AdminOrganizationChartController {
 		List<AuthorizeVo> authorizeList = adminMemberService.authorizeList();
 		List<PositionVo> positionList = positionService.positionList();
 		List<DeptVo> deptList = deptService.daptList();
-		
+		List<DeptVo> subDeptList = deptService.subList();
+		List<MemberVo> memberListAll = memberService.selectMemberListAll();
 		model.addAttribute("pv", pv);
 		model.addAttribute("deptList", deptList);
+		model.addAttribute("subDeptList", subDeptList);
 		model.addAttribute("positionList", positionList);
 		model.addAttribute("authorizeList", authorizeList);
 		model.addAttribute("newbieList", newbieList);
 		model.addAttribute("MemberList", MemberList);
+		model.addAttribute("memberListAll", memberListAll);
+		
+		
 		return "admin/organizationChart/list";
 	}
 	
+
 }	
