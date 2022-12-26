@@ -18,13 +18,14 @@
 <!-- summernote css/js-->
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>    
-<script defer src="${path}/resources/js/mail/mail.js"></script>    
+ <script defer src="${path}/resources/js/document/documentwrite.js"></script>     
 </head>
 <body>
 
 <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
 
 <div class="main-box">
+    <form action="">
     <div id="sub-box" class="box">
         <div id="write-title">결제문서작성</div>
         <div id="write-box" class="box2">
@@ -32,19 +33,19 @@
             <div class="writelist">
                 <div class="writeno">
                     <div>문서번호</div>
-                    <div>20221214</div>
+                    <div>${dvo.no}</div>
                 </div>
                 <div class="writeno">
                     <div>기안일</div>
-                    <div>2022</div>
+                    <div>${dvo.enrollDate }</div>
                 </div>
                 <div class="writeno">
                     <div>기안자</div>
-                    <div>구기석</div>
+                    <div>${dvo.sendPay}</div>
                 </div>
                 <div class="writeno">
                     <div>참조자</div>
-                    <div>심원용</div>
+                    <div>${dvo.refer}</div>
                 </div>
             </div>
             <div class="docbox">
@@ -68,23 +69,24 @@
         <div id="write-header">
             <div id="header-title">
                 <div class="header-item-title">제목</div>
-                <input name="title" type="text">
+                <input name="title" type="text" value="${dvo.title}">
             </div>
             <div id="file-box">
                 <div class="header-item-title">파일추가
                     <div id="file-btn" class="btn"><span class="material-symbols-outlined"> add </span></div>
                 </div>
-
                 <div id="file-list"></div>
+
             </div>
         </div>
         <div id="summernote"></div>
         <div id="btn-box">
-            <input name="subit" class="c-btn" type="submit" value="반려하기">
+            <!-- <input name="subit" class="c-btn" type="submit" value="반려하기"> -->
             <input name="submit" class="btn" type="submit" value="작성하기">
             <input name="submit" class="c-btn" type="submit" value="임시저장">
         </div>
     </div>
+</form>
 </div>
 
 </body>
@@ -108,4 +110,6 @@
         });
     });
 </script>
+
+
 </html>

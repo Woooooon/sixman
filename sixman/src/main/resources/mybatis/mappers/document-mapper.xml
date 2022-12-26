@@ -4,31 +4,138 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="documentMapper">
 
-	<insert id="write">
-		<selectKey keyProperty="no" resultType="String" order="BEFORE">
-			select SEQ_DOCUMENT_NO.NEXTVAL FROM dual
-		</selectKey>
-		(
-			INSERT INTO DOCUMENT
-		)
-		VALUES
-		(
-			${no},
-			${sendPay},
-			'N'
-			<if test="saveYn.equals('작성하기')">
-			'N',
-			</if>
-			<if test="saveYn.equals('임시저장')">
-			'Y',
-			</if>
-			#{title}
-			,#{content}
-			,SYSDATE
-			,SYSDATE
-		)
-		
-	</insert>
+	 <insert id="write">
+        <selectKey keyProperty="no" resultType="String" order="BEFORE">
+            select SEQ_DOCUMENT_NO.NEXTVAL FROM dual
+        </selectKey>
+        (
+            INSERT INTO DOCUMENT
+        )
+        VALUES
+        (
+            ${no},
+            ${sendPay},
+            'N'
+            <if test="saveYn.equals('작성하기')">
+            'N',
+            </if>
+            <if test="saveYn.equals('임시저장')">
+            'Y',
+            </if>
+            #{title}
+            ,#{content}
+            ,SYSDATE
+            ,SYSDATE
+        )
+
+    </insert>
+
+    <update    id="send">
+        insert all
+        <foreach collection="paySender" item="apNo" separator=" " >
+        <if test=" apNo != ' ' ">
+            into document
+            (
+                ,NO
+                ,PRI
+                ,AP_NO
+                ,DOC_NO
+                ,state
+                ,A_YN
+            )
+            VALUES
+            (
+                get_seq_no('seq_aprproval_no)
+                ,${PRI}
+                ,${apNo}
+                ,${docNo}
+                ,${state}
+                ,'N'
+
+
+            )
+        </if>
+        </foreach>
+        select * from dual;
+    </update>
+    
+    <select id="countList" resultType="int">
+	    SELECT COUNT(*)
+	    FROM
+	    (
+	    <trim prefixOverrides="UNION ALL">
+	    <if test="!'기안문서함'.equals(type)">
+	        select 
+	            D.NO AS DOCUMENT_NO
+	            ,D.SEND_PAY AS M_NO
+	            ,MM.NAME AS SEND_NAME
+	            ,D.D_YN
+	            ,D.TITLE
+	            ,D.CONTENT
+	            ,D.START_DATE
+	            ,C.NO AS CATEGORY_NO
+	            ,C.NAME AS CATEGORY_NAME
+	            ,'Y' as ISSENDER
+	            ,'Y' as CHECK_YN
+	        from DOCUMENT D
+	        join member mm on mm.no = m.SEND_PAY
+	        LEFT JOIN M_DRAWER DD ON M.NO = DD.DOCUMENT_NO
+	        LEFT JOIN M_CATEGORY C ON C.NO = DD.TYPE
+	        WHERE MM.NO = ${userNo}
+	        AND (USER_NO = ${userNo} OR USER_NO IS NULL)
+	        AND 
+		    <if test="'임시보관함'.equals(categoryName)">
+		    	SAVE_YN = 'Y'
+		    </if>
+		    <if test="!'임시보관함'.equals(categoryName)">
+		    	SAVE_YN = 'N'
+		    </if>
+		</if>
+		<if test="!'보낸메일함'.equals(categoryName) and !'임시보관함'.equals(categoryName)">
+	        UNION ALL
+	        select 
+	            M.NO AS MAIL_NO
+	            ,M.SEND_USER AS USER_NO
+	            ,M2.NAME AS USER_NAME
+	            ,M2.EMAIL AS USER_EMAIL
+	            ,R.DELETE_YN
+	            ,M.TITLE
+	            ,M.CONTENT
+	            ,M.SEND_TIME
+	            ,C.NO AS CATEGORY_NO
+	            ,C.NAME AS CATEGORY_NAME
+	            ,'N' as ISSENDER
+	            ,R.CHECK_YN as CHECK_YN
+	        from R_MAIL R
+	        JOIN MEMBER M1 ON M1.EMAIL = R.EMAIL
+	        JOIN MAIL M ON R.MAIL_NO = M.NO
+	        JOIN MEMBER M2 ON M2.NO = M.SEND_USER
+	        LEFT JOIN M_DRAWER D ON M.NO = D.MAIL_NO 
+	        LEFT JOIN M_CATEGORY C ON C.NO = D.CATEGORY_NO
+	        WHERE  R.EMAIL = #{userEmail}
+	        AND (USER_NO = ${userNo} OR USER_NO IS NULL)
+		</if>
+		</trim>
+	    )
+	    WHERE
+	    <if test="'휴지통'.equals(categoryName)">
+	    	DELETE_YN = 'Y'
+	    </if>
+	    <if test="!'휴지통'.equals(categoryName)">
+	    	DELETE_YN = 'N'
+	    </if>
+		<if test=" category!=null and category != '' and category != 'null' ">
+            AND CATEGORY_NO = ${category}
+        </if>
+        <if test=" search!=null and search != '' and search != 'null' ">
+        	AND
+	        (
+	        TITLE LIKE '%${search}%'
+	        OR CONTENT LIKE '%${search}%'
+	        )
+	    </if>
+	</select>
+	
 	
 <!-- 	<configuration>
 	<settings>
