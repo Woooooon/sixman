@@ -140,6 +140,11 @@ function alarmAjax() {
                     }else{
                         itemCount.innerHTML = count;
                     }
+                    
+                    const box = document.querySelector('#alarm-box #inner-box');
+                    while (box.firstChild) { 
+                        box.removeChild(box.firstChild);
+                    }
 
                     for(vo of result){
 
@@ -184,7 +189,6 @@ function alarmAjax() {
                             f();
                         });
 
-                        const box = document.querySelector('#alarm-box #inner-box');
                         box.append(div);
                     }
 
