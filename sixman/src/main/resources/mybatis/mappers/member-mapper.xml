@@ -6,13 +6,18 @@
 	
 	<select id="countList" resultType="int">
 		SELECT COUNT(*)
-        FROM MEMBER
-        <trim prefix="WHERE" prefixOverrides="OR||AND">
-			<if test="keyword != null and keyword !='' and category != null and category != ''">
-				AND ${category} LIKE '%${keyword}%'
-			</if>
-			
-		</trim>
+        FROM MEMBER M
+		JOIN POSITION P ON P.NO = M.POSITION_NO
+		JOIN DEPARTMENT D ON D.NO = M.DEPT_NO
+		LEFT JOIN DEPARTMENT T ON T.NO = M.DEPT_NO
+		<if test="keyword != null and keyword !='' and category != null and category != ''">
+			WHERE ${category} LIKE '%${keyword}%'
+		</if >
+		<if test="keyword != null and keyword !=''" >
+		WHERE IN (
+		
+		)
+		</if>	
 	</select>
 	
 	<select id="login" resultType="MemberVo">
@@ -225,11 +230,10 @@
 		    WHERE "THUMB_YN" = 'Y'
 		) F ON M.NO = F.MEMBER_NO
 		WHERE M.RESIGNATION_YN = 'N'
-		<trim prefix="WHERE" prefixOverrides="OR||AND">
-			<if test="keyword != null and keyword !='' and category != null and category != ''">
-				AND ${category} LIKE '%${keyword}%'
-			</if>   
-		</trim>
+		<if test="keyword != null and keyword !='' and category != null and category != ''">
+			AND ${category} LIKE '%${keyword}%'
+		</if>   
+	
 	</select>
 	
 	<select id="selectNewbieList" resultType="MemberVo">

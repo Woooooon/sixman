@@ -14,7 +14,10 @@ import com.kh.sixman.dept.vo.DeptVo;
 import com.kh.sixman.member.vo.MemberVo;
 import com.kh.sixman.position.vo.PositionVo;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Repository
+@Slf4j
 public class AdminMemberDao {
 
 	public List<BankVo> bankList(SqlSessionTemplate sst) {

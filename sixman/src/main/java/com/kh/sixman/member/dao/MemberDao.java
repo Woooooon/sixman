@@ -10,7 +10,11 @@ import org.springframework.stereotype.Repository;
 import com.kh.sixman.common.AttachmentVo;
 import com.kh.sixman.member.vo.MemberVo;
 
+import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
+
 @Repository
+@Slf4j
 public class MemberDao {
 
 	public MemberVo selelctOneMember(MemberVo vo, SqlSessionTemplate sst) {
@@ -26,7 +30,10 @@ public class MemberDao {
 	}
 
 	public List<MemberVo> selectMemberList(SqlSessionTemplate sst, Map<String, String> search, RowBounds rb) {
-		return sst.selectList("memberMapper.selectMemberList",search, rb);
+		List<MemberVo> test = sst.selectList("memberMapper.selectMemberList",search, rb);
+		log.info("search :" + search );
+		log.info("list :" + test );	
+		return test;
 	}
 
 	public List<MemberVo> selectNewbieList(SqlSessionTemplate sst) {
@@ -39,7 +46,9 @@ public class MemberDao {
 	}
 
 	public List<MemberVo> selectMemberListAll(SqlSessionTemplate sst) {
+
 		return sst.selectList("memberMapper.selectMemberList");
+				
 	}
 
 	

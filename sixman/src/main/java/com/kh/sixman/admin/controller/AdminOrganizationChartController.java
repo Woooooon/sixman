@@ -50,7 +50,7 @@ public class AdminOrganizationChartController {
 		log.info(category);
 		
 		Map<String, String> search = new HashMap<String, String>();
-		search.put("keword", keyword);
+		search.put("keyword", keyword);
 		search.put("category", category);
 		
 		int pageLimit = 5;
