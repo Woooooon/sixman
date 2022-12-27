@@ -2,17 +2,20 @@ let cPage = null;
 let cSearch = null;
 let cListTpye = null;
 let cCategoryNo = null;
+let cFilter = null;
 
 // AJAX
-function mailAjax(page, search, listTpye, categoryNo) {
+function mailAjax(page, search, listTpye, categoryNo, filter) {
     if(typeof listTpye == 'undefined') {listTpye = null;}
     if(typeof categoryNo == 'undefined') {categoryNo = null;}
     if(typeof search == 'undefined') {search = null;}
+    if(typeof filter == 'undefined') {filter = null;}
 
     cPage = page;
     cCategoryNo = categoryNo;
     cListTpye = listTpye;
     cSearch = search;
+    cFilter = filter;
 
     const httpRequest = new XMLHttpRequest();
     httpRequest.onreadystatechange = () => {
@@ -40,10 +43,10 @@ function mailAjax(page, search, listTpye, categoryNo) {
 
                         if(vo.isSender == 'Y'){
                             div.classList.add('read');
-                            text += `<span class="material-symbols-outlined"> forward_to_inbox </span>`;
+                            text += `<span class="material-symbols-outlined read"> forward_to_inbox </span>`;
                         }else if(vo.checkYn == 'Y'){
                             div.classList.add('read');
-                            text += `<span class="material-symbols-outlined"> drafts </span>`;
+                            text += `<span class="material-symbols-outlined read"> drafts </span>`;
                         }else{
                             text += `<span class="material-symbols-outlined"> mail </span>`;
                         }
@@ -91,8 +94,8 @@ function mailAjax(page, search, listTpye, categoryNo) {
                     if(pv.currentPage==pv.maxPage){nextPage = pv.maxPage}
     
                     let text2 = "";
-                    text2 += `<span class="material-symbols-outlined" onclick="mailAjax(1, ${search}, ${listTpye}, ${categoryNo})"> keyboard_double_arrow_left </span>`;
-                    text2 += `<span class="material-symbols-outlined" onclick="mailAjax(${backPage}, ${search}, ${listTpye}, ${categoryNo})"> chevron_left </span>`;
+                    text2 += `<span class="material-symbols-outlined" onclick="mailAjax(1, ${search}, ${listTpye}, ${categoryNo}, ${filter})"> keyboard_double_arrow_left </span>`;
+                    text2 += `<span class="material-symbols-outlined" onclick="mailAjax(${backPage}, ${search}, ${listTpye}, ${categoryNo}, ${filter})"> chevron_left </span>`;
     
                     for(let i = pv.startPage; i <= pv.endPage; i++){
                         let currentClass = ""
@@ -100,11 +103,11 @@ function mailAjax(page, search, listTpye, categoryNo) {
                             currentClass = " checked-p-btn";
                         }
     
-                        text2 += `<div class="page-btn${currentClass}" onclick="mailAjax(${i}, ${search}, ${listTpye}, ${categoryNo})">${i}</div>`;
+                        text2 += `<div class="page-btn${currentClass}" onclick="mailAjax(${i}, ${search}, ${listTpye}, ${categoryNo}, ${filter})">${i}</div>`;
                     }
     
-                    text2 += `<span class="material-symbols-outlined" onclick="mailAjax(${nextPage}, ${search}, ${listTpye}, ${categoryNo})"> chevron_right </span>`;
-                    text2 += `<span class="material-symbols-outlined" onclick="mailAjax(${pv.maxPage}, ${search}, ${listTpye}, ${categoryNo})"> keyboard_double_arrow_right </span>`;
+                    text2 += `<span class="material-symbols-outlined" onclick="mailAjax(${nextPage}, ${search}, ${listTpye}, ${categoryNo}, ${filter})"> chevron_right </span>`;
+                    text2 += `<span class="material-symbols-outlined" onclick="mailAjax(${pv.maxPage}, ${search}, ${listTpye}, ${categoryNo}, ${filter})"> keyboard_double_arrow_right </span>`;
     
                     pageBox.innerHTML = text2;
                     
@@ -148,6 +151,30 @@ function mailAjax(page, search, listTpye, categoryNo) {
 
                     categoryItem.innerHTML = text3;
 
+                    //필터
+                    const filterBox = document.querySelector('#filter-box');
+                    if(filterBox!=null){
+                        const labels = filterBox.querySelectorAll('label');
+                        labels.forEach(element => {
+                            const fValue = element.querySelector('input').value;
+
+                            element.onclick = ()=>{
+                                mailAjax(page, search, listTpye, categoryNo, fValue);
+                            }
+                        });
+                    }
+                    //카운팅
+                    const nonCount = result.nonListCount;
+                    const listCount = result.listCount;
+
+                    const listCountP = document.querySelector('#mail-list-count');
+                    listCountP.innerHTML = listCount;
+
+                    const nonCountP = document.querySelector('#mail-non-count');
+                    if(nonCountP!=null){
+                        nonCountP.innerHTML = nonCount;
+                    }
+
 
                 } else {
                 alert('Request Error!');
@@ -158,7 +185,7 @@ function mailAjax(page, search, listTpye, categoryNo) {
     httpRequest.open('post', '/sixman/mail/list');
     httpRequest.responseType = "json";
     httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
-    httpRequest.send(`page=${page}&search=${search}&listTpye=${listTpye}&categoryNo=${categoryNo}`);
+    httpRequest.send(`page=${page}&search=${search}&listTpye=${listTpye}&categoryNo=${categoryNo}&filter=${filter}`);
 }
 
 function getChecked() {
@@ -183,7 +210,7 @@ function deleteAjax(doAjax, no) {
                     
                     popup.alertPop("삭제하기", "메일을 삭제 완료 하였습니다.");
                     if(!doAjax){
-                        mailAjax(cPage, cSearch, cListTpye, cCategoryNo);
+                        mailAjax(cPage, cSearch, cListTpye, cCategoryNo, cFilter);
                     }else{
                         location.href = '/sixman/mail/list';
                     }
@@ -229,7 +256,7 @@ function getCategoryList() {
 
 function search() {
     const text = document.querySelector('#search-input').value;
-    mailAjax(cPage, text, cListTpye, cCategoryNo);
+    mailAjax(cPage, text, cListTpye, cCategoryNo, cFilter);
 }
 
 function createCategoryModal(doAjax) {
@@ -278,7 +305,7 @@ function createCategoryAjax(doAjax) {
                     popup.alertPop("추가하기", "카테고리가 추가되었습니다.");
 
                     if(!doAjax){
-                        mailAjax(cPage, cSearch, cListTpye, cCategoryNo);
+                        mailAjax(cPage, cSearch, cListTpye, cCategoryNo, cFilter);
                     }else{
 
                     }
@@ -301,7 +328,7 @@ function restoreAjax() {
                 if (httpRequest.status === 200) {
                     
                     popup.alertPop("복구하기", "메일들이 복구가 완료되었습니다.");
-                    mailAjax(cPage, cSearch, cListTpye, cCategoryNo);
+                    mailAjax(cPage, cSearch, cListTpye, cCategoryNo, cFilter);
 
                 } else {
                 alert('Request Error!');
@@ -321,7 +348,7 @@ function realDelete() {
                 if (httpRequest.status === 200) {
                     
                     popup.alertPop("비우기", "휴지통을 비웠습니다.");
-                    mailAjax(cPage, cSearch, cListTpye, cCategoryNo);
+                    mailAjax(cPage, cSearch, cListTpye, cCategoryNo, cFilter);
 
                 } else {
                 alert('Request Error!');
@@ -340,7 +367,7 @@ function updateRead() {
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
                 if (httpRequest.status === 200) {
 
-                    mailAjax(cPage, cSearch, cListTpye, cCategoryNo);
+                    mailAjax(cPage, cSearch, cListTpye, cCategoryNo, cFilter);
 
                 } else {
                 alert('Request Error!');
@@ -374,7 +401,7 @@ function changeCategory(doAjax, no) {
 
                     popup.alertPop("변경하기", "카테고리 변경이 완료되었습니다.");
                     if(!doAjax){
-                        mailAjax(cPage, cSearch, cListTpye, cCategoryNo);
+                        mailAjax(cPage, cSearch, cListTpye, cCategoryNo, cFilter);
                     }
 
                 } else {

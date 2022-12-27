@@ -14,7 +14,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 </head>
 <body>
-
 	<header id="main-header">
         <section id="logo"></section>
         <section id="event-msg-box"></section>
@@ -197,6 +196,22 @@
         });
     })
 
+    function beep() {
+        // const audioPlayer = document.querySelector('#audio');
+
+        // if(audioPlayer==null){
+        //     const audio = document.createElement("audio");
+        //     audio.id = 'audio';
+        //     audio.autoplay = true;
+        //     audio.innerHTML = `<source src = "${path}/resources/audio/99D4643B5F72118308.mp3" type = "audio/mp3">`;
+        //     console.log(123);
+        //     document.querySelector('body').append(audio);
+        // }else{
+        //     audioPlayer.remove();
+        //     beep();
+        // }
+    }
+
     window.onload = ()=>{
         alarmAjax();
         connectSC();
@@ -213,7 +228,7 @@
         socket.onopen = onOpen;
         socket.onclose = onClose;
 
-        console.log(socket);
+        // console.log(socket);
     }
 
     function onMessage(m) {
@@ -224,7 +239,7 @@
         const type = datas[0];
         const msg = datas[1];
 
-        console.log(data);
+        // console.log(data);
 
         let f = null;
         switch (type) {
@@ -248,7 +263,7 @@
         div.classList.add('alarm-item');
 
         const item = 
-        '<div><div class="item-header"><div>['+type+']</div><div>'+today.toLocaleTimeString()+'</div></div><div class="item-title">'+msg+'</div></div><span class="t-btn material-symbols-outlined"> close </span>'
+        '<div class="item-div"><div class="item-header"><div>['+type+']</div><div>'+today.toLocaleTimeString()+'</div></div><div class="item-title">'+msg+'</div></div><span class="t-btn material-symbols-outlined"> close </span>'
         div.innerHTML = item;
 
         div.querySelector('.item-div').addEventListener('click', ()=>{
@@ -260,6 +275,12 @@
             div.remove();
             checkAjax(vo.no, vo.type);
         });
+
+        const itemCount = document.querySelector('#alarm-count');
+
+        itemCount.style.display = 'block';
+        itemCount.innerHTML = parseInt(itemCount.innerHTML) + 1;
+
 
 
         const box = document.querySelector('#alarm-box #inner-box');

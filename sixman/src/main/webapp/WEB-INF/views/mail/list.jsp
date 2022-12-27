@@ -77,8 +77,8 @@
 		                            </div>
 		                        </div>
 		                    </div>
-		                    <c:if test="${not empty listType}"><div id="mail-count"><p class="hilight">${listCount}</p></div></c:if>
-		                    <c:if test="${empty listType}"><div id="mail-count"><p class="hilight">50</p>/<p>${listCount}</p>안읽은 메일</div></c:if>
+		                    <c:if test="${not empty listType}"><div id="mail-count"><p class="hilight" id="mail-list-count"></p></div></c:if>
+		                    <c:if test="${empty listType}"><div id="mail-count"><p class="hilight" id="mail-non-count">50</p>/<p id="mail-list-count"></p>안읽은 메일</div></c:if>
                     	</c:otherwise>
                     </c:choose>
                 </div>
@@ -89,10 +89,10 @@
 							필터
 	                        <span class="material-symbols-outlined"> arrow_drop_down </span>
 	                        <div id="category-box2" style="display: none;">
-	                            <div class="category-items">
-	                                <button>모든메일</button>
-	                                <button>읽은메일만</button>
-	                                <button>안읽은메일만</button>
+	                            <div class="category-items" id="filter-box">
+									<label><input type="radio" name="filter">모든메일</label>
+									<label><input type="radio" name="filter" value="읽은메일">읽은메일만</label>
+									<label><input type="radio" name="filter" value="안읽은메일">안읽은메일만</label>
 	                            </div>
 	                        </div>
 	                    </div>

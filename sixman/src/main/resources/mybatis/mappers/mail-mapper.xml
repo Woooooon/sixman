@@ -9,7 +9,7 @@
 	    FROM
 	    (
 	    <trim prefixOverrides="UNION ALL">
-	    <if test="!'받는메일함'.equals(categoryName)">
+	    <if test="!'받은메일함'.equals(categoryName)">
 	        select 
 	            M.NO AS MAIL_NO
 	            ,M.SEND_USER AS USER_NO
@@ -81,6 +81,15 @@
 	        OR CONTENT LIKE '%${search}%'
 	        )
 	    </if>
+	    <if test=" filter!=null and filter!=''">
+   		    <if test="'읽은메일'.equals(filter)">
+   		    	AND CHECK_YN = 'Y'
+   		    	AND ISSENDER = 'N'
+	    	</if>
+   		    <if test="'안읽은메일'.equals(filter)">
+   		    	AND CHECK_YN = 'N'
+	    	</if>
+	    </if>
 	</select>
 	
 	<select id="selectList" resultType="MailVo">
@@ -105,7 +114,7 @@
 		    FROM
 		    (
 		    <trim prefixOverrides="UNION ALL">
-		    <if test="!'받는메일함'.equals(categoryName)">
+		    <if test="!'받은메일함'.equals(categoryName)">
 		        select 
 		            M.NO AS MAIL_NO
 		            ,M.SEND_USER AS USER_NO
@@ -179,6 +188,15 @@
 		        OR CONTENT LIKE '%${search}%'
 		        )
 		    </if>
+    	    <if test=" filter!=null and filter!=''">
+   		    <if test="'읽은메일'.equals(filter)">
+   		    	AND CHECK_YN = 'Y'
+   		    	AND ISSENDER = 'N'
+	    	</if>
+   		    <if test="'안읽은메일'.equals(filter)">
+   		    	AND CHECK_YN = 'N'
+	    	</if>
+	    </if>
 		    ORDER BY SEND_TIME DESC
 		)
 	</select>

@@ -48,7 +48,7 @@ public class MailController {
 	@ResponseBody
 	@PostMapping(value = "list", produces = "application/json; charset=utf8")
 	public String list(@RequestParam Map<String, String> map, HttpSession session) {
-		
+		log.info("mailList ajax 호출");
 		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
 		
 		MailVo vo = new MailVo();
@@ -57,9 +57,8 @@ public class MailController {
 		vo.setCategoryName(map.get("listTpye"));
 		vo.setCategory(map.get("categoryNo"));
 		vo.setSearch(map.get("search"));
+		vo.setFilter(map.get("filter"));
 		
-		log.info("vo : " + vo);
-				
 //		category, keyword, page
 		int pageLimit = 5;
 		int boardLimit = 15;
@@ -73,8 +72,14 @@ public class MailController {
 	    List<MailVo> list = ms.selectList(vo, rb);
 	    
 	    List<Map<String, String>> categoryList = ms.categoryList(loginMember.getNo());
-
+	    
 		Map<String, Object> resultMap = new HashMap<>();
+		
+		if(vo.getCategoryName() == null || vo.getCategoryName().equals("null")) {
+			vo.setFilter("안읽은메일");
+			int nonListCount = ms.countList(vo);
+			resultMap.put("nonListCount", nonListCount);
+		}
 		
 		resultMap.put("pv", pv);
 		resultMap.put("list", list);
