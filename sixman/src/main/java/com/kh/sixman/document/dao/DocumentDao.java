@@ -13,9 +13,9 @@ public class DocumentDao {
 
 	
 
-	public int send(SqlSessionTemplate sst, DocumentVo dvo) {
-		return sst.update("documentMapper.send",dvo);
-	}
+//	public int send(SqlSessionTemplate sst, DocumentVo dvo) {
+//		return sst.update("documentMapper.send",dvo);
+//	}
 
 	public int write(SqlSessionTemplate sst, DocumentVo dvo) {
 		log.debug("dvo :" + dvo);

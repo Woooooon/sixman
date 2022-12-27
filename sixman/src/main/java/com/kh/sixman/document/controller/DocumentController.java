@@ -54,6 +54,7 @@ public class DocumentController {
 	   
 	   DocumentVo dvo = new DocumentVo();
 	   dvo.setMNo(loginMember.getNo());
+	   dvo.setModifyDate(loginMember.getModifyDate());
 	   dvo.setType(map.get("listType"));
 	   dvo.setTypeNo(map.get("listTypeNo"));
 	   

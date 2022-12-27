@@ -28,7 +28,7 @@ public class DocumentService {
    public int write(DocumentVo dvo) {
       
       int result1 = dao.write(sst, dvo);
-      int result2 = dao.send(sst,dvo);
+//      int result2 = dao.send(sst,dvo);
       
       String no = Integer.toString(result1);
       List<AttachmentVo> fileLists = dvo.getFileList();
@@ -45,7 +45,8 @@ public class DocumentService {
          result3= fdao.uploadAll(sst,map);
       }
       
-      return result1 * result2 * result3;
+//      return result1 * result2 * result3;
+      	return result1  * result3;
    }
 
 public int countList(DocumentVo dvo) {
@@ -53,7 +54,7 @@ public int countList(DocumentVo dvo) {
 }
 
 public List<DocumentVo> selectList(DocumentVo dvo, RowBounds rb) {
-	// TODO Auto-generated method stub
+	
 	return null;
 }
 
