@@ -10,14 +10,21 @@
 		JOIN POSITION P ON P.NO = M.POSITION_NO
 		JOIN DEPARTMENT D ON D.NO = M.DEPT_NO
 		LEFT JOIN DEPARTMENT T ON T.NO = M.DEPT_NO
+		WHERE M.RESIGNATION_YN = 'N'
 		<if test="keyword != null and keyword !='' and category != null and category != ''">
-			WHERE ${category} LIKE '%${keyword}%'
+			AND ${category} LIKE '%${keyword}%'
 		</if >
-		<if test="keyword != null and keyword !=''" >
-		WHERE IN (
-		
-		)
-		</if>	
+		<if test="keyword != null and keyword !='' and category == null and category == ''" >
+			AND M.ID LIKE '%${keyword}%'
+		    OR M.NAME LIKE '%${keyword}%' 
+		    OR M.EMAIL LIKE '%${keyword}%'
+		    OR M.BIRTHDAY LIKE '%${keyword}%'
+		    OR D.NAME LIKE '%${keyword}%'
+		    OR T.NAME LIKE '%${keyword}%'
+		    OR P.POSITION LIKE '%${keyword}%'
+		    OR A."LEVEL" LIKE '%${keyword}%'
+		    OR M.JOIN_DATE LIKE '%${keyword}%'
+		</if> 
 	</select>
 	
 	<select id="login" resultType="MemberVo">
@@ -232,7 +239,18 @@
 		WHERE M.RESIGNATION_YN = 'N'
 		<if test="keyword != null and keyword !='' and category != null and category != ''">
 			AND ${category} LIKE '%${keyword}%'
-		</if>   
+		</if >
+		<if test="keyword != null and keyword !='' and category == null and category == ''" >
+			AND M.ID LIKE '%${keyword}%'
+		    OR M.NAME LIKE '%${keyword}%' 
+		    OR M.EMAIL LIKE '%${keyword}%'
+		    OR M.BIRTHDAY LIKE '%${keyword}%'
+		    OR D.NAME LIKE '%${keyword}%'
+		    OR T.NAME LIKE '%${keyword}%'
+		    OR P.POSITION LIKE '%${keyword}%'
+		    OR A."LEVEL" LIKE '%${keyword}%'
+		    OR M.JOIN_DATE LIKE '%${keyword}%'
+		</if> 
 	
 	</select>
 	

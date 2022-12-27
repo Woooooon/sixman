@@ -124,42 +124,44 @@ function match(elem, regx, messege) {
     });
 }
 //보오옹오류~~
+
 form.onsubmit = () => {
-    popup.confirmPop('요청', '수정 하시겠습니까?', () => {
-        const checkId = id.classList.contains('error');
-        const checkPhone = phone.classList.contains('error');
-        const checkName = username.classList.contains('error');
-        const checkAccount = account.classList.contains('error');
-        const checkBirthday = birthday.classList.contains('error');
-        const checkEmail = email.classList.contains('error');
 
-        if (checkId) {
-            return false;
-        }
+    const checkId = id.classList.contains('error');
+    const checkPhone = phone.classList.contains('error');
+    const checkName = username.classList.contains('error');
+    const checkAccount = account.classList.contains('error');
+    const checkBirthday = birthday.classList.contains('error');
+    const checkEmail = email.classList.contains('error');
 
-        if (checkPhone) {
-            return false;
-        }
+    if (checkId) {
+        return false;
+    }
 
-        if (checkName) {
-            return false;
-        }
+    if (checkPhone) {
+        return false;
+    }
 
-        if (checkAccount) {
-            return false;
-        }
+    if (checkName) {
+        return false;
+    }
 
-        if (checkBirthday) {
-            return false;
-        }
+    if (checkAccount) {
+        return false;
+    }
 
-        if (checkEmail) {
-            return false;
-        }
+    if (checkBirthday) {
+        return false;
+    }
 
-        return true;
-    });
+    if (checkEmail) {
+        return false;
+    }
+
+    return false;
 };
+
+
 
 addFile(resumeBtn, resumeBox, 'resume-wrap', 'draft', 'resumeFile', 'resume-add', 'resumeInfo', '.resumeInfo');
 addFile(accountBtn, accountBox, 'account-wrap', 'image', 'accountFile', 'account-add', 'accountInfo', '.accountInfo');

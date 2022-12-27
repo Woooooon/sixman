@@ -115,7 +115,7 @@ public class AdminMemberController {
 	public String detail(String profileNo
 						, String accountNo
 						, String resumeNo
-						, @RequestParam List<String> evidenceNo
+						, @RequestParam(required = false) List<String> evidenceNo
 						, String no
 						, MemberVo vo
 						, Model model) {
