@@ -58,7 +58,7 @@ public class NoticeService {
 
 	public Map<String, NoticeVo> selectOne(String no) {
 		
-		int result = dao.viewCount(sst, no);
+		dao.viewCount(sst, no);
 		NoticeVo vo = dao.selectOne(sst, no);
 		
 		if(vo==null) return null;
@@ -106,7 +106,7 @@ public class NoticeService {
 		String no = vo.getNo();
 		
 		List<AttachmentVo> fileList = vo.getFileList();
-		int result2 = 0;
+		int result2 = 1;
 		if(fileList!=null) {
 			for(AttachmentVo fv : fileList) {
 				System.out.println(1);

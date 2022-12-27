@@ -63,10 +63,12 @@
                 	</c:if>
                 </div>
             </div>
-            <div id="btn-box">
-                <div class="btn" onclick="location.href='/sixman/notice/update?no=${resultMap.vo.no}'"><p>수정하기</p></div>
-                <div class="c-btn" onclick="deletePage(${resultMap.vo.no})"><p>삭제하기</p></div>
-            </div>
+            <c:if test="${loginMember.authorizeNo == 3}">
+                <div id="btn-box">
+                    <div class="btn" onclick="location.href='/sixman/admin/notice/update?no=${resultMap.vo.no}'"><p>수정하기</p></div>
+                    <div class="c-btn" onclick="deletePage(${resultMap.vo.no})"><p>삭제하기</p></div>
+                </div>
+            </c:if>
 
         </div>
     </div>

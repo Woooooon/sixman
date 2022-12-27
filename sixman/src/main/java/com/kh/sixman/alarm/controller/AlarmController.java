@@ -27,9 +27,12 @@ public class AlarmController {
 	@PostMapping(value = "alarm", produces = "application/json; charset=utf8")
 	public String alarm(HttpSession session) {
 		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
-		String no = loginMember.getNo();
 		
-		List<AlarmVo> list = as.selectList(no);
+		List<AlarmVo> list = null;
+		if(loginMember!=null) {
+			String no = loginMember.getNo();
+			list = as.selectList(no);			
+		}
 		
 		Gson gson = new GsonBuilder().create();
 		String json = gson.toJson(list);

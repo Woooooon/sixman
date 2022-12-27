@@ -46,8 +46,7 @@ public class FileUnit {
 		File file = new File(path);
 				
 		if(file.exists()) { // 파일이 존재하면
-			System.out.println(123);
-			System.out.println(file.delete()); // 파일 삭제	
+			file.delete(); // 파일 삭제	
 		}
 		
 	}

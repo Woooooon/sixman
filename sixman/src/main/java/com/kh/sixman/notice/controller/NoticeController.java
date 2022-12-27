@@ -23,18 +23,21 @@ import com.kh.sixman.member.vo.MemberVo;
 import com.kh.sixman.notice.service.NoticeService;
 import com.kh.sixman.notice.vo.NoticeVo;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
+@Slf4j
 public class NoticeController {
 			
 	@Autowired
 	private NoticeService ns;
 
-	@GetMapping("notice/write")
+	@GetMapping("admin/notice/write")
 	public String write() {
 		return "notice/write";
 	}
 	
-	@PostMapping("notice/write")
+	@PostMapping("admin/notice/write")
 	public String write(NoticeVo vo, HttpSession session) {
 		
 		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
@@ -53,7 +56,8 @@ public class NoticeController {
 		if(result==1) {
 			return "redirect:/notice/list";
 		}else {
-			return "redirect:/notice/write";			
+			log.error("notice : 작성하기 실패");
+			return "redirect:/admin/notice/write";			
 		}
 	}
 	
@@ -62,7 +66,10 @@ public class NoticeController {
 		Map<String, NoticeVo> resultMap = ns.selectOne(no);
 		model.addAttribute("resultMap", resultMap);
 		
-		if(resultMap==null) {return "redirect:/notice/list";}
+		if(resultMap==null) {
+			log.error("notice : 디테일 조회 실패");
+			return "redirect:/notice/list";
+		}
 		return "notice/detail";
 	}
 
@@ -89,36 +96,35 @@ public class NoticeController {
 		
 		map.put("pv", pv);
 		map.put("list", list);
+		map.put("listCount", listCount);
 		
 		Gson gson = new GsonBuilder().create();
 		String json = gson.toJson(map);
 		return json;
 	}
 	
-	@PostMapping("notice/delete")
+	@PostMapping("admin/notice/delete")
 	public String delete(String no) {
 		
 		int result = ns.delete(no);
 		
-		if(result==1) {
-			
-		}else {
-			
+		if(result!=1) {
+			log.error("notice : 삭제하기 실패");
 		}
 		
 		return "redirect:/notice/list";
 	}
 	
-	@GetMapping("notice/update")
+	@GetMapping("admin/notice/update")
 	public String update(String no, Model model) {
 		
-		Map resultMap = ns.selectOne(no);
+		Map<String, NoticeVo> resultMap = ns.selectOne(no);
 		model.addAttribute("vo",resultMap.get("vo"));
 				
 		return "notice/update";
 	}
 	
-	@PostMapping("notice/update")
+	@PostMapping("admin/notice/update")
 	public String update(NoticeVo vo, HttpSession session) {
 		
 		String rootPath = session.getServletContext().getRealPath("/");
@@ -129,10 +135,8 @@ public class NoticeController {
 		
 		int  result = ns.update(vo);
 		
-		if(result==1) {
-			
-		}else {
-			
+		if(result!=1) {
+			log.error("notice : 수정하기 실패");
 		}
 		
 		return "redirect:/notice/detail?no="+vo.getNo();

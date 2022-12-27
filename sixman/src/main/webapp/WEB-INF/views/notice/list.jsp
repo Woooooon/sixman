@@ -17,10 +17,10 @@
 	<div id="notice-box" class="box">
         <div class="title-box">
             <div class="b-title">공지사항</div>
-            <div class="b-page-count hilight">50</div>
+            <div id="list-count" class="b-page-count hilight"></div>
         </div>
         <div class="header-box">
-            <a href="/sixman/notice/write" class="btn" onclick="location.href='/sixman/notice/write'"><span class="material-symbols-outlined"> add </span><p>글쓰기</p></a>
+            <a href="/sixman/admin/notice/write" class="btn" onclick="location.href='/sixman/notice/write'"><span class="material-symbols-outlined"> add </span><p>글쓰기</p></a>
             <div class="search-bar"><input id="search-input" type="text" placeholder="검색"><span id="search-btn" class="material-symbols-outlined"> search </span></div>
         </div>
         <div class="list-box">

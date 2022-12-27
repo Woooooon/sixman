@@ -26,8 +26,11 @@ import com.kh.sixman.mail.service.MailService;
 import com.kh.sixman.mail.vo.MailVo;
 import com.kh.sixman.member.vo.MemberVo;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RequestMapping("mail")
 @Controller
+@Slf4j
 public class MailController {
 	
 	@Autowired
@@ -125,14 +128,20 @@ public class MailController {
 		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
 		Map<String, Object> map = new HashMap<>();
 		map.put("loginMember", loginMember);
+		
 		List<String> noList = new ArrayList<String>();
 		noList.add(no);
+		
 		map.put("no", noList);
 		
 		int result = ms.updateRead(map);
+		if(result!= 1) {log.error("mail-controller : 읽음처리 실패");}
+		
+		List<Map<String, String>> categoryList = ms.categoryList(loginMember.getNo());
 		
 		MailVo vo = ms.selectOne(no);
 		model.addAttribute("vo", vo);
+		model.addAttribute("categoryList", categoryList);
 		if(vo==null) {return 	"redirect:/mail/list";}
 		return "mail/detail";
 	}

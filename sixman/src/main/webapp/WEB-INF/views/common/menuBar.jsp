@@ -64,8 +64,8 @@
     const menuMap = new Map();
 
     menuMap.set("공지사항", [
-        {icon: "approval", title: "공지사항"},
-        {title: "", url: ""}
+        {icon: "event_note", title: "공지사항"},
+        {title: "공지사항", url: "${path}/notice/list"}
     ]);
 
     menuMap.set("근태관리", [
@@ -223,8 +223,8 @@
         console.log(socket);
     }
 
-    function onMessage(msg) {
-        const data = msg.data;
+    function onMessage(m) {
+        const data = m.data;
         const curMember = '${loginMember.no}';
 
         const datas = data.split('#');
@@ -255,17 +255,7 @@
         div.classList.add('alarm-item');
 
         const item = 
-        `            
-        <div>
-            <div class="item-header">
-                <div>[${type}]</div>
-                <div>${today.toLocaleTimeString()}</div>
-            </div>
-            <div class="item-title">${msg}</div>
-        </div>
-        <span class="t-btn material-symbols-outlined"> close </span>
-        `
-
+        '<div><div class="item-header"><div>['+type+']</div><div>'+today.toLocaleTimeString()+'</div></div><div class="item-title">'+msg+'</div></div><span class="t-btn material-symbols-outlined"> close </span>'
         div.innerHTML = item;
 
         div.addEventListener('click', ()=>{
