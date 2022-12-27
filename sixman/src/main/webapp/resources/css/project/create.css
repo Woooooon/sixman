@@ -94,6 +94,19 @@ input[name='prj_name']{
     margin: 10px;
 }
 
+/* 생성자 */
+.writer {
+    margin-left: 150px;
+}
+
+input[name='writer'] {
+    outline: none;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    width: 150px;
+    height: 40px;
+    text-align: center;
+}
 
 /* 팀 select */
 

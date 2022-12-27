@@ -15,3 +15,5 @@ $(prjtype).ready(function(){
       $(allprj).toggle(500);
     });
   });
+
+  

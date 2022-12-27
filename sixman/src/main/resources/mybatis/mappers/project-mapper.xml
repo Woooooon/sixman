@@ -8,12 +8,11 @@
 		SELECT 
 		    P.NO  
 		    , M.NAME LEADER
-		    , M.NAME NAME
+		    , M.NAME WRITER
 		    , P.TITLE
 		    , P.CONTENT
 		    , P.START_DATE
 		    , P.END_DATE
-		    , P.GOAL
 		    , P.FAVORITES_YN
 		FROM PROJECT P
 		JOIN MEMBER M ON M.NO = P.WRITER
@@ -28,7 +27,6 @@
 			    , WRITER
 			    , TITLE
 			    , CONTENT
-			    , GOAL
 			    , START_DATE
 			    , END_DATE
 			)
@@ -39,10 +37,39 @@
 			    , #{writer}
 			    , #{title}
 			    , #{content}
-			    , 'zz'
 			    , #{startDate}
 			    , #{endDate}
 			)   
     </insert>
+    
+    <select id="selectPrjNo" resultType="projectVo">
+    	SELECT
+    		NO
+    	FROM PROJECT
+    </select>
+    
+    <insert id="insertPrjMember">
+		INSERT INTO PROJECT_MEMBER 
+		(  
+		    NO
+		    , PRJ_NO
+		    , MEM_NO
+		    , START_DATE
+		)
+		VALUES
+		(
+		    SEQ_PROJECT_MEMBER_NO.NEXTVAL
+		    , #{no}
+		    , #{memberNo}
+		    , SYSDATE
+		)
+    </insert>
+    
+    
+    <select id="selectOne" resultType="ProjectVo">
+    	
+    </select>
+    
+    
     
 </mapper>
