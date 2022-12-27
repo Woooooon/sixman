@@ -2,6 +2,7 @@ package com.kh.sixman.attendance.service;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,12 +18,16 @@ public class AttendanceService {
 	@Autowired
 	private AttendanceDao dao;
 
-	public List<AttendanceVo> selectList() {
-		return dao.selectList(sst);
+	public List<AttendanceVo> selectList(RowBounds rb) {
+		return dao.selectList(sst, rb);
 	}
 
 	public int insertStart() {
 		return dao.insertStart(sst);
+	}
+
+	public int countList() {
+		return dao.countList(sst);
 	}
 
 }

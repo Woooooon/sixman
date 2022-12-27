@@ -333,21 +333,25 @@
                         <p>추가근무시간</p>
                         <p>총 근무시간</p>
                     </div>
-                    <div class="list-item"> <p>2022-11-28</p> <p>양수철</p> <p>09:00</p> <p>18:00</p> <p>0</p> <p>8</p></div>
-                    <div class="list-item"> <p>2022-11-27</p> <p>양수철</p> <p>09:00</p> <p>18:00</p> <p>0</p> <p>8</p></div>
-                    <div class="list-item"> <p>2022-11-26</p> <p>양수철</p> <p>09:00</p> <p>18:00</p> <p>0</p> <p>8</p></div>
-                    <div class="list-item"> <p>2022-11-25</p> <p>양수철</p> <p>09:00</p> <p>18:00</p> <p>0</p> <p>8</p></div>
-                    <div class="list-item"> <p>2022-11-24</p> <p>양수철</p> <p>09:00</p> <p>18:00</p> <p>0</p> <p>8</p></div>
-                    
+                        <c:forEach items="${voList}" var="x">
+                            <div class="list-item">
+                                <p>${x.start}</p>
+                                <p>${x.name}</p>
+                                <p>${x.start}</p>
+                                <p>${x.end}</p>
+                                <p>${x.start}</p>
+                                <p>${x.end}</p>
+                            </div>
+                        </c:forEach>
                 </div>
                 <div class="page-box">
                     <span class="material-symbols-outlined"> keyboard_double_arrow_left </span>
                     <span class="material-symbols-outlined"> chevron_left </span>
-                    <div class="page-btn checked-p-btn">1</div>
-                    <div class="page-btn">2</div>
-                    <div class="page-btn">3</div>
-                    <div class="page-btn">4</div>
-                    <div class="page-btn">5</div>
+                        <div class="page-btn checked-p-btn">1</div>
+                        <div class="page-btn">2</div>
+                        <div class="page-btn">3</div>
+                        <div class="page-btn">4</div>
+                        <div class="page-btn">5</div>
                     <span class="material-symbols-outlined"> chevron_right </span>
                     <span class="material-symbols-outlined"> keyboard_double_arrow_right </span>
                 </div>
