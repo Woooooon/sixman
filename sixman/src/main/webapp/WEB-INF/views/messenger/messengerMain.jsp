@@ -50,7 +50,7 @@
 						<div class="chatlist-big">
 							<div class="chatroom-list-box">
 								
-								<div class="with-chat-data01">
+								<div class="with-chat-data01" id="with-chat-data01">
 									<div class="square-first" style=""></div>
 									<div class="chatroom-list-two-to-two" id="chatroom-list-two-to-two">
 										<div class="with-chat-subroomname2">야 지금 뭐해?</div>
@@ -67,8 +67,7 @@
 									</div>
 									
 								</div>
-								<div class="with-chat-data01-1" style="display:none;">
-	<!-- 								<div class="square-first" style=""></div> -->
+								<div class="with-chat-data01-1" id="with-chat-data01-1" style="display:none" >
 										<div class="width-chat-subroomname2-1">해당 대화창을 삭제하시겠습니까?</div>
 										<div class="button-list-chatroom-delete">
 											<button type="button" class="btn" id="deletechatroom-ok">예</button>
@@ -79,7 +78,7 @@
 							</div>
 							<div class="chatroom-list-box">
 								
-								<div class="with-chat-data01">
+								<div class="with-chat-data02" id="with-chat-data01">
 									<div class="square-first" style=""></div>
 									<div class="chatroom-list-two-to-two" id="chatroom-list-two-to-two">
 										<div class="with-chat-subroomname2">야 지금 뭐해?</div>
@@ -96,8 +95,7 @@
 									</div>
 									
 								</div>
-								<div class="with-chat-data01-1" style="display:none;">
-	<!-- 								<div class="square-first" style=""></div> -->
+								<div class="with-chat-data02-1" id="with-chat-data01-1" style="display:none" >
 										<div class="width-chat-subroomname2-1">해당 대화창을 삭제하시겠습니까?</div>
 										<div class="button-list-chatroom-delete">
 											<button type="button" class="btn" id="deletechatroom-ok">예</button>
@@ -299,15 +297,15 @@
 						<div class="chatroom-one-to-two">
 							<div class="chatroom-one-to-three-2"  style="display:none">
 								<div class="chatroom-4-1-box" style="margin-left:4%; margin-right:4%;">	
-									<span class="material-symbols-outlined" id="chatroom-4-1-icon1">contacts</span>
+									<div class="material-symbols-outlined" id="chatroom-4-1-icon1">contacts</div>
 									<div class="chatroom-menubar-text-green"">명함 보내기</div>
 								</div>
 								<div class="chatroom-4-1-box" style="margin-left:4%; margin-right:4%;">
-									<span class="material-symbols-outlined" id="chatroom-4-1-icon2">upload</span>
+									<div class="material-symbols-outlined" id="chatroom-4-1-icon2">upload</div>
 									<div class="chatroom-menubar-text-green">첨부파일</div>
 								</div>
 								<div class="chatroom-4-1-box" style="margin-left:4%; margin-right:4%;">
-									<span class="material-symbols-outlined" id="chatroom-4-1-icon3">exit_to_app</span>
+									<div class="material-symbols-outlined" id="chatroom-4-1-icon3">exit_to_app</div>
 									<div class="chatroom-menubar-text-green">취소하기</div>
 								</div>
 							</div>
@@ -436,16 +434,16 @@
 						<div class="chatroom-one-to-two">
 							<div class="chatroom-one-to-three-2"  style="display:none">
 								<div class="chatroom-4-1-box" style="margin-left:4%; margin-right:4%;">	
-									<span class="material-symbols-outlined" id="chatroom-4-1-icon1">contacts</span>
-									<div class="chatroom-menubar-text-green"">명함 보내기</div>
+									<div class="material-symbols-outlined" id="chatroom-4-1-icon1">contacts</div>
+									<div class="chatroom-menubar-text-green"">명함 보내기2</div>
 								</div>
 								<div class="chatroom-4-1-box" style="margin-left:4%; margin-right:4%;">
-									<span class="material-symbols-outlined" id="chatroom-4-1-icon2">upload</span>
-									<div class="chatroom-menubar-text-green">첨부파일</div>
+									<div class="material-symbols-outlined" id="chatroom-4-1-icon2">upload</div>
+									<div class="chatroom-menubar-text-green">첨부파일2</div>
 								</div>
 								<div class="chatroom-4-1-box" style="margin-left:4%; margin-right:4%;">
-									<span class="material-symbols-outlined" id="chatroom-4-1-icon3">exit_to_app</span>
-									<div class="chatroom-menubar-text-green">취소하기</div>
+									<div class="material-symbols-outlined" id="chatroom-4-1-icon3">exit_to_app</div>
+									<div class="chatroom-menubar-text-green">취소하기2</div>
 								</div>
 							</div>
 							<div class="chatroom" id="chatroom-1">
@@ -588,6 +586,38 @@
 						
 					</div>
 					
+					<div class="chatroom-setting" id="chatroom-setting" style="display:none">
+						<div class="chatroom-setting-box1">
+							<div class="title-text01">채팅방 설정</div>
+						<span class="material-symbols-outlined" id="chatroom-setting-icon-1">exit_to_app</span>
+						</div>
+						
+						<div class='bottom-area' id='ba'></div>
+	
+						<div class='add-button' id='main-add-button'></div>
+						
+						<div class="chatroom-setting-2-1">
+							<div class="chatroom-setting-2-1-1">고정 여부</div>
+							<input type="checkbox" class="checkbox-square-one" name="chatroom_setting_check1" id="chat-setting-check01">
+						</div>
+						<div class="chatroom-setting-2-2">
+							<div class="chatroom-setting-2-2-1">알림 여부</div>
+							<input type="checkbox" class="checkbox-square-one" name="chatroom_setting_check2" id="chat-setting-check02">
+						</div>
+						
+	
+						<div class='chatroom-setting-nametitle'>채팅방 참여 이름</div>
+	
+	
+	
+	
+						<input type="text" name="wantchatdata" class="define-roomname">
+						<div class="btn-height">
+							<input type="submit" class="btn" value=" 설정 저장  " id="chatroom-setting-out">
+						</div>
+						
+					</div>
+					
 					
 					<!-- 채팅방 회원 프로필 데이터 -->
 					<div class="chat-profile-site" id = "chat-profile-site" style="display:none">
@@ -629,7 +659,45 @@
 <!-- 							<input type="submit" class="btn" value=" 설정 저장  " id="chatroom-setting-out"> -->
 <!-- 						</div> -->
 					</div>
-					
+					<div class="chat-profile-site" id = "chat-profile-site" style="display:none">
+						<div class="chatroom-setting-box1">
+							<div class="chatroom-person-profile-title-1">사용자 프로필 정보</div>
+						<span class="material-symbols-outlined" id="chatroom-setting-icon-2">exit_to_app</span>
+						</div>
+						
+						<div class='bottom-area' id='ba'></div>
+	
+						<div class='add-button' id='main-add-button'></div>
+						
+						<div id='chatroom-square02-big'></div>
+						<div class="chatroom-person-profile-text">
+							<div class="chatroom-profile" id="chatroom-profile-1">이름</div>
+							<div class="chatroom-profile1" id="chatroom-profile-2">구기석</div>
+						</div>
+<!-- 						<div class="chatroom-person-profile-text"> -->
+<!-- 							<div class="chatroom-profile" id="chatroom-profile-3">전화번호</div> -->
+<!-- 							<div class="chatroom-profile1" id="chatroom-profile-4">011-211-211</div> -->
+<!-- 						</div> -->
+						<div class="chatroom-person-profile-text">
+							<div class="chatroom-profile" id="chatroom-profile-5">소속 부서</div>
+							<div class="chatroom-profile1" id="chatroom-profile-6">영업부 영업4팀</div>
+						</div>
+						<div class="chatroom-person-profile-text">
+							<div class="chatroom-profile" id="chatroom-profile-7">직급</div>
+							<div class="chatroom-profile1" id="chatroom-profile-8">부장</div>
+						</div>
+						
+	
+<!-- 						<div class='chatroom-setting-nametitle'>채팅방 참여 이름</div> -->
+	
+	
+	
+	
+<!-- 						<input type="text" name="wantchatdata" class="define-roomname"> -->
+<!-- 						<div class="btn-height"> -->
+<!-- 							<input type="submit" class="btn" value=" 설정 저장  " id="chatroom-setting-out"> -->
+<!-- 						</div> -->
+					</div>
 					
 					
 					
@@ -866,6 +934,117 @@
 						</div>
 					</div>
 					
+					<!-- 누구와 대화하시겠습니까? 2 -->
+					<div class="text-messenger-send-contactss-page-01" id="text-messenger-send-contactss-page-01" style="display:none">
+					
+						<div class="title-box" id="who-send-profile-inchatroom">
+							<div class="title-text01">명함 전달하기</div>
+						</div>
+
+						<div class='bottom-area' id='ba'></div>
+
+						<div id='who-chat'>어느 분의 명함을 전달하시겠어요?</div>
+
+						<!-- 카탈로그, textarea, button -->
+
+						<div class="chatroom-list-space">
+							<!-- <div class="chatroom-introduce">대화방 목록</div> -->
+							<!-- <div class="textbox-messenger-area1"> -->
+
+							<div class="messenger-category01">
+								<select>
+									<option>직책</option>
+									<option>이름</option>
+									<option>팀명</option>
+								</select>
+							</div>
+							<input type="text" name="wantchatdata" id="wantchatdata">
+							<input type="submit" class="btn" value="검색">
+						</div>
+
+
+						<!-- 프로필 설정 창, 클래스 바꿔야 -->
+						<div class="text-messenger-send-contacts-page-01">
+							<div class="textbox-messenger-area2">
+								<div class="showup" id="showup01">
+									<span class="material-symbols-outlined" style="font-size:300%" id="chatsetting-slide01">expand_more</span>
+									<div class="chatsetting-02-subtitle" id="subtitle1">전체 목록</div>
+								</div>
+								<div class="team-people-data">
+ 								<div class="team-whole-data">
+									<div class="team-area">영업부</div>
+									<div class="team-name">영업 2팀</div>
+								</div>
+								<div class="bottom-area2"></div>
+								<div class="with-chat-data">
+									<div class="square" style=""></div>
+									<div class="with-chat-name">구기석</div>
+									<div class="with-chat-grade">부장</div>
+									<input type="checkbox" class="checkbox-square-one" name="withfriend01">
+								</div>
+								<div class="bottom-area2"></div>
+								<div class="with-chat-data">
+									<div class="square" style=""></div>
+									<div class="with-chat-name">구기석</div>
+									<div class="with-chat-grade">부장</div>
+									<input type="checkbox" class="checkbox-square-one" name="withfriend01">
+								</div>
+								<div class="bottom-area2"></div>
+								</div>
+								<div class="with-chat-data">
+									<div class="square" style=""></div>
+									<div class="with-chat-name">구기석</div>
+									<div class="with-chat-grade">부장</div>
+									<input type="checkbox" class="checkbox-square-one" name="withfriend01">
+								</div>
+								<div class="bottom-area2"></div>
+							</div>
+							<div class="textbox-messenger-area3">
+								<div class="showup" id="showup02">
+									<span class="material-symbols-outlined" style="font-size:50px" id="chatsetting-slide01">expand_more</span>
+									<div class="chatsetting-02-subtitle" id="subtitle1">친구 목록</div>
+								</div>
+								<div class="team-people-data">
+									<div class="team-whole-data">
+										<div class="team-area">영업부</div>
+										<div class="team-name">영업 2팀</div>
+									</div>
+									<div class='bottom-area2' id='ba'></div>
+									<div class="with-chat-data">
+										<div class="square" style=""></div>
+										<div class="with-chat-name">구기석</div>
+										<div class="with-chat-grade">부장</div>
+										<input type="checkbox" class="checkbox-square-one" name="withfriend01">
+									</div>
+									<div class="bottom-area2"></div>
+									<div class="with-chat-data">
+										<div class="square" style=""></div>
+										<div class="with-chat-name">구기석</div>
+										<div class="with-chat-grade">부장</div>
+										<input type="checkbox" class="checkbox-square-one" name="withfriend01">
+									</div>
+									<div class="bottom-area2"></div>
+									<div class="with-chat-data">
+										<div class="square" style=""></div>
+										<div class="with-chat-name">구기석</div>
+										<div class="with-chat-grade">부장</div>
+										<input type="checkbox" class="checkbox-square-one" name="withfriend01">
+ 									</div>
+									<div class="bottom-area2"></div>
+								</div>
+							</div>
+							<div class="chatting-button-list01">
+								<div class="chatbutton01">
+									<input type="submit" class="btn" value="이전 화면" id="sendcontactslink-leave">
+								</div>
+								<div class="chatbutton01">
+									<input type="submit" class="btn" value=" 보내기 " id="sendcontactslink-go">
+								</div>
+							</div>
+							<div class="white_display_01"></div>
+						</div>
+					</div>
+					
 				</main>
 
 
@@ -880,39 +1059,17 @@
 				$('.messenger-whole').toggle();
 			}
 
-		<!--
-		if ($('.messenger-whole').css("display") == "none") {
-				$('.messenger-whole').show();
-			} else {
-				$('.messenger-whole').hide();
-			}
-			-->
-
-<!--
-if (messenger.style.display == 'none') {
-				messenger.style.display = 'block';
-			} else {
-				messenger.style.display = 'none';
-			}
-			-->
-
-<!--
-				messengericon.onclick = function() {
-					if ($('.messenger-whole').css("display") == "none") {
-						$('.messenger-whole').show();
-					} else {
-						$('.messenger-whole').hide();
-					}
-				}
-
-			-->
+			
+			
 			<!-- 채팅방 목록 화면에서 채팅방 생성 화면으로.. -->
 			const qwe = document.querySelector('#qwe');
 
 			qwe.onclick = function () {
 // 				alert('ㅇㅇ');
-				$('.chatroomlist-first-page').hide();
-				$('.whochat-page-first').show();
+
+// 				$('.chatroomlist-first-page').hide();
+// 				$('.whochat-page-first').show();
+				function 
 			}
 			
 			
@@ -985,26 +1142,59 @@ if (messenger.style.display == 'none') {
  			
  			
 // 			var chatrn=0;
+			var chat_num=0;
 			
-			
+
 			chatListAll[0].onclick = function () {
 				var chatrn = $(this).index();
 				$('.chatroomlist-first-page').hide();
 				$(chatRoomAll[0]).show();
 				
-				alert(chatListAllIndex);
-// 				var indexchatr = $(this).index();
+// 				alert(chatListAllIndex);
+				var indexchatr = $(this).index();
 // 				alert(indexchatr);
-
+// 				alert($(this).index());
 			 } 	
 			
 			chatListAll[1].onclick = function () {
 				$('.chatroomlist-first-page').hide();
 			 	$(chatRoomAll[1]).show();
-			 	alert(chatListAllIndex);
-// 			 	var indexchatr = $(this).index();
+// 			 	alert(chatListAllIndex);
+			 	var indexchatr = $(this).index();
 // 				alert(indexchatr);
+// 				alert($(this).index());
 			 } 
+
+			
+			
+			
+			
+			
+			
+// 			$(".with-chat-subroomname2").click(function(event){
+// 				var i = $(this).index();
+// 				alert(i);
+				
+// 				var j = $("#chatroom-list-two-to-two").index(this);
+// 				alert(j);
+// 			});
+			
+// 			var test = document.querySelectorAll(".with-chat-subroomname2");
+			
+// 			function testFunc() {
+// 				var i;
+// 				for (i=0; i<test.length; i++) {
+// 					test[i].alert(this(index));
+// 				}
+// 			}
+			
+			
+			
+			
+			
+			
+			
+			
 			
 // 			for(int i=0; i<chatListAllIndex; i++){
 // 				chatListAll[i].onclick = function () {
@@ -1061,40 +1251,66 @@ if (messenger.style.display == 'none') {
 			
 			<!-- 채팅방 -->
 			
+			<!--채팅방 나가기 버튼 인덱스-->
+			const out_icons_of_chattingroom = document.querySelectorAll('#chatroom-1-2-icon');
 			
 			
 			<!-- 채팅방에서 나가기-->
-			const out_of_chattingroom = document.getElementById('chatroom-1-2-icon');
-			out_of_chattingroom.onclick = function () {
- 				$('.chatting-room').hide();
- 				$('.chatroomlist-first-page').show();
+// 			const out_of_chattingroom = document.getElementById('chatroom-1-2-icon');
+			out_icons_of_chattingroom[0].onclick = function () {
+  				$('.chatting-room').hide();
+  				$('.chatroomlist-first-page').show();
 			}
+			out_icons_of_chattingroom[1].onclick = function () {
+  				$('.chatting-room').hide();
+  				$('.chatroomlist-first-page').show();
+			}
+			
+			<!-- 채팅방 메뉴 인덱스 -->
+			const chattingroom_menubar_icons_all = document.querySelectorAll('#chatroom-1-3-1');
+			const chattingroom_menubar_icons_1 = document.querySelectorAll('.chatroom-one-to-three-2');
 			
 			<!-- 채팅방 메뉴 누르기-->
-			const chattingroom_menubar = document.getElementById('chatroom-1-3-1');
-			chattingroom_menubar.onclick = function() {
- 				$('.chatroom-one-to-three-2').show();
- 				
+
+			chattingroom_menubar_icons_all[0].onclick = function() {
+ 				$(chattingroom_menubar_icons_1[0]).show();
+			}
+			chattingroom_menubar_icons_all[1].onclick = function() {
+ 				$(chattingroom_menubar_icons_1[1]).show();
 			}
 			
-			<!-- 메뉴바 - 다른 곳에 누르면 없애기 : 실패-->
+// // 			const chattingroom_menubar = document.getElementById('chatroom-1-3-1');
+// 			$(chattingroom_menubar_icons_all[0]).click = function() {
+// //  				$('.chatroom-one-to-three-2').show();
+//  				alert('1');
+// 			}
+			
+// 			<!-- 메뉴바 - 다른 곳에 누르면 없애기 : 실패-->
 // 			const chattingroom_touch_another_menubar = function () {
 //  				$('.chatroom-one-to-three-2').show();
 // 			}
 
-			$('document').click(function(e){
-				if($(e.target).parents('.chatroom-one-to-three-2').length>1 && $(e.target).parents('.chatroom-one-to-three-2').length<1){
-					alert('merrong');
-				}
-			});
+// 			$('document').click(function(e){
+// 				if($(e.target).parents('.chatroom-one-to-three-2').length>1 && $(e.target).parents('.chatroom-one-to-three-2').length<1){
+// 					alert('merrong');
+// 				}
+// 			});
 			
+			<!-- 메뉴바 없애기 -->
 			
-			const out_of_chattingroom_menubar = document.getElementById('chatroom-4-1-icon3');
-			out_of_chattingroom_menubar.onclick = function() {
+// 			const out_of_chattingroom_menubar = document.getElementById('chatroom-4-1-icon3');
+			const out_of_chattingroom_menubar = document.querySelectorAll('#chatroom-4-1-icon3');
+			out_of_chattingroom_menubar[0].onclick = function() {
  				$('.chatroom-one-to-three-2').hide();
- 				
 			}
-			<!-- 회원 상세 정보 페이지 이동-->
+			
+			out_of_chattingroom_menubar[1].onclick = function() {
+ 				$('.chatroom-one-to-three-2').hide();
+			}
+			
+			
+			
+			<!-- 회원 상세 정보 페이지(프로필) 이동-->
 			
 // 			const show_chattingroom_setting = document.getElementById('chatroom-1-3-icon');
 // 			show_chattingroom_setting.onclick = function () {
@@ -1102,130 +1318,227 @@ if (messenger.style.display == 'none') {
 //  				$('.chatroom-setting').show();
 // 			}
 			
-			const chat_person_profile = document.getElementById('chatroom-square02');
-			chat_person_profile.onclick = function () {
+// 			const chat_person_profile = document.getElementById('chatroom-square02');
+			const chat_person_profile = document.querySelectorAll('.chatroom-square');
+			const chat_person_profile_sites = document.querySelectorAll('.chat-profile-site');
+			chat_person_profile[0].onclick = function () {
 //  				alert('33');
   				$('.chatting-room').hide();
-  				$('.chat-profile-site').show();
+  				$(chat_person_profile_sites[0]).show();
 			}
+			chat_person_profile[1].onclick = function () {
+//				alert('33');
+				$('.chatting-room').hide();
+				$(chat_person_profile_sites[1]).show();
+		}
 			
+			<!-- 프로필 화면에서 나가기 -->
+// 			const out_of_chattingroom_profile = document.getElementById('chatroom-setting-icon-2');
+			const out_of_chattingroom_profile = document.querySelectorAll('#chatroom-setting-icon-2');
+			out_of_chattingroom_profile[0].onclick = function () {
+//  				alert('33');
+   				$('.chat-profile-site').hide();
+   				$(chatRoomAll[0]).show(); // 이전 채팅방 관련 queryselectorall 관련 구문 가져옴
+			}
+			out_of_chattingroom_profile[1].onclick = function () {
+//				alert('33');
+				$('.chat-profile-site').hide();
+				$(chatRoomAll[1]).show();
+			}
 			
 			<!-- 채팅방 설정창-->
-			const show_chattingroom_setting = document.getElementById('chatroom-1-3-icon');
-			show_chattingroom_setting.onclick = function () {
- 				$('.chatting-room').hide();
- 				$('.chatroom-setting').show();
+			
+			<!-- 채팅방 설정 인덱스-->
+			const show_chattingroom_setting_icons = document.querySelectorAll('#chatroom-1-3-icon');
+			const show_chattingroom_setting_page = document.querySelectorAll('.chatroom-setting');
+			
+			show_chattingroom_setting_icons[0].onclick = function () {
+				$(chatRoomAll[0]).hide();
+ 				$(show_chattingroom_setting_page[0]).show();
 			}
 			
-			<!-- 채팅방 섫정창에서 채팅방으로 돌아오기 -->
+			show_chattingroom_setting_icons[1].onclick = function () {
+				$(chatRoomAll[1]).hide();
+ 				$(show_chattingroom_setting_page[1]).show();
+			}
+			
+			
+			
+			<!-- 채팅방 설정창에서 채팅방으로 돌아오기 -->
 			
 			
 			<!-- 설정 저장 -->
-			const save_chattingroom_setting = document.getElementById('chatroom-setting-out');
-			save_chattingroom_setting.onclick = function () {
+// 			const save_chattingroom_setting = document.getElementById('chatroom-setting-out');
+			const save_chattingroom_setting = document.querySelectorAll('#chatroom-setting-out');
+			const chat_roomsetting_n=save_chattingroom_setting.length;
+			
+			save_chattingroom_setting[0].onclick = function () {
 // 				alert('33');
   				$('.chatroom-setting').hide();
-  				$('.chatting-room').show();
+  				$(chatRoomAll[0]).show();
 			}
+			save_chattingroom_setting[1].onclick = function () {
+// 				alert('33');
+  				$('.chatroom-setting').hide();
+  				$(chatRoomAll[1]).show();
+			}
+
 			<!-- 나가기 -->
-			const out_of_chattingroom_setting = document.getElementById('chatroom-setting-icon-1');
-			out_of_chattingroom_setting.onclick = function () {
+// 			const out_of_chattingroom_setting = document.getElementById('chatroom-setting-icon-1');
+
+			const out_of_chattingroom_setting = document.querySelectorAll('#chatroom-setting-icon-1');
+			const exit_chatroom_settings = out_of_chattingroom_setting.length;
+			
+			out_of_chattingroom_setting[0].onclick = function () {
 //  				alert('33');
   				$('.chatroom-setting').hide();
-  				$('.chatting-room').show();
+  				$(chatRoomAll[0]).show();
 			}
-			<!-- 프로필 화면에서 나가기 -->
-			const out_of_chattingroom_profile = document.getElementById('chatroom-setting-icon-2');
-			out_of_chattingroom_profile.onclick = function () {
+			
+			out_of_chattingroom_setting[1].onclick = function () {
 //  				alert('33');
-   				$('.chat-profile-site').hide();
-  				$('.chatting-room').show();
+  				$('.chatroom-setting').hide();
+  				$(chatRoomAll[1]).show();
 			}
 			
-			<!--모달창1(프로필, 연락처 링크)  -->
-// 			$('#chatroom-4-1-icon1').click(function(){
-// 				$(".chatlist-modal").fadeIn();
-// 			})
-			
-// 			<!--모달창1(프로필, 연락처 링크)-->
-// 			$('.chatroom-one-to-two').not('#chatroom-one-to-three-2, .chatroom-4-1-box').click(function(){
-// //  				alert('d');
-// 				if($('.chatlist-modal').length>0){
-// 					$(".chatlist-modal").fadeOut();
-// // 					alert('d');
-// 				}
-// 			})
-// 			$('.chatlist-modal').click(function(){
-// 				$(".chatlist-modal").fadeOut();
-// 			})
-			
-// 			$('.chatlist-modal-text02-1').click(function(){
-// 				$(".chatlist-modal").hide();
-// 				$(".chatting-room").hide();
-// 				$(".text-messenger-send-profile-page-01").show();
-// 			})
-			<!-- 섞기 -->
 
+
+
+
+			<!-- 메뉴바 명함보내기 버튼 -->
+			const chat_send_tagname = document.querySelectorAll('#chatroom-4-1-icon1');
+			const chat_send_tagnames_page = document.querySelectorAll('.text-messenger-send-contactss-page-01');
 // 			text-messenger-send-contactss-page-01
-			$('#chatroom-4-1-icon1').click(function(){
-				
+			chat_send_tagname[0].onclick = function() {
+// 				var idx = $('#chatroom-4-1-icon1').index(this);
+				alert('2');
 				$(".chatting-room").hide();
 				$("#text-messenger-send-contactss-page-01").show();
-			})
+			}
 			
-			
-			
-			
-			
-// 			프로필 링크-이전화면, 이후화면
-			$('#sendprofilelink-leave').click(function(){
-// 				alert('dd');
-				$(".text-messenger-send-profile-page-01").hide();
-				$(".chatting-room").show();
-				$('.chatroom-one-to-three-2').hide();
-			})
-			$('#sendprofilelink-go').click(function(){
-// 				alert('dd');
-				$(".text-messenger-send-profile-page-01").hide();
-				$(".chatting-room").show();
-				$('.chatroom-one-to-three-2').hide();
-			})
-			
-// 			"text-messenger-send-contacts-page-01"
+// 			chat_send_tagname[1].click(function(){
+// 				$(".chatting-room").hide();
+// 				$("#text-messenger-send-contactss-page-01").show();
+// 			})
 
-			$('#sendcontactslink-leave').click(function(){
-// 				alert('dd');
-				$("#text-messenger-send-contactss-page-01").hide();
-				$(".chatting-room").show();
-				$('.chatroom-one-to-three-2').hide();
-			})
-			$('#sendcontactslink-go').click(function(){
-// 				alert('dd');
-				$("#text-messenger-send-contactss-page-01").hide();
-				$(".chatting-room").show();
-				$('.chatroom-one-to-three-2').hide();
-			})
+// // <!-- 메뉴바 봐서 결정 - 해야할듯-->
+// // 			chat_send_tagname[0].onclick() = function(){
+// // 				alert('1');
+// // 				$(".chatting-room").hide();
+// // 				$("#text-messenger-send-contactss-page-01").show();
+// // 			}
+// // 			chat_send_tagname[1].onclick() = function(){
+// // 				$(".chatting-room").hide();
+// // 				$("#text-messenger-send-contactss-page-01").show();
+// // 			}
+			
+			
+			
+			
+// // 			명함보내기-이전화면, 이후화면
+// // 			const chat_not_send_tagname = document.querySelectorAll('#chatroom-4-1-icon1');
+// // 			chat_not_send_tagname[0].click(function(){
+// // 				alert('dd');
+// // 				$(".text-messenger-send-profile-page-01").hide();
+// // 				$(".chatting-room").show();
+// // 				$('.chatroom-one-to-three-2').hide();
+// // 			})
+			
+			
+			
+// // 			$('#sendprofilelink-leave').click(function(){
+// // // 				alert('dd');
+// // 				$(".text-messenger-send-profile-page-01").hide();
+// // 				$(".chatting-room").show();
+// // 				$('.chatroom-one-to-three-2').hide();
+// // 			})
+// // 			$('#sendprofilelink-go').click(function(){
+// // // 				alert('dd');
+// // 				$(".text-messenger-send-profile-page-01").hide();
+// // 				$(".chatting-room").show();
+// // 				$('.chatroom-one-to-three-2').hide();
+// // 			})
+			
+// // 			"text-messenger-send-contacts-page-01"
+
+// 			<!-- 명함보내기 이전 버튼-->
+// // 			$('#sendcontactslink-leave').click(function(){
+// // // 				alert('dd');
+// // 				$("#text-messenger-send-contactss-page-01").hide();
+// // 				$(".chatting-room").show();
+// // 				$('.chatroom-one-to-three-2').hide();
+// // 			})
+
+// 			$('#sendcontactslink-leave').click(function(){
+// // 				alert('dd');
+// 				$("#text-messenger-send-contactss-page-01").hide();
+// 				$(".chatting-room").show();
+// 				$('.chatroom-one-to-three-2').hide();
+// 			})
+			
+			
+// 			<!-- 명함보내기 보내기 버튼-->
+// // 			$('#sendcontactslink-go').click(function(){
+// // // 				alert('dd');
+// // 				$("#text-messenger-send-contactss-page-01").hide();
+// // 				$(".chatting-room").show();
+// // 				$('.chatroom-one-to-three-2').hide();
+// // 			})
+
+// 			$('#sendcontactslink-go').click(function(){
+// // 				alert('dd');
+// 				$("#text-messenger-send-contactss-page-01").hide();
+// 				$(".chatting-room").show();
+// 				$('.chatroom-one-to-three-2').hide();
+// 			})
 			
 			<!--대화창목록 삭제-->
-			$('#chatroom-exit-icon').click(function(){
- 				$(".with-chat-data01").hide();
- 				$(".with-chat-data01-1").show();
+			const delete_chatroom = document.querySelectorAll('#chatroom-exit-icon');
+			const delete_chatroom_page = document.querySelectorAll("#with-chat-data01-1");
+			delete_chatroom[0].onclick=function() {
+ 				$("#with-chat-data01").hide();
+ 				$(delete_chatroom_page[0]).show();
+// 				$('.chatroom-one-to-three-2').hide();
+			}
+			
+			delete_chatroom[1].onclick=function(){
+ 				$("#with-chat-data01").hide();
+ 				$(delete_chatroom_page[1]).show();
+// 				$('.chatroom-one-to-three-2').hide();
+			}
+			
+			const delete_chatroom_page_button1 = document.querySelectorAll('#deletechatroom-ok');			
+			delete_chatroom_page_button1[0].click(function(){
+ 				$("#with-chat-data01-1").hide();
+ 				$(delete_chatroom_page_button1)[0].show();
+// 				$('.chatroom-one-to-three-2').hide();
+			})
+			delete_chatroom_page_button1[1].click(function(){
+ 				$("#with-chat-data01-1").hide();
+ 				$(delete_chatroom_page_button1)[1].show();
 // 				$('.chatroom-one-to-three-2').hide();
 			})
 			
-			$('#deletechatroom-ok').click(function(){
- 				$(".with-chat-data01-1").hide();
- 				$(".with-chat-data01").show();
-// 				$('.chatroom-one-to-three-2').hide();
-			})
 			
 			$('#deletechatroom-no').click(function(){
 //  				$(".with-chat-data01").hide();
 //  				$(".with-chat-data01-1").show();
-				$(".with-chat-data01-1").hide();
- 				$(".with-chat-data01").show();
+				$("#with-chat-data01-1").hide();
+ 				$("#with-chat-data01").show();
 // 				$('.chatroom-one-to-three-2').hide();
 			})
+
+// 			<!-- ajax -->
+			
+// 			$.ajax({
+				
+				
+// 			});
+			
+			
+			
 			</script>
+			
+			
 
 		</html>
