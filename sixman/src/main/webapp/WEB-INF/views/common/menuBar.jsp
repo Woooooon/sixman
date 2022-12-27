@@ -197,13 +197,6 @@
         });
     })
 
-    const alarmItems = document.querySelectorAll('.alarm-item');
-    alarmItems.forEach(element => {
-        element.querySelector('span').addEventListener('click', ()=>{
-            element.remove();
-        });
-    });
-
     window.onload = ()=>{
         alarmAjax();
         connectSC();
@@ -258,10 +251,16 @@
         '<div><div class="item-header"><div>['+type+']</div><div>'+today.toLocaleTimeString()+'</div></div><div class="item-title">'+msg+'</div></div><span class="t-btn material-symbols-outlined"> close </span>'
         div.innerHTML = item;
 
-        div.addEventListener('click', ()=>{
+        div.querySelector('.item-div').addEventListener('click', ()=>{
             checkAjax(vo.no, vo.type);
             f();
         });
+
+        div.querySelector('span').addEventListener('click', ()=>{
+            div.remove();
+            checkAjax(vo.no, vo.type);
+        });
+
 
         const box = document.querySelector('#alarm-box #inner-box');
         box.prepend(div);

@@ -40,9 +40,12 @@ input[type=checkbox]{
     color: var(--main-color);
 }
 
+.list-item span.read,
 .read{
     color: var(--bo-40);
 }
+
+
 
 .category-btn{
     position: relative;

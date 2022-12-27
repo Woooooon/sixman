@@ -57,6 +57,8 @@ public class MailController {
 		vo.setCategoryName(map.get("listTpye"));
 		vo.setCategory(map.get("categoryNo"));
 		vo.setSearch(map.get("search"));
+		
+		log.info("vo : " + vo);
 				
 //		category, keyword, page
 		int pageLimit = 5;
@@ -122,7 +124,6 @@ public class MailController {
 		if(vo.getMailNo()==null) {
 			result = ms.write(vo);			
 		}else {
-			log.info("update 들어옴 %n mailVo : " + vo);
 			result = ms.update(vo);
 		}
 		
@@ -172,7 +173,7 @@ public class MailController {
 		int result = ms.delete(map);
 		
 		if(result!=1) {
-			
+			log.error("delete 실패");
 		}
 	}
 	
@@ -186,7 +187,7 @@ public class MailController {
 		int result = ms.updateRead(map);	
 		
 		if(result!=1) {
-			
+			log.error("updateRead 실패");
 		}
 	}
 	
@@ -202,7 +203,7 @@ public class MailController {
 		int result = ms.changeCategory(map);
 		
 		if(result!=1) {
-			
+			log.error("updateRead 실패");
 		}
 	}
 	
@@ -213,7 +214,7 @@ public class MailController {
 		int result = ms.createCategory(category, loginMeber.getNo());
 		
 		if(result!=1) {
-			
+			log.error("createCategory 실패");
 		}
 	}	
 	
@@ -227,7 +228,7 @@ public class MailController {
 		int result = ms.restore(map);
 		
 		if(result!=1) {
-			
+			log.error("restore 실패");
 		}
 	}
 	
@@ -241,7 +242,7 @@ public class MailController {
 		int result = ms.realDelete(map);
 		
 		if(result!=1) {
-			
+			log.error("realDelete 실패");
 		}
 	}
 	

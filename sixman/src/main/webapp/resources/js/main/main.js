@@ -172,7 +172,7 @@ function alarmAjax() {
                         div.classList.add('alarm-item');
                         const item = 
                         `            
-                        <div>
+                        <div class="item-div">
                             <div class="item-header">
                                 <div>[${vo.type}]</div>
                                 <div>${vo.enrollDate}</div>
@@ -184,9 +184,14 @@ function alarmAjax() {
 
                         div.innerHTML = item;
             
-                        div.addEventListener('click', ()=>{
+                        div.querySelector('.item-div').addEventListener('click', ()=>{
                             checkAjax(vo.no, vo.type);
                             f();
+                        });
+
+                        div.querySelector('span').addEventListener('click', ()=>{
+                            div.remove();
+                            checkAjax(vo.no, vo.type);
                         });
 
                         box.append(div);
