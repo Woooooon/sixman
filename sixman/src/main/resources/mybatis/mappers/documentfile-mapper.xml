@@ -29,6 +29,9 @@
 			</foreach>
 			select * from dual
 		</update>
+		
+		
+		
 
     
 </mapper>

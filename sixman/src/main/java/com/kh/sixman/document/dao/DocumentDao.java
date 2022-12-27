@@ -5,17 +5,27 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.sixman.document.vo.DocumentVo;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Repository
 public class DocumentDao {
 
 	
 
 	public int send(SqlSessionTemplate sst, DocumentVo dvo) {
-		return 0;
+		return sst.update("documentMapper.send",dvo);
 	}
 
 	public int write(SqlSessionTemplate sst, DocumentVo dvo) {
+		log.debug("dvo :" + dvo);
 		return sst.insert("documentMapper.write",dvo);
+	
+		
+	}
+
+	public int countList(SqlSessionTemplate sst, DocumentVo dvo) {
+		return sst.selectOne("documentMapper.countList",dvo);
 	}
 
 }
