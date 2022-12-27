@@ -51,7 +51,7 @@ function createMemberBox() {
     for(let i = 0; i < selects.length; i++){
         const item = selects[i];
         const v = item.querySelector('.selected-option');
-        text += `<p>${v.innerHTML}</p>`;
+        text += `<input type="text" value="${v.innerHTML}">`;
         if(i!=selects.length-1){
             text += ' / ';
         }
