@@ -128,25 +128,53 @@ public class AdminMemberService {
 								  , String accountNo
 								  , String resumeNo,
 							  	  List<String> evidenceNo) {
-	
+		AttachmentVo attVo = null;
+		int fileResult = 0;
 		if(profileNo != null) {
+			attVo = adminMemberDao.getFileOne(sst, vo.getNo(),"PROFILE");
+			fileResult = adminMemberDao.delete(sst, attVo.getNo(),"PROFILE");
+			
+			if(fileResult == 1) {
+				FileUnit.deleteFile(attVo.getFilePath()+attVo.getChangeName());
+			}
 			
 		}
+		
+		if(accountNo != null) {
+			attVo = adminMemberDao.getFileOne(sst, vo.getNo(),"ACCOUNT");
+			fileResult = adminMemberDao.delete(sst, attVo.getNo(),"ACCOUNT");
+			
+			if(fileResult == 1) {
+				FileUnit.deleteFile(attVo.getFilePath()+attVo.getChangeName());
+			}
+			
+		}
+		
+		if(resumeNo != null) {
+			attVo = adminMemberDao.getFileOne(sst, vo.getNo(),"RESUME");
+			fileResult = adminMemberDao.delete(sst, attVo.getNo(),"RESUME");
+			
+			if(fileResult == 1) {
+				FileUnit.deleteFile(attVo.getFilePath()+attVo.getChangeName());
+			}
+			
+		}
+		
+		if(evidenceNo != null) {
+			List<AttachmentVo> attList = adminMemberDao.getfile(sst, vo.getNo(),"EVIDENCE");
+			for(AttachmentVo attvo : attList) {
+				fileResult = adminMemberDao.delete(sst, attvo.getNo(),"EVIDENCE");
+				if(fileResult == 1) {
+					FileUnit.deleteFile(attvo.getFilePath()+attvo.getChangeName());
+				}
+			}
+		}
+				
 		return 0;
 	}
 
 	
-	private void nullFileCheck(String no) {
-		
-	}
-	
-	public void deleteFile(Map<String, String> map) {
-		AttachmentVo vo = adminMemberDao.getFile(map);
-		
-		FileUnit.deleteFile(vo.getFilePath()+vo.getChangeName());
-		
-		int result = adminMemberDao.delete(map);
-	}
+
 
 	
 }

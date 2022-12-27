@@ -38,7 +38,7 @@
                                     <c:if test="${j.deptNo eq i.deptNo and empty i.teamName}">
                                         <li>
                                             <div class="memberList-item">
-                                                <a href=""><span class="material-symbols-outlined">account_box</span>${i.name} ${i.positionName}</a>
+                                                <a href="/sixman/admin/member/detail?no=${i.no}"><span class="material-symbols-outlined">account_box</span>${i.name} ${i.positionName}</a>
                                             </div>
                                         </li>													
                                     </c:if>
@@ -60,7 +60,7 @@
 													<c:if test="${l.teamNo eq i.teamNo}">
 														<li>
 					                                        <div class="memberList-item">
-					                                            <a href=""><span class="material-symbols-outlined">account_box</span>${i.name} ${i.positionName}</a>
+					                                            <a href="/sixman/admin/member/detail?no=${i.no}"><span class="material-symbols-outlined">account_box</span>${i.name} ${i.positionName}</a>
 					                                        </div>
 					                                    </li>													
 													</c:if>
@@ -85,7 +85,7 @@
                                     <c:if test="${i.deptNo eq 1}">
                                         <li>
                                             <div class="memberList-item">
-                                                <a href=""><span class="material-symbols-outlined">account_box</span>${i.name} ${i.positionName}</a>
+                                                <a href="/sixman/admin/member/detail?no=${i.no}"><span class="material-symbols-outlined">account_box</span>${i.name} ${i.positionName}</a>
                                             </div>
                                         </li>													
                                     </c:if>
@@ -190,7 +190,7 @@
                                     <button type="button" id="address_kakao">검 색</button>
                                 </div>
                                 <div id="submit">
-                                    <input type="submit" value="수 정" />
+                                    <input type="button" id="submitBtn" value="수 정" />
                                     <input type="button" value="삭 제" />
                                 </div>
                             </div>

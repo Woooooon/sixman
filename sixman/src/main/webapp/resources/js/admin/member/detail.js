@@ -124,42 +124,43 @@ function match(elem, regx, messege) {
     });
 }
 //보오옹오류~~
+document.querySelector('#submitBtn').addEventListener('click', ()=>{
+    popup.confirmPop("제안", "수정 하시겠습니까 ?", ()=>{
+        const checkId = id.classList.contains('error');
+        const checkPhone = phone.classList.contains('error');
+        const checkName = username.classList.contains('error');
+        const checkAccount = account.classList.contains('error');
+        const checkBirthday = birthday.classList.contains('error');
+        const checkEmail = email.classList.contains('error');
 
-form.onsubmit = () => {
+        if (checkId) {
+            return false;
+        }
 
-    const checkId = id.classList.contains('error');
-    const checkPhone = phone.classList.contains('error');
-    const checkName = username.classList.contains('error');
-    const checkAccount = account.classList.contains('error');
-    const checkBirthday = birthday.classList.contains('error');
-    const checkEmail = email.classList.contains('error');
+        if (checkPhone) {
+            return false;
+        }
 
-    if (checkId) {
-        return false;
-    }
+        if (checkName) {
+            return false;
+        }
 
-    if (checkPhone) {
-        return false;
-    }
+        if (checkAccount) {
+            return false;
+        }
 
-    if (checkName) {
-        return false;
-    }
+        if (checkBirthday) {
+            return false;
+        }
 
-    if (checkAccount) {
-        return false;
-    }
+        if (checkEmail) {
+            return false;
+        }
+        
+        return form.submit();
+    });
+});
 
-    if (checkBirthday) {
-        return false;
-    }
-
-    if (checkEmail) {
-        return false;
-    }
-
-    return false;
-};
 
 
 

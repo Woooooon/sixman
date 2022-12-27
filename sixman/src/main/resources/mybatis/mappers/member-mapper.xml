@@ -240,7 +240,7 @@
 		<if test="keyword != null and keyword !='' and category != null and category != ''">
 			AND ${category} LIKE '%${keyword}%'
 		</if >
-		<if test="keyword != null and keyword !='' and category == null and category == ''" >
+		<if test="keyword != null and keyword !='' and category == null" >
 			AND M.ID LIKE '%${keyword}%'
 		    OR M.NAME LIKE '%${keyword}%' 
 		    OR M.EMAIL LIKE '%${keyword}%'

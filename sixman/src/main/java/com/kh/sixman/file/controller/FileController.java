@@ -49,9 +49,10 @@ public class FileController {
 	@PostMapping("delete")
 	public void delete(@RequestParam Map<String, String> map) {
 		AttachmentVo vo = fs.getFile(map);
-		System.out.println(vo.getFilePath());
-		FileUnit.deleteFile(vo.getFilePath()+vo.getChangeName());
 		int result = fs.delete(map);
+		if(result == 1) {
+			FileUnit.deleteFile(vo.getFilePath()+vo.getChangeName());
+		}
 	}
 
 }

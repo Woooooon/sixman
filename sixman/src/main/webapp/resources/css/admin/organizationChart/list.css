@@ -363,8 +363,8 @@ p[name='imgName'] {
     display: grid;
     grid-template-columns: 0.5fr 1.5fr 1fr 1fr 1.3fr 1.3fr 1fr 2fr 0.5fr;
     border-bottom: 1px solid var(--bo-20);
-    align-items: flex-end;
-    padding-bottom: 10px;
+    align-items: center;
+    padding: 5px 0;
     justify-items: center;
     font-size: 15px;
 }

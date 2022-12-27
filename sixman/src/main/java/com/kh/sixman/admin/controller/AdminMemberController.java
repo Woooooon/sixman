@@ -1,8 +1,6 @@
 package com.kh.sixman.admin.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -28,6 +26,7 @@ import com.kh.sixman.position.service.PositionService;
 import com.kh.sixman.position.vo.PositionVo;
 
 import lombok.extern.slf4j.Slf4j;
+
 @RequestMapping("admin/member")
 @Controller
 @Slf4j
@@ -118,7 +117,21 @@ public class AdminMemberController {
 						, @RequestParam(required = false) List<String> evidenceNo
 						, String no
 						, MemberVo vo
-						, Model model) {
+						, Model model
+						, HttpSession session) {
+		
+		String rootPath = session.getServletContext().getRealPath("/");
+		
+		List<AttachmentVo> picFileInfo = FileUnit.uploadFile(vo.getPicFile(), rootPath, "sixman/src/main/webapp/resources/img/profile");
+		List<AttachmentVo> resumeFileInfo = FileUnit.uploadFile(vo.getResumeFile(), rootPath, "upload/resume");
+		List<AttachmentVo> accountFileInfo = FileUnit.uploadFile(vo.getAccountFile(), rootPath, "upload/account");
+		List<AttachmentVo> evidenceFileList = FileUnit.uploadFile(vo.getEvidenceFile(), rootPath, "upload/evidence");
+		
+		vo.setNo(no);
+		vo.setPicFileInfo(picFileInfo);
+		vo.setResumeFileInfo(resumeFileInfo);
+		vo.setAccountFileInfo(accountFileInfo);
+		vo.setEvidenceFileList(evidenceFileList);
 		
 		log.info("profileNo :" + profileNo);
 		log.info("accountNo :" + accountNo);
@@ -127,9 +140,9 @@ public class AdminMemberController {
 		log.info("MemberSeq :" + no);
 		log.info("MemberVo :" + vo);	
 
-		vo.setNo(no);
-		
 		int result = adminMemberService.updateMemberDetail(vo, profileNo, accountNo, resumeNo, evidenceNo);
+		
+		
 		return "admin/member/detail";
 	}
 	
