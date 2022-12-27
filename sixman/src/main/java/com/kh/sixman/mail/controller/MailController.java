@@ -122,11 +122,12 @@ public class MailController {
 		if(vo.getMailNo()==null) {
 			result = ms.write(vo);			
 		}else {
+			log.info("update 들어옴 %n mailVo : " + vo);
 			result = ms.update(vo);
 		}
 		
 		
-		if(result > 0) {
+		if(result != 0) {
 			return "redirect:/mail/list";
 		}else {
 			return "";
@@ -197,8 +198,6 @@ public class MailController {
 		map.put("loginMember", loginMember);
 		map.put("no", no);
 		map.put("category", category);
-		
-		System.out.println(map);
 		
 		int result = ms.changeCategory(map);
 		

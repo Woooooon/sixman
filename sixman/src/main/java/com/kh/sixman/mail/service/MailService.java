@@ -31,7 +31,7 @@ public class MailService {
 		int result1 = dao.write(sst, vo);
 		int result2 = dao.send(sst, vo);
 		
-		String no = Integer.toString(result1);
+		String no = vo.getMailNo();
 		List<AttachmentVo> fileList = vo.getFileList();
 		int result3 = 1;
 		if(fileList!=null) {
@@ -118,7 +118,7 @@ public class MailService {
 	public int update(MailVo vo) {
 		int result1 = dao.update(sst, vo);
 		int result2 = dao.sendUpdate(sst, vo);
-		
+				
 		String no = vo.getMailNo();
 		List<AttachmentVo> fileList = vo.getFileList();
 		int result3 = 1;

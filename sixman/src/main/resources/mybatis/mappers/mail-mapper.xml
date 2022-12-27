@@ -223,31 +223,72 @@
 	</update>
 	
 	<update id="sendUpdate">
+		DECLARE BEGIN
+		DELETE R_MAIL
+		WHERE MAIL_NO = ${mailNo}
+		AND NOT EMAIL IN
+		<foreach collection="sender" item="email" open="(" close=");" separator=",">
+			#{email}
+		</foreach>
+		<foreach collection="sender" item="email">
+			MERGE INTO R_MAIL R
+			USING 
+			(
+			    SELECT NO FROM R_MAIL WHERE EMAIL = #{email} AND MAIL_NO = ${mailNo}
+			    UNION ALL
+			    SELECT NULL FROM DUAL
+			    WHERE NOT EXISTS
+			    (
+			    SELECT NO FROM R_MAIL WHERE EMAIL = #{email} AND MAIL_NO = ${mailNo}
+			    )
+			) R2
+			ON (R.NO = R2.NO)
+			WHEN NOT MATCHED THEN
+			INSERT 
+			(
+			    NO
+			    , MAIL_NO
+			    , EMAIL
+			    , CHECK_YN
+			    , ALARM_YN
+			    , DELETE_YN
+			)
+			VALUES
+			(
+			    get_seq_no('seq_r_mail_no'),
+			    ${mailNo},
+			    #{email},
+			    'N',
+			    'N',
+			    'N'
+			);
+		</foreach>
+		END;
 	</update>
 	
 	<update id="send">
 		insert all
 		<foreach collection="sender" item="email" separator=" ">
-		<if test=" email != '' ">
-			into r_mail
-			(
-				no,
-				mail_no,
-				email,
-				check_yn,
-				alarm_yn,
-				DELETE_YN
-			)
-			VALUES
-			(
-				get_seq_no('seq_r_mail_no'),
-				${mailNo},
-				#{email},
-				'N',
-				'N',
-				'N'
-			)
-		</if>
+			<if test=" email != '' ">
+				into r_mail
+				(
+					no,
+					mail_no,
+					email,
+					check_yn,
+					alarm_yn,
+					DELETE_YN
+				)
+				VALUES
+				(
+					get_seq_no('seq_r_mail_no'),
+					${mailNo},
+					#{email},
+					'N',
+					'N',
+					'N'
+				)
+			</if>
 		</foreach>
 		select * from dual
 	</update>
