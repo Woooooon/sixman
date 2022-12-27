@@ -530,7 +530,7 @@
 	position:absolute;
 	background-color: gray;
 	border-radius: 100%;
-	margin:3%;
+	margin:3%;	cursor:pointer;
 }
 
 .chatroom-box1-1-profile-data{
@@ -628,7 +628,7 @@
 	border-radius:60%;
 	margin-top:1%;
 	margin-left:3%;
-	cursor:pointer;
+/* 	cursor:pointer; */
 }
 .chatroom2-1-1-1text{
 	margin-right:1%;
@@ -996,7 +996,7 @@ input[id="chat-setting-check02"]{
 /* } */
 
 
-#text-messenger-send-contactss-page-01{
+.text-messenger-send-contactss-page-01{
 	display:none;
 	margin:10%;
 	margin-top:-14%;
@@ -1005,6 +1005,7 @@ input[id="chat-setting-check02"]{
 	position: absolute;
 	margin-left:60%;
 /* 	margin-top:12%; */
+/* 	z-index:99; */
 }
 
 
