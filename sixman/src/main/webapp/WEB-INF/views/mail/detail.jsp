@@ -36,6 +36,9 @@
                     <span class="material-symbols-outlined"> arrow_drop_down </span>
                     <div id="category-box" style="display: none;">
                         <div class="category-items">
+                            <c:forEach items="${categoryList}" var="category">
+                            <label>${category.name}<input name="category" type="radio" value="${category.no}"><span class="material-symbols-outlined"> close </span></label>
+                        	</c:forEach>
                         </div>
                         <div class="category-footer">
                             <div class="c-btn" onclick="createCategoryModal(true)"><p>추가</p></div>

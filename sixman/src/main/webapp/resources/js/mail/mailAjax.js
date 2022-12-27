@@ -245,7 +245,7 @@ function createCategoryModal(doAjax) {
     close.addEventListener('click', ()=>{div.remove();});
 
     const btn = div.querySelector('button');
-    const input = div.querySelector('input');
+
     btn.addEventListener('click', ()=>{
         createCategoryAjax(doAjax);
         div.remove();

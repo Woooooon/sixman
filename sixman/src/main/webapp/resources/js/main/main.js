@@ -124,3 +124,102 @@ class Popup{
 }
 
 const popup = new Popup;
+
+function alarmAjax() {
+    const httpRequest = new XMLHttpRequest();
+    httpRequest.onreadystatechange = () => {
+        if (httpRequest.readyState === XMLHttpRequest.DONE) {
+                if (httpRequest.status === 200) {
+                    const result = httpRequest.response;
+                    // console.log(result);
+                    const itemCount = document.querySelector('#alarm-count');
+                    const count = result.length;
+
+                    if(count==null || count==0){
+                        itemCount.style.display = 'none';
+                    }else{
+                        itemCount.innerHTML = count;
+                    }
+                    
+                    const box = document.querySelector('#alarm-box #inner-box');
+                    while (box.firstChild) { 
+                        box.removeChild(box.firstChild);
+                    }
+
+                    for(vo of result){
+
+                        let msg = ``;
+                        let f = null;
+                        switch (vo.type) {
+                            case 'MAIL':
+                                msg = `${vo.senderName}(이)가 메일을 보냈습니다. "${vo.title}"`;
+                                f = ()=>{location.href='';}
+                                break;
+                            case 'DOCUMENT':
+                                msg = `${vo.senderName}(이)가 결재를 요청하였습니다. "${vo.title}"`;
+                                f = ()=>{location.href='';}
+                                break;
+                            case 'ADRESS':
+                                msg = `${vo.senderName}(이)가 주소록을 공유하였습니다. "${vo.title}"`;
+                                f = ()=>{location.href='';}
+                                break;
+                            case 'SCHEDULE':
+                                msg = `${vo.senderName}(이)가 일정을 공유하였습니다. "${vo.title}"`;
+                                f = ()=>{location.href='';}
+                                break;
+                        }
+                        const div = document.createElement('div');
+                        div.classList.add('alarm-item');
+                        const item = 
+                        `            
+                        <div>
+                            <div class="item-header">
+                                <div>[${vo.type}]</div>
+                                <div>${vo.enrollDate}</div>
+                            </div>
+                            <div class="item-title">${msg}</div>
+                        </div>
+                        <span class="t-btn material-symbols-outlined"> close </span>
+                        `
+
+                        div.innerHTML = item;
+            
+                        div.addEventListener('click', ()=>{
+                            checkAjax(vo.no, vo.type);
+                            f();
+                        });
+
+                        box.append(div);
+                    }
+
+                } else {
+                alert('Request Error!');
+                }
+        }
+    };
+
+    httpRequest.open('post', '/sixman/alarm');
+    httpRequest.responseType = "json";
+    httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
+    httpRequest.send();
+}
+
+function checkAjax(no, type) {
+    console.log(no, type);
+    const httpRequest = new XMLHttpRequest();
+    httpRequest.onreadystatechange = () => {
+        if (httpRequest.readyState === XMLHttpRequest.DONE) {
+                if (httpRequest.status === 200) {
+
+                } else {
+                alert('Request Error!');
+                }
+        }
+    };
+
+    httpRequest.open('post', '/sixman/alarm/check');
+    httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
+    httpRequest.send(`no=${no}&type=${type}`);
+}
+
+// 

@@ -12,7 +12,7 @@
 <script defer src="${path}/resources/js/mail/mailList.js"></script>
 <script defer src="${path}/resources/js/mail/mailAjax.js"></script>
 <script>
-	window.onload = ()=>{
+	window.addEventListener('load', function() {
 		let listType = '${listType}';
 		if(listType!=null){
 			if(listType == '') {listType = null;}
@@ -20,7 +20,7 @@
 		}else{
 			mailAjax(1);
 		}
-	}
+	});
 </script>
 </head>
 <body>

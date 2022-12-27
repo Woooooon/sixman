@@ -274,7 +274,7 @@
 			${n}
 		</foreach>
 		AND
-		R_MAIL = #{loginMember.email};
+		R_MAIL = #{loginMember.email}
 	</update>
 	
 	<insert id="createCategory">

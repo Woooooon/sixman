@@ -24,7 +24,7 @@
 <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
 <main class="main-box">
 
-    <form action="" method="POST" enctype="multipart/form-data">
+    <form action="" method="POST" enctype="multipart/form-data" onsubmit="return false">
 
         <div  id="notice-box" class="box">
             <div class="title-box">
@@ -77,6 +77,31 @@
                 ['height', ['height']]
             ]
         });
+    });
+
+    const form = document.querySelector('form');
+    console.log(form);
+    form.addEventListener('submit', (e)=>{
+        console.log('mail is submit');
+        const senders = document.querySelectorAll('input[type=email]');
+
+        let sender = '';
+        for (let i = 0; i < senders.length; i++) {
+            const element = senders[i];
+
+            sender += element.value;
+
+            if(i!=senders.length-1){
+                sender += ',';
+            }
+        }
+
+        const titleInput = document.querySelector('input[name=title]');
+
+
+        sendMsg('${loginMember.name}', titleInput.value, 'MAIL', sender);
+
+        return false;
     });
 </script>
 </html>

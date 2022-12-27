@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="${path}/resources/css/main.css">
     <link rel="stylesheet" href="${path}/resources/css/reset.css">
     <script src="${path}/resources/js/main/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 </head>
 <body>
 
@@ -20,7 +21,7 @@
         <section id="my-menu">
             <article id="alarm" class="center">
                 <span class="material-symbols-outlined"> notifications </span>
-                <div id="alarm-count">1</div>
+                <div id="alarm-count"></div>
             </article>
             <article id="msg" class="center">
                 <span class="material-symbols-outlined"> sms </span>
@@ -32,33 +33,11 @@
     </header>
     <div id="alarm-box">
         <div id="inner-box">
-
-            <div class="alarm-item">
-                <div>
-                    <div class="item-header">
-                        <div>[카테고리]</div>
-                        <div>2022:00:00:00</div>
-                    </div>
-                    <div class="item-title">ooo님이 보낸메일 "제목 제sadfasdf목 제목"</div>
-                </div>
-                <span class="t-btn material-symbols-outlined"> close </span>
-            </div>
-
-            <div class="alarm-item">
-                <div>
-                    <div class="item-header">
-                        <div>[카테고리]</div>
-                        <div>2022:00:00:00</div>
-                    </div>
-                    <div class="item-title">ooo님이 보낸메일 "제목 제sadfasdf목 제목"</div>
-                </div>
-                <span class="t-btn material-symbols-outlined"> close </span>
-            </div>
-
         </div>
     </div>
     <aside id="main-aside">
         <ul id="menu-list">
+            <li><a>공지사항</a></li>
             <li><a>근태관리</a></li>
             <li><a>프로젝트</a></li>
             <li><a>전자문서</a></li>
@@ -83,6 +62,11 @@
 </body>
 <script>
     const menuMap = new Map();
+
+    menuMap.set("공지사항", [
+        {icon: "event_note", title: "공지사항"},
+        {title: "공지사항", url: "${path}/notice/list"}
+    ]);
 
     menuMap.set("근태관리", [
         {icon: "approval", title: "근태관리"},
@@ -220,5 +204,96 @@
         });
     });
 
+    window.onload = ()=>{
+        alarmAjax();
+        connectSC();
+    }
+
+    // 웹소켓
+    var socket = null;
+
+    function connectSC() {
+        socket = new SockJS("${path}/alarmSocket");
+
+        
+        socket.onmessage = onMessage;
+        socket.onopen = onOpen;
+        socket.onclose = onClose;
+
+        console.log(socket);
+    }
+
+    function onMessage(m) {
+        const data = m.data;
+        const curMember = '${loginMember.no}';
+
+        const datas = data.split('#');
+        const type = datas[0];
+        const msg = datas[1];
+
+        console.log(data);
+
+        let f = null;
+        switch (type) {
+            case 'MAIL':
+                f = ()=>{location.href='';}
+                break;
+            case 'DOCUMENT':
+                f = ()=>{location.href='';}
+                break;
+            case 'ADRESS':
+                f = ()=>{location.href='';}
+                break;
+            case 'SCHEDULE':
+                f = ()=>{location.href='';}
+                break;
+        }
+
+        const today = new Date();
+
+        const div = document.createElement('div');
+        div.classList.add('alarm-item');
+
+        const item = 
+        '<div><div class="item-header"><div>['+type+']</div><div>'+today.toLocaleTimeString()+'</div></div><div class="item-title">'+msg+'</div></div><span class="t-btn material-symbols-outlined"> close </span>'
+        div.innerHTML = item;
+
+        div.addEventListener('click', ()=>{
+            checkAjax(vo.no, vo.type);
+            f();
+        });
+
+        const box = document.querySelector('#alarm-box #inner-box');
+        box.prepend(div);
+    }
+
+    function onOpen(params) {
+            
+    }
+
+    function onClose(params) {
+            
+    }
+
+    function sendMsg(name, title, type, sender) {
+
+        let msg = ``;
+        switch (type) {
+            case 'MAIL':
+                msg = name + '(이)가 메일을 보냈습니다. "' + title + '"';
+                break;
+            case 'DOCUMENT':
+                msg = name + '(이)가 결재를 요청하였습니다. "' + title + '"';
+                break;
+            case 'ADRESS':
+                msg = name + '(이)가 주소록을 공유하였습니다. "' + title + '"';
+                break;
+            case 'SCHEDULE':
+                msg = name + '(이)가 일정을 공유하였습니다. "' + title + '"';
+                break;
+        }
+        
+        socket.send('${loginMember.no}#'+ type + '#' + msg + '#' + sender);
+    }
 </script>
 </html>
