@@ -92,11 +92,14 @@ public class MailController {
 		return "mail/write";
 	}
 	
-	@GetMapping("update")
-	public String update(String no , Model model) {
-		MailVo vo = ms.selectOne(no);
+	@GetMapping("reWrite")
+	public String update(String no , String save, Model model) {
 		if(no!=null) {
-			model.addAttribute("vo", vo);			
+			MailVo vo = ms.selectOne(no);
+			model.addAttribute("vo", vo);
+		}
+		if(save!=null) {
+			model.addAttribute("save", save);
 		}
 		return "mail/write";
 	}
@@ -114,7 +117,14 @@ public class MailController {
 		String rootPath = session.getServletContext().getRealPath("/");
 		List<AttachmentVo> fileList = FileUnit.uploadFile(vo.getFile(), rootPath, "upload/notice");
 		vo.setFileList(fileList);
-		int result = ms.write(vo);
+		
+		int result = 0;
+		if(vo.getMailNo()==null) {
+			result = ms.write(vo);			
+		}else {
+			result = ms.update(vo);
+		}
+		
 		
 		if(result > 0) {
 			return "redirect:/mail/list";
@@ -124,7 +134,7 @@ public class MailController {
 	}
 	
 	@GetMapping("detail")
-	public String detail(String no, Model model, HttpSession session) {
+	public String detail(String no, String save, Model model, HttpSession session) {
 		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
 		Map<String, Object> map = new HashMap<>();
 		map.put("loginMember", loginMember);
@@ -142,6 +152,11 @@ public class MailController {
 		MailVo vo = ms.selectOne(no);
 		model.addAttribute("vo", vo);
 		model.addAttribute("categoryList", categoryList);
+		
+		if(save!=null) {
+			model.addAttribute("save", save);
+		}
+		
 		if(vo==null) {return 	"redirect:/mail/list";}
 		return "mail/detail";
 	}

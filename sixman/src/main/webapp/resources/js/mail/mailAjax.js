@@ -48,8 +48,13 @@ function mailAjax(page, search, listTpye, categoryNo) {
                             text += `<span class="material-symbols-outlined"> mail </span>`;
                         }
 
+                        let save = '';
+                        if(vo.saveYn == 'Y'){
+                            save = '&save=true'
+                        }
+
                         text += `<p>${vo.userName}</p>`;
-                        text += `<p onclick="location.href = '/sixman/mail/detail?no=${vo.mailNo}'">${vo.title}</p>`;
+                        text += `<p onclick="location.href = '/sixman/mail/detail?no=${vo.mailNo+save}'">${vo.title}</p>`;
                         text += `<p>${vo.sendTime}</p>`;
 
                         div.innerHTML = text;

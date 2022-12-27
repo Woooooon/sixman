@@ -64,4 +64,12 @@ public class MailDao {
 		return sst.selectList("mailMapper.getSender", no);
 	}
 
+	public int update(SqlSessionTemplate sst, MailVo vo) {
+		return sst.update("mailMapper.update", vo);
+	}
+
+	public int sendUpdate(SqlSessionTemplate sst, MailVo vo) {
+		return sst.update("mailMapper.sendUpdate", vo);
+	}
+
 }
