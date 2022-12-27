@@ -114,4 +114,27 @@ public class MailService {
 		return dao.changeCategory(sst, map);
 	}
 
+	@Transactional
+	public int update(MailVo vo) {
+		int result1 = dao.update(sst, vo);
+		int result2 = dao.sendUpdate(sst, vo);
+		
+		String no = vo.getMailNo();
+		List<AttachmentVo> fileList = vo.getFileList();
+		int result3 = 1;
+		if(fileList!=null) {
+			for(AttachmentVo fv : fileList) {
+				fv.setSubNo(no);
+			}
+			
+			Map<String, Object> map = new HashMap<>();
+			map.put("list", fileList);
+			map.put("tableName","MAIL");
+			
+			result3 = fDao.uploadAll(sst, map);
+		}
+		
+		return result1 * result2 * result3;
+	}
+
 }

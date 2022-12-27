@@ -20,6 +20,7 @@
 		    JOIN MAIL M ON R.MAIL_NO = M.NO
 		    JOIN MEMBER RE_U ON RE_U.EMAIL = R.EMAIL
 		    JOIN MEMBER SE_U ON SE_U.NO = M.SEND_USER
+		    WHERE SAVE_YN = 'N'
 		    UNION ALL
 		    SELECT 
 		        R.NO,

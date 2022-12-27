@@ -24,9 +24,11 @@
 <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
 <main class="main-box">
 
-    <form action="" method="POST" enctype="multipart/form-data" onsubmit="return false">
-
-        <div  id="notice-box" class="box">
+    <form action="/sixman/mail/write" method="POST" enctype="multipart/form-data">
+        <c:if test="${not empty save}">
+            <input type="hidden" name="mailNo" value="${vo.no}">
+        </c:if>
+        <div id="notice-box" class="box">
             <div class="title-box">
                 <a href="${path}/mail/list" class="material-symbols-outlined"> chevron_left </a>
                 <div class="b-title">메일 작성</div>
@@ -54,8 +56,8 @@
                 <input name="saveYn" class="c-btn" type="submit" value="임시저장">
             </div>
 
-        </form>
-    </div>
+		</div>
+	</form>
 
 </main>
 
@@ -80,9 +82,7 @@
     });
 
     const form = document.querySelector('form');
-    console.log(form);
     form.addEventListener('submit', (e)=>{
-        console.log('mail is submit');
         const senders = document.querySelectorAll('input[type=email]');
 
         let sender = '';
@@ -100,8 +100,6 @@
 
 
         sendMsg('${loginMember.name}', titleInput.value, 'MAIL', sender);
-
-        return false;
     });
 </script>
 </html>

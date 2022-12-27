@@ -59,6 +59,7 @@
 	        LEFT JOIN M_DRAWER D ON M.NO = D.MAIL_NO 
 	        LEFT JOIN M_CATEGORY C ON C.NO = D.CATEGORY_NO
 	        WHERE  R.EMAIL = #{userEmail}
+	        AND SAVE_YN = 'N'
 	        AND (USER_NO = ${userNo} OR USER_NO IS NULL)
 		</if>
 		</trim>
@@ -97,6 +98,7 @@
 		    , CATEGORY_NAME
 		    , ISSENDER
 		    , CHECK_YN
+		    , SAVE_YN
 		FROM 
 		(
 		    SELECT *
@@ -117,6 +119,7 @@
 		            ,C.NAME AS CATEGORY_NAME
 		            ,'Y' as ISSENDER
 		            ,'Y' as CHECK_YN
+		            , SAVE_YN
 		        from mail m
 		        join member mm on mm.no = m.SEND_USER
 		        LEFT JOIN M_DRAWER D ON M.NO = D.MAIL_NO 
@@ -135,17 +138,18 @@
 		        UNION ALL
 		        select 
 		            M.NO AS MAIL_NO
-		            ,M.SEND_USER AS USER_NO
-		            ,M2.NAME AS USER_NAME
-		            ,M2.EMAIL AS USER_EMAIL
-		            ,R.DELETE_YN
-		            ,M.TITLE
-		            ,M.CONTENT
-		            ,M.SEND_TIME
-		            ,C.NO AS CATEGORY_NO
-		            ,C.NAME AS CATEGORY_NAME
-		            ,'N' AS ISSENDER
-		            ,R.CHECK_YN AS CHECK_YN
+		            , M.SEND_USER AS USER_NO
+		            , M2.NAME AS USER_NAME
+		            , M2.EMAIL AS USER_EMAIL
+		            , R.DELETE_YN
+		            , M.TITLE
+		            , M.CONTENT
+		            , M.SEND_TIME
+		            , C.NO AS CATEGORY_NO
+		            , C.NAME AS CATEGORY_NAME
+		            , 'N' AS ISSENDER
+		            , R.CHECK_YN AS CHECK_YN
+		            , SAVE_YN
 		        from R_MAIL R
 		        JOIN MEMBER M1 ON M1.EMAIL = R.EMAIL
 		        JOIN MAIL M ON R.MAIL_NO = M.NO
@@ -153,6 +157,7 @@
 		        LEFT JOIN M_DRAWER D ON M.NO = D.MAIL_NO 
 		        LEFT JOIN M_CATEGORY C ON C.NO = D.CATEGORY_NO
 		        WHERE  R.EMAIL = #{userEmail}
+		        AND SAVE_YN = 'N'
 		        AND (USER_NO = ${userNo} OR USER_NO IS NULL)
 			</if>
 			</trim>
@@ -189,10 +194,10 @@
 			${userNo},
 			'N',
 			<if test=" saveYn.equals('작성하기') ">
-			'N',
+				'N',
 			</if>
 			<if test=" saveYn.equals('임시저장') ">
-			'Y',
+				'Y',
 			</if>
 			#{title},
 			#{content},
@@ -200,6 +205,25 @@
 			SYSDATE
 		)
 	</insert>
+	
+	<update id="update">
+		UPDATE MAIL
+		SET 
+			TITLE = #{title}
+			, CONTENT = #{content}
+			, SAVE_YN =
+			<if test=" saveYn.equals('작성하기') ">
+				'N'
+			</if>
+			<if test=" saveYn.equals('임시저장') ">
+				'Y'
+			</if>
+			, MODIFY_TIME = SYSDATE
+		WHERE NO = ${mailNo}
+	</update>
+	
+	<update id="sendUpdate">
+	</update>
 	
 	<update id="send">
 		insert all

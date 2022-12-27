@@ -84,7 +84,12 @@
             </div>
         </div>
         <div id="board-footer">
-            <div class="btn" onclick="location.href='/sixman/mail/update?no=${vo.mailNo}'"><p>다시쓰기</p></div>
+        	<c:if test="${empty save}">
+	            <div class="btn" onclick="location.href='/sixman/mail/reWrite?no=${vo.mailNo}'"><p>다시쓰기</p></div>
+        	</c:if>
+       		<c:if test="${not empty save}">
+            	<div class="btn" onclick="location.href='/sixman/mail/reWrite?no=${vo.mailNo}&save=true'"><p>다시쓰기</p></div>
+        	</c:if>
         </div>
     </div>
 
