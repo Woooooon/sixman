@@ -8,6 +8,7 @@ import lombok.Data;
 public class AttendanceVo {
 	
 	private String no;
+	private String name;
 	private String memberNo;
 	private String status;
 	private String start;

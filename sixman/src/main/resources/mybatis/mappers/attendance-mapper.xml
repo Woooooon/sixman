@@ -5,7 +5,23 @@
 <mapper namespace="attendanceMapper">
 
 	<select id="selectList" resultType="com.kh.sixman.attendance.vo.AttendanceVo">
-		SELECT * FROM ATTENDANCE
+		SELECT 
+			M.NO
+			,M.NAME
+			,A.MEMBER_NO
+			,A.STATUS
+			,A.WORK_DAY
+			,A."START"
+			,A."END"
+			,A.WORK_TIME
+			FROM MEMBER M
+			, ATTENDANCE A
+		WHERE A.MEMBER_NO = M.NO
+	</select>
+	
+	<select id="countList" resultType="int">
+		SELECT COUNT(*)
+		FROM ATTENDANCE
 	</select>
 	
 	<insert id="insertStart">
@@ -14,6 +30,7 @@
 		   "NO",
 			"MEMBER_NO",
 			STATUS,
+			WORK_DAY
 			"START",
 			"END",
 			"WORK_TIME"
@@ -23,6 +40,7 @@
 		    SEQ_ATTENDANCE_NO.NEXTVAL,
 		    1,
 		    1,
+		    SYSDATE,
 		    SYSDATE,
 		    SYSDATE,
 		    1
