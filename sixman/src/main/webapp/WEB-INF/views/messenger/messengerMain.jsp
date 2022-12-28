@@ -22,7 +22,7 @@
 					<div class="chatroomlist-first-page" id="chatroomlist-first-page">
 						<div class="title-box">
 							<div class="title-text01">사내 대화방</div>
-							<button type="button" class="material-symbols-outlined" id="qwe" >add_circle</button>
+							<button onclick="qwe_chat_onclick();" class="material-symbols-outlined" id="qwe" >add_circle</button>
 						</div>
 
 						<div class='bottom-area' id='ba'></div>
@@ -1064,12 +1064,24 @@
 			<!-- 채팅방 목록 화면에서 채팅방 생성 화면으로.. -->
 			const qwe = document.querySelector('#qwe');
 
-			qwe.onclick = function () {
+// 			qwe.onclick = function () {
+			function qwe_chat_onclick() {
 // 				alert('ㅇㅇ');
 
-// 				$('.chatroomlist-first-page').hide();
-// 				$('.whochat-page-first').show();
-				function 
+				$('.chatroomlist-first-page').hide();
+				$('.whochat-page-first').show();
+// 				function 
+			$.ajax({
+// 				url:"http://127.0.0.1:8888/sixman/chat/chatwantfirst",
+				url:"/sixman/chatwantfirst",
+// 				type:"POST" ,
+				success:function(x){
+					alert(x);
+				},
+				error:function(){
+						alert("연결x");
+					}
+				});
 			}
 			
 			
