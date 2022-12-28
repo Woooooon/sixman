@@ -15,7 +15,7 @@ public class AdminInterceptor implements HandlerInterceptor{
 			throws Exception {
 		HttpSession session = request.getSession();
 		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
-		if(loginMember != null && "3".equals(loginMember.getEntrustNo())) {
+		if(loginMember != null && "3".equals(loginMember.getAuthorizeNo())) {
 			return true;
 		}
 		
