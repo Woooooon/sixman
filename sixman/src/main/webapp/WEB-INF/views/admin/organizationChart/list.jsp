@@ -6,9 +6,7 @@
         <title>Insert title here</title>
         <link rel="stylesheet" href="<c:url value='/resources/css/admin/organizationChart/list.css'/>" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,700,1,200" />
-        <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
         <script defer src="<c:url value='/resources/js/admin/organizationChart/list.js'/>"></script>
-        <link rel="stylesheet" href="/sixman\resources\jstree\default\style.min.css" />
         <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
         <script src="https://kit.fontawesome.com/ae846b135b.js" crossorigin="anonymous"></script>
     </head>
@@ -167,7 +165,7 @@
                                     </select>
                                     <select name="authorizeList" id="">
                                     <c:forEach items="${authorizeList}" var="j">
-                                        <option value="${j.no}" <c:if test="${j.no eq i.authorizeNo}">selected</c:if>>${j.level}</option>
+                                        <option value="${j.no}" <c:if test="${j.no eq i.authorizeNo}">selected</c:if>>${j.rank}</option>
                                         </c:forEach>
                                     </select>
                                     <p>${i.joinDate}</p>

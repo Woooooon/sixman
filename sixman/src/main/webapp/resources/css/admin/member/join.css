@@ -388,3 +388,125 @@ select {
 .error:focus {
     outline-color: #e85c5c;
 }
+
+
+
+/* 부서목록 */
+
+.dept-title {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: 1px solid var(--main-color-dark);
+    padding: 3px 0;
+    margin-bottom: 10px;
+}
+
+.dept-title span {
+    color: var(--main-color);
+    margin-right: 5px;
+}
+
+.dept-title p {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.teamList-item,
+.deptList-item {
+    width: 70%;
+    border: 1px solid var(--main-color);
+    border-radius: 2px;
+    margin: 4px 0;
+    transition: 0.2s ease-in-out;
+}
+
+.teamList-item label > input,
+.deptList-item label > input {
+    display: none;
+}
+
+.teamList-item .toggleBtn,
+.deptList-item .toggleBtn {
+    padding: 3px 4px;
+    display: flex;
+    background-color: var(--main-color);
+    align-items: center;
+    color: #fff;
+    margin-right: 5px;
+    transition: 0.2s ease-in-out;
+}
+
+.teamList-item .toggleBtn > span,
+.deptList-item .toggleBtn > span {
+    font-size: 15px;
+    transition: 0.4s ease-in-out;
+}
+
+.teamList-item > label,
+.deptList-item > label {
+    width: 100%;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.teamList-item {
+    margin-left: 23px;
+}
+
+.teamList-item ~ li > .memberList-item {
+    width: 70%;
+    border: 1px solid var(--main-color);
+    border-radius: 2px;
+    margin: 4px 0;
+    margin-left: 46px;
+}
+
+.deptList-item ~ li > .memberList-item {
+    width: 70%;
+    border: 1px solid var(--main-color);
+    border-radius: 2px;
+    margin: 4px 0;
+    margin-left: 23px;
+}
+
+.memberList-item > a {
+    font-size: 12px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #000;
+}
+.memberList-item > a > span {
+    margin-right: 4px;
+    color: var(--main-color);
+}
+
+.teamList-item:has(input:checked),
+.deptList-item:has(input:checked) {
+    border: 1px solid var(--main-color-dark);
+    background-color: var(--main-color-dark);
+    color: #fff;
+}
+
+.teamList-item:has(input:checked) .toggleBtn,
+.deptList-item:has(input:checked) .toggleBtn {
+    background-color: var(--main-color-dark);
+}
+.teamList-item:has(input:checked) .toggleBtn span,
+.deptList-item:has(input:checked) .toggleBtn span {
+    transform: rotate(180deg);
+}
+
+.teamList-item ~ li,
+.deptList-item ~ li {
+    max-height: 0px;
+    overflow: hidden;
+}
+
+.teamList-item:has(input:checked) ~ li,
+.deptList-item:has(input:checked) ~ li {
+    max-height: none;
+}

@@ -101,7 +101,7 @@
                             </figure>
                             <div class="header">
                                 <span class="material-symbols-outlined">person_add</span>
-                                <label>사원 등록</label>
+                                <label>상세 페이지</label>
                             </div>
                             <div class="wrap">
                                 <div class="info-wrap">
@@ -143,7 +143,7 @@
                                     <div class="right-info">
                                         <div id="id" class="write">
                                             <label for="">사 번</label>
-                                            <input type="text" name="id" placeholder="영,숫자로만 입력하세요." value="${selectMember.id}"/>
+                                            <input type="text" name="id" placeholder="영,숫자로만 입력하세요." value="${selectMember.id}" readonly/>
                                             <span>*</span>
                                         </div>
                                         <div id="name" class="write">
@@ -159,7 +159,7 @@
                                             <label for="">권 한</label>
                                             <select name="authorizeNo">
                                                 <c:forEach items="${authorizeList}" var="i">
-                                                    <option value="${i.no}" <c:if test="${selectMember.authorizeNo eq i.no}">selected</c:if>>${i.level}</option>
+                                                    <option value="${i.no}" <c:if test="${selectMember.authorizeNo eq i.no}">selected</c:if>>${i.rank}</option>
                                                 </c:forEach>
                                             </select>
                                         </div>
@@ -191,7 +191,7 @@
                                 </div>
                                 <div id="submit">
                                     <input type="button" id="submitBtn" value="수 정" />
-                                    <input type="button" value="삭 제" />
+                                    <input type="button" id="deleteBtn" value="삭 제" />
                                 </div>
                             </div>
                         </article>
@@ -201,7 +201,7 @@
                                     <h2>중요파일 등록</h2>
                                 </div>
                                 <div id="profile-pic">
-                                    <div class="addfile">
+                                    <div class="addfile" id="profile-wrap">
                                         <span>프로필사진</span>
                                         <c:if test="${empty selectMember.fileNo}">
                                         <button type="button" class="plus" id="add-pic">
@@ -217,7 +217,7 @@
                                         </c:if>
                                     </div>
                                     <c:if test="${not empty selectMember.fileNo}">
-                                    <input type="checkbox" class="hide" name="proflieNo" value="${selectMember.fileNo}"/> 
+                                    <input type="checkbox" class="hide" name="profileNo" value="${selectMember.fileNo}"/> 
                                     <div id="file-info" class="profileInfo"> 
                                         <div class="checked"> 
                                             <span class="material-symbols-outlined">image</span> 
@@ -308,19 +308,21 @@
 
                                 <div class="att-filelist">
                                     <c:forEach items="${selectMember.evidenceFileList}" var="i">
-                                        <input type="checkbox" class="hide" name="evidenceNo" value="${i.no}"/> 
-                                        <div id="file-info"> 
-                                        <input type="checkbox" class="check_list" value="${i.no}"/> 
-                                        <div class="checked"> 
-                                            <span class="material-symbols-outlined">draft</span> 
-                                        </div> 
-                                        <label for=""> 
-                                        ${i.originName}
-                                        </label> 
-                                        <button type="button" class="remove"> 
-                                            <span id="remove-file" class="material-symbols-outlined">remove</span>삭 제 
-                                        </button> 
-                                    </div>
+                                        <input type="checkbox" class="hide attcheck" name="evidenceNo" value="${i.no}"/> 
+                                        <div class="att-wrap">
+                                            <div id="file-info"> 
+                                                <div class="checked"> 
+                                                    <input type="checkbox" class="check_list savaAtt" value="${i.no}"/> 
+                                                    <span class="material-symbols-outlined">draft</span> 
+                                                </div> 
+                                                <label for=""> 
+                                                ${i.originName}
+                                                </label> 
+                                                <button type="button" class="remove"> 
+                                                    <span id="remove-file" class="material-symbols-outlined">remove</span>삭 제 
+                                                </button> 
+                                            </div>
+                                        </div>
                                     </c:forEach>
                                 </div>
                             </div>

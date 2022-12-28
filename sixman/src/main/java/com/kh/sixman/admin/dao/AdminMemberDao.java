@@ -52,7 +52,7 @@ public class AdminMemberDao {
 		return sst.selectOne("memberMapper.selectOne", no);
 	}
 
-	public List<AttachmentVo> getfile(SqlSessionTemplate sst, String no, String tableName) {
+	public List<AttachmentVo> getFile(SqlSessionTemplate sst, String no, String tableName) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("no", no);
 		map.put("tableName", tableName);
@@ -72,6 +72,10 @@ public class AdminMemberDao {
 		map.put("no", no);
 		map.put("tableName", tableName);
 		return sst.delete("memberMapper.deleteFile", map);
+	}
+
+	public int updateMemberDetail(SqlSessionTemplate sst, MemberVo vo) {
+		return sst.update("memberMapper.updateMemberDetail", vo);
 	}
 
 }

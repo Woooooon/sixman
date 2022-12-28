@@ -53,12 +53,15 @@ public class AdminMemberController {
 		List<AuthorizeVo> authorizeList = adminMemberService.authorizeList();
 		List<PositionVo> positionList = positionService.positionList();
 		List<DeptVo> deptList = deptService.daptList();
+		List<MemberVo> memberListAll = memberService.selectMemberListAll();
+		List<DeptVo> subDeptList = deptService.subList();
 		
+		model.addAttribute("subDeptList", subDeptList);
 		model.addAttribute("deptList", deptList);
 		model.addAttribute("positionList", positionList);
 		model.addAttribute("bankList", bankList);
 		model.addAttribute("authorizeList", authorizeList);
-		
+		model.addAttribute("memberListAll", memberListAll);
 		return "admin/member/join";
 	}
 	
@@ -81,7 +84,7 @@ public class AdminMemberController {
 		int result = adminMemberService.join(vo);
 		
 		if(result > 0) {
-			return "redirect:/admin/employee/list?page=1"; 
+			return "redirect:/admin/employee/list"; 
 		}
 		
 		return "redirect:/main/mainPage";
@@ -142,8 +145,11 @@ public class AdminMemberController {
 
 		int result = adminMemberService.updateMemberDetail(vo, profileNo, accountNo, resumeNo, evidenceNo);
 		
+		if(result > 0) {
+			return "redirect:/admin/employee/list"; 
+		}
 		
-		return "admin/member/detail";
+		return "redirect:/main/mainPage";
 	}
 	
 	

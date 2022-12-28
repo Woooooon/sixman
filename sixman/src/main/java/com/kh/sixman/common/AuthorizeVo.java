@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class AuthorizeVo {
 	private String no;
-	private String level;
+	private String rank;
 }
