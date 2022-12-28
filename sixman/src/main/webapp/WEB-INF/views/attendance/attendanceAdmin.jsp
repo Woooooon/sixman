@@ -53,7 +53,7 @@
 }
 
 #notice-box{
-    padding: 20px;
+    padding: 40px;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -206,6 +206,7 @@
 #date-btn{
     padding-right: 15px;
     width: 100px;
+    border: none;
 }
 
 .search-bar{
@@ -377,27 +378,28 @@
     <!-- 위에는 모달 -->
     <div id="main-content">
         <div>
-            <div id="search-box" class="box">
-                <div id="search-name">사원이름</div>
-                <div>   
-                    <select name="" id="" style="font-size: 1em; width:80px; height:30px;">
-                        <option value="first">심원용</option>
-                        <option value="second">양수철</option>
-                        <option value="third">김수철</option>
-                        <option value="four">김철수</option>
-                    </select>
+            <form action="/sixman/attendance/admin" method="post">
+                <div id="search-box" class="box">
+                    <div id="search-name">사원이름</div>
+                    <div>   
+                        <select name="name" id="" style="font-size: 1em; width:80px; height:30px;">
+                            <c:forEach items="${memberList}" var="x">
+                                <option>${x.name}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                    <div></div>
+                    <div id="search-font">검색기간</div>
+                    <div id="date">
+                        <input id="start-day" type="date" style="width: 100px;">
+                        ~
+                        <input id="end-day" type="date" style="width: 100px;">
+                    </div>
+                    <div></div>
+                    <div><input class="btn" id="date-btn" type="submit" value="검색"></div>
+                    <div></div>
                 </div>
-                <div></div>
-                <div id="search-font">검색기간</div>
-                <div id="date">
-                    <input id="start-day" type="date" style="width: 100px;">
-                    ~
-                    <input id="end-day" type="date" style="width: 100px;">
-                </div>
-                <div></div>
-                <div id="date-btn" class="btn">검색</div>
-                <div></div>
-            </div>
+            </form>
         </div>
         <div>
             <div id="notice-box" class="box">
@@ -410,23 +412,26 @@
                         <p>추가근무시간</p>
                         <p>총 근무시간</p>
                     </div>
-                    <div class="list-item"> <p>2022-11-28</p> <p>심원용</p> <p>09:00</p> <p>18:00</p> <p>0</p> <p>8</p></div>
-                    <div class="list-item"> <p>2022-11-27</p> <p>심원용</p> <p>09:00</p> <p>18:00</p> <p>0</p> <p>8</p></div>
-                    <div class="list-item"> <p>2022-11-26</p> <p>심원용</p> <p>09:00</p> <p>18:00</p> <p>0</p> <p>8</p></div>
-                    <div class="list-item"> <p>2022-11-25</p> <p>심원용</p> <p>09:00</p> <p>18:00</p> <p>0</p> <p>8</p></div>
-                    <div class="list-item"> <p>2022-11-24</p> <p>심원용</p> <p>09:00</p> <p>18:00</p> <p>0</p> <p>8</p></div>
+                    <c:forEach items="${selectMemberList}" var="x">
+                        <div class="list-item">
+                            <p>${x.workDay}</p>
+                            <p>${x.name}</p>
+                            <p>${x.start}</p>
+                            <p>${x.end}</p>
+                            <p></p>
+                            <p></p>
+                        </div>
+                    </c:forEach>
                    
                 </div>
                 <div class="page-box">
-                    <span class="material-symbols-outlined"> keyboard_double_arrow_left </span>
-                    <span class="material-symbols-outlined"> chevron_left </span>
-                    <div class="page-btn checked-p-btn">1</div>
-                    <div class="page-btn">2</div>
-                    <div class="page-btn">3</div>
-                    <div class="page-btn">4</div>
-                    <div class="page-btn">5</div>
-                    <span class="material-symbols-outlined"> chevron_right </span>
-                    <span class="material-symbols-outlined"> keyboard_double_arrow_right </span>
+                    <span class="material-symbols-outlined" <c:if test="${pv.currentPage ne 1}">onclick="location.href='/sixman/attendance/admin?page=1'"</c:if>> keyboard_double_arrow_left </span>
+                    <span class="material-symbols-outlined" <c:if test="${pv.currentPage ne 1}">onclick="location.href='/sixman/attendance/admin?page=${pv.currentPage - 1}'"</c:if>> chevron_left </span>
+                    <c:forEach var="i" begin="${pv.startPage}" end="${pv.endPage}">
+                    <div class="page-btn <c:if test="${i eq pv.currentPage}"> checked-p-btn</c:if>" onclick="location.href='/sixman/attendance/adminpage=${i}'">${i}</div>
+                    </c:forEach>
+                    <span class="material-symbols-outlined" <c:if test="${pv.maxPage ne pv.currentPage}">onclick="location.href='/sixman/attendance/admin?page=${pv.currentPage + 1}'"</c:if>> chevron_right </span>
+                    <span class="material-symbols-outlined" <c:if test="${pv.maxPage ne 1 and pv.maxPage eq pv.currentPage}">onclick="location.href='/sixman/attendance/admin?page=${pv.maxPage}'"</c:if>> keyboard_double_arrow_right </span>
                 </div>
             </div>
         </div>
@@ -436,11 +441,11 @@
             <div id="btn-box">
                 관리자 페이지
             </div>
-            <div id="date-box">2022-11-30</div>
-            <div id="time-box">11:00</div>
+            <div id="date-box">${day}</div>
+            <div id="time-box">${time}</div>
             <div id="result-box">
-                <div>시작: &nbsp<input type="text" style="width: 50px; height: 25px;"></div>
-                <div>종료: &nbsp<input type="text" style="width: 50px; height: 25px;"></div>
+                <div>시작: ${todayWork.start}</div>
+                <div>종료: ${todayWork.end}</div>
             </div>
         </div>
         <div id="work-week" class="box">
