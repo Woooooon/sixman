@@ -38,7 +38,7 @@
                     <div id="category-box" style="display: none;">
                         <div class="category-items">
                             <c:forEach items="${categoryList}" var="category">
-                            <label>${category.name}<input name="category" type="radio" value="${category.no}"><span class="material-symbols-outlined"> close </span></label>
+                            <label>${category.NAME}<input name="category" type="radio" value="${category.NO}"><span class="material-symbols-outlined"> close </span></label>
                         	</c:forEach>
                         </div>
                         <div class="category-footer">

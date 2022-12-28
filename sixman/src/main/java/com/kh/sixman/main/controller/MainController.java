@@ -35,9 +35,10 @@ public class MainController {
 			vo.setUserEmail(loginMember.getEmail());
 			vo.setCategoryName("받은메일함");
 			
-		    RowBounds rb = new RowBounds(1 , 5);
+		    RowBounds rb = new RowBounds(0 , 5);
 		    
 		    List<MailVo> list = mailService.selectList(vo, rb);
+		    System.out.println(list);
 		    
 			Map<String, Object> resultMap = new HashMap<>();
 			
@@ -53,8 +54,9 @@ public class MainController {
 			
 			model.addAttribute("mailMap", resultMap);
 			
-		    RowBounds rb2 = new RowBounds(1 , 7);
+		    RowBounds rb2 = new RowBounds(0 , 7);
 		    List<NoticeVo> noticelist = noticeService.selectList("", rb2);
+		    System.out.println(noticelist);
 		    
 		    model.addAttribute("noticelist", noticelist);
 		}

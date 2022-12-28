@@ -189,14 +189,14 @@
 		        )
 		    </if>
     	    <if test=" filter!=null and filter!=''">
-   		    <if test="'읽은메일'.equals(filter)">
-   		    	AND CHECK_YN = 'Y'
-   		    	AND ISSENDER = 'N'
-	    	</if>
-   		    <if test="'안읽은메일'.equals(filter)">
-   		    	AND CHECK_YN = 'N'
-	    	</if>
-	    </if>
+	   		    <if test="'읽은메일'.equals(filter)">
+	   		    	AND CHECK_YN = 'Y'
+	   		    	AND ISSENDER = 'N'
+		    	</if>
+	   		    <if test="'안읽은메일'.equals(filter)">
+	   		    	AND CHECK_YN = 'N'
+		    	</if>
+		    </if>
 		    ORDER BY SEND_TIME DESC
 		)
 	</select>
