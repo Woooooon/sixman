@@ -4,6 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="attendanceMapper">
 
+<!-- Board  -->
 	<select id="selectList" resultType="com.kh.sixman.attendance.vo.AttendanceVo">
 		SELECT 
 			M.NO
@@ -11,12 +12,13 @@
 			,A.MEMBER_NO
 			,A.STATUS
 			,A.WORK_DAY
-			,A."START"
-			,A."END"
+			,TO_CHAR(A."START", 'HH24:MI') AS "START"
+			,TO_CHAR(A."END", 'HH24:MI') AS "END"
 			,A.WORK_TIME
 			FROM MEMBER M
 			, ATTENDANCE A
 		WHERE A.MEMBER_NO = M.NO
+		ORDER BY "WORK_DAY" DESC, "START" DESC
 	</select>
 	
 	<select id="countList" resultType="int">
@@ -30,7 +32,7 @@
 		   "NO",
 			"MEMBER_NO",
 			STATUS,
-			WORK_DAY
+			"WORK_DAY",
 			"START",
 			"END",
 			"WORK_TIME"
@@ -42,10 +44,57 @@
 		    1,
 		    SYSDATE,
 		    SYSDATE,
-		    SYSDATE,
+		    NULL,
 		    1
 		)
 	
 	</insert>
+	
+	<select id="todayWork" resultType="com.kh.sixman.attendance.vo.WorkTimeVo">
+		SELECT 
+		TO_CHAR("START", 'HH24:MI') AS "START"
+		,TO_CHAR("END", 'HH24:MI') AS "END"
+		FROM 
+		(SELECT "START","END"
+		FROM ATTENDANCE
+		WHERE "WORK_DAY" = #{workDay}
+		ORDER BY "START")
+		WHERE ROWNUM=1
+	</select>
+	
+	<update id="updateEnd">
+		UPDATE ATTENDANCE
+		SET
+		"END" = SYSDATE
+		WHERE "WORK_DAY" = #{end}
+			
+	</update>
+	
+	<!-- admin -->
+	
+	<select id="listMember" resultType="com.kh.sixman.member.vo.MemberVo">
+		SELECT *
+		FROM MEMBER
+	</select>
+	
+	<select id="selectMemberList" resultType="com.kh.sixman.attendance.vo.AttendanceVo">
+			SELECT 
+			M.NO
+			,M.NAME
+			,A.MEMBER_NO
+			,A.STATUS
+			,A.WORK_DAY
+			,TO_CHAR(A."START", 'HH24:MI') AS "START"
+			,TO_CHAR(A."END", 'HH24:MI') AS "END"
+			,A.WORK_TIME
+			FROM MEMBER M
+			, ATTENDANCE A
+		WHERE A.MEMBER_NO = M.NO
+		AND M.NAME = #{name}
+		ORDER BY "WORK_DAY" DESC, "START" DESC
+	</select>
+
+
+
 
 </mapper>

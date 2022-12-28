@@ -7,6 +7,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.sixman.attendance.vo.AttendanceVo;
+import com.kh.sixman.attendance.vo.WorkTimeVo;
+import com.kh.sixman.member.vo.MemberVo;
 
 @Repository
 public class AttendanceDao {
@@ -21,6 +23,24 @@ public class AttendanceDao {
 
 	public int countList(SqlSessionTemplate sst) {
 		return sst.selectOne("attendanceMapper.countList");
+	}
+
+	public int updateEnd(SqlSessionTemplate sst, AttendanceVo vo) {
+		return sst.update("attendanceMapper.updateEnd", vo);
+	}
+
+	public WorkTimeVo todayWork(SqlSessionTemplate sst, WorkTimeVo workVo) {
+		return sst.selectOne("attendanceMapper.todayWork", workVo);
+	}
+	
+/////////////////////////////////////////위에는 board 아래는 admin
+
+	public List<MemberVo> ListMember(SqlSessionTemplate sst) {
+		return sst.selectList("attendanceMapper.listMember");
+	}
+
+	public List<AttendanceVo> selectMemberList(SqlSessionTemplate sst, AttendanceVo vo) {
+		return sst.selectList("attendanceMapper.selectMemberList",vo);
 	}
 
 	
