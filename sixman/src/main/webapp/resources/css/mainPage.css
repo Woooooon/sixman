@@ -83,7 +83,7 @@
 
 .box-item{
     display: grid;
-    grid-template-columns: 2fr 7fr 1fr;
+    grid-template-columns: 2fr 6fr 1fr;
     margin-bottom: 4px;
     gap: 10px;
     width: 100%;

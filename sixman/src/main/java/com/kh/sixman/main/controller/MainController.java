@@ -1,29 +1,97 @@
 package com.kh.sixman.main.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
+import org.apache.ibatis.session.RowBounds;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import com.kh.sixman.mail.service.MailService;
+import com.kh.sixman.mail.vo.MailVo;
+import com.kh.sixman.member.vo.MemberVo;
+import com.kh.sixman.notice.service.NoticeService;
+import com.kh.sixman.notice.vo.NoticeVo;
 
 @Controller
 public class MainController {
 	
-//	@Autowired
-//	JavaMailSender mailSender;
+	@Autowired
+	private NoticeService noticeService;
+	@Autowired
+	private MailService mailService;
 
 	@GetMapping("main")
-	public String main() {
-		
-//		try {
-//			MailHandler mailHandler = new MailHandler(mailSender);
-//			mailHandler.setFrom("sixman@six.kh", "김부장");
-//			mailHandler.setSubject("테스트용 메일");
-//			mailHandler.setText("<h1>M</h1>");
-//			mailHandler.setTo("wjdgks4752@gmail.com");
-//			mailHandler.send();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-		
+	public String main(HttpSession session, Model model) {
+		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
+		if(loginMember!=null) {
+			MailVo vo = new MailVo();
+			vo.setUserNo(loginMember.getNo());
+			vo.setUserEmail(loginMember.getEmail());
+			vo.setCategoryName("받은메일함");
+			
+		    RowBounds rb = new RowBounds(1 , 5);
+		    
+		    List<MailVo> list = mailService.selectList(vo, rb);
+		    
+			Map<String, Object> resultMap = new HashMap<>();
+			
+			vo.setCategoryName("");
+			int listCount = mailService.countList(vo);
+			
+			vo.setFilter("안읽은메일");
+			int nonListCount = mailService.countList(vo);
+			
+			resultMap.put("listCount", listCount);
+			resultMap.put("nonListCount", nonListCount);
+			resultMap.put("list", list);
+			
+			model.addAttribute("mailMap", resultMap);
+			
+		    RowBounds rb2 = new RowBounds(1 , 7);
+		    List<NoticeVo> noticelist = noticeService.selectList("", rb2);
+		    
+		    model.addAttribute("noticelist", noticelist);
+		}
 		return "main/mainPage";
+	}
+	
+	@GetMapping("error")
+	public String error(String code, Model model) {
+		
+		String errorMsg = "";
+		String title = "";
+		String msg = "";
+		
+		switch(code) {
+		case "404": 
+			errorMsg = "Page Not Found";
+			title = "죄송합니다. 현재 찾을 수 없는 페이지를 요청 하셨습니다.";
+			msg = "존재하지 않는 주소를 입력하셨거나,<br>요청하신 페이지의 주소가 변경, 삭제되어 찾을 수 없습니다.";
+			break;
+		case "405": 
+			errorMsg = "Method Not Allowed";
+			title = "The page you are looking for cannot be displayed";
+			msg = "because an invalid method (HTTP verb)is used.";
+			break;
+		case "505": 
+			errorMsg = "HTTP Version Not Supported";
+			title = "Sorry, something went tecnically wrong";
+			msg = "";
+			break;
+		}
+		
+		model.addAttribute("code", code);
+		model.addAttribute("errorMsg", errorMsg);
+		model.addAttribute("title", title);
+		model.addAttribute("msg", msg);
+		
+		return "common/error";
 	}
 	
 }

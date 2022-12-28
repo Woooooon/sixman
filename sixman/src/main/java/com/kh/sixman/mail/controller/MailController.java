@@ -48,7 +48,7 @@ public class MailController {
 	@ResponseBody
 	@PostMapping(value = "list", produces = "application/json; charset=utf8")
 	public String list(@RequestParam Map<String, String> map, HttpSession session) {
-		
+		log.info("mailList ajax 호출");
 		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
 		
 		MailVo vo = new MailVo();
@@ -57,7 +57,8 @@ public class MailController {
 		vo.setCategoryName(map.get("listTpye"));
 		vo.setCategory(map.get("categoryNo"));
 		vo.setSearch(map.get("search"));
-				
+		vo.setFilter(map.get("filter"));
+		
 //		category, keyword, page
 		int pageLimit = 5;
 		int boardLimit = 15;
@@ -71,8 +72,14 @@ public class MailController {
 	    List<MailVo> list = ms.selectList(vo, rb);
 	    
 	    List<Map<String, String>> categoryList = ms.categoryList(loginMember.getNo());
-
+	    
 		Map<String, Object> resultMap = new HashMap<>();
+		
+		if(vo.getCategoryName() == null || vo.getCategoryName().equals("null")) {
+			vo.setFilter("안읽은메일");
+			int nonListCount = ms.countList(vo);
+			resultMap.put("nonListCount", nonListCount);
+		}
 		
 		resultMap.put("pv", pv);
 		resultMap.put("list", list);
@@ -126,7 +133,7 @@ public class MailController {
 		}
 		
 		
-		if(result > 0) {
+		if(result != 0) {
 			return "redirect:/mail/list";
 		}else {
 			return "";
@@ -171,7 +178,7 @@ public class MailController {
 		int result = ms.delete(map);
 		
 		if(result!=1) {
-			
+			log.error("delete 실패");
 		}
 	}
 	
@@ -185,7 +192,7 @@ public class MailController {
 		int result = ms.updateRead(map);	
 		
 		if(result!=1) {
-			
+			log.error("updateRead 실패");
 		}
 	}
 	
@@ -198,12 +205,10 @@ public class MailController {
 		map.put("no", no);
 		map.put("category", category);
 		
-		System.out.println(map);
-		
 		int result = ms.changeCategory(map);
 		
 		if(result!=1) {
-			
+			log.error("updateRead 실패");
 		}
 	}
 	
@@ -214,7 +219,7 @@ public class MailController {
 		int result = ms.createCategory(category, loginMeber.getNo());
 		
 		if(result!=1) {
-			
+			log.error("createCategory 실패");
 		}
 	}	
 	
@@ -228,7 +233,7 @@ public class MailController {
 		int result = ms.restore(map);
 		
 		if(result!=1) {
-			
+			log.error("restore 실패");
 		}
 	}
 	
@@ -242,7 +247,7 @@ public class MailController {
 		int result = ms.realDelete(map);
 		
 		if(result!=1) {
-			
+			log.error("realDelete 실패");
 		}
 	}
 	

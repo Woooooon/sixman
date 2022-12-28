@@ -7,17 +7,21 @@ import java.util.Map;
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.sixman.common.AttachmentVo;
 import com.kh.sixman.file.dao.FileDao;
+import com.kh.sixman.mail.controller.MailHandler;
 import com.kh.sixman.mail.dao.MailDao;
 import com.kh.sixman.mail.vo.MailVo;
 
 @Service
 public class MailService {
-
+	
+	@Autowired
+	JavaMailSender mailSender;
 	@Autowired
 	private SqlSessionTemplate sst;
 	@Autowired
@@ -30,8 +34,11 @@ public class MailService {
 		
 		int result1 = dao.write(sst, vo);
 		int result2 = dao.send(sst, vo);
+		if("작성하기".equals(vo.getSaveYn())) {
+			sendMail(vo);			
+		}
 		
-		String no = Integer.toString(result1);
+		String no = vo.getMailNo();
 		List<AttachmentVo> fileList = vo.getFileList();
 		int result3 = 1;
 		if(fileList!=null) {
@@ -118,7 +125,10 @@ public class MailService {
 	public int update(MailVo vo) {
 		int result1 = dao.update(sst, vo);
 		int result2 = dao.sendUpdate(sst, vo);
-		
+		if("작성하기".equals(vo.getSaveYn())) {
+			sendMail(vo);			
+		}
+				
 		String no = vo.getMailNo();
 		List<AttachmentVo> fileList = vo.getFileList();
 		int result3 = 1;
@@ -135,6 +145,19 @@ public class MailService {
 		}
 		
 		return result1 * result2 * result3;
+	}
+	
+	private void sendMail(MailVo vo) {
+		try {
+			MailHandler mailHandler = new MailHandler(mailSender);
+			mailHandler.setFrom(vo.getUserEmail(), vo.getUserName());
+			mailHandler.setSubject(vo.getTitle());
+			mailHandler.setText(vo.getContent());
+			mailHandler.setMultipleTo(vo.getSender().toArray(new String[0]));
+			mailHandler.send();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

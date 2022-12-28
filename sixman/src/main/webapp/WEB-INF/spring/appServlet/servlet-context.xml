@@ -35,7 +35,7 @@
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
       <beans:property name="maxUploadSize" value="10485760" />
       <beans:property name="defaultEncoding" value="utf-8" />
-   	</beans:bean> 	
+   	</beans:bean>
    	
  	<websocket:handlers>
 		<websocket:mapping handler="alarmHandler" path="/alarmSocket" />
@@ -46,6 +46,21 @@
 	</websocket:handlers>	
     
   	<beans:bean id="alarmHandler" class="com.kh.sixman.alarm.handler.AlarmHandler" />
+  	
+  	<interceptors>
+		<interceptor>
+			<mapping path="/**"/>
+			<exclude-mapping path="/"/>
+			<exclude-mapping path="/error"/>
+			<beans:bean class="com.kh.sixman.common.interceptor.LoginInterceptor"/>
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/admin/**"/>
+			<exclude-mapping path="/"/>
+			<beans:bean class="com.kh.sixman.common.interceptor.AdminInterceptor"/>
+		</interceptor>
+	</interceptors>
 	
 
 	

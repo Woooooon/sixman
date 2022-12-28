@@ -11,10 +11,12 @@
     <link rel="stylesheet" href="${path}/resources/css/main.css">
     <link rel="stylesheet" href="${path}/resources/css/reset.css">
     <script src="${path}/resources/js/main/main.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 </head>
 <body>
-
+    <!-- <iframe src="https://www.youtube.com/embed/NS-NEwEnSqA?autoplay=1&mute=1" allow="autoplay" id="audio" style=" position: absolute; z-index: 10000; "></iframe> -->
+    <audio src="${path}/resources/audio/silence.mp3" autoplay muted></audio>
 	<header id="main-header">
         <section id="logo"></section>
         <section id="event-msg-box"></section>
@@ -197,12 +199,12 @@
         });
     })
 
-    const alarmItems = document.querySelectorAll('.alarm-item');
-    alarmItems.forEach(element => {
-        element.querySelector('span').addEventListener('click', ()=>{
-            element.remove();
-        });
-    });
+    function beep() {
+        console.log(123);
+        $('#player').remove();
+        $('body').append(`<audio id="player" autoplay></audio>`);
+        $("#player").append(`<source src = "${path}/resources/audio/99D4643B5F72118308.mp3" type = "audio/mp3">`);
+    }
 
     window.onload = ()=>{
         alarmAjax();
@@ -220,7 +222,7 @@
         socket.onopen = onOpen;
         socket.onclose = onClose;
 
-        console.log(socket);
+        // console.log(socket);
     }
 
     function onMessage(m) {
@@ -231,7 +233,7 @@
         const type = datas[0];
         const msg = datas[1];
 
-        console.log(data);
+        // console.log(data);
 
         let f = null;
         switch (type) {
@@ -255,16 +257,30 @@
         div.classList.add('alarm-item');
 
         const item = 
-        '<div><div class="item-header"><div>['+type+']</div><div>'+today.toLocaleTimeString()+'</div></div><div class="item-title">'+msg+'</div></div><span class="t-btn material-symbols-outlined"> close </span>'
+        '<div class="item-div"><div class="item-header"><div>['+type+']</div><div>'+today.toLocaleTimeString()+'</div></div><div class="item-title">'+msg+'</div></div><span class="t-btn material-symbols-outlined"> close </span>'
         div.innerHTML = item;
 
-        div.addEventListener('click', ()=>{
+        div.querySelector('.item-div').addEventListener('click', ()=>{
             checkAjax(vo.no, vo.type);
             f();
         });
 
+        div.querySelector('span').addEventListener('click', ()=>{
+            div.remove();
+            checkAjax(vo.no, vo.type);
+        });
+
+        const itemCount = document.querySelector('#alarm-count');
+
+        itemCount.style.display = 'block';
+        itemCount.innerHTML = parseInt(itemCount.innerHTML) + 1;
+
+
+
         const box = document.querySelector('#alarm-box #inner-box');
         box.prepend(div);
+
+        beep();
     }
 
     function onOpen(params) {

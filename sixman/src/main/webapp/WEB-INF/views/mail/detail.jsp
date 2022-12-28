@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="${path}/resources/css/mail/mailDetail.css">
 <script defer src="${path}/resources/js/mail/mailList.js"></script>
 <script defer src="${path}/resources/js/mail/mailAjax.js"></script>
+<script defer src="${path}/resources/js/file/file.js"></script>
 <script>
 	window.onload = ()=>{
         getCategoryList();
@@ -69,7 +70,7 @@
                             <div id="file-list">
                                 <c:forEach items="${vo.fileList}" var="fv">
                                     <div class="file-item">
-                                        <div>${fv.orginName}</div>
+                                        <div>${fv.originName}</div>
                                         <span class="material-symbols-outlined" onclick="download(${fv.no}, 'MAIL')"> download </span>
                                     </div>
                                 </c:forEach>

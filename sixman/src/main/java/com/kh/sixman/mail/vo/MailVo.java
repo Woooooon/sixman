@@ -31,4 +31,5 @@ public class MailVo {
 	private String category;
 	private String categoryName;
 	private String search;
+	private String filter;
 }
