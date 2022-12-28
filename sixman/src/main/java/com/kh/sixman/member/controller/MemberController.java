@@ -23,7 +23,7 @@ public final class MemberController {
 	
 	@PostMapping("")
 	public String login(MemberVo vo, HttpSession session, Model model) {
-		System.out.println(vo);
+		
 		String loginAdminId = vo.getId();
 		
 		String adminId = "admin";
@@ -40,8 +40,6 @@ public final class MemberController {
 			model.addAttribute("alert", "존재하지 않는 회원입니다.");
 			return "member/login";
 		}
-		
-		System.out.println(loginMember);
 		
 		session.setAttribute("loginMember", loginMember);
 		

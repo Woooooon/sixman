@@ -59,7 +59,7 @@
 													<c:if test="${l.teamNo eq i.teamNo}">
 														<li>
 					                                        <div class="memberList-item">
-					                                            <a href=""><span class="material-symbols-outlined">account_box</span>${i.name} ${i.positionName}</a>
+					                                            <a href="/sixman/admin/member/detail?no=${i.no}"><span class="material-symbols-outlined">account_box</span>${i.name} ${i.positionName}</a>
 					                                        </div>
 					                                    </li>													
 													</c:if>

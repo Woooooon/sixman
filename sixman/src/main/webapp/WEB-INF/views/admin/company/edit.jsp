@@ -230,6 +230,58 @@
                         </div>
                         <div class="edit-position">
                             <input type="radio" id="position" name="edit" />
+                            <div class="position-wrap">
+                                <div id="position-title">
+                                    <span class="material-symbols-outlined"> edit_square </span>
+                                    <p>직급 설정</p>
+                                </div>
+                                <div class="position-list">
+                                    <div class="position-item">
+                                        <p class="positionNo">1</p>
+                                        <div>
+                                            <span class="material-symbols-outlined"> assignment_ind </span>
+                                            <p class="positionName">부 장</p>
+                                        </div>
+                                        <span class="material-symbols-outlined remove-btn"> do_not_disturb_on </span>
+                                    </div>
+                                    <div class="position-item">
+                                        <p class="positionNo">1</p>
+                                        <div>
+                                            <span class="material-symbols-outlined"> assignment_ind </span>
+                                            <p class="positionName">부 장</p>
+                                        </div>
+                                        <span class="material-symbols-outlined remove-btn"> do_not_disturb_on </span>
+                                    </div>
+                                    <div class="position-item">
+                                        <p class="positionNo">1</p>
+                                        <div>
+                                            <span class="material-symbols-outlined"> assignment_ind </span>
+                                            <p class="positionName">부 장</p>
+                                        </div>
+                                        <span class="material-symbols-outlined remove-btn"> do_not_disturb_on </span>
+                                    </div>
+                                    <div class="position-item">
+                                        <p class="positionNo">1</p>
+                                        <div>
+                                            <span class="material-symbols-outlined"> assignment_ind </span>
+                                            <p class="positionName">부 장</p>
+                                        </div>
+                                        <span class="material-symbols-outlined remove-btn"> do_not_disturb_on </span>
+                                    </div>
+                                    <div class="position-item">
+                                        <p class="positionNo">1</p>
+                                        <div>
+                                            <span class="material-symbols-outlined"> assignment_ind </span>
+                                            <p class="positionName">부 장</p>
+                                        </div>
+                                        <span class="material-symbols-outlined remove-btn"> do_not_disturb_on </span>
+                                    </div>
+                                </div>
+                                <div class="position-insert">
+                                    <input type="text" />
+                                    <input type="button" value="추 가" />
+                                </div>
+                            </div>
                         </div>
                     </article>
                 </section>
