@@ -33,7 +33,7 @@
                 <div id="mail-list">
                     <div onclick="location.href='${path}/mail/list'">최근메일</div>
                     <c:forEach items="${mailMap.list}" var="vo">
-                    	<div class="box-item" onclick="location.href='${path}/mail/detail?no=${vo.no}'"><p>${vo.userName}</p><p>${vo.title}</p><p>${fn:substring(vo.enrollDate,5,10)}</p></div>
+                    	<div class="box-item" onclick="location.href='${path}/mail/detail?no=${vo.mailNo}'"><p>${vo.userName}</p><p>${vo.title}</p><p>${fn:substring(vo.sendTime,5,10)}</p></div>
                     </c:forEach>
                 </div>
             </article>
