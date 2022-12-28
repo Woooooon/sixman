@@ -101,6 +101,7 @@ public class DocumentController {
    //결재상신 (찐)
    @PostMapping("approve")
    public String Approve(DocumentVo dvo) {
+	   
       return "";
    }
    
@@ -139,7 +140,7 @@ public class DocumentController {
    public String Reference(DocumentVo dvo) {
       return "";
    }
-   
+
    
    //임시보관함(화면)
    @GetMapping("keep")
@@ -163,14 +164,21 @@ public class DocumentController {
    }
    //결재선 작성 (찐)
    @PostMapping("write")
-   public String Write(DocumentVo dvo , HttpSession session) {
+   public String write(DocumentVo dvo , HttpSession session) {
       
-      MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
-      dvo.setSendPay(loginMember.getNo());
+	   MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
+	   dvo.setApNo(loginMember.getNo());
+
       
       String rootPath = session.getServletContext().getRealPath("/");
       List<AttachmentVo> fileList = FileUnit.uploadFile(dvo.getFile(), rootPath, "upload/document");
-      dvo.setFileList(fileList);
+      
+//      dvo.setApNo(loginMember.getNo());
+//      dvo.setSendPay(loginMember.getName());
+//      dvo.setFileList(fileList);
+      
+      
+      
       int result = ds.write(dvo);
       
       if(result > 0) {

@@ -32,7 +32,7 @@ public class DocumentService {
       
       String no = Integer.toString(result1);
       List<AttachmentVo> fileLists = dvo.getFileList();
-      int result3 = 1;
+      int result2 = 1;
       if(fileLists != null) {
          for(AttachmentVo fv : fileLists) {
             fv.setSubNo(no);
@@ -40,13 +40,11 @@ public class DocumentService {
          
          Map<String, Object> map = new HashMap<>();
          map.put("list",fileLists);
-         map.put("tableName","AP_NO");
+         map.put("tableName","DOCUMENT");
          
-         result3= fdao.uploadAll(sst,map);
+         result2= fdao.uploadAll(sst,map);
       }
-      
-//      return result1 * result2 * result3;
-      	return result1  * result3;
+      	return result1  * result2;
    }
 
 public int countList(DocumentVo dvo) {
