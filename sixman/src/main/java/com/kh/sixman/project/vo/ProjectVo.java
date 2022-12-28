@@ -29,4 +29,5 @@ public class ProjectVo {
 	
 	private List<MemberVo> memberList;
 	private List<String> memberNo;
+	
 }

@@ -1,6 +1,8 @@
 package com.kh.sixman.project.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -56,9 +58,6 @@ public class ProjectController {
 	public String create(ProjectVo vo, HttpSession session) {
 		
 		log.info("화면에서 받은 정보 : " + vo);
-		String rootPath = session.getServletContext().getRealPath("/");
-		List<AttachmentVo> fileList = FileUnit.uploadFile(vo.getPrjfile(), rootPath, "upload/project");
-		vo.setPrjfileList(fileList);
 		
 		int result = ps.insertPrjOne(vo);
 		
@@ -72,9 +71,11 @@ public class ProjectController {
 	
 	//프로젝트 상세보기(화면)
 	@GetMapping("detail")
-	public String detail(ProjectVo pvo, AttachmentVo avo) {
+	public String detail(ProjectVo vo, HttpSession session) {
+		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
 		
-		ProjectVo provo = ps.selectOne(pvo);
+		ProjectVo prj = ps.selectOne(vo);
+		session.setAttribute("prj", prj);
 		
 		
 		return "project/detail";

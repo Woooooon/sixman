@@ -68,7 +68,32 @@
     
     
     <select id="selectOne" resultType="ProjectVo">
-    	
+    	SELECT 
+		    P.NO 
+		    , M.NAME AS WRITER
+		    , P.TITLE 
+		    , P.CONTENT 
+		    , PC.STATUS AS PROGRESS
+		    , P.ENROLL_DATE 
+		    , P.START_DATE
+		    , P.END_DATE
+		FROM PROJECT P 
+		LEFT JOIN MEMBER M ON P.WRITER = M.NO 
+		LEFT JOIN PROGRESS_CATE PC ON P.PROGRESS = PC.NO
+		WHERE P.NO = #{no}
+    </select>
+    
+    <select id="selectMembers" resultType="ProjectVo">
+    		SELECT
+			    PM.NO
+			    ,PM.PRJ_NO
+			    , M.NAME AS MEMBER
+			FROM PROJECT_MEMBER PM
+			LEFT JOIN MEMBER M ON M.NO = PM.MEM_NO
+			LEFT JOIN PROJECT P ON P.NO = PM.PRJ_NO
+    	<foreach collection="list" item="member" open="(" close=")" separator=",">
+			WHERE PM.PRJ_NO = #{member.no}
+    	</foreach>
     </select>
     
     

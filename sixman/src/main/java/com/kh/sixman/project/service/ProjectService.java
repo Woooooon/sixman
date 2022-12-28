@@ -30,17 +30,24 @@ public class ProjectService {
 		
 		 int MemberInsertList = 0;
 		 int result = pdao.insertPrjOne(sst, vo);
-		 
-//		 vo.setNo(pdao.getno(sst, vo));
-//		 int memberInsertList = pdao.insertAllMember(sst, vo);
+		
+		 //int memberInsertList = pdao.insertAllMember(sst, vo);
 
-
-//		 return result * memberInsertList;
+		 //return result * memberInsertList;
 		 return result;
 	}
 
-	public ProjectVo selectOne(ProjectVo pvo) {
-		return pdao.selectOne(sst, pvo);
+	//프로젝트 디테일
+	public ProjectVo selectOne(ProjectVo vo) {
+		
+		//프로젝트 select
+		ProjectVo selectPrj = pdao.selectOne(sst, vo);
+		
+		//멤버s select
+		List<ProjectVo> memvo = pdao.selectMembers(sst, vo);
+		
+		return vo;
+		
 	}
 
 

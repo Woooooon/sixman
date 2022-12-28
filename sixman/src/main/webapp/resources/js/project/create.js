@@ -51,9 +51,11 @@ function createMemberBox() {
     for(let i = 0; i < selects.length; i++){
         const item = selects[i];
         const v = item.querySelector('.selected-option');
-        text += `<input type="text" value="${v.innerHTML}">`;
+        const leader = item.querySelector('input[type=hidden]');
+        leader.value = v.innerHTML;
+        text += `<input type='text' value="${v.innerHTML}" name='prjmem'>`;
         if(i!=selects.length-1){
-            text += ' / ';
+            text += '';
         }
     }
 
@@ -130,7 +132,7 @@ const renderCalender = () =>{
     const viewYear  = date.getFullYear();
     const viewMonth = date.getMonth();
 
-    document.querySelector('.year-month').textContent = `${viewYear}년 ${viewMonth + 1}월`;
+    document.querySelector('.year-month').innerHTML = `${viewYear}년 ${viewMonth + 1}월`;
 
     const prevLast = new Date(viewYear, viewMonth , 0);
     const thisLast = new Date(viewYear, viewMonth + 1 , 0);
