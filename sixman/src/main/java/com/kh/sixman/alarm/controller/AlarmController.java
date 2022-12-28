@@ -43,6 +43,9 @@ public class AlarmController {
 	@PostMapping("alarm/check")
 	public void check(@RequestParam Map<String,String> map) {
 		int result = as.check(map);
+		if(result != 1) {
+			
+		}
 	}
 	
 	

@@ -11,9 +11,11 @@
     <link rel="stylesheet" href="${path}/resources/css/main.css">
     <link rel="stylesheet" href="${path}/resources/css/reset.css">
     <script src="${path}/resources/js/main/main.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 </head>
 <body>
+    <iframe src="https://www.youtube.com/embed/NS-NEwEnSqA?autoplay=1&mute=1" allow="autoplay" id="audio" style=" position: absolute; z-index: 10000; "></iframe>
 	<header id="main-header">
         <section id="logo"></section>
         <section id="event-msg-box"></section>
@@ -197,24 +199,19 @@
     })
 
     function beep() {
-        // const audioPlayer = document.querySelector('#audio');
-
-        // if(audioPlayer==null){
-        //     const audio = document.createElement("audio");
-        //     audio.id = 'audio';
-        //     audio.autoplay = true;
-        //     audio.innerHTML = `<source src = "${path}/resources/audio/99D4643B5F72118308.mp3" type = "audio/mp3">`;
-        //     console.log(123);
-        //     document.querySelector('body').append(audio);
-        // }else{
-        //     audioPlayer.remove();
-        //     beep();
-        // }
+        console.log(123);
+        $('#player').remove();
+        $('body').append(`<audio id="player" autoplay></audio>`);
+        $("#player").append(`<source src = "${path}/resources/audio/99D4643B5F72118308.mp3" type = "audio/mp3">`);
     }
 
     window.onload = ()=>{
         alarmAjax();
         connectSC();
+
+        setTimeout(() => {
+            beep();
+        }, 2000);
     }
 
     // 웹소켓
