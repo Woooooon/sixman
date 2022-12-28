@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.sixman.member.vo.MemberVo;
+import com.kh.sixman.messenger.service.ChatWantFirstService;
 import com.kh.sixman.messenger.vo.ChatCreateRoomMemberVo;
 
 //@RequestMapping("chat")
