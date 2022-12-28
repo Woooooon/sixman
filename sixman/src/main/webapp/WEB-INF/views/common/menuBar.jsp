@@ -80,9 +80,8 @@
 
     menuMap.set("프로젝트", [
         {icon: "groups", title: "프로젝트"},
-        {title: "", url: ""},
-        {title: "", url: ""},
-        {title: "", url: ""}
+        {title: "프로젝트", url: "${path}/project/allprj"},
+        {title: "프로젝트 생성", url: "${path}/project/create"}
     ]);
 
     menuMap.set("전자문서", [

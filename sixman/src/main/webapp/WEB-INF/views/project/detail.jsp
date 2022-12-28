@@ -17,7 +17,8 @@
 	<main class="main-box">
         <div class="box detail-box">
             <div class="head">
-                <p>프로젝트 제목</p>
+            	<input type="hidden" value="${prj.no }">
+                <p>${prj.title}</p>
                 <div class="detail-btn">
                     <button class="btn" type="button">수정하기</button>
                     <button class="c-btn" type="button">삭제하기</button>
@@ -29,6 +30,7 @@
                     <p>상태</p>
                 </div>
                 <div class="status-btn">
+                	<!-- ${project.progress} -->
                     <div class="ing backgray">진행중</div>
                     <div class="delay backgray">지연중</div>
                     <div class="complete backgray">완료</div>
@@ -40,9 +42,9 @@
                     <p>인원</p>
                 </div>
                 <div class="member-list">
-                    <div class="name">· 김민우</div>
-                    <div class="name">· 김민우</div>
-                    <div class="name">· 김민우</div>
+	                <c:forEach var="prj" items="${prj}">
+    	                <div class="name">${prj.memberNo}</div>
+        	        </c:forEach>
                 </div>
             </div>
             <div class="date">
@@ -50,7 +52,7 @@
                     <span class="material-symbols-outlined">calendar_today</span>
                     <p>날짜</p>
                 </div>
-                <input type="date" class="startdate"><p>~</p><input type="date" class="enddate">
+                <input type="date" class="startdate" value="${prj.startDate }"><p>~</p><input type="date" class="enddate"  value="${prj.endDate }">
             </div>
             <div class="percent">
                 <div class="clear">
@@ -77,7 +79,7 @@
             </div>
             <div class="hidden"></div>
             <div class="content">
-                <textarea name="content" id="prj-content">내용ㅋㅋ</textarea>
+                <textarea name="content" id="prj-content">${project.content}</textarea>
             </div>
             <div class="hidden"></div>
             <div class="todo-list">

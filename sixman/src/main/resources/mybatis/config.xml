@@ -21,7 +21,8 @@
 		<typeAlias type="com.kh.sixman.position.vo.PositionVo" alias="PositionVo"/>
 		<typeAlias type="com.kh.sixman.dept.vo.DeptVo" alias="DeptVo"/>
 		<typeAlias type="com.kh.sixman.alarm.vo.AlarmVo" alias="AlarmVo"/>
-
+		<typeAlias type="com.kh.sixman.project.vo.ProjectVo" alias="ProjectVo"/>
+		<typeAlias type="com.kh.sixman.schedule.vo.ScheduleVo" alias="ScheduleVo"/>
 	</typeAliases> 
 
 
