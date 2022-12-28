@@ -28,4 +28,9 @@ public class DocumentDao {
 		return sst.selectOne("documentMapper.countList",dvo);
 	}
 
+	public String getDocNo(SqlSessionTemplate sst, DocumentVo dvo) {
+		return sst.selectOne("documentMapper.getNo", dvo);
+	}
+
+
 }

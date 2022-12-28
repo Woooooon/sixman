@@ -8,6 +8,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.sixman.common.AttachmentVo;
 import com.kh.sixman.document.dao.DocumentDao;
@@ -24,13 +25,15 @@ public class DocumentService {
    @Autowired
    private DocumentFileDao fdao;
    
+   @Transactional
    //게시글 작성
    public int write(DocumentVo dvo) {
       
       int result1 = dao.write(sst, dvo);
-//      int result2 = dao.send(sst,dvo);
+//      String no = Integer.toString(result1);
+      String no = dao.getDocNo(sst,dvo);
       
-      String no = Integer.toString(result1);
+      
       List<AttachmentVo> fileLists = dvo.getFileList();
       int result2 = 1;
       if(fileLists != null) {

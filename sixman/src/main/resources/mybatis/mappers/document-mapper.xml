@@ -16,8 +16,8 @@
         	"NO",
         	"TITLE",
         	"CONTENT",
-        	ENROLL_DATE,
-        	"REFER"
+        	ENROLL_DATE
+
         	
         	
         )
@@ -27,12 +27,16 @@
             ,#{title}
             ,#{content}
             ,SYSDATE
-            ,#{refer}
-       
             
         )
 </insert>
 
+<select id="getNo" resultType="String">
+    	SELECT "NO"
+    	FROM DOCUMENT
+    	WHERE SEND_PAY = #{sendPay}
+    	AND "TITLE" = #{title}
+    </select>
 
 
 

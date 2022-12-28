@@ -156,10 +156,9 @@ public class DocumentController {
 
    //결재선 작성(화면)
    @GetMapping("write")
-   public String Write(String aman, Model model){
-      if(aman != null) {
-         model.addAttribute("aMan",aman);
-      }
+//   public String write(String aman, Model model){
+   	public String write(){
+     
       return "document/write";
    }
    //결재선 작성 (찐)
@@ -167,24 +166,20 @@ public class DocumentController {
    public String write(DocumentVo dvo , HttpSession session) {
       
 	   MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
-	   dvo.setApNo(loginMember.getNo());
-
       
       String rootPath = session.getServletContext().getRealPath("/");
       List<AttachmentVo> fileList = FileUnit.uploadFile(dvo.getFile(), rootPath, "upload/document");
       
-//      dvo.setApNo(loginMember.getNo());
-//      dvo.setSendPay(loginMember.getName());
-//      dvo.setFileList(fileList);
-      
-      
-      
+      dvo.setNo(loginMember.getNo());
+      dvo.setSendPay(loginMember.getName());
+      dvo.setFileList(fileList);
+
       int result = ds.write(dvo);
       
-      if(result > 0) {
-         return "document/first";
+      if(result == 1) {
+         return "redirect:document/first";
       }else {
-         return "에러페이지";
+         return "redirect:/document/write";
       }
       
    }
@@ -193,9 +188,4 @@ public class DocumentController {
    
    
    /////////////////////////////////////////////////////////
-   
-   
-   
-
-   
 }
