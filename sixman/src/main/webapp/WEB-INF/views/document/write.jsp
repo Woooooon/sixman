@@ -25,7 +25,7 @@
 <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
 
 <div class="main-box">
-    <form action="">
+    <form action="" id="docuhi" method="POST" enctype="multipart/form-data" >
     <div id="sub-box" class="box">
         <div id="write-title">결제문서작성</div>
         <div id="write-box" class="box2">
@@ -33,7 +33,7 @@
             <div class="writelist">
                 <div class="writeno">
                     <div>문서번호</div>
-                    <div>${dvo.no}</div>
+                    <div>${dvo.apNo}</div>
                 </div>
                 <div class="writeno">
                     <div>기안일</div>
@@ -51,17 +51,17 @@
             <div class="docbox">
                 <div class="ppp">
                     <div>직급</div>
-                    <div> + 이미지</div>
+                    <div class="btn"><span class="material-symbols-outlined"> add </span> </div>
                     <div>심원용</div>
                 </div>
                 <div class="ppp">
                     <div>직급</div>
-                    <div>+ 이미지</div>
+                    <div class="btn"><span class="material-symbols-outlined"> add </span> </div>
                     <div>심투용</div>
                 </div>
                 <div class="ppp">
                     <div>직급</div>
-                    <div>+ 이미지</div>
+                    <div class="btn"><span class="material-symbols-outlined"> add </span> </div>
                     <div>심삼용</div>
                 </div>
             </div>
@@ -109,7 +109,17 @@
             ]
         });
     });
+
+
+    const form = document.querySelector('form');
+    console.log(form);
+    form.addEventListener('submit', (e)=>{
+
+        const titleInput = document.querySelector('input[name=title]');
+        sendMsg('${loginMember.name}', titleInput.value, 'DOCUMENT');
+        
+
+        return false;
+    });
 </script>
-
-
 </html>

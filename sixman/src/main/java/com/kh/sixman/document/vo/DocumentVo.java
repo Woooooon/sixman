@@ -26,6 +26,8 @@ public class DocumentVo {
     private String sendName;
     private String aYn;
     private String dSave;
+    private String docNo;
+    
 
 
     private List<AttachmentVo> fileList;

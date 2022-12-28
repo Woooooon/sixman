@@ -4,143 +4,194 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="documentMapper">
 
-	 <insert id="write">
-        <selectKey keyProperty="no" resultType="String" order="BEFORE">
-            select SEQ_DOCUMENT_NO.NEXTVAL FROM dual
-        </selectKey>
+
+
+
+
+<!-- 게시판 insert -->
+<insert id="write">
+
+	INSERT INTO DOCUMENT
         (
-            INSERT INTO DOCUMENT
+        	"NO",
+        	"TITLE",
+        	"CONTENT",
+        	ENROLL_DATE,
+        	"REFER"
+        	
+        	
         )
         VALUES
         (
-            ${no},
-            ${sendPay},
-            'N'
-            <if test="dSave.equals('작성하기')">
-            'N',
-            </if>
-            <if test="dSave.equals('임시저장')">
-            'Y',
-            </if>
-            #{title}
+        	SEQ_DOCUMENT_NO.NEXTVAL
+            ,#{title}
             ,#{content}
             ,SYSDATE
-            ,SYSDATE
+            ,#{refer}
+       
+            
         )
-
-    </insert>
-
-    <update    id="send">
-        insert all
-        <foreach collection="paySender" item="apNo" separator=" " >
-        <if test=" apNo != ' ' ">
-            into document
-            (
-                ,NO
-                ,PRI
-                ,AP_NO
-                ,DOC_NO
-                ,state
-                ,A_YN
-            )
-            VALUES
-            (
-                get_seq_no('seq_aprproval_no)
-                ,${PRI}
-                ,${apNo}
-                ,${docNo}
-                ,${state}
-                ,'N'
+</insert>
 
 
-            )
-        </if>
-        </foreach>
-        select * from dual;
-    </update>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 	 <insert id="write"> -->
+<!--         <selectKey keyProperty="no" resultType="String" order="BEFORE"> -->
+<!--             select SEQ_DOCUMENT_NO.NEXTVAL FROM dual -->
+<!--         </selectKey> -->
+<!--             INSERT INTO DOCUMENT -->
+<!--         ( -->
+<!--         	AP_NO, -->
+<!--         	M_NO, -->
+<!--         	SEND_PAY, -->
+
+<!--         	TITLE, -->
+<!--         	CONTENT, -->
+<!--         	ENROLL_DATE, -->
+<!--         	MODIFY_DATE, -->
+<!--         	START_DATE, -->
+<!--         	END_DATE, -->
+<!--         	REFER, -->
+        	
+<!--         ) -->
+<!--         VALUES -->
+<!--         ( -->
+<!--             ${apNo}, -->
+<!--             ${mNo}, -->
+<!--             ${sendPay}, -->
+
+<!--             #{title} -->
+<!--             ,#{content} -->
+<!--             ,SYSDATE -->
+<!--             ,SYSDATE -->
+<!--             ,SYSDATE -->
+<!--             ,SYSDATE -->
+<!--             ,#{refer} -->
+            
+<!--         ) -->
+
+<!--     </insert> -->
     
-    <select id="countList" resultType="int">
-	    SELECT COUNT(*)
-	    FROM
-	    (
-	    <trim prefixOverrides="UNION ALL">
-	    <if test="!'기안문서함'.equals(type)">
-	        select 
-	            D.NO AS DOCUMENT_NO
-	            ,D.SEND_PAY AS M_NO
-	            ,MM.NAME AS SEND_NAME
-	            ,D.D_YN
-	            ,D.TITLE
-	            ,D.CONTENT
-	            ,D.START_DATE
-	            ,T.NO AS TYPE_NO
-	            ,T.NAME AS TYPE_NAME
-<!-- 	            ,'Y' as ISSENDER -->
-	            ,'Y' as A_YN
-	        from DOCUMENT D
-	        join member mm on mm.no = D.SEND_PAY
-	        LEFT JOIN DOC_A DA ON D.NO = DA.DOCUMENT_NO
-	        LEFT JOIN TYPE_A T ON T.NO = DA.TYPE_NO
-	        WHERE MM.NO = ${mNo}
-	        AND (USER_NO = ${mNo} OR M_NO IS NULL)
-	        AND 
-		    <if test="'임시보관함'.equals(typeName)">
-		    	D_SAVE = 'Y'
-		    </if>
-		    <if test="!'임시보관함'.equals(typeName)">
-		    	D_SAVE = 'N'
-		    </if>
-		</if>
-		<if test="!'기안문서함'.equals(typeName) and !'임시보관함'.equals(typeName)">
-	        UNION ALL
-	        select 
-	            D.NO AS DOCUMENT_NO
-	            ,D.SEND_PAY AS M_NO
-	            ,M2.NAME AS USER_NAME
-	            ,M2.EMAIL AS USER_EMAIL
-	            ,R.DELETE_YN
-	            ,D.TITLE
-	            ,D.CONTENT
-	            ,D.SEND_TIME
-	            ,C.NO AS CATEGORY_NO
-	            ,C.NAME AS CATEGORY_NAME
-	            ,'N' as ISSENDER
-	            ,R.CHECK_YN as CHECK_YN
-	        from R_MAIL R
-	        JOIN MEMBER M1 ON M1.EMAIL = R.EMAIL
-	        JOIN DOCUMENT D ON R.MAIL_NO = D.NO
-	        JOIN MEMBER M2 ON M2.NO = D.SEND_PAY
-	        LEFT JOIN DOC_A DA ON D.NO = DA.DOCUMENT_NO 
-	        LEFT JOIN TYPE_A T ON T.NO = DA.TYPE_NO
-	        WHERE  R.EMAIL = #{userEmail}
-	        AND (USER_NO = ${userNo} OR USER_NO IS NULL)
-		</if>
-		</trim>
-	    )
-	    WHERE
-	    <if test="'휴지통'.equals(categoryName)">
-	    	DELETE_YN = 'Y'
-	    </if>
-	    <if test="!'휴지통'.equals(categoryName)">
-	    	DELETE_YN = 'N'
-	    </if>
-		<if test=" category!=null and category != '' and category != 'null' ">
-            AND CATEGORY_NO = ${category}
-        </if>
-        <if test=" search!=null and search != '' and search != 'null' ">
-        	AND
-	        (
-	        TITLE LIKE '%${search}%'
-	        OR CONTENT LIKE '%${search}%'
-	        )
-	    </if>
-	</select>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<!--     <update    id="send"> -->
+<!--         insert all -->
+<!--         <foreach collection="paySender" item="apNo" separator=" " > -->
+<!--         <if test=" apNo != ' ' "> -->
+<!--             into document -->
+<!--             ( -->
+<!--                 NO -->
+<!--                 ,DOC_NO -->
+<!--                 ,M_NO -->
+<!--                 ,STATE -->
+<!--                 ,A_YN -->
+<!--             ) -->
+<!--             VALUES -->
+<!--             ( -->
+<!--                 get_seq_no('seq_aprproval_no) -->
+<!-- 				,${docNo} -->
+<!--                 ,${mNo} -->
+<!--                 ,${state} -->
+<!--                 ,'N' -->
+
+
+<!--             ) -->
+<!--         </if> -->
+<!--         </foreach> -->
+<!--         select * from dual; -->
+<!--     </update> -->
+    
+<!--     <select id="countList" resultType="int"> -->
+<!-- 	    SELECT COUNT(*) -->
+<!-- 	    FROM -->
+<!-- 	    ( -->
+<!-- 	    <trim prefixOverrides="UNION ALL"> -->
+<!-- 	    <if test="!'기안문서함'.equals(type)"> -->
+<!-- 	        select  -->
+<!-- 	            D.NO AS DOCUMENT_NO -->
+<!-- 	            ,D.SEND_PAY AS M_NO -->
+<!-- 	            ,MM.NAME AS SEND_NAME -->
+<!-- 	            ,D.D_YN -->
+<!-- 	            ,D.TITLE -->
+<!-- 	            ,D.CONTENT -->
+<!-- 	            ,D.START_DATE -->
+<!-- 	            ,T.NO AS TYPE_NO -->
+<!-- 	            ,T.NAME AS TYPE_NAME -->
+<!-- 	            ,'Y' as ISSENDER  -->
+<!-- 	            ,'Y' as A_YN -->
+<!-- 	        from DOCUMENT D -->
+<!-- 	        join member mm on mm.no = D.SEND_PAY -->
+<!-- 	        LEFT JOIN DOC_A DA ON D.NO = DA.DOCUMENT_NO -->
+<!-- 	        LEFT JOIN TYPE_A T ON T.NO = DA.TYPE_NO -->
+<!-- 	        WHERE MM.NO = ${mNo} -->
+<!-- 	        AND (USER_NO = ${mNo} OR M_NO IS NULL) -->
+<!-- 	        AND  -->
+<!-- 		    <if test="'임시보관함'.equals(typeName)"> -->
+<!-- 		    	D_SAVE = 'Y' -->
+<!-- 		    </if> -->
+<!-- 		    <if test="!'임시보관함'.equals(typeName)"> -->
+<!-- 		    	D_SAVE = 'N' -->
+<!-- 		    </if> -->
+<!-- 		</if> -->
+<!-- 		</trim> -->
+		
+		
+<!-- 	</select> -->
 	
 	
-<!-- 	<configuration>
-	<settings>
-		<setting name="mapUnderscoreToCamelCase" value="true"/>
-	</settings>
-</configuration> -->
-    
 </mapper>
+<!-- 	<configuration> -->
+<!-- 	<settings> -->
+<!-- 		<setting name="mapUnderscoreToCamelCase" value="true"/> -->
+<!-- 	</settings> -->
+<!-- </configuration> -->
+    
