@@ -15,8 +15,8 @@
     <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 </head>
 <body>
-    <!-- <iframe src="https://www.youtube.com/embed/NS-NEwEnSqA?autoplay=1&mute=1" allow="autoplay" id="audio" style=" position: absolute; z-index: 10000; "></iframe> -->
-    <audio src="${path}/resources/audio/silence.mp3" autoplay muted></audio>
+    <iframe src="${path}/resources/audio/silence.mp3" allow="autoplay; muted;" id="audio" style="display: none;"></iframe>
+    <!-- <audio src="${path}/resources/audio/silence.mp3" autoplay muted></audio> -->
 	<header id="main-header">
         <section id="logo"></section>
         <section id="event-msg-box"></section>
