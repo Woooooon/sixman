@@ -1,8 +1,6 @@
 package com.kh.sixman.admin.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -28,6 +26,7 @@ import com.kh.sixman.position.service.PositionService;
 import com.kh.sixman.position.vo.PositionVo;
 
 import lombok.extern.slf4j.Slf4j;
+
 @RequestMapping("admin/member")
 @Controller
 @Slf4j
@@ -54,12 +53,15 @@ public class AdminMemberController {
 		List<AuthorizeVo> authorizeList = adminMemberService.authorizeList();
 		List<PositionVo> positionList = positionService.positionList();
 		List<DeptVo> deptList = deptService.daptList();
+		List<MemberVo> memberListAll = memberService.selectMemberListAll();
+		List<DeptVo> subDeptList = deptService.subList();
 		
+		model.addAttribute("subDeptList", subDeptList);
 		model.addAttribute("deptList", deptList);
 		model.addAttribute("positionList", positionList);
 		model.addAttribute("bankList", bankList);
 		model.addAttribute("authorizeList", authorizeList);
-		
+		model.addAttribute("memberListAll", memberListAll);
 		return "admin/member/join";
 	}
 	
@@ -82,7 +84,7 @@ public class AdminMemberController {
 		int result = adminMemberService.join(vo);
 		
 		if(result > 0) {
-			return "redirect:/admin/employee/list?page=1"; 
+			return "redirect:/admin/employee/list"; 
 		}
 		
 		return "redirect:/main/mainPage";
@@ -118,7 +120,21 @@ public class AdminMemberController {
 						, @RequestParam(required = false) List<String> evidenceNo
 						, String no
 						, MemberVo vo
-						, Model model) {
+						, Model model
+						, HttpSession session) {
+		
+		String rootPath = session.getServletContext().getRealPath("/");
+		
+		List<AttachmentVo> picFileInfo = FileUnit.uploadFile(vo.getPicFile(), rootPath, "sixman/src/main/webapp/resources/img/profile");
+		List<AttachmentVo> resumeFileInfo = FileUnit.uploadFile(vo.getResumeFile(), rootPath, "upload/resume");
+		List<AttachmentVo> accountFileInfo = FileUnit.uploadFile(vo.getAccountFile(), rootPath, "upload/account");
+		List<AttachmentVo> evidenceFileList = FileUnit.uploadFile(vo.getEvidenceFile(), rootPath, "upload/evidence");
+		
+		vo.setNo(no);
+		vo.setPicFileInfo(picFileInfo);
+		vo.setResumeFileInfo(resumeFileInfo);
+		vo.setAccountFileInfo(accountFileInfo);
+		vo.setEvidenceFileList(evidenceFileList);
 		
 		log.info("profileNo :" + profileNo);
 		log.info("accountNo :" + accountNo);
@@ -127,10 +143,13 @@ public class AdminMemberController {
 		log.info("MemberSeq :" + no);
 		log.info("MemberVo :" + vo);	
 
-		vo.setNo(no);
-		
 		int result = adminMemberService.updateMemberDetail(vo, profileNo, accountNo, resumeNo, evidenceNo);
-		return "admin/member/detail";
+		
+		if(result > 0) {
+			return "redirect:/admin/employee/list"; 
+		}
+		
+		return "redirect:/main/mainPage";
 	}
 	
 	

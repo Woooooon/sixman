@@ -9,12 +9,13 @@
         FROM MEMBER M
 		JOIN POSITION P ON P.NO = M.POSITION_NO
 		JOIN DEPARTMENT D ON D.NO = M.DEPT_NO
+		JOIN AUTHORIZE A ON A.NO = M.AUTHORIZE_NO
 		LEFT JOIN DEPARTMENT T ON T.NO = M.DEPT_NO
 		WHERE M.RESIGNATION_YN = 'N'
 		<if test="keyword != null and keyword !='' and category != null and category != ''">
 			AND ${category} LIKE '%${keyword}%'
 		</if >
-		<if test="keyword != null and keyword !='' and category == null and category == ''" >
+		<if test="keyword != null and keyword !='' and category == null" >
 			AND M.ID LIKE '%${keyword}%'
 		    OR M.NAME LIKE '%${keyword}%' 
 		    OR M.EMAIL LIKE '%${keyword}%'
@@ -22,7 +23,7 @@
 		    OR D.NAME LIKE '%${keyword}%'
 		    OR T.NAME LIKE '%${keyword}%'
 		    OR P.POSITION LIKE '%${keyword}%'
-		    OR A."LEVEL" LIKE '%${keyword}%'
+		    OR A.RANK LIKE '%${keyword}%'
 		    OR M.JOIN_DATE LIKE '%${keyword}%'
 		</if> 
 	</select>
@@ -40,22 +41,40 @@
 		    , B.NAME AS BANK_NAME
 		    , M.ACCOUNT
 		    , M.ADDRESS
-		    , M.DEPT_NO
+		    , D.NO AS DEPT_NO
 		    , D.NAME AS DEPT_NAME
+		    , T.NO AS TEAM_NO
+		    , T.NAME AS TEAM_NAME
 		    , M.POSITION_NO
 		    , P.POSITION AS POSITION_NAME
 		    , M.AUTHORIZE_NO
-		    , A."LEVEL" AS AUTHORIZE_NAME
+		    , A.RANK AS AUTHORIZE_NAME
 		    , M.JOIN_DATE
 		    , M.MODIFY_DATE
 		    , M.RESIGNATION_YN
 		    , M.ENTRUST_NO
+		    , F.NO AS FILE_NO 
+		    , F.CHANGE_NAME as FILE_NAME
+		    , F.ORIGIN_NAME AS FILE_ORIGIN_NAME
 		FROM MEMBER M
 		JOIN BANK B ON B.NO = M.BANK_NO
 		JOIN POSITION P ON P.NO = M.POSITION_NO
-		JOIN DEPARTMENT D ON D.NO = M.DEPT_NO
-		LEFT JOIN DEPARTMENT T ON T.NO = M.DEPT_NO
 		JOIN AUTHORIZE A ON A.NO = M.AUTHORIZE_NO
+		JOIN DEPARTMENT D ON D.NO = M.DEPT_NO
+		LEFT JOIN DEPARTMENT T ON T.NO = M.TEAM_NO
+		LEFT JOIN 
+		(
+		    SELECT 
+		        "NO",
+		        "ORIGIN_NAME",
+		        "MEMBER_NO",
+		        "CHANGE_NAME",
+		        "FILE_PATH",
+		        "ENROLL_DATE",
+		        "THUMB_YN"
+		    FROM PROFILE_A
+		    WHERE "THUMB_YN" = 'Y'
+		) F ON M.NO = F.MEMBER_NO
 		WHERE M.ID = #{id}
 		AND M.RESIGNATION_YN = 'N'	
 	</select>
@@ -80,7 +99,7 @@
 		    , M.POSITION_NO
 		    , P.POSITION AS POSITION_NAME
 		    , M.AUTHORIZE_NO
-		    , A."LEVEL" AS AUTHORIZE_NAME
+		    , A.RANK AS AUTHORIZE_NAME
 		    , M.JOIN_DATE
 		    , M.MODIFY_DATE
 		    , M.RESIGNATION_YN
@@ -121,7 +140,7 @@
 	<select id="authorizeList" resultType="AuthorizeVo">
 		SELECT 
 			"NO"
-			, "LEVEL"
+			, RANK
 		FROM AUTHORIZE
 	</select>
 	
@@ -209,7 +228,7 @@
 		    , M.POSITION_NO
 		    , P.POSITION AS POSITION_NAME
 		    , M.AUTHORIZE_NO
-		    , A."LEVEL" AS AUTHORIZE_NAME
+		    , A.RANK AS AUTHORIZE_NAME
 		    , M.JOIN_DATE
 		    , M.MODIFY_DATE
 		    , M.RESIGNATION_YN
@@ -240,7 +259,7 @@
 		<if test="keyword != null and keyword !='' and category != null and category != ''">
 			AND ${category} LIKE '%${keyword}%'
 		</if >
-		<if test="keyword != null and keyword !='' and category == null and category == ''" >
+		<if test="keyword != null and keyword !='' and category == null" >
 			AND M.ID LIKE '%${keyword}%'
 		    OR M.NAME LIKE '%${keyword}%' 
 		    OR M.EMAIL LIKE '%${keyword}%'
@@ -248,10 +267,18 @@
 		    OR D.NAME LIKE '%${keyword}%'
 		    OR T.NAME LIKE '%${keyword}%'
 		    OR P.POSITION LIKE '%${keyword}%'
-		    OR A."LEVEL" LIKE '%${keyword}%'
+		    OR A.RANK LIKE '%${keyword}%'
 		    OR M.JOIN_DATE LIKE '%${keyword}%'
 		</if> 
-	
+		<if test="loginTeamNo == null and loginDeptNo != null">
+			AND M.NO != #{loginNo}
+			AND D.NO = #{loginDeptNo}
+			AND D.NO != 1 
+		</if>
+		<if test="loginTeamNo != null and loginDeptNo != null">
+			AND M.NO != #{loginNo}
+			AND T.NO = #{loginTeamNo}
+		</if>
 	</select>
 	
 	<select id="selectNewbieList" resultType="MemberVo">
@@ -274,7 +301,7 @@
 			    , M.POSITION_NO
 			    , P.POSITION AS POSITION_NAME
 			    , M.AUTHORIZE_NO
-			    , A."LEVEL" AS AUTHORIZE_NAME
+			    , A.RANK AS AUTHORIZE_NAME
 			    , M.JOIN_DATE
 			    , M.MODIFY_DATE
 			    , M.RESIGNATION_YN
@@ -320,10 +347,18 @@
 	<update id="updateMemberDetail">
 		UPDATE "MEMBER"
 		SET 
-			"POSITION_NO" = #{positionNo},
-		    "DEPT_NO" = #{deptNo},
-		    "TEAM_NO" = #{teamNo},
-		    "AUTHORIZE_NO" = #{authorizeNo}
+			"NAME" = #{name}
+			, "EMAIL" = #{email}
+			, "PHONE" = #{phone}
+			, "BIRTHDAY" = #{birthday}
+			, "BANK_NO" = #{bankNo}
+			, "ACCOUNT" = #{account}
+			, "ADDRESS" = #{address}
+			, "MODIFY_DATE" = SYSDATE
+			, "POSITION_NO" = #{positionNo}
+		    , "DEPT_NO" = #{deptNo}
+		    , "TEAM_NO" = #{teamNo}
+		    , "AUTHORIZE_NO" = #{authorizeNo}
 		WHERE "NO" = #{no}
 	</update>
 	
@@ -390,4 +425,10 @@
  		from ${tableName}_A
  		where MEMBER_NO = ${no}
 	</select>
+	
+	<delete id="deleteFile">
+		DELETE 
+		FROM ${tableName}_A 
+ 		where NO = ${no}
+	</delete>
 </mapper>

@@ -51,6 +51,10 @@ public class MemberDao {
 				
 	}
 
+	public List<MemberVo> selectdeptMemberList(SqlSessionTemplate sst, Map<String, String> map) {
+		return sst.selectList("memberMapper.selectMemberList", map);
+	}
+
 	
 
 }

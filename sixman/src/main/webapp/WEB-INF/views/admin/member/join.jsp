@@ -10,10 +10,7 @@
         <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
         <!-- kakao -->
         <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-        <!-- jstree -->
-        <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
-        <link rel="stylesheet" href="/sixman\resources\jstree\default\style.min.css" />
-        <script src="https://kit.fontawesome.com/ae846b135b.js" crossorigin="anonymous"></script>
+        
     </head>
 
     <body>
@@ -21,32 +18,80 @@
         <main id="main-page" class="main-box">
             <div id="main-box-2">
                 <aside id="dept-wrap" class="box">
-                    <div class="dept-guide">
-                        <span class="material-symbols-outlined"> diversity_3 </span>
-                        <p>배달의 민족</p>
+                    <div class="dept-title">
+                        <span class="material-symbols-outlined">inventory_2</span>
+                        <p>부서 목록</p>
                     </div>
-                    <div id="jstree">
-                        <ul>
-                            <li data-jstree='{"icon":"fa fa-folder-open icon-color"}'>
-                                <input type="text" value="영업부" disabled />
-                                <ul>
-                                    <li data-jstree='{"icon":"fa fa-folder icon-color"}'>
-                                        <input type="text" value="영업 2팀" disabled />
-                                        <ul>
-                                            <li data-jstree='{"icon":"fa fa-user icon-color"}'>윤태원</li>
-                                            <li data-jstree='{"icon":"fa fa-user icon-color"}'>구기석</li>
-                                        </ul>
-                                    </li>
-                                    <li data-jstree='{"icon":"fa fa-folder icon-color"}'>
-                                        <input type="text" value="영업 3팀" disabled />
-                                        <ul>
-                                            <li data-jstree='{"icon":"fa fa-user icon-color"}'>윤태원</li>
-                                            <li data-jstree='{"icon":"fa fa-user icon-color"}'>구기석</li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
+                    
+                    <div class="dept-list">
+                    	<c:forEach items="${deptList}" var="j">
+	                    	<ul>
+	                            <div class="deptList-item">
+	                                <label for="deptNo${j.deptNo}">
+		                                <input type="checkbox" id="deptNo${j.deptNo}">
+		                                <div class="toggleBtn">
+		                                    <span class="material-symbols-outlined">change_history</span>
+		                                </div>
+	                            	    ${j.deptName}
+	                                </label>
+	                            </div>
+                                <c:forEach items="${memberListAll}" var="i">
+                                    <c:if test="${j.deptNo eq i.deptNo and empty i.teamName}">
+                                        <li>
+                                            <div class="memberList-item">
+                                                <a href="/sixman/admin/member/detail?no=${i.no}"><span class="material-symbols-outlined">account_box</span>${i.name} ${i.positionName}</a>
+                                            </div>
+                                        </li>													
+                                    </c:if>
+                                </c:forEach>
+		                    	<c:forEach items="${subDeptList}" var="l">
+		                    		<c:if test="${j.deptNo eq l.deptNo }">
+										<li>
+			                                <ul>
+			                                    <div class="teamList-item">
+			                                        <label for="teamNo${l.teamNo}">
+				                                        <input type="checkbox" id="teamNo${l.teamNo}">
+				                                        <div class="toggleBtn">
+				                                            <span class="material-symbols-outlined">change_history</span>
+				                                        </div>
+			                                      	    ${l.teamName}
+			                                        </label>
+			                                    </div>
+												<c:forEach items="${memberListAll}" var="i">
+													<c:if test="${l.teamNo eq i.teamNo}">
+														<li>
+					                                        <div class="memberList-item">
+																<a href="/sixman/admin/member/detail?no=${i.no}"><span class="material-symbols-outlined">account_box</span>${i.name} ${i.positionName}</a>
+					                                        </div>
+					                                    </li>													
+													</c:if>
+												</c:forEach>		                    				
+		                    				</ul>
+	                    				</li>
+		                    		</c:if>
+		                    	</c:forEach>
+	                    	</ul>
+                    	</c:forEach>
+	                    	<ul>
+                                <div class="deptList-item">
+                                    <label for="deptNo">
+                                        <input type="checkbox" id="deptNo">
+                                        <div class="toggleBtn">
+                                            <span class="material-symbols-outlined">change_history</span>
+                                        </div>
+                                        부서 발령 전
+                                    </label>
+                                </div>
+                                <c:forEach items="${memberListAll}" var="i">
+                                    <c:if test="${i.deptNo eq 1}">
+                                        <li>
+                                            <div class="memberList-item">
+                                                <a href=""><span class="material-symbols-outlined">account_box</span>${i.name} ${i.positionName}</a>
+                                            </div>
+                                        </li>													
+                                    </c:if>
+                                </c:forEach>
+                            </ul>
                     </div>
                 </aside>
                 <section id="member-wrap">
@@ -110,7 +155,7 @@
                                             <label for="">권 한</label>
                                             <select name="authorizeNo">
                                                 <c:forEach items="${authorizeList}" var="i">
-                                                    <option id="deptList" value="${i.no}">${i.level}</option>
+                                                    <option id="deptList" value="${i.no}">${i.rank}</option>
                                                 </c:forEach>
                                             </select>
                                         </div>

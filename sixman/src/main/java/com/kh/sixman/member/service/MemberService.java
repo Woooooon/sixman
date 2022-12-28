@@ -39,11 +39,6 @@ public class MemberService {
 			return null;
 		}
 		
-		String no = dbMember.getNo();
-		
-		List<AttachmentVo> fileInfo = memberDao.selectFileOne(sst, no);
-		vo.setPicFileInfo(fileInfo);
-		
 		return dbMember;
 	}
 
@@ -79,6 +74,12 @@ public class MemberService {
 	public List<MemberVo> selectMemberListAll() {
 		
 		return memberDao.selectMemberListAll(sst);
+	}
+
+
+	public List<MemberVo> selectdeptMemberList(Map<String, String> map) {
+		
+		return memberDao.selectdeptMemberList(sst, map);
 	}
 
 

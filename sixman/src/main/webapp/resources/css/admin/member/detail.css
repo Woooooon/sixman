@@ -211,7 +211,7 @@
     gap: 20px;
 }
 
-#submit > input {
+#submit > #submitBtn {
     margin-left: 10px;
     font-size: 15px;
     background-color: var(--main-color);
@@ -222,7 +222,7 @@
     color: #fff;
 }
 
-#submit > input:hover {
+#submit > #submitBtn:hover {
     background-color: #17a897;
 }
 
@@ -385,6 +385,17 @@ select {
     outline-color: #17a897;
 }
 
+
+.write .error {
+    border: 1px solid #e85c5c;
+}
+
+.error:focus {
+    outline-color: #e85c5c;
+}
+
+/* 부서목록 */
+
 .dept-title {
     display: flex;
     justify-content: flex-start;
@@ -404,15 +415,6 @@ select {
     font-weight: 600;
 }
 
-.write .error {
-    border: 1px solid #e85c5c;
-}
-
-.error:focus {
-    outline-color: #e85c5c;
-}
-
-/* 부서목록 */
 .teamList-item,
 .deptList-item {
     width: 70%;

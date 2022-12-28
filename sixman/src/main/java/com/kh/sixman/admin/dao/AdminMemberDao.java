@@ -10,9 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.sixman.common.AttachmentVo;
 import com.kh.sixman.common.AuthorizeVo;
 import com.kh.sixman.common.BankVo;
-import com.kh.sixman.dept.vo.DeptVo;
 import com.kh.sixman.member.vo.MemberVo;
-import com.kh.sixman.position.vo.PositionVo;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -54,19 +52,30 @@ public class AdminMemberDao {
 		return sst.selectOne("memberMapper.selectOne", no);
 	}
 
-	public List<AttachmentVo> getfile(SqlSessionTemplate sst, String no, String tableName) {
+	public List<AttachmentVo> getFile(SqlSessionTemplate sst, String no, String tableName) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("no", no);
 		map.put("tableName", tableName);
 		return sst.selectList("memberMapper.getFile",map);
 	}
 
-	public AttachmentVo getFile(Map<String, String> map) {
-		return null;
+	public AttachmentVo getFileOne(SqlSessionTemplate sst, String no, String tableName) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("no", no);
+		map.put("tableName", tableName);
+		return sst.selectOne("memberMapper.getFile",map);
 	}
 
-	public int delete(Map<String, String> map) {
-		return 0;
+
+	public int delete(SqlSessionTemplate sst, String no, String tableName) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("no", no);
+		map.put("tableName", tableName);
+		return sst.delete("memberMapper.deleteFile", map);
+	}
+
+	public int updateMemberDetail(SqlSessionTemplate sst, MemberVo vo) {
+		return sst.update("memberMapper.updateMemberDetail", vo);
 	}
 
 }
