@@ -23,14 +23,26 @@ public final class MemberController {
 	
 	@PostMapping("")
 	public String login(MemberVo vo, HttpSession session, Model model) {
+		System.out.println(vo);
+		String loginAdminId = vo.getId();
 		
-		MemberVo loginMember = memberService.login(vo);
+		String adminId = "admin";
+		
+		MemberVo loginMember = null;
+
+		loginMember = memberService.adminLogin(vo);
+		
+		if(!adminId.equals(loginAdminId)) {
+			loginMember = memberService.login(vo);
+		}
 		
 		if(loginMember == null) {
 			model.addAttribute("alert", "존재하지 않는 회원입니다.");
 			return "member/login";
 		}
-	
+		
+		System.out.println(loginMember);
+		
 		session.setAttribute("loginMember", loginMember);
 		
 		//아이디 비번 일치했을 시 비번 최신화 
