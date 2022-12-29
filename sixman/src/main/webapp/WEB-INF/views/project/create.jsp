@@ -41,14 +41,14 @@
                                 <input type="hidden" name="writer" value="${loginMember.no}">
                             </div>
                             <div class="line">
-                                <div class="prj">팀</div>
+                                <div class="prj">부 서</div>
                                 <div class="select" data-role="selectBox">
                                     <span date-value="optValue" class="selected-option"><!-- 선택된 옵션 값이 출력되는 부분 --></span>
                                     <input type="hidden" id="teamvalue" name="team">
                                     <ul class="hide">
-                                        <label for="teamvalue"><li class="option-wrap">영업1팀</li></label>
-                                        <label for="teamvalue"><li class="option-wrap">인사팀</li></label>
-                                        <label for="teamvalue"><li class="option-wrap">회계팀</li></label>
+                                    	<c:forEach items="${deptList}" var="dept">
+                                        <label for="teamvalue"><li class="option-wrap">${dept.deptName }</li></label>
+                                        </c:forEach>
                                     </ul>
                                 </div>
                                 <div style="width: 30px;"></div>
@@ -58,8 +58,9 @@
                                     <input type="hidden" id="leadervalue" name="leader">
                                     <!-- 옵션 영역 -->
                                     <ul class="hide">
-                                    <label for="leadervalue"><li class="option-wrap">1</li></label>
-                                    <label for="leadervalue"><li class="option-wrap">2</li></label>
+                                    <c:forEach items="${positionList }" var="position">
+                                    <label for="leadervalue"><li class="option-wrap">${position.position}</li></label>
+                                    </c:forEach>
                                     </ul>
                                 </div>
                                 <div style="width: 30px;"></div>
@@ -68,10 +69,10 @@
                                     <span date-value="optValue" class="selected-option"><!-- 선택된 옵션 값이 출력되는 부분 --></span>
                                     <input type="hidden" id="membervalue" name="memberNo">
                                     <ul class="hide">
-                                        <label for="membervalue"><li class="option-wrap">1</li></label>
-                                        <label for="membervalue"><li class="option-wrap">2</li></label>
-                                        <label for="membervalue"><li class="option-wrap">3</li></label>
-                                        <label for="membervalue"><li class="option-wrap">4</li></label>
+                                        <label for="membervalue"><li class="option-wrap">김민우</li></label>
+                                        <label for="membervalue"><li class="option-wrap">구기석</li></label>
+                                        <label for="membervalue"><li class="option-wrap">임정한</li></label>
+                                        <label for="membervalue"><li class="option-wrap">윤태원</li></label>
                                     </ul>
                                 </div>
                             </div>

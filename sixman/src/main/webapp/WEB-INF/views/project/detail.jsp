@@ -31,9 +31,9 @@
                 </div>
                 <div class="status-btn">
                 	<!-- ${project.progress} -->
-                    <div class="ing backgray">진행중</div>
-                    <div class="delay backgray">지연중</div>
-                    <div class="complete backgray">완료</div>
+                    <input type="radio"><div class="ing backgray">진행중</div>
+                    <label><input type="radio"><div class="delay backgray">지연중</div></label>
+                    <label><input type="radio"><div class="complete backgray">완료</div></label>
                 </div>
             </div>
             <div class="member">

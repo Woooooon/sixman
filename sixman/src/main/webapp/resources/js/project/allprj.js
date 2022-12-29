@@ -29,14 +29,18 @@ $(prjtype).ready(function(){
   //상태 버튼 클릭시 변경
   $(statusbtn).click(function(){
     // $(this).toggleClass('ing delay');
+    
     if($(this).hasClass('ing')){
       $(this).addClass('delay').removeClass('ing');
       $(this).text("지연중");
     }else if ($(this).hasClass('delay')){
       $(this).addClass('complete').removeClass('delay');
       $(this).text("완료");
-    } else {
+    } else if($(this).hasClass('complete')){
       $(this).addClass('ing').removeClass('complete');
+      $(this).text("진행중");
+    } else if($(this).hasClass('done')){
+      $(this).addClass('ing').removeClass('done');
       $(this).text("진행중");
     }
 

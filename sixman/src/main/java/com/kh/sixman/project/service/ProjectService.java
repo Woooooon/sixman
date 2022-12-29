@@ -29,8 +29,12 @@ public class ProjectService {
 	public int insertPrjOne(ProjectVo vo) {
 		
 		 int MemberInsertList = 0;
+		 //프로젝트 디비에 저장
 		 int result = pdao.insertPrjOne(sst, vo);
 		
+		 //디비에 저장한 프로젝트 읽어오기
+		 
+		 //프로젝트에 저장된 멤버 들 저장
 		 //int memberInsertList = pdao.insertAllMember(sst, vo);
 
 		 //return result * memberInsertList;
