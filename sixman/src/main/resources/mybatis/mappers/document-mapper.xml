@@ -17,9 +17,19 @@
         	"TITLE",
         	"CONTENT",
         	ENROLL_DATE,
-        	"REFER"
-        	
-        	
+        	"REFER",
+        	MODIFY_DATE,
+        	START_DATE,
+        	END_DATE,
+        	D_YN,
+        	D_SAVE,
+        	SEND_NAME
+        	<!-- "SEND_PAY",
+        	"TYPE",
+        	D_YN,
+        	D_SAVE,
+        	SEND_NAME -->
+   
         )
         VALUES
         (
@@ -28,10 +38,30 @@
             ,#{content}
             ,SYSDATE
             ,#{refer}
+            ,SYSDATE
+            ,SYSDATE
+            ,SYSDATE
+            ,'N'
+            ,'N'
+            ,${sendName}
+       <!--     ,#{sendPay}
+           ,'1'
+           ,'N'
+           ,'N'
+           ,#{sendName} -->
+
+            
        
             
         )
 </insert>
+
+<select id="getNo" resultType="String">
+    	SELECT "NO"
+    	FROM DOCUMENT
+    	WHERE SEND_PAY = ${sendPay}
+    	AND "TITLE" = #{title}
+    </select>
 
 
 

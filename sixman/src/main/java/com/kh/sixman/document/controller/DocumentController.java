@@ -156,26 +156,33 @@ public class DocumentController {
 
    //결재선 작성(화면)
    @GetMapping("write")
-   public String Write(String aman, Model model){
-      if(aman != null) {
-         model.addAttribute("aMan",aman);
-      }
+//   public String Write(String sendPay, Model model){
+   public String write( Model model){
+//      if(sendPay != null) {
+//         model.addAttribute("sendPay",sendPay);
+//      }
       return "document/write";
    }
    //결재선 작성 (찐)
    @PostMapping("write")
    public String write(DocumentVo dvo , HttpSession session) {
-      
+	   
 	   MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
-	   dvo.setApNo(loginMember.getNo());
 
       
       String rootPath = session.getServletContext().getRealPath("/");
       List<AttachmentVo> fileList = FileUnit.uploadFile(dvo.getFile(), rootPath, "upload/document");
       
-//      dvo.setApNo(loginMember.getNo());
-//      dvo.setSendPay(loginMember.getName());
-//      dvo.setFileList(fileList);
+     
+      
+      dvo.setSendPay(loginMember.getNo());
+      dvo.setSendName(loginMember.getName());
+      dvo.setFileList(fileList);
+      
+      
+
+      
+ 
       
       
       

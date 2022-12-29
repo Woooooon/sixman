@@ -30,7 +30,7 @@ public class DocumentService {
       int result1 = dao.write(sst, dvo);
 //      int result2 = dao.send(sst,dvo);
       
-      String no = Integer.toString(result1);
+      String no = dao.getDocuementNo(sst, dvo);
       List<AttachmentVo> fileLists = dvo.getFileList();
       int result2 = 1;
       if(fileLists != null) {

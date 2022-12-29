@@ -77,60 +77,7 @@
                 <p>3222</p>
                 <p>결재대기</p>
             </div>
-            <div class="list-item">
-                <input type="checkbox" name="dddd">
-                <!-- <span></span> -->
-                <p>2022/12/05</p>
-                <p>아몰루</p>
-                <p>기안서 올립니다.</p>
-                <p>3222</p>
-                <p>결재대기</p>
-            </div>
-            <div class="list-item">
-                <input type="checkbox" name="dddd">
-                <!-- <span></span> -->
-                <p>2022/12/05</p>
-                <p>아몰루</p>
-                <p>기안서 올립니다.</p>
-                <p>3222</p>
-                <p>결재대기</p>
-            </div>
-            <div class="list-item">
-                <input type="checkbox" name="dddd">
-                <!-- <span></span> -->
-                <p>2022/12/05</p>
-                <p>아몰루</p>
-                <p>기안서 올립니다.</p>
-                <p>3222</p>
-                <p>결재대기</p>
-            </div>
-            <div class="list-item">
-                <input type="checkbox" name="dddd">
-                <!-- <span></span> -->
-                <p>2022/12/05</p>
-                <p>아몰루</p>
-                <p>기안서 올립니다.</p>
-                <p>3222</p>
-                <p>결재대기</p>
-            </div>
-            <div class="list-item">
-                <input type="checkbox"name="dddd">
-                <!-- <span></span> -->
-                <p>2022/12/05</p>
-                <p>아몰루</p>
-                <p>기안서 올립니다.</p>
-                <p>3222</p>
-                <p>결재대기</p>
-            </div>
-            <div class="list-item">
-                <input type="checkbox" name="dddd">
-                <!-- <span></span> -->
-                <p>2022/12/05</p>
-                <p>아몰루</p>
-                <p>기안서 올립니다.</p>
-                <p>3222</p>
-                <p>결재대기</p>
-            </div>
+           
 
             
         </div>
@@ -152,7 +99,7 @@
         <div class="docu-write">
             <!-- <button onclick="" id="documentwrite"><a href="">결재 상신</a></button> -->
            <!-- <input type="button" value="결재상신"> -->
-           <input name="submit" class="btn" type="submit" value="결재상신">
+          <a href="${path}/document/write"> <input name="submit" class="btn" type="submit" value="결재상신"></a>
            <input name="subit" class="btn" type="submit" value="삭제">
         </div>
     
