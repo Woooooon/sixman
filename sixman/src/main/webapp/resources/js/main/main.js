@@ -216,6 +216,15 @@ function checkAjax(no, type) {
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
                 if (httpRequest.status === 200) {
 
+                    const itemCount = document.querySelector('#alarm-count');
+                    const count = parseInt(itemCount.innerText);
+
+                    if(count==null || count==0){
+                        itemCount.style.display = 'none';
+                    }else{
+                        itemCount.innerText = count - 1;
+                    }
+
                 } else {
                 // alert('Request Error!');
                 }

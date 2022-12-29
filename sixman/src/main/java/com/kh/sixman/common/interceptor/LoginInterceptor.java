@@ -18,7 +18,7 @@ public class LoginInterceptor implements HandlerInterceptor{
 		if(loginMember != null) {
 			return true;
 		}
-		
+		session.setAttribute("msg", "로그인이 필요합니다.");
 		response.sendRedirect(request.getContextPath());
 		return false;
 	}

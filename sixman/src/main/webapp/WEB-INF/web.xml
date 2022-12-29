@@ -31,6 +31,10 @@
 		<error-code>500</error-code>
 		<location>/error?code=500</location>
 	</error-page>
+	
+	<error-page>
+		<location>/error?code=ERR</location>
+	</error-page>
 
 	<!-- Processes application requests -->
 	<servlet>
