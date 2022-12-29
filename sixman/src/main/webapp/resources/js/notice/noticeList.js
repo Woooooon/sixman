@@ -61,7 +61,7 @@ function noticeListAjax(page, keyword) {
                 document.querySelector("#search-input").value = keyword;
 
                 } else {
-                alert('Request Error!');
+                // alert('Request Error!');
                 }
         }
     };

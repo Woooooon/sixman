@@ -80,7 +80,7 @@ class Popup{
             [{
                 // 초기상태
                 opacity: 0,
-                width: '0',
+                width: '600px',
                 height: '0'
             },
             {
@@ -108,7 +108,7 @@ class Popup{
             {
                 // 마지막상태
                 opacity: 0,
-                width: '0',
+                width: '600px',
                 height: '0'
             }],
             {
@@ -198,7 +198,7 @@ function alarmAjax() {
                     }
 
                 } else {
-                alert('Request Error!');
+                // alert('Request Error!');
                 }
         }
     };
@@ -217,7 +217,7 @@ function checkAjax(no, type) {
                 if (httpRequest.status === 200) {
 
                 } else {
-                alert('Request Error!');
+                // alert('Request Error!');
                 }
         }
     };

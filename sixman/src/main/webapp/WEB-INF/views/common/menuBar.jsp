@@ -11,11 +11,10 @@
     <link rel="stylesheet" href="${path}/resources/css/main.css">
     <link rel="stylesheet" href="${path}/resources/css/reset.css">
     <script src="${path}/resources/js/main/main.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 </head>
 <body>
-    <!-- <iframe src="https://www.youtube.com/embed/NS-NEwEnSqA?autoplay=1&mute=1" allow="autoplay" id="audio" style=" position: absolute; z-index: 10000; "></iframe> -->
+    <!-- <iframe src="${path}/resources/audio/silence.mp3" allow="autoplay; muted;" id="audio" style="display: none;"></iframe> -->
     <audio src="${path}/resources/audio/silence.mp3" autoplay muted></audio>
 	<header id="main-header">
         <section id="logo"></section>
@@ -51,7 +50,7 @@
         </ul>
         <section id="menu-footer">
             <a href="" class="material-symbols-outlined">logout</a>
-            <div id="foot-logo"></div>
+            <div id="foot-logo" onclick="location.href='${path}/main'"></div>
         </section>
     </aside>
     <aside id="side-menu">
@@ -72,10 +71,9 @@
 
     menuMap.set("근태관리", [
         {icon: "approval", title: "근태관리"},
-        {title: "", url: ""},
-        {title: "", url: ""},
-        {title: "", url: ""},
-        {title: "", url: ""}
+        {title: "근태현황", url: "${path}/attendance/calender"},
+        {title: "일별근무시간", url: "${path}/attendance/board?page=1"},
+        {title: "관리자페이지 ", url: "${path}/attendance/admin"}
     ]);
 
     menuMap.set("프로젝트", [
@@ -86,9 +84,10 @@
 
     menuMap.set("전자문서", [
         {icon: "home_storage", title: "전자문서"},
-        {title: "", url: ""},
-        {title: "", url: ""},
-        {title: "", url: ""}
+        {title: "기안문서함", url: "${path}/document/first"},
+        {title: "결재문서함", url: "${path}/document/payment"},
+        {title: "참조문서함", url: "${path}/document/reference"},
+        {title: "임시보관함", url: "${path}/document/keep"}
     ]);
 
     menuMap.set("메일함", [
@@ -103,29 +102,25 @@
 
     menuMap.set("조직도", [
         {icon: "account_tree", title: "조직도"},
-        {title: "", url: ""},
-        {title: "", url: ""},
-        {title: "", url: ""}
+        {title: "조직도", url: "${path}/employee/list"}
     ]);
 
     menuMap.set("주소록", [
         {icon: "contacts", title: "주소록"},
-        {title: "", url: ""},
-        {title: "", url: ""},
-        {title: "", url: ""}
+        {title: "내 주소록", url: "${path}/sixman/address"},
+        {title: "주소록 추가", url: "${path}/sixman/add"},
+        {title: "주소록 받아오기", url: "${path}/sixman/receive"}
     ]);
 
     menuMap.set("일정", [
         {icon: "calendar_month", title: "일정"},
         {title: "일정", url: "${path}/schedule/calendar"},
-        {title: "주간일정", url: ""},
+        {title: "주간일정", url: "${path}/schedule/weeks"}
     ]);
 
     menuMap.set("급여", [
         {icon: "calculate", title: "급여"},
-        {title: "", url: ""},
-        {title: "", url: ""},
-        {title: "", url: ""}
+        {title: "급여관리", url: "${path}/salary/salary"}
     ]);
 
     const menuListBox = document.querySelector('#menu-list');
@@ -271,8 +266,12 @@
 
         const itemCount = document.querySelector('#alarm-count');
 
-        itemCount.style.display = 'block';
-        itemCount.innerHTML = parseInt(itemCount.innerHTML) + 1;
+        itemCount.style.display = 'flex';
+        if(itemCount.innerText=='' ||itemCount.innerText == null){
+            itemCount.innerText = 1;
+        }else{
+            itemCount.innerText = parseInt(itemCount.innerText) + 1;
+        }
 
 
 

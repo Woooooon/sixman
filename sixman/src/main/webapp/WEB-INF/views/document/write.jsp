@@ -31,9 +31,9 @@
         <div id="write-box" class="box2">
                 
             <div class="writelist">
-                <div class="writeno">
+                <div class="writeno"> 
                     <div>문서번호</div>
-                    <div>${dvo.apNo}</div>
+                    <div type="text" name="no">${dvo.no}</div>
                 </div>
                 <div class="writeno">
                     <div>기안일</div>
@@ -41,11 +41,11 @@
                 </div>
                 <div class="writeno">
                     <div>기안자</div>
-                    <div>${dvo.sendPay}</div>
+                    <div type="text" name="sendPay">${loginMember.name}</div>
                 </div>
                 <div class="writeno">
                     <div>참조자</div>
-                    <div>${dvo.refer}</div>
+                    <input type="text" name="refer" value="입력해주세요.">
                 </div>
             </div>
             <div class="docbox">
@@ -79,7 +79,7 @@
 
             </div>
         </div>
-        <div id="summernote"></div>
+        <textarea name="content" id="summernote"></textarea>
         <div id="btn-box">
             <!-- <input name="subit" class="c-btn" type="submit" value="반려하기"> -->
             <input name="submit" class="btn" type="submit" value="작성하기">
@@ -111,15 +111,6 @@
     });
 
 
-    const form = document.querySelector('form');
-    console.log(form);
-    form.addEventListener('submit', (e)=>{
-
-        const titleInput = document.querySelector('input[name=title]');
-        sendMsg('${loginMember.name}', titleInput.value, 'DOCUMENT');
-        
-
-        return false;
-    });
+   
 </script>
 </html>

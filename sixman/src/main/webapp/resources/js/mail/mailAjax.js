@@ -94,8 +94,8 @@ function mailAjax(page, search, listTpye, categoryNo, filter) {
                     if(pv.currentPage==pv.maxPage){nextPage = pv.maxPage}
     
                     let text2 = "";
-                    text2 += `<span class="material-symbols-outlined" onclick="mailAjax(1, ${search}, ${listTpye}, ${categoryNo}, ${filter})"> keyboard_double_arrow_left </span>`;
-                    text2 += `<span class="material-symbols-outlined" onclick="mailAjax(${backPage}, ${search}, ${listTpye}, ${categoryNo}, ${filter})"> chevron_left </span>`;
+                    text2 += `<span class="material-symbols-outlined" onclick="mailAjax(1, '${search}', '${listTpye}', ${categoryNo}, '${filter}')"> keyboard_double_arrow_left </span>`;
+                    text2 += `<span class="material-symbols-outlined" onclick="mailAjax(${backPage}, '${search}', '${listTpye}', ${categoryNo}, '${filter}')"> chevron_left </span>`;
     
                     for(let i = pv.startPage; i <= pv.endPage; i++){
                         let currentClass = ""
@@ -103,11 +103,11 @@ function mailAjax(page, search, listTpye, categoryNo, filter) {
                             currentClass = " checked-p-btn";
                         }
     
-                        text2 += `<div class="page-btn${currentClass}" onclick="mailAjax(${i}, ${search}, ${listTpye}, ${categoryNo}, ${filter})">${i}</div>`;
+                        text2 += `<div class="page-btn${currentClass}" onclick="mailAjax(${i}, '${search}', '${listTpye}', ${categoryNo}, '${filter}')">${i}</div>`;
                     }
     
-                    text2 += `<span class="material-symbols-outlined" onclick="mailAjax(${nextPage}, ${search}, ${listTpye}, ${categoryNo}, ${filter})"> chevron_right </span>`;
-                    text2 += `<span class="material-symbols-outlined" onclick="mailAjax(${pv.maxPage}, ${search}, ${listTpye}, ${categoryNo}, ${filter})"> keyboard_double_arrow_right </span>`;
+                    text2 += `<span class="material-symbols-outlined" onclick="mailAjax(${nextPage}, '${search}', '${listTpye}', ${categoryNo}, '${filter}')"> chevron_right </span>`;
+                    text2 += `<span class="material-symbols-outlined" onclick="mailAjax(${pv.maxPage}, '${search}', '${listTpye}', ${categoryNo}, '${filter}')"> keyboard_double_arrow_right </span>`;
     
                     pageBox.innerHTML = text2;
                     
@@ -117,10 +117,10 @@ function mailAjax(page, search, listTpye, categoryNo, filter) {
                     // 카테고리
                     const categoryList = document.querySelector('#category-list');
 
-                    let text = `<div class="category-item" onclick="mailAjax(${page}, null, ${listTpye})">전체 메일</div>`;
+                    let text = `<div class="category-item" onclick="mailAjax(${page}, null, '${listTpye}')">전체 메일</div>`;
 
                     for(item of category){
-                        text += `<div no="${item.NO}" class="category-item" onclick="mailAjax(${page}, ${search}, ${listTpye}, ${item.NO})" >${item.NAME}</div>`;
+                        text += `<div no="${item.NO}" class="category-item" onclick="mailAjax(${page}, '${search}', '${listTpye}', ${item.NO})" >${item.NAME}</div>`;
                     }
                     text += '<div class="category-item create-btn"><span class="material-symbols-outlined"> add </span>추가</div>';
 
@@ -177,7 +177,7 @@ function mailAjax(page, search, listTpye, categoryNo, filter) {
 
 
                 } else {
-                alert('Request Error!');
+
                 }
         }
     };
@@ -209,14 +209,14 @@ function deleteAjax(doAjax, no) {
                 if (httpRequest.status === 200) {
                     
                     popup.alertPop("삭제하기", "메일을 삭제 완료 하였습니다.");
-                    if(!doAjax){
+                    if(!doAjax || doAjax == null){
                         mailAjax(cPage, cSearch, cListTpye, cCategoryNo, cFilter);
                     }else{
                         location.href = '/sixman/mail/list';
                     }
 
                 } else {
-                alert('Request Error!');
+
                 }
         }
     };
@@ -243,7 +243,7 @@ function getCategoryList() {
                     categoryItem.innerHTML = text;
 
                 } else {
-                alert('Request Error!');
+                
                 }
         }
     };
@@ -304,14 +304,14 @@ function createCategoryAjax(doAjax) {
                     
                     popup.alertPop("추가하기", "카테고리가 추가되었습니다.");
 
-                    if(!doAjax){
+                    if(!doAjax || doAjax == null){
                         mailAjax(cPage, cSearch, cListTpye, cCategoryNo, cFilter);
                     }else{
-
+                        location.reload();
                     }
 
                 } else {
-                alert('Request Error!');
+
                 }
         }
     };
@@ -331,7 +331,7 @@ function restoreAjax() {
                     mailAjax(cPage, cSearch, cListTpye, cCategoryNo, cFilter);
 
                 } else {
-                alert('Request Error!');
+
                 }
         }
     };
@@ -351,7 +351,7 @@ function realDelete() {
                     mailAjax(cPage, cSearch, cListTpye, cCategoryNo, cFilter);
 
                 } else {
-                alert('Request Error!');
+
                 }
         }
     };
@@ -370,7 +370,7 @@ function updateRead() {
                     mailAjax(cPage, cSearch, cListTpye, cCategoryNo, cFilter);
 
                 } else {
-                alert('Request Error!');
+
                 }
         }
     };
@@ -400,12 +400,12 @@ function changeCategory(doAjax, no) {
                 if (httpRequest.status === 200) {
 
                     popup.alertPop("변경하기", "카테고리 변경이 완료되었습니다.");
-                    if(!doAjax){
+                    if(!doAjax || doAjax == null){
                         mailAjax(cPage, cSearch, cListTpye, cCategoryNo, cFilter);
                     }
 
                 } else {
-                alert('Request Error!');
+
                 }
         }
     };
