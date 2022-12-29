@@ -54,6 +54,7 @@ function createMemberBox() {
         const leader = item.querySelector('input[type=hidden]');
         leader.value = v.innerHTML;
         text += `<input type='text' value="${v.innerHTML}" name='prjmem'>`;
+        text += `<input type='hidden' value="${v.innerHTML}" name='memberNo'>`
         if(i!=selects.length-1){
             text += '';
         }

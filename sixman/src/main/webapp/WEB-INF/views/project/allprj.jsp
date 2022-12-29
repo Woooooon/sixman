@@ -46,7 +46,7 @@
 	                        <div class="reader">
 	                            <span class="material-symbols-outlined">person</span>
 	                            <p>${list.leader }</p>
-	                            <div class="status ing"></div>
+	                            <div class="status done"></div>
 	                        </div>
 	                        <div class="status-progress"></div>
 	                    </div>
