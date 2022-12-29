@@ -13,16 +13,16 @@ import com.kh.sixman.member.vo.MemberVo;
 @Repository
 public class AttendanceDao {
 
-	public List<AttendanceVo> selectList(SqlSessionTemplate sst, RowBounds rb) {
-		return sst.selectList("attendanceMapper.selectList",null, rb);
+	public List<AttendanceVo> selectList(SqlSessionTemplate sst, MemberVo loginMember, RowBounds rb) {
+		return sst.selectList("attendanceMapper.selectList",loginMember, rb);
 	}
 
-	public int insertStart(SqlSessionTemplate sst) {
-		return sst.insert("attendanceMapper.insertStart");
+	public int insertStart(SqlSessionTemplate sst, MemberVo loginMember) {
+		return sst.insert("attendanceMapper.insertStart", loginMember);
 	}
 
-	public int countList(SqlSessionTemplate sst) {
-		return sst.selectOne("attendanceMapper.countList");
+	public int countList(SqlSessionTemplate sst, MemberVo loginMember) {
+		return sst.selectOne("attendanceMapper.countList", loginMember);
 	}
 
 	public int updateEnd(SqlSessionTemplate sst, AttendanceVo vo) {

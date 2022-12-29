@@ -18,12 +18,17 @@
 			FROM MEMBER M
 			, ATTENDANCE A
 		WHERE A.MEMBER_NO = M.NO
+		AND M.NAME = #{name}
 		ORDER BY "WORK_DAY" DESC, "START" DESC
 	</select>
 	
 	<select id="countList" resultType="int">
 		SELECT COUNT(*)
-		FROM ATTENDANCE
+		FROM MEMBER M
+		, ATTENDANCE A
+		WHERE A.MEMBER_NO = M.NO
+		AND M.NAME = #{name}
+
 	</select>
 	
 	<insert id="insertStart">
@@ -40,7 +45,7 @@
 		VALUES
 		(
 		    SEQ_ATTENDANCE_NO.NEXTVAL,
-		    1,
+		    #{no},
 		    1,
 		    SYSDATE,
 		    SYSDATE,

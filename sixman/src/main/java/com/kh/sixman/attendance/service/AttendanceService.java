@@ -20,16 +20,16 @@ public class AttendanceService {
 	@Autowired
 	private AttendanceDao dao;
 
-	public List<AttendanceVo> selectList(RowBounds rb) {
-		return dao.selectList(sst, rb);
+	public List<AttendanceVo> selectList(MemberVo loginMember, RowBounds rb) {
+		return dao.selectList(sst,loginMember ,rb);
 	}
 
-	public int insertStart() {
-		return dao.insertStart(sst);
+	public int insertStart(MemberVo loginMember) {
+		return dao.insertStart(sst, loginMember);
 	}
 
-	public int countList() {
-		return dao.countList(sst);
+	public int countList(MemberVo loginMember) {
+		return dao.countList(sst, loginMember);
 	}
 
 	public int updateEnd(AttendanceVo vo) {
