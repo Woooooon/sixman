@@ -54,6 +54,11 @@ public class ProjectService {
 		
 	}
 
+	//프로젝트 멤버 읽어오기
+	public List<MemberVo> selectMemberList() {
+		return pdao.selectMemberList(sst);
+	}
+
 
 
 }

@@ -96,6 +96,20 @@
     	</foreach>
     </select>
     
+    <select id="selectMemberList" resultType="ProjectVo">
+    	SELECT
+		    M.NO
+		    , M.ID
+		    , M.NAME
+		    , D.NAME AS DEPT
+		    , M.POSITION_NO
+		    , M.AUTHORIZE_NO
+		FROM MEMBER M
+		LEFT JOIN DEPARTMENT D ON M.DEPT_NO = D.DEPT_NO
+		LEFT JOIN POSITION P ON M.POSITION_NO = P.NO
+		LEFT JOIN AUTHORIZE A ON M.AUTHORIZE_NO = A.NO
+    </select>
+    
     
     
 </mapper>

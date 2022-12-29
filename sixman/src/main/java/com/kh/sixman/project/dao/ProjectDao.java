@@ -5,6 +5,7 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.sixman.member.vo.MemberVo;
 import com.kh.sixman.project.vo.ProjectVo;
 
 @Repository
@@ -39,6 +40,11 @@ public class ProjectDao {
 	public List<ProjectVo> selectMembers(SqlSessionTemplate sst, ProjectVo vo) {
 		return sst.selectList("projectMapper.selectMembers", vo);
 		
+	}
+
+	//프로젝트 멤버 읽어오기
+	public List<MemberVo> selectMemberList(SqlSessionTemplate sst) {
+		return sst.selectList("projectMapper.selectMemberList");
 	}
 
 }

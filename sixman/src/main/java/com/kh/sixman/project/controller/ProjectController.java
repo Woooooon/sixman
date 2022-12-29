@@ -57,6 +57,7 @@ public class ProjectController {
 		
 		List<PositionVo> positionList = positionService.positionList();
 		List<DeptVo> deptList = deptService.daptList();
+		List<MemberVo> memberList = ps.selectMemberList();
 		
 		model.addAttribute("deptList", deptList);
 		model.addAttribute("positionList", positionList);

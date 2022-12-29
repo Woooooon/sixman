@@ -69,10 +69,9 @@
                                     <span date-value="optValue" class="selected-option"><!-- 선택된 옵션 값이 출력되는 부분 --></span>
                                     <input type="hidden" id="membervalue" name="memberNo">
                                     <ul class="hide">
+                                    	<c:forEach>
                                         <label for="membervalue"><li class="option-wrap">김민우</li></label>
-                                        <label for="membervalue"><li class="option-wrap">구기석</li></label>
-                                        <label for="membervalue"><li class="option-wrap">임정한</li></label>
-                                        <label for="membervalue"><li class="option-wrap">윤태원</li></label>
+                                        </c:forEach>
                                     </ul>
                                 </div>
                             </div>
