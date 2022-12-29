@@ -22,8 +22,9 @@
         	START_DATE,
         	END_DATE,
         	D_YN,
-        	D_SAVE,
-        	SEND_NAME
+        	D_SAVE
+        	<!-- ,
+        	"SEND_NAME" -->
         	<!-- "SEND_PAY",
         	"TYPE",
         	D_YN,
@@ -43,7 +44,7 @@
             ,SYSDATE
             ,'N'
             ,'N'
-            ,${sendName}
+           <!--  ,#{sendName} -->
        <!--     ,#{sendPay}
            ,'1'
            ,'N'

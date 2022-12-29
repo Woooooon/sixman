@@ -68,15 +68,7 @@
                 <p>3222</p>
                 <p>결재대기</p>
             </div>
-            <div class="list-item">
-                <input type="checkbox" name="dddd">
-                <!-- <span></span> -->
-                <p>2022/12/05</p>
-                <p>아몰루</p>
-                <p>기안서 올립니다.</p>
-                <p>3222</p>
-                <p>결재대기</p>
-            </div>
+          
            
 
             

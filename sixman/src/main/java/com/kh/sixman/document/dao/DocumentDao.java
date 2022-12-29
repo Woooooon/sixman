@@ -24,12 +24,13 @@ public class DocumentDao {
 		
 	}
 
-	public int countList(SqlSessionTemplate sst, DocumentVo dvo) {
-		return sst.selectOne("documentMapper.countList",dvo);
-	}
 
 	public String getDocuementNo(SqlSessionTemplate sst, DocumentVo dvo) {
 		return sst.selectOne("documentMapper.getNo",dvo);
+	}
+
+	public int countList(SqlSessionTemplate sst, String keyword) {
+		return sst.selectOne("documentMapper.selectCount",keyword);
 	}
 
 }

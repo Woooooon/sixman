@@ -41,7 +41,7 @@
                 </div>
                 <div class="writeno">
                     <div>기안자</div>
-                    <div type="text" name="sendPay">${loginMember.name}</div>
+                    <div type="text" name="sendName">${loginMember.name}</div>
                 </div>
                 <div class="writeno">
                     <div>참조자</div>

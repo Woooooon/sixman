@@ -25,6 +25,7 @@ import com.kh.sixman.document.service.DocumentService;
 import com.kh.sixman.document.vo.DocumentVo;
 import com.kh.sixman.mail.vo.MailVo;
 import com.kh.sixman.member.vo.MemberVo;
+import com.kh.sixman.notice.vo.NoticeVo;
 
 @RequestMapping("document")
 @Controller
@@ -37,58 +38,39 @@ public class DocumentController {
    
    //기안문서함(화면)
    @GetMapping("first")
-   public String First(String listType,Model model) {
+//   public String First(String listType,Model model) {
+   public String First() {
 
-      if(listType !=null) {
-         model.addAttribute("listType" , listType);
-      }
+//      if(listType !=null) {
+//         model.addAttribute("listType" , listType);
+//      }
       
       return "document/first";
    }
    //기안문서함 (찐)
    @ResponseBody
    @PostMapping(value="first", produces = "application/json; charset=utf8")
-   public String First(@RequestParam Map<String, String> map, HttpSession session) {
-      
-	   MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
+   public String First(int page ,String keyword){
 	   
-	   DocumentVo dvo = new DocumentVo();
-	   dvo.setMNo(loginMember.getNo());
-	   dvo.setModifyDate(loginMember.getModifyDate());
-	   dvo.setType(map.get("listType"));
-	   dvo.setTypeNo(map.get("listTypeNo"));
-	   
-	   
-	   //여기 테이블을 분리하는게 좋을지....새로생성하거나
-	   
-	   dvo.setSearch(map.get("search"));
-	   
-      
 	   int pageLimit = 5;
 		int boardLimit = 15;
-		int listCount = ds.countList(dvo);
+		int listCount = ds.countList(keyword);
 		
-		int page = Integer.parseInt(map.get("page"));
 	    int offset = (page-1) * boardLimit;
 	    RowBounds rb = new RowBounds(offset , boardLimit);
 	    
 	    PageVo pv = new PageVo(listCount,page,pageLimit,boardLimit);
-	    List<DocumentVo> list = ds.selectList(dvo, rb);
-	    
-	    List<Map<String, String>> typeList = ds.typeList(loginMember.getNo());
+	    List<NoticeVo> list = ds.selectList(keyword, rb);
 
-		Map<String, Object> resultMap = new HashMap<>();
+		Map<String, Object> map = new HashMap<>();
 		
-		resultMap.put("pv", pv);
-		resultMap.put("list", list);
-		resultMap.put("typeList", typeList);
-		resultMap.put("listCount", listCount);
+		map.put("pv", pv);
+		map.put("list", list);
+		map.put("listCount", listCount);
 		
 		Gson gson = new GsonBuilder().create();
-		String json = gson.toJson(resultMap);
+		String json = gson.toJson(map);
 		return json;
-		
-		
      
    }
    

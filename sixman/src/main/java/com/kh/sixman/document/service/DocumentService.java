@@ -47,9 +47,6 @@ public class DocumentService {
       	return result1  * result2;
    }
 
-public int countList(DocumentVo dvo) {
-	return dao.countList(sst,dvo);
-}
 
 public List<DocumentVo> selectList(DocumentVo dvo, RowBounds rb) {
 	
@@ -59,6 +56,10 @@ public List<DocumentVo> selectList(DocumentVo dvo, RowBounds rb) {
 public List<Map<String, String>> typeList(String no) {
 	// TODO Auto-generated method stub
 	return null;
+}
+
+public int countList(String keyword) {
+	return dao.countList(sst, keyword)
 }
 
 }
