@@ -9,6 +9,9 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="<c:url value='resources/css/mainPage.css'/>">
 </head>
+<script>
+    getNotificationPermission();
+</script>
 <body>
 
 <%@include file="/WEB-INF/views/common/menuBar.jsp" %>

@@ -384,7 +384,8 @@ a{
 }
 
 .popup-section{
-    position: absolute;
+    position: fixed;
+    top: 0;
     width: 100vw;
     height: 100vh;
     display: flex;

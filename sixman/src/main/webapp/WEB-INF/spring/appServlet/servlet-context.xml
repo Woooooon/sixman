@@ -51,7 +51,8 @@
 		<interceptor>
 			<mapping path="/**"/>
 			<exclude-mapping path="/"/>
-			<exclude-mapping path="/error"/>
+			<exclude-mapping path="/resources/**"/>
+			<exclude-mapping path="/error/**"/>
 			<beans:bean class="com.kh.sixman.common.interceptor.LoginInterceptor"/>
 		</interceptor>
 		

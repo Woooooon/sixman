@@ -14,8 +14,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 </head>
 <body>
-    <!-- <iframe src="${path}/resources/audio/silence.mp3" allow="autoplay; muted;" id="audio" style="display: none;"></iframe> -->
-    <audio src="${path}/resources/audio/silence.mp3" autoplay muted></audio>
 	<header id="main-header">
         <section id="logo"></section>
         <section id="event-msg-box"></section>
@@ -193,13 +191,6 @@
         });
     })
 
-    function beep() {
-        console.log(123);
-        $('#player').remove();
-        $('body').append(`<audio id="player" autoplay></audio>`);
-        $("#player").append(`<source src = "${path}/resources/audio/99D4643B5F72118308.mp3" type = "audio/mp3">`);
-    }
-
     window.onload = ()=>{
         alarmAjax();
         connectSC();
@@ -226,13 +217,14 @@
         const datas = data.split('#');
         const type = datas[0];
         const msg = datas[1];
+        const no = datas[2];
 
         // console.log(data);
 
         let f = null;
         switch (type) {
             case 'MAIL':
-                f = ()=>{location.href='';}
+                f = ()=>{location.href='/sixman/mail/detail?no=';}
                 break;
             case 'DOCUMENT':
                 f = ()=>{location.href='';}
@@ -255,13 +247,13 @@
         div.innerHTML = item;
 
         div.querySelector('.item-div').addEventListener('click', ()=>{
-            checkAjax(vo.no, vo.type);
+            checkAjax(no, type);
             f();
         });
 
         div.querySelector('span').addEventListener('click', ()=>{
             div.remove();
-            checkAjax(vo.no, vo.type);
+            checkAjax(no, type);
         });
 
         const itemCount = document.querySelector('#alarm-count');
@@ -273,12 +265,10 @@
             itemCount.innerText = parseInt(itemCount.innerText) + 1;
         }
 
-
-
         const box = document.querySelector('#alarm-box #inner-box');
         box.prepend(div);
 
-        beep();
+        notify(type, msg);
     }
 
     function onOpen(params) {
@@ -309,5 +299,37 @@
         
         socket.send('${loginMember.no}#'+ type + '#' + msg + '#' + sender);
     }
+
+    function getNotificationPermission() {
+        // 브라우저 지원 여부 체크
+        if (!("Notification" in window)) {
+            alert("데스크톱 알림을 지원하지 않는 브라우저입니다.");
+        }
+        // 데스크탑 알림 권한 요청
+        Notification.requestPermission(function (result) {
+            // 권한 거절
+            if(result == 'denied') {
+                popup.alertPop("알림을 차단하셨습니다.", "브라우저의 사이트 설정에서 변경하실 수 있습니다.");
+                return false;
+            }
+        });
+    }
+
+    notify('asgdf', '한글');
+    function notify(title, msg) {
+        var options = {
+            body: msg
+        }
+        
+        // 데스크탑 알림 요청
+        var notification = new Notification(title, options);
+        
+        // 3초뒤 알람 닫기
+        setTimeout(function(){
+            notification.close();
+        }, 3000);
+    }
+
+
 </script>
 </html>
