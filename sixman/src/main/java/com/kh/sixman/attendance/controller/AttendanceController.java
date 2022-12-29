@@ -43,6 +43,8 @@ public class AttendanceController {
 		
 		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
 		
+		
+		
 		//실시간시간출력
 		Date date = new Date();
 		SimpleDateFormat day = new SimpleDateFormat("yyyy-MM-dd");
@@ -59,7 +61,7 @@ public class AttendanceController {
 		//보드페이지
 		int pageLimit = 5;
 		int boardLimit = 14;
-		int listCount = service.countList();
+		int listCount = service.countList(loginMember);
 		
 		int page = Integer.parseInt(map.get("page"));
 	    int offset = (page-1) * boardLimit;
@@ -68,7 +70,7 @@ public class AttendanceController {
 	    PageVo pv = new PageVo(listCount,page,pageLimit,boardLimit);
 		
 		//리스트 보여주기
-		List<AttendanceVo> voList = service.selectList(rb);
+		List<AttendanceVo> voList = service.selectList(loginMember,rb);
 		
 		model.addAttribute("voList", voList);
 		model.addAttribute("pv", pv);
@@ -79,9 +81,11 @@ public class AttendanceController {
 	
 	//출근버튼
 	@PostMapping("board")
-	public String board(@RequestParam Map<String, String> map,Model model) {
+	public String boardinsert(@RequestParam Map<String, String> map,Model model, HttpSession session) {
 		
-		int result = service.insertStart();
+		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
+		
+		int result = service.insertStart(loginMember);
 		
 		if(result != 1) {
 			return "errorPage";
