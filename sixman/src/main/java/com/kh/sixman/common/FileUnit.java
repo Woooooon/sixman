@@ -51,4 +51,34 @@ public class FileUnit {
 		
 	}
 
+	
+	public static AttachmentVo uploadFileOne(MultipartFile file, String rootPath, String filePath){
+		
+		AttachmentVo vo = null;
+		if(file==null) return null;
+		
+		// 0. 준비
+		String originName = file.getOriginalFilename();
+		String ext = originName.substring(originName.lastIndexOf("."), originName.length());
+		String changeName = System.currentTimeMillis() + "_" + (Math.random()*99999 + 1) + ext;
+		
+		// 1. 파일 객체 준비 (경로+파일명)
+		String path = rootPath.substring(0, rootPath.lastIndexOf("sixman")) + filePath + "/";
+		File saveFile = new File(path, changeName);
+		
+		try {
+			file.transferTo(saveFile); // 파일복사(업로드)
+		} catch (IllegalStateException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		vo = new AttachmentVo();
+		vo.setChangeName(changeName);
+		vo.setOriginName(originName);
+		vo.setFilePath(path);
+		
+		return vo;
+		
+	}//method
 }

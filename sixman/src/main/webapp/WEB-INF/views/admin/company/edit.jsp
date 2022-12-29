@@ -36,7 +36,7 @@
                                         <img src="" alt="asd" name="companyLogo" id="img-box" />
                                     </div>
                                 </div>
-                                <input type="file" id="companyLogoFile" />
+                                <input type="file" id="companyLogo" />
                                 <div id="company-info">
                                     <div class="info-item" id="company-name-edit">
                                         <label>* 기 업 명</label>

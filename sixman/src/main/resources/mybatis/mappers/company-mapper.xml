@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="companyMapper">
+	
+	<insert id="insertCompany">
+		INSERT INTO COMPANY
+		(
+			"NO",
+			"NAME",
+			"LICENSE",
+			"ADDRESS",
+			"PHONE"
+		)
+		VALUES
+		(
+			SEQ_COMPANY_NO.NEXTVAL,
+			#{name},
+			${license},
+			#{address},
+			#{phone}
+		)
+	</insert>
+	
+	<select id="getNo" resultType="String">
+		select
+			"NO"
+		from COMPANY
+		WHERE LICENSE = #{license}
+	</select>
+	
+	<select id="getCompany" resultType="CompanyVo">
+		select
+			C.NO,
+			C.NAME,
+			C.LICENSE,
+			C.ADDRESS,
+			C.PHONE,
+			A.NO AS LOGO_NO,
+			A.CHANGE_NAME AS LOGO_NAME
+		from COMPANY C
+		LEFT JOIN 
+		(
+			SELECT
+				*
+			FROM COMPANYLOGO_A
+			WHERE COMPANY_NO = #{no}
+			AND THUMB_YN = 'Y'
+		) A ON C.NO = A.COMPANY_NO
+		WHERE LICENSE = #{license}
+	</select>
+	
+	<insert id="insertFile">
+		INSERT INTO COMPANYLOGO_A
+		(
+			"NO",
+			"ORIGIN_NAME",
+			"MEMBER_NO",
+			"CHANGE_NAME",
+			"FILE_PATH",
+			"ENROLL_DATE"
+		)
+		VALUES
+		(
+			SEQ_COMPANYLOGO_A_NO.NEXTVAL,
+			#{originName},
+			${subNo},
+			#{changeName},
+			#{filePath},
+			SYSDATE
+		)
+	</insert>
+	
+	
+	<delete id="deleteFile">
+		DELETE 
+		FROM COMPANYLOGO_A 
+ 		where NO = ${no}
+	</delete>
+</mapper>
