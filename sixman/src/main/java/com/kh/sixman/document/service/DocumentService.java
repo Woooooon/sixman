@@ -13,6 +13,7 @@ import com.kh.sixman.common.AttachmentVo;
 import com.kh.sixman.document.dao.DocumentDao;
 import com.kh.sixman.document.dao.DocumentFileDao;
 import com.kh.sixman.document.vo.DocumentVo;
+import com.kh.sixman.notice.vo.NoticeVo;
 
 @Service
 public class DocumentService {
@@ -48,10 +49,6 @@ public class DocumentService {
    }
 
 
-public List<DocumentVo> selectList(DocumentVo dvo, RowBounds rb) {
-	
-	return null;
-}
 
 public List<Map<String, String>> typeList(String no) {
 	// TODO Auto-generated method stub
@@ -59,7 +56,13 @@ public List<Map<String, String>> typeList(String no) {
 }
 
 public int countList(String keyword) {
-	return dao.countList(sst, keyword)
+	return dao.countList(sst, keyword);
+}
+
+
+public List<NoticeVo> selectList(String keyword, RowBounds rb) {
+	// TODO Auto-generated method stub
+	return null;
 }
 
 }

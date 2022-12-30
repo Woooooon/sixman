@@ -59,6 +59,8 @@ public class DocumentController {
 	    int offset = (page-1) * boardLimit;
 	    RowBounds rb = new RowBounds(offset , boardLimit);
 	    
+	    
+	    
 	    PageVo pv = new PageVo(listCount,page,pageLimit,boardLimit);
 	    List<NoticeVo> list = ds.selectList(keyword, rb);
 
@@ -151,7 +153,7 @@ public class DocumentController {
 	   
 	   MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
 
-      
+     
       String rootPath = session.getServletContext().getRealPath("/");
       List<AttachmentVo> fileList = FileUnit.uploadFile(dvo.getFile(), rootPath, "upload/document");
       
