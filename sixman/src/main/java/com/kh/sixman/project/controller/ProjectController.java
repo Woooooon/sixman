@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.sixman.dept.service.DeptService;
 import com.kh.sixman.dept.vo.DeptVo;
+import com.kh.sixman.member.service.MemberService;
 import com.kh.sixman.member.vo.MemberVo;
 import com.kh.sixman.position.service.PositionService;
 import com.kh.sixman.position.vo.PositionVo;
@@ -34,6 +35,9 @@ public class ProjectController {
 	
 	@Autowired 
 	private DeptService deptService;
+	
+	@Autowired
+	private MemberService memberService;
 	
 	//프로젝트(화면)
 	@GetMapping("allprj")
@@ -58,11 +62,12 @@ public class ProjectController {
 		List<PositionVo> positionList = positionService.positionList();
 		List<DeptVo> deptList = deptService.daptList();
 		List<MemberVo> memberList = ps.selectMemberList();
+		//List<MemberVo> memberListAll = memberService.selectMemberListAll();
 		
 		model.addAttribute("deptList", deptList);
 		model.addAttribute("positionList", positionList);
-		
-		
+		model.addAttribute("memberList", memberList);
+
 		return "project/create";
 	}
 	
@@ -70,8 +75,9 @@ public class ProjectController {
 	@PostMapping("create")
 	public String create(ProjectVo vo, HttpSession session) {
 
-		int result = ps.insertPrjOne(vo);
+		System.out.println("플젝보내는vo"+vo);
 		
+		int result = ps.insertPrjOne(vo);
 		if(result != 1) {
 			return "errorPage";
 		}
@@ -83,8 +89,8 @@ public class ProjectController {
 	//프로젝트 상세보기(화면)
 	@GetMapping("detail")
 	public String detail(ProjectVo vo, HttpSession session) {
-//		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
-//		
+		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
+		
 //		ProjectVo prj = ps.selectOne(vo);
 //		session.setAttribute("prj", prj);
 		
