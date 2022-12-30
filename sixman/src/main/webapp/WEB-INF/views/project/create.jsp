@@ -40,42 +40,43 @@
                                 <div class="prj writer1" name="writer">${loginMember.name}</div>
                                 <input type="hidden" name="writer" value="${loginMember.no}">
                             </div>
-                            <div class="line">
-                                <div class="prj">부 서</div>
-                                <div class="select" data-role="selectBox">
-                                    <span date-value="optValue" class="selected-option"><!-- 선택된 옵션 값이 출력되는 부분 --></span>
-                                    <input type="hidden" id="teamvalue" name="team">
-                                    <ul class="hide">
-                                    	<c:forEach items="${deptList}" var="dept">
-                                        <label for="teamvalue"><li class="option-wrap">${dept.deptName }</li></label>
-                                        </c:forEach>
-                                    </ul>
-                                </div>
-                                <div style="width: 30px;"></div>
-                                <div class="prj">담당자</div>
-                                <div class="select" data-role="selectBox">
-                                    <span date-value="optValue" class="selected-option"><!-- 선택된 옵션 값이 출력되는 부분 --></span>
-                                    <input type="hidden" id="leadervalue" name="leader">
-                                    <!-- 옵션 영역 -->
-                                    <ul class="hide">
-                                    <c:forEach items="${positionList }" var="position">
-                                    <label for="leadervalue"><li class="option-wrap">${position.position}</li></label>
-                                    </c:forEach>
-                                    </ul>
-                                </div>
-                                <div style="width: 30px;"></div>
-                                <div class="prj">참여자</div>
-                                <div class="select" data-role="selectBox">
-                                    <span date-value="optValue" class="selected-option"><!-- 선택된 옵션 값이 출력되는 부분 --></span>
-                                    <input type="hidden" id="membervalue" name="memberNo">
-                                    <ul class="hide">
-                                        <label for="membervalue"><li class="option-wrap">김민우</li></label>
-                                        <label for="membervalue"><li class="option-wrap">구기석</li></label>
-                                        <label for="membervalue"><li class="option-wrap">임정한</li></label>
-                                        <label for="membervalue"><li class="option-wrap">윤태원</li></label>
-                                    </ul>
-                                </div>
-                            </div>
+                            
+	                           <div class="line">
+	                                <div class="prj">부 서</div>
+	                                <div class="select" data-role="selectBox">
+	                                    <span date-value="optValue" class="selected-option"><!-- 선택된 옵션 값이 출력되는 부분 --></span>
+	                                    <ul class="hide">
+                                            <c:forEach items="${deptList}" var="dept">
+                                                <label for="teamvalue"><li class="option-wrap">${dept.deptName}</li></label>
+                                            </c:forEach>
+                                            <input type="hidden" id="teamvalue" name="team">
+	                                    </ul>
+	                                </div>
+	                                <div style="width: 30px;"></div>
+	                                <div class="prj">직급</div>
+	                                <div class="select" data-role="selectBox">
+	                                    <span date-value="optValue" class="selected-option"><!-- 선택된 옵션 값이 출력되는 부분 --></span>
+	                                    <!-- 옵션 영역 -->
+	                                    <ul class="hide">
+                                            <c:forEach items="${positionList }" var="position">
+                                                <label for="leadervalue"><li class="option-wrap">${position.position}</li></label>
+                                            </c:forEach>
+                                            <input type="hidden" id="leadervalue" name="leader" value="${position.no}">
+	                                    </ul>
+	                                </div>
+	                                <div style="width: 30px;"></div>
+	                                <div class="prj">참여자</div>
+	                                <div class="select" data-role="selectBox">
+	                                    <span date-value="optValue" class="selected-option"><!-- 선택된 옵션 값이 출력되는 부분 --></span>
+	                                    <ul class="hide">
+                                            <c:forEach items="${memberList }" var="member">
+                                                <label for="membervalue"><li class="option-wrap">${member.name }</li></label>
+	                                        </c:forEach>
+                                            <input type="hidden" id="membervalue" name="memberNo" value="${member.no }">
+	                                    </ul>
+	                                </div>
+	                            </div>
+                            
                             <div class="team-member-box"></div>
                             <div class="line">
                                 <div class="btn prj" id="file-btn">첨부파일</div>
