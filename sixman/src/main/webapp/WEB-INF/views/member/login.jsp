@@ -25,9 +25,11 @@
     <body>
         <main>
             <section id="loginBox">
-                <figure id="companyLogo">
-                    <img src="/sixman/resources/img/google.png" alt="기업로고" />
-                </figure>
+            	<c:if test="${not empty company.name}">
+	                <figure id="companyLogo">
+	                    <img src="/sixman/resources/img/logo/${company.logoName}" alt="기업로고" />
+	                </figure>
+                </c:if>
                 <form action="" method="POST">
                     <div id="memberId">
                         <input type="text" name="id" placeholder="Username" />

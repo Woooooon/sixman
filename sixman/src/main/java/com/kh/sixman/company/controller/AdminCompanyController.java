@@ -32,7 +32,6 @@ public class AdminCompanyController {
 	
 	@GetMapping("admin/company/edit")
 	public String edit(Model model) {
-		
 		List<PositionVo> positionList = positionService.positionList();
 		List<DeptVo> deptList = deptService.daptList();
 		List<DeptVo> subDeptList = deptService.subList();
@@ -47,14 +46,16 @@ public class AdminCompanyController {
 	
 	@PostMapping("admin/company/edit")
 	public String edit(CompanyVo vo, HttpSession session,Model model) {
-
+		
+		vo.setNo("1");
+		
 		String rootPath = session.getServletContext().getRealPath("/");
 		
 		AttachmentVo logoFile = FileUnit.uploadFileOne(vo.getCompanyLogo(), rootPath, "sixman/src/main/webapp/resources/img/logo");
-		
+		System.out.println(logoFile);
 		vo.setLogoFile(logoFile);
 		
-		int result = companyService.insertCompanyInfo(vo);
+		int result = companyService.updateCompanyInfo(vo);
 		
 		if(result != 1) {
 			String errorMsg = "Failed to save corporate information.";
@@ -68,7 +69,7 @@ public class AdminCompanyController {
 		}
 		
 		CompanyVo company = companyService.getCompany(vo);
-		
+		model.addAttribute("msg", "기업 정보 변경/등록 요청 완료 되었습니다.");
 		session.setAttribute("company", company);
 		
 		return "redirect:/admin/company/edit";

@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.kh.sixman.company.service.CompanyService;
+import com.kh.sixman.company.vo.CompanyVo;
 import com.kh.sixman.member.service.MemberService;
 import com.kh.sixman.member.vo.MemberVo;
 
@@ -16,8 +18,19 @@ public final class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
+	@Autowired
+	private CompanyService companyService;
+	
 	@GetMapping("") 
-	public String login(){
+	public String login(HttpSession session){
+		CompanyVo company = new CompanyVo();
+		
+		String no = "1";
+		company.setNo(no);
+		
+		company = companyService.getCompany(company); 
+		session.setAttribute("company", company);
+		
 		return "member/login";
 	}
 	

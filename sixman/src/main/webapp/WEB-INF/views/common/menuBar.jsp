@@ -15,7 +15,11 @@
 </head>
 <body>
 	<header id="main-header">
-        <section id="logo"></section>
+        <section id="logo">
+            <c:if test="${not empty company.logoName}">
+                <img src="/sixman/resources/img/logo/${company.logoName}" alt="" id="headerLogo">
+            </c:if>
+        </section>
         <section id="event-msg-box"></section>
         <section id="my-menu">
             <article id="alarm" class="center">
@@ -26,7 +30,12 @@
                 <span class="material-symbols-outlined"> sms </span>
             </article>
             <article id="my-img" class="center">
-                <span class="material-symbols-outlined"> person </span>
+                <c:if test="${empty loginMember.fileName}">
+                    <span class="material-symbols-outlined"> person </span>
+                </c:if>
+                <c:if test="${not empty loginMember.fileName}">
+                    <img src="/sixman/resources/img/profile/${loginMember.fileName}" alt="">
+                </c:if>
             </article>
         </section>
     </header>

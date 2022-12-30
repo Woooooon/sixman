@@ -18,17 +18,23 @@ public class CompanyService {
 	private SqlSessionTemplate sst;
 	
 	@Transactional
-	public int insertCompanyInfo(CompanyVo vo) {
-
-		int insertCompany = companyDao.insertCompanyInfo(sst, vo);
+	public int updateCompanyInfo(CompanyVo vo) {
+		
+		int insertCompany = companyDao.updateCompanyInfo(sst, vo);
 		
 		String no = companyDao.getNo(sst, vo);
 		
 		AttachmentVo logoFile = vo.getLogoFile();
 		
 		int logoFileResult = 1;
-	
+		int updateThumb = 0;
+		
 		if(logoFile != null) {
+			String fileNo = companyDao.getFileNo(sst);
+			updateThumb = companyDao.updateThumb(sst, fileNo);
+		}
+		
+		if(updateThumb != 0) {
 			logoFile.setSubNo(no);
 			logoFileResult = companyDao.upload(sst, logoFile);
 		}
@@ -36,8 +42,8 @@ public class CompanyService {
 		return insertCompany * logoFileResult;
 	}
 
-	public CompanyVo getCompany(CompanyVo vo) {
 	
+	public CompanyVo getCompany(CompanyVo vo) {
 		return companyDao.getCompany(sst,vo);
 	}
 

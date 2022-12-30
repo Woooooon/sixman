@@ -194,7 +194,6 @@ input[type='submit'] {
 }
 #preview {
     position: absolute;
-    display: none;
     top: 2px;
     left: 30px;
     width: 130px;
@@ -213,7 +212,7 @@ input[type='submit'] {
 #company-name-edit input {
     width: 50%;
 }
-label[for='companyLogoFile'] {
+label[for='companyLogo'] {
     position: absolute;
     top: 0px;
     right: 0px;
@@ -230,11 +229,11 @@ label[for='companyLogoFile'] {
     font-size: 13px;
 }
 
-label[for='companyLogoFile'] span {
+label[for='companyLogo'] span {
     font-size: 15px;
 }
 
-label[for='companyLogoFile']:hover {
+label[for='companyLogo']:hover {
     border: 1px solid var(--main-color);
     color: #000;
     font-weight: 500;

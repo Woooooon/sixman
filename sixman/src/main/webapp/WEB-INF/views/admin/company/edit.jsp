@@ -33,30 +33,35 @@
                                 <div id="company-pic">
                                     <img src="/sixman/resources/img/companyLogoSet.png" alt="" />
                                     <div id="preview">
-                                        <img src="" alt="asd" name="companyLogo" id="img-box" />
+                                        <c:if test="${not empty company.logoName}">
+                                            <img src="/sixman/resources/img/logo/${company.logoName}" name="companyLogo" id="img-box" />
+                                        </c:if>
+                                        <c:if test="${empty company.logoName}">
+                                            <img src="/sixman/resources/img/defaultCompany.png" alt="150X50" name="companyLogo" id="img-box" />
+                                        </c:if>
                                     </div>
                                 </div>
-                                <input type="file" id="companyLogo" />
+                                <input type="file" id="companyLogo" name="companyLogo" />
                                 <div id="company-info">
                                     <div class="info-item" id="company-name-edit">
                                         <label>* 기 업 명</label>
-                                        <input type="text" name="name" />
-                                        <label for="companyLogoFile">
+                                        <input type="text" name="name" value="${company.name}" />
+                                        <label for="companyLogo">
                                             <span class="material-symbols-outlined">add</span>
                                             로고추가
                                         </label>
                                     </div>
                                     <div class="info-item">
                                         <label>* 사업자 번호</label>
-                                        <input type="text" name="license" placeholder="'-' 제외한 숫자만 입력하세요." />
+                                        <input type="text" name="license" placeholder="'-' 제외한 숫자만 입력하세요." value="${company.license}" />
                                     </div>
                                     <div class="info-item">
                                         <label> 연 락 처</label>
-                                        <input type="text" name="phone" placeholder="'-' 제외한 숫자만 입력하세요." />
+                                        <input type="text" name="phone" placeholder="'-' 제외한 숫자만 입력하세요." value="${company.phone}" />
                                     </div>
                                     <div class="info-item address-info">
                                         <label> 주 소</label>
-                                        <input type="text" id="address" name="address" readonly />
+                                        <input type="text" id="address" name="address" value="${company.address}" readonly />
                                         <button type="button" id="address_kakao">검 색</button>
                                     </div>
                                     <div id="map"></div>
