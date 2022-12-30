@@ -96,6 +96,7 @@ font-variation-settings:
 #my-menu article{
     width: 40px;
     height: 40px;
+    cursor: pointer;
 }
 #my-menu > article > span{
     font-size: 35px;
@@ -314,8 +315,9 @@ a{
     right: 10px;
     background-color: white;
     top: -500px;
-    z-index: 2;
+    z-index: 12;
     border: 1px solid var(--main-color);
+    transition: 0.5s;
 }
 
 #inner-box{

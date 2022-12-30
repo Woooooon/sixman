@@ -25,7 +25,11 @@ public class MainController {
 	private NoticeService noticeService;
 	@Autowired
 	private MailService mailService;
-
+	
+	@GetMapping("tempMain")
+	public String tempMain() {
+		return "main/tempMain";
+	}
 	@GetMapping("main")
 	public String main(HttpSession session, Model model) {
 		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
