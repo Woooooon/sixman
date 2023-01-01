@@ -25,4 +25,12 @@ public class PositionDao {
 	public List<MemberVo> positionNullCheck(SqlSessionTemplate sst, String no) {
 		return sst.selectList("positionMapper.positionNullCheck", no);
 	}
+
+	public int insertPosition(SqlSessionTemplate sst, String name) {
+		return sst.insert("positionMapper.insertPosition", name);
+	}
+
+	public PositionVo selectPosition(SqlSessionTemplate sst, String name) {
+		return sst.selectOne("positionMapper.selectPosition", name);
+	}
 }

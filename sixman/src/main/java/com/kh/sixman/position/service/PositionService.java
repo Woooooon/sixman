@@ -45,4 +45,12 @@ public class PositionService {
 		return memberPositionReset * deletePosition;
 		
 	}
+
+	public int insertPosition(String name) {
+		return positionDao.insertPosition(sst, name);
+	}
+
+	public PositionVo selectPosition(String name) {
+		return positionDao.selectPosition(sst, name);
+	}
 }

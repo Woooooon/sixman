@@ -115,19 +115,21 @@
                                 </div>
                                 <div class="position-list">
                                     <c:forEach items="${positionList}" var="i">
-                                        <div class="position-item">
-                                            <p class="positionNo">${i.no}</p>
-                                            <div>
-                                                <span class="material-symbols-outlined"> assignment_ind </span>
-                                                <p class="positionName">${i.position}</p>
+                                        <c:if test="${i.no ne 1}">
+                                            <div class="position-item">
+                                                <p class="positionNo">${i.no}</p>
+                                                <div>
+                                                    <span class="material-symbols-outlined"> assignment_ind </span>
+                                                    <p class="positionName">${i.position}</p>
+                                                </div>
+                                                <span class="material-symbols-outlined remove-position"> do_not_disturb_on </span>
                                             </div>
-                                            <span class="material-symbols-outlined remove-position"> do_not_disturb_on </span>
-                                        </div>
+                                        </c:if>
                                     </c:forEach>
                                 </div>
                                 <div class="position-insert">
-                                    <input type="text" />
-                                    <input type="button" value="추 가" />
+                                    <input type="text" id="newPositionName" />
+                                    <input type="button" value="추 가" id="insertPosition" />
                                 </div>
                             </div>
                         </div>

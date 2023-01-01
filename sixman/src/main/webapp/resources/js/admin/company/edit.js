@@ -189,7 +189,7 @@ function removeTeamAjax(elem) {
 
 //직급 제거
 removePosition();
-function removeDept() {
+function removePosition() {
     const removeBtn = document.querySelectorAll('.remove-position');
     removeBtn.forEach((elem) => {
         removePositionAjax(elem);
@@ -318,29 +318,47 @@ $('#insertTeam').click(() => {
     }); //confirm
 }); //event
 
-// $('select[name="deptNo"]').on('change', () => {
-//     $('select[name="teamNo"]').html('');
-//     if ($('select[name="deptNo"]').val() != 1) {
-//         $.ajax({
-//             url: '/sixman/dept/sublist',
-//             method: 'POST',
-//             data: {
-//                 no: $('select[name="deptNo"]').val(),
-//             },
-//             success: (teamList) => {
-//                 teamList.forEach((element) => {
-//                     const option = document.createElement('option');
-//                     option.setAttribute('value', element.teamNo);
-//                     option.innerHTML = element.teamName;
-//                     $('select[name="teamNo"]').append(option);
-//                 });
-//             },
-//             error: (teamList) => {
-//                 console.log('hi');
-//             },
-//         });
-//     }
-// });
+//직급 추가
+$('#insertPosition').click(() => {
+    const positionName = $('#newPositionName').val();
+
+    popup.confirmPop('제안', '새로운 [' + positionName + '] 직급을 추가 하시겠습니까?', () => {
+        $.ajax({
+            url: '/sixman/position/insert',
+            method: 'POST',
+            data: {
+                name: positionName,
+            },
+            success: (position) => {
+                const item = document.createElement('div');
+                item.setAttribute('class', 'position-item');
+                item.innerHTML =
+                    '<p class="positionNo">' +
+                    position.no +
+                    '</p>' +
+                    '<div>' +
+                    '<span class="material-symbols-outlined"> assignment_ind </span>' +
+                    '<p class="positionName">' +
+                    position.position +
+                    '</p>' +
+                    '</div>' +
+                    '<span class="material-symbols-outlined remove-position"> do_not_disturb_on </span>';
+
+                const removeBtn = item.querySelector('.remove-position');
+
+                removeBtn.addEventListener('click', () => {
+                    removePositionAjax(removeBtn);
+                });
+
+                document.querySelector('.position-list').append(item);
+                $('#newPositionName').val('');
+            },
+            error: (error) => {
+                console.log(error);
+            },
+        }); //ajax
+    }); //confirm
+});
 
 const form = document.querySelector('#form');
 const companyName = document.querySelector('input[name="name"]');

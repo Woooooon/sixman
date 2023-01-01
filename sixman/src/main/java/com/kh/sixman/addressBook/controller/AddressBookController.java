@@ -10,7 +10,7 @@ public class AddressBookController {
 	
 	@GetMapping("")
 	public String list() {
-		return "addressBook/list";
+		return "addressBook/test";
 	}
 	
 	@GetMapping("receive")

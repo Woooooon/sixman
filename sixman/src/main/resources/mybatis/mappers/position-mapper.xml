@@ -11,9 +11,21 @@
 		FROM POSITION
 	</select>
 	
+	<select id="selectPosition" resultType="PositionVo">
+		SELECT 
+			"NO"
+			, "POSITION"
+		FROM POSITION
+		WHERE "POSITION" = #{name}
+	</select>
+	
 	<select id="positionNullCheck" resultType="MemberVo">
 		select * from MEMBER WHERE POSITION_NO = ${no}
 	</select>
+	
+	<insert id="insertPosition">
+		INSERT INTO position VALUES(SEQ_position_NO.NEXTVAL, #{name} )
+	</insert>
 	
 	<update id="positionReset">
 		UPDATE MEMBER 

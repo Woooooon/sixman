@@ -60,6 +60,6 @@ public class DeptDao {
 	}
 
 	public DeptVo selectTeam(SqlSessionTemplate sst, DeptVo vo) {
-		return sst.selectOne("deptMapper.selectDept", vo);
+		return sst.selectOne("deptMapper.selectTeam", vo);
 	}
 }
