@@ -71,6 +71,8 @@ public class OrganizationChartController {
 		List<MemberVo> memberListAll = memberService.selectMemberListAll();
 		List<MemberVo> deptMemberList = memberService.selectdeptMemberList(map);
 		
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("category", category);
 		model.addAttribute("pv", pv);
 		model.addAttribute("deptList", deptList);
 		model.addAttribute("subDeptList", subDeptList);

@@ -27,7 +27,7 @@ public class CompanyService {
 		AttachmentVo logoFile = vo.getLogoFile();
 		
 		int logoFileResult = 1;
-		int updateThumb = 0;
+		int updateThumb = 1;
 		
 		if(logoFile != null) {
 			String fileNo = companyDao.getFileNo(sst);
@@ -39,7 +39,7 @@ public class CompanyService {
 			logoFileResult = companyDao.upload(sst, logoFile);
 		}
 		
-		return insertCompany * logoFileResult;
+		return insertCompany * logoFileResult * updateThumb;
 	}
 
 	

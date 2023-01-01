@@ -10,5 +10,20 @@
 			, "POSITION"
 		FROM POSITION
 	</select>
-
+	
+	<select id="positionNullCheck" resultType="MemberVo">
+		select * from MEMBER WHERE POSITION_NO = ${no}
+	</select>
+	
+	<update id="positionReset">
+		UPDATE MEMBER 
+		SET 
+			POSITION_NO = 1 
+      	WHERE POSITION_NO = #{no}
+	</update>
+	
+	<delete id="deletePosition">
+		delete POSITION
+		where NO = ${no}
+	</delete>
 </mapper>

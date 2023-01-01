@@ -67,6 +67,256 @@ $('#address_kakao').click(function () {
         },
     }).open();
 });
+//subList 함수 호출
+subDeptList();
+const teamListBox = document.querySelector('.team-list');
+
+//로드시 기존 deptlist에 subList 불러오는 이벤트 주입
+function subDeptList() {
+    const deptRadioBtn = document.querySelectorAll('input[name=deptNo');
+
+    deptRadioBtn.forEach((checked) => {
+        checked.addEventListener('change', () => {
+            previewSubDeptListAjax(checked);
+        });
+    });
+}
+
+//클릭시 sublist보는 함수 호출
+function previewSubDeptListAjax(checked) {
+    const teamInput = document.querySelector('#newTeamName');
+    teamInput.readOnly = false;
+    teamListBox.innerHTML = '';
+    const no = checked.parentElement.querySelector('p[class="deptNo"]').innerHTML;
+    const deptNo = document.querySelector('#deptNo');
+    deptNo.value = no;
+
+    $.ajax({
+        url: '/sixman/dept/sublist',
+        method: 'POST',
+        data: {
+            no: no,
+        },
+        success: (teamList) => {
+            teamList.forEach((element) => {
+                const item = document.createElement('div');
+                item.setAttribute('class', 'team-item');
+                item.innerHTML =
+                    '<p class="teamNo">' +
+                    element.teamNo +
+                    '</p>' +
+                    '<div>' +
+                    '<span class="material-symbols-outlined"> label </span>' +
+                    '<p class="teamName">' +
+                    element.teamName +
+                    '</p>' +
+                    '</div>' +
+                    '<span class="material-symbols-outlined remove-team"> do_not_disturb_on </span>';
+                const removeBtn = item.querySelector('.remove-team');
+
+                removeBtn.addEventListener('click', () => {
+                    removeTeamAjax(removeBtn);
+                });
+
+                teamListBox.append(item);
+            });
+        },
+        error: (error) => {
+            console.log(error);
+        },
+    });
+}
+
+//부서 삭제
+removeDept();
+function removeDept() {
+    const removeBtn = document.querySelectorAll('.remove-dept');
+    removeBtn.forEach((elem) => {
+        removeDeptAjax(elem);
+    });
+}
+//부서 제거 ajax
+function removeDeptAjax(elem) {
+    const parentDiv = elem.parentElement;
+    const no = parentDiv.querySelector('p[class=deptNo]').innerHTML;
+
+    elem.addEventListener('click', () => {
+        popup.confirmPop('주의', '부서를 폐부 하시면 하위 조직도 지워집니다.', () => {
+            $.ajax({
+                url: '/sixman/dept/delete',
+                method: 'POST',
+                data: {
+                    no: no,
+                },
+                dataType: 'text',
+                success: (msg) => {
+                    popup.alertPop('성공', msg);
+                    parentDiv.remove();
+                },
+                error: (error) => {
+                    console.log(error);
+                },
+            }); //ajax
+        }); //confirm
+    }); //event
+} //function
+
+//팀제거 ajax
+function removeTeamAjax(elem) {
+    const parentDiv = elem.parentElement;
+    const no = parentDiv.querySelector('p[class=teamNo]').innerHTML;
+
+    elem.addEventListener('click', () => {
+        popup.confirmPop('주의', '팀을 삭제하시겠습니까?.', () => {
+            $.ajax({
+                url: '/sixman/team/delete',
+                method: 'POST',
+                data: {
+                    no: no,
+                },
+                dataType: 'text',
+                success: (msg) => {
+                    popup.alertPop('성공', msg);
+                    parentDiv.remove();
+                },
+                error: (error) => {
+                    console.log(error);
+                },
+            }); //ajax
+        }); //confirm
+    }); //event
+} //function
+
+//직급 제거
+removePosition();
+function removeDept() {
+    const removeBtn = document.querySelectorAll('.remove-position');
+    removeBtn.forEach((elem) => {
+        removePositionAjax(elem);
+    });
+}
+
+//직급 제거 ajax
+function removePositionAjax(elem) {
+    const parentDiv = elem.parentElement;
+    const no = parentDiv.querySelector('p[class=positionNo]').innerHTML;
+
+    elem.addEventListener('click', () => {
+        popup.confirmPop('주의', '해당 직급을 삭제하시면 직급 당사자들은 사원 직급으로 지정 됩니다.', () => {
+            $.ajax({
+                url: '/sixman/position/delete',
+                method: 'POST',
+                data: {
+                    no: no,
+                },
+                dataType: 'text',
+                success: (msg) => {
+                    popup.alertPop('성공', msg);
+                    parentDiv.remove();
+                },
+                error: (error) => {
+                    console.log(error);
+                },
+            }); //ajax
+        }); //confirm
+    }); //event
+} //function
+
+//부서 추가
+$('#insertDept').click(() => {
+    const deptName = $('#newDeptName').val();
+
+    popup.confirmPop('제안', '새로운 부서를 창설하시겠습니까?', () => {
+        $.ajax({
+            url: '/sixman/dept/insert',
+            method: 'POST',
+            data: {
+                name: deptName,
+            },
+            success: (dept) => {
+                const div = document.createElement('div');
+                div.setAttribute('class', 'dept-item');
+                div.innerHTML =
+                    '<input type="radio" class="newRadio" id="deptNo' +
+                    dept.deptNo +
+                    '" name="deptNo" />' +
+                    '<p class="deptNo">' +
+                    dept.deptNo +
+                    '</p>' +
+                    '<label for="deptNo' +
+                    dept.deptNo +
+                    '" class="show-team">' +
+                    '<span class="material-symbols-outlined"> bookmark </span>' +
+                    '<p class="deptName">' +
+                    dept.deptName +
+                    '</p>' +
+                    '</label>' +
+                    '<span class="material-symbols-outlined remove-dept"> do_not_disturb_on </span>';
+
+                const radioBtn = div.querySelector('.newRadio');
+                console.log(radioBtn);
+                radioBtn.addEventListener('change', () => {
+                    previewSubDeptListAjax(radioBtn);
+                });
+
+                const removeBtn = div.querySelector('.remove-dept');
+                removeBtn.addEventListener('click', () => {
+                    removeDeptAjax(removeBtn);
+                });
+
+                $('.dept-list').append(div);
+                $('#newDeptName').val('');
+            },
+            error: (error) => {
+                console.log(error);
+            },
+        }); //ajax
+    }); //confirm
+}); //event
+
+//팀 추가
+$('#insertTeam').click(() => {
+    const temaName = $('#newTeamName').val();
+    const deptNo = $('#deptNo').val();
+
+    popup.confirmPop('제안', '새로운 부서를 창설하시겠습니까?', () => {
+        $.ajax({
+            url: '/sixman/team/insert',
+            method: 'POST',
+            data: {
+                deptNo: deptNo,
+                name: temaName,
+            },
+            success: (team) => {
+                const item = document.createElement('div');
+                item.setAttribute('class', 'team-item');
+                item.innerHTML =
+                    '<p class="teamNo">' +
+                    team.teamNo +
+                    '</p>' +
+                    '<div>' +
+                    '<span class="material-symbols-outlined"> label </span>' +
+                    '<p class="teamName">' +
+                    team.teamName +
+                    '</p>' +
+                    '</div>' +
+                    '<span class="material-symbols-outlined remove-team"> do_not_disturb_on </span>';
+
+                const removeBtn = item.querySelector('.remove-team');
+
+                removeBtn.addEventListener('click', () => {
+                    removeTeamAjax(removeBtn);
+                });
+
+                teamListBox.append(item);
+                $('#newTeamName').val('');
+            },
+            error: (error) => {
+                console.log(error);
+            },
+        }); //ajax
+    }); //confirm
+}); //event
 
 // $('select[name="deptNo"]').on('change', () => {
 //     $('select[name="teamNo"]').html('');

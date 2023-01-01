@@ -153,7 +153,7 @@
                                     <select name="deptNo" id="">
                                     	<option value="1">부서 발령 전</option>
                                         <c:forEach items="${deptList}" var="j">
-                                        <option value="${j.deptNo}" <c:if test="${j.deptNo eq i.deptNo}">selected</c:if>>${j.deptName}zz</option>
+                                        <option value="${j.deptNo}" <c:if test="${j.deptNo eq i.deptNo}">selected</c:if>>${j.deptName}</option>
                                         </c:forEach>
                                     </select>
                                     <select name="teamNo" id="">
@@ -174,13 +174,13 @@
                             </c:forEach>
                         </div>
                         <div class="page-box">
-                            <span class="material-symbols-outlined" <c:if test="${pv.currentPage ne 1}">onclick="location.href='/sixman/admin/employee/list?page=1'"</c:if>> keyboard_double_arrow_left </span>
-                            <span class="material-symbols-outlined" <c:if test="${pv.currentPage ne 1}">onclick="location.href='/sixman/admin/employee/list?page=${pv.currentPage - 1}'"</c:if>> chevron_left </span>
+                            <span class="material-symbols-outlined" <c:if test="${pv.currentPage ne 1}">onclick="location.href='/sixman/admin/employee/list?page=1&&category=${category}&&keyword=${keyword}'"</c:if>> keyboard_double_arrow_left </span>
+                            <span class="material-symbols-outlined" <c:if test="${pv.currentPage ne 1}">onclick="location.href='/sixman/admin/employee/list?page=${pv.currentPage - 1}&&category=${category}&&keyword=${keyword}'"</c:if>> chevron_left </span>
                             <c:forEach var="i" begin="${pv.startPage}" end="${pv.endPage}">
-                            <div class="page-btn <c:if test="${i eq pv.currentPage}"> checked-p-btn</c:if>" onclick="location.href='/sixman/admin/employee/list?page=${i}'">${i}</div>
+                            <div class="page-btn <c:if test="${i eq pv.currentPage}"> checked-p-btn</c:if>" onclick="location.href='/sixman/admin/employee/list?page=${i}&&category=${category}&&keyword=${keyword}'">${i}</div>
                             </c:forEach>
-                            <span class="material-symbols-outlined" <c:if test="${pv.maxPage ne pv.currentPage}">onclick="location.href='/sixman/admin/employee/list?page=${pv.currentPage + 1}'"</c:if>> chevron_right </span>
-                            <span class="material-symbols-outlined" <c:if test="${pv.maxPage ne 1 and pv.maxPage eq pv.currentPage}">onclick="location.href='/sixman/admin/employee/list?page=${pv.maxPage}'"</c:if>> keyboard_double_arrow_right </span>
+                            <span class="material-symbols-outlined" <c:if test="${pv.maxPage ne pv.currentPage}">onclick="location.href='/sixman/admin/employee/list?page=${pv.currentPage + 1}&&category=${category}&&keyword=${keyword}'"</c:if>> chevron_right </span>
+                            <span class="material-symbols-outlined" <c:if test="${pv.maxPage ne 1}">onclick="location.href='/sixman/admin/employee/list?page=${pv.maxPage}&&category=${category}&&keyword=${keyword}'"</c:if>> keyboard_double_arrow_right </span>
                         </div>
                     </article>
                 </section>

@@ -79,55 +79,21 @@
                                     <p>부서 설정</p>
                                 </div>
                                 <div class="dept-list">
-                                    <div class="dept-item">
-                                        <input type="radio" id="deptNo1" name="deptNo" />
-                                        <p class="deptNo">1</p>
-                                        <label for="deptNo1" class="show-team">
-                                            <span class="material-symbols-outlined"> bookmark </span>
-                                            <p class="deptName">영업부</p>
-                                        </label>
-                                        <span class="material-symbols-outlined remove-btn"> do_not_disturb_on </span>
-                                    </div>
-                                    <div class="dept-item">
-                                        <input type="radio" id="deptNo2" name="deptNo" />
-                                        <p class="deptNo">1</p>
-                                        <label for="deptNo2" class="show-team">
-                                            <span class="material-symbols-outlined"> bookmark </span>
-                                            <p class="deptName">영업부</p>
-                                        </label>
-                                        <span class="material-symbols-outlined remove-btn"> do_not_disturb_on </span>
-                                    </div>
-                                    <div class="dept-item">
-                                        <input type="radio" id="deptNo3" name="deptNo" />
-                                        <p class="deptNo">1</p>
-                                        <label for="deptNo3" class="show-team">
-                                            <span class="material-symbols-outlined"> bookmark </span>
-                                            <p class="deptName">영업부</p>
-                                        </label>
-                                        <span class="material-symbols-outlined remove-btn"> do_not_disturb_on </span>
-                                    </div>
-                                    <div class="dept-item">
-                                        <input type="radio" id="deptNo4" name="deptNo" />
-                                        <p class="deptNo">1</p>
-                                        <label for="deptNo4" class="show-team">
-                                            <span class="material-symbols-outlined"> bookmark </span>
-                                            <p class="deptName">영업부</p>
-                                        </label>
-                                        <span class="material-symbols-outlined remove-btn"> do_not_disturb_on </span>
-                                    </div>
-                                    <div class="dept-item">
-                                        <input type="radio" id="deptNo5" name="deptNo" />
-                                        <p class="deptNo">1</p>
-                                        <label for="deptNo5" class="show-team">
-                                            <span class="material-symbols-outlined"> bookmark </span>
-                                            <p class="deptName">영업부</p>
-                                        </label>
-                                        <span class="material-symbols-outlined remove-btn"> do_not_disturb_on </span>
-                                    </div>
+                                    <c:forEach items="${deptList}" var="i">
+                                        <div class="dept-item">
+                                            <input type="radio" id="deptNo${i.deptNo}" name="deptNo" />
+                                            <p class="deptNo">${i.deptNo}</p>
+                                            <label for="deptNo${i.deptNo}" class="show-team">
+                                                <span class="material-symbols-outlined"> bookmark </span>
+                                                <p class="deptName">${i.deptName}</p>
+                                            </label>
+                                            <span class="material-symbols-outlined remove-dept"> do_not_disturb_on </span>
+                                        </div>
+                                    </c:forEach>
                                 </div>
                                 <div class="dept-insert">
-                                    <input type="text" />
-                                    <input type="button" value="추 가" />
+                                    <input type="text" id="newDeptName" />
+                                    <input type="button" value="추 가" id="insertDept" />
                                 </div>
                             </div>
                             <div class="team-wrap">
@@ -135,99 +101,31 @@
                                     <span class="material-symbols-outlined"> edit_square </span>
                                     <p>팀 설정</p>
                                 </div>
-                                <div class="team-list">
-                                    <div class="team-item">
-                                        <p class="teamNo">1</p>
-                                        <p class="deptNo">1</p>
-                                        <div>
-                                            <span class="material-symbols-outlined"> label </span>
-                                            <p class="teamName">영업 1팀</p>
-                                        </div>
-                                        <span class="material-symbols-outlined remove-btn"> do_not_disturb_on </span>
-                                    </div>
-                                    <div class="team-item">
-                                        <p class="teamNo">1</p>
-                                        <p class="deptNo">1</p>
-                                        <div>
-                                            <span class="material-symbols-outlined"> label </span>
-                                            <p class="teamName">영업 1팀</p>
-                                        </div>
-                                        <span class="material-symbols-outlined remove-btn"> do_not_disturb_on </span>
-                                    </div>
-                                    <div class="team-item">
-                                        <p class="teamNo">1</p>
-                                        <p class="deptNo">1</p>
-                                        <div>
-                                            <span class="material-symbols-outlined"> label </span>
-                                            <p class="teamName">영업 1팀</p>
-                                        </div>
-                                        <span class="material-symbols-outlined remove-btn"> do_not_disturb_on </span>
-                                    </div>
-                                    <div class="team-item">
-                                        <p class="teamNo">1</p>
-                                        <p class="deptNo">1</p>
-                                        <div>
-                                            <span class="material-symbols-outlined"> label </span>
-                                            <p class="teamName">영업 1팀</p>
-                                        </div>
-                                        <span class="material-symbols-outlined remove-btn"> do_not_disturb_on </span>
-                                    </div>
-                                    <div class="team-item">
-                                        <p class="teamNo">1</p>
-                                        <p class="deptNo">1</p>
-                                        <div>
-                                            <span class="material-symbols-outlined"> label </span>
-                                            <p class="teamName">영업 1팀</p>
-                                        </div>
-                                        <span class="material-symbols-outlined remove-btn"> do_not_disturb_on </span>
-                                    </div>
-                                    <div class="team-item">
-                                        <p class="teamNo">1</p>
-                                        <p class="deptNo">1</p>
-                                        <div>
-                                            <span class="material-symbols-outlined"> label </span>
-                                            <p class="teamName">영업 1팀</p>
-                                        </div>
-                                        <span class="material-symbols-outlined remove-btn"> do_not_disturb_on </span>
-                                    </div>
-                                    <div class="team-item">
-                                        <p class="teamNo">1</p>
-                                        <p class="deptNo">1</p>
-                                        <div>
-                                            <span class="material-symbols-outlined"> label </span>
-                                            <p class="teamName">영업 1팀</p>
-                                        </div>
-                                        <span class="material-symbols-outlined remove-btn"> do_not_disturb_on </span>
-                                    </div>
-                                    <div class="team-item">
-                                        <p class="teamNo">1</p>
-                                        <p class="deptNo">1</p>
-                                        <div>
-                                            <span class="material-symbols-outlined"> label </span>
-                                            <p class="teamName">영업 1팀</p>
-                                        </div>
-                                        <span class="material-symbols-outlined remove-btn"> do_not_disturb_on </span>
-                                    </div>
-                                    <div class="team-item">
-                                        <p class="teamNo">1</p>
-                                        <p class="deptNo">1</p>
-                                        <div>
-                                            <span class="material-symbols-outlined"> label </span>
-                                            <p class="teamName">영업 1팀</p>
-                                        </div>
-                                        <span class="material-symbols-outlined remove-btn"> do_not_disturb_on </span>
-                                    </div>
-                                    <div class="team-item">
-                                        <p class="teamNo">1</p>
-                                        <p class="deptNo">1</p>
-                                        <div>
-                                            <span class="material-symbols-outlined"> label </span>
-                                            <p class="teamName">영업 1팀</p>
-                                        </div>
-                                        <span class="material-symbols-outlined remove-btn"> do_not_disturb_on </span>
-                                    </div>
-                                </div>
+                                <div class="team-list"></div>
                                 <div class="team-insert">
+                                    <input type="text" id="newTeamName" readonly />
+                                    <input type="text" id="deptNo" />
+                                    <input type="button" value="추 가" id="insertTeam" />
+                                </div>
+                            </div>
+                            <div class="position-wrap">
+                                <div id="position-title">
+                                    <span class="material-symbols-outlined"> edit_square </span>
+                                    <p>직급 설정</p>
+                                </div>
+                                <div class="position-list">
+                                    <c:forEach items="${positionList}" var="i">
+                                        <div class="position-item">
+                                            <p class="positionNo">${i.no}</p>
+                                            <div>
+                                                <span class="material-symbols-outlined"> assignment_ind </span>
+                                                <p class="positionName">${i.position}</p>
+                                            </div>
+                                            <span class="material-symbols-outlined remove-position"> do_not_disturb_on </span>
+                                        </div>
+                                    </c:forEach>
+                                </div>
+                                <div class="position-insert">
                                     <input type="text" />
                                     <input type="button" value="추 가" />
                                 </div>
@@ -247,7 +145,7 @@
                                             <span class="material-symbols-outlined"> assignment_ind </span>
                                             <p class="positionName">부 장</p>
                                         </div>
-                                        <span class="material-symbols-outlined remove-btn"> do_not_disturb_on </span>
+                                        <span class="material-symbols-outlined remove-position"> do_not_disturb_on </span>
                                     </div>
                                     <div class="position-item">
                                         <p class="positionNo">1</p>
@@ -255,7 +153,7 @@
                                             <span class="material-symbols-outlined"> assignment_ind </span>
                                             <p class="positionName">부 장</p>
                                         </div>
-                                        <span class="material-symbols-outlined remove-btn"> do_not_disturb_on </span>
+                                        <span class="material-symbols-outlined remove-position"> do_not_disturb_on </span>
                                     </div>
                                     <div class="position-item">
                                         <p class="positionNo">1</p>
@@ -263,7 +161,7 @@
                                             <span class="material-symbols-outlined"> assignment_ind </span>
                                             <p class="positionName">부 장</p>
                                         </div>
-                                        <span class="material-symbols-outlined remove-btn"> do_not_disturb_on </span>
+                                        <span class="material-symbols-outlined remove-position"> do_not_disturb_on </span>
                                     </div>
                                     <div class="position-item">
                                         <p class="positionNo">1</p>
@@ -271,7 +169,7 @@
                                             <span class="material-symbols-outlined"> assignment_ind </span>
                                             <p class="positionName">부 장</p>
                                         </div>
-                                        <span class="material-symbols-outlined remove-btn"> do_not_disturb_on </span>
+                                        <span class="material-symbols-outlined remove-position"> do_not_disturb_on </span>
                                     </div>
                                     <div class="position-item">
                                         <p class="positionNo">1</p>
@@ -279,7 +177,7 @@
                                             <span class="material-symbols-outlined"> assignment_ind </span>
                                             <p class="positionName">부 장</p>
                                         </div>
-                                        <span class="material-symbols-outlined remove-btn"> do_not_disturb_on </span>
+                                        <span class="material-symbols-outlined remove-position"> do_not_disturb_on </span>
                                     </div>
                                 </div>
                                 <div class="position-insert">

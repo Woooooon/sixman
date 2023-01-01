@@ -34,12 +34,9 @@ public class AdminCompanyController {
 	public String edit(Model model) {
 		List<PositionVo> positionList = positionService.positionList();
 		List<DeptVo> deptList = deptService.daptList();
-		List<DeptVo> subDeptList = deptService.subList();
 		
-		model.addAttribute("subDeptList", subDeptList);
 		model.addAttribute("deptList", deptList);
 		model.addAttribute("positionList", positionList);
-		
 		
 		return "admin/company/edit";
 	}

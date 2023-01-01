@@ -74,6 +74,9 @@ public class AdminOrganizationChartController {
 		List<DeptVo> deptList = deptService.daptList();
 		List<DeptVo> subDeptList = deptService.subList();
 		List<MemberVo> memberListAll = memberService.selectMemberListAll();
+		
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("category", category);
 		model.addAttribute("pv", pv);
 		model.addAttribute("deptList", deptList);
 		model.addAttribute("subDeptList", subDeptList);

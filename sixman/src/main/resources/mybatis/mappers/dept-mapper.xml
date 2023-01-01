@@ -13,6 +13,24 @@
 		AND D.NO = 1
 	</select>
 	
+	<select id="selectDept" resultType="DeptVo">
+		SELECT 
+		    "NO" AS DEPT_NO,
+		    "NAME" AS DEPT_NAME
+		FROM DEPARTMENT
+		WHERE NAME = #{name}
+	</select>
+	
+	<select id="selectTeam" resultType="DeptVo">
+		SELECT 
+		    NO TEAM_NO,
+		    NAME AS TEAM_NAME, 
+		    DEPT_NO DEPT_NO
+		FROM DEPARTMENT
+		WHERE DEPT_NO = #{deptNo}
+		AND NAME = #{teamName}
+	</select>
+	
 	<select id="selectSubList" resultType="DeptVo">
 		SELECT 
 		    P.NO TEAM_NO,
@@ -33,4 +51,54 @@
 		AND D.NO != 1
 	</select>
 	
+	<update id="deptReset">
+		UPDATE MEMBER 
+		SET 
+			DEPT_NO = 1, 
+	      	TEAM_NO = NULL 
+      	WHERE DEPT_NO = #{no}
+	</update>
+	
+	<update id="teamReset">
+		UPDATE MEMBER 
+		SET 
+	      	TEAM_NO = NULL 
+      WHERE TEAM_NO = #{no}
+	</update>
+	
+	<delete id="deleteDept">
+		delete DEPARTMENT
+		where NO = ${no}
+		OR DEPT_NO = ${no}
+	</delete>
+	
+	<delete id="deleteTeam">
+		delete DEPARTMENT
+		WHERE NO = ${no}
+	</delete>
+	
+	<select id="deptMemberNullCheck" resultType="MemberVo">
+		select * from MEMBER WHERE DEPT_NO = ${no}
+	</select>
+	
+	<select id="teamMemberNullCheck" resultType="MemberVo">
+		select * from MEMBER WHERE TEAM_NO = ${no}
+	</select>
+	
+<!-- 	<insert id="insertDept" parameterType="deptVo">
+		<selectKey keyProperty="deptNo" resultType="String" order="BEFORE">
+        	SELECT SEQ_DEPARTMENT_NO.NEXTVAL AS deptNo from dual
+    	</selectKey>
+
+		INSERT INTO department VALUES(#{deptNo}, 1,  #{deptName})
+		결과 값이 1 로 나옴 ;;; ㄷㄷ
+	</insert> -->
+	
+	<insert id="insertDept">
+		INSERT INTO department VALUES(SEQ_DEPARTMENT_NO.NEXTVAL, 1,  #{name})
+	</insert>
+	
+	<insert id="insertTeam">
+		INSERT INTO department VALUES(SEQ_DEPARTMENT_NO.NEXTVAL, #{deptNo},  #{teamName})
+	</insert>
 </mapper>
