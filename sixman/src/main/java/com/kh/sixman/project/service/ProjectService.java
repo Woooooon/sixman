@@ -35,10 +35,10 @@ public class ProjectService {
 		 //디비에 저장한 프로젝트 읽어오기
 		 
 		 //프로젝트에 저장된 멤버 들 저장
-		 //int memberInsertList = pdao.insertAllMember(sst, vo);
+		 int memberInsertList = pdao.insertAllMember(sst, vo);
 
-		 //return result * memberInsertList;
-		 return result;
+		 return result * memberInsertList;
+		 //return result;
 	}
 
 	//프로젝트 디테일
@@ -57,6 +57,11 @@ public class ProjectService {
 	//프로젝트 멤버 읽어오기
 	public List<MemberVo> selectMemberList() {
 		return pdao.selectMemberList(sst);
+	}
+
+	//프로젝트 생성에서 멤버 가져오기
+	public List<MemberVo> selectMemberList(String no) {
+		return pdao.selectMembersubList(sst, no);
 	}
 
 

@@ -13,35 +13,36 @@ document.querySelector('#startDate').setAttribute("min", today);
 const selects = document.querySelectorAll('.select');
 const memberbox = document.querySelector('.team-member-box');
 
-selects.forEach(function (element, index, array) {
-    const value = element.querySelector('.selected-option');
-    const option = element.querySelector('ul');
-    const opts = option.querySelectorAll('li');
+// selects.forEach(function (element, index, array) {
+//     const value = element.querySelector('.selected-option');
+//     const option = element.querySelector('select');
+//     const opts = option.querySelectorAll('option');
 
-    element.addEventListener('click', (e)=>{
-        e.stopPropagation();
-        if(option.classList.contains('hide')){
-            option.classList.remove('hide');
-            option.classList.add('show');
-            opts.forEach(optsItem=>{
-                const innerValue = optsItem.innerHTML;
-                optsItem.addEventListener('click', (e)=>{
-                    e.stopImmediatePropagation();
-                    value.innerHTML = innerValue;
-                    option.classList.add('hide');
-                    option.classList.remove('show');
-                    if(index===array.length-1){
-                        createMemberBox();
-                    }
-                });
-            });
-        }else{
-            option.classList.add('hide');
-            option.classList.remove('show');
-        }
-    })
-});
+//     element.addEventListener('click', (e)=>{
+//         e.stopPropagation();
+//         if(option.classList.contains('hide')){
+//             option.classList.remove('hide');
+//             option.classList.add('show');
+//             opts.forEach(optsItem=>{
+//                 const innerValue = optsItem.innerHTML;
+//                 optsItem.addEventListener('click', (e)=>{
+//                     e.stopImmediatePropagation();
+//                     value.innerHTML = innerValue;
+//                     option.classList.add('hide');
+//                     option.classList.remove('show');
+//                     if(index===array.length-1){
+//                         createMemberBox();
+//                     }
+//                 });
+//             });
+//         }else{
+//             option.classList.add('hide');
+//             option.classList.remove('show');
+//         }
+//     })
+// });
 
+//담당자, 직급, 이름 선택시 memberbox 에 생성되는 div값
 function createMemberBox() {
     const divbox = document.createElement('div');
     divbox.classList.add('member');
@@ -68,6 +69,60 @@ function createMemberBox() {
     })
 
     memberbox.append(divbox);
+}
+
+//팀 목록 조회하기
+$('select[name="deptNo"]').on('change', () => {
+    $('select[name="teamNo"]').html('');
+    console.log($('select[name="deptNo"]').val());
+    if ($('select[name="deptNo"]').val() != 1) {
+        $.ajax({
+            url: '/sixman/dept/sublist',
+            method: 'POST',
+            data: {
+                no: $('select[name="deptNo"]').val(),
+            },
+            success: (teamList) => {
+                console.log('success!!!!');
+                teamList.forEach((element) => {
+                    const option = document.createElement('option');
+                    option.addEventListener('click', ()=>{
+                        memberListAjax(element.teamNo);
+                    })
+                    option.setAttribute('value', element.teamNo);
+                    option.innerHTML = element.teamName;
+                    $('select[name="teamNo"]').append(option);
+                });
+            },
+            error: (teamList) => {
+                console.log('hi');
+            },
+        });
+    }
+});
+
+//팀에 속해 있는 멤버 목록 조회하기
+function memberListAjax(num){
+    $.ajax({
+        url: '/sixman/dept/memberlist', //member url
+        method: 'POST',
+        data: {
+            no : num,
+        },
+        success: (teamList) => {
+            console.log('success!!!!');
+            teamList.forEach((element) => {
+                const option = document.createElement('option');
+                //member 정보
+                option.setAttribute('value', element.no);
+                option.innerHTML = element.memberName;
+                $('select[name="memberNo"]').append(option);
+            });
+        },
+        error: (teamList) => {
+            console.log('hi');
+        },
+    });
 }
 
 // selects.forEach(element => {
@@ -233,4 +288,15 @@ fileBtn.addEventListener('click',()=>{
     });
 
 });
+
+
+//현재 모든 부서, 직급, 멤버 정보 다 받았음 화면에
+//이걸 가지고 부서를 클릭 했을 때, 해당 부서에 있는 멤버 전체를 확인한 후
+//멤버 부서 == 현재 클릭한 부서인 인원의 직급들만 출력
+//이름도 마찬가지로 멤버 부서 == 선택 부서 , 멤버 직급 == 선택 직급 이면
+//위의 2가지 정보가 일치하는 멤버의 이름을 이름 칸에 appendChild
+
+
+
+
 
