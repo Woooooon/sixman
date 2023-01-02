@@ -164,33 +164,31 @@
 									<div class="chatsetting-02-subtitle" id="subtitle1">전체 목록</div>
 								</div>
 								<div class="team-people-data">
- 								<div class="team-whole-data">
-									<div class="team-area">영업부</div>
-									<div class="team-name">영업 2팀</div>
+	<!--  								<div class="team-whole-data"> -->
+	<!-- 									<div class="team-area">영업부</div> -->
+	<!-- 									<div class="team-name">영업 2팀</div> -->
+	<!-- 								</div> -->
+									<div class="bottom-area2"></div>
+									<div class="with-chat-data">
+										<div class="square" style=""></div>
+										<div class="chat-deptname-area-version2" style="margin-left:6%;width:40%;position:absolute;">${whoChatfirst.deptName}</div>
+										<div class="chat-teamname-area-version2">${whoChatfirst.teamName}</div>
+										<div class="with-chat-name">${whoChatfirst.name}</div>
+										<div class="with-chat-grade">${whoChatfirst.position}</div>
+										<input type="checkbox" class="checkbox-square-one" name="withfriend01">
+									</div>
+									<div class="bottom-area2"></div>
+									<div class="with-chat-data">
+										<div class="square" style=""></div>
+										<div class="chat-deptname-area-version2" style="margin-left:6%;width:40%;position:absolute;">${whoChatfirst.deptName}</div>
+										<div class="chat-teamname-area-version2">${whoChatfirst.teamName}</div>
+										<div class="with-chat-name">${whoChatfirst.name}</div>
+										<div class="with-chat-grade">${whoChatfirst.position}</div>
+										<input type="checkbox" class="checkbox-square-one" name="withfriend01">
+									</div>
+									<div class="bottom-area2"></div>
 								</div>
-								<div class="bottom-area2"></div>
-								<div class="with-chat-data">
-									<div class="square" style=""></div>
-									<div class="with-chat-name">${whoChatfirst.name}</div>
-									<div class="with-chat-grade">부장</div>
-									<input type="checkbox" class="checkbox-square-one" name="withfriend01">
-								</div>
-								<div class="bottom-area2"></div>
-								<div class="with-chat-data">
-									<div class="square" style=""></div>
-									<div class="with-chat-name">구기석</div>
-									<div class="with-chat-grade">부장</div>
-									<input type="checkbox" class="checkbox-square-one" name="withfriend01">
-								</div>
-								<div class="bottom-area2"></div>
-								</div>
-								<div class="with-chat-data">
-									<div class="square" style=""></div>
-									<div class="with-chat-name">구기석</div>
-									<div class="with-chat-grade">부장</div>
-									<input type="checkbox" class="checkbox-square-one" name="withfriend01">
-								</div>
-								<div class="bottom-area2"></div>
+								
 							</div>
 							<div class="textbox-messenger-area3">
 								<div class="showup" id="showup02">
@@ -1532,13 +1530,13 @@
 			})
 			
 			
-			$('#deletechatroom-no').click(function(){
+			$('#deletechatroom-no').onclick(function(){
 //  				$(".with-chat-data01").hide();
 //  				$(".with-chat-data01-1").show();
 				$("#with-chat-data01-1").hide();
  				$("#with-chat-data01").show();
 // 				$('.chatroom-one-to-three-2').hide();
-			})
+			});
 
 // 			<!-- ajax -->
 			

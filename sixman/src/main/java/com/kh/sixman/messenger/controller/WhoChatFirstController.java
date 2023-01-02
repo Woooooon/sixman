@@ -37,14 +37,14 @@ public class WhoChatFirstController {
 			
 			String name = "심영";
 			String teamName = "영업1팀";
-//			String deptName = "영업부";
-//			String profilePath = "no";
+			String deptName = "영업부";
+			String profilePath = "no";
 			String position = "사원";
 			
 			whoChatfirst.setName(name);
 			whoChatfirst.setTeamName(teamName);
-//			whoChatfirst.setDeptName(deptName);
-//			whoChatfirst.setProfilePath(profilePath);
+			whoChatfirst.setDeptName(deptName);
+			whoChatfirst.setProfilePath(profilePath);
 			whoChatfirst.setPosition(position);
 			
 			session.setAttribute("whoChatfirst", whoChatfirst);
