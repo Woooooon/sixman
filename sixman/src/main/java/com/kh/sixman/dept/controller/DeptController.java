@@ -66,12 +66,7 @@ public class DeptController {
 	@PostMapping(value = "dept/insert", produces = "application/json; charset=utf8")
 	@ResponseBody
 	public String insertDept(String name) {
-//		DeptVo vo = new DeptVo();
-//		
-//		vo.setDeptName(name);
-//		
-//		int deptNo = deptService.insertDept(vo);
-//		
+
 		int insertDept = deptService.insertDept(name);
 		
 		log.info("부서 추가 결과 : " + insertDept);
@@ -115,4 +110,5 @@ public class DeptController {
 		
 		return json;
 	}
+
 }
