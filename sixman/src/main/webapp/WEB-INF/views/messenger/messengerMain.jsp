@@ -171,7 +171,7 @@
 								<div class="bottom-area2"></div>
 								<div class="with-chat-data">
 									<div class="square" style=""></div>
-									<div class="with-chat-name">구기석</div>
+									<div class="with-chat-name">${whoChatfirst.name}</div>
 									<div class="with-chat-grade">부장</div>
 									<input type="checkbox" class="checkbox-square-one" name="withfriend01">
 								</div>
