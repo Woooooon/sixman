@@ -28,8 +28,9 @@ public class DocumentVo {
     private String dSave;
     private String docNo;
     private String refer;
+    private String view;
+    private String state;
     
-
 
     private List<AttachmentVo> fileList;
     private List<MultipartFile> file;

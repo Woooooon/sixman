@@ -58,15 +58,17 @@
                 <p>문서번호</p>
                 <p>결재상태</p>
             </div>
+            <div id="list-count" class="b-page-count hilight"></div>
 
             <div class="list-item">
+                
                 <input type="checkbox" name="dddd">
                 <!-- <span></span> -->
-                <p>2022/12/05</p>
-                <p>아몰루</p>
-                <p>기안서 올립니다.</p>
-                <p>3222</p>
-                <p>결재대기</p>
+               <p>${dvo.enrollDate}</p>
+               <p>${dvo.type}</p>
+               <p>${dvo.title}</p>
+               <p>${dvo.no}</p>
+               <p>${dvo.state}</p>
             </div>
           
            
