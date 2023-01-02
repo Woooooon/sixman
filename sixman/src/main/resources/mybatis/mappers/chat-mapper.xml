@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="chatMapper">
+
+	<select id="getChatList" resultType="ChatRoomVo">
+	
+		SELECT 
+		    CHAT_ROOM_NO
+		    , MEMBER_NO
+		    , FIX_YN
+		    , ALARM_YN
+		    , NAME
+		    , LAST_JOIN_TIME
+		FROM CHAT_ROOM_SETTING
+		WHERE MEMBER_NO = ${no}
+	
+	</select>
+	
+	<select id="getChatLastMsg" resultType="ChatRoomVo">
+	
+		SELECT 
+		(
+		    SELECT "WRITE_TIME" 
+		    FROM 
+		        (
+		        SELECT "WRITE_TIME" FROM CHAT_CONTENT
+		        WHERE CHAT_ROOM_NO = ${chatRoomNo}
+		        ORDER BY WRITE_TIME DESC
+		        )
+		    WHERE ROWNUM = 1
+		) AS LAST_MSG_TIME
+		,
+		(
+		    SELECT "CONTENT" 
+		    FROM 
+		        (
+		        SELECT "CONTENT" FROM CHAT_CONTENT
+		        WHERE CHAT_ROOM_NO = ${chatRoomNo}
+		        ORDER BY WRITE_TIME DESC
+		        )
+		    WHERE ROWNUM = 1
+		) AS LAST_MSG
+		,
+		(
+		    SELECT COUNT(*) FROM CHAT_CONTENT CC
+		    LEFT JOIN CHAT_ROOM_SETTING CRS  USING(CHAT_ROOM_NO)
+		    WHERE CRS.MEMBER_NO = ${memberNo}
+		    AND CHAT_ROOM_NO = ${chatRoomNo}
+		    AND CC.WRITE_TIME > #{lastJoinTime}
+		    GROUP BY CHAT_ROOM_NO
+		) AS NOT_READ_COUNT
+		FROM DUAL
+	
+	</select>
+	
+	<select id="getMemberInChat" resultType="MemberVo">
+		SELECT 
+		*
+		FROM CHAT_ROOM_SETTING
+		JOIN MEMBER ON MEMBER_NO = NO
+		WHERE CHAT_ROOM_NO = ${no}
+	</select>
+
+	<select id="getChat" resultType="ChatRoomVo">
+		SELECT 
+		    CHAT_ROOM_NO
+		    , MEMBER_NO
+		    , FIX_YN
+		    , ALARM_YN
+		    , NAME
+		    , LAST_JOIN_TIME
+		FROM CHAT_ROOM_SETTING
+		WHERE MEMBER_NO = ${loginNo}
+		AND CHAT_ROOM_NO = ${no}
+	</select>
+	
+	<select id="getChats" resultType="ChatVo">
+		SELECT 
+			CHAT_NUM
+			, MEMBER_NO
+			, CHAT_ROOM_NO
+			, CONTENT
+			, WRITE_TIME
+			, DELETE_YN
+			, ARE_YOU_FIRST
+			, NAME AS MEMBER_NAME
+		FROM CHAT_CONTENT
+		JOIN MEMBER ON MEMBER_NO = NO
+		WHERE CHAT_ROOM_NO = ${no}
+		ORDER BY WRITE_TIME
+	</select>
+	
+	<select id="getFile" resultType="ChatVo">
+		SELECT 
+		    FILE_PATH,
+		    ORIGIN_NAME AS FILE_NAME
+		FROM CHAT_A
+		WHERE CHAT_NUM = ${chatNum}
+	</select>
+	
+	<select id="getNonCount" resultType="String">
+	    SELECT COUNT(*) AS NON_COUNT FROM CHAT_ROOM_SETTING
+	    WHERE LAST_JOIN_TIME <![CDATA[<]]> #{writeTime}
+	    AND CHAT_ROOM_NO = ${chatRoomNo}
+	</select>
+
+	<select id="getBookMark" resultType="MemberVo">
+		SELECT * FROM BOOKMARK B
+		JOIN MEMBER MM ON B.NO2 = MM.NO
+		WHERE KNO = ${no}
+	</select>
+	
+	<select id="getTeamMember" resultType="MemberVo">
+		SELECT * FROM member
+		where team_no = (select team_no from member where no = ${no})
+	</select>
+	
+	<select id="getMemberAll" resultType="MemberVo">
+		SELECT * FROM member
+	</select>
+</mapper>

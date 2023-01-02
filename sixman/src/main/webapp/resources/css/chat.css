@@ -1,0 +1,666 @@
+#m-outer{
+    position: fixed;
+    top: 0;
+    right: -400px;
+
+    width: 400px;
+    height: 100vh;
+
+    padding-top: 50px;
+
+    box-shadow: 0 0 5px 1px rgba(200, 200, 200, 0.5);
+
+    z-index: 10;
+    transition: 0.5s;
+}
+#m-outer span:not(.member-item){
+    cursor: pointer;
+}
+#m-outer-box{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.m-inner{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+}
+#m-outer *::-webkit-scrollbar{
+    width: 10px;
+    background: none;
+}
+#m-outer *::-webkit-scrollbar-thumb{
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+}
+/*====================================================================*/
+/* 사원들 목록 페이지 */
+#m-list-panel{
+    display: none;
+}
+.ml-main{
+    overflow-y: scroll;
+    align-self: flex-start;
+    height: 84%;
+}
+.ml-header{
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 15px;
+    background-color: white;
+    height: 8%;
+}
+.ml-header > div:nth-of-type(1){
+    font-size: 1.5em;
+    font-weight: 600;
+}
+#ml-search{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--bo-20);
+    padding: 3px 8px;
+    border-radius: 10px;
+}
+#ml-search > input{
+    border: none;
+    background: none;
+    outline: none;
+}
+.ml-list-box{
+    padding-left: 15px;
+    padding-right: 5px;
+}
+.ml-list-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--bo-20);
+    border-bottom: 1px solid var(--bo-20);
+    padding: 5px 0;
+    margin: 10px 0;
+}
+.ml-list-title > input{
+    display: none;
+}
+.ml-list-title:has(input:checked) + .ml-list{
+    height: 0;
+}
+.ml-list-title:has(input:checked) > span{
+    transform: rotate(0.5turn);
+}
+.ml-list{
+    overflow: hidden;
+}
+.ml-list-item{
+    display: flex;
+    align-items: center;
+    justify-content: baseline;
+    height: 70px;
+    padding: 5px;
+    padding-left: 10px;
+    gap: 20px;
+    width: 400px;
+}
+.ml-list-item:hover{
+    background-color: rgba(0, 0, 0, 0.03);
+}
+.ml-list-item > img{
+    width: 55px;
+    height: 55px;
+    border-radius: 35%;
+    background-color: var(--main-color);
+}
+.chat-img-box{
+    width: 55px;
+    height: 55px;
+    border-radius: 35%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 2px;
+}
+.chat-img-box img{
+    width: 100%;
+    height: 100%;
+    border-radius: 35%;
+    background-color: var(--main-color);
+}
+.ml-list-item > div{
+    display: flex;
+    width: 55%;
+    gap: 10px;
+    align-items: center;
+}
+.ml-list-item > div > p{
+    font-size: 0.7em;
+    color: var(--bo-60);
+}
+.ml-list-item input{
+    display: none;
+}
+.ml-list-item > label.material-symbols-outlined{
+    text-align: center;
+    width: 50px;
+    color: var(--bo-20);
+    font-size: 2.5em;
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 200,
+    'GRAD' 0,
+    'opsz' 48
+}
+.ml-list-item > label.material-symbols-outlined:has(input:checked){
+    text-align: center;
+    width: 50px;
+    color: #ffd700;
+    font-size: 2em;
+    font-variation-settings:
+    'FILL' 1,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 48
+}
+
+.ml-footer{
+    position: relative;
+    bottom: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 8%;
+}
+
+.ml-f-item{
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 1px -1px 2px 0px rgb(225, 225, 225);
+    cursor: pointer;
+}
+
+.ml-f-item:hover{
+    background-color: var(--main-color);
+}
+
+.ml-f-item:hover span{
+    color: white;
+    font-variation-settings:
+    'FILL' 1,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 48
+}
+
+.ml-f-item span{
+    font-size: 2em;
+    color: var(--main-color-dark);
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 48
+}
+
+/*====================================================================*/
+/* 채팅리스트 */
+#m-chatList-panel{
+
+}
+#done-btn{
+    color: var(--main-color-dark);
+    display: none;
+}
+#ml-menu-box{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.mc-list-item:hover{
+    background-color: rgba(0, 0, 0, 0.03);
+}
+.mc-list-item > img{
+    width: 55px;
+    height: 55px;
+    border-radius: 35%;
+    background-color: var(--main-color);
+}
+.mc-list-item{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+    padding: 10px 5;
+    padding-left: 15px;
+    gap: 20px;
+    width: 100%;
+}
+.mc-list-item > div{
+    width: 80%;
+}
+.mc-list-item-header,
+.mc-list-item-main
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px;
+}
+.mc-list-item-header p:nth-of-type(1){
+    font-weight: 700;
+}
+.mc-list-item-header p:nth-of-type(2){
+    color: var(--bo-40);
+    font-size: 0.7em;
+}
+.mc-list-item-main div:nth-of-type(1){
+    width: 70%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--bo-60);
+}
+.mc-list-item-main div:nth-of-type(2){
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: red;
+    width: 20px;
+    height: 20px;
+    padding: 2px;
+    border-radius: 50%;
+    font-size: 0.8em;
+    color: white;
+}
+/*====================================================================*/
+/* 채팅방 */
+#m-chat-panel{
+    display: none;
+}
+#m-chat-panel .ml-header{
+    padding-left: 5px;
+    scroll-behavior: smooth;
+}
+#chat-title{
+    display: flex;
+    font-size: 15px;
+    font-weight: 400;
+    align-items: center;
+    width: 80%;
+}
+#chat-title > img{
+    background-color: var(--main-color-dark);
+    width: 50px;
+    height: 50px;
+    border-radius: 35%;
+}
+#chat-title > input{
+    background: none;
+    border: none;
+    outline: none;
+    margin-left: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 50%;
+    font-size: 1em;
+}
+#chat-title > span:last-of-type{
+    font-size: 1em;
+    color: var(--bo-40);
+}
+#chat-menu span{
+    cursor: pointer;
+    width: 30px;
+}
+#m-chat-panel .ml-main{
+    background-color: rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 5px;
+    padding-left: 15px;
+}
+.chat-count{
+    color: var(--main-color);
+    font-size: 0.8em;
+}
+.chat-date{
+    color: var(--bo-20);
+    font-size: 0.8em;
+}
+.chat-item{
+    display: flex;
+    align-items: flex-end;
+    gap: 5px;
+}
+.chat-msg{
+    position: relative;
+    display: flex;
+    padding: 8px;
+    background-color: white;
+    border-radius: 3px;
+    line-height: 20px;
+    letter-spacing: 0.5px;
+    font-size: 0.95em;
+}
+.right .chat-msg{
+    background-color: #ffe657;
+}
+.right{
+    flex-direction: row-reverse;
+    align-self: flex-end;
+    justify-content: end;
+}
+.chat-info{
+    text-align: right;
+}
+#m-chat-panel .ml-footer{
+    padding-bottom: 20px;
+    grid-template-columns: 1fr 5fr 1fr;
+    align-items: center;
+    justify-items: center;
+}
+#m-chat-panel .ml-footer input{
+    width: 100%;
+    border: none;
+    background: none;
+    outline: none;
+    height: 40px;
+    border-bottom: 1px solid var(--main-color);
+}
+.chat-arrow-right,
+.chat-arrow-{
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    top: 0;
+}
+
+.chat-arrow-right{
+    right: -5px;
+    background-color: #ffe657;
+    clip-path: polygon(100% 0, 50% 50%, 50% 100%, 0 100%, 0 0);
+}
+
+.chat-arrow-{
+    left: -5px;
+    background-color: white;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 100%, 50% 50%);
+}
+#search-box{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    position: absolute;
+    z-index: 11;
+    top: 70px;
+    height: 50px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+    display: none;
+}
+#search-box > input{
+    border: none;
+    outline: none;
+    background: none;
+    border-bottom: 1px solid var(--main-color-dark);
+    width: 80%;
+}
+#chat-file{
+    display: none;
+}
+#chat-file-box{
+    position: absolute;
+    bottom: 70px;
+    background-color: rgba(255, 255, 255, 0.7);
+    width: 100%;
+    height: 150px;
+    display: flex;
+    padding: 10px;
+    justify-content: space-between;
+    display: none;
+}
+#preview{
+    width: 120px;
+    height: 120px;
+    margin-right: 30px;
+    align-self: center;
+}
+/*====================================================================*/
+#m-option-panel{
+    z-index: 11;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: end;
+
+    display: none;
+}
+#option-inner{
+    position: absolute;
+    right: -100%;
+    width: 80%;
+    height: 100%;
+    background-color: white;
+    transition: 0.5s;
+}
+#option-header{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+}
+#option-header div{
+    font-size: 1.2em;
+    font-weight: 500;
+}
+#option-box{
+    display: flex;
+    flex-direction: column;
+    padding: 20px 30px;
+    gap: 20px;
+    margin: 20px 0 ;
+}
+#option-box > label{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    color: var(--bo-80);
+}
+#containner-box > div:not(.file-box){
+    width: 100%;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 25px;
+}
+.checked + .file-box{
+    height: 400px;
+    overflow-y: auto;
+    padding: 20px;
+}
+.file-box{
+    height: 0px;
+    display: grid;
+    grid-template-columns: 60px 60px 60px 60px;
+    grid-template-rows: repeat(auto-fill, minmax(60px, auto));
+    gap: 10px;
+    justify-items: center;
+    align-items: center;
+    overflow-y: hidden;
+    padding: 0 20px;
+}
+.file-box > div{
+    width: 60px;
+    height: 60px;
+    background-color: red;
+}
+#containner-box > div:not(.file-box):hover,
+#containner-box > div.checked{
+    background-color: var(--main-color);
+    color: white;
+}
+#containner-box > div:not(.file-box) span{
+    color: var(--main-color-dark);
+}
+#containner-box > div:not(.file-box):hover span,
+#containner-box > div.checked span{
+    color: white;
+}
+/*====================================================================*/
+#m-create-panel{
+    display: none;
+    z-index: 11;
+}
+#m-create-panel .ml-header{
+    flex-direction: column;
+    height: 12%;
+    gap: 10px;
+}
+#m-create-panel .ml-header div:nth-of-type(1){
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+#m-create-panel .ml-header > div:nth-of-type(2){
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+    overflow: auto;
+}
+.member-item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20px;
+    padding: 5px 5px 5px 8px;
+    border-radius: 10px;
+    background-color: var(--main-color);
+    color: white;
+    font-size: 0.8em;
+    gap: 5px;
+}
+.member-item span{
+    font-size: 0.8em;
+}
+#m-create-panel .ml-main{
+    height: 80%;
+}
+#m-create-panel .ml-footer{
+    grid-template-columns: 1fr;
+}
+#m-create-panel .ml-footer .ml-f-item{
+    gap: 30px;
+}
+#m-create-panel .ml-footer .ml-f-item  span{
+    font-size: 1.2em;
+}
+#m-create-panel .ml-list-item input{
+    width: 15px;
+    height: 15px;
+    display: block;
+    cursor: pointer;
+}
+/*====================================================================*/
+#m-profile-panel{
+    display: none;
+    z-index: 11;
+}
+#m-profile-panel > div:nth-of-type(1){
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
+#m-profile-panel > div input{
+    display: none;
+}
+#m-profile-panel > div > label.material-symbols-outlined{
+    text-align: center;
+    width: 50px;
+    color: var(--bo-20);
+    font-size: 2.5em;
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 200,
+    'GRAD' 0,
+    'opsz' 48
+}
+#m-profile-panel > div > label.material-symbols-outlined:has(input:checked){
+    text-align: center;
+    width: 50px;
+    color: #ffd700;
+    font-size: 2em;
+    font-variation-settings:
+    'FILL' 1,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 48
+}
+
+#m-profile-panel > div:nth-of-type(2){
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    margin: 150px 0 30px 0;
+}
+
+#m-profile-panel > div:nth-of-type(2)> img{
+    width: 150px;
+    height: 150px;
+    border-radius: 5px;
+}
+
+#m-profile-panel > div:nth-of-type(2)> div{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+#m-profile-panel > div:nth-of-type(2)> div:nth-of-type(1){
+    font-size: 0.8em;
+
+}
+
+#m-profile-panel > div:nth-of-type(2)> div > p{
+    font-size: 1.5em;
+    font-weight: 500;
+}
+
+#m-profile-panel > div:nth-of-type(3){
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 80px 0;
+    padding: 0 20px;
+}
+
+#m-profile-panel > div:nth-of-type(3) span{
+    cursor: pointer;
+    font-size: 2.5em;
+    color: var(--bo-40);
+}
+
+#m-profile-panel > div:nth-of-type(3) span:hover{
+    color: var(--main-color);
+}
+

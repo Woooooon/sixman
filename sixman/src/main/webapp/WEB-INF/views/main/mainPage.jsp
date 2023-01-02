@@ -10,7 +10,9 @@
 <link rel="stylesheet" href="<c:url value='resources/css/mainPage.css'/>">
 </head>
 <script>
-    getNotificationPermission();
+    window.addEventListener('load', ()=>{
+        getNotificationPermission();
+    });
 </script>
 <body>
 
