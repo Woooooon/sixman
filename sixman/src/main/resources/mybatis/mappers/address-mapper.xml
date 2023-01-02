@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="addressMapper">
+	
+	<select id="countAddress" resultType="int">
+		SELECT COUNT(*)
+        FROM ADDRESS_BOOK A 
+		LEFT JOIN ADDRESS_SORTATION S ON A.SORTATION_NO = S.NO
+		LEFT JOIN ADDRESS_A F ON F.ADDRESS_NO = A.NO
+		WHERE A.USER_NO = #{no}
+		AND A.DELETE_YN = 'N'
+		<if test="keyword != null and keyword !='' and category != null and category != ''">
+			AND ${category} LIKE '%${keyword}%'
+		</if >
+		<if test="keyword != null and keyword !='' and category == null" >
+			AND A.NAME LIKE '%${keyword}%'
+		    OR A.PHONE LIKE '%${keyword}%' 
+		    OR A.EMAIL LIKE '%${keyword}%'
+		    OR M.BIRTHDAY LIKE '%${keyword}%'
+		    OR A.COMPANY LIKE '%${keyword}%'
+		    OR A.POSITION LIKE '%${keyword}%'
+		    OR A.ADDRESS LIKE '%${keyword}%'
+		    OR S.NAME LIKE '%${keyword}%'
+		</if> 
+	</select>
+	
+	<insert id="insertAddress">
+		INSERT INTO 
+		ADDRESS_BOOK
+		(
+		    NO,
+			SORTATION_NO,
+			USER_NO,
+			NAME,
+			PHONE,
+			EMAIL,
+			COMPANY,
+			POSITION,
+			ADDRESS,
+			COMMENT
+		)
+		VALUES
+		(
+		    SEQ_ADDRESS_BOOK_NO.NEXTVAL,
+		    #{sortationNo},
+		    #{name},
+		    #{phone},
+		    #{email},
+		    #{company},
+		    #{position},
+		    #{address},
+		    #{comment}
+		)
+	</insert>
+	
+	<select id="getNo" resultType="String">
+		select
+			"NO"
+		from ADDRESS_BOOK
+		WHERE phone = #{phone}
+		AND name = #{name}
+	</select>
+	
+	<select id="selectAddressList" resultType="AddressVo">
+		SELECT
+		    A.NO,
+		    A.SORTATION_NO,
+		    A.NAME,
+		    A.PHONE,
+		    A.EMAIL,
+		    A.COMPANY,
+		    A.POSITION,
+		    A.ADDRESS,
+		    A.ENROLL_DATE,
+		    A.MODIFY_DATE,
+		    A.DELETE_YN,
+		    A."COMMENT",
+		    S.HIGH_NO AS SORTATION_HIGH,
+		    S.NAME AS SORTATION_NAME,
+		    F.CHANGE_NAME AS FILE_NAME,
+		    F.NO AS FILE_NO
+		FROM ADDRESS_BOOK A 
+		LEFT JOIN ADDRESS_SORTATION S ON A.SORTATION_NO = S.NO
+		LEFT JOIN ADDRESS_A F ON F.ADDRESS_NO = A.NO
+		WHERE A.USER_NO = #{no}
+		AND DELETE_YN = 'N'
+		<if test="keyword != null and keyword !='' and category != null and category != ''">
+			AND ${category} LIKE '%${keyword}%'
+		</if >
+		<if test="keyword != null and keyword !='' and category == null" >
+			AND A.NAME LIKE '%${keyword}%'
+		    OR A.PHONE LIKE '%${keyword}%' 
+		    OR A.EMAIL LIKE '%${keyword}%'
+		    OR M.BIRTHDAY LIKE '%${keyword}%'
+		    OR A.COMPANY LIKE '%${keyword}%'
+		    OR A.POSITION LIKE '%${keyword}%'
+		    OR A.ADDRESS LIKE '%${keyword}%'
+		    OR S.NAME LIKE '%${keyword}%'
+		</if> 
+	</select>
+	
+	<select id="sortationList" resultType="SortationVo">
+		SELECT 
+		    NO,
+		    HIGH_NO,
+		    NAME
+		FROM ADDRESS_SORTATION
+		WHERE USER_NO = #{no}
+	</select>
+	
+	<insert id="insertSortation">
+		INSERT INTO 
+		ADDRESS_SORTATION
+		(
+		    NO,
+		    HIGH_NO,
+		    USER_NO,
+		    NAME
+		)
+		VALUES
+		(
+		    SEQ_ADDRESS_SORTATION_NO.NEXTVAL,
+		    #{no},
+		    #{highNo},
+		    #{name}
+		)
+	</insert>
+	
+	
+	<update id="updateAddress">
+		UPDATE COMPANY
+		SET 
+			SORTATION_NO = #{sortationNo},
+			NAME = #{name},
+			PHONE = #{phone},
+			EMAIL = #{email},
+			COMPANY = #{company},
+			POSITION = #{position},
+			ADDRESS = #{address},
+			"COMMENT" = #{comment}
+		WHERE "NO" = #{no}
+	</update>
+	
+	<select id="getFileNo" resultType="String">
+		SELECT 
+			NO
+		FROM ADDRESS_A
+		WHERE ADDRESS_NO = #{no}
+		AND THUMB_YN = 'Y'
+	</select>
+	
+	<update id="updateThumb">
+		UPDATE ADDRESS_A
+		SET 
+			"THUMB_YN" = 'N'
+		WHERE "NO" = #{fileNo}
+	</update>
+	
+	<select id="getCompany" resultType="CompanyVo">
+		select
+			C.NO,
+			C.NAME,
+			C.LICENSE,
+			C.ADDRESS,
+			C.PHONE,
+			A.NO AS LOGO_NO,
+			A.CHANGE_NAME AS LOGO_NAME
+		from COMPANY C
+		LEFT JOIN 
+		(
+			SELECT
+				*
+			FROM COMPANYLOGO_A
+			WHERE COMPANY_NO = #{no}
+			AND THUMB_YN = 'Y'
+		) A ON C.NO = A.COMPANY_NO
+		WHERE C.NO = #{no}
+		<if test="license != null and license != ''">
+		AND C.LICENSE = #{license}
+		</if>
+	</select>
+	
+	<insert id="insertFile">
+		INSERT INTO COMPANYLOGO_A
+		(
+			"NO",
+			"ORIGIN_NAME",
+			"COMPANY_NO",
+			"CHANGE_NAME",
+			"FILE_PATH",
+			"ENROLL_DATE"
+		)
+		VALUES
+		(
+			SEQ_COMPANYLOGO_A_NO.NEXTVAL,
+			#{originName},
+			${subNo},
+			#{changeName},
+			#{filePath},
+			SYSDATE
+		)
+	</insert>
+	
+	
+	<delete id="deleteFile">
+		DELETE 
+		FROM COMPANYLOGO_A 
+ 		where NO = ${no}
+	</delete>
+</mapper>

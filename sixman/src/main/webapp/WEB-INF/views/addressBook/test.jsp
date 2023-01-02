@@ -8,6 +8,7 @@
         <script defer src="<c:url value='/resources/js/address/test.js'/>"></script>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
         <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+        <script src="https://kit.fontawesome.com/ae846b135b.js" crossorigin="anonymous"></script>
     </head>
     <body>
         <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
@@ -186,6 +187,7 @@
                         <div class="address-search">
                             <form action="">
                                 <select name="category" id="">
+                                    <option value="">상 호</option>
                                     <option value="">이 름</option>
                                     <option value="">연락처</option>
                                     <option value="">직 급</option>
@@ -219,7 +221,7 @@
                             <div class="card-bottom">
                                 <div class="essential-info">
                                     <p id="card-name">윤태원</p>
-                                    <p id="card-company"><span class="material-symbols-outlined"> store </span>Yogiyo</p>
+                                    <p id="card-company"><i class="fa-solid fa-building"></i>요기요</p>
                                 </div>
                                 <p id="card-address">서울시 역삼동 123-7</p>
                                 <p id="card-phone"><strong>Tel.</strong>010-8888-6666</p>
@@ -240,7 +242,7 @@
                             <div class="card-bottom">
                                 <div class="essential-info">
                                     <p id="card-name">윤태원</p>
-                                    <p id="card-company"><span class="material-symbols-outlined"> store </span>요기요</p>
+                                    <p id="card-company"><i class="fa-solid fa-building"></i>요기요</p>
                                 </div>
                                 <p id="card-address">서울시 역삼동 123-7</p>
                                 <p id="card-phone"><strong>Tel.</strong>010-8888-6666</p>
@@ -261,7 +263,7 @@
                             <div class="card-bottom">
                                 <div class="essential-info">
                                     <p id="card-name">윤태원</p>
-                                    <p id="card-company"><span class="material-symbols-outlined"> store </span>요기요</p>
+                                    <p id="card-company"><i class="fa-solid fa-building"></i>요기요</p>
                                 </div>
                                 <p id="card-address">서울시 역삼동 123-7</p>
                                 <p id="card-phone"><strong>Tel.</strong>010-8888-6666</p>
@@ -282,7 +284,7 @@
                             <div class="card-bottom">
                                 <div class="essential-info">
                                     <p id="card-name">윤태원</p>
-                                    <p id="card-company"><span class="material-symbols-outlined"> store </span>요기요</p>
+                                    <p id="card-company"><i class="fa-solid fa-building"></i>요기요</p>
                                 </div>
                                 <p id="card-address">서울시 역삼동 123-7</p>
                                 <p id="card-phone"><strong>Tel.</strong>010-8888-6666</p>
@@ -303,7 +305,7 @@
                             <div class="card-bottom">
                                 <div class="essential-info">
                                     <p id="card-name">윤태원</p>
-                                    <p id="card-company"><span class="material-symbols-outlined"> store </span>요기요</p>
+                                    <p id="card-company"><i class="fa-solid fa-building"></i>요기요</p>
                                 </div>
                                 <p id="card-address">서울시 역삼동 123-7</p>
                                 <p id="card-phone"><strong>Tel.</strong>010-8888-6666</p>
@@ -311,6 +313,70 @@
                                 <a id="card-detail" href="">자세히</a>
                             </div>
                         </div>
+                        <div class="card-item">
+                            <input type="checkbox" id="cardNo" class="cardCheck" />
+                            <div class="card-sortation">
+                                <p>거래처</p>
+                            </div>
+                            <div class="card-top">
+                                <label for="cardNo">
+                                    <img src="/sixman/resources/img/defaultProfilePic.png" alt="" />
+                                </label>
+                            </div>
+                            <div class="card-bottom">
+                                <div class="essential-info">
+                                    <p id="card-name">윤태원</p>
+                                    <p id="card-company"><i class="fa-solid fa-building"></i>요기요</p>
+                                </div>
+                                <p id="card-address">서울시 역삼동 123-7</p>
+                                <p id="card-phone"><strong>Tel.</strong>010-8888-6666</p>
+                                <a id="card-email" href=""><strong>Mail.</strong>asd@gmail.com</a>
+                                <a id="card-detail" href="">자세히</a>
+                            </div>
+                        </div>
+                        <div class="card-item">
+                            <input type="checkbox" id="cardNo" class="cardCheck" />
+                            <div class="card-sortation">
+                                <p>거래처</p>
+                            </div>
+                            <div class="card-top">
+                                <label for="cardNo">
+                                    <img src="/sixman/resources/img/defaultProfilePic.png" alt="" />
+                                </label>
+                            </div>
+                            <div class="card-bottom">
+                                <div class="essential-info">
+                                    <p id="card-name">윤태원</p>
+                                    <p id="card-company"><i class="fa-solid fa-building"></i>요기요</p>
+                                </div>
+                                <p id="card-address">서울시 역삼동 123-7</p>
+                                <p id="card-phone"><strong>Tel.</strong>010-8888-6666</p>
+                                <a id="card-email" href=""><strong>Mail.</strong>asd@gmail.com</a>
+                                <a id="card-detail" href="">자세히</a>
+                            </div>
+                        </div>
+                        <div class="card-item">
+                            <input type="checkbox" id="cardNo" class="cardCheck" />
+                            <div class="card-sortation">
+                                <p>거래처</p>
+                            </div>
+                            <div class="card-top">
+                                <label for="cardNo">
+                                    <img src="/sixman/resources/img/defaultProfilePic.png" alt="" />
+                                </label>
+                            </div>
+                            <div class="card-bottom">
+                                <div class="essential-info">
+                                    <p id="card-name">윤태원</p>
+                                    <p id="card-company"><i class="fa-solid fa-building"></i>요기요</p>
+                                </div>
+                                <p id="card-address">서울시 역삼동 123-7</p>
+                                <p id="card-phone"><strong>Tel.</strong>010-8888-6666</p>
+                                <a id="card-email" href=""><strong>Mail.</strong>asd@gmail.com</a>
+                                <a id="card-detail" href="">자세히</a>
+                            </div>
+                        </div>
+                        
                     </div>
                     <div class="footer">
                         <div class="page-box">
