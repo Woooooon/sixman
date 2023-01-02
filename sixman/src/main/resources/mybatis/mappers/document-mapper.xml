@@ -5,45 +5,46 @@
 <mapper namespace="documentMapper">
 
 
-
-
-
 <!-- 게시판 insert -->
 <insert id="write">
 
 	INSERT INTO DOCUMENT
         (
         	"NO",
+        	"SEND_PAY",
+        	"AP_NO",
         	"TITLE",
-        	"CONTENT",
+        	CONTENT",
         	ENROLL_DATE,
-        	"REFER",
         	MODIFY_DATE,
         	START_DATE,
         	END_DATE,
+        	"REFER",
         	D_YN,
         	D_SAVE
-        	<!-- ,
-        	"SEND_NAME" -->
-        	<!-- "SEND_PAY",
-        	"TYPE",
-        	D_YN,
-        	D_SAVE,
-        	SEND_NAME -->
+        	
+        <!-- 
+        	"STATE",
+        	"TYPE"
+        	 -->
    
         )
         VALUES
         (
         	SEQ_DOCUMENT_NO.NEXTVAL
+        	,#{sendPay}
+        	,${apNo}
             ,#{title}
             ,#{content}
             ,SYSDATE
+            ,SYSDATE
+            ,SYSDATE
+            ,SYSDATE
             ,#{refer}
-            ,SYSDATE
-            ,SYSDATE
-            ,SYSDATE
             ,'N'
             ,'N'
+            
+
            <!--  ,#{sendName} -->
        <!--     ,#{sendPay}
            ,'1'
@@ -64,6 +65,70 @@
     	AND "TITLE" = #{title}
     </select>
 
+<select id="selectCount" parameterType="String" resultType="int">
+        SELECT COUNT(*)
+        FROM DOCUMENT
+        <trim prefix="WHERE" prefixOverrides="OR||AND">
+	        <if test=" keyword != '' ">
+		        (
+		        TITLE LIKE '%${keyword}%'
+		        OR CONTENT LIKE '%${keyword}%'
+		        )
+	        </if>
+	        AND DELETE_YN = 'N' 
+		</trim>
+        order by enroll_date
+    </select>
+    
+    
+    <select id="selectList" parameterType="String" resultType="DocumentVo">
+        SELECT *
+        FROM DOCUMENT
+        <trim prefix="WHERE" prefixOverrides="OR||AND">
+	        <if test=" keyword != '' ">
+		        (
+		        TITLE LIKE '%${keyword}%'
+		        OR CONTENT LIKE '%${keyword}%'
+		        )
+	        </if>
+	        AND DELETE_YN = 'N' 
+		</trim>
+        order by enroll_date
+    </select>
+    
+   <update id="viewCount">
+		UPDATE DOCUMENT
+		SET "VIEW" = "VIEW" + 1
+		WHERE NO = ${no}
+	</update> 
+	
+	<select id="selectOne" parameterType="String" resultType="DocumentVo">
+    	select * from document
+    	where no = ${no}
+    </select>
+    
+    <select id="nextAndPre" resultType="DocumentVo">
+		SELECT NO, TITLE, ENROLL_DATE
+		FROM DOCUMENT
+		WHERE NO IN
+		(
+			SELECT MIN(NO)
+			FROM 
+			(
+				SELECT NO
+				FROM DOCUMENT
+				WHERE NO > ${no}
+			)
+			UNION ALL
+			SELECT MAX(NO)
+			FROM 
+			(
+				SELECT NO
+				FROM DOCUMENT
+				WHERE NO <![CDATA[<]]> ${no}
+			)
+		)
+	</select>
 
 
 

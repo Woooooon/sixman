@@ -40,11 +40,6 @@ public class DocumentController {
    @GetMapping("first")
 //   public String First(String listType,Model model) {
    public String First() {
-
-//      if(listType !=null) {
-//         model.addAttribute("listType" , listType);
-//      }
-      
       return "document/first";
    }
    //기안문서함 (찐)
@@ -62,7 +57,7 @@ public class DocumentController {
 	    
 	    
 	    PageVo pv = new PageVo(listCount,page,pageLimit,boardLimit);
-	    List<NoticeVo> list = ds.selectList(keyword, rb);
+	    List<DocumentVo> list = ds.selectList(keyword, rb);
 
 		Map<String, Object> map = new HashMap<>();
 		
@@ -163,12 +158,7 @@ public class DocumentController {
       dvo.setSendName(loginMember.getName());
       dvo.setFileList(fileList);
       
-      
 
-      
- 
-      
-      
       
       int result = ds.write(dvo);
       
@@ -180,11 +170,7 @@ public class DocumentController {
       
    }
 
-   
-   
-   
-   /////////////////////////////////////////////////////////
-   
+
    
    
 

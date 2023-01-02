@@ -50,19 +50,51 @@ public class DocumentService {
 
 
 
-public List<Map<String, String>> typeList(String no) {
-	// TODO Auto-generated method stub
-	return null;
-}
+   public Map<String, DocumentVo> selectOne(String no) {
+		
+		dao.viewCount(sst, no);
+		DocumentVo dvo = dao.selectOne(sst, no);
+		
+		if(dvo==null) return null;
+		
+		List<DocumentVo> list = dao.nextAndPre(sst, no);
+		DocumentVo next = null;
+		DocumentVo pre = null;
+		
+		if(list.size()>=1) {
+			for(DocumentVo n : list) {
+				int a = Integer.parseInt(n.getNo());
+				int b = Integer.parseInt(no);
+				if(a>b) {
+					next  = n;
+				}else {
+					pre  = n;
+				}
+			}
+		}
+		
+		Map<String, String> map = new HashMap<>();
+		map.put("no", no);
+		map.put("tableName","DOCUMENT");
+		
+		List<AttachmentVo> fileList = fdao.selectFileList(sst, map);
+		dvo.setFileList(fileList);
+		
+		Map<String, DocumentVo> resultMap = new HashMap<>();
+		resultMap.put("dvo", dvo);
+		resultMap.put("next", next);
+		resultMap.put("pre", pre);
+		
+		return resultMap;
+	}
 
 public int countList(String keyword) {
 	return dao.countList(sst, keyword);
 }
 
 
-public List<NoticeVo> selectList(String keyword, RowBounds rb) {
-	// TODO Auto-generated method stub
-	return null;
+public List<DocumentVo> selectList(String keyword, RowBounds rb) {
+	return dao.selectList(sst, keyword, rb);
 }
 
 }

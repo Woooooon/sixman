@@ -19,6 +19,7 @@
 		<typeAlias type="com.kh.sixman.common.AuthorizeVo" alias="AuthorizeVo"/>
 		<typeAlias type="com.kh.sixman.member.vo.MemberVo" alias="MemberVo"/>
 		<typeAlias type="com.kh.sixman.position.vo.PositionVo" alias="PositionVo"/>
+		<typeAlias type="com.kh.sixman.document.vo.DocumentVo" alias="DocumentVo"/>
 		<typeAlias type="com.kh.sixman.dept.vo.DeptVo" alias="DeptVo"/>
 		<typeAlias type="com.kh.sixman.alarm.vo.AlarmVo" alias="AlarmVo"/>
 		<typeAlias type="com.kh.sixman.project.vo.ProjectVo" alias="ProjectVo"/>
@@ -28,6 +29,7 @@
 
 
 </configuration>
+
 
 
 
