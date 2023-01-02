@@ -118,6 +118,21 @@
     border-radius: 35%;
     background-color: var(--main-color);
 }
+.chat-img-box{
+    width: 55px;
+    height: 55px;
+    border-radius: 35%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 2px;
+}
+.chat-img-box img{
+    width: 100%;
+    height: 100%;
+    border-radius: 35%;
+    background-color: var(--main-color);
+}
 .ml-list-item > div{
     display: flex;
     width: 55%;
@@ -340,6 +355,7 @@
     background-color: #ffe657;
 }
 .right{
+    flex-direction: row-reverse;
     align-self: flex-end;
     justify-content: end;
 }
@@ -360,21 +376,21 @@
     height: 40px;
     border-bottom: 1px solid var(--main-color);
 }
-.chat-arrow-r,
-.chat-arrow-l{
+.chat-arrow-right,
+.chat-arrow-{
     width: 10px;
     height: 10px;
     position: absolute;
     top: 0;
 }
 
-.chat-arrow-r{
+.chat-arrow-right{
     right: -5px;
     background-color: #ffe657;
     clip-path: polygon(100% 0, 50% 50%, 50% 100%, 0 100%, 0 0);
 }
 
-.chat-arrow-l{
+.chat-arrow-{
     left: -5px;
     background-color: white;
     clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 100%, 50% 50%);
@@ -460,7 +476,7 @@
     width: 100%;
     color: var(--bo-80);
 }
-#containner-box > div{
+#containner-box > div:not(.file-box){
     width: 100%;
     height: 50px;
 
@@ -469,15 +485,38 @@
     gap: 10px;
     padding: 10px 25px;
 }
-#containner-box > div:hover{
+.checked + .file-box{
+    height: 400px;
+    overflow-y: auto;
+    padding: 20px;
+}
+.file-box{
+    height: 0px;
+    display: grid;
+    grid-template-columns: 60px 60px 60px 60px;
+    grid-template-rows: repeat(auto-fill, minmax(60px, auto));
+    gap: 10px;
+    justify-items: center;
+    align-items: center;
+    overflow-y: hidden;
+    padding: 0 20px;
+}
+.file-box > div{
+    width: 60px;
+    height: 60px;
+    background-color: red;
+}
+#containner-box > div:not(.file-box):hover,
+#containner-box > div.checked{
     background-color: var(--main-color);
     color: white;
 }
-#containner-box > div:hover span{
-    color: white;
-}
-#containner-box > div span{
+#containner-box > div:not(.file-box) span{
     color: var(--main-color-dark);
+}
+#containner-box > div:not(.file-box):hover span,
+#containner-box > div.checked span{
+    color: white;
 }
 /*====================================================================*/
 #m-create-panel{

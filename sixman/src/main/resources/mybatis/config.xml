@@ -24,6 +24,8 @@
 		<typeAlias type="com.kh.sixman.project.vo.ProjectVo" alias="ProjectVo"/>
 		<typeAlias type="com.kh.sixman.schedule.vo.ScheduleVo" alias="ScheduleVo"/>
 		<typeAlias type="com.kh.sixman.company.vo.CompanyVo" alias="CompanyVo"/>
+		<typeAlias type="com.kh.sixman.chat.vo.ChatRoomVo" alias="ChatRoomVo"/>
+		<typeAlias type="com.kh.sixman.chat.vo.ChatVo" alias="ChatVo"/>
 	</typeAliases> 
 
 

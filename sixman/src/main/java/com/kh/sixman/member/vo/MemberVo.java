@@ -37,6 +37,7 @@ public class MemberVo {
 	private String fileNo;
 	private String fileName;
 	private String fileOriginName;
+	private String bookmark;
 	
 	private List<MultipartFile> accountFile;
 	private List<AttachmentVo> accountFileInfo;

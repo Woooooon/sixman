@@ -168,46 +168,6 @@
                     </div>
                 </article>
                 <article class="ml-main">
-
-                    <div class="mc-list-item" onclick="joinChat()">
-                        <img src="" onerror="this.style.visibility='hidden'">
-                        <div>
-                            <div class="mc-list-item-header">
-                                <p>name</p>
-                                <p>2022:22:22:22: 11111</p>
-                            </div>
-                            <div class="mc-list-item-main">
-                                <div>text text text text text text text text</div>
-                                <div>10</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mc-list-item">
-                        <img src="" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">
-                        <div>
-                            <div class="mc-list-item-header">
-                                <p>name</p>
-                                <p>2022:22:22:22: 11111</p>
-                            </div>
-                            <div class="mc-list-item-main">
-                                <div>text text text text text text text text</div>
-                                <div>10</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mc-list-item">
-                        <img src="" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">
-                        <div>
-                            <div class="mc-list-item-header">
-                                <p>name</p>
-                                <p>2022:22:22:22: 11111</p>
-                            </div>
-                            <div class="mc-list-item-main">
-                                <div>text text text text text text text text</div>
-                                <div>10</div>
-                            </div>
-                        </div>
-                    </div>
         
                 </article>
                 <article class="ml-footer">
@@ -231,13 +191,24 @@
                         <label><input type="checkbox">알림여부</label>
                     </div>
                     <div id="containner-box">
-                        <div>
+                        <div class=>
                             <span class="material-symbols-outlined"> photo_library </span>
                             사진보관함
+                        </div>
+                        <div class="file-box">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+
                         </div>
                         <div>
                             <span class="material-symbols-outlined"> attach_file </span>
                             파일보관함
+                        </div>
+                        <div class="file-box">
+
                         </div>
                     </div>
                 </div>
@@ -246,11 +217,7 @@
             <section id="m-chat-panel" class="m-inner">
                 <article class="ml-header">
                     <div id="chat-title">
-                        <span class="material-symbols-outlined" onclick="openChat()"> chevron_left </span>
-                        <img src="" alt="" onclick="openProfile()">
-                        <input id="title-input" type="text" value="사용자, 사용자, 사용자" readonly>
-                        <span id="done-btn" class="material-symbols-outlined"> done </span>
-                        <span id="edit-btn" class="material-symbols-outlined"> _edit </span>
+
                     </div>
                     <div id="chat-menu">
                         <span id="search-btn" class="material-symbols-outlined"> search </span>
@@ -263,153 +230,6 @@
                     <span class="material-symbols-outlined" onclick="search()"> arrow_right_alt </span>
                 </div>
                 <article class="ml-main">
-
-                    <div class="chat-name">name</div>
-                    <div class="chat-item">
-                        <div class="chat-msg">
-                            <div class="chat-arrow-l"></div>
-                            이게뭐람...
-                        </div>
-                    </div>
-                    <div class="chat-item">
-                        <div class="chat-msg">
-                            이게뭐람...
-                        </div>
-                    </div>
-                    <div class="chat-item">
-                        <div class="chat-msg">
-                            엄청나잖아
-                        </div>
-                    </div>
-                    <div class="chat-item">
-                        <div class="chat-msg">
-                            신기하다 그치
-                        </div>
-                        <div class="chat-info">
-                            <div class="chat-date">222222222222</div>
-                        </div>
-                    </div>
-                    
-                    <div class="chat-name right">name</div>
-
-                    <div class="chat-item right">
-                        <div class="chat-count">1</div>
-                        <div class="chat-msg">
-                            <div class="chat-arrow-r"></div>
-                            이게메세지지
-                        </div>
-                    </div>
-                    <div class="chat-item right">
-                        <div class="chat-count">1</div>
-                        <div class="chat-msg">
-                            ㅎㅎㅎㅎㅎㅎ
-                        </div>
-                    </div>
-                    <div class="chat-item right">
-                        <div class="chat-info">
-                            <div class="chat-count">1</div>
-                            <div class="chat-date">222222222222</div>
-                        </div>
-                        <div class="chat-msg">
-                            엄청나게 긴 문자열 엄청나다고 이렇게 긴건 본적이 없을걸 너무길어서 줄바꿈이 되지않으면 안될 것 같아
-                        </div>
-                    </div>
-
-                    <div class="chat-name">name</div>
-                    <div class="chat-item">
-                        <div class="chat-msg">
-                            <div class="chat-arrow-l"></div>
-                            이게뭐람...
-                        </div>
-                    </div>
-                    <div class="chat-item">
-                        <div class="chat-msg">
-                            이게뭐람...
-                        </div>
-                    </div>
-                    <div class="chat-item">
-                        <div class="chat-msg">
-                            엄청나잖아
-                        </div>
-                    </div>
-                    <div class="chat-item">
-                        <div class="chat-msg">
-                            신기하다 그치
-                        </div>
-                        <div class="chat-info">
-                            <div class="chat-date">222222222222</div>
-                        </div>
-                    </div>
-                    
-                    <div class="chat-name right">name</div>
-
-                    <div class="chat-item right">
-                        <div class="chat-count">1</div>
-                        <div class="chat-msg">
-                            <div class="chat-arrow-r"></div>
-                            이게메세지지
-                        </div>
-                    </div>
-                    <div class="chat-item right">
-                        <div class="chat-count">1</div>
-                        <div class="chat-msg">
-                            ㅎㅎㅎㅎㅎㅎ
-                        </div>
-                    </div>
-                    <div class="chat-item right">
-                        <div class="chat-info">
-                            <div class="chat-count">1</div>
-                            <div class="chat-date">222222222222</div>
-                        </div>
-                        <div class="chat-msg">
-                            엄청나게 긴 문자열 엄청나다고 이렇게 긴건 본적이 없을걸 너무길어서 줄바꿈이 되지않으면 안될 것 같아
-                        </div>
-                    </div>
-                    <div class="chat-item right">
-                        <div class="chat-info">
-                            <div class="chat-count">1</div>
-                            <div class="chat-date">222222222222</div>
-                        </div>
-                        <div class="chat-msg">
-                            엄청나게 긴 문자열 엄청나다고 이렇게 긴건 본적이 없을걸 너무길어서 줄바꿈이 되지않으면 안될 것 같아
-                        </div>
-                    </div>
-                    <div class="chat-item right">
-                        <div class="chat-info">
-                            <div class="chat-count">1</div>
-                            <div class="chat-date">222222222222</div>
-                        </div>
-                        <div class="chat-msg">
-                            엄청나게 긴 문자열 엄청나다고 이렇게 긴건 본적이 없을걸 너무길어서 줄바꿈이 되지않으면 안될 것 같아
-                        </div>
-                    </div>
-                    <div class="chat-item right">
-                        <div class="chat-info">
-                            <div class="chat-count">1</div>
-                            <div class="chat-date">222222222222</div>
-                        </div>
-                        <div class="chat-msg">
-                            엄청나게 긴 문자열 엄청나다고 이렇게 긴건 본적이 없을걸 너무길어서 줄바꿈이 되지않으면 안될 것 같아
-                        </div>
-                    </div>
-                    <div class="chat-item right">
-                        <div class="chat-info">
-                            <div class="chat-count">1</div>
-                            <div class="chat-date">222222222222</div>
-                        </div>
-                        <div class="chat-msg">
-                            엄청나게 긴 문자열 엄청나다고 이렇게 긴건 본적이 없을걸 너무길어서 줄바꿈이 되지않으면 안될 것 같아
-                        </div>
-                    </div>
-                    <div class="chat-item right">
-                        <div class="chat-info">
-                            <div class="chat-count">1</div>
-                            <div class="chat-date">222222222222</div>
-                        </div>
-                        <div class="chat-msg">
-                            엄청나게 긴 문자열 엄청나다고 이렇게 긴건 본적이 없을걸 너무길어서 줄바꿈이 되지않으면 안될 것 같아
-                        </div>
-                    </div>
 
                 </article>
                 <article class="ml-footer">
@@ -434,15 +254,8 @@
                             <span class="material-symbols-outlined"> search </span>
                         </div>
                     </div>
-                    <div>
-                        <span class="member-item">임정한 <span class="material-symbols-outlined"> close </span></span>
-                        <span class="member-item">임정한 <span class="material-symbols-outlined"> close </span></span>
-                        <span class="member-item">임정한 <span class="material-symbols-outlined"> close </span></span>
-                        <span class="member-item">임정한 <span class="material-symbols-outlined"> close </span></span>
-                        <span class="member-item">임정한 <span class="material-symbols-outlined"> close </span></span>
-                        <span class="member-item">임정한 <span class="material-symbols-outlined"> close </span></span>
-                        <span class="member-item">임정한 <span class="material-symbols-outlined"> close </span></span>
-                        <span class="member-item">임정한 <span class="material-symbols-outlined"> close </span></span>
+                    <div id="chat-member-list">
+                        
                     </div>
                 </article>
                 <article class="ml-main">
