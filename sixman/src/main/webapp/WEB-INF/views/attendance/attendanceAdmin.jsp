@@ -516,6 +516,14 @@
         document.querySelector(".share-modal").style.display = "flex"
     })
 
+
+    
+    // 모달 모두열기 
+
+    // document.querySelectorAll(".list-item").addEventListener("click", () => {
+    //     document.querySelector(".share-modal").style.display = "flex"
+    // })
+
 </script>
 
 </body>
