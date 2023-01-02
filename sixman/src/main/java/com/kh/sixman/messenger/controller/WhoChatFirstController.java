@@ -3,6 +3,7 @@ package com.kh.sixman.messenger.controller;
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,31 +25,34 @@ public class WhoChatFirstController {
 	@ResponseBody
 	@GetMapping("chatwantfirst")
 //	public String method(HttpServletResponse resp) throws Exception {
-	public String method(){
+	public String method(HttpSession session){
 		//DB
 //
 ////		 	MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
 //
-//			ChatCreateRoomMemberVo whoChatfirst = new ChatCreateRoomMemberVo();
-//			
-//			
-////			String id = loginMember.getId();
-//			
-//			String id = "chatfirst";
-//			String teamName = "영업1팀";
+			ChatCreateRoomMemberVo whoChatfirst = new ChatCreateRoomMemberVo();
+			
+			
+//			String id = loginMember.getId();
+			
+			String name = "심영";
+			String teamName = "영업1팀";
 //			String deptName = "영업부";
-////			String profilePath = "no";
-//			String position = "사원";
-//			
-//			whoChatfirst.setName(id);
-//			whoChatfirst.setTeamName(teamName);
+//			String profilePath = "no";
+			String position = "사원";
+			
+			whoChatfirst.setName(name);
+			whoChatfirst.setTeamName(teamName);
 //			whoChatfirst.setDeptName(deptName);
-////			whoChatfirst.setProfilePath(profilePath);
-//			whoChatfirst.setPosition(position);
+//			whoChatfirst.setProfilePath(profilePath);
+			whoChatfirst.setPosition(position);
+			
+			session.setAttribute("whoChatfirst", whoChatfirst);
+			
 //			
 //			
 //			
-			System.out.println("2");
+			System.out.println(whoChatfirst);
 //			return "3";
 //			resp.getWriter().write("3");
 			
