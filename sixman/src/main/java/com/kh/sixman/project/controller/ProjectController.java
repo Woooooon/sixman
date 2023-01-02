@@ -10,10 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.kh.sixman.dept.service.DeptService;
 import com.kh.sixman.dept.vo.DeptVo;
 import com.kh.sixman.member.service.MemberService;
@@ -70,17 +67,15 @@ public class ProjectController {
 		model.addAttribute("deptList", deptList);
 		model.addAttribute("positionList", positionList);
 		model.addAttribute("memberList", memberList);
-		log.info("==============");
-		String json = new Gson().toJson(memberList);
-		log.info("json : " +json);
-		log.info("==============");
-		
+
 		return "project/create";
 	}
 	
 	//프로젝트 생성(찐)
 	@PostMapping("create")
 	public String create(ProjectVo vo, HttpSession session) {
+
+		System.out.println("플젝보내는vo"+vo);
 		
 		int result = ps.insertPrjOne(vo);
 		if(result != 1) {
@@ -101,18 +96,6 @@ public class ProjectController {
 		
 		
 		return "project/detail";
-	}
-	
-	
-	@PostMapping(value = "dept/memberlist", produces = "application/json; charset=utf8")
-	@ResponseBody
-	public String memberList(String no) {
-		
-		List<MemberVo> memberList = ps.selectMemberList(no);
-		Gson gson = new GsonBuilder().create();
-		String json = gson.toJson(memberList);
-		return json;
-		
 	}
 	
 

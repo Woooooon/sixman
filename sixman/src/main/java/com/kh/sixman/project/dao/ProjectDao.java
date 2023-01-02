@@ -47,9 +47,4 @@ public class ProjectDao {
 		return sst.selectList("projectMapper.selectMemberList");
 	}
 
-	//프로젝트 생성 멤버 읽어오기
-	public List<MemberVo> selectMembersubList(SqlSessionTemplate sst, String no) {
-		return sst.selectList("projectMapper.selectsubMemberList", no);
-	}
-
 }

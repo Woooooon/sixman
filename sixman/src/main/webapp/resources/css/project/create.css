@@ -83,7 +83,7 @@ input[name='title']{
 #startDate,
 #endDate {
     --margin-top: 11px;
-    width: 120px;
+    width: 150px;
     height: 40px;
     border-radius: 5px;
     border: 1px solid #aaa;
@@ -95,16 +95,11 @@ input[name='title']{
 }
 
 .prj2 {
-    margin-left: 30px;
+    margin-left: 170px;
 }
 
 .writer1 {
-    margin-right: 30px;
-
-}
-
-.plusm {
-    width: 120px;
+    width: 150px;
 }
 
 
@@ -113,7 +108,6 @@ input[name='title']{
 .hide{
     display: none;
 }
-
 /* .show{
     display: block;
 } */
@@ -150,7 +144,6 @@ input[name='title']{
     cursor: pointer;
     z-index: 1;
 }
-
 .select ul li{
     padding: 10px;
     text-align: center;

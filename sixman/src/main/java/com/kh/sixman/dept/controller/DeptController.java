@@ -26,5 +26,4 @@ public class DeptController {
 		String json = gson.toJson(subDeptList);
 		return json;
 	}
-
 }

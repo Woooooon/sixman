@@ -8,7 +8,8 @@
 <meta charset="UTF-8">
 <title>프로젝트 생성</title>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="${path}\resources\css\project\create.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <script defer src="${path}/resources/js/project/create.js"></script>
@@ -38,40 +39,41 @@
                                 <div class="prj prj2">생성자</div>
                                 <div class="prj writer1" name="writer">${loginMember.name}</div>
                                 <input type="hidden" name="writer" value="${loginMember.no}">
-
-                                <button class="btn cbtn plusmem" type="button"><span class="material-symbols-outlined">
-                                    add
-                                    </span>인원추가 </button>
                             </div>
                             
 	                           <div class="line">
-	                                <div class="prj">부  서</div>
-	                                <div class="team">
-	                                    <span date-value="optValue" class="selected-option" id="deptName"><!-- 선택된 옵션 값이 출력되는 부분 --></span>
-	                                    <select name="deptNo" id="dept">
-                                            <option value="1" selected>부 서</option>
+	                                <div class="prj">부 서</div>
+	                                <div class="select" data-role="selectBox">
+	                                    <span date-value="optValue" class="selected-option"><!-- 선택된 옵션 값이 출력되는 부분 --></span>
+	                                    <ul class="hide">
                                             <c:forEach items="${deptList}" var="dept">
-                                                <option value="${dept.deptNo}">${dept.deptName}</option>
+                                                <label for="teamvalue"><li class="option-wrap">${dept.deptName}</li></label>
                                             </c:forEach>
-	                                    </select>
+                                            <input type="hidden" id="teamvalue" name="team">
+	                                    </ul>
 	                                </div>
 	                                <div style="width: 30px;"></div>
-	                                <div class="prj">팀</div>
-	                                <div class="select">
-	                                    <span date-value="optValue" class="selected-option" id="teamName"><!-- 선택된 옵션 값이 출력되는 부분 --></span>
+	                                <div class="prj">직급</div>
+	                                <div class="select" data-role="selectBox">
+	                                    <span date-value="optValue" class="selected-option"><!-- 선택된 옵션 값이 출력되는 부분 --></span>
 	                                    <!-- 옵션 영역 -->
-	                                    <select name="teamNo" id="">
-	                                    </select>
+	                                    <ul class="hide">
+                                            <c:forEach items="${positionList }" var="position">
+                                                <label for="leadervalue"><li class="option-wrap">${position.position}</li></label>
+                                            </c:forEach>
+                                            <input type="hidden" id="leadervalue" name="leader" value="${position.no}">
+	                                    </ul>
 	                                </div>
 	                                <div style="width: 30px;"></div>
-	                                <div class="prj">이  름</div>
-	                                <div class="select">
-	                                    <span date-value="optValue" class="selected-option" id="memberName"><!-- 선택된 옵션 값이 출력되는 부분 --></span>
-	                                    <select name="memberNo">
+	                                <div class="prj">참여자</div>
+	                                <div class="select" data-role="selectBox">
+	                                    <span date-value="optValue" class="selected-option"><!-- 선택된 옵션 값이 출력되는 부분 --></span>
+	                                    <ul class="hide">
                                             <c:forEach items="${memberList }" var="member">
-                                                <option value="${member.no}">${member.name} ${member.positionName }</option>
+                                                <label for="membervalue"><li class="option-wrap">${member.name }</li></label>
 	                                        </c:forEach>
-	                                    </select>
+                                            <input type="hidden" id="membervalue" name="memberNo" value="${member.no }">
+	                                    </ul>
 	                                </div>
 	                            </div>
                             
