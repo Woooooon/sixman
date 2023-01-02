@@ -186,12 +186,18 @@ public class AttendanceController {
 	
 	
 	@GetMapping("calendar")
-	public String calendar(){
+	public String calendar(@RequestParam Map<String, String> map, Model model, AttendanceVo vo){
+		
+		String selectMemberList = "qweasd";
+		
+		model.addAttribute("selectMemberList", selectMemberList);
+		
 		return "attendance/attendanceCalendar";
 	}
 	
 	@GetMapping("test")
 	public String test(){
+		
 		return "attendance/test";
 	}
 	
