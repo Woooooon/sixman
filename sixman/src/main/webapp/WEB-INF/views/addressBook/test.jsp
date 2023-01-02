@@ -101,6 +101,81 @@
                         <span class="material-symbols-outlined"> contacts </span>
                         <p>주소록</p>
                     </div>
+                    <div class="dept-title">
+                        <span class="material-symbols-outlined">inventory_2</span>
+                        <p>부서 목록</p>
+                    </div>
+                    
+                    <div class="dept-list">
+                    	<c:forEach items="${deptList}" var="j">
+	                    	<ul>
+	                            <div class="deptList-item">
+	                                <label for="deptNo${j.deptNo}">
+		                                <input type="checkbox" id="deptNo${j.deptNo}">
+		                                <div class="toggleBtn">
+		                                    <span class="material-symbols-outlined">change_history</span>
+		                                </div>
+	                            	    ${j.deptName}
+	                                </label>
+	                            </div>
+                                <c:forEach items="${memberListAll}" var="i">
+                                    <c:if test="${j.deptNo eq i.deptNo and empty i.teamName}">
+                                        <li>
+                                            <div class="memberList-item">
+                                                <a href="/sixman/admin/member/detail?no=${i.no}"><span class="material-symbols-outlined">account_box</span>${i.name} ${i.positionName}</a>
+                                            </div>
+                                        </li>													
+                                    </c:if>
+                                </c:forEach>
+		                    	<c:forEach items="${subDeptList}" var="l">
+		                    		<c:if test="${j.deptNo eq l.deptNo }">
+										<li>
+			                                <ul>
+			                                    <div class="teamList-item">
+			                                        <label for="teamNo${l.teamNo}">
+				                                        <input type="checkbox" id="teamNo${l.teamNo}">
+				                                        <div class="toggleBtn">
+				                                            <span class="material-symbols-outlined">change_history</span>
+				                                        </div>
+			                                      	    ${l.teamName}
+			                                        </label>
+			                                    </div>
+												<c:forEach items="${memberListAll}" var="i">
+													<c:if test="${l.teamNo eq i.teamNo}">
+														<li>
+					                                        <div class="memberList-item">
+					                                            <a href="/sixman/admin/member/detail?no=${i.no}"><span class="material-symbols-outlined">account_box</span>${i.name} ${i.positionName}</a>
+					                                        </div>
+					                                    </li>													
+													</c:if>
+												</c:forEach>		                    				
+		                    				</ul>
+	                    				</li>
+		                    		</c:if>
+		                    	</c:forEach>
+	                    	</ul>
+                    	</c:forEach>
+	                    	<ul>
+                                <div class="deptList-item">
+                                    <label for="deptNo">
+                                        <input type="checkbox" id="deptNo">
+                                        <div class="toggleBtn">
+                                            <span class="material-symbols-outlined">change_history</span>
+                                        </div>
+                                        부서 발령 전
+                                    </label>
+                                </div>
+                                <c:forEach items="${memberListAll}" var="i">
+                                    <c:if test="${i.deptNo eq 1}">
+                                        <li>
+                                            <div class="memberList-item">
+                                                <a href=""><span class="material-symbols-outlined">account_box</span>${i.name} ${i.positionName}</a>
+                                            </div>
+                                        </li>													
+                                    </c:if>
+                                </c:forEach>
+                            </ul>
+                    </div>
                 </aside>
                 <section id="addressBook-wrap" class="box">
                     <div class="header">
@@ -133,26 +208,106 @@
                     <div class="body">
                         <div class="card-item">
                             <input type="checkbox" id="cardNo" class="cardCheck" />
+                            <div class="card-sortation">
+                                <p>거래처</p>
+                            </div>
                             <div class="card-top">
                                 <label for="cardNo">
                                     <img src="/sixman/resources/img/defaultProfilePic.png" alt="" />
                                 </label>
                             </div>
                             <div class="card-bottom">
-                                <div class="card-sortation">
-                                    <p>거래처</p>
-                                </div>
                                 <div class="essential-info">
-                                    <div class="card-owner">
-                                        <span class="material-symbols-outlined"> account_box </span>
-                                        <p class="card-name">윤태원</p>
-                                        <p id="card-position">사원</p>
-                                    </div>
-                                    <p id="card-company"><span class="material-symbols-outlined"> storefront </span>요기요</p>
+                                    <p id="card-name">윤태원</p>
+                                    <p id="card-company"><span class="material-symbols-outlined"> store </span>Yogiyo</p>
                                 </div>
-                                <p id="card-phone"><span class="material-symbols-outlined"> call </span>010-8888-6666</p>
-                                <p id="card-email"><span class="material-symbols-outlined"> mail </span>asd@gmail.com</p>
-                                <p id="card-address"><span class="material-symbols-outlined"> home </span>서울시 역삼동 어쩌고저쩌고 여기저기 어디저기</p>
+                                <p id="card-address">서울시 역삼동 123-7</p>
+                                <p id="card-phone"><strong>Tel.</strong>010-8888-6666</p>
+                                <a id="card-email" href=""><strong>Mail.</strong>asd@gmail.com</a>
+                                <a id="card-detail" href="">자세히</a>
+                            </div>
+                        </div>
+                        <div class="card-item">
+                            <input type="checkbox" id="cardNo" class="cardCheck" />
+                            <div class="card-sortation">
+                                <p>거래처</p>
+                            </div>
+                            <div class="card-top">
+                                <label for="cardNo">
+                                    <img src="/sixman/resources/img/defaultProfilePic.png" alt="" />
+                                </label>
+                            </div>
+                            <div class="card-bottom">
+                                <div class="essential-info">
+                                    <p id="card-name">윤태원</p>
+                                    <p id="card-company"><span class="material-symbols-outlined"> store </span>요기요</p>
+                                </div>
+                                <p id="card-address">서울시 역삼동 123-7</p>
+                                <p id="card-phone"><strong>Tel.</strong>010-8888-6666</p>
+                                <a id="card-email" href=""><strong>Mail.</strong>asd@gmail.com</a>
+                                <a id="card-detail" href="">자세히</a>
+                            </div>
+                        </div>
+                        <div class="card-item">
+                            <input type="checkbox" id="cardNo" class="cardCheck" />
+                            <div class="card-sortation">
+                                <p>거래처</p>
+                            </div>
+                            <div class="card-top">
+                                <label for="cardNo">
+                                    <img src="/sixman/resources/img/defaultProfilePic.png" alt="" />
+                                </label>
+                            </div>
+                            <div class="card-bottom">
+                                <div class="essential-info">
+                                    <p id="card-name">윤태원</p>
+                                    <p id="card-company"><span class="material-symbols-outlined"> store </span>요기요</p>
+                                </div>
+                                <p id="card-address">서울시 역삼동 123-7</p>
+                                <p id="card-phone"><strong>Tel.</strong>010-8888-6666</p>
+                                <a id="card-email" href=""><strong>Mail.</strong>asd@gmail.com</a>
+                                <a id="card-detail" href="">자세히</a>
+                            </div>
+                        </div>
+                        <div class="card-item">
+                            <input type="checkbox" id="cardNo" class="cardCheck" />
+                            <div class="card-sortation">
+                                <p>거래처</p>
+                            </div>
+                            <div class="card-top">
+                                <label for="cardNo">
+                                    <img src="/sixman/resources/img/defaultProfilePic.png" alt="" />
+                                </label>
+                            </div>
+                            <div class="card-bottom">
+                                <div class="essential-info">
+                                    <p id="card-name">윤태원</p>
+                                    <p id="card-company"><span class="material-symbols-outlined"> store </span>요기요</p>
+                                </div>
+                                <p id="card-address">서울시 역삼동 123-7</p>
+                                <p id="card-phone"><strong>Tel.</strong>010-8888-6666</p>
+                                <a id="card-email" href=""><strong>Mail.</strong>asd@gmail.com</a>
+                                <a id="card-detail" href="">자세히</a>
+                            </div>
+                        </div>
+                        <div class="card-item">
+                            <input type="checkbox" id="cardNo" class="cardCheck" />
+                            <div class="card-sortation">
+                                <p>거래처</p>
+                            </div>
+                            <div class="card-top">
+                                <label for="cardNo">
+                                    <img src="/sixman/resources/img/defaultProfilePic.png" alt="" />
+                                </label>
+                            </div>
+                            <div class="card-bottom">
+                                <div class="essential-info">
+                                    <p id="card-name">윤태원</p>
+                                    <p id="card-company"><span class="material-symbols-outlined"> store </span>요기요</p>
+                                </div>
+                                <p id="card-address">서울시 역삼동 123-7</p>
+                                <p id="card-phone"><strong>Tel.</strong>010-8888-6666</p>
+                                <a id="card-email" href=""><strong>Mail.</strong>asd@gmail.com</a>
                                 <a id="card-detail" href="">자세히</a>
                             </div>
                         </div>
