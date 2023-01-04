@@ -98,16 +98,16 @@
     margin-right: 5px;
 }
 
-.reader {
+.leader {
     display: flex;
     margin: 20px 10px 10px 15px;
 }
 
-.reader > span {
+.leader > span {
     margin-right: 5px;
 }
 
-.reader > p {
+.leader > p {
     font-weight: bold;
 }
 

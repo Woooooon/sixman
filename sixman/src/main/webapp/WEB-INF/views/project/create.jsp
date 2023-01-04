@@ -44,33 +44,29 @@
                                     </span>인원추가 </button>
                             </div>
                             
-	                           <div class="line">
-	                                <div class="prj">부  서</div>
-	                                <div class="team">
-	                                    <span date-value="optValue" class="selected-option" id="deptName"><!-- 선택된 옵션 값이 출력되는 부분 --></span>
-	                                    <select name="deptNo" id="dept">
-                                            <option value="1" selected>부 서</option>
-                                            <c:forEach items="${deptList}" var="dept">
-                                                <option value="${dept.deptNo}">${dept.deptName}</option>
-                                            </c:forEach>
-	                                    </select>
-	                                </div>
-	                                <div style="width: 30px;"></div>
-	                                <div class="prj">팀</div>
-	                                <div class="select">
-	                                    <span date-value="optValue" class="selected-option" id="teamName"><!-- 선택된 옵션 값이 출력되는 부분 --></span>
-	                                    <!-- 옵션 영역 -->
-	                                    <select name="teamNo" id="">
-	                                    </select>
-	                                </div>
-	                                <div style="width: 30px;"></div>
-	                                <div class="prj">이  름</div>
-	                                <div class="select">
-	                                    <span date-value="optValue" class="selected-option" id="memberName"><!-- 선택된 옵션 값이 출력되는 부분 --></span>
-	                                    <select name="memberNo">
-	                                    </select>
-	                                </div>
-	                            </div>
+                            <div class="line">
+                                <div class="prj">부  서</div>
+                                <div class="team">
+                                    <span class="selected-option" id="deptName"><!-- 선택된 옵션 값이 출력되는 부분 --></span>
+                                    <select name="deptNo">
+                                        <option value="1" selected>부 서</option>
+                                        <c:forEach items="${deptList}" var="dept">
+                                            <option value="${dept.deptNo}">${dept.deptName}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                                <div style="width: 30px;"></div>
+                                <div class="prj">팀</div>
+                                    <span class="selected-option" id="teamName"><!-- 선택된 옵션 값이 출력되는 부분 --></span>
+                                    <!-- 옵션 영역 -->
+                                    <select name="teamNo">
+                                    </select>
+                                <div style="width: 30px;"></div>
+                                <div class="prj">담당자</div>
+                                    <span class="selected-option" id="memberName"><!-- 선택된 옵션 값이 출력되는 부분 --></span>
+                                    <select name="leader">
+                                    </select>
+                            </div>
                             
                             <div class="team-member-box"></div>
                             <div class="line">

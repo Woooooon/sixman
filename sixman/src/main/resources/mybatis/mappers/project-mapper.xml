@@ -7,14 +7,17 @@
 	<select id="selectList" resultType="ProjectVo">
 		SELECT 
 		    P.NO  
-		    , M.NAME LEADER
+		    , M2.NAME AS LEADER
 		    , M.NAME NAME
 		    , P.TITLE
 		    , P.CONTENT
 		    , P.START_DATE
 		    , P.END_DATE
+		    , P.STATUS
+		    , P.FAVORITES_YN
 		FROM PROJECT P
-		JOIN MEMBER M ON M.NO = P.WRITER
+		LEFT JOIN MEMBER M ON M.NO = P.WRITER
+		LEFT JOIN MEMBER M2 ON M2.NO = P.LEADER
 		WHERE M.NO = #{no}
 		ORDER BY NO DESC
 	</select>
@@ -92,7 +95,7 @@
 			LEFT JOIN MEMBER M ON M.NO = PM.MEM_NO
 			LEFT JOIN PROJECT P ON P.NO = PM.PRJ_NO
     	<foreach collection="list" item="member" open="(" close=")" separator=",">
-			WHERE PM.PRJ_NO = #{member.no}
+			WHERE PM.PRJ_NO = #{memberno}
     	</foreach>
     </select>
     
@@ -137,7 +140,7 @@
 		AND AUTHORIZE_NO = '2'
 		</if>
 		<if test="no == 5">
-		AND DEPT_NO = #{no}
+		AND M.DEPT_NO = #{no}
 		AND AUTHORIZE_NO = '2'
 		</if>
 	</select>

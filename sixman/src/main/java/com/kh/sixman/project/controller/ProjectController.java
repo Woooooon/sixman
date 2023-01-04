@@ -55,7 +55,8 @@ public class ProjectController {
 		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
 
 		List<ProjectVo> prjList = ps.selectList(Integer.parseInt(loginMember.getNo()));
-		session.setAttribute("List", prjList);
+		session.setAttribute("prjList", prjList);
+		log.info("list : " + prjList);
 	
 		return "project/allprj";
 	}
@@ -78,10 +79,7 @@ public class ProjectController {
 		model.addAttribute("memberList", memberList);
 		model.addAttribute("authorizeList", authorizeList);
 		
-		log.info("==============");
 		String json = new Gson().toJson(memberList);
-		log.info("json : " +json);
-		log.info("==============");
 		
 		return "project/create";
 	}
@@ -89,7 +87,7 @@ public class ProjectController {
 	//프로젝트 생성(찐)
 	@PostMapping("create")
 	public String create(ProjectVo vo, HttpSession session) {
-		
+		log.info("vo :::" + vo);
 		int result = ps.insertPrjOne(vo);
 		if(result != 1) {
 			return "errorPage";
