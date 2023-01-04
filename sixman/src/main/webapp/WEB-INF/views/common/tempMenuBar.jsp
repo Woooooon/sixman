@@ -79,21 +79,7 @@
                             <input type="checkbox">
                         </label>
                         <div class="ml-list">
-                            <div class="ml-list-item">
-                                <img src="" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">
-                                <div>닉네임 <p>직급</p></div>
-                                <label class="material-symbols-outlined"> grade <input type="checkbox"></label>
-                            </div>
-                            <div class="ml-list-item">
-                                <img src="" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">
-                                <div>닉네임 <p>직급</p></div>
-                                <label class="material-symbols-outlined"> grade <input type="checkbox"></label>
-                            </div>
-                            <div class="ml-list-item">
-                                <img src="" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">
-                                <div>닉네임 <p>직급</p></div>
-                                <label class="material-symbols-outlined"> grade <input type="checkbox"></label>
-                            </div>
+
                         </div>
                     </article>
                     <article id="ml-team" class="ml-list-box">
@@ -103,21 +89,7 @@
                             <input type="checkbox">
                         </label>
                         <div class="ml-list">
-                            <div class="ml-list-item">
-                                <img src="" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">
-                                <div>닉네임 <p>직급</p></div>
-                                <label class="material-symbols-outlined"> grade <input type="checkbox"></label>
-                            </div>
-                            <div class="ml-list-item">
-                                <img src="" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">
-                                <div>닉네임 <p>직급</p></div>
-                                <label class="material-symbols-outlined"> grade <input type="checkbox"></label>
-                            </div>
-                            <div class="ml-list-item">
-                                <img src="" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">
-                                <div>닉네임 <p>직급</p></div>
-                                <label class="material-symbols-outlined"> grade <input type="checkbox"></label>
-                            </div>
+
                         </div>
                     </article>
                     <article id="ml-all" class="ml-list-box">
@@ -127,21 +99,7 @@
                             <input type="checkbox" checked>
                         </label>
                         <div class="ml-list">
-                            <div class="ml-list-item">
-                                <img src="" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">
-                                <div>닉네임 <p>직급</p></div>
-                                <label class="material-symbols-outlined"> grade <input type="checkbox"></label>
-                            </div>
-                            <div class="ml-list-item">
-                                <img src="" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">
-                                <div>닉네임 <p>직급</p></div>
-                                <label class="material-symbols-outlined"> grade <input type="checkbox"></label>
-                            </div>
-                            <div class="ml-list-item">
-                                <img src="" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">
-                                <div>닉네임 <p>직급</p></div>
-                                <label class="material-symbols-outlined"> grade <input type="checkbox"></label>
-                            </div>
+
                         </div>
                     </article>
                 </article>
@@ -234,8 +192,8 @@
                 </article>
                 <article class="ml-footer">
                     <label for="chat-file" class="material-symbols-outlined"> attach_file </label>
-                    <input type="text">
-                    <span class="material-symbols-outlined"> arrow_forward </span>
+                    <input id="chat-input" type="text">
+                    <span class="material-symbols-outlined" onclick="chat();"> arrow_forward </span>
                     <input id="chat-file" type="file" onchange="readURL(this)">
                 </article>
                 <div id="chat-file-box">
@@ -266,21 +224,7 @@
                             <input type="checkbox">
                         </label>
                         <div class="ml-list">
-                            <div class="ml-list-item">
-                                <img src="" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">
-                                <div>닉네임 <p>직급</p></div>
-                                <input type="checkbox">
-                            </div>
-                            <div class="ml-list-item">
-                                <img src="" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">
-                                <div>닉네임 <p>직급</p></div>
-                                <input type="checkbox">
-                            </div>
-                            <div class="ml-list-item">
-                                <img src="" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">
-                                <div>닉네임 <p>직급</p></div>
-                                <input type="checkbox">
-                            </div>
+
                         </div>
                     </article>
                     <article id="ml-team" class="ml-list-box">
@@ -290,21 +234,7 @@
                             <input type="checkbox">
                         </label>
                         <div class="ml-list">
-                            <div class="ml-list-item">
-                                <img src="" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">
-                                <div>닉네임 <p>직급</p></div>
-                                <input type="checkbox">
-                            </div>
-                            <div class="ml-list-item">
-                                <img src="" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">
-                                <div>닉네임 <p>직급</p></div>
-                                <input type="checkbox">
-                            </div>
-                            <div class="ml-list-item">
-                                <img src="" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">
-                                <div>닉네임 <p>직급</p></div>
-                                <input type="checkbox">
-                            </div>
+
                         </div>
                     </article>
                     <article id="ml-all" class="ml-list-box">
@@ -314,21 +244,7 @@
                             <input type="checkbox" checked>
                         </label>
                         <div class="ml-list">
-                            <div class="ml-list-item">
-                                <img src="" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">
-                                <div>닉네임 <p>직급</p></div>
-                                <input type="checkbox">
-                            </div>
-                            <div class="ml-list-item">
-                                <img src="" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">
-                                <div>닉네임 <p>직급</p></div>
-                                <input type="checkbox">
-                            </div>
-                            <div class="ml-list-item">
-                                <img src="" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">
-                                <div>닉네임 <p>직급</p></div>
-                                <input type="checkbox">
-                            </div>
+
                         </div>
                     </article>
                 </article>
@@ -341,20 +257,7 @@
             </section>
 
             <section id="m-profile-panel" class="m-inner">
-                <div>
-                    <label class="material-symbols-outlined"> grade <input type="checkbox"></label>
-                    <span class="material-symbols-outlined" onclick="closeProfile()"> close </span>
-                </div>
-                <div>
-                    <img src="" alt="">
-                    <div><p>부서</p> <div>팀</div></div>
-                    <div><p>name</p> <div>직급</div></div>
-                </div>
-                <div>
-                    <span class="material-symbols-outlined"> mail </span>
-                    <span class="material-symbols-outlined"> group_add </span>
-                    <span class="material-symbols-outlined"> forum </span>
-                </div>
+
             </section>
 
         </div>
@@ -429,7 +332,7 @@
     liArr.forEach(element => {
         element.addEventListener("mouseover", ()=>{
             const a = element.querySelector('a');
-            const key = a.innerText
+            const key = a.innerText;
             setSideList(menuMap.get(key));
             sideMenu.style.left = '250px';
         });
@@ -493,76 +396,26 @@
     function connectSC() {
         socket = new SockJS("${path}/alarmSocket");
 
-        
         socket.onmessage = onMessage;
-        socket.onopen = onOpen;
-
-        // console.log(socket);
     }
 
     function onMessage(m) {
         const data = m.data;
-        const curMember = '${loginMember.no}';
 
         const datas = data.split('#');
         const type = datas[0];
         const msg = datas[1];
-        const no = datas[2];
-
-        // console.log(data);
-
-        let f = null;
-        switch (type) {
-            case 'MAIL':
-                f = ()=>{location.href='/sixman/mail/detail?no=';}
-                break;
-            case 'DOCUMENT':
-                f = ()=>{location.href='';}
-                break;
-            case 'ADRESS':
-                f = ()=>{location.href='';}
-                break;
-            case 'SCHEDULE':
-                f = ()=>{location.href='';}
-                break;
+        
+        console.log(data);
+        
+        if(type=='CHAT'){
+            notify(type, msg);
+            return;
         }
 
-        const today = new Date();
-
-        const div = document.createElement('div');
-        div.classList.add('alarm-item');
-
-        const item = 
-        '<div class="item-div"><div class="item-header"><div>['+type+']</div><div>'+today.toLocaleTimeString()+'</div></div><div class="item-title">'+msg+'</div></div><span class="t-btn material-symbols-outlined"> close </span>'
-        div.innerHTML = item;
-
-        div.querySelector('.item-div').addEventListener('click', ()=>{
-            checkAjax(no, type);
-            f();
-        });
-
-        div.querySelector('span').addEventListener('click', ()=>{
-            div.remove();
-            checkAjax(no, type);
-        });
-
-        const itemCount = document.querySelector('#alarm-count');
-
-        itemCount.style.display = 'flex';
-        if(itemCount.innerText=='' ||itemCount.innerText == null){
-            itemCount.innerText = 1;
-        }else{
-            itemCount.innerText = parseInt(itemCount.innerText) + 1;
-        }
-
-        const box = document.querySelector('#alarm-box #inner-box');
-        box.prepend(div);
+        alarmAjax();
 
         notify(type, msg);
-    }
-
-    function onOpen(params) {
-            
     }
 
     function sendMsg(name, title, type, sender) {
@@ -580,6 +433,9 @@
                 break;
             case 'SCHEDULE':
                 msg = name + '(이)가 일정을 공유하였습니다. "' + title + '"';
+                break;
+            case 'CHAT':
+                msg = name + ' : ' + title;
                 break;
         }
         
@@ -608,6 +464,8 @@
         
         // 데스크탑 알림 요청
         var notification = new Notification(title, options);
+
+        console.log('msg');
         
         // 3초뒤 알람 닫기
         setTimeout(function(){
@@ -615,6 +473,135 @@
         }, 3000);
     }
 
+    //채팅
+    var chatSocket = null;
+
+    function joinChatSocket() {
+        chatSocket = new SockJS("${path}/chatSocket");
+
+        chatSocket.onmessage = chatOnMessage;
+    }
+
+    //메세지받아라
+    function chatOnMessage(m) {
+        const data = m.data;
+
+        if(data=='#####'){
+            chatCountDown();
+            return;
+        }
+
+        const datas = data.split('#');
+        const no = datas[0];
+        const name = datas[1];
+        const room = datas[2];
+        const msg = datas[3];
+        const sysdate = datas[4];
+        const count = datas[5];
+
+        if(no=='${loginMember.no}'){
+            chatInHTML(name, msg, 'right', sysdate, count);
+        }else{
+            chatInHTML(name, msg, null, sysdate, count);
+        }
+
+    }
+
+    function chatCountDown() {
+        const counts = document.querySelectorAll('.chat-count');
+        counts.forEach(element => {
+            if(parseInt(element.innerHTML) - 1 > 0){
+                element.innerHTML = parseInt(element.innerHTML) - 1;
+            }else{
+                element.innerHTML = '';
+            }
+        });
+    }
+
+    function chat() {
+        const chatInput = document.querySelector('#chat-input');
+        const room = chatInput.name;
+        const msg = chatInput.value;
+        const sysdate = getSysdate();
+
+        chatAjax(room, msg);
+        
+        chatSocket.send('${loginMember.no}#${loginMember.name}' + '#' + room + '#' + msg + '#' + sysdate);
+        sendMsg('${loginMember.name}', '"'+msg+'" '+sysdate, 'CHAT', room);
+        chatInput.value = '';
+    }
+
+    function getSysdate() {
+        let today = new Date();   
+
+        var year = ('0' + (today.getFullYear())).slice(-2);
+        var month = ('0' + (today.getMonth() + 1)).slice(-2);
+        var day = ('0' + today.getDate()).slice(-2);
+        
+        var dateString = year + '-' + month  + '-' + day;
+
+        var hours = ('0' + today.getHours()).slice(-2); 
+        var minutes = ('0' + today.getMinutes()).slice(-2);
+        
+        var timeString = hours + ':' + minutes
+        
+        //23-01-03 11:09
+        const sysdate = dateString+' '+timeString;
+        
+        return sysdate;
+    }
+    
+    function chatInHTML(name, msg, right, sysdate, lastCount) {
+        const names = document.querySelectorAll('.chat-name');
+        const chatBox = document.querySelector('#m-chat-panel .ml-main');
+        let lastName = '';
+        if(names!=null && names.length != 0){
+            lastName = names[names.length-1].innerText;
+        }
+
+        const dates = document.querySelectorAll('.chat-date');
+        let lastDate = '';
+        if(dates!=null && dates.length != 0){
+            lastDate = dates[dates.length-1].innerText;
+        }
+
+        const div = document.createElement('div');
+        div.classList.add('chat-item');
+        const div2 = document.createElement('div');
+        div2.classList.add('chat-name');
+
+        if(right){
+            div.classList.add('right');
+            div2.classList.add('right');
+            right = "right";
+        }
+
+        let arrow = '';
+
+        if(lastName != name){
+            div2.innerHTML = name;
+            chatBox.append(div2);
+            arrow = '<div class="chat-arrow-'+right+'"></div>';
+        }
+
+        let time = '<div class="chat-date">'+sysdate+'</div>';
+        if(lastDate == sysdate){
+            if(dates!=null && dates.length != 0){
+                dates[dates.length-1].remove();
+            }
+        }
+
+        let count = '';
+        if(lastCount>0){
+            count = '<div class="chat-count">'+lastCount+'</div>';
+        }
+
+        div.innerHTML = '<div class="chat-msg">' + arrow + msg + '</div><div class="chat-info">' + count + time + '</div>';
+
+        chatBox.append(div);
+        const chatMain = document.querySelector('#m-chat-panel .ml-main');
+        chatMain.scrollTop = chatMain.scrollHeight;
+    }
 
 </script>
 </html>

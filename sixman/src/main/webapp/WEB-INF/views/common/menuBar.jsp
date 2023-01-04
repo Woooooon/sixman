@@ -324,7 +324,6 @@
         });
     }
 
-    notify('asgdf', '한글');
     function notify(title, msg) {
         var options = {
             body: msg

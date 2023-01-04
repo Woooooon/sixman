@@ -3,12 +3,14 @@ package com.kh.sixman.chat.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
@@ -18,8 +20,11 @@ import com.kh.sixman.chat.vo.ChatRoomVo;
 import com.kh.sixman.common.AttachmentVo;
 import com.kh.sixman.member.vo.MemberVo;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
 @ResponseBody
+@Slf4j
 public class ChatController {
 	
 	@Autowired
@@ -35,11 +40,23 @@ public class ChatController {
 		return (MemberVo) session.getAttribute("loginMember");
 	}
 	
+	@PostMapping(value = "chat", produces = "application/json; charset=utf8")
+	public void chat(String room, String msg, HttpSession session) {
+		String no = getLoginMember(session).getNo();
+		Map<String, String> map = new HashMap<>();
+		
+		map.put("room", room);
+		map.put("msg", msg);
+		map.put("no", no);
+		chatService.chat(map);
+	}
+	
 	@PostMapping(value = "memberPage", produces = "application/json; charset=utf8")
 	public String memberPage(HttpSession session) {
 		String no = getLoginMember(session).getNo();
 		
 		Map<String, Object> map = chatService.getMember(no);
+		System.out.println(map);
 
 		return getJson(map);
 	}
@@ -59,9 +76,27 @@ public class ChatController {
 		Map<String, String> map = new HashMap<>();
 		map.put("loginNo", loginNo);
 		map.put("no", no);
-		ChatRoomVo vo = chatService.getChat(map);
+		
+		int result = chatService.join(map);
+		ChatRoomVo vo = null;			
+		if(result==1) {
+			vo = chatService.getChat(map);
+			session.setAttribute("room", vo);
+		}
 		
 		return getJson(vo);		
+	}
+	
+	@PostMapping(value = "closeChat", produces = "application/json; charset=utf8")
+	public void closeChat(HttpSession session) {
+		String loginNo = getLoginMember(session).getNo();
+		ChatRoomVo vo = (ChatRoomVo) session.getAttribute("room");
+		String no = vo.getChatRoomNo();
+		Map<String, String> map = new HashMap<>();
+		map.put("loginNo", loginNo);
+		map.put("no", no);
+		int result = chatService.join(map);
+		session.removeAttribute("room");
 	}
 	
 	@PostMapping(value = "getImgList", produces = "application/json; charset=utf8")
@@ -79,21 +114,25 @@ public class ChatController {
 	}
 	
 	@PostMapping(value = "createChat")
-	public void createChat(List<String> no, HttpSession session) {
-		String loginNo = getLoginMember(session).getNo();
-		int result = chatService.createChat(loginNo, no);
+	public void createChat(@RequestParam Set<String> no, HttpSession session) {
+		MemberVo loginMember = getLoginMember(session);
+		int result = chatService.createChat(loginMember, no);
+		if(result!=1) {
+			log.error("createChat 등록 실패");
+		}
 	}
 	
 	@PostMapping(value = "bookMark")
-	public void bookMark(String no, HttpSession session) {
+	public void bookMark(String no, String bookMark, HttpSession session) {
 		String loginNo = getLoginMember(session).getNo();
-		int result = chatService.bookMark(loginNo, no);
-	}
-	
-	@PostMapping(value = "nonBookMark")
-	public void nonBookMark(String no, HttpSession session) {
-		String loginNo = getLoginMember(session).getNo();
-		int result = chatService.nonBookMark(loginNo, no);
+		Map<String, String> map = new HashMap<>();
+		map.put("loginNo", loginNo);
+		map.put("bookMark", bookMark);
+		map.put("no", no);
+		int result = chatService.bookMark(map);
+		if(result!=1) {
+			log.error("bookMark 등록 실패");
+		}
 	}
 	
 	@PostMapping(value = "chatOut")
@@ -103,21 +142,56 @@ public class ChatController {
 	}
 	
 	@PostMapping(value = "changeName")
-	public void changeName(String no, HttpSession session) {
+	public void changeName(String no, String value,  HttpSession session) {
 		String loginNo = getLoginMember(session).getNo();
-		int result = chatService.changeName(loginNo, no);
+		Map<String, String> map = new HashMap<>();
+		map.put("loginNo", loginNo);
+		map.put("value", value);
+		map.put("no", no);
+		int result = chatService.changeName(map);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+		if(result!=1) {
+			log.error("changeName 실패");
+		}
 	}
 	
 	@PostMapping(value = "setFix")
 	public void setFix(String no, String fix, HttpSession session) {
 		String loginNo = getLoginMember(session).getNo();
-		int result = chatService.setFix(loginNo, no, fix);
+		Map<String, String> map = new HashMap<>();
+		map.put("loginNo", loginNo);
+		map.put("fix", fix);
+		map.put("no", no);
+		int result = chatService.setFix(map);
+		if(result!=1) {
+			log.error("setFix 실패");
+		}
 	}
 	
 	@PostMapping(value = "setAlarm")
 	public void setAlarm(String no, String alarm, HttpSession session) {
 		String loginNo = getLoginMember(session).getNo();
-		int result = chatService.setAlarm(loginNo, no, alarm);
+		Map<String, String> map = new HashMap<>();
+		map.put("loginNo", loginNo);
+		map.put("alarm", alarm);
+		map.put("no", no);
+		int result = chatService.setAlarm(map);
+		if(result!=1) {
+			log.error("setAlarm 실패");
+		}
+	}
+	
+	@PostMapping(value = "profile")
+	public String profile(String no, HttpSession session) {
+		String loginNo = getLoginMember(session).getNo();
+		Map<String, String> map = new HashMap<>();
+		map.put("loginNo", loginNo);
+		map.put("no", no);
+		MemberVo vo = chatService.profile(map);
+		if(vo==null) {
+			log.error("setAlarm 실패");
+			return null;
+		}
+		return getJson(vo);
 	}
 
 }
