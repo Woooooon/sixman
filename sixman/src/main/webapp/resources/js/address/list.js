@@ -1,3 +1,13 @@
+const openPop = document.querySelector('input[name="sender"]');
+
+openPop.addEventListener('click', () => {
+    openWindowPop('/sixman/employee/popup', '조직도 팝업');
+});
+function openWindowPop(url, name) {
+    var options = 'top=10, left=10, width=500, height=600, status=no, menubar=no, toolbar=no, resizable=no';
+    window.open(url, name, options);
+}
+
 const modal = document.querySelector('.share-modal');
 const share = document.querySelectorAll('.share');
 const closeBtn = document.querySelector('#close-modal');
@@ -14,6 +24,61 @@ share.forEach((elem) => {
 });
 
 checkBoxToggleEvent('.selectAll', '.cardCheck');
+selectCardOne();
+
+//개별선택
+function selectCardOne() {
+    const selectCard = document.querySelectorAll('.cardCheck');
+    const selectCardAll = document.querySelector('.selectAll');
+    const cardInfoList = document.querySelector('.list-sortation');
+    selectCard.forEach((target) => {
+        const div = shareCard(selectCardAll, target);
+        target.addEventListener('change', () => {
+            if (target.checked) {
+                cardInfoList.after(div);
+            } else {
+                div.remove();
+            }
+        });
+    });
+}
+
+function shareCard(selectAll, checkbox) {
+    const div = document.createElement('div');
+    const parentElem = checkbox.closest('div');
+    const sortation = parentElem.querySelector('.card-sortation p').innerText;
+    const company = parentElem.querySelector('#card-company').innerText;
+    const name = parentElem.querySelector('#card-name').innerText;
+    const phone = parentElem.querySelector('#card-phone').innerText;
+    const email = parentElem.querySelector('#card-email').innerText;
+
+    div.classList.add('list-item');
+    div.innerHTML =
+        '<span class="material-symbols-outlined removeBtn">cancel_schedule_send</span>' +
+        '<p>' +
+        sortation +
+        '</p>' +
+        '<p>' +
+        company +
+        '</p>' +
+        '<p>' +
+        name +
+        '</p>' +
+        '<p>' +
+        phone +
+        '</p>' +
+        '<p>' +
+        email +
+        '</p>';
+
+    div.querySelector('.removeBtn').addEventListener('click', () => {
+        checkbox.checked = false;
+        selectAll.checked = false;
+        div.remove();
+    });
+
+    return div;
+}
 
 //전체석택
 function checkBoxToggleEvent(all_selector, check_selector) {

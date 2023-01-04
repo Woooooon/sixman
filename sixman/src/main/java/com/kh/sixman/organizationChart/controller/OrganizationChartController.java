@@ -82,4 +82,58 @@ public class OrganizationChartController {
 		
 		return "organizationChart/list";
 	}
+	
+	@GetMapping("employee/popup")
+	public String popup(Model model, String page, String keyword, String category, HttpSession session) {
+		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("loginDeptNo", loginMember.getDeptNo());
+		map.put("loginTeamNo", loginMember.getTeamNo());
+		map.put("loginNo", loginMember.getNo());
+		
+		if(page == null) {
+			page = "1";
+		}
+		
+		log.info(keyword);
+		log.info(category);
+		
+		Map<String, String> search = new HashMap<String, String>();
+		search.put("keyword", keyword);
+		search.put("category", category);
+		
+		int pageLimit = 5;
+		int boardLimit = 10;
+		int listCount = memberService.countList(search);
+		
+		log.info("listCount : " + listCount);
+		
+	    int offset = (Integer.parseInt(page)-1) * boardLimit;
+	    
+	    PageVo pv = new PageVo(listCount,Integer.parseInt(page),pageLimit,boardLimit);
+	    RowBounds rb = new RowBounds(offset , boardLimit);
+
+		List<MemberVo> MemberList = memberService.selectMemberList(rb, search);
+		
+		log.info("memberList size : " + MemberList.size());
+		
+		
+		List<DeptVo> deptList = deptService.daptList();
+		List<DeptVo> subDeptList = deptService.subList();
+		List<MemberVo> memberListAll = memberService.selectMemberListAll();
+		List<MemberVo> deptMemberList = memberService.selectdeptMemberList(map);
+		
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("category", category);
+		model.addAttribute("pv", pv);
+		model.addAttribute("deptList", deptList);
+		model.addAttribute("subDeptList", subDeptList);
+		model.addAttribute("MemberList", MemberList);
+		model.addAttribute("memberListAll", memberListAll);
+		model.addAttribute("deptMemberList", deptMemberList);
+		
+		return "organizationChart/popup";
+	}
+	
 }

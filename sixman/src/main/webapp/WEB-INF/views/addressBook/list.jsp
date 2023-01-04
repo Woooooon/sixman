@@ -16,7 +16,7 @@
             <form action="">
                 <div class="receiver">
                     <label for="">받는사람</label>
-                    <input type="text" />
+                    <input type="text" name="sender"/>
                     <input type="submit" value="전 송" />
                     <span class="material-symbols-outlined" id="close-modal"> close </span>
                 </div>
@@ -30,69 +30,11 @@
                         <p>구 분</p>
                         <p>상 호</p>
                         <p>이 름</p>
-                        <p>직 급</p>
                         <p>연락처</p>
-                    </div>
-                    <div class="list-item">
-                        <input type="checkbox" value="" name="" checked />
-                        <p>거래처</p>
-                        <p>요기요</p>
-                        <p>윤태원</p>
-                        <p>사원</p>
-                        <p>010-8888-6666</p>
-                    </div>
-                    <div class="list-item">
-                        <input type="checkbox" value="" name="" checked />
-                        <p>거래처</p>
-                        <p>요기요</p>
-                        <p>윤태원</p>
-                        <p>사원</p>
-                        <p>010-8888-6666</p>
-                    </div>
-                    <div class="list-item">
-                        <input type="checkbox" value="" name="" checked />
-                        <p>거래처</p>
-                        <p>요기요</p>
-                        <p>윤태원</p>
-                        <p>사원</p>
-                        <p>010-8888-6666</p>
-                    </div>
-                    <div class="list-item">
-                        <input type="checkbox" value="" name="" checked />
-                        <p>거래처</p>
-                        <p>요기요</p>
-                        <p>윤태원</p>
-                        <p>사원</p>
-                        <p>010-8888-6666</p>
-                    </div>
-                    <div class="list-item">
-                        <input type="checkbox" value="" name="" checked />
-                        <p>거래처</p>
-                        <p>요기요</p>
-                        <p>윤태원</p>
-                        <p>사원</p>
-                        <p>010-8888-6666</p>
-                    </div>
-                    <div class="list-item">
-                        <input type="checkbox" value="" name="" checked />
-                        <p>거래처</p>
-                        <p>요기요</p>
-                        <p>윤태원</p>
-                        <p>사원</p>
-                        <p>010-8888-6666</p>
+                        <p>EMAIL</p>
                     </div>
                 </div>
-                <div class="page-box">
-                    <span class="material-symbols-outlined"> keyboard_double_arrow_left </span>
-                    <span class="material-symbols-outlined"> chevron_left </span>
-                    <div class="page-btn checked-p-btn">1</div>
-                    <div class="page-btn">2</div>
-                    <div class="page-btn">3</div>
-                    <div class="page-btn">4</div>
-                    <div class="page-btn">5</div>
-                    <span class="material-symbols-outlined"> chevron_right </span>
-                    <span class="material-symbols-outlined"> keyboard_double_arrow_right </span>
-                </div>
+                
             </form>
         </div>
         <main id="main-page" class="main-box">
@@ -201,8 +143,14 @@
 	                                    <p id="card-company"><i class="fa-solid fa-building"></i>${i.company}</p>
 	                                </div>
 	                                <p id="card-address">${i.address}</p>
-	                                <p id="card-phone"><strong>Tel.</strong>${i.phone}</p>
-	                                <a id="card-email" href="/sixman/mail/write?email=${i.email}"><strong>Mail.</strong>${i.email}</a>
+	                                <div class="info-phone">
+                                        <strong>Tel.</strong>
+                                        <p id="card-phone">${i.phone}</p>
+                                    </div>
+	                                <div class="info-email">
+                                        <strong>Mail.</strong>
+                                        <a id="card-email" href="/sixman/mail/write?email=${i.email}">${i.email}</a>
+                                    </div>
 	                                <a id="card-detail" href="/sixman/address/detail?no=${i.no}">자세히</a>
 	                            </div>
 	                        </div>
