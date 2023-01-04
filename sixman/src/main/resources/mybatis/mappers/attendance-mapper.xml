@@ -50,7 +50,7 @@
 		    SYSDATE,
 		    SYSDATE,
 		    NULL,
-		    1
+		    NULL
 		)
 	
 	</insert>
@@ -63,6 +63,7 @@
 		(SELECT "START","END"
 		FROM ATTENDANCE
 		WHERE "WORK_DAY" = #{workDay}
+		AND MEMBER_NO = #{memberNo}
 		ORDER BY "START")
 		WHERE ROWNUM=1
 	</select>
@@ -74,6 +75,24 @@
 		WHERE "WORK_DAY" = #{end}
 			
 	</update>
+	
+	<select id="searchList" resultType="com.kh.sixman.attendance.vo.AttendanceVo">
+		SELECT 
+			M.NO
+			,M.NAME
+			,A.MEMBER_NO
+			,A.STATUS
+			,A.WORK_DAY
+			,TO_CHAR(A."START", 'HH24:MI') AS "START"
+			,TO_CHAR(A."END", 'HH24:MI') AS "END"
+			,A.WORK_TIME
+			FROM MEMBER M
+			, ATTENDANCE A
+		WHERE A.MEMBER_NO = M.NO
+		AND M.NAME = #{name}
+		AND WORK_DAY BETWEEN TO_DATE(#{start},'YY-MM-DD') AND TO_DATE(#{end},'YY-MM-DD')
+		ORDER BY "WORK_DAY" DESC, "START" DESC
+	</select>
 	
 	<!-- admin -->
 	
@@ -96,9 +115,34 @@
 			, ATTENDANCE A
 		WHERE A.MEMBER_NO = M.NO
 		AND M.NAME = #{name}
+		AND WORK_DAY BETWEEN TO_DATE(#{start},'YY-MM-DD') AND TO_DATE(#{end},'YY-MM-DD')
 		ORDER BY "WORK_DAY" DESC, "START" DESC
 	</select>
 
+	<select id="AdminTodayWork" resultType="com.kh.sixman.attendance.vo.WorkTimeVo">
+		SELECT 
+		TO_CHAR("START", 'HH24:MI') AS "START"
+		,TO_CHAR("END", 'HH24:MI') AS "END"
+		FROM 
+		(SELECT "START","END"
+		FROM MEMBER M
+		, ATTENDANCE A
+		WHERE A.MEMBER_NO = M.NO
+		AND "WORK_DAY" = #{workDay}
+		AND NAME = #{name}
+		ORDER BY "START")
+		WHERE ROWNUM=1
+	</select>
+	
+	<select id="adminCountList" resultType="int">
+		SELECT COUNT(*)
+		FROM MEMBER M
+		, ATTENDANCE A
+		WHERE A.MEMBER_NO = M.NO
+		AND M.NAME = #{name}
+
+	</select>
+	
 
 
 
