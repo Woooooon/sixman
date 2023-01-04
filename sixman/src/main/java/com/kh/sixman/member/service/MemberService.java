@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.kh.sixman.common.AttachmentVo;
 import com.kh.sixman.member.dao.MemberDao;
 import com.kh.sixman.member.vo.MemberVo;
 

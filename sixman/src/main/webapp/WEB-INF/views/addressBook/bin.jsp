@@ -4,97 +4,14 @@
     <head>
         <meta charset="UTF-8" />
         <title>Insert title here</title>
-        <link rel="stylesheet" href="<c:url value='/resources/css/addressBook/list.css'/>" />
-        <script defer src="<c:url value='/resources/js/address/list.js'/>"></script>
+        <link rel="stylesheet" href="<c:url value='/resources/css/addressBook/bin.css'/>" />
+        <script defer src="<c:url value='/resources/js/address/bin.js'/>"></script>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
         <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
         <script src="https://kit.fontawesome.com/ae846b135b.js" crossorigin="anonymous"></script>
     </head>
     <body>
         <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
-        <div class="share-modal close">
-            <form action="">
-                <div class="receiver">
-                    <label for="">받는사람</label>
-                    <input type="text" />
-                    <input type="submit" value="전 송" />
-                    <span class="material-symbols-outlined" id="close-modal"> close </span>
-                </div>
-                <div class="select-list">
-                    <div class="list-title">
-                        <span class="material-symbols-outlined">contacts</span>
-                        <label for="">주소록</label>
-                    </div>
-                    <div class="list-sortation">
-                        <p></p>
-                        <p>구 분</p>
-                        <p>상 호</p>
-                        <p>이 름</p>
-                        <p>직 급</p>
-                        <p>연락처</p>
-                    </div>
-                    <div class="list-item">
-                        <input type="checkbox" value="" name="" checked />
-                        <p>거래처</p>
-                        <p>요기요</p>
-                        <p>윤태원</p>
-                        <p>사원</p>
-                        <p>010-8888-6666</p>
-                    </div>
-                    <div class="list-item">
-                        <input type="checkbox" value="" name="" checked />
-                        <p>거래처</p>
-                        <p>요기요</p>
-                        <p>윤태원</p>
-                        <p>사원</p>
-                        <p>010-8888-6666</p>
-                    </div>
-                    <div class="list-item">
-                        <input type="checkbox" value="" name="" checked />
-                        <p>거래처</p>
-                        <p>요기요</p>
-                        <p>윤태원</p>
-                        <p>사원</p>
-                        <p>010-8888-6666</p>
-                    </div>
-                    <div class="list-item">
-                        <input type="checkbox" value="" name="" checked />
-                        <p>거래처</p>
-                        <p>요기요</p>
-                        <p>윤태원</p>
-                        <p>사원</p>
-                        <p>010-8888-6666</p>
-                    </div>
-                    <div class="list-item">
-                        <input type="checkbox" value="" name="" checked />
-                        <p>거래처</p>
-                        <p>요기요</p>
-                        <p>윤태원</p>
-                        <p>사원</p>
-                        <p>010-8888-6666</p>
-                    </div>
-                    <div class="list-item">
-                        <input type="checkbox" value="" name="" checked />
-                        <p>거래처</p>
-                        <p>요기요</p>
-                        <p>윤태원</p>
-                        <p>사원</p>
-                        <p>010-8888-6666</p>
-                    </div>
-                </div>
-                <div class="page-box">
-                    <span class="material-symbols-outlined"> keyboard_double_arrow_left </span>
-                    <span class="material-symbols-outlined"> chevron_left </span>
-                    <div class="page-btn checked-p-btn">1</div>
-                    <div class="page-btn">2</div>
-                    <div class="page-btn">3</div>
-                    <div class="page-btn">4</div>
-                    <div class="page-btn">5</div>
-                    <span class="material-symbols-outlined"> chevron_right </span>
-                    <span class="material-symbols-outlined"> keyboard_double_arrow_right </span>
-                </div>
-            </form>
-        </div>
         <main id="main-page" class="main-box">
             <div class="main-box-2">
                 <aside id="myaddress-wrap" class="box">
@@ -116,7 +33,7 @@
                                             ${j.name}
                                         </label>
                                     </div>
-                                    <c:forEach items="${addressListAll}" var="i">
+                                    <c:forEach items="${dlelteAddressListAll}" var="i">
                                         <c:if test="${j.no eq i.sortationNo}">
                                             <li>
                                                 <div class="address-item">
@@ -140,7 +57,7 @@
                                             ${j.name}
                                         </label>
                                     </div>
-                                    <c:forEach items="${addressListAll}" var="i">
+                                    <c:forEach items="${dlelteAddressListAll}" var="i">
                                         <c:if test="${j.no eq i.sortationNo}">
                                             <li>
                                                 <div class="address-item">
@@ -157,8 +74,8 @@
                 <section id="addressBook-wrap" class="box">
                     <div class="header">
                         <div class="title">
-                            <span class="material-symbols-outlined">contacts</span>
-                            <label>주소록</label>
+                            <span class="material-symbols-outlined">delete</span>
+                            <label>휴지통</label>
                         </div>
                         <div class="address-search">
                             <form action="">
@@ -167,7 +84,6 @@
                                     <option value="a.phone">연락처</option>
                                     <option value="a.position">직 급</option>
                                     <option value="a.email">이메일</option>
-                                    <option value="a.address">주 소</option>
                                     <option value="a.company">상 호</option>
                                     <option value="s.name">구 분</option>
                                 </select>
@@ -176,39 +92,37 @@
                             </form>
                         </div>
                     </div>
-                    <div class="body-controller">
-                        <input type="checkbox" class="selectAll" id="selectAll" />
-                        <label for="selectAll">전체선택</label>
-                        <a href="/sixman/address/add"><span class="material-symbols-outlined"> add_box </span></a>
-                        <span class="material-symbols-outlined delete"> delete </span>
-                        <span class="material-symbols-outlined share" id="checkShare"> share </span>
-                    </div>
                     <div class="body">
-	                    <c:forEach items="${addressList}" var="i">
-	                        <div class="card-item">
-	                            <input type="checkbox" id="cardNo${i.no}" class="cardCheck" value="${i.no}"/>
-	                            <div class="card-sortation">
-	                                <p>${i.sortationName}</p>
-	                            </div>
-	                            <div class="card-top">
-	                                <label for="cardNo${i.no}">
-	                                    <img src="/sixman/resources/img/address/${i.fileName}" alt="명함사진" />
-	                                </label>
-	                            </div>
-	                            <div class="card-bottom">
-	                                <div class="essential-info">
-	                                    <p id="card-name">${i.name}</p>
-	                                    <p id="card-company"><i class="fa-solid fa-building"></i>${i.company}</p>
-	                                </div>
-	                                <p id="card-address">${i.address}</p>
-	                                <p id="card-phone"><strong>Tel.</strong>${i.phone}</p>
-	                                <a id="card-email" href="/sixman/mail/write?email=${i.email}"><strong>Mail.</strong>${i.email}</a>
-	                                <a id="card-detail" href="/sixman/address/detail?no=${i.no}">자세히</a>
-	                            </div>
-	                        </div>
+                        <div class="sortation">
+                            <input type="checkbox" class="selectAll" id="selectAll" />
+                            <p>구 분</p>
+                            <p>상 호</p>
+                            <p>이 름</p>
+                            <p>직 급</p>
+                            <p>전화번호</p>
+                            <p>EMAIL</p>
+                        </div>
+	                    <c:forEach items="${dlelteAddressList}" var="i">
+                            <label for="cardNo${i.no}">
+                                <div class="card-item">
+                                    <input type="checkbox" id="cardNo${i.no}" class="selectOne" value="${i.no}"/>
+                                    <div class="card-sortation">
+                                        <p>${i.sortationName}</p>
+                                    </div>
+                                    <p id="card-company">${i.company}</p>
+                                    <p id="card-name">${i.name}</p>
+                                    <p id="card-position">${i.position}</p>
+                                    <p id="card-phone">${i.phone}</p>
+                                    <p id="card-email">${i.email}</p>
+                                </div>
+                            </label>
                         </c:forEach>
                     </div>
                     <div class="footer">
+                        <div class="controller">
+                            <input type="button" id="restore" value="복 원">
+                            <input type="button" id="delete" value="삭 제">
+                        </div>
                         <div class="page-box">
                             <span class="material-symbols-outlined" <c:if test="${pv.currentPage ne 1}">onclick="location.href='/sixman/address?page=1&&category=${category}&&keyword=${keyword}'"</c:if>> keyboard_double_arrow_left </span>
                             <span class="material-symbols-outlined" <c:if test="${pv.currentPage ne 1}">onclick="location.href='/sixman/address?page=${pv.currentPage - 1}&&category=${category}&&keyword=${keyword}'"</c:if>> chevron_left </span>

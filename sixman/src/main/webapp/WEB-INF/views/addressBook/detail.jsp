@@ -4,11 +4,11 @@
     <head>
         <meta charset="UTF-8" />
         <title>Insert title here</title>
-        <link rel="stylesheet" href="<c:url value='/resources/css/addressBook/add.css'/>" />
+        <link rel="stylesheet" href="<c:url value='/resources/css/addressBook/detail.css'/>" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-        <script defer src="<c:url value='/resources/js/address/add.js'/>"></script>
+        <script defer src="<c:url value='/resources/js/address/detail.js'/>"></script>
         <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-      
+        
         <script src="https://kit.fontawesome.com/ae846b135b.js" crossorigin="anonymous"></script>
     </head>
     <body>
@@ -76,15 +76,21 @@
                 <section id="card-wrap" class="box">
                     <div class="header">
                         <span class="material-symbols-outlined">contacts</span>
-                        <label>주소록 등록</label>
+                        <label>${selectAddress.company}</label>
                     </div>
                     <div class="body">
-                        <form action="/sixman/address/add" method="POST" enctype="multipart/form-data" id="form">
+                        <form action="/sixman/address/detail" method="POST" enctype="multipart/form-data" id="form">
                             <div id="card-pic">
-                                <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" class="image-box" />
+                                <c:if test="${not empty selectAddress.fileName}">
+                                    <img src="<c:url value='/resources/img/address/${selectAddress.fileName}'/>" alt="" class="image-box" />
+                                </c:if>
+                                <c:if test="${empty selectAddress.fileName}">
+                                    <img src="<c:url value='/resources/img/defaultAddress.png'/>" alt="" class="image-box" />
+                                </c:if>
                             </div>
                             <div id="pic-controller">
                                 <label for="pic-add" onchange="readURL(this)">
+                                    <input type="text" id="addNo" name="no" value="${selectAddress.no}"/>
                                     <span class="material-symbols-outlined">add</span>
                                     <input type="file" id="pic-add" name="cardFile" />명함 추가
                                 </label>
@@ -93,11 +99,11 @@
                                 <div class="info-box left">
                                     <label for="">
                                         <p>상 호</p>
-                                        <input type="text" name="company" />
+                                        <input type="text" name="company" value="${selectAddress.company}"/>
                                     </label>
                                     <label for="">
                                         <p>성 명</p>
-                                        <input type="text" name="name" />
+                                        <input type="text" name="name" value="${selectAddress.name}"/>
                                     </label>
                                 </div>
                                 <div class="info-box right">
@@ -105,39 +111,39 @@
                                         <p>구 분</p>
                                         <select name="sortationNo" id="">
                                             <c:forEach items="${sortationList}" var="i">
-                                                <option value="${i.no}">${i.name}</option>
+                                                <option value="${i.no}" <c:if test="${selectAddress.sortationName eq i.name}"> selected </c:if>>${i.name}</option>
                                             </c:forEach>
                                         </select>
                                     </label>
                                     <label for="">
                                         <p>직 급</p>
-                                        <input type="text" name="position" />
+                                        <input type="text" name="position" value="${selectAddress.position}" />
                                     </label>
                                 </div>
                             </div>
                             <div id="card-phone-email">
                                 <label for="">
                                     <p>연락처</p>
-                                    <input type="text" name="phone" />
+                                    <input type="text" name="phone" value="${selectAddress.phone}"  />
                                 </label>
                                 <label for="">
                                     <p>E-MAIL</p>
-                                    <input type="text" name="email" />
+                                    <input type="text" name="email" value="${selectAddress.email}"  />
                                 </label>
                             </div>
                             <div id="card-info-address">
                                 <label for="">주 소</label>
-                                <input type="text" id="address" name="address" />
+                                <input type="text" id="address" name="address"  value="${selectAddress.address}" />
                                 <button type="button" id="address_kakao">검 색</button>
                             </div>
                             <div id="memo">
                                 <div id="title">
                                     <p>Memo</p>
                                 </div>
-                                <textarea name="comment"></textarea>
+                                <textarea name="comment">${selectAddress.comment}</textarea>
                             </div>
                             <div id="sub">
-                                <input type="submit" value="등 록" />
+                                <input type="submit" value="수 정" />
                             </div>
                         </form>
                     </div>

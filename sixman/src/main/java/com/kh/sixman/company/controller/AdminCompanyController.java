@@ -49,7 +49,7 @@ public class AdminCompanyController {
 		String rootPath = session.getServletContext().getRealPath("/");
 		
 		AttachmentVo logoFile = FileUnit.uploadFileOne(vo.getCompanyLogo(), rootPath, "sixman/src/main/webapp/resources/img/logo");
-		System.out.println(logoFile);
+		
 		vo.setLogoFile(logoFile);
 		
 		int result = companyService.updateCompanyInfo(vo);

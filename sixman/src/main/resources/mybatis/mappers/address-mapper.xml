@@ -11,6 +11,7 @@
 		LEFT JOIN ADDRESS_A F ON F.ADDRESS_NO = A.NO
 		WHERE A.USER_NO = #{no}
 		AND A.DELETE_YN = 'N'
+		AND F.THUMB_YN = 'Y'
 		<if test="keyword != null and keyword !='' and category != null and category != ''">
 			AND ${category} LIKE '%${keyword}%'
 		</if >
@@ -18,7 +19,6 @@
 			AND A.NAME LIKE '%${keyword}%'
 		    OR A.PHONE LIKE '%${keyword}%' 
 		    OR A.EMAIL LIKE '%${keyword}%'
-		    OR M.BIRTHDAY LIKE '%${keyword}%'
 		    OR A.COMPANY LIKE '%${keyword}%'
 		    OR A.POSITION LIKE '%${keyword}%'
 		    OR A.ADDRESS LIKE '%${keyword}%'
@@ -30,21 +30,22 @@
 		INSERT INTO 
 		ADDRESS_BOOK
 		(
-		    NO,
-			SORTATION_NO,
-			USER_NO,
-			NAME,
-			PHONE,
-			EMAIL,
-			COMPANY,
-			POSITION,
-			ADDRESS,
-			COMMENT
+		    "NO",
+			"SORTATION_NO",
+			"USER_NO",
+			"NAME",
+			"PHONE",
+			"EMAIL",
+			"COMPANY",
+			"POSITION",
+			"ADDRESS",
+			"COMMENT"
 		)
 		VALUES
 		(
 		    SEQ_ADDRESS_BOOK_NO.NEXTVAL,
 		    #{sortationNo},
+		    #{userNo},
 		    #{name},
 		    #{phone},
 		    #{email},
@@ -85,7 +86,8 @@
 		LEFT JOIN ADDRESS_SORTATION S ON A.SORTATION_NO = S.NO
 		LEFT JOIN ADDRESS_A F ON F.ADDRESS_NO = A.NO
 		WHERE A.USER_NO = #{no}
-		AND DELETE_YN = 'N'
+		AND A.DELETE_YN = 'N'
+		AND F.THUMB_YN = 'Y'
 		<if test="keyword != null and keyword !='' and category != null and category != ''">
 			AND ${category} LIKE '%${keyword}%'
 		</if >
@@ -93,12 +95,76 @@
 			AND A.NAME LIKE '%${keyword}%'
 		    OR A.PHONE LIKE '%${keyword}%' 
 		    OR A.EMAIL LIKE '%${keyword}%'
-		    OR M.BIRTHDAY LIKE '%${keyword}%'
 		    OR A.COMPANY LIKE '%${keyword}%'
 		    OR A.POSITION LIKE '%${keyword}%'
 		    OR A.ADDRESS LIKE '%${keyword}%'
 		    OR S.NAME LIKE '%${keyword}%'
 		</if> 
+	</select>
+	
+	<select id="selectDlelteAddressList" resultType="AddressVo">
+		SELECT
+		    A.NO,
+		    A.SORTATION_NO,
+		    A.NAME,
+		    A.PHONE,
+		    A.EMAIL,
+		    A.COMPANY,
+		    A.POSITION,
+		    A.ADDRESS,
+		    A.ENROLL_DATE,
+		    A.MODIFY_DATE,
+		    A.DELETE_YN,
+		    A."COMMENT",
+		    S.HIGH_NO AS SORTATION_HIGH,
+		    S.NAME AS SORTATION_NAME,
+		    F.CHANGE_NAME AS FILE_NAME,
+		    F.NO AS FILE_NO
+		FROM ADDRESS_BOOK A 
+		LEFT JOIN ADDRESS_SORTATION S ON A.SORTATION_NO = S.NO
+		LEFT JOIN ADDRESS_A F ON F.ADDRESS_NO = A.NO
+		WHERE A.USER_NO = #{no}
+		AND A.DELETE_YN = 'Y'
+		AND F.THUMB_YN = 'Y'
+		<if test="keyword != null and keyword !='' and category != null and category != ''">
+			AND ${category} LIKE '%${keyword}%'
+		</if >
+		<if test="keyword != null and keyword !='' and category == null" >
+			AND A.NAME LIKE '%${keyword}%'
+		    OR A.PHONE LIKE '%${keyword}%' 
+		    OR A.EMAIL LIKE '%${keyword}%'
+		    OR A.COMPANY LIKE '%${keyword}%'
+		    OR A.POSITION LIKE '%${keyword}%'
+		    OR A.ADDRESS LIKE '%${keyword}%'
+		    OR S.NAME LIKE '%${keyword}%'
+		</if> 
+	</select>
+	
+	<select id="getAddress" resultType="AddressVo">
+		SELECT
+		    A.NO,
+		    A.SORTATION_NO,
+		    A.NAME,
+		    A.PHONE,
+		    A.EMAIL,
+		    A.COMPANY,
+		    A.POSITION,
+		    A.ADDRESS,
+		    A.ENROLL_DATE,
+		    A.MODIFY_DATE,
+		    A.DELETE_YN,
+		    A."COMMENT",
+		    S.HIGH_NO AS SORTATION_HIGH,
+		    S.NAME AS SORTATION_NAME,
+		    F.CHANGE_NAME AS FILE_NAME,
+		    F.NO AS FILE_NO
+		FROM ADDRESS_BOOK A 
+		LEFT JOIN ADDRESS_SORTATION S ON A.SORTATION_NO = S.NO
+		LEFT JOIN ADDRESS_A F ON F.ADDRESS_NO = A.NO
+		WHERE A.USER_NO = #{userNo}
+		AND A.NO = #{no}
+		AND DELETE_YN = 'N'
+		AND F.THUMB_YN = 'Y'
 	</select>
 	
 	<select id="sortationList" resultType="SortationVo">
@@ -128,19 +194,43 @@
 		)
 	</insert>
 	
+	<update id="updateDeleteAddressAll">
+		UPDATE ADDRESS_BOOK
+		SET DELETE_YN = 'Y'
+		<foreach collection="list" item="no" open="WHERE NO IN(" close=")" separator=",">
+			#{no}
+		</foreach>
+	</update>
+	
+	<delete id="deleteAddress">
+		DELETE 
+		FROM ADDRESS_BOOK
+		<foreach collection="list" item="no" open="WHERE NO IN(" close=")" separator=",">
+			#{no}
+		</foreach>
+	</delete>
+	
+	<update id="restore">
+		UPDATE ADDRESS_BOOK
+		SET DELETE_YN = 'N'
+		<foreach collection="list" item="no" open="WHERE NO IN(" close=")" separator=",">
+			#{no}
+		</foreach>
+	</update>
 	
 	<update id="updateAddress">
-		UPDATE COMPANY
+		UPDATE ADDRESS_BOOK
 		SET 
-			SORTATION_NO = #{sortationNo},
-			NAME = #{name},
-			PHONE = #{phone},
-			EMAIL = #{email},
-			COMPANY = #{company},
-			POSITION = #{position},
-			ADDRESS = #{address},
+			"SORTATION_NO" = #{sortationNo},
+			"NAME" = #{name},
+			"PHONE" = #{phone},
+			"EMAIL" = #{email},
+			"COMPANY" = #{company},
+			"POSITION" = #{position},
+			"ADDRESS" = #{address},
 			"COMMENT" = #{comment}
 		WHERE "NO" = #{no}
+		AND "USER_NO" = #{userNo}
 	</update>
 	
 	<select id="getFileNo" resultType="String">
@@ -155,7 +245,7 @@
 		UPDATE ADDRESS_A
 		SET 
 			"THUMB_YN" = 'N'
-		WHERE "NO" = #{fileNo}
+		WHERE "ADDRESS_NO" = #{no}
 	</update>
 	
 	<select id="getCompany" resultType="CompanyVo">
@@ -182,12 +272,12 @@
 		</if>
 	</select>
 	
-	<insert id="insertFile">
-		INSERT INTO COMPANYLOGO_A
+	<insert id="upload">
+		INSERT INTO ADDRESS_A
 		(
 			"NO",
 			"ORIGIN_NAME",
-			"COMPANY_NO",
+			"ADDRESS_NO",
 			"CHANGE_NAME",
 			"FILE_PATH",
 			"ENROLL_DATE"

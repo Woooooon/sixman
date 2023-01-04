@@ -9,7 +9,9 @@ import lombok.Data;
 @Data
 public class AddressVo {
     private String no;
+    private String userNo;
     private String sortationNo;
+    private String sortationName;
     private String name;
     private String phone;
     private String email;
@@ -20,10 +22,9 @@ public class AddressVo {
     private String modifyDate;
     private String comment;
     private String sortationHigh;
-    private String sortationName;
     private String fileName;
     private String fileNo;
     
-    private MultipartFile fileInsert;
-	private AttachmentVo addressFile;
+    private MultipartFile cardFile;
+	private AttachmentVo cardFileInfo;
 }

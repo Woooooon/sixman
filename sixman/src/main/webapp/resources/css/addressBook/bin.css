@@ -1,0 +1,290 @@
+.main-box-2 {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    gap: 40px;
+    position: relative;
+}
+
+#myaddress-wrap {
+    width: 18%;
+    height: 100%;
+    padding: 10px;
+}
+
+#addressBook-wrap {
+    width: 82%;
+    height: 100%;
+    padding: 40px 30px 10px 30px;
+}
+
+.header {
+    width: 100%;
+    height: 5%;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--bo-20);
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+}
+
+.title span {
+    color: var(--main-color);
+    font-size: 25px;
+    margin-right: 7px;
+}
+
+.title label {
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.address-search {
+    display: flex;
+    align-items: flex-end;
+}
+
+.address-search form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    margin: 10px 0;
+}
+
+.address-search input[type='text'] {
+    width: 150px;
+    height: 25px;
+    margin: 0px 7px 0px 5px;
+    border: 1px solid var(--bo-40);
+    border-radius: 2px;
+    outline-color: var(--main-color);
+}
+
+.address-search select {
+    font-size: 12px;
+    border: 1px solid var(--bo-40);
+    border-radius: 2px;
+    outline-color: var(--main-color);
+}
+
+.address-search input[type='submit'] {
+    border: none;
+    color: #fff;
+    background-color: var(--main-color);
+    cursor: pointer;
+    padding: 3px 13px;
+    border-radius: 2px;
+}
+
+.address-search input[type='submit']:hover {
+    background-color: #17a897;
+}
+
+.body {
+    margin: auto;
+    margin-top: 30px;
+    width: 90%;
+    height: 80%;
+}
+
+#checkShare {
+    font-size: 16px;
+}
+
+.footer {
+    position: relative;
+    width: 100%;
+    height: 12%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.controller {
+    position: absolute;
+    display: flex;
+    gap: 10px;
+    top: 0;
+    right: 0;
+}
+
+#restore {
+    padding: 5px 20px;
+    background-color: var(--main-color);
+    color: #fff;
+    cursor: pointer;
+    border: none;
+    border-radius: 2px;
+}
+
+#delete {
+    padding: 5px 20px;
+    background-color: transparent;
+    color: var(--bo-40);
+    cursor: pointer;
+    border: 1px solid #fff;
+    border-radius: 2px;
+}
+
+#restore:hover {
+    background-color: #17a897;
+}
+
+#delete:hover {
+    border: 1px solid #17a897;
+    color: #000;
+}
+
+/* CardInBin */
+
+.card-sortation {
+    background-color: #ffee93;
+    padding: 3px 5px;
+    border-radius: 2px;
+    color: #000;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.sortation {
+    font-weight: 600;
+    border-top: 1px solid var(--bo-60);
+    border-bottom: 1px solid var(--main-color);
+    width: 100%;
+    height: 8%;
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 1.5fr 1fr 1fr 1.5fr 1.5fr;
+    align-items: center;
+    justify-items: center;
+}
+
+.card-item {
+    font-weight: 500;
+    width: 100%;
+    height: 7%;
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 1.5fr 1fr 1fr 1.5fr 1.5fr;
+    border-bottom: 1px solid var(--bo-20);
+    align-items: center;
+    padding: 5px 0;
+    justify-items: center;
+    font-size: 13px;
+}
+
+.card-item:has(input[type='checkbox']:checked) {
+    border-bottom: 1px solid var(--main-color-dark);
+    color: var(--main-color-dark);
+    font-weight: 600;
+}
+
+.essential-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 7px;
+}
+
+/* 부서목록 */
+
+.sortation-title {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: 1px solid var(--main-color-dark);
+    padding: 3px 0;
+    margin-bottom: 10px;
+}
+
+.sortation-title span {
+    color: var(--main-color);
+    margin-right: 5px;
+}
+
+.sortation-title p {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.sortation-item {
+    width: 70%;
+    border: 1px solid var(--main-color);
+    border-radius: 2px;
+    margin: 4px 0;
+    transition: 0.2s ease-in-out;
+}
+
+.sortation-item label > input {
+    display: none;
+}
+
+.sortation-item .toggleBtn {
+    padding: 3px 4px;
+    display: flex;
+    background-color: var(--main-color);
+    align-items: center;
+    color: #fff;
+    margin-right: 5px;
+    transition: 0.2s ease-in-out;
+}
+
+.sortation-item .toggleBtn > span {
+    font-size: 15px;
+    transition: 0.4s ease-in-out;
+}
+
+.sortation-item > label {
+    width: 100%;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.sortation-item ~ li > .address-item {
+    width: 70%;
+    border: 1px solid var(--main-color);
+    border-radius: 2px;
+    margin: 4px 0;
+    margin-left: 23px;
+}
+
+.address-item > a {
+    font-size: 12px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #000;
+}
+.address-item > a > span {
+    margin-right: 4px;
+    color: var(--main-color);
+}
+
+.sortation-item:has(input:checked) {
+    border: 1px solid var(--main-color-dark);
+    background-color: var(--main-color-dark);
+    color: #fff;
+}
+
+.sortation-item:has(input:checked) .toggleBtn {
+    background-color: var(--main-color-dark);
+}
+.sortation-item:has(input:checked) .toggleBtn span {
+    transform: rotate(180deg);
+}
+
+.sortation-item ~ li {
+    max-height: 0px;
+    overflow: hidden;
+}
+
+.sortation-item:has(input:checked) ~ li {
+    max-height: none;
+}

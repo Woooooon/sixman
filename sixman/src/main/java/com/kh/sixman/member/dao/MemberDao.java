@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import com.kh.sixman.common.AttachmentVo;
 import com.kh.sixman.member.vo.MemberVo;
 
-import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 
 @Repository

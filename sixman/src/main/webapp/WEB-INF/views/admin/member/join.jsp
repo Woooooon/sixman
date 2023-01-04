@@ -202,7 +202,6 @@
                                 <div id="resume">
                                     <div class="addfile">
                                         <span>이력서</span>
-                                        <input type="file" />
                                         <button type="button" class="plus" id="add-resume">
                                             <span class="material-symbols-outlined">add</span>
                                             추 가
@@ -212,7 +211,6 @@
                                 <div id="copy-account">
                                     <div class="addfile">
                                         <span>통장사본</span>
-                                        <input type="file" />
                                         <button type="button" class="plus" id="add-account">
                                             <span class="material-symbols-outlined">add</span>
                                             추 가
