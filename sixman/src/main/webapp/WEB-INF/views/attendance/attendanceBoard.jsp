@@ -96,6 +96,7 @@
     cursor: pointer;
     font-size: 1.7em;
     font-weight: 500;
+    border: none;
 }
 #btn-box > form > .c-btn{
     width: 120px;
@@ -299,6 +300,12 @@
     color: black
 }
 
+#date-btn{
+    /* padding-right: 15px; */
+    width: 100px;
+    border: none;
+}
+
 </style>
 
 <body>
@@ -307,20 +314,22 @@
 <main class="main-box">
     <div id="main-content">
         <div>
-            <div id="search-box" class="box">
-                <div id="search-font">검색기간</div>
-                <div class="btn">7일</div>
-                <div class="btn">1개월</div>
-                <div class="btn">3개월</div>
-                <div class="btn">1년</div>
-                <div id="date">
-                    <input id="start-day" type="date" style="width: 100px;">
-                    ~
-                    <input id="end-day" type="date" style="width: 100px;">
+            <form action="/sixman/attendance/board3" method="post">
+                <div id="search-box" class="box">
+                    <div id="search-font">검색기간</div>
+                    <div class="btn">7일</div>
+                    <div class="btn">1개월</div>
+                    <div class="btn">3개월</div>
+                    <div class="btn">1년</div>
+                    <div id="date">
+                        <input id="start-day" type="date" style="width: 100px;" name="start" value="2020-01-01">
+                        ~
+                        <input id="end-day" type="date" style="width: 100px;" name="end">
+                    </div>
+                    <div><input class="btn" id="date-btn" type="submit" value="검색"></div>
+                    <div></div>
                 </div>
-                <div class="btn">검색</div>
-                <div></div>
-            </div>
+            </form>         
         </div>
         <div>
             <div id="notice-box" class="box">
@@ -340,7 +349,7 @@
                                 <p>${x.start}</p>
                                 <p>${x.end}</p>
                                 <p></p>
-                                <p></p>
+                                <p>${x.workTime}</p>
                             </div>
                         </c:forEach>
                 </div>
@@ -437,6 +446,15 @@
     // document.querySelector("#end-btn").addEventListener("click", () => {
     //     popup.alertPop("퇴근","시간나오게");
     // })
+
+    var start = document.getElementById('start123');
+    var end = document.getElementById('end123');
+
+    var result = start-end;
+    console.log(start[2]);
+    console.log(start[1]);
+    console.log(start[0]);
+    console.log(result);
 
 </script>
 

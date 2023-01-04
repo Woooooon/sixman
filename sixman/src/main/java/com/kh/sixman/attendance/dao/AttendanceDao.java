@@ -33,16 +33,27 @@ public class AttendanceDao {
 		return sst.selectOne("attendanceMapper.todayWork", workVo);
 	}
 	
+	public List<AttendanceVo> searchList(SqlSessionTemplate sst, AttendanceVo vo) {
+		return sst.selectList("attendanceMapper.searchList", vo);
+	}
 /////////////////////////////////////////위에는 board 아래는 admin
 
 	public List<MemberVo> ListMember(SqlSessionTemplate sst) {
 		return sst.selectList("attendanceMapper.listMember");
 	}
 
-	public List<AttendanceVo> selectMemberList(SqlSessionTemplate sst, AttendanceVo vo) {
-		return sst.selectList("attendanceMapper.selectMemberList",vo);
+	public List<AttendanceVo> selectMemberList(SqlSessionTemplate sst, AttendanceVo vo, RowBounds rb) {
+		return sst.selectList("attendanceMapper.selectMemberList",vo,rb);
 	}
 
-	
+	public WorkTimeVo AdminTodayWork(SqlSessionTemplate sst, WorkTimeVo workVo) {
+		return sst.selectOne("attendanceMapper.AdminTodayWork", workVo);
+	}
+
+	public int adminCountList(SqlSessionTemplate sst, AttendanceVo vo) {
+		return sst.selectOne("attendanceMapper.adminCountList", vo);
+	}
+
+
 
 }

@@ -55,6 +55,7 @@ public class AttendanceController {
 		
 		WorkTimeVo workVo = new WorkTimeVo();
 		workVo.setWorkDay(today);
+		workVo.setMemberNo(loginMember.getNo());
 		
 		WorkTimeVo todayWork = service.todayWork(workVo);
 		
@@ -96,7 +97,7 @@ public class AttendanceController {
 	
 	//퇴근버튼
 	@PostMapping("board2")
-	public String board2(@RequestParam Map<String, String> map, Model model, AttendanceVo vo) {
+	public String board2(Model model, AttendanceVo vo) {
 		
 		//오늘 날짜
 		String today = (day.format(date)).replace("-", "/").substring(2);
@@ -112,33 +113,25 @@ public class AttendanceController {
 		return "redirect:/attendance/board?page=1";
 	}
 	
-	
-	@GetMapping("admin")
-	public String admin(@RequestParam Map<String, String> map,Model model, HttpSession session){		
+	@PostMapping("board3")
+	public String board3(Model model, AttendanceVo vo, HttpSession session) {
 		
-		//실시간시간출력
-		Date date = new Date();
-		SimpleDateFormat day = new SimpleDateFormat("yyyy-MM-dd");
-		SimpleDateFormat time = new SimpleDateFormat("HH:mm");
+		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
 		
-		model.addAttribute("day", day.format(date) );
-		model.addAttribute("time", time.format(date) );
+		String name = loginMember.getName();
+		vo.setName(name);
 		
-		//출퇴근시간
-		WorkTimeVo workVo = new WorkTimeVo();
-		workVo.setWorkDay(today);
-		WorkTimeVo todayWork = service.todayWork(workVo);
-		model.addAttribute("todayWork", todayWork);
+		//리스트  검색해서 보여주기
+		List<AttendanceVo> voList = service.searchList(vo);
 		
-				
-	    //맴버선택
-		List<MemberVo> memberList = service.ListMember();
-		model.addAttribute("memberList", memberList);
+		model.addAttribute("voList", voList);
 		
-		return "attendance/attendanceAdmin";
+		return "redirect:/attendance/board?page=1";
+//		return "attendance/attendanceBoard";
 	}
 	
-	@PostMapping("admin")
+	
+	@GetMapping("admin")
 	public String admin(@RequestParam Map<String, String> map, Model model, AttendanceVo vo) {
 		//실시간시간출력
 		Date date = new Date();
@@ -148,39 +141,38 @@ public class AttendanceController {
 		model.addAttribute("day", day.format(date) );
 		model.addAttribute("time", time.format(date) );
 		
-		//출퇴근시간
-		WorkTimeVo workVo = new WorkTimeVo();
-		workVo.setWorkDay(today);
-		WorkTimeVo todayWork = service.todayWork(workVo);
-		model.addAttribute("todayWork", todayWork);
-		
-		
-		
-				
-	    //맴버선택
+		 //맴버선택
 		List<MemberVo> memberList = service.ListMember();
 		model.addAttribute("memberList", memberList);
 		
 		//보드페이지
-//		int pageLimit = 5;
-//		int boardLimit = 14;
-//		int listCount = service.countList();
-//		int page = Integer.parseInt(map.get("page"));
-//	    int offset = (page-1) * boardLimit;
-//	    RowBounds rb = new RowBounds(offset , boardLimit);
-//	    
-//	    PageVo pv = new PageVo(listCount,page,pageLimit,boardLimit);
+		int pageLimit = 5;
+		int boardLimit = 14;
+		int listCount = service.adminCountList(vo);
+		int page = Integer.parseInt(map.get("page"));
+	    int offset = (page-1) * boardLimit;
+	    RowBounds rb = new RowBounds(offset , boardLimit);
+	    
+	    PageVo pv = new PageVo(listCount,page,pageLimit,boardLimit);
 		
-		List<AttendanceVo> selectMemberList = service.selectMemberList(vo);
-		
-		System.out.println("selectMemberList:"+ selectMemberList);
+	    
+	    
+		List<AttendanceVo> selectMemberList = service.selectMemberList(vo,rb);
 		
 		model.addAttribute("selectMemberList", selectMemberList);
-//		model.addAttribute("pv", pv);
+
+		//출퇴근시간
+		WorkTimeVo workVo = new WorkTimeVo();
+		workVo.setWorkDay(today);
+		workVo.setName(vo.getName());
+		WorkTimeVo todayWork = service.AdminTodayWork(workVo);
+		model.addAttribute("todayWork", todayWork);
+		model.addAttribute("pv", pv);
 		
 		return "attendance/attendanceAdmin";
-//		return "redirect:/attendance/admin?page=1";
 	}
+	
+	@PostMapping("admin")
 	
 	
 	

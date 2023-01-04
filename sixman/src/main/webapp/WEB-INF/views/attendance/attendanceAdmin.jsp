@@ -204,7 +204,7 @@
     width: 100px;
 }
 #date-btn{
-    padding-right: 15px;
+    /* padding-right: 15px; */
     width: 100px;
     border: none;
 }
@@ -331,7 +331,7 @@
     padding: 10px;
 }
 
-#modal{
+#modal form{
     display: grid;
     grid-template-rows: 1fr 1.5fr 1.5fr 1.5fr 1.5fr 2fr 0.5fr;
     gap: 10px;
@@ -351,6 +351,12 @@
     align-items: center;
 }
 
+#date-btn{
+    width: 100%;
+    height: 100%;
+    font-size: 1.5em;;
+}
+
 
 </style>
 
@@ -361,25 +367,32 @@
 <main class="main-box">
     <div class="share-modal">
         <div id="modal">
-            <div id="modal-close"> 
-                <div></div>
-                <div>
-                    <span id="close" class="material-symbols-outlined"> close </span>
+            <form action="/sixman/attendance/admin" method="post">
+                <div id="modal-close"> 
+                    <div></div>
+                    <div>
+                        <span id="close" class="material-symbols-outlined"> close </span>
+                    </div>
                 </div>
-            </div>
-            <div id="timemodal1">2022-12-29</div>
-            <div id="timemodal2"  contenteditable="true">상태: 지각</div>
-            <div id="timemodal3"  contenteditable="true">시작 시간: 09:30</div>
-            <div id="timemodal4"  contenteditable="true">종료 시간: 18:30</div>
-            <div id="timemodal5" class="btn">수정</div>
-            <div></div>
+                <c:forEach items="${selectMemberList}" var="x">
+
+                </c:forEach>
+                <div id="timemodal1">2022-12-29</div>
+                <div id="timemodal2">상태: 정상출근</div>
+                <div id="timemodal3"  contenteditable="true">시작 시간: 09:30</div>
+                <div id="timemodal4"  contenteditable="true">종료 시간: 18:30</div>
+                <div><input class="btn" id="date-btn" type="submit" value="수정"></div>
+                <div></div>
+            </form>
+            
         </div>
     </div>
     <!-- 위에는 모달 -->
     <div id="main-content">
         <div>
-            <form action="/sixman/attendance/admin" method="post">
+            <form action="/sixman/attendance/admin" method="get">
                 <div id="search-box" class="box">
+                    <input type="hidden" name="page" value="1">
                     <div id="search-name">사원이름</div>
                     <div>   
                         <select name="name" id="" style="font-size: 1em; width:80px; height:30px;">
@@ -391,9 +404,9 @@
                     <div></div>
                     <div id="search-font">검색기간</div>
                     <div id="date">
-                        <input id="start-day" type="date" style="width: 100px;">
+                        <input id="start-day" type="date" style="width: 100px;" name="start" value="2020-01-01">
                         ~
-                        <input id="end-day" type="date" style="width: 100px;">
+                        <input id="end-day" type="date" style="width: 100px;" name="end">
                     </div>
                     <div></div>
                     <div><input class="btn" id="date-btn" type="submit" value="검색"></div>
@@ -422,7 +435,7 @@
                             <p></p>
                         </div>
                     </c:forEach>
-                   
+
                 </div>
                 <div class="page-box">
                     <span class="material-symbols-outlined" <c:if test="${pv.currentPage ne 1}">onclick="location.href='/sixman/attendance/admin?page=1'"</c:if>> keyboard_double_arrow_left </span>
@@ -512,17 +525,26 @@
     })
   
     //모달 열기
-    document.querySelector(".list-item").addEventListener("click", () => {
-        document.querySelector(".share-modal").style.display = "flex"
-    })
+    // document.querySelector(".list-item").addEventListener("click", () => {
+    //     document.querySelector(".share-modal").style.display = "flex"
+    // })
 
 
     
-    // 모달 모두열기 
+    // 모달 모두열기
+    var modalAll = document.querySelectorAll(".list-item");
+    
+    for (i = 0; i < modalAll.length; i++) {
+        modalAll[i].addEventListener("click", () => {
+        document.querySelector(".share-modal").style.display = "flex"
+    })
+    }
 
-    // document.querySelectorAll(".list-item").addEventListener("click", () => {
+    // modalAll.addEventListener("click", () => {
+    //     console.log(modalAll.length)
     //     document.querySelector(".share-modal").style.display = "flex"
     // })
+    
 
 </script>
 
