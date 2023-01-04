@@ -61,14 +61,16 @@
             </div>
             <div id="list-count" class="b-page-count hilight"></div>
 
+
+
+            <!--
             <div class="list-item">
-                <!-- <%
+             <%
                 if(dvoList != null) for(DocumentVo dvo : dvoList){
                 pageContext.setAttribute("dvo",dvoList);
-                %> -->
+                %> 
                 <c:forEach var="dvo" items="${dvoList}">
                 <input type="checkbox" name="dddd">
-                <!-- <span></span> -->
                <p>${dvoList.enrollDate}</p>
                <p>${dvoList.type}</p>
                <p>${dvoList.title}</p>
@@ -76,6 +78,8 @@
                <p>${dvoList.state}</p>
             </c:forEach>
             </div>
+        -->
+            
           
            
 
