@@ -57,7 +57,7 @@ public class ChatDao {
 		return sst.update("chatMapper.createChat", map);
 	}
 
-	public int chat(SqlSessionTemplate sst, Map<String, String> map) {
+	public int chat(SqlSessionTemplate sst, Map<String, Object> map) {
 		return sst.insert("chatMapper.chat", map);
 	}
 

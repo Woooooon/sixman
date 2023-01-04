@@ -12,12 +12,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.kh.sixman.chat.service.ChatService;
 import com.kh.sixman.chat.vo.ChatRoomVo;
 import com.kh.sixman.common.AttachmentVo;
+import com.kh.sixman.common.FileUnit;
 import com.kh.sixman.member.vo.MemberVo;
 
 import lombok.extern.slf4j.Slf4j;
@@ -40,10 +42,16 @@ public class ChatController {
 		return (MemberVo) session.getAttribute("loginMember");
 	}
 	
-	@PostMapping(value = "chat", produces = "application/json; charset=utf8")
-	public void chat(String room, String msg, HttpSession session) {
+	@PostMapping(value = "chat")
+	public void chat(String room, String msg, MultipartFile file, HttpSession session) {
 		String no = getLoginMember(session).getNo();
-		Map<String, String> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<>();
+		
+		if(file!=null) {
+			String rootPath = session.getServletContext().getRealPath("/");
+			AttachmentVo vo = FileUnit.uploadFileOne(file, rootPath, "sixman/src/main/webapp/resources/chat");
+			map.put("file", vo);
+		}
 		
 		map.put("room", room);
 		map.put("msg", msg);
@@ -180,7 +188,7 @@ public class ChatController {
 		}
 	}
 	
-	@PostMapping(value = "profile")
+	@PostMapping(value = "profile", produces = "application/json; charset=utf8")
 	public String profile(String no, HttpSession session) {
 		String loginNo = getLoginMember(session).getNo();
 		Map<String, String> map = new HashMap<>();

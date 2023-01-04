@@ -146,7 +146,7 @@ public class ChatService {
 		return result;
 	}
 
-	public int chat(Map<String, String> map) {
+	public int chat(Map<String, Object> map) {
 		return chatDao.chat(sst, map);
 	}
 
