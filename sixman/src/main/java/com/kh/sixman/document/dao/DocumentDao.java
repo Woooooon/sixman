@@ -6,6 +6,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.sixman.document.vo.DocumentSaveVo;
 import com.kh.sixman.document.vo.DocumentVo;
 import com.kh.sixman.notice.vo.NoticeVo;
 
@@ -56,6 +57,14 @@ public class DocumentDao {
 
 	public List<DocumentVo> nextAndPre(SqlSessionTemplate sst, String no) {
 		return sst.selectList("DocumentMapper.nextAndPre", no);
+	}
+
+	public int writesv(SqlSessionTemplate sst, DocumentVo dvo) {
+		return sst.insert("DocumentMapper.stateis",dvo);
+	}
+
+	public List<DocumentVo> selectDcList(SqlSessionTemplate sst) {
+		return sst.selectList("documentMapper.docuselect");
 	}
 
 }

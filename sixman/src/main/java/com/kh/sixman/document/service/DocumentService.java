@@ -8,10 +8,12 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.sixman.common.AttachmentVo;
 import com.kh.sixman.document.dao.DocumentDao;
 import com.kh.sixman.document.dao.DocumentFileDao;
+import com.kh.sixman.document.vo.DocumentSaveVo;
 import com.kh.sixman.document.vo.DocumentVo;
 import com.kh.sixman.notice.vo.NoticeVo;
 
@@ -26,10 +28,13 @@ public class DocumentService {
    private DocumentFileDao fdao;
    
    //게시글 작성
+   @Transactional
    public int write(DocumentVo dvo) {
       
       int result1 = dao.write(sst, dvo);
 //      int result2 = dao.send(sst,dvo);
+      
+      int result3 = dao.writesv(sst, dvo);
       
       String no = dao.getDocuementNo(sst, dvo);
       List<AttachmentVo> fileLists = dvo.getFileList();
@@ -45,7 +50,8 @@ public class DocumentService {
          
          result2= fdao.uploadAll(sst,map);
       }
-      	return result1  * result2;
+      	return result1  * result2 * result3;
+//      	return result1  * result3;
    }
 
 
@@ -95,6 +101,12 @@ public int countList(String keyword) {
 
 public List<DocumentVo> selectList(String keyword, RowBounds rb) {
 	return dao.selectList(sst, keyword, rb);
+}
+
+
+
+public List<DocumentVo> selectDocumentList() {
+	return dao.selectDcList(sst);
 }
 
 }

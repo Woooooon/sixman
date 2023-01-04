@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,14 +62,19 @@
             <div id="list-count" class="b-page-count hilight"></div>
 
             <div class="list-item">
-                
+                <!-- <%
+                if(dvoList != null) for(DocumentVo dvo : dvoList){
+                pageContext.setAttribute("dvo",dvoList);
+                %> -->
+                <c:forEach var="dvo" items="${dvoList}">
                 <input type="checkbox" name="dddd">
                 <!-- <span></span> -->
-               <p>${dvo.enrollDate}</p>
-               <p>${dvo.type}</p>
-               <p>${dvo.title}</p>
-               <p>${dvo.no}</p>
-               <p>${dvo.state}</p>
+               <p>${dvoList.enrollDate}</p>
+               <p>${dvoList.type}</p>
+               <p>${dvoList.title}</p>
+               <p>${dvoList.sendPay}</p>
+               <p>${dvoList.state}</p>
+            </c:forEach>
             </div>
           
            

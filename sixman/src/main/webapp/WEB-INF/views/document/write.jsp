@@ -33,11 +33,11 @@
             <div class="writelist">
                 <div class="writeno"> 
                     <div>문서번호</div>
-                    <div type="text" name="no">${dvo.sendPay}</div>
+                    <div type="text" name="no">${dvo.no}</div>
                 </div>
                 <div class="writeno">
                     <div>기안일</div>
-                    <div>${dvo.enrollDate }</div>
+                    <div>${dvo.enrollDate}</div>
                 </div>
                 <div class="writeno">
                     <div>기안자</div>

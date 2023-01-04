@@ -22,6 +22,7 @@ import com.kh.sixman.common.AttachmentVo;
 import com.kh.sixman.common.FileUnit;
 import com.kh.sixman.common.PageVo;
 import com.kh.sixman.document.service.DocumentService;
+import com.kh.sixman.document.vo.DocumentSaveVo;
 import com.kh.sixman.document.vo.DocumentVo;
 import com.kh.sixman.mail.vo.MailVo;
 import com.kh.sixman.member.vo.MemberVo;
@@ -39,12 +40,15 @@ public class DocumentController {
    //기안문서함(화면)
    @GetMapping("first")
 //   public String First(String listType,Model model) {
-   public String First() {
+   public String First(HttpSession session) {
+	   List<DocumentVo> dvoList = ds.selectDocumentList();
+	   session.setAttribute("dvo", dvoList);
+	   
       return "document/first";
    }
    //기안문서함 (찐)
    @ResponseBody
-   @PostMapping(value="first", produces = "application/json; charset=utf8")
+   @PostMapping(value="document/first", produces = "application/json; charset=utf8")
    public String First(int page ,String keyword){
 	   
 	   int pageLimit = 5;
@@ -54,15 +58,13 @@ public class DocumentController {
 	    int offset = (page-1) * boardLimit;
 	    RowBounds rb = new RowBounds(offset , boardLimit);
 	    
-	    
-	    
 	    PageVo pv = new PageVo(listCount,page,pageLimit,boardLimit);
 	    List<DocumentVo> list = ds.selectList(keyword, rb);
 
 		Map<String, Object> map = new HashMap<>();
 		
 		map.put("pv", pv);
-		map.put("list", list);
+		map.put("dvo", list);
 		map.put("listCount", listCount);
 		
 		Gson gson = new GsonBuilder().create();
@@ -81,7 +83,10 @@ public class DocumentController {
    @PostMapping("approve")
    public String Approve(DocumentVo dvo) {
 	   
-      return "";
+	   
+	   
+	   
+      return "document/approve";
    }
    
    
@@ -142,6 +147,36 @@ public class DocumentController {
 //      }
       return "document/write";
    }
+   
+	/*
+	 * //결재선 작성 (찐)
+	 * 
+	 * @PostMapping("write") public String write(DocumentVo dvo , HttpSession
+	 * session ) {
+	 * 
+	 * MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
+	 * 
+	 * 
+	 * String rootPath = session.getServletContext().getRealPath("/");
+	 * List<AttachmentVo> fileList = FileUnit.uploadFile(dvo.getFile(), rootPath,
+	 * "upload/document");
+	 * 
+	 * 
+	 * 
+	 * dvo.setSendPay(loginMember.getNo()); dvo.setSendName(loginMember.getName());
+	 * dvo.setFileList(fileList);
+	 * 
+	 * 
+	 * 
+	 * int result = ds.write(dvo);
+	 * 
+	 * if(result > 0) { return "document/first"; }else { return "에러페이지"; }
+	 * 
+	 * }
+	 */
+   
+   
+   //state 값 넣는거 해야함
    //결재선 작성 (찐)
    @PostMapping("write")
    public String write(DocumentVo dvo , HttpSession session) {
@@ -152,13 +187,8 @@ public class DocumentController {
       String rootPath = session.getServletContext().getRealPath("/");
       List<AttachmentVo> fileList = FileUnit.uploadFile(dvo.getFile(), rootPath, "upload/document");
       
-     
-      
       dvo.setSendPay(loginMember.getNo());
-      dvo.setSendName(loginMember.getName());
       dvo.setFileList(fileList);
-      
-
       
       int result = ds.write(dvo);
       
