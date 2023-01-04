@@ -1049,20 +1049,18 @@ input[id="chat-setting-check02"]{
 
 
 
+<!-- 20230102 긴급추가 -->
 
+<!-- 대화방 생성 -->
 
-<!-- 버튼 흰색 -->
+.chat-deptname-area-version2{
+	margin-left:36%;
+	width:40%;
+	position:absolute;
+}
 
-
-/* #makingroom-first-leave{ */
-/* 	border:1px solid white; */
-/* } */
-
-/* .chatlist-big{ */
-/* 	align-items:flex-start; */
-/* 	display:flex; */
-/* 	flex-direction:column; */
-/* } */
-
-
-
+.chat-teamname-area-version2{
+	margin-left:36%;
+	width:40%;
+	position:absolute;
+}

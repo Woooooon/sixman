@@ -4,31 +4,29 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="messengerMapper">
 	
-<!-- 	<select id="selectChatFriendList" resultType="ChatCreateRoomMemberVo"> -->
+	<select id="selectChatFriendList" resultType="ChatCreateRoomMemberVo">
 		
-<!-- 		SELECT  -->
-<!-- 		MEMBER.NAME AS "이름",  -->
-<!-- 		(SELECT NAME -->
-<!-- 		FROM DEPARTMENT -->
-<!-- 		WHERE MEMBER.DEPT_NO=DEPARTMENT.NO -->
-<!-- 		)AS "팀" -->
-<!-- 		,  -->
-<!-- 		(SELECT NAME -->
-<!-- 		FROM DEPARTMENT -->
-<!-- 		WHERE MEMBER.TEAM_NO=DEPARTMENT.NO -->
-<!-- 		)AS "부서" -->
-<!-- 		,  -->
-<!-- 		(SELECT FILE_PATH -->
-<!-- 		FROM PROFILE_A -->
-<!-- 		WHERE PROFILE_A.MEMBER_NO=MEMBER.NO -->
-<!-- 		)AS "프로필사진" -->
-<!-- 		, position.position AS 직급 -->
-<!-- 		FROM MEMBER, PROFILE_A, position -->
-<!-- 		WHERE  -->
-<!-- 		MEMBER.ID='testfirst' AND  -->
-<!-- 		POSITION.NO = MEMBER.POSITION_NO  -->
+		SELECT 
+		MEMBER.NAME AS "이름", 
+		(SELECT NAME
+		FROM DEPARTMENT
+		WHERE MEMBER.DEPT_NO=DEPARTMENT.NO
+		)AS "팀"
+		, 
+		(SELECT NAME
+		FROM DEPARTMENT
+		WHERE MEMBER.TEAM_NO=DEPARTMENT.NO
+		)AS "부서"
+		, 
+		(SELECT FILE_PATH
+		FROM PROFILE_A
+		WHERE PROFILE_A.MEMBER_NO=MEMBER.NO
+		)AS "프로필사진"
+		, position.position AS 직급
+		FROM MEMBER, PROFILE_A, position
+		WHERE 
+		POSITION.NO = MEMBER.POSITION_NO 
 <!-- 		AND MEMBER.ID NOT IN('testfirst') -->
-<!-- 		AND MEMBER.ID NOT IN(#{loginMember.id}) -->
-<!-- 		; -->
-<!-- 	</select> -->
+		;
+	</select>
 </mapper>
