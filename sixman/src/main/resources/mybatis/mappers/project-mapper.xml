@@ -117,8 +117,29 @@
 	</select>
 	
 	<select id="selectsubMemberList" resultType="MemberVo">
-	
-	
+		SELECT
+		    M.NO
+		    ,M.ID
+		    ,M.NAME
+		    ,M.DEPT_NO
+		    ,M.TEAM_NO
+		    ,M.POSITION_NO
+		    ,P.POSITION AS POSITION_NAME
+		    ,A.RANK AS AUTHORIZE_NO
+		FROM MEMBER M
+		LEFT JOIN DEPARTMENT D ON D.NO = M.DEPT_NO
+		LEFT JOIN DEPARTMENT T ON D.DEPT_NO = M.TEAM_NO
+		LEFT JOIN POSITION P ON P.NO = M.POSITION_NO
+		LEFT JOIN AUTHORIZE A ON A.NO = M. AUTHORIZE_NO
+		WHERE M.RESIGNATION_YN = 'N'
+		<if test=" no != 5">
+		AND TEAM_NO = #{no}
+		AND AUTHORIZE_NO = '2'
+		</if>
+		<if test="no == 5">
+		AND DEPT_NO = #{no}
+		AND AUTHORIZE_NO = '2'
+		</if>
 	</select>
     
     
