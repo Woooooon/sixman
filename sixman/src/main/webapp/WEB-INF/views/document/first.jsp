@@ -63,8 +63,8 @@
 
 
 
-            <!--
-            <div class="list-item">
+            
+          <%--   <div class="list-item">
              <%
                 if(dvoList != null) for(DocumentVo dvo : dvoList){
                 pageContext.setAttribute("dvo",dvoList);
@@ -77,8 +77,8 @@
                <p>${dvoList.sendPay}</p>
                <p>${dvoList.state}</p>
             </c:forEach>
-            </div>
-        -->
+            </div> --%>
+      
             
           
            
