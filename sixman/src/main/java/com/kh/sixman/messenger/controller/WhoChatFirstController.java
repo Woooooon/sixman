@@ -25,7 +25,7 @@ public class WhoChatFirstController {
 	@ResponseBody
 	@GetMapping("chatwantfirst")
 //	public String method(HttpServletResponse resp) throws Exception {
-	public String method(HttpSession session){
+	public <List> String method(HttpSession session){
 		//DB
 //
 ////		 	MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
@@ -35,17 +35,19 @@ public class WhoChatFirstController {
 			
 //			String id = loginMember.getId();
 			
-			String name = "심영";
-			String teamName = "영업1팀";
-			String deptName = "영업부";
-			String profilePath = "no";
-			String position = "사원";
+//			String name = "심영";
+//			String teamName = "영업1팀";
+//			String deptName = "영업부";
+//			String profilePath = "no";
+//			String position = "사원";
+//			
+//			whoChatfirst.setName(name);
+//			whoChatfirst.setTeamName(teamName);
+//			whoChatfirst.setDeptName(deptName);
+//			whoChatfirst.setProfilePath(profilePath);
+//			whoChatfirst.setPosition(position);
 			
-			whoChatfirst.setName(name);
-			whoChatfirst.setTeamName(teamName);
-			whoChatfirst.setDeptName(deptName);
-			whoChatfirst.setProfilePath(profilePath);
-			whoChatfirst.setPosition(position);
+			System.out.println(chatWfs.chatfirst(whoChatfirst));;
 			
 			session.setAttribute("whoChatfirst", whoChatfirst);
 			
