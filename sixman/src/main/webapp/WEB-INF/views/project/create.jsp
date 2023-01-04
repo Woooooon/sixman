@@ -68,9 +68,6 @@
 	                                <div class="select">
 	                                    <span date-value="optValue" class="selected-option" id="memberName"><!-- 선택된 옵션 값이 출력되는 부분 --></span>
 	                                    <select name="memberNo">
-                                            <c:forEach items="${memberList }" var="member">
-                                                <option value="${member.no}">${member.name} ${member.positionName }</option>
-	                                        </c:forEach>
 	                                    </select>
 	                                </div>
 	                            </div>

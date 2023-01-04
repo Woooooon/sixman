@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.kh.sixman.admin.service.AdminMemberService;
+import com.kh.sixman.common.AuthorizeVo;
 import com.kh.sixman.dept.service.DeptService;
 import com.kh.sixman.dept.vo.DeptVo;
 import com.kh.sixman.member.service.MemberService;
@@ -42,6 +44,9 @@ public class ProjectController {
 	@Autowired
 	private MemberService memberService;
 	
+	@Autowired
+	private AdminMemberService adminMemberService;
+	
 	//프로젝트(화면)
 	@GetMapping("allprj")
 	public String allprj(HttpSession session) {
@@ -64,12 +69,15 @@ public class ProjectController {
 		
 		List<PositionVo> positionList = positionService.positionList();
 		List<DeptVo> deptList = deptService.daptList();
+		List<AuthorizeVo> authorizeList = adminMemberService.authorizeList();
 		List<MemberVo> memberList = ps.selectMemberList();
 		//List<MemberVo> memberListAll = memberService.selectMemberListAll();
 		
 		model.addAttribute("deptList", deptList);
 		model.addAttribute("positionList", positionList);
 		model.addAttribute("memberList", memberList);
+		model.addAttribute("authorizeList", authorizeList);
+		
 		log.info("==============");
 		String json = new Gson().toJson(memberList);
 		log.info("json : " +json);
@@ -99,21 +107,10 @@ public class ProjectController {
 //		ProjectVo prj = ps.selectOne(vo);
 //		session.setAttribute("prj", prj);
 		
-		
 		return "project/detail";
 	}
 	
-	
-	@PostMapping(value = "dept/memberlist", produces = "application/json; charset=utf8")
-	@ResponseBody
-	public String memberList(String no) {
-		
-		List<MemberVo> memberList = ps.selectMemberList(no);
-		Gson gson = new GsonBuilder().create();
-		String json = gson.toJson(memberList);
-		return json;
-		
-	}
+
 	
 
 }

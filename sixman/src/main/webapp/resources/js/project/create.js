@@ -74,7 +74,6 @@ function createMemberBox() {
 //팀 목록 조회하기
 $('select[name="deptNo"]').on('change', () => {
     $('select[name="teamNo"]').html('');
-    console.log($('select[name="deptNo"]').val());
     if ($('select[name="deptNo"]').val() != 1) {
         $.ajax({
             url: '/sixman/dept/sublist',
@@ -83,44 +82,82 @@ $('select[name="deptNo"]').on('change', () => {
                 no: $('select[name="deptNo"]').val(),
             },
             success: (teamList) => {
-                console.log('success!!!!');
+                console.log('팀 조회 성공');
                 teamList.forEach((element) => {
                     const option = document.createElement('option');
-                    option.addEventListener('click', ()=>{
-                        memberListAjax(element.teamNo);
-                    })
+                    console.log("옵션 생성 성공");
                     option.setAttribute('value', element.teamNo);
                     option.innerHTML = element.teamName;
                     $('select[name="teamNo"]').append(option);
                 });
+                memberListAjax();
             },
             error: (teamList) => {
-                console.log('hi');
+                console.log('팀 조회 에러');
             },
         });
     }
 });
 
+//멤버 목록 조회하기
+$('select[name="teamNo"]').on('change', () => {
+    $('select[name="memberNo"]').html('');
+    if ($('select[name="memberNo"]').val() != 1) {
+        $.ajax({
+            url: '/sixman/project/memberlist',
+            method: 'POST',
+            data: {
+                no: $('select[name="teamNo"]').val(),
+            },
+            success: (teamList) => {
+                console.log('멤버 조회 성공');
+                teamList.forEach((element) => {
+                    const option = document.createElement('option');
+                    console.log("멤버 옵션 생성 성공");
+                    option.setAttribute('value', element.no);
+                    option.innerHTML = element.name;
+                    $('select[name="memberNo"]').append(option);
+
+                });
+            },
+            error: (teamList) => {
+                console.log('멤버 조회 에러');
+            },
+        });
+    }
+});
+
+
 //팀에 속해 있는 멤버 목록 조회하기
-function memberListAjax(num){
+function memberListAjax(){
+    $('select[name="memberNo"]').html('');
+    const teamNo = $('select[name="teamNo"]').val();
+    const deptNo = $('select[name="deptNo"]').val();
+    let no = teamNo;
+
+    no = teamNo != null ? teamNo : deptNo 
+    console.log("팀 번호 : "+teamNo);
+    console.log("=====");
+    console.log("부서 번호 : "+deptNo);
     $.ajax({
-        url: '/sixman/dept/memberlist', //member url
+        url: '/sixman/project/memberlist',
         method: 'POST',
         data: {
-            no : num,
+            no: no
         },
         success: (teamList) => {
-            console.log('success!!!!');
+            console.log('멤버 조회 성공');
             teamList.forEach((element) => {
                 const option = document.createElement('option');
-                //member 정보
+                console.log("멤버 옵션 생성 성공");
                 option.setAttribute('value', element.no);
-                option.innerHTML = element.memberName;
+                option.innerHTML = element.name;
                 $('select[name="memberNo"]').append(option);
+
             });
         },
         error: (teamList) => {
-            console.log('hi');
+            console.log('멤버 옵션 조회 에러');
         },
     });
 }
