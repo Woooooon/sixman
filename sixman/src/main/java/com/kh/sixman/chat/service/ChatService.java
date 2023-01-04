@@ -3,6 +3,7 @@ package com.kh.sixman.chat.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,37 +34,52 @@ public class ChatService {
 		map.put("teamMember", teamMember);
 		map.put("memberAll", memberAll);
 		
-		return null;
+		return map;
 	}
 
 	public List<ChatRoomVo> getChatList(String no) {
 		List<ChatRoomVo> list =  chatDao.getChatList(sst, no);
 		for(ChatRoomVo vo : list) {
-			List<MemberVo> members = chatDao.getMemberInChat(sst, vo.getChatRoomNo());
+			Map<String, String> map = new HashMap<>();
+			map.put("loginNo", no);
+			map.put("no", vo.getChatRoomNo());
+			List<MemberVo> members = chatDao.getMemberInChat(sst, map);
 			
 			ChatRoomVo roomVo = chatDao.getChatLastMsg(sst, vo);
-			
-			String lastMsg = roomVo.getLastMsg();
-			String lastMsgTime = roomVo.getLastMsgTime();
-			String notReadCount = roomVo.getNotReadCount();
-			
+			if(roomVo!= null) {
+				String lastMsg = roomVo.getLastMsg();
+				String lastMsgTime = roomVo.getLastMsgTime();
+				String notReadCount = roomVo.getNotReadCount();
+				vo.setLastMsg(lastMsg);
+				vo.setLastMsgTime(lastMsgTime);
+				vo.setNotReadCount(notReadCount);
+			}
 			vo.setMembers(members);
-			vo.setLastMsg(lastMsg);
-			vo.setLastMsgTime(lastMsgTime);
-			vo.setNotReadCount(notReadCount);
+
 		}
 		return list;
 	}
+	
+	public ChatRoomVo getChatSetting(Map<String, String> map) {
+		return chatDao.getChat(sst, map);
+	}
+	
 
 	public ChatRoomVo getChat(Map<String, String> map) {
 		
 		ChatRoomVo vo = chatDao.getChat(sst, map);
 		List<ChatVo> chats = chatDao.getChats(sst, map);
-		List<MemberVo> members = chatDao.getMemberInChat(sst, vo.getChatRoomNo());
+		List<MemberVo> members = chatDao.getMemberInChat(sst, map);
+		
+		String loginNo = map.get("loginNo");
 		
 		for(ChatVo cv : chats) {
 			
-			String nonCount = chatDao.getNonCount(sst, cv);
+			Map<String, Object> tempMap = new HashMap<>();
+			tempMap.put("loginNo", loginNo);
+			tempMap.put("cv", cv);
+			
+			String nonCount = chatDao.getNonCount(sst, tempMap);
 			cv.setNonCount(nonCount);
 			
 			ChatVo temp = chatDao.getFile(sst, cv);
@@ -88,20 +104,24 @@ public class ChatService {
 		return vo;
 	}
 
-	public int createChat(String loginNo, List<String> no) {
-		return 0;
+	public int createChat(MemberVo loginMember, Set<String> no) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("loginMember", loginMember);
+		no.add(loginMember.getNo());
+		map.put("no", no);
+		return chatDao.createChat(sst, map);
 	}
 
 	public int chatOut(String loginNo, String no) {
 		return 0;
 	}
 
-	public int setFix(String loginNo, String no, String fix) {
-		return 0;
+	public int setFix(Map<String, String> map) {
+		return chatDao.setFix(sst, map);
 	}
 
-	public int setAlarm(String loginNo, String no, String alarm) {
-		return 0;
+	public int setAlarm(Map<String, String> map) {
+		return chatDao.setAlarm(sst, map);
 	}
 
 	public List<AttachmentVo> getFileList(String no) {
@@ -112,16 +132,30 @@ public class ChatService {
 		return null;
 	}
 
-	public int changeName(String loginNo, String no) {
-		return 0;
+	public int changeName(Map<String, String> map) {
+		return chatDao.changeName(sst, map);
 	}
 
-	public int bookMark(String loginNo, String no) {
-		return 0;
+	public int bookMark(Map<String, String> map) {
+		int result = 0;
+		if("Y".equals(map.get("bookMark"))) {
+			result = chatDao.inBookMark(sst, map);
+		}else {
+			result = chatDao.outBookMark(sst, map);
+		}
+		return result;
 	}
 
-	public int nonBookMark(String loginNo, String no) {
-		return 0;
+	public int chat(Map<String, String> map) {
+		return chatDao.chat(sst, map);
+	}
+
+	public int join(Map<String, String> map) {
+		return chatDao.join(sst, map);
+	}
+
+	public MemberVo profile(Map<String, String> map) {
+		return chatDao.profile(sst, map);
 	}
 
 }

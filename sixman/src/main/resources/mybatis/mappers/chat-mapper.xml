@@ -4,6 +4,58 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="chatMapper">
 
+	<insert id="">
+		INSERT INTO BOOKMARK
+		VALUES
+		(
+			SEQ_BOOKMARK_NO.NEXTVAL
+			, ${loginNo}
+			, ${no}
+		)
+	</insert>
+	
+	<delete id="">
+		DELETE BOOKMARK
+		WHERE KNO = ${no}
+		AND NO2 = ${loginNo}
+	</delete>
+
+	<update id="join">
+	
+		UPDATE CHAT_ROOM_SETTING
+		SET LAST_JOIN_TIME = SYSDATE
+		WHERE CHAT_ROOM_NO = ${no}
+		AND MEMBER_NO = ${loginNo}
+	
+	</update>
+	
+	<update id="changeName">
+	
+		UPDATE CHAT_ROOM_SETTING
+		SET NAME = #{value}
+		WHERE CHAT_ROOM_NO = ${no}
+		AND MEMBER_NO = ${loginNo}
+	
+	</update>
+	
+	<update id="setFix">
+	
+		UPDATE CHAT_ROOM_SETTING
+		SET FIX_YN = #{fix}
+		WHERE CHAT_ROOM_NO = ${no}
+		AND MEMBER_NO = ${loginNo}
+	
+	</update>
+	
+	<update id="setAlarm">
+	
+		UPDATE CHAT_ROOM_SETTING
+		SET ALARM_YN = #{alarm}
+		WHERE CHAT_ROOM_NO = ${no}
+		AND MEMBER_NO = ${loginNo}
+	
+	</update>
+
 	<select id="getChatList" resultType="ChatRoomVo">
 	
 		SELECT 
@@ -57,10 +109,37 @@
 	
 	<select id="getMemberInChat" resultType="MemberVo">
 		SELECT 
-		*
-		FROM CHAT_ROOM_SETTING
-		JOIN MEMBER ON MEMBER_NO = NO
+		    M.NO
+		    , M.NAME
+		    , D.NO AS DEPT_NO
+		    , D.NAME AS DEPT_NAME
+		    , T.NO AS TEAM_NO
+		    , T.NAME AS TEAM_NAME
+		    , M.POSITION_NO
+		    , P.POSITION AS POSITION_NAME
+		    , F.NO AS FILE_NO 
+		    , F.CHANGE_NAME as FILE_NAME
+		    , F.ORIGIN_NAME AS FILE_ORIGIN_NAME
+		FROM CHAT_ROOM_SETTING C
+		JOIN MEMBER M ON C.MEMBER_NO = M.NO
+		JOIN POSITION P ON P.NO = M.POSITION_NO
+		JOIN DEPARTMENT D ON D.NO = M.DEPT_NO
+		LEFT JOIN DEPARTMENT T ON T.NO = M.TEAM_NO
+		LEFT JOIN 
+		(
+		    SELECT 
+		        "NO",
+		        "ORIGIN_NAME",
+		        "MEMBER_NO",
+		        "CHANGE_NAME",
+		        "FILE_PATH",
+		        "ENROLL_DATE",
+		        "THUMB_YN"
+		    FROM PROFILE_A
+		    WHERE "THUMB_YN" = 'Y'
+		) F ON M.NO = F.MEMBER_NO
 		WHERE CHAT_ROOM_NO = ${no}
+		AND NOT M.NO = ${loginNo} 
 	</select>
 
 	<select id="getChat" resultType="ChatRoomVo">
@@ -102,22 +181,305 @@
 	
 	<select id="getNonCount" resultType="String">
 	    SELECT COUNT(*) AS NON_COUNT FROM CHAT_ROOM_SETTING
-	    WHERE LAST_JOIN_TIME <![CDATA[<]]> #{writeTime}
-	    AND CHAT_ROOM_NO = ${chatRoomNo}
+	    WHERE LAST_JOIN_TIME <![CDATA[<]]> #{cv.writeTime}
+	    AND CHAT_ROOM_NO = ${cv.chatRoomNo}
+	    AND NOT MEMBER_NO = ${loginNo}
 	</select>
 
 	<select id="getBookMark" resultType="MemberVo">
-		SELECT * FROM BOOKMARK B
-		JOIN MEMBER MM ON B.NO2 = MM.NO
-		WHERE KNO = ${no}
+		SELECT 
+		    M.NO
+		    , M.NAME
+		    , D.NO AS DEPT_NO
+		    , D.NAME AS DEPT_NAME
+		    , T.NO AS TEAM_NO
+		    , T.NAME AS TEAM_NAME
+		    , M.POSITION_NO
+		    , P.POSITION AS POSITION_NAME
+		    , F.NO AS FILE_NO 
+		    , F.CHANGE_NAME as FILE_NAME
+		    , F.ORIGIN_NAME AS FILE_ORIGIN_NAME
+		    , 'Y' AS BOOKMARK
+		FROM BOOKMARK B
+		JOIN MEMBER M ON M.NO = B.NO2
+		JOIN POSITION P ON P.NO = M.POSITION_NO
+		JOIN DEPARTMENT D ON D.NO = M.DEPT_NO
+		LEFT JOIN DEPARTMENT T ON T.NO = M.TEAM_NO
+		LEFT JOIN 
+		(
+		    SELECT 
+		        "NO",
+		        "ORIGIN_NAME",
+		        "MEMBER_NO",
+		        "CHANGE_NAME",
+		        "FILE_PATH",
+		        "ENROLL_DATE",
+		        "THUMB_YN"
+		    FROM PROFILE_A
+		    WHERE "THUMB_YN" = 'Y'
+		) F ON M.NO = F.MEMBER_NO
+		WHERE B.KNO = ${no}
 	</select>
 	
 	<select id="getTeamMember" resultType="MemberVo">
-		SELECT * FROM member
+		SELECT 
+		    M.NO
+		    , M.NAME
+		    , D.NO AS DEPT_NO
+		    , D.NAME AS DEPT_NAME
+		    , T.NO AS TEAM_NO
+		    , T.NAME AS TEAM_NAME
+		    , M.POSITION_NO
+		    , P.POSITION AS POSITION_NAME
+		    , F.NO AS FILE_NO 
+		    , F.CHANGE_NAME as FILE_NAME
+		    , F.ORIGIN_NAME AS FILE_ORIGIN_NAME
+		    , 'Y' AS BOOKMARK
+		FROM MEMBER M
+		JOIN POSITION P ON P.NO = M.POSITION_NO
+		JOIN DEPARTMENT D ON D.NO = M.DEPT_NO
+		LEFT JOIN DEPARTMENT T ON T.NO = M.TEAM_NO
+		LEFT JOIN 
+		(
+		    SELECT 
+		        "NO",
+		        "ORIGIN_NAME",
+		        "MEMBER_NO",
+		        "CHANGE_NAME",
+		        "FILE_PATH",
+		        "ENROLL_DATE",
+		        "THUMB_YN"
+		    FROM PROFILE_A
+		    WHERE "THUMB_YN" = 'Y'
+		) F ON M.NO = F.MEMBER_NO
 		where team_no = (select team_no from member where no = ${no})
+		AND M.NO IN (SELECT NO2 FROM BOOKMARK WHERE KNO = ${no})
+		UNION ALL
+		SELECT 
+		    M.NO
+		    , M.NAME
+		    , D.NO AS DEPT_NO
+		    , D.NAME AS DEPT_NAME
+		    , T.NO AS TEAM_NO
+		    , T.NAME AS TEAM_NAME
+		    , M.POSITION_NO
+		    , P.POSITION AS POSITION_NAME
+		    , F.NO AS FILE_NO 
+		    , F.CHANGE_NAME as FILE_NAME
+		    , F.ORIGIN_NAME AS FILE_ORIGIN_NAME
+		    , 'N' AS BOOKMARK
+		FROM MEMBER M
+		JOIN POSITION P ON P.NO = M.POSITION_NO
+		JOIN DEPARTMENT D ON D.NO = M.DEPT_NO
+		LEFT JOIN DEPARTMENT T ON T.NO = M.TEAM_NO
+		LEFT JOIN 
+		(
+		    SELECT 
+		        "NO",
+		        "ORIGIN_NAME",
+		        "MEMBER_NO",
+		        "CHANGE_NAME",
+		        "FILE_PATH",
+		        "ENROLL_DATE",
+		        "THUMB_YN"
+		    FROM PROFILE_A
+		    WHERE "THUMB_YN" = 'Y'
+		) F ON M.NO = F.MEMBER_NO
+		where team_no = (select team_no from member where no = ${no})
+		AND M.NO NOT IN (SELECT NO2 FROM BOOKMARK WHERE KNO = ${no})	
 	</select>
 	
 	<select id="getMemberAll" resultType="MemberVo">
-		SELECT * FROM member
+		SELECT 
+		    M.NO
+		    , M.NAME
+		    , D.NO AS DEPT_NO
+		    , D.NAME AS DEPT_NAME
+		    , T.NO AS TEAM_NO
+		    , T.NAME AS TEAM_NAME
+		    , M.POSITION_NO
+		    , P.POSITION AS POSITION_NAME
+		    , F.NO AS FILE_NO 
+		    , F.CHANGE_NAME as FILE_NAME
+		    , F.ORIGIN_NAME AS FILE_ORIGIN_NAME
+		    , 'Y' AS BOOKMARK
+		FROM MEMBER M
+		JOIN POSITION P ON P.NO = M.POSITION_NO
+		JOIN DEPARTMENT D ON D.NO = M.DEPT_NO
+		LEFT JOIN DEPARTMENT T ON T.NO = M.TEAM_NO
+		LEFT JOIN 
+		(
+		    SELECT 
+		        "NO",
+		        "ORIGIN_NAME",
+		        "MEMBER_NO",
+		        "CHANGE_NAME",
+		        "FILE_PATH",
+		        "ENROLL_DATE",
+		        "THUMB_YN"
+		    FROM PROFILE_A
+		    WHERE "THUMB_YN" = 'Y'
+		) F ON M.NO = F.MEMBER_NO
+		WHERE M.NO IN (SELECT NO2 FROM BOOKMARK WHERE KNO = ${no})
+		UNION ALL
+		SELECT 
+		    M.NO
+		    , M.NAME
+		    , D.NO AS DEPT_NO
+		    , D.NAME AS DEPT_NAME
+		    , T.NO AS TEAM_NO
+		    , T.NAME AS TEAM_NAME
+		    , M.POSITION_NO
+		    , P.POSITION AS POSITION_NAME
+		    , F.NO AS FILE_NO 
+		    , F.CHANGE_NAME as FILE_NAME
+		    , F.ORIGIN_NAME AS FILE_ORIGIN_NAME
+		    , 'N' AS BOOKMARK
+		FROM MEMBER M
+		JOIN POSITION P ON P.NO = M.POSITION_NO
+		JOIN DEPARTMENT D ON D.NO = M.DEPT_NO
+		LEFT JOIN DEPARTMENT T ON T.NO = M.TEAM_NO
+		LEFT JOIN 
+		(
+		    SELECT 
+		        "NO",
+		        "ORIGIN_NAME",
+		        "MEMBER_NO",
+		        "CHANGE_NAME",
+		        "FILE_PATH",
+		        "ENROLL_DATE",
+		        "THUMB_YN"
+		    FROM PROFILE_A
+		    WHERE "THUMB_YN" = 'Y'
+		) F ON M.NO = F.MEMBER_NO
+		WHERE M.NO NOT IN (SELECT NO2 FROM BOOKMARK WHERE KNO = ${no})
 	</select>
+	
+	<select id="memberOne" resultType="MemberVo">
+		SELECT 
+		    M.NO
+		    , M.NAME
+		    , D.NO AS DEPT_NO
+		    , D.NAME AS DEPT_NAME
+		    , T.NO AS TEAM_NO
+		    , T.NAME AS TEAM_NAME
+		    , M.POSITION_NO
+		    , P.POSITION AS POSITION_NAME
+		    , F.NO AS FILE_NO 
+		    , F.CHANGE_NAME as FILE_NAME
+		    , F.ORIGIN_NAME AS FILE_ORIGIN_NAME
+		    , 'Y' AS BOOKMARK
+		FROM MEMBER M
+		JOIN POSITION P ON P.NO = M.POSITION_NO
+		JOIN DEPARTMENT D ON D.NO = M.DEPT_NO
+		LEFT JOIN DEPARTMENT T ON T.NO = M.TEAM_NO
+		LEFT JOIN 
+		(
+		    SELECT 
+		        "NO",
+		        "ORIGIN_NAME",
+		        "MEMBER_NO",
+		        "CHANGE_NAME",
+		        "FILE_PATH",
+		        "ENROLL_DATE",
+		        "THUMB_YN"
+		    FROM PROFILE_A
+		    WHERE "THUMB_YN" = 'Y'
+		) F ON M.NO = F.MEMBER_NO
+		WHERE M.NO IN (SELECT NO2 FROM BOOKMARK WHERE KNO = ${loginNo})
+		AND M.NO = ${no}
+		UNION ALL
+		SELECT 
+		    M.NO
+		    , M.NAME
+		    , D.NO AS DEPT_NO
+		    , D.NAME AS DEPT_NAME
+		    , T.NO AS TEAM_NO
+		    , T.NAME AS TEAM_NAME
+		    , M.POSITION_NO
+		    , P.POSITION AS POSITION_NAME
+		    , F.NO AS FILE_NO 
+		    , F.CHANGE_NAME as FILE_NAME
+		    , F.ORIGIN_NAME AS FILE_ORIGIN_NAME
+		    , 'N' AS BOOKMARK
+		FROM MEMBER M
+		JOIN POSITION P ON P.NO = M.POSITION_NO
+		JOIN DEPARTMENT D ON D.NO = M.DEPT_NO
+		LEFT JOIN DEPARTMENT T ON T.NO = M.TEAM_NO
+		LEFT JOIN 
+		(
+		    SELECT 
+		        "NO",
+		        "ORIGIN_NAME",
+		        "MEMBER_NO",
+		        "CHANGE_NAME",
+		        "FILE_PATH",
+		        "ENROLL_DATE",
+		        "THUMB_YN"
+		    FROM PROFILE_A
+		    WHERE "THUMB_YN" = 'Y'
+		) F ON M.NO = F.MEMBER_NO
+		WHERE M.NO NOT IN (SELECT NO2 FROM BOOKMARK WHERE KNO = ${loginNo})
+		AND M.NO = ${no}
+	</select>
+	
+	<update id="createChat">
+		INSERT ALL
+		INTO CHAT_ROOM 
+		(
+			CHAT_ROOM_NO
+			, ADMIN, ENROLL_DATE
+			, DELETE_YN
+		)
+		VALUES 
+		(
+			SEQ_CHAT_ROOM_NO.NEXTVAL
+			, ${loginMember.no}
+			, SYSDATE
+			, 'N'
+		)
+		<foreach collection="no" item="n">
+			INTO CHAT_ROOM_SETTING 
+			(
+				CHAT_ROOM_NO
+				, MEMBER_NO
+				, FIX_YN
+				, ALARM_YN
+				, NAME
+				, LAST_JOIN_TIME
+			)
+			VALUES
+			(
+				SEQ_CHAT_ROOM_NO.NEXTVAL
+				, ${n}
+				, 'N'
+				, 'N'
+				, '${loginMember.name}의 메신저'
+				, SYSDATE
+			)
+		</foreach>
+		SELECT * FROM DUAL
+	</update>
+	
+	<insert id="chat">
+		INSERT INTO CHAT_CONTENT
+		(
+			CHAT_NUM
+			, MEMBER_NO
+			, CHAT_ROOM_NO
+			, CONTENT
+			, WRITE_TIME
+			, DELETE_YN
+		)
+		VALUES
+		(
+			SEQ_CHAT_CONTENT_NO.NEXTVAL
+			, ${no}
+			, ${room}
+			, #{msg}
+			, SYSDATE
+			, 'N'
+		)
+	</insert>
+	
 </mapper>

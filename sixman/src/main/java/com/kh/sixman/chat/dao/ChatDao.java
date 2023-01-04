@@ -25,8 +25,8 @@ public class ChatDao {
 		return sst.selectList("chatMapper.getMemberAll", no);
 	}
 
-	public List<MemberVo> getMemberInChat(SqlSessionTemplate sst, String chatRoomNo) {
-		return sst.selectList("chatMapper.getMemberInChat", chatRoomNo);
+	public List<MemberVo> getMemberInChat(SqlSessionTemplate sst, Map<String, String> map) {
+		return sst.selectList("chatMapper.getMemberInChat", map);
 	}
 
 	public List<ChatRoomVo> getChatList(SqlSessionTemplate sst, String no) {
@@ -49,8 +49,44 @@ public class ChatDao {
 		return sst.selectOne("chatMapper.getFile", cv);
 	}
 
-	public String getNonCount(SqlSessionTemplate sst, ChatVo cv) {
-		return sst.selectOne("chatMapper.getNonCount", cv);
+	public String getNonCount(SqlSessionTemplate sst, Map<String, Object> tempMap) {
+		return sst.selectOne("chatMapper.getNonCount", tempMap);
+	}
+
+	public int createChat(SqlSessionTemplate sst, Map<String, Object> map) {
+		return sst.update("chatMapper.createChat", map);
+	}
+
+	public int chat(SqlSessionTemplate sst, Map<String, String> map) {
+		return sst.insert("chatMapper.chat", map);
+	}
+
+	public int join(SqlSessionTemplate sst, Map<String, String> map) {
+		return sst.update("chatMapper.join", map);
+	}
+
+	public int changeName(SqlSessionTemplate sst, Map<String, String> map) {
+		return sst.update("chatMapper.changeName", map);
+	}
+
+	public int setFix(SqlSessionTemplate sst, Map<String, String> map) {
+		return sst.update("chatMapper.setFix", map);
+	}
+
+	public int setAlarm(SqlSessionTemplate sst, Map<String, String> map) {
+		return sst.update("chatMapper.setAlarm", map);
+	}
+
+	public int inBookMark(SqlSessionTemplate sst, Map<String, String> map) {
+		return sst.insert("chatMapper.inBookMark", map);
+	}
+	
+	public int outBookMark(SqlSessionTemplate sst, Map<String, String> map) {
+		return sst.delete("chatMapper.outBookMark", map);
+	}
+
+	public MemberVo profile(SqlSessionTemplate sst, Map<String, String> map) {
+		return sst.selectOne("chatMapper.memberOne", map);
 	}
 
 }

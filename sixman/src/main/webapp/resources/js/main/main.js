@@ -153,7 +153,7 @@ function alarmAjax() {
                         switch (vo.type) {
                             case 'MAIL':
                                 msg = `${vo.senderName}(이)가 메일을 보냈습니다. "${vo.title}"`;
-                                f = ()=>{location.href='';}
+                                f = ()=>{location.href='/sixman/mail/detail?no='+vo.no;}
                                 break;
                             case 'DOCUMENT':
                                 msg = `${vo.senderName}(이)가 결재를 요청하였습니다. "${vo.title}"`;

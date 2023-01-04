@@ -47,6 +47,16 @@
     
   	<beans:bean id="alarmHandler" class="com.kh.sixman.alarm.handler.AlarmHandler" />
   	
+ 	<websocket:handlers>
+		<websocket:mapping handler="chatHandler" path="/chatSocket" />
+		<websocket:handshake-interceptors>
+			<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
+		</websocket:handshake-interceptors>
+		<websocket:sockjs websocket-enabled="true"/>
+	</websocket:handlers>	
+    
+  	<beans:bean id="chatHandler" class="com.kh.sixman.chat.handler.ChatHandler" />
+  	
   	<interceptors>
 		<interceptor>
 			<mapping path="/**"/>

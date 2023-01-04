@@ -10,9 +10,23 @@ const pofilePanel = document.querySelector('#m-profile-panel');
 const optionInner = document.querySelector('#option-inner');
 
 function closeAll() {
+    if(chatSocket){
+        chatSocket.close();
+        chatSocket = null;
+        closeChat();
+        socket.close();
+        connectSC();
+    }
     panels.forEach(element => {
         element.style.display = "none";
     });
+}
+
+function closeChat() {
+    const httpRequest = new XMLHttpRequest();
+    httpRequest.open('post', '/sixman/closeChat');
+    httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
+    httpRequest.send();
 }
 
 const msgBtn = document.querySelector('#msg');
@@ -28,7 +42,7 @@ msgBtn.addEventListener('click', ()=>{
 
 });
 
-function titleEdit() {
+function titleEdit(no) {
     const titleEditBtn = document.querySelector('#edit-btn');
     const titleDoneBtn = document.querySelector('#done-btn');
     const titleInput = document.querySelector('#title-input');
@@ -50,6 +64,7 @@ function titleEdit() {
         let value = titleInput.placeholder;
         if(titleInput.value!=''){
             value = titleInput.value;
+            titleEditAjax(value, no);
         }
 
         titleInput.placeholder = '';
@@ -59,6 +74,12 @@ function titleEdit() {
     });
 }
 
+function titleEditAjax(value, no) {
+    const httpRequest = new XMLHttpRequest();
+    httpRequest.open('post', '/sixman/changeName');
+    httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
+    httpRequest.send(`value=${value}&no=${no}`);
+}
 
 //맴버리스트열기
 function openList() {
@@ -73,18 +94,18 @@ function openList() {
                     const teamMember = result.teamMember;
                     const memberAll = result.memberAll;
 
-                    const bookMarkBox = document.querySelector('#m-list-panel #ml-bookmark .ml-list-item');
-                    const teamBox = document.querySelector('#m-list-panel #ml-team .ml-list-item');
-                    const allBox = document.querySelector('#m-list-panel #ml-all .ml-list-item');
+                    const bookMarkBox = document.querySelector('#m-list-panel #ml-bookmark .ml-list');
+                    const teamBox = document.querySelector('#m-list-panel #ml-team .ml-list');
+                    const allBox = document.querySelector('#m-list-panel #ml-all .ml-list');
 
                     let text = '';
                     for(let vo of bookMarkMember){
                         text +=
                         `
                         <div class="ml-list-item">
-                            <img src="" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">
-                            <div>닉네임 <p>직급</p></div>
-                            <label class="material-symbols-outlined"> grade <input type="checkbox"></label>
+                            <img src="/sixman/resources/img/profile/${vo.fileName}" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">
+                            <div>${vo.name} <p>${vo.positionName}</p></div>
+                            <label class="material-symbols-outlined"> grade <input type="checkbox" onchange="bookMark('${vo.no}',this)" checked></label>
                         </div>
                         `;
                     };
@@ -92,12 +113,16 @@ function openList() {
 
                     text = '';
                     for(let vo of teamMember){
+                        let checked = '';
+                        if(vo.bookmark=='Y'){
+                            checked = "checked";
+                        }
                         text +=
                         `
                         <div class="ml-list-item">
-                            <img src="" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">
-                            <div>닉네임 <p>직급</p></div>
-                            <label class="material-symbols-outlined"> grade <input type="checkbox"></label>
+                            <img src="/sixman/resources/img/profile/${vo.fileName}" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">
+                            <div>${vo.name} <p>${vo.positionName}</p></div>
+                            <label class="material-symbols-outlined"> grade <input type="checkbox" onchange="bookMark('${vo.no}',this)" ${checked}></label>
                         </div>
                         `;
                     };
@@ -105,12 +130,16 @@ function openList() {
 
                     text = '';
                     for(let vo of memberAll){
+                        let checked = '';
+                        if(vo.bookmark=='Y'){
+                            checked = "checked";
+                        }
                         text +=
                         `
                         <div class="ml-list-item">
-                            <img src="" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">
-                            <div>닉네임 <p>직급</p></div>
-                            <label class="material-symbols-outlined"> grade <input type="checkbox"></label>
+                            <img src="/sixman/resources/img/profile/${vo.fileName}" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">
+                            <div>${vo.name} <p>${vo.positionName}</p></div>
+                            <label class="material-symbols-outlined"> grade <input type="checkbox" onchange="bookMark('${vo.no}',this)" ${checked}></label>
                         </div>
                         `;
                     };
@@ -125,16 +154,20 @@ function openList() {
     httpRequest.open('post', '/sixman/memberPage');
     httpRequest.responseType = "json";
     httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
-    // httpRequest.send();
+    httpRequest.send();
 
     listPanel.style.display = "block";
 }
 
-openChat();
-//채팅리스트열기
-function openChat() {
-    closeAll();
+function chatAjax(room, msg) {
+    const httpRequest = new XMLHttpRequest();
+    httpRequest.open('post', '/sixman/chat');
+    httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
+    httpRequest.send(`room=${room}&msg=${msg}`);
+}
 
+openChatAjax();
+function openChatAjax() {
     const httpRequest = new XMLHttpRequest();
     httpRequest.onreadystatechange = () => {
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
@@ -145,13 +178,22 @@ function openChat() {
                     
                     for(let vo of result){
                         const members = vo.members;
+                        if(members.length==0){continue}
                         if(members==null){break;}
                         const memberCount = members.length;
+
+                        if(!vo.lastMsgTime){vo.lastMsgTime = '';}
+                        if(!vo.lastMsg){vo.lastMsg = '';}
+                        let notReadCount = '';
+                        if(vo.notReadCount){
+                            notReadCount = `<div>${vo.notReadCount}</div>`;
+                        }
+
                         if(memberCount>1){
                             let img = '';
                             for (let index = 0; index < members.length; index++) {
                                 const element = members[index];
-                                img += `<img src="${element.이미지링크}" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">`;
+                                img += `<img src="/sixman/resources/img/profile/${element.fileName}" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">`;
                                 if(index == 3){break;}
                             }
                             text +=
@@ -167,7 +209,7 @@ function openChat() {
                                     </div>
                                     <div class="mc-list-item-main">
                                         <div>${vo.lastMsg}</div>
-                                        <div>${vo.notReadCount}</div>
+                                        ${notReadCount}
                                     </div>
                                 </div>
                             </div>
@@ -176,15 +218,15 @@ function openChat() {
                             text +=
                             `
                             <div class="mc-list-item" onclick="joinChat(${vo.chatRoomNo})">
-                                <img src="${vo.members[0].이미지링크}" onerror="this.style.visibility='hidden'">
+                                <img src="/sixman/resources/img/profile/${members[0].fileName}" onerror="this.style.visibility='hidden'">
                                 <div>
                                     <div class="mc-list-item-header">
-                                        <p>${vo.members[0].name}</p>
+                                        <p>${members[0].name}</p>
                                         <p>${vo.lastMsgTime}</p>
                                     </div>
                                     <div class="mc-list-item-main">
                                         <div>${vo.lastMsg}</div>
-                                        <div>${vo.notReadCount}</div>
+                                        ${notReadCount}
                                     </div>
                                 </div>
                             </div>
@@ -205,7 +247,11 @@ function openChat() {
     httpRequest.responseType = "json";
     httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
     httpRequest.send();
-
+}
+//채팅리스트열기
+function openChat() {
+    closeAll();
+    openChatAjax();
     chatListPanel.style.display = "block";
 }
 
@@ -222,18 +268,18 @@ function openCreate() {
                     const teamMember = result.teamMember;
                     const memberAll = result.memberAll;
 
-                    const bookMarkBox = document.querySelector('#m-create-panel #ml-bookmark .ml-list-item');
-                    const teamBox = document.querySelector('#m-create-panel #ml-team .ml-list-item');
-                    const allBox = document.querySelector('#m-create-panel #ml-all .ml-list-item');
+                    const bookMarkBox = document.querySelector('#m-create-panel #ml-bookmark .ml-list');
+                    const teamBox = document.querySelector('#m-create-panel #ml-team .ml-list');
+                    const allBox = document.querySelector('#m-create-panel #ml-all .ml-list');
 
                     let text = '';
                     for(let vo of bookMarkMember){
                         text +=
                         `
                         <div class="ml-list-item">
-                            <img src="" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">
-                            <div>닉네임 <p>직급</p></div>
-                            <input type="checkbox">
+                            <img src="/sixman/resources/img/profile/${vo.fileName}" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">
+                            <div>${vo.name} <p>${vo.positionName}</p></div>
+                            <input type="checkbox" name="member" value="${vo.no}">
                         </div>
                         `;
                     };
@@ -244,9 +290,9 @@ function openCreate() {
                         text +=
                         `
                         <div class="ml-list-item">
-                            <img src="" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">
-                            <div>닉네임 <p>직급</p></div>
-                            <input type="checkbox">
+                            <img src="/sixman/resources/img/profile/${vo.fileName}" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">
+                            <div>${vo.name} <p>${vo.positionName}</p></div>
+                            <input type="checkbox" name="member" value="${vo.no}">
                         </div>
                         `;
                     };
@@ -257,14 +303,15 @@ function openCreate() {
                         text +=
                         `
                         <div class="ml-list-item">
-                            <img src="" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">
-                            <div>닉네임 <p>직급</p></div>
-                            <input type="checkbox" value=${vo.no}>
+                            <img src="/sixman/resources/img/profile/${vo.fileName}" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">
+                            <div>${vo.name} <p>${vo.positionName}</p></div>
+                            <input type="checkbox" name="member" value="${vo.no}">
                         </div>
                         `;
                     };
                     allBox.innerHTML = text;
 
+                    createEvent();
                 } else {
 
                 }
@@ -274,15 +321,30 @@ function openCreate() {
     httpRequest.open('post', '/sixman/memberPage');
     httpRequest.responseType = "json";
     httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
-    // httpRequest.send();
+    httpRequest.send();
 
-    createEvent();
     createPanel.style.display = "block";
 }
 
 //채팅방만들기
 function createChat() {
-    openChat();
+    const panel = document.querySelector('#m-create-panel .ml-main');
+    const members = panel.querySelectorAll('input[name=member]');
+    const memberNo = [];
+    members.forEach(element => {
+        if(element.checked){
+            memberNo.push(element.value);
+        }
+    });
+
+    const httpRequest = new XMLHttpRequest();
+    httpRequest.open('post', '/sixman/createChat');
+    httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
+    httpRequest.send(`no=${memberNo}`);
+
+    setTimeout(() => {
+        openChat();
+    }, 500);
 }
 
 const fileBoxBtn = document.querySelectorAll('#containner-box div:not(.file-box)');
@@ -299,7 +361,9 @@ fileBoxBtn.forEach(element => {
 //채팅조인
 function joinChat(no) {
     closeAll();
-
+    joinChatSocket();
+    socket.close();
+    connectSC();
     const httpRequest = new XMLHttpRequest();
     httpRequest.onreadystatechange = () => {
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
@@ -307,73 +371,104 @@ function joinChat(no) {
                     const result = httpRequest.response;
                     const chats = result.chats;
 
-                    let text = '';
+                    const chatBox = document.querySelector('#m-chat-panel .ml-main');
+                    chatBox.innerHTML = '';
                     
                     let name = '';
                     let writeTime = '';
                     for (let index = 0; index < chats.length; index++) {
+                        let text = '';
                         const chat = chats[index];
+
+                        const div = document.createElement('div');
+                        div.classList.add('chat-item');
+                        const div2 = document.createElement('div');
+                        div2.classList.add('chat-name');
 
                         let right = '';
                         if(chat.isMe == 'Y'){
+                            div.classList.add('right');
+                            div2.classList.add('right');
                             right = "right";
                         }
 
                         let arrow = '';
                         if(name != chat.memberName){
-                            text += `<div class="chat-name ${right}">${chat.memberName}</div>`;
+                            div2.innerHTML = chat.memberName;
+                            chatBox.append(div2);
                             arrow = `<div class="chat-arrow-${right}"></div>`;
-                            name = chat.memberName;
                         }
+                        name = chat.memberName;
 
-                        let time = '';
-                        if(writeTime != chat.writeTime){
-                            time = `<div class="chat-date">${chat.writeTime}</div>`;
-                            writeTime = chat.writeTime;
+                        let time = `<div class="chat-date">${chat.writeTime}</div>`;
+                        if(writeTime == chat.writeTime){
+                            const dates = document.querySelectorAll('.chat-date');
+                            if(dates!=null && dates.length != 0){
+                                dates[dates.length-1].remove();
+                            }
                         }
+                        writeTime = chat.writeTime;
 
                         let count = '';
-                        if(chat.nonCount-1>0){
-                            count = `<div class="chat-count">${chat.nonCount-1}</div>`;
+                        if(chat.nonCount>0){
+                            count = `<div class="chat-count">${chat.nonCount}</div>`;
                         }
 
                         text += 
                         `
-                        <div class="chat-item ${right}">
-                            <div class="chat-msg">
-                                ${arrow}
-                                ${chat.content}
-                            </div>
-                            <div class="chat-info">
-                                ${count}
-                                ${time}
-                            </div>
+                        <div class="chat-msg">
+                            ${arrow}
+                            ${chat.content}
+                        </div>
+                        <div class="chat-info">
+                            ${count}
+                            ${time}
                         </div>
                         `
-                    }
 
-                    const chatBox = document.querySelector('#m-chat-panel .ml-main');
-                    chatBox.innerHTML = text;
+                        div.innerHTML = text;
+                        chatBox.append(div);
+                    }
 
                     const optionBox = document.querySelector('#m-option-panel #option-box');
                     const optionBtns = optionBox.querySelectorAll('input[type=checkbox]');  
                     optionBtns[0].checked = (result.fixYn == 'Y') ? true : false;
-                    optionBtns[0].checked = (result.alarmYn == 'Y') ? true : false;
+                    optionBtns[1].checked = (result.alarmYn == 'Y') ? true : false;
+
+                    optionBtns[0].onchange = ()=>{
+                        const no = result.chatRoomNo;
+                        if(optionBtns[0].checked){
+                            setFix(no, 'Y');
+                        }else{
+                            setFix(no, 'N');
+                        }
+                    }
+
+                    optionBtns[1].onchange = ()=>{
+                        const no = result.chatRoomNo;
+                        if(optionBtns[0].checked){
+                            setAlarm(no, 'Y');
+                        }else{
+                            setAlarm(no, 'N');
+                        }
+                    }
 
                     const members = result.members;
                     const memberCount = members.length;
 
                     let img = '';
+                    let roomName = result.name;
                     if(memberCount>1){
                         img += `<span class="chat-img-box">`;
                         for (let index = 0; index < members.length; index++) {
                             const element = members[index];
-                            img += `<img src="${element.이미지링크}" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">`;
+                            img += `<img src="/sixman/resources/img/profile/${element.fileName}" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">`;
                             if(index == 3){break;}
                         }
                         img += `</span>`;
                     }else{
-                        img = `<img src="${members[0].이미지링크}" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'" onclick="openProfile(${members[0].no})">`;
+                        roomName = members[0].name;
+                        img = `<img src="/sixman/resources/img/profile/${members[0].fileName}" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'" onclick="openProfile(${members[0].no})">`;
                     }
 
                     const chatTitle  = document.querySelector('#chat-title');
@@ -381,12 +476,18 @@ function joinChat(no) {
                     `
                     <span class="material-symbols-outlined" onclick="openChat()"> chevron_left </span>
                     ${img}
-                    <input id="title-input" type="text" value="${name}" readonly>
+                    <input id="title-input" type="text" value="${roomName}" readonly>
                     <span id="done-btn" class="material-symbols-outlined"> done </span>
                     <span id="edit-btn" class="material-symbols-outlined"> _edit </span>
                     `;
 
-                    titleEdit();
+                    const chatInput = document.querySelector('#chat-input');
+                    chatInput.name = result.chatRoomNo;
+
+                    titleEdit(result.chatRoomNo);
+
+                    chatPanel.style.display = "block";
+                    chatMain.scrollTop = chatMain.scrollHeight;
 
                 } else {
                     console.log("채팅 리스트 에이젝스 실패");
@@ -398,9 +499,6 @@ function joinChat(no) {
     httpRequest.responseType = "json";
     httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
     httpRequest.send(`no=${no}`);
-
-    chatPanel.style.display = "block";
-    chatMain.scrollTop = chatMain.scrollHeight; 
 }
 
 const searchInput = document.querySelector('#search-box input');
@@ -450,7 +548,51 @@ function closeOption() {
     }, 400);
 }
 
-function openProfile() {
+function openProfile(no) {
+
+    const httpRequest = new XMLHttpRequest();
+    httpRequest.onreadystatechange = () => {
+        if (httpRequest.readyState === XMLHttpRequest.DONE) {
+                if (httpRequest.status === 200) {
+
+                    const result = httpRequest.response;
+
+                    let checked = "";
+                    if(result.bookMark == 'Y'){
+                        checked = "checked";
+                    }
+
+                    let text = 
+                    `
+                    <div>
+                        <label class="material-symbols-outlined"> grade <input type="checkbox" onchange="bookMark('${result.no}',this)" ${checked}></label>
+                        <span class="material-symbols-outlined" onclick="closeProfile()"> close </span>
+                    </div>
+                    <div>
+                        <img src="/sixman/resources/img/profile/${result.fileName}">
+                        <div><p>${result.authorizeName}</p> <div>${result.teamName}</div></div>
+                        <div><p>${result.name}</p> <div>${result.positionName}</div></div>
+                    </div>
+                    <div>
+                        <span class="material-symbols-outlined" onclick="/sixman/mail/write?email=${result.email}"> mail </span>
+                        <span class="material-symbols-outlined"> group_add </span>
+                        <span class="material-symbols-outlined"> forum </span>
+                    </div>
+                    `
+
+                    pofilePanel.innerHTML = text;
+
+                } else {
+                    console.log("채팅 리스트 에이젝스 실패");
+                }
+        }
+    };
+
+    httpRequest.open('post', '/sixman/profile');
+    httpRequest.responseType = "json";
+    httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
+    httpRequest.send(`no=${no}`);
+
     pofilePanel.style.display = "block";
 }
 
@@ -492,7 +634,9 @@ function closeFileBox() {
 
 function createEvent() {
     const items =  document.querySelectorAll('#m-create-panel .ml-list-item');
+    console.log(items);
     const memberBox =  document.querySelector('#chat-member-list');
+    memberBox.innerHTML = "";
     items.forEach(element => {
         const input = element.querySelector('input[type=checkbox]');
 
@@ -516,4 +660,29 @@ function createEvent() {
             }
         });
     });
+}
+
+function setFix(no, fix) {
+    const httpRequest = new XMLHttpRequest();
+    httpRequest.open('post', '/sixman/setFix');
+    httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
+    httpRequest.send(`no=${no}&fix=${fix}`);
+}
+
+function setAlarm(no, alarm) {
+    const httpRequest = new XMLHttpRequest();
+    httpRequest.open('post', '/sixman/setAlarm');
+    httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
+    httpRequest.send(`no=${no}&alarm=${alarm}`);
+}
+
+function bookMark(no, obj) {
+    let mark = 'N';
+    if(obj.checked){
+        mark = 'Y';
+    }
+    const httpRequest = new XMLHttpRequest();
+    httpRequest.open('post', '/sixman/setAlarm');
+    httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
+    httpRequest.send(`no=${no}&bookMark=${mark}`);
 }
