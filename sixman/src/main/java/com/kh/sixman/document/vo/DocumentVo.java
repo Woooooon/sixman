@@ -24,12 +24,32 @@ public class DocumentVo {
     private String endDate;
     private String apNo;
     private String sendName;
-    private String aYn;
     private String dSave;
-    private String docNo;
+   
     private String refer;
     private String view;
+    
+    private String aYn;
+    private String docNo;
     private String state;
+    
+    private String Mno;
+    
+    private String aMan;
+    private String aNo;
+    private String pri;
+    
+   
+    private String originName;
+    private String changeName;
+    private String filePath;
+    
+    private String typeNo;
+    private String name;
+    
+    
+    
+    
     
 
     private List<AttachmentVo> fileList;
@@ -37,7 +57,7 @@ public class DocumentVo {
     private List<DocumentSendVo> paySender;
 
     private String search;
-    private String typeNo;
+    
     private String typeName;
 
 

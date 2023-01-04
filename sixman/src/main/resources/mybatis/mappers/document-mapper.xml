@@ -10,18 +10,20 @@
 
 	INSERT INTO DOCUMENT
         (
-        	"NO",
-        	"SEND_PAY",
-        	"AP_NO",
-        	"TITLE",
-        	CONTENT",
-        	ENROLL_DATE,
-        	MODIFY_DATE,
-        	START_DATE,
-        	END_DATE,
-        	"REFER",
-        	D_YN,
-        	D_SAVE
+        	"NO"
+        	,"SEND_PAY"
+        	,"AP_NO"
+        	,"TITLE"
+        	,"CONTENT"
+        	,ENROLL_DATE
+        	,MODIFY_DATE
+        	,START_DATE
+        	,END_DATE
+        	,"REFER"
+        	,D_YN
+        	,D_SAVE
+        	,"TYPE"
+        	
         	
         <!-- 
         	"STATE",
@@ -33,7 +35,7 @@
         (
         	SEQ_DOCUMENT_NO.NEXTVAL
         	,#{sendPay}
-        	,${apNo}
+        	,#{apNo}
             ,#{title}
             ,#{content}
             ,SYSDATE
@@ -43,6 +45,7 @@
             ,#{refer}
             ,'N'
             ,'N'
+           	,#{type}
             
 
            <!--  ,#{sendName} -->
@@ -52,11 +55,29 @@
            ,'N'
            ,#{sendName} -->
 
-            
-       
-            
         )
 </insert>
+<insert id="stateis">
+	INSERT INTO DOC_SAVE
+	(
+		"NO"
+		,"AP_NO"
+		,"DOC_NO"
+		,STATE
+		,A_YN
+	)
+	VALUES
+	(
+		SEQ_DOC_SAVE_NO.NEXTVAL
+		,#{apNo}
+		,#{docNo}
+		,'1'
+		,'N'
+	)
+	
+</insert>
+
+
 
 <select id="getNo" resultType="String">
     	SELECT "NO"
@@ -93,14 +114,14 @@
 	        </if>
 	        AND DELETE_YN = 'N' 
 		</trim>
-        order by enroll_date
+        order by enroll_date 
     </select>
     
-   <update id="viewCount">
+<!--    <update id="viewCount">
 		UPDATE DOCUMENT
 		SET "VIEW" = "VIEW" + 1
 		WHERE NO = ${no}
-	</update> 
+	</update>  -->
 	
 	<select id="selectOne" parameterType="String" resultType="DocumentVo">
     	select * from document
@@ -130,7 +151,19 @@
 		)
 	</select>
 
+<select id="docuselect"  resultType="DocumentVo">
+	 SELECT  
+		D.NO
+        ,S.DOC_NO
+		,D.ENROLL_DATE
+		,D.TYPE
+		,D.TITLE
+		,S.STATE
+	FROM
+		DOCUMENT D
+	LEFT OUTER JOIN DOC_SAVE S ON D.NO =S.DOC_NO
 
+</select>
 
 
 
