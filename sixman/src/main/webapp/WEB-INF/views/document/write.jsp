@@ -33,11 +33,13 @@
             <div class="writelist">
                 <div class="writeno"> 
                     <div>문서번호</div>
-                    <div type="text" name="no">${dvo.no}</div>
+                   
+                    <div></div>
                 </div>
                 <div class="writeno">
                     <div>기안일</div>
-                    <div>${dvo.enrollDate}</div>
+                   
+                    <div></div>
                 </div>
                 <div class="writeno">
                     <div>기안자</div>
@@ -69,7 +71,7 @@
         <div id="write-header">
             <div id="header-title">
                 <div class="header-item-title">제목</div>
-                <input name="title" type="text" value="${dvo.title}">
+                <input type="text" name="title">
             </div>
             <div id="file-box">
                 <div class="header-item-title">파일추가

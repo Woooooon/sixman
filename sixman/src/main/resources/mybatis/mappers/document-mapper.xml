@@ -23,13 +23,11 @@
         	,D_YN
         	,D_SAVE
         	,"TYPE"
-        	
-        	
+
         <!-- 
         	"STATE",
         	"TYPE"
         	 -->
-   
         )
         VALUES
         (
@@ -83,8 +81,12 @@
     	SELECT "NO"
     	FROM DOCUMENT
     	WHERE SEND_PAY = ${sendPay}
-    	AND "TITLE" = #{title}
+    	AND "ENROLL_DATE" = #{enrollDate}
     </select>
+
+
+
+
 
 <select id="selectCount" parameterType="String" resultType="int">
         SELECT COUNT(*)

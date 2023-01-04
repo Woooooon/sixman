@@ -52,7 +52,7 @@
                 name='dddd' 
                 value='selectall'
                 onclick='selectAll(this)'/> 
-                <!-- <span></span> -->
+               
                 <p>기안일</p>
                 <p>기안 양식</p>
                 <p>제목</p>
@@ -61,24 +61,20 @@
             </div>
             <div id="list-count" class="b-page-count hilight"></div>
 
-
-
-            
-          <%--   <div class="list-item">
-             <%
-                if(dvoList != null) for(DocumentVo dvo : dvoList){
-                pageContext.setAttribute("dvo",dvoList);
-                %> 
+            <div class="list-item">
+    
                 <c:forEach var="dvo" items="${dvoList}">
                 <input type="checkbox" name="dddd">
-               <p>${dvoList.enrollDate}</p>
-               <p>${dvoList.type}</p>
-               <p>${dvoList.title}</p>
-               <p>${dvoList.sendPay}</p>
-               <p>${dvoList.state}</p>
+               <p>${dvo.enrollDate}</p>
+               <p>${dvo.type}</p>
+               <p>${dvo.title}</p>
+               <p>${dvo.sendPay}</p>
+               <p>${dvo.state}</p>
             </c:forEach>
-            </div> --%>
-      
+
+            
+            </div>
+       
             
           
            

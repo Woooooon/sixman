@@ -45,26 +45,32 @@ public class DocumentDao {
 
 
 	public int viewCount(SqlSessionTemplate sst, String no) {
-		return sst.update("DocumentMapper.viewCount", no);
+		return sst.update("documentMapper.viewCount", no);
 		
 	}
 
 
 	public DocumentVo selectOne(SqlSessionTemplate sst, String no) {
-		return sst.selectOne("DocumentMapper.selectOne", no);
+		log.debug("dvo: " + no);
+		return sst.selectOne("documentMapper.selectOne", no);
 	}
 
 
 	public List<DocumentVo> nextAndPre(SqlSessionTemplate sst, String no) {
-		return sst.selectList("DocumentMapper.nextAndPre", no);
+		return sst.selectList("documentMapper.nextAndPre", no);
 	}
 
 	public int writesv(SqlSessionTemplate sst, DocumentVo dvo) {
-		return sst.insert("DocumentMapper.stateis",dvo);
+		return sst.insert("documentMapper.stateis",dvo);
 	}
 
 	public List<DocumentVo> selectDcList(SqlSessionTemplate sst) {
+		
 		return sst.selectList("documentMapper.docuselect");
 	}
+
+
+
+	
 
 }

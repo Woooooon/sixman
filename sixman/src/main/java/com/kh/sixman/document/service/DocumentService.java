@@ -17,6 +17,8 @@ import com.kh.sixman.document.vo.DocumentSaveVo;
 import com.kh.sixman.document.vo.DocumentVo;
 import com.kh.sixman.notice.vo.NoticeVo;
 
+
+
 @Service
 public class DocumentService {
 
@@ -34,9 +36,10 @@ public class DocumentService {
       int result1 = dao.write(sst, dvo);
 //      int result2 = dao.send(sst,dvo);
       
-      int result3 = dao.writesv(sst, dvo);
+//      int result3 = dao.writesv(sst, dvo);
       
       String no = dao.getDocuementNo(sst, dvo);
+      
       List<AttachmentVo> fileLists = dvo.getFileList();
       int result2 = 1;
       if(fileLists != null) {
@@ -50,8 +53,8 @@ public class DocumentService {
          
          result2= fdao.uploadAll(sst,map);
       }
-      	return result1  * result2 * result3;
-//      	return result1  * result3;
+//      	return result1  * result2 * result3;
+      	return result1  * result2;
    }
 
 
@@ -106,7 +109,14 @@ public List<DocumentVo> selectList(String keyword, RowBounds rb) {
 
 
 public List<DocumentVo> selectDocumentList() {
+	
 	return dao.selectDcList(sst);
 }
+
+
+
+
+
+
 
 }
