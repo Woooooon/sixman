@@ -4,7 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="chatMapper">
 
-<!-- 	<insert id="">
+	<insert id="inBookMark">
 		INSERT INTO BOOKMARK
 		VALUES
 		(
@@ -14,12 +14,12 @@
 		)
 	</insert>
 	
-	<delete id="">
+	<delete id="outBookMark">
 		DELETE BOOKMARK
 		WHERE KNO = ${no}
 		AND NO2 = ${loginNo}
 	</delete>
- -->
+
 	<update id="join">
 	
 		UPDATE CHAT_ROOM_SETTING
