@@ -129,112 +129,119 @@
 					<!-- 대화방 생성 첫번째 화면 -->
 
 					<!-- 누구와 대화하시겠습니까? -->
-					<div class="whochat-page-first" style="display:none">
-					
-						<div class="title-box">
-							<div class="title-text01">대화방 생성</div>
-						</div>
-
-						<div class='bottom-area' id='ba'></div>
-
-						<div id='who-chat'>누구와 대화하시겠습니까?</div>
-
-						<!-- 카탈로그, textarea, button -->
-
-						<div class="chatroom-list-space">
-							<!-- <div class="chatroom-introduce">대화방 목록</div> -->
-							<!-- <div class="textbox-messenger-area1"> -->
-
-							<div class="messenger-category01">
-								<select>
-									<option>직책</option>
-									<option>이름</option>
-									<option>팀명</option>
-								</select>
+						<div class="whochat-page-first" style="display:none">
+						
+							<div class="title-box">
+								<div class="title-text01">대화방 생성</div>
 							</div>
-							<input type="text" name="wantchatdata" id="wantchatdata">
-							<input type="submit" class="btn" value="검색">
-						</div>
-
-
-						<div class="text-messenger-settings">
-							<div class="textbox-messenger-area2">
-								<div class="showup" id="showup01">
-									<span class="material-symbols-outlined" style="font-size:300%" id="chatsetting-slide01">expand_more</span>
-									<div class="chatsetting-02-subtitle" id="subtitle1">전체 목록</div>
+	
+							<div class='bottom-area' id='ba'></div>
+	
+							<div id='who-chat'>누구와 대화하시겠습니까?</div>
+	
+							<!-- 카탈로그, textarea, button -->
+	
+							<div class="chatroom-list-space">
+								<!-- <div class="chatroom-introduce">대화방 목록</div> -->
+								<!-- <div class="textbox-messenger-area1"> -->
+	
+								<div class="messenger-category01">
+									<select>
+										<option>직책</option>
+										<option>이름</option>
+										<option>팀명</option>
+									</select>
 								</div>
-								<div class="team-people-data">
-	<!--  								<div class="team-whole-data"> -->
-	<!-- 									<div class="team-area">영업부</div> -->
-	<!-- 									<div class="team-name">영업 2팀</div> -->
+								<input type="text" name="wantchatdata" id="wantchatdata">
+								<input type="submit" class="btn" value="검색">
+							</div>
+	
+	
+							<div class="text-messenger-settings">
+								<div class="textbox-messenger-area2">
+									<div class="showup" id="showup01">
+										<span class="material-symbols-outlined" style="font-size:300%" id="chatsetting-slide01">expand_more</span>
+										<div class="chatsetting-02-subtitle" id="subtitle1">전체 목록</div>
+									</div>
+									<div class="team-people-data">
+		<!--  								<div class="team-whole-data"> -->
+		<!-- 									<div class="team-area">영업부</div> -->
+		<!-- 									<div class="team-name">영업 2팀</div> -->
+		<!-- 								</div> -->
+		
+									<div class="bottom-area2"></div>	
+									
+									<c:forEach items="${whoChatfirst}" var="mo">
+										
+										<div class="with-chat-data">
+											<div class="square" style="">
+												<img class="square-img" src="/sixman/resources/img/profile/${mo.profileName}" />
+											</div>
+											<div class="chat-deptname-area-version2" style="margin-left:6%;width:40%;position:absolute;">${mo.deptName}</div>
+	<%-- 										${whoChatfirst.deptName} --%>
+											<div class="chat-teamname-area-version2">${mo.teamName}</div>
+	<%-- 										${whoChatfirst.teamName} --%>
+											<div class="with-chat-name">${mo.name}</div>
+	<%-- 										${whoChatfirst.name} --%>
+											<div class="with-chat-grade">${mo.position}</div>
+	<%-- 										${whoChatfirst.position} --%>
+											<input type="checkbox" class="checkbox-square-one" name="withfriend01">
+										</div>
+										
+										<div class="bottom-area2"></div>
+										
+									</c:forEach>	
+										
+										
+										
+									</div>
+									
+								</div>
+	<!-- 							<div class="textbox-messenger-area3"> -->
+	<!-- 								<div class="showup" id="showup02"> -->
+	<!-- 									<span class="material-symbols-outlined" style="font-size:50px" id="chatsetting-slide01">expand_more</span> -->
+	<!-- 									<div class="chatsetting-02-subtitle" id="subtitle1">친구 목록</div> -->
 	<!-- 								</div> -->
-									<div class="bottom-area2"></div>
-									<div class="with-chat-data">
-										<div class="square" style=""></div>
-										<div class="chat-deptname-area-version2" style="margin-left:6%;width:40%;position:absolute;">${whoChatfirst.deptName}</div>
-										<div class="chat-teamname-area-version2">${whoChatfirst.teamName}</div>
-										<div class="with-chat-name">${whoChatfirst.name}</div>
-										<div class="with-chat-grade">${whoChatfirst.position}</div>
-										<input type="checkbox" class="checkbox-square-one" name="withfriend01">
+	<!-- 								<div class="team-people-data"> -->
+	<!-- 									<div class="team-whole-data"> -->
+	<!-- 										<div class="team-area">영업부</div> -->
+	<!-- 										<div class="team-name">영업 2팀</div> -->
+	<!-- 									</div> -->
+	<!-- 									<div class='bottom-area2' id='ba'></div> -->
+	<!-- 									<div class="with-chat-data"> -->
+	<!-- 										<div class="square" style=""></div> -->
+	<!-- 										<div class="with-chat-name">구기석</div> -->
+	<!-- 										<div class="with-chat-grade">부장</div> -->
+	<!-- 										<input type="checkbox" class="checkbox-square-one" name="withfriend01"> -->
+	<!-- 									</div> -->
+	<!-- 									<div class="bottom-area2"></div> -->
+	<!-- 									<div class="with-chat-data"> -->
+	<!-- 										<div class="square" style=""></div> -->
+	<!-- 										<div class="with-chat-name">구기석</div> -->
+	<!-- 										<div class="with-chat-grade">부장</div> -->
+	<!-- 										<input type="checkbox" class="checkbox-square-one" name="withfriend01"> -->
+	<!-- 									</div> -->
+	<!-- 									<div class="bottom-area2"></div> -->
+	<!-- 									<div class="with-chat-data"> -->
+	<!-- 										<div class="square" style=""></div> -->
+	<!-- 										<div class="with-chat-name">구기석</div> -->
+	<!-- 										<div class="with-chat-grade">부장</div> -->
+	<!-- 										<input type="checkbox" class="checkbox-square-one" name="withfriend01"> -->
+	<!--  									</div> -->
+	<!-- 									<div class="bottom-area2"></div> -->
+	<!-- 								</div> -->
+	<!-- 							</div> -->
+								<div class="chatting-button-list01">
+									<div class="chatbutton01">
+										<input type="submit" class="btn" value="이전 화면" id="makingroom-first-leave">
 									</div>
-									<div class="bottom-area2"></div>
-									<div class="with-chat-data">
-										<div class="square" style=""></div>
-										<div class="chat-deptname-area-version2" style="margin-left:6%;width:40%;position:absolute;">${whoChatfirst.deptName}</div>
-										<div class="chat-teamname-area-version2">${whoChatfirst.teamName}</div>
-										<div class="with-chat-name">${whoChatfirst.name}</div>
-										<div class="with-chat-grade">${whoChatfirst.position}</div>
-										<input type="checkbox" class="checkbox-square-one" name="withfriend01">
+									<div class="chatbutton01">
+										<input type="submit" class="btn" value="다음 화면" id="makingroom-first-next">
 									</div>
-									<div class="bottom-area2"></div>
 								</div>
-								
+								<div class="white_display_01"></div>
 							</div>
-							<div class="textbox-messenger-area3">
-								<div class="showup" id="showup02">
-									<span class="material-symbols-outlined" style="font-size:50px" id="chatsetting-slide01">expand_more</span>
-									<div class="chatsetting-02-subtitle" id="subtitle1">친구 목록</div>
-								</div>
-								<div class="team-people-data">
-									<div class="team-whole-data">
-										<div class="team-area">영업부</div>
-										<div class="team-name">영업 2팀</div>
-									</div>
-									<div class='bottom-area2' id='ba'></div>
-									<div class="with-chat-data">
-										<div class="square" style=""></div>
-										<div class="with-chat-name">구기석</div>
-										<div class="with-chat-grade">부장</div>
-										<input type="checkbox" class="checkbox-square-one" name="withfriend01">
-									</div>
-									<div class="bottom-area2"></div>
-									<div class="with-chat-data">
-										<div class="square" style=""></div>
-										<div class="with-chat-name">구기석</div>
-										<div class="with-chat-grade">부장</div>
-										<input type="checkbox" class="checkbox-square-one" name="withfriend01">
-									</div>
-									<div class="bottom-area2"></div>
-									<div class="with-chat-data">
-										<div class="square" style=""></div>
-										<div class="with-chat-name">구기석</div>
-										<div class="with-chat-grade">부장</div>
-										<input type="checkbox" class="checkbox-square-one" name="withfriend01">
- 									</div>
-									<div class="bottom-area2"></div>
-								</div>
-							</div>
-							<div class="chatting-button-list01">
-								<div class="chatbutton01">
-									<input type="submit" class="btn" value="이전 화면" id="makingroom-first-leave">
-								</div>
-								<div class="chatbutton01">
-									<input type="submit" class="btn" value="다음 화면" id="makingroom-first-next">
-								</div>
-							</div>
-							<div class="white_display_01"></div>
 						</div>
-					</div>
 
 					<!-- 채팅방 이름 생성 -->
 
@@ -1065,7 +1072,7 @@
 // 			qwe.onclick = function () {
 			function qwe_chat_onclick() {
 // 				alert('ㅇㅇ');
-
+				
 				$('.chatroomlist-first-page').hide();
 				$('.whochat-page-first').show();
 // 				function 
@@ -1074,7 +1081,11 @@
 				url:"/sixman/chatwantfirst",
 // 				type:"POST" ,
 				success:function(x){
-					alert(x);
+					alert(x.deptName);
+// 						$.each(x, function(index, value){
+// 							alert(index);
+// 							alert(value.name);
+// 						});
 				},
 				error:function(){
 						alert("연결x");

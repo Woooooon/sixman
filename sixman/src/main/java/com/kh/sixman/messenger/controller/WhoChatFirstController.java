@@ -1,6 +1,7 @@
 package com.kh.sixman.messenger.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -22,10 +23,11 @@ public class WhoChatFirstController {
 	@Autowired
 	private ChatWantFirstService chatWfs;
 	
+	
 	@ResponseBody
 	@GetMapping("chatwantfirst")
 //	public String method(HttpServletResponse resp) throws Exception {
-	public <List> String method(HttpSession session){
+	public List<ChatCreateRoomMemberVo> method(HttpSession session){
 		//DB
 //
 ////		 	MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
@@ -47,18 +49,18 @@ public class WhoChatFirstController {
 //			whoChatfirst.setProfilePath(profilePath);
 //			whoChatfirst.setPosition(position);
 			
-			System.out.println(chatWfs.chatfirst(whoChatfirst));;
+			List<ChatCreateRoomMemberVo> whoChatFirst = chatWfs.chatfirst(whoChatfirst);
+			System.out.println(whoChatFirst);
+			session.setAttribute("whoChatfirst", whoChatFirst);
 			
-			session.setAttribute("whoChatfirst", whoChatfirst);
-			
 //			
 //			
 //			
-			System.out.println(whoChatfirst);
+
 //			return "3";
 //			resp.getWriter().write("3");
 			
-			return "3";
+			return whoChatFirst;
 //			return chat;
 		
 			

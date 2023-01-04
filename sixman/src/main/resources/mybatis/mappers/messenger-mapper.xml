@@ -6,27 +6,26 @@
 	
 	<select id="selectChatFriendList" resultType="ChatCreateRoomMemberVo">
 		
-		SELECT 
-		MEMBER.NAME AS "이름", 
+		SELECT DISTINCT
+		MEMBER.NAME AS name, 
 		(SELECT NAME
 		FROM DEPARTMENT
 		WHERE MEMBER.DEPT_NO=DEPARTMENT.NO
-		)AS "팀"
+		)AS teamName
 		, 
 		(SELECT NAME
 		FROM DEPARTMENT
 		WHERE MEMBER.TEAM_NO=DEPARTMENT.NO
-		)AS "부서"
+		)AS deptName
 		, 
-		(SELECT FILE_PATH
+		(SELECT CHANGE_NAME
 		FROM PROFILE_A
 		WHERE PROFILE_A.MEMBER_NO=MEMBER.NO
-		)AS "프로필사진"
-		, position.position AS 직급
+		)AS profileName
+		, position.position AS position
 		FROM MEMBER, PROFILE_A, position
 		WHERE 
 		POSITION.NO = MEMBER.POSITION_NO 
-<!-- 		AND MEMBER.ID NOT IN('testfirst') -->
-		;
+<!-- 	AND MEMBER.ID NOT IN('testfirst') -->
 	</select>
 </mapper>
