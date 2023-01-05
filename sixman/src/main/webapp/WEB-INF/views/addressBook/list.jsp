@@ -13,10 +13,10 @@
     <body>
         <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
         <div class="share-modal close">
-            <form action="">
+            <form action="/sixman/address/send" method='POST'>
                 <div class="receiver">
                     <label for="">받는사람</label>
-                    <input type="text" name="sender"/>
+                    <input type="text" name="reciver"/>
                     <input type="submit" value="전 송" />
                     <span class="material-symbols-outlined" id="close-modal"> close </span>
                 </div>

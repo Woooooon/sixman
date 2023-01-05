@@ -1,32 +1,61 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css');
+html {
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    --main-color: #12887a;
+    --main-color-dark: #0e6d62;
+    --bo-20: rgba(0, 0, 0, 0.2);
+    --bo-40: rgba(0, 0, 0, 0.4);
+    --bo-60: rgba(0, 0, 0, 0.6);
+    --bo-80: rgba(0, 0, 0, 0.8);
+    font-family: Pretendard;
+    accent-color: #12887a;
+}
+body * {
+    box-sizing: border-box;
+}
+a {
+    text-decoration: none;
+}
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 1, 'wght' 200, 'GRAD' 0, 'opsz' 48;
+}
+
 main {
     width: 100vw;
     height: 100vh;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
 }
 
 .main-box-2 {
+    width: 100%;
+    height: 100%;
     display: flex;
-    width: 90%;
-    height: 90%;
     justify-content: center;
     align-items: center;
-    gap: 40px;
 }
 
 #dept-wrap {
-    width: 14%;
+    width: 25%;
     height: 100%;
+    border-radius: 3px;
+    box-shadow: 1px 1px 3px 1px var(--bo-40);
     padding: 10px;
 }
 
 #employee-wrap {
     display: flex;
     flex-direction: column;
-    width: 80%;
+    width: 100%;
     height: 100%;
-    gap: 40px;
+    border-radius: 3px;
+    box-shadow: 1px 1px 3px 1px var(--bo-40);
+    padding: 20px;
 }
 
 #employee-search {
@@ -35,7 +64,6 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px;
 }
 #employee-search form {
     width: 100%;
@@ -110,7 +138,9 @@ main {
 #employee-list {
     width: 100%;
     height: 90%;
-    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 #employee-detail {
@@ -192,17 +222,17 @@ main {
 }
 
 .header {
-    display: flex;
-    justify-content: space-between;
+    height: 5%;
 }
+
 .title {
     display: flex;
     align-items: flex-end;
-    margin: 10px 30px;
 }
 .title span {
     color: var(--main-color);
     margin-right: 7px;
+    font-size: 27px;
 }
 .title label {
     font-size: 18px;
@@ -210,37 +240,13 @@ main {
     margin-bottom: 2px;
 }
 
-.view-controller {
-    display: flex;
-    align-items: flex-end;
-    margin: 10px 5px;
-}
-
-.view-controller button {
-    padding: 0;
-    display: flex;
-    margin-right: 3px;
-    border: none;
-    background-color: rgb(246, 246, 246);
-}
-
-.view-controller button:hover span {
-    color: var(--main-color);
-    border: 1px solid #17a897;
-}
-
-.view-controller button > span {
-    font-size: 20px;
-    border: 1px solid var(--bo-40);
-    border-radius: 3px;
-}
-
 #employee-info-wrap {
     width: 100%;
-    height: 70%;
-    margin-bottom: 50px;
+    height: 90%;
 }
-
+#employee-info-wrap p {
+    margin: 0;
+}
 #sortation {
     font-weight: 600;
     border-top: 1px solid var(--bo-60);
@@ -248,32 +254,27 @@ main {
     width: 100%;
     height: 10%;
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr 1fr 2fr;
+    grid-template-columns: 0.5fr 1.5fr 1fr 1fr 1fr 1fr 2fr;
     cursor: pointer;
-    align-items: flex-end;
+    align-items: center;
     text-align: center;
-    padding-bottom: 10px;
+    font-size: 16px;
 }
 
 .list-item {
     width: 100%;
-    height: 9%;
+    height: 8.5%;
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr 1fr 2fr;
+    grid-template-columns: 0.5fr 1.5fr 1fr 1fr 1fr 1fr 2fr;
     border-bottom: 1px solid var(--bo-20);
     cursor: pointer;
-    align-items: flex-end;
+    align-items: center;
     text-align: center;
-    padding-bottom: 10px;
-    font-size: 15px;
+    font-size: 14px;
 }
 
 .list-item:hover {
     color: var(--main-color);
-}
-
-.list-item > input {
-    display: none;
 }
 
 .list-item > input:checked ~ p {
@@ -298,7 +299,6 @@ main {
 }
 .dept-list-wrap {
     width: 100%;
-    height: 88%;
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -348,25 +348,6 @@ main {
     object-fit: fill;
 }
 
-.dept-list-controller {
-    display: flex;
-    align-items: flex-end;
-    font-size: 13px;
-}
-
-.dept-list-controller a > span {
-    font-size: 17px;
-    color: var(--bo-60);
-}
-
-.dept-list-controller a {
-    text-decoration: none;
-}
-
-.dept-list-controller a:nth-child(2) {
-    margin: 0 5px;
-}
-
 #list-controller {
     width: 100%;
     height: 5%;
@@ -385,12 +366,32 @@ main {
 
 /* page */
 .page-box {
+    position: relative;
+    height: 5%;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
+    width: 100%;
     align-self: center;
 }
+
+#push {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 80px;
+    height: 30px;
+    border: none;
+    background-color: var(--main-color);
+    color: #fff;
+    cursor: pointer;
+}
+
+#push:hover {
+    background-color: #17a897;
+}
+
 .page-btn {
     display: flex;
     align-items: center;
@@ -417,12 +418,17 @@ main {
 
 /* 부서목록 */
 
+.dept-list ul {
+    padding: 0;
+    margin: 2px 0;
+}
+
 .dept-title {
+    height: 5%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     border-bottom: 1px solid var(--main-color-dark);
-    padding: 3px 0;
     margin-bottom: 10px;
 }
 
@@ -441,7 +447,6 @@ main {
     width: 70%;
     border: 1px solid var(--main-color);
     border-radius: 2px;
-    margin: 4px 0;
     transition: 0.2s ease-in-out;
 }
 
@@ -495,15 +500,17 @@ main {
     margin-left: 23px;
 }
 
-.memberList-item > a {
+.memberList-item > p {
     font-size: 12px;
     width: 100%;
     display: flex;
     align-items: center;
     text-decoration: none;
     color: #000;
+    margin: 0;
+    cursor: pointer;
 }
-.memberList-item > a > span {
+.memberList-item > p > span {
     margin-right: 4px;
     color: var(--main-color);
 }

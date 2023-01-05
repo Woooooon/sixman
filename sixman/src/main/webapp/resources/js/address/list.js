@@ -1,12 +1,32 @@
-const openPop = document.querySelector('input[name="sender"]');
 
+
+const openPop = document.querySelector('input[name="reciver"]');
+
+//자식창 오픈
 openPop.addEventListener('click', () => {
-    openWindowPop('/sixman/employee/popup', '조직도 팝업');
+    openWindowPop();
 });
-function openWindowPop(url, name) {
-    var options = 'top=10, left=10, width=500, height=600, status=no, menubar=no, toolbar=no, resizable=no';
-    window.open(url, name, options);
+
+function openWindowPop() {
+    window.open('/sixman/employee/popup', '조직도 팝업', 'top=0, left=8000, width=800, height=500, status=no, menubar=no, toolbar=no, resizable=no');
 }
+
+//자식창에서 멤버 객체 배열 받은 함수
+function childValue(memberArr) {  
+    let reciver = "";
+
+    for (let index = 0; index < memberArr.length; index++) {
+        reciver += memberArr[index].no;
+        if (!index==memberArr.length-1) {
+            reciver += ",";
+        }
+        document.querySelector('input[name="reciver"]').value = reciver;
+    }
+}
+
+
+
+
 
 const modal = document.querySelector('.share-modal');
 const share = document.querySelectorAll('.share');
@@ -46,6 +66,7 @@ function selectCardOne() {
 function shareCard(selectAll, checkbox) {
     const div = document.createElement('div');
     const parentElem = checkbox.closest('div');
+    const no = checkbox.value;
     const sortation = parentElem.querySelector('.card-sortation p').innerText;
     const company = parentElem.querySelector('#card-company').innerText;
     const name = parentElem.querySelector('#card-name').innerText;
@@ -54,6 +75,7 @@ function shareCard(selectAll, checkbox) {
 
     div.classList.add('list-item');
     div.innerHTML =
+        '<input type="checkbox" value="'+ no +'" name="addressNo"/>' +
         '<span class="material-symbols-outlined removeBtn">cancel_schedule_send</span>' +
         '<p>' +
         sortation +

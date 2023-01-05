@@ -5,17 +5,37 @@ const selectEmpEmail = document.querySelector('#emp-email');
 const selectEmpTeam = document.querySelector('#emp-team');
 const selectEmpDept = document.querySelector('#emp-dept');
 
-//개별선택
-selectMemberOne();
-function selectMemberOne() {
-    const selectMemberBox = document.querySelectorAll('input[name="memberInfo"]');
+//부모에게 객체 배열 전달
+const pushBtn = document.querySelector('#push');
+pushBtn.addEventListener('click', ()=>{
+    let memberArr = [];
+    const checkedMember = document.querySelectorAll('.selectOne:checked');
 
-    selectMemberBox.forEach((target) => {
-        target.addEventListener('change', () => {
-            selectMember(target);
-        });
+    checkedMember.forEach((target)=>{
+        let memberObj = {};
+        const parentElem = target.closest('div');
+        const no = target.value;
+        const name = parentElem.querySelector('.list-name').innerHTML;
+        const position = parentElem.querySelector('.list-position').innerHTML;
+        const dept = parentElem.querySelector('.list-dept').innerHTML;
+        const team = parentElem.querySelector('.list-team').innerHTML;
+        const email = parentElem.querySelector('.list-email').innerHTML;
+        
+        memberObj.no = no;
+        memberObj.name = name;
+        memberObj.position = position;
+        memberObj.dept = dept;
+        memberObj.team = team;
+        memberObj.email = email;
+        
+        memberArr.push(memberObj);
     });
-}
+
+    window.opener.childValue(memberArr);
+    window.close();
+});
+
+
 
 function selectMember(radio) {
     // const div = document.createElement('div');
@@ -41,68 +61,48 @@ function selectMember(radio) {
     selectEmpEmail.setAttribute('href', '/sixman/mail/write?email=' + email);
 }
 
-// //newbie slide
-// const slides = document.querySelector('.newbie-list');
-// const slide = document.querySelectorAll('.newbie-box');
-// let currentIdx = 0,
-//     slideCount = slide.length,
-//     slideWidth = 140.469,
-//     slideMargin = 30;
-// const prev = document.querySelector('#prev');
-// const next = document.querySelector('#next');
 
-// makeClone();
-// function makeClone() {
-//     slide.forEach((target) => {
-//         const cloneSlide = target.cloneNode(true);
-//         cloneSlide.classList.add('clone');
-//         slides.appendChild(cloneSlide);
-//     });
-//     slide.forEach((target) => {
-//         const cloneSlide = target.cloneNode(true);
-//         cloneSlide.classList.add('clone');
-//         slides.prepend(cloneSlide);
-//     });
+checkBoxToggleEvent('.selectAll', '.selectOne');
+//전체석택
+function checkBoxToggleEvent(all_selector, check_selector) {
+    const selectAll = document.querySelector(all_selector);
 
-//     updateWidth();
-//     setInitialPos();
-//     setTimeout(() => {
-//         slides.classList.add('animated');
-//     }, 100);
-// }
+    selectAll.addEventListener('change', function () {
+        checkAllToggle(all_selector);
+    });
 
-// function updateWidth() {
-//     const currentSlides = document.querySelectorAll('.newbie-box');
-//     const newSlideCount = currentSlides.length;
+    const checkBox = document.querySelectorAll(check_selector);
+    checkBox.forEach((el_check) => {
+        el_check.addEventListener('change', function () {
+            checkBoxToggle(all_selector, check_selector);
+        });
+    });
+}
 
-//     const newWidth = (slideWidth + slideMargin) * newSlideCount - slideMargin + 'px';
-//     slides.style.width = newWidth;
-// }
+function checkAllToggle(all_selector) {
+    const selectAll = document.querySelector(all_selector);
+    const none_check = document.querySelectorAll('.selectOne:not(:checked)');
+    const is_check = document.querySelectorAll('.selectOne:checked');
 
-// function setInitialPos() {
-//     const initialTranslatValue = -(slideWidth + slideMargin) * slideCount;
-//     slides.style.transform = 'translateX(' + initialTranslatValue + 'px)';
-// }
+    const is_Allcheck = selectAll.checked;
+    if (is_Allcheck === true) {
+        none_check.forEach((check) => {
+            check.click();
+        });
+    } else {
+        is_check.forEach((check) => {
+            check.click();
+        });
+    }
+}
 
-// next.addEventListener('click', () => {
-//     moveSlide(currentIdx + 1);
-// });
-
-// prev.addEventListener('click', () => {
-//     moveSlide(currentIdx - 1);
-// });
-
-// function moveSlide(num) {
-//     slides.style.left = -num * (slideWidth + slideMargin) + 'px';
-//     currentIdx = num;
-//     if (currentIdx == slideCount || currentIdx == -slideCount) {
-//         setTimeout(() => {
-//             slides.classList.remove('animated');
-//             slides.style.left = '0px';
-//             currentIdx = 0;
-//         }, 400);
-//         setTimeout(() => {
-//             slides.classList.add('animated');
-//         }, 500);
-//     }
-// }
+function checkBoxToggle(all_selector, check_selector) {
+    const selectAll = document.querySelector(all_selector);
+    const checkbox_ln = document.querySelectorAll(check_selector + ':enabled').length;
+    const check_ln = document.querySelectorAll(check_selector + ':checked:enabled').length;
+    if (checkbox_ln === check_ln) {
+        selectAll.checked = true;
+    } else {
+        selectAll.checked = false;
+    }
+}

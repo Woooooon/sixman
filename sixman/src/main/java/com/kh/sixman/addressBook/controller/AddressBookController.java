@@ -1,5 +1,6 @@
 package com.kh.sixman.addressBook.controller;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -92,6 +93,19 @@ public class AddressBookController {
 		return "addressBook/list";
 	}
 	
+	@PostMapping("send")
+	public String list(HttpSession session, String reciver, String[] addressNo) {
+		//로그인한 유저의 세션 가져오기
+		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+
+		//로그인 유저의 seqNo 가져오기
+		String no = loginMember.getNo();
+		
+		log.info("받는 사람 번호" + reciver);
+		log.info("전달 할 Address" + Arrays.toString(addressNo));
+
+		return "redirect:/addressBook/list";
+	}
 	
 	@GetMapping("receive")
 	public String receive() {
@@ -132,9 +146,10 @@ public class AddressBookController {
 
 		String rootPath = session.getServletContext().getRealPath("/");
 		
-		AttachmentVo cardFile = FileUnit.uploadFileOne(vo.getCardFile(), rootPath, "sixman/src/main/webapp/resources/img/address");
-		
-		vo.setCardFileInfo(cardFile);
+		if(vo.getCardFile().getSize() > 0) {
+			AttachmentVo cardFile = FileUnit.uploadFileOne(vo.getCardFile(), rootPath, "sixman/src/main/webapp/resources/img/address");
+			vo.setCardFileInfo(cardFile);
+		}
 		
 		int insertAddress = addressService.insertAddress(vo);
 		
@@ -330,4 +345,6 @@ public class AddressBookController {
 		
 		return "복원 요청을 완료했습니다.";
 	}
+	
+	
 }
