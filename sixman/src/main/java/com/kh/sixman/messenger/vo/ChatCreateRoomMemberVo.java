@@ -8,7 +8,8 @@ public class ChatCreateRoomMemberVo {
 	private String name;
 	private String teamName;
 	private String deptName;
-	private String profilePath;
+	private String profileName;
 	private String position;
+	private String profileNo;
 	
 }

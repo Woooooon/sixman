@@ -1064,3 +1064,7 @@ input[id="chat-setting-check02"]{
 	width:40%;
 	position:absolute;
 }
+
+.square>.square-img{
+	width:-webkit-fill-available;
+}
