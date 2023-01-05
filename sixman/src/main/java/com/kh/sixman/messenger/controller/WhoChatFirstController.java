@@ -54,12 +54,14 @@ public class WhoChatFirstController {
 	
 	@ResponseBody
 	@PostMapping("chatwantfirst2")
-	public String method2(HttpSession session, DefineChatNameVo dchatnvo) {
+	public int method2(HttpSession session, DefineChatNameVo dchatnvo) {
 		System.out.println(dchatnvo);
+		
+		
 //		
-//		makeroom.makechatroom(dchatnvo);
+		int result = makeroom.makechatroom(session, dchatnvo);
 ////		
-		return null;
+		return result;
 		
 	}
 

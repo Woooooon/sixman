@@ -31,5 +31,36 @@
 		WHERE 
 		POSITION.NO = MEMBER.POSITION_NO 
 <!-- 	AND MEMBER.ID NOT IN('testfirst') -->
+
 	</select>
+	
+	<insert id="makechatroom_joo">
+		INSERT INTO CHAT_ROOM
+		VALUES
+		(
+		    SEQ_CHAT_ROOM_NO.NEXTVAL 
+		    , #{loginMember.id}
+		    , SYSDATE
+		    , 'N'
+		)
+	</insert>
+	
+<!-- 	<insert id="makechatroomsetting"> -->
+<!-- 		INSERT INTO CHAT_ROOM_SETTING( -->
+<!-- 		    CHAT_ROOM_NO -->
+<!-- 		    , MEMBER_NO -->
+<!-- 		    , FIX_YN -->
+<!-- 		    , ALARM_YN -->
+<!-- 		    , NAME -->
+<!-- 		) -->
+<!-- 		VALUES -->
+<!-- 		( -->
+<!-- 		    SEQ_CHAT_ROOM_NO.NEXTVAL() -->
+<!-- 		    , 1 -->
+<!-- 		    , 2 -->
+<!-- 		    , 'N' -->
+<!-- 		    , 'N' -->
+<!-- 		) -->
+<!-- 	</insert> -->
+	
 </mapper>
