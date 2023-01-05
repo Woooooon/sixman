@@ -10,5 +10,6 @@ public class ChatCreateRoomMemberVo {
 	private String deptName;
 	private String profileName;
 	private String position;
+	private String profileNo;
 	
 }

@@ -185,7 +185,7 @@
 	<%-- 										${whoChatfirst.name} --%>
 											<div class="with-chat-grade">${mo.position}</div>
 	<%-- 										${whoChatfirst.position} --%>
-											<input type="checkbox" class="checkbox-square-one" name="withfriend01">
+											<input type="radio" class="checkbox-square-one" name="withfriend01" value="${mo.profileNo}">
 										</div>
 										
 										<div class="bottom-area2"></div>
@@ -258,7 +258,7 @@
 	
 	
 	
-						<input type="text" name="wantchatdata" class="define-roomname">
+						<input type="text" name="wantcreatechatroomname" class="define-roomname">
 						<div class="btn-height">
 							<input type="submit" class="btn" value="이전 화면" id="makingchatroom-second-leave">
 							<input type="submit" class="btn" value=" + 채팅방 생성" id="makingchatroom-second-go">
@@ -1081,7 +1081,7 @@
 				url:"/sixman/chatwantfirst",
 // 				type:"POST" ,
 				success:function(x){
-					alert(x.deptName);
+// 					alert(x.deptName);
 // 						$.each(x, function(index, value){
 // 							alert(index);
 // 							alert(value.name);
@@ -1101,20 +1101,23 @@
 				$('#qwe').show();
 				$('.chatroomlist-first-page').show();
 			}
-			
-			
-	
-	
-			
-		
-			
-			
+
 			<!-- 채팅방 생성 중 친구초대 화면에서 채팅방 이름 생성 화면으로 -->
 			const first_making_next = document.getElementById('makingroom-first-next');
 			first_making_next.onclick = function () {
+
+
 				$('.define-chatroomname').show();
 				$('.whochat-page-first').hide();
 			}
+			
+			
+			
+			
+			
+			
+			
+			
 			<!-- 채팅방 생성 중 이름 조정 화면에서 이전화면 -->
 			const second_makingchat_leave = document.getElementById('makingchatroom-second-leave');
 			second_makingchat_leave.onclick = function () {
@@ -1124,11 +1127,27 @@
 			
 			<!-- 채팅방 생성 중 이름 조정 화면에서 채팅방 목록 화면으로..  -->
 			const second_makingchat_go = document.getElementById('makingchatroom-second-go');
-			second_makingchat_go.onclick = function () {
-// 				alert('ㅇㅇ');
+			$('#makingchatroom-second-go').click(function() {
+				alert('ㅇㅇ');
+				const wantchat1 = $('input[name="withfriend01"]:checked').val();
+				alert(wantchat1);
+				const wantchat2 = $('.define-roomname').val();
+				alert(wantchat2);
+				
+// 				$.ajax({
+// 					url:"/sixman/chatwantfirst2",
+// // 					type:"POST",
+// 					success:function(x){
+// 						alert("연결o");
+// 					}
+// 					error:function(){
+// 						alert("연결x");
+// 					}
+// 				})
 				$('.define-chatroomname').hide();
 				$('.chatroomlist-first-page').show();
-			}
+			})
+// 				
 
 				
 // 			function change() {
@@ -1541,14 +1560,14 @@
 			})
 			
 			
-			$('#deletechatroom-no').onclick(function(){
-//  				$(".with-chat-data01").hide();
-//  				$(".with-chat-data01-1").show();
-				$("#with-chat-data01-1").hide();
- 				$("#with-chat-data01").show();
-// 				$('.chatroom-one-to-three-2').hide();
-			});
-
+			/* 	$('#deletechatroom-no').onclick(function(){
+	//  				$(".with-chat-data01").hide();
+	//  				$(".with-chat-data01-1").show();
+					$("#with-chat-data01-1").hide();
+	 				$("#with-chat-data01").show();
+	// 				$('.chatroom-one-to-three-2').hide();
+				});
+	 */
 // 			<!-- ajax -->
 			
 // 			$.ajax({

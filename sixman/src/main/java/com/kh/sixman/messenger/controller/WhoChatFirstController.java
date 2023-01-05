@@ -29,46 +29,28 @@ public class WhoChatFirstController {
 //	public String method(HttpServletResponse resp) throws Exception {
 	public List<ChatCreateRoomMemberVo> method(HttpSession session){
 		//DB
-//
-////		 	MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
-//
+
+		 	MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+
 			ChatCreateRoomMemberVo whoChatfirst = new ChatCreateRoomMemberVo();
 			
-			
+//			과거 코드 대표
 //			String id = loginMember.getId();
-			
 //			String name = "심영";
-//			String teamName = "영업1팀";
-//			String deptName = "영업부";
-//			String profilePath = "no";
-//			String position = "사원";
-//			
 //			whoChatfirst.setName(name);
-//			whoChatfirst.setTeamName(teamName);
-//			whoChatfirst.setDeptName(deptName);
-//			whoChatfirst.setProfilePath(profilePath);
-//			whoChatfirst.setPosition(position);
 			
 			List<ChatCreateRoomMemberVo> whoChatFirst = chatWfs.chatfirst(whoChatfirst);
 			System.out.println(whoChatFirst);
 			session.setAttribute("whoChatfirst", whoChatFirst);
 			
-//			
-//			
-//			
-
-//			return "3";
-//			resp.getWriter().write("3");
-			
 			return whoChatFirst;
-//			return chat;
+	}
+	
+	@ResponseBody
+	@GetMapping("chatwantfirst2")
+	public String method2(HttpSession session) {
+		return null;
 		
-			
-			
-			
-			
-			
-			
 	}
 
 }
