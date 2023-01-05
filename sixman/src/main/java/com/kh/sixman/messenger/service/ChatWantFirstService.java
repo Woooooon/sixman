@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.sixman.messenger.dao.WhoChatFirstDao;
 import com.kh.sixman.messenger.vo.ChatCreateRoomMemberVo;
+import com.kh.sixman.messenger.vo.DefineChatNameVo;
 
 @Service
 public class ChatWantFirstService {
@@ -22,5 +23,7 @@ public class ChatWantFirstService {
 		
 		return dao.whochatfirst(sst, vo);
 	}
+
+
 
 }

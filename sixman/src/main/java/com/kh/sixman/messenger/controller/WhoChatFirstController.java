@@ -9,12 +9,15 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.sixman.member.vo.MemberVo;
 import com.kh.sixman.messenger.service.ChatWantFirstService;
+import com.kh.sixman.messenger.service.MakeRoomFirstService;
 import com.kh.sixman.messenger.vo.ChatCreateRoomMemberVo;
+import com.kh.sixman.messenger.vo.DefineChatNameVo;
 
 //@RequestMapping("chat")
 @Controller
@@ -22,6 +25,9 @@ public class WhoChatFirstController {
 	
 	@Autowired
 	private ChatWantFirstService chatWfs;
+	
+	@Autowired
+	private MakeRoomFirstService makeroom;
 	
 	
 	@ResponseBody
@@ -47,8 +53,12 @@ public class WhoChatFirstController {
 	}
 	
 	@ResponseBody
-	@GetMapping("chatwantfirst2")
-	public String method2(HttpSession session) {
+	@PostMapping("chatwantfirst2")
+	public String method2(HttpSession session, DefineChatNameVo dchatnvo) {
+		System.out.println(dchatnvo);
+//		
+//		makeroom.makechatroom(dchatnvo);
+////		
 		return null;
 		
 	}

@@ -152,7 +152,7 @@
 										<option>팀명</option>
 									</select>
 								</div>
-								<input type="text" name="wantchatdata" id="wantchatdata">
+								<input type="text" name="wantchatdata-search" id="wantchatdata">
 								<input type="submit" class="btn" value="검색">
 							</div>
 	
@@ -1128,25 +1128,29 @@
 			<!-- 채팅방 생성 중 이름 조정 화면에서 채팅방 목록 화면으로..  -->
 			const second_makingchat_go = document.getElementById('makingchatroom-second-go');
 			$('#makingchatroom-second-go').click(function() {
-				alert('ㅇㅇ');
+// 				alert('ㅇㅇ');
 				const wantchat1 = $('input[name="withfriend01"]:checked').val();
 				alert(wantchat1);
 				const wantchat2 = $('.define-roomname').val();
 				alert(wantchat2);
 				
-// 				$.ajax({
-// 					url:"/sixman/chatwantfirst2",
-// // 					type:"POST",
-// 					success:function(x){
-// 						alert("연결o");
-// 					}
-// 					error:function(){
-// 						alert("연결x");
-// 					}
-// 				})
+				$.ajax({
+					url:"/sixman/chatwantfirst2",
+					type:"POST",
+					data: {
+						memberNo : wantchat1,
+						chatRoomNo : wantchat2
+					},
+					success:function(x){
+						alert("연결o");
+					},
+					error:function(){
+						alert("연결x");
+					}
+				});
 				$('.define-chatroomname').hide();
 				$('.chatroomlist-first-page').show();
-			})
+			});
 // 				
 
 				
