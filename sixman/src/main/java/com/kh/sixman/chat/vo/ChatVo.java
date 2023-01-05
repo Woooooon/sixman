@@ -16,6 +16,7 @@ public class ChatVo {
 	private String nonCount;
 	private String isMe;
 	
+	private String fileNo;
 	private String originName;
 	private String fileName;
 }

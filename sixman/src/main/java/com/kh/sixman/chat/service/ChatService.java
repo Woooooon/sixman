@@ -85,8 +85,10 @@ public class ChatService {
 			ChatVo temp = chatDao.getFile(sst, cv);
 			
 			if(temp!=null) {
+				String fileNo = temp.getFileNo();
 				String fileName = temp.getFileName();
 				String filePath = temp.getOriginName();	
+				cv.setFileNo(fileNo);
 				cv.setFileName(fileName);
 				cv.setOriginName(filePath);
 			}

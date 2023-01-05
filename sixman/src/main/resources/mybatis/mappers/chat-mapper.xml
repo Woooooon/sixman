@@ -174,10 +174,11 @@
 	
 	<select id="getFile" resultType="ChatVo">
 		SELECT 
+			NO AS FILE_NO,
 		    ORIGIN_NAME,
 		    CHANGE_NAME AS FILE_NAME
 		FROM CHAT_A
-		WHERE CHAT_NUM = ${chatNum}
+		WHERE CHAT_NO = ${chatNum}
 	</select>
 	
 	<select id="getNonCount" resultType="String">
@@ -486,7 +487,7 @@
 			INTO CHAT_A
 			(
 				NO
-				, CHAT_NUM
+				, CHAT_NO
 				, ORIGIN_NAME
 				, CHANGE_NAME
 				, FILE_PATH

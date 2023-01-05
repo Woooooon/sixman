@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="${path}/resources/css/chat.css">
     <script defer src="${path}/resources/js/main/main.js"></script>
     <script defer src="${path}/resources/js/main/chat.js"></script>
+    <script src="${path}/resources/js/file/file.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 </head>
 <body>
@@ -514,6 +515,8 @@
     function chatOnMessage(m) {
         const data = m.data;
 
+        console.log(data);
+
         if(data=='#####'){
             chatCountDown();
             return;
@@ -528,10 +531,10 @@
         const isfile = datas[5];
         const count = datas[6];
 
-        if(isfile=='Y'){
-            createChatRoom(room);
-            return;
-        }
+        // if(isfile=='Y'){
+        //     createChatRoom(room);
+        //     return;
+        // }
 
         if(no=='${loginMember.no}'){
             chatInHTML(name, msg, 'right', sysdate, count, isfile);
@@ -559,7 +562,7 @@
         const sysdate = getSysdate();
 
         const file = document.querySelector('#chat-file').files[0];
-
+        
         let formData = new FormData();
         if(file!=null&&typeof(file)!=undefined){
             formData.append('file', file);
@@ -567,9 +570,9 @@
         }
         formData.append('room', room);
         formData.append('msg', msg);
-
+        
         const beforeMsg = '${loginMember.no}#${loginMember.name}' + '#' + room + '#';
-        const afterMsg = '#' + sysdate + '#Y';
+        const afterMsg = '#' + sysdate;
         
         chatAjax(formData, beforeMsg, msg, afterMsg);
         
@@ -645,7 +648,7 @@
         if(isfile=="Y"){
             const fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/gi;
             let file = '';
-            if(chat.fileName.match(fileForm)){
+            if(msg.match(fileForm)){
                 file = '<img src=/sixman/resources/chat/'+msg+'>';
             }else{
                 file = '<span class="material-symbols-outlined"> upload_file </span><span>'+msg+'</span>';

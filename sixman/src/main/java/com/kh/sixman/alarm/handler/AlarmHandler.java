@@ -103,6 +103,7 @@ public class AlarmHandler extends TextWebSocketHandler{
 				
 				Map<String, Object> hs =  (Map<String, Object>) map.get("httpSession");
 				ChatRoomVo roomVo = (ChatRoomVo) hs.get("room");
+				if(roomVo==null) {continue;}
 				String room = roomVo.getChatRoomNo();
 								
 				WebSocketSession ss = (WebSocketSession) map.get("session");

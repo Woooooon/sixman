@@ -168,18 +168,16 @@ function chatAjax(formData, beforeMsg, msg, afterMsg) {
                 if (httpRequest.status === 200) {
                     const result = httpRequest.response;
 
-                    console.log(result);
-
-                    if(result.length){
+                    if(result.changeName){
                         const fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/gi;
                         if(result.changeName.match(fileForm)){
-                            chatSocket.send(beforeMsg + result.changeName + afterMsg);
+                            chatSocket.send(beforeMsg + result.changeName + afterMsg + "#Y");
                         }else{
-                            chatSocket.send(beforeMsg + result.originName + afterMsg);
+                            chatSocket.send(beforeMsg + result.originName + afterMsg + "#Y");
                         }
                     }
 
-                    chatSocket.send(beforeMsg + msg + afterMsg);
+                    chatSocket.send(beforeMsg + msg + afterMsg + "#N");
                 } else {
 
                 }
@@ -214,7 +212,7 @@ function openChatAjax() {
                         }
 
                         let fixed = '';
-                        if(vo.fixYn="Y"){
+                        if(vo.fixYn=="Y"){
                             fixed = '<span class="material-symbols-outlined"> push_pin </span>';
                         }
 
@@ -462,11 +460,11 @@ function createChatRoom(no) {
                             let file = '';
                             let fileDiv = document.createElement('div');
                             if(chat.fileName.match(fileForm)){
-                                file = `<img src=/sixman/resources/chat/${chat.fileName}>`;
+                                file = `<img onclick="openFile(${chat.fileNo}, this.cloneNode(true))" src=/sixman/resources/chat/${chat.fileName}>`;
                                 fileDiv.innerHTML = file;
                                 imgBox.append(fileDiv);
                             }else{
-                                file = `<span class="material-symbols-outlined"> upload_file </span><span>${chat.originName}</span>`;
+                                file = `<span onclick="openFile(${chat.fileNo}, this.cloneNode(true))" class="material-symbols-outlined"> upload_file </span><span>${chat.originName}</span>`;
                                 fileDiv.innerHTML = file;
                                 nonImgBox.append(fileDiv);
                             }
@@ -660,6 +658,25 @@ function closeChatMember() {
     setTimeout(() => {
         chatMemberPanel.style.display = "none";
     }, 400);
+}
+
+const filePanel = document.querySelector('#m-file-panel');
+function openFile(no, element){
+    filePanel.style.display = 'flex';
+
+    const fileInnerBox = document.querySelector('#file-inner-box');
+
+    fileInnerBox.innerHTML = "";
+    fileInnerBox.append(element);
+
+    const downloadBtn = document.querySelector('#file-footer div');
+    downloadBtn.onclick = ()=>{
+        download(no, "CHAT");
+    };
+}
+
+function closeFilePanel(){
+    filePanel.style.display = 'none';
 }
 
 function openProfile(no) {

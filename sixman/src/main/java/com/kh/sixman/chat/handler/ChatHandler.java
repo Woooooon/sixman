@@ -30,6 +30,8 @@ public class ChatHandler extends TextWebSocketHandler{
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		Map<String, Object> httpSession = getHTTPSession(session);
+		ChatRoomVo curRoom = (ChatRoomVo) httpSession.get("room");
+		MemberVo curMember = (MemberVo)httpSession.get("loginMember");
 		
 		log.info("Chat Socket 연결");
 		log.info("id : " + session.getId());
@@ -38,13 +40,14 @@ public class ChatHandler extends TextWebSocketHandler{
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("httpSession", httpSession);
 			map.put("session", session);
-			MemberVo curMember = (MemberVo)httpSession.get("loginMember");
 			userSessionsMap.put(curMember.getNo(), map);			
 		}
 		
 		Set<String> keySet = userSessionsMap.keySet();
 		
 		for(String key : keySet) {
+			if(key.equals(curMember.getNo())) {continue;}
+			
 			Map<String, Object> map = userSessionsMap.get(key);
 			
 			Map<String, Object> hs =  (Map<String, Object>) map.get("httpSession");
@@ -52,7 +55,8 @@ public class ChatHandler extends TextWebSocketHandler{
 			String room = roomVo.getChatRoomNo();
 			WebSocketSession ss = (WebSocketSession) map.get("session");
 			
-			if(room.equals(httpSession.get("room"))) {
+			if(room.equals(curRoom.getChatRoomNo())) {
+				System.out.println("보냄");
 				ss.sendMessage(new TextMessage("#####"));
 			}
 		}
