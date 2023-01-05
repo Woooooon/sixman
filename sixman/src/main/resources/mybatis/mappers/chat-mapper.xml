@@ -16,8 +16,8 @@
 	
 	<delete id="outBookMark">
 		DELETE BOOKMARK
-		WHERE KNO = ${no}
-		AND NO2 = ${loginNo}
+		WHERE KNO = ${loginNo}
+		AND NO2 = ${no}
 	</delete>
 
 	<update id="join">
@@ -67,6 +67,7 @@
 		    , LAST_JOIN_TIME
 		FROM CHAT_ROOM_SETTING
 		WHERE MEMBER_NO = ${no}
+		ORDER BY FIX_YN DESC
 	
 	</select>
 	
@@ -173,8 +174,8 @@
 	
 	<select id="getFile" resultType="ChatVo">
 		SELECT 
-		    FILE_PATH,
-		    ORIGIN_NAME AS FILE_NAME
+		    ORIGIN_NAME,
+		    CHANGE_NAME AS FILE_NAME
 		FROM CHAT_A
 		WHERE CHAT_NUM = ${chatNum}
 	</select>
@@ -462,7 +463,8 @@
 	</update>
 	
 	<insert id="chat">
-		INSERT INTO CHAT_CONTENT
+		INSERT ALL
+		INTO CHAT_CONTENT
 		(
 			CHAT_NUM
 			, MEMBER_NO
@@ -480,6 +482,27 @@
 			, SYSDATE
 			, 'N'
 		)
+		<if test="file!=null">
+			INTO CHAT_A
+			(
+				NO
+				, CHAT_NUM
+				, ORIGIN_NAME
+				, CHANGE_NAME
+				, FILE_PATH
+				, ENROLL_DATE
+			)
+			VALUES
+			(
+				SEQ_CHAT_A_NO.NEXTVAL,
+				SEQ_CHAT_CONTENT_NO.NEXTVAL,
+				#{file.originName},
+				#{file.changeName},
+				#{file.filePath},
+				SYSDATE
+		)
+		</if>
+		select * from dual
 	</insert>
 	
 </mapper>

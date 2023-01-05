@@ -42,14 +42,15 @@ public class ChatController {
 		return (MemberVo) session.getAttribute("loginMember");
 	}
 	
-	@PostMapping(value = "chat")
-	public void chat(String room, String msg, MultipartFile file, HttpSession session) {
+	@PostMapping(value = "chat", produces = "application/json; charset=utf8")
+	public String chat(String room, String msg, MultipartFile file, HttpSession session) {
 		String no = getLoginMember(session).getNo();
 		Map<String, Object> map = new HashMap<>();
 		
+		AttachmentVo vo = null;
 		if(file!=null) {
 			String rootPath = session.getServletContext().getRealPath("/");
-			AttachmentVo vo = FileUnit.uploadFileOne(file, rootPath, "sixman/src/main/webapp/resources/chat");
+			vo = FileUnit.uploadFileOne(file, rootPath, "sixman/src/main/webapp/resources/chat");
 			map.put("file", vo);
 		}
 		
@@ -57,6 +58,14 @@ public class ChatController {
 		map.put("msg", msg);
 		map.put("no", no);
 		chatService.chat(map);
+		
+		Map<String, String> result = new HashMap<>();
+		if(vo!=null) {
+			result.put("changeName", vo.getChangeName());
+			result.put("originName", vo.getOriginName());
+		}
+				
+		return getJson(result);
 	}
 	
 	@PostMapping(value = "memberPage", produces = "application/json; charset=utf8")
@@ -64,7 +73,6 @@ public class ChatController {
 		String no = getLoginMember(session).getNo();
 		
 		Map<String, Object> map = chatService.getMember(no);
-		System.out.println(map);
 
 		return getJson(map);
 	}
@@ -105,20 +113,6 @@ public class ChatController {
 		map.put("no", no);
 		int result = chatService.join(map);
 		session.removeAttribute("room");
-	}
-	
-	@PostMapping(value = "getImgList", produces = "application/json; charset=utf8")
-	public String getImgList(String no) {
-		
-		List<AttachmentVo> list = chatService.getImgList(no);
-		return getJson(list);		
-	}
-	
-	@PostMapping(value = "getFileList", produces = "application/json; charset=utf8")
-	public String getFileList(String no) {
-		
-		List<AttachmentVo> list = chatService.getFileList(no);
-		return getJson(list);		
 	}
 	
 	@PostMapping(value = "createChat")
@@ -196,7 +190,7 @@ public class ChatController {
 		map.put("no", no);
 		MemberVo vo = chatService.profile(map);
 		if(vo==null) {
-			log.error("setAlarm 실패");
+			log.error("profile 실패");
 			return null;
 		}
 		return getJson(vo);

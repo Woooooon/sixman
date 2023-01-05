@@ -8,11 +8,11 @@ import java.util.Set;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.sixman.chat.dao.ChatDao;
 import com.kh.sixman.chat.vo.ChatRoomVo;
 import com.kh.sixman.chat.vo.ChatVo;
-import com.kh.sixman.common.AttachmentVo;
 import com.kh.sixman.member.vo.MemberVo;
 
 @Service
@@ -83,17 +83,17 @@ public class ChatService {
 			cv.setNonCount(nonCount);
 			
 			ChatVo temp = chatDao.getFile(sst, cv);
+			
 			if(temp!=null) {
 				String fileName = temp.getFileName();
-				String filePath = temp.getFilePath();	
+				String filePath = temp.getOriginName();	
 				cv.setFileName(fileName);
-				cv.setFilePath(filePath);
+				cv.setOriginName(filePath);
 			}
 			
 			if(cv.getMemberNo().equals(map.get("loginNo"))) {
 				cv.setIsMe("Y");
 			}
-			
 			cv.setWriteTime(cv.getWriteTime().substring(2, 16));
 			
 		}
@@ -124,14 +124,6 @@ public class ChatService {
 		return chatDao.setAlarm(sst, map);
 	}
 
-	public List<AttachmentVo> getFileList(String no) {
-		return null;
-	}
-
-	public List<AttachmentVo> getImgList(String no) {
-		return null;
-	}
-
 	public int changeName(Map<String, String> map) {
 		return chatDao.changeName(sst, map);
 	}
@@ -146,6 +138,7 @@ public class ChatService {
 		return result;
 	}
 
+	@Transactional
 	public int chat(Map<String, Object> map) {
 		return chatDao.chat(sst, map);
 	}

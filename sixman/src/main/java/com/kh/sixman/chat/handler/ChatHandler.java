@@ -33,8 +33,6 @@ public class ChatHandler extends TextWebSocketHandler{
 		
 		log.info("Chat Socket 연결");
 		log.info("id : " + session.getId());
-		log.info("loginMember : " + httpSession);//현재 접속한 사람
-		log.info("---------------------------------------------");
 
 		if(httpSession.get("loginMember")!=null) {
 			Map<String, Object> map = new HashMap<String, Object>();
@@ -68,7 +66,6 @@ public class ChatHandler extends TextWebSocketHandler{
 		
 		log.info("Chat Socket 종료");
 		log.info("id : " + session.getId());//현재 접속한 사람
-		log.info("---------------------------------------------");
 		
 		if(curMember!=null) {
 			userSessionsMap.remove(curMember.getNo());			
@@ -85,7 +82,8 @@ public class ChatHandler extends TextWebSocketHandler{
 		String msg = message.getPayload();
 		String msgs[] = msg.split("#");
 		
-		String roomNo = msgs[2];
+		String roomNo = msgs[2];	
+		
 		
 		int inMemberCount = -1;
 		Set<String> keySet = userSessionsMap.keySet();

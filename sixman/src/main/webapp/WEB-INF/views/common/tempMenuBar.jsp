@@ -154,11 +154,6 @@
                             사진보관함
                         </div>
                         <div class="file-box">
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
 
                         </div>
                         <div>
@@ -168,6 +163,32 @@
                         <div class="file-box">
 
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="m-chat-member-panel" class="m-inner">
+                <div id="member-inner">
+                    <div id="option-header">
+                        <span class="material-symbols-outlined" onclick="closeChatMember()"> chevron_left </span>
+                        <div>Members</div>
+                    </div>
+                    <div id="member-inner-box">
+
+                    </div>
+                </div>
+            </section>
+
+            <section id="m-file-panel" class="m-inner">
+                <div id="file-inner">
+                    <div id="file-header">
+                        <span class="material-symbols-outlined" onclick="closeFilePanel()"> close </span>
+                    </div>
+                    <div id="file-inner-box">
+                        <div></div>
+                    </div>
+                    <div id="file-footer">
+                        <div class="btn">다운로드</div>
                     </div>
                 </div>
             </section>
@@ -188,7 +209,13 @@
                     <span class="material-symbols-outlined" onclick="search()"> arrow_right_alt </span>
                 </div>
                 <article class="ml-main">
-
+                    <div class="chat-item right">
+                        <div class="chat-msg"><img src="" alt=""></div>
+                        <div class="chat-info">
+                            <div class="chat-count">2</div>
+                            <div class="chat-date">23-01-05 10:01</div>
+                        </div>
+                    </div>
                 </article>
                 <article class="ml-footer">
                     <label for="chat-file" class="material-symbols-outlined"> attach_file </label>
@@ -198,7 +225,7 @@
                 </article>
                 <div id="chat-file-box">
                     <span class="material-symbols-outlined" onclick="closeFileBox()"> close </span>
-                    <img id="preview"/>
+                    <div id="preview"></div>
                 </div>
             </section>
 
@@ -309,9 +336,9 @@
 
     menuMap.set("주소록", [
         {icon: "contacts", title: "주소록"},
-        {title: "내 주소록", url: "${path}/sixman/address"},
-        {title: "주소록 추가", url: "${path}/sixman/add"},
-        {title: "주소록 받아오기", url: "${path}/sixman/receive"}
+        {title: "내 주소록", url: "${path}/address"},
+        {title: "주소록 추가", url: "${path}/add"},
+        {title: "주소록 받아오기", url: "${path}/receive"}
     ]);
 
     menuMap.set("일정", [
@@ -483,6 +510,7 @@
     }
 
     //메세지받아라
+    let fileSrc = '';
     function chatOnMessage(m) {
         const data = m.data;
 
@@ -497,12 +525,18 @@
         const room = datas[2];
         const msg = datas[3];
         const sysdate = datas[4];
-        const count = datas[5];
+        const isfile = datas[5];
+        const count = datas[6];
+
+        if(isfile=='Y'){
+            createChatRoom(room);
+            return;
+        }
 
         if(no=='${loginMember.no}'){
-            chatInHTML(name, msg, 'right', sysdate, count);
+            chatInHTML(name, msg, 'right', sysdate, count, isfile);
         }else{
-            chatInHTML(name, msg, null, sysdate, count);
+            chatInHTML(name, msg, null, sysdate, count, isfile);
         }
 
     }
@@ -524,9 +558,21 @@
         const msg = chatInput.value;
         const sysdate = getSysdate();
 
-        chatAjax(room, msg);
+        const file = document.querySelector('#chat-file').files[0];
+
+        let formData = new FormData();
+        if(file!=null&&typeof(file)!=undefined){
+            formData.append('file', file);
+            closeFileBox();
+        }
+        formData.append('room', room);
+        formData.append('msg', msg);
+
+        const beforeMsg = '${loginMember.no}#${loginMember.name}' + '#' + room + '#';
+        const afterMsg = '#' + sysdate + '#Y';
         
-        chatSocket.send('${loginMember.no}#${loginMember.name}' + '#' + room + '#' + msg + '#' + sysdate);
+        chatAjax(formData, beforeMsg, msg, afterMsg);
+        
         sendMsg('${loginMember.name}', '"'+msg+'" '+sysdate, 'CHAT', room);
         chatInput.value = '';
     }
@@ -551,7 +597,7 @@
         return sysdate;
     }
     
-    function chatInHTML(name, msg, right, sysdate, lastCount) {
+    function chatInHTML(name, msg, right, sysdate, lastCount, isfile) {
         const names = document.querySelectorAll('.chat-name');
         const chatBox = document.querySelector('#m-chat-panel .ml-main');
         let lastName = '';
@@ -596,9 +642,20 @@
             count = '<div class="chat-count">'+lastCount+'</div>';
         }
 
-        div.innerHTML = '<div class="chat-msg">' + arrow + msg + '</div><div class="chat-info">' + count + time + '</div>';
-
-        chatBox.append(div);
+        if(isfile=="Y"){
+            const fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/gi;
+            let file = '';
+            if(chat.fileName.match(fileForm)){
+                file = '<img src=/sixman/resources/chat/'+msg+'>';
+            }else{
+                file = '<span class="material-symbols-outlined"> upload_file </span><span>'+msg+'</span>';
+            }
+            div.innerHTML = '<div class="chat-msg">' + arrow + file + '</div><div class="chat-info">' + count + time + '</div>';
+        }else{
+            div.innerHTML = '<div class="chat-msg">' + arrow + msg + '</div><div class="chat-info">' + count + time + '</div>';
+        }
+        
+        chatBox.append(div);  
         const chatMain = document.querySelector('#m-chat-panel .ml-main');
         chatMain.scrollTop = chatMain.scrollHeight;
     }
