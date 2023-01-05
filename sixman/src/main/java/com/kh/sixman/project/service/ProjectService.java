@@ -42,15 +42,9 @@ public class ProjectService {
 	}
 
 	//프로젝트 디테일
-	public ProjectVo selectOne(ProjectVo vo) {
-		
+	public ProjectVo selectOnePrj(String no) {
 		//프로젝트 select
-		ProjectVo selectPrj = pdao.selectOne(sst, vo);
-		
-		//멤버s select
-		List<ProjectVo> memvo = pdao.selectMembers(sst, vo);
-		
-		return vo;
+		return pdao.selectOnePrj(sst, no);
 		
 	}
 
@@ -62,6 +56,14 @@ public class ProjectService {
 	//프로젝트 생성에서 멤버 가져오기
 	public List<MemberVo> selectMemberList(String no) {
 		return pdao.selectMembersubList(sst, no);
+	}
+
+	public List<MemberVo> selectPrjMember(String no) {
+		return pdao.selectPrjMember(sst, no);
+	}
+
+	public int updatePrj(ProjectVo vo) {
+		return pdao.updatePrj(sst, vo);
 	}
 
 

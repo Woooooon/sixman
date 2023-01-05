@@ -3,8 +3,9 @@ const progress = document.querySelector('.progress-bar');
 const valueinput = document.querySelector('.valueinput');
 const maxIntput = document.querySelector('.maxinput');
 
-let finalValue = 0;
+let finalValue = valueinput.value;
 let max = 100;
+changeGuage()
 
 function changeGuage(){
     progress.style.width = `${(finalValue / max) * 100}%`;
@@ -17,28 +18,43 @@ valueinput.addEventListener("keyup", function() {
     changeGuage();
 });
 
+
 // 상태 토글
+// const ing = document.querySelector('.ing');
+// const delay = document.querySelector('.delay');
+// const complete = document.querySelector('.complete');
 
-const ing = document.querySelector('.ing');
-const delay = document.querySelector('.delay');
-const complete = document.querySelector('.complete');
+// function btnchange(color, element) {
+//     if(element.classList.contains('backgray')){
+//         element.classList.remove('backgray');
+//         element.classList.add(color);
+//     } else{
+//         element.classList.remove(color);
+//         element.classList.add('backgray');
+//     }
+// }
 
-function btnchange(color, element) {
-    if(element.classList.contains('backgray')){
-        element.classList.remove('backgray');
-        element.classList.add(color);
-        console.log(123);
-    } else{
-        element.classList.remove(color);
-        element.classList.add('backgray');
-    }
-}
+// if(ing.addEventListener('click', ()=>{btnchange('backgreen', ing);})){
+//    delay.classList.remove('backred');
+//    delay.classList.add('backgray')
+//    complete.classList.remove('backblue');
+// }else if (delay.addEventListener('click', ()=>{btnchange('backred', delay);})){
+//     ing.classList.remove('backgreen');
+//     ing.classList.add('backgray');
+//     complete.classList.remove('backblue');
+//     complete.classList.add('backgray')
+// }else if (complete.addEventListener('click', ()=>{btnchange('backblue', complete);})){
+//     ing.classList.remove('backgreen');
+//     ing.classList.add('backgray');
+//     delay.classList.remove('backred');
+//     delay.classList.add('backgray')
+// }
 
-ing.addEventListener('click', ()=>{btnchange('backgreen', ing);});
+// ing.addEventListener('click', ()=>{btnchange('backgreen', ing);});
 
-delay.addEventListener('click', ()=>{btnchange('backred', delay);});
+// delay.addEventListener('click', ()=>{btnchange('backred', delay);});
 
-complete.addEventListener('click', ()=>{btnchange('backblue', complete);});
+// complete.addEventListener('click', ()=>{btnchange('backblue', complete);});
 
 
 // 모달

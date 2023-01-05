@@ -11,17 +11,18 @@
     margin-bottom: 10px;
 }
 
-.head > p {
+.prj-title {
+    --border: 1px solid black;
+    width: 20vw;
     font-size: 30px;
     font-weight: bold;
 }
 
 .detail-btn {
     display: flex;
-    margin-left: 390px;
+    margin-left: 200px;
     justify-content: space-between;
     width: 18%;
-
 }
 
 .btn, .c-btn {
@@ -32,6 +33,11 @@
 
 
 /* 상태 */
+
+input[type='radio'] {
+    display: none;
+
+}
 
 .status {
     margin: 10px;
@@ -46,9 +52,9 @@
 
 .status-btn {
     display: flex;
-    justify-content: space-between;
-    width: 20%;
-    margin-left: 25px;
+    justify-content: space-evenly;
+    width: 20vw;
+    --margin-left: 20px;
     text-align: center;
     vertical-align: middle;
 }
@@ -59,22 +65,16 @@
 }
 
 /* 버튼 toggle 상태 */
+label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .backgray {
     background-color: #d3d3d3;
 }
 
-.backgreen {
-    background-color: #62C276;
-}
-
-.backred {
-    background-color: #E95E51;
-}
-
-.backblue {
-    background-color: #55BAE5;
-}
 
 .ing {
     color: #FFFFFF;
@@ -85,6 +85,10 @@
     cursor: pointer;
 }
 
+
+.ing:has(input[type="radio"]:checked) {
+    background-color: #62C276;
+}
 .delay {
     color: #FFFFFF;
     width: 90px;
@@ -93,7 +97,9 @@
     border: none;
     cursor: pointer;
 }
-
+.delay:has(input[type="radio"]:checked) {
+    background-color: #E95E51;
+}
 .complete {
     color: #FFFFFF;
     width: 90px;
@@ -102,7 +108,9 @@
     border: none;
     cursor: pointer;
 }
-
+.complete:has(input[type="radio"]:checked) {
+    background-color: #55BAE5;
+}
 /* 프로젝트 멤버 */
 
 .member {
@@ -123,6 +131,11 @@
     justify-content: space-between;
 }
 
+.name {
+    color : black;
+    font-weight: 700;
+}
+
 /* 플젝 날짜 */
 
 .date {
@@ -134,10 +147,11 @@
 
 .prjdate {
     display: flex;
+    margin-right: 30px;
 }
 
 .date > p {
-    margin-left: 25px;
+    margin-right: 20px;
 }
 
 .startdate,

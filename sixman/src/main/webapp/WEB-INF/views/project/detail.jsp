@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
     <c:set var = "path" value = "${pageContext.request.contextPath}"/>  
 <!DOCTYPE html>
 <html>
@@ -13,15 +14,15 @@
 </head>
 <body>
     <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
-    <form action="">
+    <form action="${path}/project/update" method="post">
 	<main class="main-box">
         <div class="box detail-box">
             <div class="head">
-            	<input type="hidden" value="${prj.no }">
-                <p>${prj.title}</p>
+            	<input type="hidden" value="${prj.no}" name="no">
+                <div class="prj-title">${prj.title}</div>
                 <div class="detail-btn">
-                    <button class="btn" type="button">수정하기</button>
-                    <button class="c-btn" type="button">삭제하기</button>
+                    <input class="btn" type="submit" value="수정하기" />
+                    <button class="c-btn" type="button" onclick="location.href='${path}/prject/delete'">삭제하기</button>
                 </div>
             </div>
             <div class="status">
@@ -31,9 +32,11 @@
                 </div>
                 <div class="status-btn">
                 	<!-- ${project.progress} -->
-                    <input type="radio"><div class="ing backgray">진행중</div>
-                    <label><input type="radio"><div class="delay backgray">지연중</div></label>
-                    <label><input type="radio"><div class="complete backgray">완료</div></label>
+                	
+                    <label for="radio1"  class="ing backgray"><input type="radio" name="status" value="I" id="radio1" <c:if test="${prj.status eq 'I'}">checked</c:if>>진행중</label>
+                    <label for="radio2" class="delay backgray"><input type="radio" name="status" value="D" id="radio2" <c:if test="${prj.status eq 'D'}">checked</c:if>>지연중</label>
+                    <label for="radio3" class="complete backgray"><input type="radio" name="status" value="C" id="radio3" <c:if test="${prj.status eq 'C'}">checked</c:if>>완료</label>
+                    
                 </div>
             </div>
             <div class="member">
@@ -42,8 +45,9 @@
                     <p>인원</p>
                 </div>
                 <div class="member-list">
-	                <c:forEach var="prj" items="${prj}">
-    	                <div class="name">${prj.memberNo}</div>
+                    <div class="name">${prj.leader}</div>
+	                <c:forEach var="m" items="${members}">
+    	                <div class="name">${m.name}</div>
         	        </c:forEach>
                 </div>
             </div>
@@ -52,7 +56,13 @@
                     <span class="material-symbols-outlined">calendar_today</span>
                     <p>날짜</p>
                 </div>
-                <input type="date" class="startdate" value="${prj.startDate }"><p>~</p><input type="date" class="enddate"  value="${prj.endDate }">
+				<c:choose>
+					<c:when test="${fn:length(prj.startDate) > 12}">
+						<div class="prjdate"><c:out value="${fn:substring(prj.startDate, 0, 10)}" /></div>
+						<p>~</p>
+						<div class="prjdate2"><c:out value="${fn:substring(prj.endDate, 0, 10)}" /></div>
+					</c:when>
+				</c:choose>
             </div>
             <div class="percent">
                 <div class="clear">
@@ -68,7 +78,7 @@
                     <span class="material-symbols-outlined">more_horiz</span>
                     <p>진행도</p>
                 </div>
-                <input  class="valueinput" type="number">
+                <input  class="valueinput" type="number" value="${prj.progress}" name="progress">
                 <input  class="maxinput" type="hidden">
             </div>
             <div class="todo">
@@ -79,7 +89,7 @@
             </div>
             <div class="hidden"></div>
             <div class="content">
-                <textarea name="content" id="prj-content">${project.content}</textarea>
+                <textarea name="content" id="prj-content">${prj.content}</textarea>
             </div>
             <div class="hidden"></div>
             <div class="todo-list">

@@ -26,7 +26,6 @@ public class ProjectMemController {
 	@ResponseBody
 	public String memberList(String no) {
 		
-		log.info(no);
 		List<MemberVo> memberList = ps.selectMemberList(no);
 		Gson gson = new GsonBuilder().create();
 		String json = gson.toJson(memberList);

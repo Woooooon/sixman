@@ -28,7 +28,7 @@
 	                    <div class="prj-box">
 	                        <div class="box-header">
 	                            <span class="material-symbols-outlined">public</span>
-	                            <p>${list.title}</p>
+	                            <a href="${path}/project/detail?no=${list.no}"><p>${list.title}</a></p>
 	                        </div>
 	                        <div class="favorite"><span class="material-symbols-outlined normal">star</span></div>
 	                    </div>

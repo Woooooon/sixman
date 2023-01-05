@@ -1,6 +1,7 @@
 package com.kh.sixman.project.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -56,7 +57,6 @@ public class ProjectController {
 
 		List<ProjectVo> prjList = ps.selectList(Integer.parseInt(loginMember.getNo()));
 		session.setAttribute("prjList", prjList);
-		log.info("list : " + prjList);
 	
 		return "project/allprj";
 	}
@@ -99,13 +99,38 @@ public class ProjectController {
 	
 	//프로젝트 상세보기(화면)
 	@GetMapping("detail")
-	public String detail(ProjectVo vo, HttpSession session) {
+	public String detail(String no, HttpSession session) {
 		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
+		log.info("no : " + no);
 		
-//		ProjectVo prj = ps.selectOne(vo);
-//		session.setAttribute("prj", prj);
+		//번호에 맞는 프로젝트 하나 조회
+		ProjectVo prj = ps.selectOnePrj(no);
+		log.info("prj : " + prj);
+		//프로젝트에 들어간 멤버 조회
+		List<MemberVo> members = ps.selectPrjMember(prj.getNo());
+//		prj.setMemberList(members);
+		log.info("member : " + members);
 		
+		session.setAttribute("members", members);
+		session.setAttribute("prj", prj);
 		return "project/detail";
+	}
+	
+	@PostMapping("update")
+	public String status(ProjectVo vo) {
+		
+		log.info("vsasd :: " + vo);
+		List<MemberVo> members = ps.selectPrjMember(vo.getNo());
+		log.info("members :: " + members);
+		
+		int result = ps.updatePrj(vo);
+		log.info("result :: " + result);
+		
+		if(result != 1) {
+			return "common/errorPage";
+		}
+		
+		return "redirect:/project/allprj";
 	}
 	
 

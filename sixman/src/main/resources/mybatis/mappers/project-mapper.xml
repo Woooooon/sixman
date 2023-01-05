@@ -71,18 +71,18 @@
     
     
     <select id="selectOne" resultType="ProjectVo">
-    	SELECT 
-		    P.NO 
-		    , M.NAME AS WRITER
-		    , P.TITLE 
-		    , P.CONTENT 
-		    , PC.STATUS AS PROGRESS
-		    , P.ENROLL_DATE 
-		    , P.START_DATE
-		    , P.END_DATE
-		FROM PROJECT P 
+		SELECT 
+			  P.NO 
+			, M.NAME AS WRITER
+			, P.PROGRESS
+			, P.TITLE
+			, P.CONTENT 
+			, P.ENROLL_DATE 
+			, P.START_DATE
+			, P.END_DATE
+			, P.STATUS
+			FROM PROJECT P 
 		LEFT JOIN MEMBER M ON P.WRITER = M.NO 
-		LEFT JOIN PROGRESS_CATE PC ON P.PROGRESS = PC.NO
 		WHERE P.NO = #{no}
     </select>
     
@@ -145,6 +145,23 @@
 		</if>
 	</select>
     
+    <select id="selectPrjMember" resultType="MemberVo">
+    	SELECT 
+		    PM.NO
+		    , M.NAME
+		FROM MEMBER M
+		LEFT JOIN PROJECT_MEMBER PM ON M.NO = PM.MEM_NO
+		WHERE PM.PRJ_NO = #{no}
+    </select>
+    
+    <update id="updatePrj">
+    	UPDATE PROJECT
+    	SET
+    		STATUS = #{status}
+    		, PROGRESS = #{progress}
+    		, CONTENT = #{content}
+    	WHERE NO = #{no}
+    </update>
     
     
 </mapper>
