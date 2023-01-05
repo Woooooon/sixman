@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.RowBounds;
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -22,11 +24,8 @@ import com.kh.sixman.common.AttachmentVo;
 import com.kh.sixman.common.FileUnit;
 import com.kh.sixman.common.PageVo;
 import com.kh.sixman.document.service.DocumentService;
-import com.kh.sixman.document.vo.DocumentSaveVo;
 import com.kh.sixman.document.vo.DocumentVo;
-import com.kh.sixman.mail.vo.MailVo;
 import com.kh.sixman.member.vo.MemberVo;
-import com.kh.sixman.notice.vo.NoticeVo;
 
 @RequestMapping("document")
 @Controller
@@ -40,9 +39,9 @@ public class DocumentController {
    //기안문서함(화면)
    @GetMapping("first")
 //   public String First(String listType,Model model) {
-   public String First(HttpSession session) {
-	   List<DocumentVo> dvoList = ds.selectDocumentList();
-	   session.setAttribute("dvo", dvoList);
+   public String First(Model model) {
+	   List<DocumentVo> dvo = ds.selectDocumentList();
+	   model.addAttribute("dvo", dvo);
 	   
 	   
       return "document/first";
@@ -61,6 +60,7 @@ public class DocumentController {
 	    
 	    PageVo pv = new PageVo(listCount,page,pageLimit,boardLimit);
 	    List<DocumentVo> list = ds.selectList(keyword, rb);
+	    
 
 		Map<String, Object> map = new HashMap<>();
 		
@@ -73,16 +73,43 @@ public class DocumentController {
 		return json;
      
    }
+
+   
+
+   // 게시물 삭제
+   @RequestMapping(value = "document/first", method = RequestMethod.GET)
+   public String postdelete(String no) throws Exception {
+   	ds.delete(no);
+      return "document/first";
+   }
+
+   //게시물 선택삭제
+   @RequestMapping(value = "document/first")
+   public String ajaxTest(HttpServletRequest request) throws Exception {
+
+       String[] ajaxMsg = request.getParameterValues("valueArr");
+       int size = ajaxMsg.length;
+       for(int i=0; i<size; i++) {
+       	ds.delete(ajaxMsg[i]);
+       }
+       return "document/first";
+   }
+   
    
    
    //결재상신(화면)
    @GetMapping("approve")
-   public String Approve() {
+   public String Approve(Model model) {
+	   
+
+//	   
       return "document/approve";
    }
    //결재상신 (찐)
    @PostMapping("approve")
    public String Approve(DocumentVo dvo) {
+	   
+	   
 	   
 	   
 	   
@@ -95,13 +122,22 @@ public class DocumentController {
    
    //결재상신(mypage)(화면)
    @GetMapping("approvemy")
-   public String ApproveMyPage() {
+   public String ApproveMyPage(Model model) {
+//	   List<DocumentVo> dvo = ds.selectdsList();
+//	   model.addAttribute("dvo",dvo);
+//	   
+//	   List<DocumentVo> dvoap = ds.selectapList();
+//	   model.addAttribute("dvo",dvoap);
       return "document/approvemy";
    }
+   
    //결재상신(mypage) (찐)
+   @RequestMapping(value="document/approvemy",method = RequestMethod.POST)
+   @ResponseBody
    @PostMapping("approvemy")
-   public String ApproveMyPage(DocumentVo dvo) {
-      return "";
+   public String ApproveMyPage(@RequestParam(value="apprmyArr") List<String> approvemy,DocumentVo dvo) {
+	     
+	   return "document/approvemy";
    }
    
    //결재문서함(화면)

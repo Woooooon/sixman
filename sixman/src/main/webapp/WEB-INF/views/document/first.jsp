@@ -2,8 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
 <!DOCTYPE html>
 <html>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <head>
 <meta charset="UTF-8">
 <title>기안문서함1</title>
@@ -49,7 +51,8 @@
 
             <div class="list-item first">
                 <input type='checkbox'
-                name='dddd' 
+                id="allCheck"
+                name='allCheck' 
                 value='selectall'
                 onclick='selectAll(this)'/> 
                
@@ -60,21 +63,23 @@
                 <p>결재상태</p>
             </div>
             <div id="list-count" class="b-page-count hilight"></div>
-
-            <div class="list-item">
-    
-                <c:forEach var="dvo" items="${dvoList}">
-                <input type="checkbox" name="dddd">
-               <p>${dvo.enrollDate}</p>
-               <p>${dvo.type}</p>
-               <p>${dvo.title}</p>
-               <p>${dvo.sendPay}</p>
-               <p>${dvo.state}</p>
-            </c:forEach>
-
             
-            </div>
-       
+            <c:forEach  items="${dvo}" var="dvo" >
+            <div class="list-item">
+                
+                    <input type="checkbox" name="RowCheck"value="${dvo.no}">
+                    <p partern="yyyy/MM/dd">${dvo.enrollDate}</p>
+                    <p>${dvo.type}</p>
+                    <p>${dvo.title}</p>
+                    <p>${dvo.sendPay}</p>
+                    <p>${dvo.state}</p>
+                    
+                    
+                    
+                    
+                </div>
+                
+            </c:forEach>
             
           
            
@@ -100,7 +105,7 @@
             <!-- <button onclick="" id="documentwrite"><a href="">결재 상신</a></button> -->
            <!-- <input type="button" value="결재상신"> -->
           <a href="${path}/document/write"> <input name="submit" class="btn" type="submit" value="결재상신"></a>
-           <input name="subit" class="btn" type="submit" value="삭제">
+           <input name="button" class="btn btn-outline-info"  value="삭제" onclick="deleteValue();">
         </div>
     
 
@@ -125,5 +130,60 @@ function selectAll(selectAll)  {
       checkbox.checked = selectAll.checked
     })
   }
+</script>
+
+<script type="text/javascript">
+    (function(){
+        var chkObj = Document.getElementsByName("RowCheck");
+        var rowCnt = chkObj.length;
+
+        $("input[name='allCheck']").click(function(){
+            var chk_listArr = $("input[name='RowCheck']");
+            for(var i=0; i<chk_listArr.length; i++){
+                chk_listArr[i].checked = this.checked;
+            }
+        });
+        $("input[name='RowCheck']").click(function(){
+            if($("input[name='RowCheck']:checked").length == rowCnt){
+                $("input[name='allCheck']")[0].checked = true;
+            }
+            else{
+                $("input[name='allCheck']")[0].checked = false;
+            }
+        });
+    });
+    function deleteValue(){
+        var url = "document/first";
+        var valueArr = new Array();
+        var list = $("input[name='RowCheck']");
+        for(var i=0; i< list.length; i++){
+            if(list[i].checked){
+                valueArr.push(list[i].value);
+            }
+        }
+        if(valueArr.length ==0){
+            alert("선택된 글이 없습니다.")
+        }
+        else{
+            var chk = confirm("삭제하시겠습니까?");
+            $.ajax({
+                url : url,
+                type : 'POST',
+                traditional : true,
+                data :{
+                    valueArr : valueArr //보내고자 하는 data 변수설정
+                }, 
+                success: function(jdata){
+                    if(jdata = 1){
+                        alert("삭제성공!");
+                        location.replace("list") //리스트 페이지로 새로고침
+                    }
+                    else{
+                        alert("삭제실패");
+                    }
+                }
+            });
+        }
+    }
 </script>
 </html>

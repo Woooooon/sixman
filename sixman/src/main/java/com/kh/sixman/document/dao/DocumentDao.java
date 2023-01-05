@@ -69,6 +69,19 @@ public class DocumentDao {
 		return sst.selectList("documentMapper.docuselect");
 	}
 
+	public List<DocumentVo> selectdsList(SqlSessionTemplate sst) {
+		return sst.selectList("documenMapper.approveDS");
+	}
+
+	public List<DocumentVo> selectapList(SqlSessionTemplate sst) {
+		return sst.selectList("documentMapper.approveAP");
+	}
+
+
+	public Object delete(SqlSessionTemplate sst,String no) {
+		return sst.delete("documentMapper.delete",no);
+	} 
+
 
 
 	

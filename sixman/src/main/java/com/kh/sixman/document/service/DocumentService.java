@@ -36,7 +36,7 @@ public class DocumentService {
       int result1 = dao.write(sst, dvo);
 //      int result2 = dao.send(sst,dvo);
       
-//      int result3 = dao.writesv(sst, dvo);
+      int result3 = dao.writesv(sst, dvo);
       
       String no = dao.getDocuementNo(sst, dvo);
       
@@ -53,8 +53,8 @@ public class DocumentService {
          
          result2= fdao.uploadAll(sst,map);
       }
-//      	return result1  * result2 * result3;
-      	return result1  * result2;
+      	return result1  * result2 * result3;
+//      	return result1  * result2;
    }
 
 
@@ -111,6 +111,25 @@ public List<DocumentVo> selectList(String keyword, RowBounds rb) {
 public List<DocumentVo> selectDocumentList() {
 	
 	return dao.selectDcList(sst);
+}
+
+
+
+public List<DocumentVo> selectdsList() {
+	return dao.selectdsList(sst);
+}
+
+
+
+//결재선페이지 APP_NO 불러오기
+public List<DocumentVo> selectapList() {
+	return dao.selectapList(sst);
+}
+
+
+
+public Object delete(String no) {
+	return dao.delete(sst, no);
 }
 
 

@@ -167,7 +167,44 @@
 
 </select>
 
+<select id="approveDS" resultType="DocumentVo">
+	SELECT
+		A.NO
+		,DS.NO
+		,DS.AP_NO
+		,DS.DOC_NO
+		,DS.STATE
+		,DS.A_YN
+		,A.A_MAN
+		,A.A_NO
+		,A.PRI
+	FROM
+		APRPROVAL A
+	LEFT OUTER JOIN DOC_SAVE DS ON A.NO = DS.AP_NO
+</select>
 
+<select id="approveAP" resultType="DocumentVo">
+	SELECT 
+		A.NO
+		,P.NO
+		,A.A_MAN
+		,A.A_NO
+		,A.PRI
+		,P.M_NO
+	FROM
+		APRPROVAL A
+	LEFT OUTER JOIN APP_NO P ON A.NO = P.NO = A.A_NO
+		
+</select>
+
+<delete id="delete">
+
+	DELETE FROM
+	DOCUMENT
+	WHERE
+	NO = #{no}
+
+</delete>
 
 
 
