@@ -441,18 +441,19 @@ function createChatRoom(no) {
                         }
                         name = chat.memberName;
 
-                        let time = `<div class="chat-date">${chat.writeTime}</div>`;
-                        if(writeTime == chat.writeTime){
+                        const chatTime = chat.writeTime.substring(2, 16);
+                        let time = `<div class="chat-date">${chatTime}</div>`;
+                        if(writeTime == chatTime){
                             const dates = document.querySelectorAll('.chat-date');
                             if(dates!=null && dates.length != 0){
                                 dates[dates.length-1].remove();
                             }
                         }
-                        writeTime = chat.writeTime;
+                        writeTime = chatTime;
 
                         let count = '';
                         if(chat.nonCount>0){
-                            count = `<div class="chat-count">${chat.nonCount}</div>`;
+                            count = `<div class="chat-count" date="${chat.writeTime}">${chat.nonCount}</div>`;
                         }
 
                         if(chat.fileName!=null && typeof(chat.fileName)!=undefined){

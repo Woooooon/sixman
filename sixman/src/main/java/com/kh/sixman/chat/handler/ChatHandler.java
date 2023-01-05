@@ -56,8 +56,7 @@ public class ChatHandler extends TextWebSocketHandler{
 			WebSocketSession ss = (WebSocketSession) map.get("session");
 			
 			if(room.equals(curRoom.getChatRoomNo())) {
-				System.out.println("보냄");
-				ss.sendMessage(new TextMessage("#####"));
+				ss.sendMessage(new TextMessage("#####"+roomVo.getBeforeJoin()));
 			}
 		}
 		

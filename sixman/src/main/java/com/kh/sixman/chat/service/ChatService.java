@@ -96,7 +96,7 @@ public class ChatService {
 			if(cv.getMemberNo().equals(map.get("loginNo"))) {
 				cv.setIsMe("Y");
 			}
-			cv.setWriteTime(cv.getWriteTime().substring(2, 16));
+//			cv.setWriteTime(cv.getWriteTime().substring(2, 16));
 			
 		}
 		

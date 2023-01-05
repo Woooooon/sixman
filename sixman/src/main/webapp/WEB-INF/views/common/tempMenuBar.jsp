@@ -434,9 +434,8 @@
         const type = datas[0];
         const msg = datas[1];
         
-        console.log(data);
-        
         if(type=='CHAT'){
+            console.log("asdf");
             notify(type, msg);
             return;
         }
@@ -492,8 +491,6 @@
         
         // 데스크탑 알림 요청
         var notification = new Notification(title, options);
-
-        console.log('msg');
         
         // 3초뒤 알람 닫기
         setTimeout(function(){
@@ -515,10 +512,8 @@
     function chatOnMessage(m) {
         const data = m.data;
 
-        console.log(data);
-
-        if(data=='#####'){
-            chatCountDown();
+        if(data.substring(0,5)=='#####'){
+            chatCountDown(data.substring(5));
             return;
         }
 
@@ -544,16 +539,31 @@
 
     }
 
-    function chatCountDown() {
+    function chatCountDown(date) {
         const counts = document.querySelectorAll('.chat-count');
+        const beforeDate = new Date(date);
         counts.forEach(element => {
-            if(parseInt(element.innerHTML) - 1 > 0){
+            const eDate = new Date(element.getAttribute("date"));
+
+            
+            if(eDate > beforeDate){
+                console.log(element);
+                console.log("이전접속시간 : " + beforeDate);
+                console.log("요소에기록된시간 : " + eDate);
+                if(parseInt(element.innerHTML) - 1 > 0){
                 element.innerHTML = parseInt(element.innerHTML) - 1;
-            }else{
-                element.innerHTML = '';
+                }else{
+                    element.innerHTML = '';
+                }
             }
         });
     }
+    const chatInput = document.querySelector('#chat-input');
+    chatInput.addEventListener("keyup", (e)=>{
+        if(e.keyCode == 13){
+            chat();
+        }
+    });
 
     function chat() {
         const chatInput = document.querySelector('#chat-input');
@@ -583,7 +593,7 @@
     function getSysdate() {
         let today = new Date();   
 
-        var year = ('0' + (today.getFullYear())).slice(-2);
+        var year = (today.getFullYear());
         var month = ('0' + (today.getMonth() + 1)).slice(-2);
         var day = ('0' + today.getDate()).slice(-2);
         
@@ -591,8 +601,9 @@
 
         var hours = ('0' + today.getHours()).slice(-2); 
         var minutes = ('0' + today.getMinutes()).slice(-2);
+        var seconds = ('0' + today.getSeconds()).slice(-2);
         
-        var timeString = hours + ':' + minutes
+        var timeString = hours + ':' + minutes + ':' + seconds;
         
         //23-01-03 11:09
         const sysdate = dateString+' '+timeString;
@@ -633,8 +644,9 @@
             arrow = '<div class="chat-arrow-'+right+'"></div>';
         }
 
-        let time = '<div class="chat-date">'+sysdate+'</div>';
-        if(lastDate == sysdate){
+        const chatTime = sysdate.substring(2, 16);
+        let time = '<div class="chat-date">'+chatTime+'</div>';
+        if(lastDate == chatTime){
             if(dates!=null && dates.length != 0){
                 dates[dates.length-1].remove();
             }
@@ -642,7 +654,7 @@
 
         let count = '';
         if(lastCount>0){
-            count = '<div class="chat-count">'+lastCount+'</div>';
+            count = '<div class="chat-count" date="'+sysdate+'">'+lastCount+'</div>';
         }
 
         if(isfile=="Y"){
