@@ -8,6 +8,8 @@ const chatMain = document.querySelector('#m-chat-panel .ml-main');
 const createPanel = document.querySelector('#m-create-panel');
 const pofilePanel = document.querySelector('#m-profile-panel');
 const optionInner = document.querySelector('#option-inner');
+const chatMemberPanel = document.querySelector('#m-chat-member-panel');
+const memberInner = document.querySelector('#member-inner');
 
 function closeAll() {
     if(chatSocket){
@@ -103,7 +105,7 @@ function openList() {
                         text +=
                         `
                         <div class="ml-list-item">
-                            <img src="/sixman/resources/img/profile/${vo.fileName}" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">
+                            <img src="/sixman/resources/img/profile/${vo.fileName}" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'" onclick="openProfile(${vo.no})">
                             <div>${vo.name} <p>${vo.positionName}</p></div>
                             <label class="material-symbols-outlined"> grade <input type="checkbox" onchange="bookMark('${vo.no}',this)" checked></label>
                         </div>
@@ -120,7 +122,7 @@ function openList() {
                         text +=
                         `
                         <div class="ml-list-item">
-                            <img src="/sixman/resources/img/profile/${vo.fileName}" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">
+                            <img src="/sixman/resources/img/profile/${vo.fileName}" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'" onclick="openProfile(${vo.no})">
                             <div>${vo.name} <p>${vo.positionName}</p></div>
                             <label class="material-symbols-outlined"> grade <input type="checkbox" onchange="bookMark('${vo.no}',this)" ${checked}></label>
                         </div>
@@ -137,7 +139,7 @@ function openList() {
                         text +=
                         `
                         <div class="ml-list-item">
-                            <img src="/sixman/resources/img/profile/${vo.fileName}" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">
+                            <img src="/sixman/resources/img/profile/${vo.fileName}" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'" onclick="openProfile(${vo.no})">
                             <div>${vo.name} <p>${vo.positionName}</p></div>
                             <label class="material-symbols-outlined"> grade <input type="checkbox" onchange="bookMark('${vo.no}',this)" ${checked}></label>
                         </div>
@@ -159,11 +161,31 @@ function openList() {
     listPanel.style.display = "block";
 }
 
-function chatAjax(room, msg) {
+function chatAjax(formData, beforeMsg, msg, afterMsg) {
     const httpRequest = new XMLHttpRequest();
+    httpRequest.onreadystatechange = () => {
+        if (httpRequest.readyState === XMLHttpRequest.DONE) {
+                if (httpRequest.status === 200) {
+                    const result = httpRequest.response;
+
+                    if(result.changeName){
+                        const fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/gi;
+                        if(result.changeName.match(fileForm)){
+                            chatSocket.send(beforeMsg + result.changeName + afterMsg + "#Y");
+                        }else{
+                            chatSocket.send(beforeMsg + result.originName + afterMsg + "#Y");
+                        }
+                    }
+
+                    chatSocket.send(beforeMsg + msg + afterMsg + "#N");
+                } else {
+
+                }
+        }
+    };
     httpRequest.open('post', '/sixman/chat');
-    httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
-    httpRequest.send(`room=${room}&msg=${msg}`);
+    httpRequest.responseType = "json";
+    httpRequest.send(formData);
 }
 
 openChatAjax();
@@ -189,6 +211,11 @@ function openChatAjax() {
                             notReadCount = `<div>${vo.notReadCount}</div>`;
                         }
 
+                        let fixed = '';
+                        if(vo.fixYn=="Y"){
+                            fixed = '<span class="material-symbols-outlined"> push_pin </span>';
+                        }
+
                         if(memberCount>1){
                             let img = '';
                             for (let index = 0; index < members.length; index++) {
@@ -204,7 +231,7 @@ function openChatAjax() {
                                 </span>
                                 <div>
                                     <div class="mc-list-item-header">
-                                        <p>${vo.name}</p>
+                                        <p>${vo.name}${fixed}</p>
                                         <p>${vo.lastMsgTime}</p>
                                     </div>
                                     <div class="mc-list-item-main">
@@ -221,7 +248,7 @@ function openChatAjax() {
                                 <img src="/sixman/resources/img/profile/${members[0].fileName}" onerror="this.style.visibility='hidden'">
                                 <div>
                                     <div class="mc-list-item-header">
-                                        <p>${members[0].name}</p>
+                                        <p>${members[0].name}${fixed}</p>
                                         <p>${vo.lastMsgTime}</p>
                                     </div>
                                     <div class="mc-list-item-main">
@@ -251,7 +278,9 @@ function openChatAjax() {
 //채팅리스트열기
 function openChat() {
     closeAll();
-    openChatAjax();
+    setTimeout(() => {
+        openChatAjax();
+    }, 500);
     chatListPanel.style.display = "block";
 }
 
@@ -275,39 +304,39 @@ function openCreate() {
                     let text = '';
                     for(let vo of bookMarkMember){
                         text +=
-                        `
-                        <div class="ml-list-item">
-                            <img src="/sixman/resources/img/profile/${vo.fileName}" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">
-                            <div>${vo.name} <p>${vo.positionName}</p></div>
-                            <input type="checkbox" name="member" value="${vo.no}">
-                        </div>
-                        `;
+                            `
+                            <div class="ml-list-item">
+                                <img src="/sixman/resources/img/profile/${vo.fileName}" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">
+                                <div>${vo.name} <p>${vo.positionName}</p></div>
+                                <input type="checkbox" name="member" value="${vo.no}">
+                            </div>
+                            `;
                     };
                     bookMarkBox.innerHTML = text;
 
                     text = '';
                     for(let vo of teamMember){
                         text +=
-                        `
-                        <div class="ml-list-item">
-                            <img src="/sixman/resources/img/profile/${vo.fileName}" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">
-                            <div>${vo.name} <p>${vo.positionName}</p></div>
-                            <input type="checkbox" name="member" value="${vo.no}">
-                        </div>
-                        `;
+                            `
+                            <div class="ml-list-item">
+                                <img src="/sixman/resources/img/profile/${vo.fileName}" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">
+                                <div>${vo.name} <p>${vo.positionName}</p></div>
+                                <input type="checkbox" name="member" value="${vo.no}">
+                            </div>
+                            `;
                     };
                     teamBox.innerHTML = text;
 
                     text = '';
                     for(let vo of memberAll){
                         text +=
-                        `
-                        <div class="ml-list-item">
-                            <img src="/sixman/resources/img/profile/${vo.fileName}" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">
-                            <div>${vo.name} <p>${vo.positionName}</p></div>
-                            <input type="checkbox" name="member" value="${vo.no}">
-                        </div>
-                        `;
+                            `
+                            <div class="ml-list-item">
+                                <img src="/sixman/resources/img/profile/${vo.fileName}" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">
+                                <div>${vo.name} <p>${vo.positionName}</p></div>
+                                <input type="checkbox" name="member" value="${vo.no}">
+                            </div>
+                            `;
                     };
                     allBox.innerHTML = text;
 
@@ -361,9 +390,10 @@ fileBoxBtn.forEach(element => {
 //채팅조인
 function joinChat(no) {
     closeAll();
-    joinChatSocket();
-    socket.close();
-    connectSC();
+    createChatRoom(no);
+}
+
+function createChatRoom(no) {
     const httpRequest = new XMLHttpRequest();
     httpRequest.onreadystatechange = () => {
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
@@ -373,6 +403,14 @@ function joinChat(no) {
 
                     const chatBox = document.querySelector('#m-chat-panel .ml-main');
                     chatBox.innerHTML = '';
+
+                    const containnerBox = document.querySelector('#m-option-panel #containner-box');
+                    const fileBox = containnerBox.querySelectorAll('.file-box');
+                    const imgBox = fileBox[0];
+                    const nonImgBox = fileBox[1];  
+                    
+                    imgBox.innerHTML = '';
+                    nonImgBox.innerHTML = '';
                     
                     let name = '';
                     let writeTime = '';
@@ -382,6 +420,8 @@ function joinChat(no) {
 
                         const div = document.createElement('div');
                         div.classList.add('chat-item');
+                        const div3 = document.createElement('div');
+                        div3.classList.add('chat-item');
                         const div2 = document.createElement('div');
                         div2.classList.add('chat-name');
 
@@ -389,6 +429,7 @@ function joinChat(no) {
                         if(chat.isMe == 'Y'){
                             div.classList.add('right');
                             div2.classList.add('right');
+                            div3.classList.add('right');
                             right = "right";
                         }
 
@@ -414,20 +455,61 @@ function joinChat(no) {
                             count = `<div class="chat-count">${chat.nonCount}</div>`;
                         }
 
-                        text += 
-                        `
-                        <div class="chat-msg">
-                            ${arrow}
-                            ${chat.content}
-                        </div>
-                        <div class="chat-info">
-                            ${count}
-                            ${time}
-                        </div>
-                        `
+                        if(chat.fileName!=null && typeof(chat.fileName)!=undefined){
+                            const fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/gi;
+                            let file = '';
+                            let fileDiv = document.createElement('div');
+                            if(chat.fileName.match(fileForm)){
+                                file = `<img onclick="openFile(${chat.fileNo}, this.cloneNode(true))" src=/sixman/resources/chat/${chat.fileName}>`;
+                                fileDiv.innerHTML = file;
+                                imgBox.append(fileDiv);
+                            }else{
+                                file = `<span onclick="openFile(${chat.fileNo}, this.cloneNode(true))" class="material-symbols-outlined"> upload_file </span><span>${chat.originName}</span>`;
+                                fileDiv.innerHTML = file;
+                                nonImgBox.append(fileDiv);
+                            }
+                            text =
+                                `
+                                <div class="chat-msg">
+                                    ${arrow}
+                                    ${file}
+                                </div>
+                                <div class="chat-info">
+                                    ${count}
+                                </div>
+                                `;
+                            div.innerHTML = text;
+                            
+                            chatBox.append(div);
 
-                        div.innerHTML = text;
-                        chatBox.append(div);
+                            text =
+                                `
+                                <div class="chat-msg">
+                                    ${chat.content}
+                                </div>
+                                <div class="chat-info">
+                                    ${count}
+                                    ${time}
+                                </div>
+                                `;
+                            div3.innerHTML = text;
+                            chatBox.append(div3);
+
+                        }else{ 
+                            text = 
+                                `
+                                <div class="chat-msg">
+                                    ${arrow}
+                                    ${chat.content}
+                                </div>
+                                <div class="chat-info">
+                                    ${count}
+                                    ${time}
+                                </div>
+                                `;
+                            div.innerHTML = text;
+                            chatBox.append(div);
+                        }
                     }
 
                     const optionBox = document.querySelector('#m-option-panel #option-box');
@@ -455,16 +537,28 @@ function joinChat(no) {
 
                     const members = result.members;
                     const memberCount = members.length;
+                    const memberInnerBox = document.querySelector('#member-inner-box');
 
                     let img = '';
+                    let memberText = '';
                     let roomName = result.name;
                     if(memberCount>1){
-                        img += `<span class="chat-img-box">`;
+                        img += `<span class="chat-img-box" onclick="openChatMember()">`;
                         for (let index = 0; index < members.length; index++) {
                             const element = members[index];
-                            img += `<img src="/sixman/resources/img/profile/${element.fileName}" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">`;
-                            if(index == 3){break;}
+                            if(index < 4){
+                                img += `<img src="/sixman/resources/img/profile/${element.fileName}" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'">`;
+                            }
+
+                            memberText +=
+                            `
+                            <div class="ml-list-item">
+                                <img src="/sixman/resources/img/profile/${element.fileName}" onerror="this.src='/sixman/resources/img/defaultProfilePic.png'" onclick="openProfile(${element.no})">
+                                <div>${element.name} <p>${element.positionName}</p></div>
+                            </div>
+                            `;
                         }
+                        memberInnerBox.innerHTML = memberText;
                         img += `</span>`;
                     }else{
                         roomName = members[0].name;
@@ -488,6 +582,10 @@ function joinChat(no) {
 
                     chatPanel.style.display = "block";
                     chatMain.scrollTop = chatMain.scrollHeight;
+
+                    joinChatSocket();
+                    socket.close();
+                    connectSC();
 
                 } else {
                     console.log("채팅 리스트 에이젝스 실패");
@@ -548,8 +646,40 @@ function closeOption() {
     }, 400);
 }
 
-function openProfile(no) {
+function openChatMember() {
+    chatMemberPanel.style.display = "flex";
+    setTimeout(() => {
+        memberInner.style.left = "0";
+    }, 10);
+}
 
+function closeChatMember() {
+    memberInner.style.left = "-100%";
+    setTimeout(() => {
+        chatMemberPanel.style.display = "none";
+    }, 400);
+}
+
+const filePanel = document.querySelector('#m-file-panel');
+function openFile(no, element){
+    filePanel.style.display = 'flex';
+
+    const fileInnerBox = document.querySelector('#file-inner-box');
+
+    fileInnerBox.innerHTML = "";
+    fileInnerBox.append(element);
+
+    const downloadBtn = document.querySelector('#file-footer div');
+    downloadBtn.onclick = ()=>{
+        download(no, "CHAT");
+    };
+}
+
+function closeFilePanel(){
+    filePanel.style.display = 'none';
+}
+
+function openProfile(no) {
     const httpRequest = new XMLHttpRequest();
     httpRequest.onreadystatechange = () => {
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
@@ -558,7 +688,7 @@ function openProfile(no) {
                     const result = httpRequest.response;
 
                     let checked = "";
-                    if(result.bookMark == 'Y'){
+                    if(result.bookmark == 'Y'){
                         checked = "checked";
                     }
 
@@ -615,14 +745,25 @@ searchBtn.addEventListener('click', ()=>{
 const fileBox = document.querySelector('#chat-file-box');
 function readURL(input) {
     if (input.files && input.files[0]) {
-      var reader = new FileReader();
-      reader.onload = function(e) {
-        document.getElementById('preview').src = e.target.result;
-      };
-      reader.readAsDataURL(input.files[0]);
-      fileBox.style.display = 'flex';
+        const fileName = input.value;
+        const fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/gi;
+        if(!fileName.match(fileForm)){
+            document.getElementById('preview').innerHTML = `<span class="material-symbols-outlined"> upload_file </span><span> ${fileName.substring(fileName.lastIndexOf('\\')+1)} </span>`;
+            fileBox.style.display = 'flex';
+            return;
+        }
+
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            document.getElementById('preview').innerHTML = '';
+            document.getElementById('preview').append(img);
+        };
+        reader.readAsDataURL(input.files[0]);
+        fileBox.style.display = 'flex';
     } else {
-      document.getElementById('preview').src = "";
+        document.getElementById('preview').src = "";
     }
 }
 
@@ -634,7 +775,7 @@ function closeFileBox() {
 
 function createEvent() {
     const items =  document.querySelectorAll('#m-create-panel .ml-list-item');
-    console.log(items);
+    
     const memberBox =  document.querySelector('#chat-member-list');
     memberBox.innerHTML = "";
     items.forEach(element => {
@@ -682,7 +823,7 @@ function bookMark(no, obj) {
         mark = 'Y';
     }
     const httpRequest = new XMLHttpRequest();
-    httpRequest.open('post', '/sixman/setAlarm');
+    httpRequest.open('post', '/sixman/bookMark');
     httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
     httpRequest.send(`no=${no}&bookMark=${mark}`);
 }

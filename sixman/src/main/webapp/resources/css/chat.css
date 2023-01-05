@@ -12,6 +12,8 @@
 
     z-index: 10;
     transition: 0.5s;
+
+    overflow: hidden;
 }
 #m-outer span:not(.member-item){
     cursor: pointer;
@@ -107,7 +109,7 @@
     padding: 5px;
     padding-left: 10px;
     gap: 20px;
-    width: 400px;
+    width: 100%
 }
 .ml-list-item:hover{
     background-color: rgba(0, 0, 0, 0.03);
@@ -255,6 +257,10 @@
 }
 .mc-list-item-header p:nth-of-type(1){
     font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
 }
 .mc-list-item-header p:nth-of-type(2){
     color: var(--bo-40);
@@ -351,6 +357,10 @@
     letter-spacing: 0.5px;
     font-size: 0.95em;
 }
+.chat-msg img{
+    width: 100px;
+    height: 100px;
+}
 .right .chat-msg{
     background-color: #ffe657;
 }
@@ -434,6 +444,42 @@
     height: 120px;
     margin-right: 30px;
     align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#preview span:nth-of-type(1),
+.file-box div span:nth-of-type(1),
+#file-inner-box div span:nth-of-type(1){
+    width: 100%;    
+    height: 80%;
+    
+    font-size: 3em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--main-color);
+}
+#preview span:nth-of-type(2),
+.file-box div span:nth-of-type(2),
+#file-inner-box div span:nth-of-type(2){
+    width: 80%;    
+    height: 20%;
+    
+    font-size: 0.7em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--bo-80);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#preview img,
+#file-inner-box div img{
+    width: 100%;
+    height: 100%;
 }
 /*====================================================================*/
 #m-option-panel{
@@ -504,7 +550,14 @@
 .file-box > div{
     width: 60px;
     height: 60px;
-    background-color: red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.file-box div img{
+    width: 100%;
+    height: 100%;
 }
 #containner-box > div:not(.file-box):hover,
 #containner-box > div.checked{
@@ -662,4 +715,57 @@
 
 #m-profile-panel > div:nth-of-type(3) span:hover{
     color: var(--main-color);
+}
+
+/* //////////////////////// */
+#m-chat-member-panel{
+    z-index: 11;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: end;
+
+    display: none;
+}
+#member-inner{
+    position: absolute;
+    left: -100%;
+    width: 85%;
+    height: 100%;
+    background-color: white;
+    transition: 0.5s;
+}
+
+/* //////////////////////// */
+#m-file-panel{
+    z-index: 11;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    display: none;
+}
+#file-inner{
+    width: 80%;
+    height: 40%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+}
+#file-footer{
+    width: 50%;
+    align-self: center;
+}
+
+#file-inner-box{
+    width: 80%;
+    height: 60%;
+    align-self: center;
+}
+
+#file-inner-box div{
+    width: 100%;
+    height: 100%;
 }

@@ -1,6 +1,5 @@
 package com.kh.sixman.alarm.handler;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,8 +36,6 @@ public class AlarmHandler extends TextWebSocketHandler{
 		
 		log.info("Chat Socket 연결");
 		log.info("id : " + session.getId());
-		log.info("loginMember : " + httpSession);//현재 접속한 사람
-		log.info("---------------------------------------------");
 
 		if(httpSession.get("loginMember")!=null) {
 			Map<String, Object> map = new HashMap<String, Object>();
@@ -56,7 +53,6 @@ public class AlarmHandler extends TextWebSocketHandler{
 		
 		log.info("Chat Socket 종료");
 		log.info("id : " + session.getId());//현재 접속한 사람
-		log.info("---------------------------------------------");
 		
 		if(curMember!=null) {
 			userSessionsMap.remove(curMember.getNo());			
@@ -107,6 +103,7 @@ public class AlarmHandler extends TextWebSocketHandler{
 				
 				Map<String, Object> hs =  (Map<String, Object>) map.get("httpSession");
 				ChatRoomVo roomVo = (ChatRoomVo) hs.get("room");
+				if(roomVo==null) {continue;}
 				String room = roomVo.getChatRoomNo();
 								
 				WebSocketSession ss = (WebSocketSession) map.get("session");

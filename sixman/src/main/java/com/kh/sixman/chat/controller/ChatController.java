@@ -12,12 +12,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.kh.sixman.chat.service.ChatService;
 import com.kh.sixman.chat.vo.ChatRoomVo;
 import com.kh.sixman.common.AttachmentVo;
+import com.kh.sixman.common.FileUnit;
 import com.kh.sixman.member.vo.MemberVo;
 
 import lombok.extern.slf4j.Slf4j;
@@ -41,14 +43,29 @@ public class ChatController {
 	}
 	
 	@PostMapping(value = "chat", produces = "application/json; charset=utf8")
-	public void chat(String room, String msg, HttpSession session) {
+	public String chat(String room, String msg, MultipartFile file, HttpSession session) {
 		String no = getLoginMember(session).getNo();
-		Map<String, String> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<>();
+		
+		AttachmentVo vo = null;
+		if(file!=null) {
+			String rootPath = session.getServletContext().getRealPath("/");
+			vo = FileUnit.uploadFileOne(file, rootPath, "sixman/src/main/webapp/resources/chat");
+			map.put("file", vo);
+		}
 		
 		map.put("room", room);
 		map.put("msg", msg);
 		map.put("no", no);
 		chatService.chat(map);
+		
+		Map<String, String> result = new HashMap<>();
+		if(vo!=null) {
+			result.put("changeName", vo.getChangeName());
+			result.put("originName", vo.getOriginName());
+		}
+				
+		return getJson(result);
 	}
 	
 	@PostMapping(value = "memberPage", produces = "application/json; charset=utf8")
@@ -56,7 +73,6 @@ public class ChatController {
 		String no = getLoginMember(session).getNo();
 		
 		Map<String, Object> map = chatService.getMember(no);
-		System.out.println(map);
 
 		return getJson(map);
 	}
@@ -97,20 +113,6 @@ public class ChatController {
 		map.put("no", no);
 		int result = chatService.join(map);
 		session.removeAttribute("room");
-	}
-	
-	@PostMapping(value = "getImgList", produces = "application/json; charset=utf8")
-	public String getImgList(String no) {
-		
-		List<AttachmentVo> list = chatService.getImgList(no);
-		return getJson(list);		
-	}
-	
-	@PostMapping(value = "getFileList", produces = "application/json; charset=utf8")
-	public String getFileList(String no) {
-		
-		List<AttachmentVo> list = chatService.getFileList(no);
-		return getJson(list);		
 	}
 	
 	@PostMapping(value = "createChat")
@@ -180,7 +182,7 @@ public class ChatController {
 		}
 	}
 	
-	@PostMapping(value = "profile")
+	@PostMapping(value = "profile", produces = "application/json; charset=utf8")
 	public String profile(String no, HttpSession session) {
 		String loginNo = getLoginMember(session).getNo();
 		Map<String, String> map = new HashMap<>();
@@ -188,7 +190,7 @@ public class ChatController {
 		map.put("no", no);
 		MemberVo vo = chatService.profile(map);
 		if(vo==null) {
-			log.error("setAlarm 실패");
+			log.error("profile 실패");
 			return null;
 		}
 		return getJson(vo);

@@ -30,23 +30,24 @@ public class ChatHandler extends TextWebSocketHandler{
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		Map<String, Object> httpSession = getHTTPSession(session);
+		ChatRoomVo curRoom = (ChatRoomVo) httpSession.get("room");
+		MemberVo curMember = (MemberVo)httpSession.get("loginMember");
 		
 		log.info("Chat Socket 연결");
 		log.info("id : " + session.getId());
-		log.info("loginMember : " + httpSession);//현재 접속한 사람
-		log.info("---------------------------------------------");
 
 		if(httpSession.get("loginMember")!=null) {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("httpSession", httpSession);
 			map.put("session", session);
-			MemberVo curMember = (MemberVo)httpSession.get("loginMember");
 			userSessionsMap.put(curMember.getNo(), map);			
 		}
 		
 		Set<String> keySet = userSessionsMap.keySet();
 		
 		for(String key : keySet) {
+			if(key.equals(curMember.getNo())) {continue;}
+			
 			Map<String, Object> map = userSessionsMap.get(key);
 			
 			Map<String, Object> hs =  (Map<String, Object>) map.get("httpSession");
@@ -54,7 +55,8 @@ public class ChatHandler extends TextWebSocketHandler{
 			String room = roomVo.getChatRoomNo();
 			WebSocketSession ss = (WebSocketSession) map.get("session");
 			
-			if(room.equals(httpSession.get("room"))) {
+			if(room.equals(curRoom.getChatRoomNo())) {
+				System.out.println("보냄");
 				ss.sendMessage(new TextMessage("#####"));
 			}
 		}
@@ -68,7 +70,6 @@ public class ChatHandler extends TextWebSocketHandler{
 		
 		log.info("Chat Socket 종료");
 		log.info("id : " + session.getId());//현재 접속한 사람
-		log.info("---------------------------------------------");
 		
 		if(curMember!=null) {
 			userSessionsMap.remove(curMember.getNo());			
@@ -85,7 +86,8 @@ public class ChatHandler extends TextWebSocketHandler{
 		String msg = message.getPayload();
 		String msgs[] = msg.split("#");
 		
-		String roomNo = msgs[2];
+		String roomNo = msgs[2];	
+		
 		
 		int inMemberCount = -1;
 		Set<String> keySet = userSessionsMap.keySet();

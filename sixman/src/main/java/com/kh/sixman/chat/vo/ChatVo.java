@@ -1,7 +1,5 @@
 package com.kh.sixman.chat.vo;
 
-import org.springframework.web.multipart.MultipartFile;
-
 import lombok.Data;
 
 @Data
@@ -18,7 +16,7 @@ public class ChatVo {
 	private String nonCount;
 	private String isMe;
 	
-	private MultipartFile file;
-	private String filePath;
+	private String fileNo;
+	private String originName;
 	private String fileName;
 }
