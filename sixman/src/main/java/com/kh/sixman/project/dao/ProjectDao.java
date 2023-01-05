@@ -22,8 +22,8 @@ public class ProjectDao {
 	}
 
 	//프로젝트 상세보기
-	public ProjectVo selectOne(SqlSessionTemplate sst, ProjectVo vo) {
-		return sst.selectOne("projectMapper.selectOne", vo);
+	public ProjectVo selectOnePrj(SqlSessionTemplate sst, String no) {
+		return sst.selectOne("projectMapper.selectOne", no);
 	}
 
 	//프로젝트 번호 받아오기
@@ -37,8 +37,8 @@ public class ProjectDao {
 	}
 
 	//프로젝트 디테일 멤버 셀렉트
-	public List<ProjectVo> selectMembers(SqlSessionTemplate sst, ProjectVo vo) {
-		return sst.selectList("projectMapper.selectMembers", vo);
+	public List<ProjectVo> selectMembers(SqlSessionTemplate sst, String no) {
+		return sst.selectList("projectMapper.selectMembers", no);
 		
 	}
 
@@ -50,6 +50,16 @@ public class ProjectDao {
 	//프로젝트 생성 멤버 읽어오기
 	public List<MemberVo> selectMembersubList(SqlSessionTemplate sst, String no) {
 		return sst.selectList("projectMapper.selectsubMemberList", no);
+	}
+
+	//프로젝트 디테일 멤버 조회
+	public List<MemberVo> selectPrjMember(SqlSessionTemplate sst, String no) {
+		return sst.selectList("projectMapper.selectPrjMember", no);
+	}
+
+	//프로젝트 디테일 상태 변경
+	public int updatePrj(SqlSessionTemplate sst, ProjectVo vo) {
+		return sst.update("projectMapper.updatePrj", vo);
 	}
 
 }

@@ -23,12 +23,12 @@
         </div>
         <div class="prj-all">
             <div class="prj-all-box">
-                <c:forEach var="list" items="${List}">
+                <c:forEach var="list" items="${prjList}">
 	                <div class="project-box">
 	                    <div class="prj-box">
 	                        <div class="box-header">
 	                            <span class="material-symbols-outlined">public</span>
-	                            <p>${list.title}</p>
+	                            <a href="${path}/project/detail?no=${list.no}"><p>${list.title}</a></p>
 	                        </div>
 	                        <div class="favorite"><span class="material-symbols-outlined normal">star</span></div>
 	                    </div>
@@ -43,7 +43,7 @@
 		                            </c:when>
 	                            </c:choose>
 	                        </div>
-	                        <div class="reader">
+	                        <div class="leader">
 	                            <span class="material-symbols-outlined">person</span>
 	                            <p>${list.leader }</p>
 	                            <div class="status done"></div>

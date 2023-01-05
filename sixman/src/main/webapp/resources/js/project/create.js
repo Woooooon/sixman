@@ -9,67 +9,6 @@ document.querySelector('#startDate').setAttribute("min", today);
 // document.querySelector('#endDate').setAttribute("max", endline + 60);
  
 //---------------------------------------------------------------
-//팀 목록 select 박스 보이게하기
-const selects = document.querySelectorAll('.select');
-const memberbox = document.querySelector('.team-member-box');
-
-// selects.forEach(function (element, index, array) {
-//     const value = element.querySelector('.selected-option');
-//     const option = element.querySelector('select');
-//     const opts = option.querySelectorAll('option');
-
-//     element.addEventListener('click', (e)=>{
-//         e.stopPropagation();
-//         if(option.classList.contains('hide')){
-//             option.classList.remove('hide');
-//             option.classList.add('show');
-//             opts.forEach(optsItem=>{
-//                 const innerValue = optsItem.innerHTML;
-//                 optsItem.addEventListener('click', (e)=>{
-//                     e.stopImmediatePropagation();
-//                     value.innerHTML = innerValue;
-//                     option.classList.add('hide');
-//                     option.classList.remove('show');
-//                     if(index===array.length-1){
-//                         createMemberBox();
-//                     }
-//                 });
-//             });
-//         }else{
-//             option.classList.add('hide');
-//             option.classList.remove('show');
-//         }
-//     })
-// });
-
-//담당자, 직급, 이름 선택시 memberbox 에 생성되는 div값
-function createMemberBox() {
-    const divbox = document.createElement('div');
-    divbox.classList.add('member');
-
-    let text = "";
-
-    for(let i = 0; i < selects.length; i++){
-        const item = selects[i];
-        const v = item.querySelector('.selected-option');
-        const leader = item.querySelector('input[type=hidden]');
-        leader.value = v.innerHTML;
-        text += `<input type='text' value="${v.innerHTML}" name='prjmem'>`;
-        text += `<input type='hidden' value="${v.innerHTML}" name='memberNo'>`
-        if(i!=selects.length-1){
-            text += '';
-        }
-    }
-
-    text += `<span class='material-symbols-outlined'> close </span>`;
-    divbox.innerHTML = text;
-
-    divbox.querySelector('span').addEventListener('click', ()=>{
-        divbox.remove();
-    })
-
-    memberbox.append(divbox);
-}
 
 //팀 목록 조회하기
 $('select[name="deptNo"]').on('change', () => {
@@ -101,8 +40,8 @@ $('select[name="deptNo"]').on('change', () => {
 
 //멤버 목록 조회하기
 $('select[name="teamNo"]').on('change', () => {
-    $('select[name="memberNo"]').html('');
-    if ($('select[name="memberNo"]').val() != 1) {
+    $('select[name="leader"]').html('');
+    if ($('select[name="leader"]').val() != 1) {
         $.ajax({
             url: '/sixman/project/memberlist',
             method: 'POST',
@@ -116,7 +55,7 @@ $('select[name="teamNo"]').on('change', () => {
                     console.log("멤버 옵션 생성 성공");
                     option.setAttribute('value', element.no);
                     option.innerHTML = element.name;
-                    $('select[name="memberNo"]').append(option);
+                    $('select[name="leader"]').append(option);
 
                 });
             },
@@ -130,12 +69,12 @@ $('select[name="teamNo"]').on('change', () => {
 
 //팀에 속해 있는 멤버 목록 조회하기
 function memberListAjax(){
-    $('select[name="memberNo"]').html('');
+    $('select[name="leader"]').html('');
     const teamNo = $('select[name="teamNo"]').val();
     const deptNo = $('select[name="deptNo"]').val();
-    let no = teamNo;
 
-    no = teamNo != null ? teamNo : deptNo 
+    let no = teamNo != null ? teamNo : deptNo;
+    
     console.log("팀 번호 : "+teamNo);
     console.log("=====");
     console.log("부서 번호 : "+deptNo);
@@ -151,8 +90,9 @@ function memberListAjax(){
                 const option = document.createElement('option');
                 console.log("멤버 옵션 생성 성공");
                 option.setAttribute('value', element.no);
-                option.innerHTML = element.name;
-                $('select[name="memberNo"]').append(option);
+                option.setAttribute('leader', element.no);
+                option.innerHTML = element.name + ' ' + element.positionName;
+                $('select[name="leader"]').append(option);
 
             });
         },
@@ -162,59 +102,67 @@ function memberListAjax(){
     });
 }
 
-// selects.forEach(element => {
-//     const value = element.querySelector('.selected-option');
-//     const option = element.querySelector('ul');
-//     const opts = element.querySelectorAll('li');
+//팀 목록 select 박스 보이게하기
+const selects = document.querySelectorAll('.select');
+const memberbox = document.querySelector('.team-member-box');
 
-//     element.addEventListener('click', ()=>{
-        
-//         if(option.classList.contains('hide')){
-//             option.classList.remove('hide');
-//             option.classList.add('show');
-//             selectOpt(opts, value, option);
-//         }else{
-//             option.classList.add('hide');
-//             option.classList.remove('show');
-//         }
-        
-//         const divbox = document.createElement('div');
-//         divbox.classList.add('member');
-//         divbox.innerHTML = `<p>${value.value}</p>`
-//                          +"<span class='material-symbols-outlined'> close </span>";
+selects.forEach(function (element, index, array) {
+    const value = element.querySelector('.selected-option');
+    const option = element.querySelector('select');
+    const opts = option.querySelectorAll('option');
 
-//         divbox.querySelector('span').addEventListener('click', ()=>{
-//             divbox.remove();
-//             value.remove();
-//         })
+    element.addEventListener('click', (e)=>{
+        e.stopPropagation();
+        if(option.classList.contains('hide')){
+            option.classList.remove('hide');
+            option.classList.add('show');
+            opts.forEach(optsItem=>{
+                const innerValue = optsItem.innerHTML;
+                optsItem.addEventListener('click', (e)=>{
+                    e.stopImmediatePropagation();
+                    value.innerHTML = innerValue;
+                    option.classList.add('hide');
+                    option.classList.remove('show');
+                    if(index===array.length-1){
+                        createMemberBox();
+                    }
+                });
+            });
+        }else{
+            option.classList.add('hide');
+            option.classList.remove('show');
+        }
+    })
+});
 
-//         memberbox.append(divbox);
-//     })
-// });
+//담당자, 직급, 이름 선택시 memberbox 에 생성되는 div값
+function createMemberBox() {
+    const divbox = document.createElement('div');
+    divbox.classList.add('member');
 
-// if(inputFile.value!=null){
-//     const div = document.createElement('div');
-//     div.classList.add('file-item');
-//     div.innerHTML = `<p>${inputFile.value.substring(inputFile.value.lastIndexOf('\\')+1)}</p>`
-//                 +"<span class='material-symbols-outlined'> close </span>";
+    let text = "";
 
-//     div.querySelector('span').addEventListener('click', ()=>{
-//         div.remove();
-//         inputFile.remove();
-//     });
+    for(let i = 0; i < selects.length; i++){
+        const item = selects[i];
+        const v = item.querySelector('.selected-option');
+        const leader = item.querySelector('input[type=hidden]');
+        leader.value = v.innerHTML;
+        text += `<input type='text' value="${v.innerHTML}" name='prjmem'>`;
+        text += `<input type='hidden' value="${v.innerHTML}" name='memberNo'>`
+        if(i!=selects.length-1){
+            text += '';
+        }
+    }
 
-//     fileBox.append(div);
-// }
+    text += `<span class='material-symbols-outlined'> close </span>`;
+    divbox.innerHTML = text;
 
+    divbox.querySelector('span').addEventListener('click', ()=>{
+        divbox.remove();
+    })
 
-//인원 선택 하면 team-member-box 로 넘기기
-// const team = document.querySelector('#teamvalue').value;
-// const reader = document.querySelector('#readervalue').value;
-// const member = document.querySelector('#membervalue').value;
-
-// console.log(team);
-// console.log(reader);
-// console.log(member);
+    memberbox.append(divbox);
+}
 
 //-----------------------------------------------
 

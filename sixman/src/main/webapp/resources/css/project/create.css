@@ -83,7 +83,7 @@ input[name='title']{
 #startDate,
 #endDate {
     --margin-top: 11px;
-    width: 120px;
+    width: 135px;
     height: 40px;
     border-radius: 5px;
     border: 1px solid #aaa;
@@ -95,12 +95,13 @@ input[name='title']{
 }
 
 .prj2 {
-    margin-left: 30px;
+    margin-left: 35px;
+    border-color: #2fa597;
 }
 
 .writer1 {
-    margin-right: 30px;
-
+    margin-left: 25px;
+    margin-right: 50px;
 }
 
 .plusm {
@@ -110,56 +111,29 @@ input[name='title']{
 
 /* 팀 select */
 
-.hide{
-    display: none;
-}
-
-/* .show{
-    display: block;
-} */
-
-.select{
-    position: relative;
-    padding: 5px 10px;
+select {
+    outline: none;
     width: 150px;
     height: 40px;
     border-radius: 5px;
     border:1px solid #d3d3d3;
     background-color: #ffffff;
-    background-image: url("https://img.icons8.com/material-rounded/24/000000/expand-arrow.png");
-    background-repeat: no-repeat;
-    background-position: 96% center;
     cursor: pointer;
-}
-
-.select > span {
-    display: flex;
-    justify-content: center;
-    padding-top: 5px;
-    padding-right: 7px;
-}
-
-.select ul{
-    position: absolute;
-    top: 39px;
-    left: 1px;
-    width: 100%;
-    border:1px solid #d3d3d3;
-    border-radius: 5px;
-    background-color: #ffffff;
-    cursor: pointer;
-    z-index: 1;
-}
-
-.select ul li{
-    padding: 10px;
+    font-size: 16px;
     text-align: center;
 }
 
-.select ul li:hover{
-    background-color: floralwhite;
+select option {
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #2fa597;
+    border-bottom: 1px dashed #2fa597;
+    transition: .3s ease-in;
 }
 
+option {
+    border-radius: 5px;
+}
 
 /* 첨부파일 */
 
@@ -349,7 +323,7 @@ input[name='prjmem'] {
     width: 30px;
     height: 30px;
     display: block;
-    background-color: #FF0000;
+    background-color: #2fa597;
     border-radius: 50%;
     content: '';
 }

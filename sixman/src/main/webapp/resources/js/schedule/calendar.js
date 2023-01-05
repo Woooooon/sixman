@@ -1,4 +1,5 @@
 let date = new Date();
+console.log(date);
 
 const renderCalender = () =>{
     const viewYear  = date.getFullYear();
