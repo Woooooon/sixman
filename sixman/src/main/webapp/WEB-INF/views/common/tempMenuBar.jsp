@@ -69,7 +69,7 @@
                     <div>Member</div>
                     <div id="ml-search">
                         <input type="text" placeholder="이름검색">
-                        <span class="material-symbols-outlined"> search </span>
+                        <span class="material-symbols-outlined" onclick="searchMemberList('m-list-panel')"> search </span>
                     </div>
                 </article>
                 <article class="ml-main">
@@ -121,7 +121,7 @@
                     <div id="ml-menu-box">
                         <div id="ml-search">
                             <input type="text" placeholder="검색">
-                            <span class="material-symbols-outlined"> search </span>
+                            <span class="material-symbols-outlined" onclick="searchChatList()"> search </span>
                         </div>
                         <span onclick="openCreate()" class="material-symbols-outlined"> add </span>
                     </div>
@@ -164,6 +164,9 @@
                         <div class="file-box">
 
                         </div>
+                    </div>
+                    <div id="option-footer">
+                        <span class="material-symbols-outlined">logout</span>
                     </div>
                 </div>
             </section>
@@ -237,7 +240,7 @@
                         <div>Create</div>
                         <div id="ml-search">
                             <input type="text" placeholder="이름검색">
-                            <span class="material-symbols-outlined"> search </span>
+                            <span class="material-symbols-outlined" onclick="searchMemberList('m-create-panel')"> search </span>
                         </div>
                     </div>
                     <div id="chat-member-list">
@@ -435,7 +438,6 @@
         const msg = datas[1];
         
         if(type=='CHAT'){
-            console.log("asdf");
             notify(type, msg);
             return;
         }
@@ -488,14 +490,14 @@
         var options = {
             body: msg
         }
-        
+
         // 데스크탑 알림 요청
         var notification = new Notification(title, options);
         
-        // 3초뒤 알람 닫기
+        // 5초뒤 알람 닫기
         setTimeout(function(){
             notification.close();
-        }, 3000);
+        }, 5000);
     }
 
     //채팅
@@ -526,11 +528,6 @@
         const isfile = datas[5];
         const count = datas[6];
 
-        // if(isfile=='Y'){
-        //     createChatRoom(room);
-        //     return;
-        // }
-
         if(no=='${loginMember.no}'){
             chatInHTML(name, msg, 'right', sysdate, count, isfile);
         }else{
@@ -545,11 +542,7 @@
         counts.forEach(element => {
             const eDate = new Date(element.getAttribute("date"));
 
-            
             if(eDate > beforeDate){
-                console.log(element);
-                console.log("이전접속시간 : " + beforeDate);
-                console.log("요소에기록된시간 : " + eDate);
                 if(parseInt(element.innerHTML) - 1 > 0){
                 element.innerHTML = parseInt(element.innerHTML) - 1;
                 }else{
@@ -557,6 +550,7 @@
                 }
             }
         });
+        
     }
     const chatInput = document.querySelector('#chat-input');
     chatInput.addEventListener("keyup", (e)=>{
@@ -661,9 +655,9 @@
             const fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/gi;
             let file = '';
             if(msg.match(fileForm)){
-                file = '<img src=/sixman/resources/chat/'+msg+'>';
+                file = '<img onclick="openFile(${chat.fileNo}, this.cloneNode(true))" src=/sixman/resources/chat/'+msg+'>';
             }else{
-                file = '<span class="material-symbols-outlined"> upload_file </span><span>'+msg+'</span>';
+                file = '<div class="file-div" onclick="openFile(${chat.fileNo}, this.cloneNode(true))"><span class="material-symbols-outlined"> upload_file </span><span>'+msg+'</span></div>';
             }
             div.innerHTML = '<div class="chat-msg">' + arrow + file + '</div><div class="chat-info">' + count + time + '</div>';
         }else{
@@ -675,5 +669,47 @@
         chatMain.scrollTop = chatMain.scrollHeight;
     }
 
+    function searchChatList() {
+        //m-list-panel
+        const input = document.querySelector('#m-chatList-panel #ml-search input');
+        const text = input.value;
+    
+        const items = document.querySelectorAll('.mc-list-item');
+        items.forEach(element => {
+            const elementText = element.querySelector('.mc-list-item-header p').innerText;
+            if(elementText.includes(text)){
+                element.style.display = "flex";
+            }else{
+                element.style.display = "none";
+            }
+        });
+    }
+
+
+    function searchMemberList(panelName) {
+        //m-list-panel
+        const input = document.querySelector('#'+panelName+' #ml-search input');
+        const text = input.value;
+    
+        const items = document.querySelectorAll('.ml-list-item');
+        items.forEach(element => {
+            const elementText = element.querySelector('div').innerText;
+            if(elementText.includes(text)){
+                element.style.display = "flex";
+            }else{
+                element.style.display = "none";
+            }
+        });
+
+        const bookMarkBox = document.querySelector('#'+panelName+' #ml-bookmark .ml-list-title input');
+        const teamBox = document.querySelector('#'+panelName+' #ml-team .ml-list-title input');
+        const allBox = document.querySelector('#'+panelName+' #ml-all .ml-list-title input');
+
+        if (bookMarkBox) {
+            bookMarkBox.checked = true;
+            teamBox.checked = true;
+            allBox.checked = false;
+        }
+    }
 </script>
 </html>

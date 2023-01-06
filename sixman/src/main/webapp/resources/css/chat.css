@@ -120,6 +120,9 @@
     border-radius: 35%;
     background-color: var(--main-color);
 }
+.chat-name{
+    margin-top: 10px;
+}
 .chat-img-box{
     width: 55px;
     height: 55px;
@@ -357,9 +360,14 @@
     letter-spacing: 0.5px;
     font-size: 0.95em;
 }
-.chat-msg img{
+.chat-msg img,
+.chat-msg .file-div{
     width: 100px;
     height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .right .chat-msg{
     background-color: #ffe657;
@@ -451,7 +459,8 @@
 }
 #preview span:nth-of-type(1),
 .file-box div span:nth-of-type(1),
-#file-inner-box div span:nth-of-type(1){
+#file-inner-box div span:nth-of-type(1),
+.chat-msg .file-div span:nth-of-type(1){
     width: 100%;    
     height: 80%;
     
@@ -463,7 +472,8 @@
 }
 #preview span:nth-of-type(2),
 .file-box div span:nth-of-type(2),
-#file-inner-box div span:nth-of-type(2){
+#file-inner-box div span:nth-of-type(2),
+.chat-msg .file-div span:nth-of-type(2){
     width: 80%;    
     height: 20%;
     
@@ -477,7 +487,7 @@
     text-overflow: ellipsis;
 }
 #preview img,
-#file-inner-box div img{
+#file-inner-box img{
     width: 100%;
     height: 100%;
 }
@@ -521,6 +531,15 @@
     gap: 20px;
     width: 100%;
     color: var(--bo-80);
+}
+#option-footer{
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding: 20px;
+    width: 100%;
 }
 #containner-box > div:not(.file-box){
     width: 100%;
@@ -761,11 +780,15 @@
 
 #file-inner-box{
     width: 80%;
-    height: 60%;
+    height: 70%;
     align-self: center;
 }
 
 #file-inner-box div{
     width: 100%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

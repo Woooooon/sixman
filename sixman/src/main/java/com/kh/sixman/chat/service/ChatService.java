@@ -114,8 +114,8 @@ public class ChatService {
 		return chatDao.createChat(sst, map);
 	}
 
-	public int chatOut(String loginNo, String no) {
-		return 0;
+	public int chatOut(String loginNo, Map<String, String> map) {
+		return chatDao.chatOut(sst, map);
 	}
 
 	public int setFix(Map<String, String> map) {

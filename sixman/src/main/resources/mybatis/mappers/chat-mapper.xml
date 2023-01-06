@@ -4,6 +4,14 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="chatMapper">
 
+	<delete id="chatOut">
+	
+		DELETE CHAT_ROOM_SETTING
+		WHERE CHAT_ROOM_NO = ${no}
+		AND MEMBER_NO = ${loginNo}
+	
+	</delete>
+
 	<insert id="inBookMark">
 		INSERT INTO BOOKMARK
 		VALUES
@@ -24,7 +32,13 @@
 	
 		UPDATE CHAT_ROOM_SETTING
 		SET LAST_JOIN_TIME = SYSDATE
-		, BEFORE_JOIN = (SELECT LAST_JOIN_TIME FROM CHAT_ROOM_SETTING WHERE CHAT_ROOM_NO = ${no} AND MEMBER_NO = ${loginNo})
+		, BEFORE_JOIN = 
+		(
+			SELECT LAST_JOIN_TIME 
+			FROM CHAT_ROOM_SETTING
+			WHERE CHAT_ROOM_NO = ${no} 
+			AND MEMBER_NO = ${loginNo}
+		)
 		WHERE CHAT_ROOM_NO = ${no}
 		AND MEMBER_NO = ${loginNo}
 	
@@ -189,6 +203,7 @@
 	    WHERE LAST_JOIN_TIME <![CDATA[<]]> #{cv.writeTime}
 	    AND CHAT_ROOM_NO = ${cv.chatRoomNo}
 	    AND NOT MEMBER_NO = ${loginNo}
+	    AND NOT MEMBER_NO = ${cv.memberNo}
 	</select>
 
 	<select id="getBookMark" resultType="MemberVo">
@@ -364,6 +379,7 @@
 		SELECT 
 		    M.NO
 		    , M.NAME
+		    , M.EMAIL
 		    , D.NO AS DEPT_NO
 		    , D.NAME AS DEPT_NAME
 		    , T.NO AS TEAM_NO
@@ -397,6 +413,7 @@
 		SELECT 
 		    M.NO
 		    , M.NAME
+		    , M.EMAIL
 		    , D.NO AS DEPT_NO
 		    , D.NAME AS DEPT_NAME
 		    , T.NO AS TEAM_NO
@@ -458,7 +475,7 @@
 				SEQ_CHAT_ROOM_NO.NEXTVAL
 				, ${n}
 				, 'N'
-				, 'N'
+				, 'Y'
 				, '${loginMember.name}의 메신저'
 				, SYSDATE
 			)

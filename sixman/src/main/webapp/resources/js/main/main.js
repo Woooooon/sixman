@@ -159,7 +159,7 @@ function alarmAjax() {
                                 msg = `${vo.senderName}(이)가 결재를 요청하였습니다. "${vo.title}"`;
                                 f = ()=>{location.href='';}
                                 break;
-                            case 'ADRESS':
+                            case 'ADDRESS':
                                 msg = `${vo.senderName}(이)가 주소록을 공유하였습니다. "${vo.title}"`;
                                 f = ()=>{location.href='';}
                                 break;

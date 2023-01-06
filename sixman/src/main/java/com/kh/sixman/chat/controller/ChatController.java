@@ -107,12 +107,17 @@ public class ChatController {
 	public void closeChat(HttpSession session) {
 		String loginNo = getLoginMember(session).getNo();
 		ChatRoomVo vo = (ChatRoomVo) session.getAttribute("room");
+		
+		session.removeAttribute("room");			
+		if(vo==null)return;
+		
 		String no = vo.getChatRoomNo();
+		
 		Map<String, String> map = new HashMap<>();
 		map.put("loginNo", loginNo);
 		map.put("no", no);
-		int result = chatService.join(map);
-		session.removeAttribute("room");
+		
+		chatService.join(map);
 	}
 	
 	@PostMapping(value = "createChat")
@@ -137,10 +142,13 @@ public class ChatController {
 		}
 	}
 	
-	@PostMapping(value = "chatOut")
+	@PostMapping(value = "outChat")
 	public void chatOut(String no, HttpSession session) {
 		String loginNo = getLoginMember(session).getNo();
-		int result = chatService.chatOut(loginNo, no);
+		Map<String, String> map = new HashMap<>();
+		map.put("loginNo", loginNo);
+		map.put("no", no);
+		int result = chatService.chatOut(loginNo, map);
 	}
 	
 	@PostMapping(value = "changeName")

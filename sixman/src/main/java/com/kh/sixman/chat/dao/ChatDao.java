@@ -89,4 +89,8 @@ public class ChatDao {
 		return sst.selectOne("chatMapper.memberOne", map);
 	}
 
+	public int chatOut(SqlSessionTemplate sst, Map<String, String> map) {
+		return sst.delete("chatMapper.chatOut", map);
+	}
+
 }
