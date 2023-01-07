@@ -1,6 +1,4 @@
-
-
-const openPop = document.querySelector('input[name="reciver"]');
+const openPop = document.querySelector('#reciverName');
 
 //자식창 오픈
 openPop.addEventListener('click', () => {
@@ -12,21 +10,23 @@ function openWindowPop() {
 }
 
 //자식창에서 멤버 객체 배열 받은 함수
-function childValue(memberArr) {  
-    let reciver = "";
+function childValue(memberArr) {
+    let reciver = '';
+    let reciverName = '';
 
     for (let index = 0; index < memberArr.length; index++) {
         reciver += memberArr[index].no;
-        if (!index==memberArr.length-1) {
-            reciver += ",";
+        reciverName += memberArr[index].name;
+
+        if (!index == memberArr.length - 1) {
+            reciver += ',';
+            reciverName += ',';
         }
+
         document.querySelector('input[name="reciver"]').value = reciver;
+        document.querySelector('#reciverName').value = reciverName;
     }
 }
-
-
-
-
 
 const modal = document.querySelector('.share-modal');
 const share = document.querySelectorAll('.share');
@@ -75,7 +75,9 @@ function shareCard(selectAll, checkbox) {
 
     div.classList.add('list-item');
     div.innerHTML =
-        '<input type="checkbox" value="'+ no +'" name="addressNo"/>' +
+        '<input type="checkbox" value="' +
+        no +
+        '" name="addressNo" style="display: none" checked/>' +
         '<span class="material-symbols-outlined removeBtn">cancel_schedule_send</span>' +
         '<p>' +
         sortation +

@@ -186,6 +186,11 @@
 .receiver span:hover {
     color: #000;
 }
+
+.receiver input[name='reciver'] {
+    display: none;
+}
+
 .receiver input[type='text'] {
     border: 1px solid var(--bo-20);
     border-radius: 2px;

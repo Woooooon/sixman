@@ -11,7 +11,6 @@
 		LEFT JOIN ADDRESS_A F ON F.ADDRESS_NO = A.NO
 		WHERE A.USER_NO = #{no}
 		AND A.DELETE_YN = 'N'
-		AND F.THUMB_YN = 'Y'
 		<if test="keyword != null and keyword !='' and category != null and category != ''">
 			AND ${category} LIKE '%${keyword}%'
 		</if >
@@ -56,12 +55,42 @@
 		)
 	</insert>
 	
+	<!-- <insert id="insertReciveAddress">
+		insert all
+			<foreach collection="list" item="vo" separator=" ">
+			INTO 
+			ADDRESS_BOOK
+			(
+			    "NO",
+				"SORTATION_NO",
+				"USER_NO",
+				"NAME",
+				"PHONE",
+				"EMAIL",
+				"COMPANY",
+				"POSITION",
+				"ADDRESS",
+				"COMMENT"
+			)
+			VALUES
+			(
+				get_seq_no('seq_ADDRESS_BOOK_NO'),
+			    #{vo.sortationNo},
+			    #{vo.userNo},
+			    #{vo.name},
+			    #{vo.phone},
+			    #{vo.email},
+			    #{vo.company},
+			    #{vo.position},
+			    #{vo.address},
+			    #{vo.comment}
+			)
+			</foreach>
+		select * from dual
+	</insert> -->
+	
 	<select id="getNo" resultType="String">
-		select
-			"NO"
-		from ADDRESS_BOOK
-		WHERE phone = #{phone}
-		AND name = #{name}
+		select SEQ_ADDRESS_BOOK_NO.CURRVAL from dual
 	</select>
 	
 	<select id="selectAddressList" resultType="AddressVo">
@@ -84,10 +113,21 @@
 		    F.NO AS FILE_NO
 		FROM ADDRESS_BOOK A 
 		LEFT JOIN ADDRESS_SORTATION S ON A.SORTATION_NO = S.NO
-		LEFT JOIN ADDRESS_A F ON F.ADDRESS_NO = A.NO
+		LEFT JOIN 
+		(
+		    SELECT 
+		        "NO",
+		        "ORIGIN_NAME",
+		        "ADDRESS_NO",
+		        "CHANGE_NAME",
+		        "FILE_PATH",
+		        "ENROLL_DATE",
+		        "THUMB_YN"
+		    FROM ADDRESS_A
+		    WHERE "THUMB_YN" = 'Y'
+		)F ON F.ADDRESS_NO = A.NO
 		WHERE A.USER_NO = #{no}
 		AND A.DELETE_YN = 'N'
-		AND F.THUMB_YN = 'Y'
 		<if test="keyword != null and keyword !='' and category != null and category != ''">
 			AND ${category} LIKE '%${keyword}%'
 		</if >
@@ -100,6 +140,43 @@
 		    OR A.ADDRESS LIKE '%${keyword}%'
 		    OR S.NAME LIKE '%${keyword}%'
 		</if> 
+	</select>
+	
+	<select id="selectReciveAddressList" resultType="AddressVo">
+		SELECT
+		    A.NO,
+		    A.SORTATION_NO,
+		    A.NAME,
+		    A.PHONE,
+		    A.EMAIL,
+		    A.COMPANY,
+		    A.POSITION,
+		    A.ADDRESS,
+		    A.ENROLL_DATE,
+		    A.MODIFY_DATE,
+		    A.DELETE_YN,
+		    A."COMMENT",
+		    S.HIGH_NO AS SORTATION_HIGH,
+		    S.NAME AS SORTATION_NAME,
+		    F.CHANGE_NAME AS FILE_NAME,
+		    F.NO AS FILE_NO
+		FROM ADDRESS_BOOK A 
+		LEFT JOIN ADDRESS_SORTATION S ON A.SORTATION_NO = S.NO
+		LEFT JOIN 
+		(
+		    SELECT 
+		        "NO",
+		        "ORIGIN_NAME",
+		        "ADDRESS_NO",
+		        "CHANGE_NAME",
+		        "FILE_PATH",
+		        "ENROLL_DATE",
+		        "THUMB_YN"
+		    FROM ADDRESS_A
+		    WHERE "THUMB_YN" = 'Y'
+		)F ON F.ADDRESS_NO = A.NO
+		WHERE A.DELETE_YN = 'N'
+		AND A.NO IN (${addressNo})
 	</select>
 	
 	<select id="selectDlelteAddressList" resultType="AddressVo">
@@ -122,10 +199,21 @@
 		    F.NO AS FILE_NO
 		FROM ADDRESS_BOOK A 
 		LEFT JOIN ADDRESS_SORTATION S ON A.SORTATION_NO = S.NO
-		LEFT JOIN ADDRESS_A F ON F.ADDRESS_NO = A.NO
+		LEFT JOIN 
+		(
+		    SELECT 
+		        "NO",
+		        "ORIGIN_NAME",
+		        "ADDRESS_NO",
+		        "CHANGE_NAME",
+		        "FILE_PATH",
+		        "ENROLL_DATE",
+		        "THUMB_YN"
+		    FROM ADDRESS_A
+		    WHERE "THUMB_YN" = 'Y'
+		)F ON F.ADDRESS_NO = A.NO
 		WHERE A.USER_NO = #{no}
 		AND A.DELETE_YN = 'Y'
-		AND F.THUMB_YN = 'Y'
 		<if test="keyword != null and keyword !='' and category != null and category != ''">
 			AND ${category} LIKE '%${keyword}%'
 		</if >
@@ -160,11 +248,60 @@
 		    F.NO AS FILE_NO
 		FROM ADDRESS_BOOK A 
 		LEFT JOIN ADDRESS_SORTATION S ON A.SORTATION_NO = S.NO
-		LEFT JOIN ADDRESS_A F ON F.ADDRESS_NO = A.NO
+		LEFT JOIN 
+		(
+		    SELECT 
+		        "NO",
+		        "ORIGIN_NAME",
+		        "ADDRESS_NO",
+		        "CHANGE_NAME",
+		        "FILE_PATH",
+		        "ENROLL_DATE",
+		        "THUMB_YN"
+		    FROM ADDRESS_A
+		    WHERE "THUMB_YN" = 'Y'
+		)F ON F.ADDRESS_NO = A.NO
 		WHERE A.USER_NO = #{userNo}
 		AND A.NO = #{no}
 		AND DELETE_YN = 'N'
-		AND F.THUMB_YN = 'Y'
+	</select>
+	
+	<select id="getAddressAll" resultType="AddressVo">
+		SELECT
+		    A.NO,
+		    A.SORTATION_NO,
+		    A.NAME,
+		    A.PHONE,
+		    A.EMAIL,
+		    A.COMPANY,
+		    A.POSITION,
+		    A.ADDRESS,
+		    A.ENROLL_DATE,
+		    A.MODIFY_DATE,
+		    A.DELETE_YN,
+		    A."COMMENT",
+		    S.HIGH_NO AS SORTATION_HIGH,
+		    S.NAME AS SORTATION_NAME,
+		    F.CHANGE_NAME AS FILE_NAME,
+		    F.NO AS FILE_NO
+		FROM ADDRESS_BOOK A 
+		LEFT JOIN ADDRESS_SORTATION S ON A.SORTATION_NO = S.NO
+		LEFT JOIN 
+		(
+		    SELECT 
+		        "NO",
+		        "ORIGIN_NAME",
+		        "ADDRESS_NO",
+		        "CHANGE_NAME",
+		        "FILE_PATH",
+		        "ENROLL_DATE",
+		        "THUMB_YN"
+		    FROM ADDRESS_A
+		    WHERE "THUMB_YN" = 'Y'
+		)F ON F.ADDRESS_NO = A.NO
+		WHERE A.USER_NO = #{userNo}
+		AND A.NO in (${no})
+		AND DELETE_YN = 'N'
 	</select>
 	
 	<select id="sortationList" resultType="SortationVo">
@@ -174,6 +311,104 @@
 		    NAME
 		FROM ADDRESS_SORTATION
 		WHERE USER_NO = #{no}
+	</select>
+	
+	<insert id="sendAddress">
+		insert all
+			<foreach collection="list" item="vo" separator=" ">
+				into R_ADDRESS
+			(
+				"NO",
+				"RECIVER_NO",
+				"SENDER_NO",
+				"SEND_ADDRESS"
+			)
+			VALUES
+			(
+				get_seq_no('seq_R_ADDRESS_no'),
+				#{vo.reciverNo},
+				${vo.senderNo},
+				#{vo.sendAddress}
+			)
+			</foreach>
+		select * from dual
+	
+	</insert>
+	
+	<select id="countReciveAddress" resultType="int">
+		SELECT COUNT(*) 
+		FROM 
+		R_ADDRESS R
+		JOIN 
+		(
+		    SELECT
+		        M.NO
+		        , M.NAME
+		        , D.NAME AS DEPT_NAME
+		        , T.NAME AS TEAM_NAME
+		        , P.POSITION AS POSITION_NAME
+		    FROM MEMBER M
+		    JOIN POSITION P ON P.NO = M.POSITION_NO
+		    JOIN DEPARTMENT D ON D.NO = M.DEPT_NO
+		    LEFT JOIN DEPARTMENT T ON T.NO = M.TEAM_NO
+		    WHERE M.RESIGNATION_YN = 'N'
+		)M ON M.NO = R.SENDER_NO
+		WHERE RECIVER_NO = #{no}
+		<if test="keyword != null and keyword !='' and category != null and category != ''">
+			AND ${category} LIKE '%${keyword}%'
+		</if >
+		<if test="keyword != null and keyword !='' and category == null" >
+			AND A.NAME LIKE '%${keyword}%'
+		    OR A.PHONE LIKE '%${keyword}%' 
+		    OR A.EMAIL LIKE '%${keyword}%'
+		    OR A.COMPANY LIKE '%${keyword}%'
+		    OR A.POSITION LIKE '%${keyword}%'
+		    OR A.ADDRESS LIKE '%${keyword}%'
+		    OR S.NAME LIKE '%${keyword}%'
+		</if> 
+	</select>
+	
+	<select id="reciveAddressList" resultType="ReciverVo">
+		SELECT 
+		    R.NO,
+		    R.RECIVER_NO,
+		    R.SENDER_NO,
+		    M.NAME AS SENDER_NAME,
+		    M.TEAM_NAME AS SENDER_TEAM,
+		    M.DEPT_NAME AS SENDER_DEPT,
+		    M.POSITION_NAME AS SENDER_POSITION,
+		    R.CHECK_YN,
+		    R.SEND_ADDRESS,
+		    R.ENROLL_DATE
+		FROM 
+		R_ADDRESS R
+		JOIN 
+		(
+		    SELECT
+		        M.NO
+		        , M.NAME
+		        , D.NAME AS DEPT_NAME
+		        , T.NAME AS TEAM_NAME
+		        , P.POSITION AS POSITION_NAME
+		    FROM MEMBER M
+		    JOIN POSITION P ON P.NO = M.POSITION_NO
+		    JOIN DEPARTMENT D ON D.NO = M.DEPT_NO
+		    LEFT JOIN DEPARTMENT T ON T.NO = M.TEAM_NO
+		    WHERE M.RESIGNATION_YN = 'N'
+		)M ON M.NO = R.SENDER_NO
+		WHERE RECIVER_NO = #{no}
+		<if test="keyword != null and keyword !='' and category != null and category != ''">
+			AND ${category} LIKE '%${keyword}%'
+		</if >
+		<if test="keyword != null and keyword !='' and category == null" >
+			AND M.NAME LIKE '%${keyword}%'
+		    OR A.PHONE LIKE '%${keyword}%' 
+		    OR A.EMAIL LIKE '%${keyword}%'
+		    OR A.COMPANY LIKE '%${keyword}%'
+		    OR A.POSITION LIKE '%${keyword}%'
+		    OR A.ADDRESS LIKE '%${keyword}%'
+		    OR S.NAME LIKE '%${keyword}%'
+		</if> 
 	</select>
 	
 	<insert id="insertSortation">
@@ -209,6 +444,21 @@
 			#{no}
 		</foreach>
 	</delete>
+	
+	<delete id="deleteReciveAddressAll">
+		DELETE 
+		FROM R_ADDRESS
+		<foreach collection="list" item="no" open="WHERE NO IN(" close=")" separator=",">
+			#{no}
+		</foreach>
+	</delete>
+	
+	<delete id="deleteReciveAddress">
+		DELETE 
+		FROM R_ADDRESS
+		WHERE NO = #{reciveNo} 
+	</delete>
+	
 	
 	<update id="restore">
 		UPDATE ADDRESS_BOOK
@@ -284,7 +534,7 @@
 		)
 		VALUES
 		(
-			SEQ_COMPANYLOGO_A_NO.NEXTVAL,
+			SEQ_ADDRESS_A_NO.NEXTVAL,
 			#{originName},
 			${subNo},
 			#{changeName},
@@ -294,9 +544,5 @@
 	</insert>
 	
 	
-	<delete id="deleteFile">
-		DELETE 
-		FROM COMPANYLOGO_A 
- 		where NO = ${no}
-	</delete>
+	
 </mapper>

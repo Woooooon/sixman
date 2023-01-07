@@ -8,8 +8,8 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
         <script defer src="<c:url value='/resources/js/address/add.js'/>"></script>
         <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-      
         <script src="https://kit.fontawesome.com/ae846b135b.js" crossorigin="anonymous"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
     </head>
     <body>
         <%@include file="/WEB-INF/views/common/menuBar.jsp" %>

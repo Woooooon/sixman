@@ -26,6 +26,7 @@
 		<typeAlias type="com.kh.sixman.schedule.vo.ScheduleVo" alias="ScheduleVo"/>
 		<typeAlias type="com.kh.sixman.company.vo.CompanyVo" alias="CompanyVo"/>
 		<typeAlias type="com.kh.sixman.addressBook.vo.AddressVo" alias="AddressVo"/>
+		<typeAlias type="com.kh.sixman.addressBook.vo.ReciverVo" alias="ReciverVo"/>
 		<typeAlias type="com.kh.sixman.addressBook.vo.SortationVo" alias="SortationVo"/>
 		<typeAlias type="com.kh.sixman.chat.vo.ChatRoomVo" alias="ChatRoomVo"/>
 		<typeAlias type="com.kh.sixman.chat.vo.ChatVo" alias="ChatVo"/>

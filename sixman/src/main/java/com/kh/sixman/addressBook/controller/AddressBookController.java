@@ -1,5 +1,6 @@
 package com.kh.sixman.addressBook.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -17,8 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.kh.sixman.addressBook.service.AddressService;
 import com.kh.sixman.addressBook.vo.AddressVo;
+import com.kh.sixman.addressBook.vo.ReciverVo;
 import com.kh.sixman.addressBook.vo.SortationVo;
 import com.kh.sixman.common.AttachmentVo;
 import com.kh.sixman.common.FileUnit;
@@ -74,7 +78,7 @@ public class AddressBookController {
 	    //각페이지마다 리스트 8개씩 
 		List<AddressVo> addressList = addressService.selectAddressList(rb, search);
 		
-//		log.info("memberList size : " + AddressList.size());
+		log.info("memberList size : " + addressList.size());
 		
 		//카테고리 구분 userNo 전달
 		List<SortationVo> sortationList = addressService.sortationList(no);
@@ -93,25 +97,8 @@ public class AddressBookController {
 		return "addressBook/list";
 	}
 	
-	@PostMapping("send")
-	public String list(HttpSession session, String reciver, String[] addressNo) {
-		//로그인한 유저의 세션 가져오기
-		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
-
-		//로그인 유저의 seqNo 가져오기
-		String no = loginMember.getNo();
-		
-		log.info("받는 사람 번호" + reciver);
-		log.info("전달 할 Address" + Arrays.toString(addressNo));
-
-		return "redirect:/addressBook/list";
-	}
 	
-	@GetMapping("receive")
-	public String receive() {
-		return "addressBook/receive";
-	}
-	
+
 	@GetMapping("add")
 	public String add(HttpSession session, Model model) {
 		//로그인한 유저의 세션 가져오기
@@ -282,7 +269,7 @@ public class AddressBookController {
 		
 		//페이징 셋
 		int pageLimit = 5;
-		int boardLimit = 8;
+		int boardLimit = 10;
 		
 		//총 주소록 개수
 		int listCount = addressService.countList(search);
@@ -346,5 +333,153 @@ public class AddressBookController {
 		return "복원 요청을 완료했습니다.";
 	}
 	
+	@PostMapping("send")
+	public String sendAddress(HttpSession session,Model model, String reciver, String[] addressNo) {
+		//로그인한 유저의 세션 가져오기
+		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+
+		//로그인 유저의 seqNo 가져오기
+		String no = loginMember.getNo();
+		
+		//받는사람 배열 주소록은 문자열 형태로 변환
+		String[] reciverNo = reciver.split(",");
+		
+		String sendAddress = String.join(",", addressNo);
+		
+		log.info("받는 사람 번호 :" + reciverNo[0]);
+		log.info("전달 할 Address :" + sendAddress);
+		
+		//받은 data로 list로 전환
+		List<ReciverVo> voList = new ArrayList<ReciverVo>();
+		
+		for(String reciverToVo : reciverNo) {
+			ReciverVo vo = new ReciverVo();
+			vo.setSenderNo(no);
+			vo.setSendAddress(sendAddress);
+			vo.setReciverNo(reciverToVo);
+			
+			voList.add(vo);
+		}
+		
+		int sendAddressResult = addressService.sendAddress(voList);
+		
+		if(sendAddressResult < 1) {
+			String errorMsg = "Failed to sand address information.";
+			String title = "죄송합니다. 주소록 전송하지 못하였습니다.";
+			String msg = "주소록 정보를 읽어오지 못 하거나,<br>받는 사람 정보룰 받아오지 못하여 요청을 처리 할 수 없습니다.";
+			
+			model.addAttribute("errorMsg", errorMsg);
+			model.addAttribute("title", title);
+			model.addAttribute("msg", msg);
+			return "common/error";
+		}
+
+		return "redirect:/address";
+	}
+
+	@GetMapping("recive")
+	public String recive(HttpSession session, Model model, String page, String category, String keyword) {
+		//로그인한 유저의 세션 가져오기
+		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+
+		//로그인 유저의 seqNo 가져오기
+		String no = loginMember.getNo();
+		
+		//page요청이 없으면 기본값으로 1설정
+		if(page == null) {
+			page = "1";
+		}
+		
+		log.info(keyword);
+		log.info(category);
+		
+		//로그인 유저마다 주소록이 별개이므로 검색 시 userNo 추가 WHERE문
+		Map<String, String> search = new HashMap<String, String>();
+		search.put("keyword", keyword);
+		search.put("category", category);
+		search.put("no", no);
+		
+		//페이징 셋
+		int pageLimit = 5;
+		int boardLimit = 10;
+		
+		//총 주소록 개수
+		int listCount = addressService.countReciveList(search);
+		
+		log.info("listCount : " + listCount);
+		
+	    int offset = (Integer.parseInt(page)-1) * boardLimit;
+	    
+	    PageVo pv = new PageVo(listCount,Integer.parseInt(page),pageLimit,boardLimit);
+	    RowBounds rb = new RowBounds(offset , boardLimit);
+
+	    //각페이지마다 리스트 10개씩 
+		List<ReciverVo> reciveList = addressService.selectReciveList(rb, search);
+		
+		//조회한 리스트의 주소록 상세정보들 담아오기 List<AddressVo> addressList;
+		
+		for(ReciverVo vo : reciveList) {
+			String addressNo = vo.getSendAddress();
+			String senderNo = vo.getSenderNo();
+		
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("no", addressNo);
+			map.put("userNo", senderNo);
+			
+			List<AddressVo> addressVo = addressService.getAddressAll(map);
+			
+			vo.setAddressList(addressVo);
+			
+			log.info("recive에 담긴 AddressVoList :" + addressVo);
+		}
+		
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("category", category);
+		model.addAttribute("pv", pv);
+		model.addAttribute("reciveList", reciveList);
+		
+		return "addressBook/recive";
+	}
+	
+	@PostMapping(value = "recive/delete", produces = "application/json; charset=utf8")
+	@ResponseBody
+	public String deleteReciveAddress(@RequestParam List<String> no) {
+		
+		log.info("no"+ no.get(0));
+		
+		int result = addressService.deleteReciveAddressAll(no);
+		
+		if(result != 1) return null;
+				
+		return "삭제 요청을 완료했습니다.";
+	}
+	
+	@PostMapping(value = "recive/all", produces = "application/json; charset=utf8")
+	@ResponseBody
+	public String insertReciveAddress(@RequestParam String target,HttpSession session) {
+		//로그인한 유저의 세션 가져오기
+		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+
+		//로그인 유저의 seqNo 가져오기
+		String no = loginMember.getNo();
+		
+		log.info("target : "+ target);
+		
+		Gson gson = new GsonBuilder().create();
+		
+		List<Map<String,String>> list = new ArrayList<>();
+		
+		List<Map<String,String>> reciveDatalist =  (List<Map<String,String>>)gson.fromJson(target, list.getClass());
+		
+		log.info("JSON : "+ reciveDatalist);
+		
+		int result = addressService.insertReciveAddress(reciveDatalist, no);
+		
+		if(result < 1) return null;
+		
+		return "내 주소록에 새로운 주소가 추가 되었습니다.";
+	}
+			
+
 	
 }

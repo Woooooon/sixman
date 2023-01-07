@@ -17,6 +17,7 @@
                 <div class="receiver">
                     <label for="">받는사람</label>
                     <input type="text" name="reciver"/>
+                    <input type="text" id="reciverName"/>
                     <input type="submit" value="전 송" />
                     <span class="material-symbols-outlined" id="close-modal"> close </span>
                 </div>

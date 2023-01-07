@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.sixman.addressBook.vo.AddressVo;
+import com.kh.sixman.addressBook.vo.ReciverVo;
 import com.kh.sixman.addressBook.vo.SortationVo;
 import com.kh.sixman.common.AttachmentVo;
 
@@ -42,8 +43,8 @@ public class AddressDao {
 		return sst.insert("addressMapper.insertAddress", vo);
 	}
 
-	public String getNo(SqlSessionTemplate sst, AddressVo vo) {
-		return sst.selectOne("addressMapper.getNo", vo);
+	public String getNo(SqlSessionTemplate sst) {
+		return sst.selectOne("addressMapper.getNo");
 	}
 
 	public int upload(SqlSessionTemplate sst, AttachmentVo cardFile) {
@@ -73,6 +74,38 @@ public class AddressDao {
 
 	public int restore(SqlSessionTemplate sst, List<String> no) {
 		return sst.update("addressMapper.restore", no);
+	}
+
+	public int sendAddress(SqlSessionTemplate sst, List<ReciverVo> voList) {
+		return sst.insert("addressMapper.sendAddress", voList);
+	}
+
+	public int countReciveList(SqlSessionTemplate sst, Map<String, String> search) {
+		return sst.selectOne("addressMapper.countReciveAddress", search);
+	}
+	
+	public List<ReciverVo> selectReciveList(SqlSessionTemplate sst, RowBounds rb, Map<String, String> search) {
+		return sst.selectList("addressMapper.reciveAddressList", search, rb);
+	}
+	
+	public List<AddressVo> getAddressAll(SqlSessionTemplate sst, Map<String, String> map) {
+		return sst.selectList("addressMapper.getAddressAll", map);
+	}
+
+	public int deleteReciveAddressAll(SqlSessionTemplate sst, List<String> no) {
+		return sst.delete("addressMapper.deleteReciveAddressAll", no);
+	}
+
+	public List<AddressVo> selectReciveAddressList(SqlSessionTemplate sst, String addressNo) {
+		return sst.selectList("addressMapper.selectReciveAddressList", addressNo);
+	}
+
+//	public int insertReciveAddress(SqlSessionTemplate sst, List<AddressVo> voList) {
+//		return sst.insert("addressMapper.insertReciveAddress", voList);
+//	}
+
+	public int deleteReciveAddress(SqlSessionTemplate sst, String reciveNo) {
+		return sst.delete("addressMapper.deleteReciveAddress", reciveNo);
 	}
 
 }
