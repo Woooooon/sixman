@@ -317,7 +317,7 @@
 
     menuMap.set("전자문서", [
         {icon: "home_storage", title: "전자문서"},
-        {title: "기안문서함", url: "${path}/document/first"},
+        {title: "기안문서함", url: "${path}/approval/list"},
         {title: "결재문서함", url: "${path}/document/payment"},
         {title: "참조문서함", url: "${path}/document/reference"},
         {title: "임시보관함", url: "${path}/document/keep"}
@@ -652,12 +652,13 @@
         }
 
         if(isfile=="Y"){
-            const fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/gi;
+            const fileString = msg.split(":");
+            const fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp)$/gi;
             let file = '';
-            if(msg.match(fileForm)){
-                file = '<img onclick="openFile(${chat.fileNo}, this.cloneNode(true))" src=/sixman/resources/chat/'+msg+'>';
+            if(fileString[1].match(fileForm)){
+                file = '<img onclick="openFile('+fileString[0]+', this.cloneNode(true))" src=/sixman/resources/chat/'+fileString[1]+'>';
             }else{
-                file = '<div class="file-div" onclick="openFile(${chat.fileNo}, this.cloneNode(true))"><span class="material-symbols-outlined"> upload_file </span><span>'+msg+'</span></div>';
+                file = '<div class="file-div" onclick="openFile('+fileString[0]+', this.cloneNode(true))"><span class="material-symbols-outlined"> upload_file </span><span>'+fileString[1]+'</span></div>';
             }
             div.innerHTML = '<div class="chat-msg">' + arrow + file + '</div><div class="chat-info">' + count + time + '</div>';
         }else{

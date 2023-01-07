@@ -185,13 +185,13 @@ function chatAjax(formData, beforeMsg, msg, afterMsg) {
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
                 if (httpRequest.status === 200) {
                     const result = httpRequest.response;
-
+                    console.log(result);
                     if(result.changeName){
-                        const fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/gi;
+                        const fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp)$/gi;
                         if(result.changeName.match(fileForm)){
-                            chatSocket.send(beforeMsg + result.changeName + afterMsg + "#Y");
+                            chatSocket.send(beforeMsg + result.fileNo + ":" + result.changeName + afterMsg + "#Y");
                         }else{
-                            chatSocket.send(beforeMsg + result.originName + afterMsg + "#Y");
+                            chatSocket.send(beforeMsg + result.fileNo + ":" + result.originName + afterMsg + "#Y");
                         }
                     }
 
@@ -475,7 +475,7 @@ function createChatRoom(no) {
                         }
 
                         if(chat.fileName!=null && typeof(chat.fileName)!=undefined){
-                            const fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/gi;
+                            const fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp)$/gi;
                             let file = '';
                             let fileDiv = document.createElement('div');
                             if(chat.fileName.match(fileForm)){
@@ -809,7 +809,7 @@ const fileBox = document.querySelector('#chat-file-box');
 function readURL(input) {
     if (input.files && input.files[0]) {
         const fileName = input.value;
-        const fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/gi;
+        const fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp)$/gi;
         if(!fileName.match(fileForm)){
             document.getElementById('preview').innerHTML = `<span class="material-symbols-outlined"> upload_file </span><span> ${fileName.substring(fileName.lastIndexOf('\\')+1)} </span>`;
             fileBox.style.display = 'flex';

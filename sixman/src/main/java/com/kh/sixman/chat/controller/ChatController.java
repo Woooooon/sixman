@@ -57,15 +57,19 @@ public class ChatController {
 		map.put("room", room);
 		map.put("msg", msg);
 		map.put("no", no);
-		chatService.chat(map);
+		String result = chatService.chat(map);
 		
-		Map<String, String> result = new HashMap<>();
+		Map<String, String> resultMap = new HashMap<>();
+		
 		if(vo!=null) {
-			result.put("changeName", vo.getChangeName());
-			result.put("originName", vo.getOriginName());
+			if(result!=null) {
+				resultMap.put("fileNo", result);
+			}
+			resultMap.put("changeName", vo.getChangeName());
+			resultMap.put("originName", vo.getOriginName());
 		}
-				
-		return getJson(result);
+		
+		return getJson(resultMap);
 	}
 	
 	@PostMapping(value = "memberPage", produces = "application/json; charset=utf8")

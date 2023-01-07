@@ -484,8 +484,10 @@
 	</update>
 	
 	<insert id="chat">
-		INSERT ALL
-		INTO CHAT_CONTENT
+		<selectKey keyProperty="chatNum" resultType="String" order="BEFORE">
+			SELECT SEQ_CHAT_CONTENT_NO.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO CHAT_CONTENT
 		(
 			CHAT_NUM
 			, MEMBER_NO
@@ -496,34 +498,37 @@
 		)
 		VALUES
 		(
-			SEQ_CHAT_CONTENT_NO.NEXTVAL
-			, ${no}
-			, ${room}
-			, #{msg}
+			${chatNum}
+			, ${memberNo}
+			, ${chatRoomNo}
+			, #{content}
 			, SYSDATE
 			, 'N'
 		)
-		<if test="file!=null">
-			INTO CHAT_A
-			(
-				NO
-				, CHAT_NO
-				, ORIGIN_NAME
-				, CHANGE_NAME
-				, FILE_PATH
-				, ENROLL_DATE
-			)
-			VALUES
-			(
-				SEQ_CHAT_A_NO.NEXTVAL,
-				SEQ_CHAT_CONTENT_NO.NEXTVAL,
-				#{file.originName},
-				#{file.changeName},
-				#{file.filePath},
-				SYSDATE
+	</insert>
+	
+	<insert id="insertFile">
+		<selectKey keyProperty="no" resultType="String" order="BEFORE">
+			SELECT SEQ_CHAT_A_NO.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO CHAT_A
+		(
+			NO
+			, CHAT_NO
+			, ORIGIN_NAME
+			, CHANGE_NAME
+			, FILE_PATH
+			, ENROLL_DATE
 		)
-		</if>
-		select * from dual
+		VALUES
+		(
+			${no},
+			${subNo},
+			#{originName},
+			#{changeName},
+			#{filePath},
+			SYSDATE
+		)
 	</insert>
 	
 </mapper>

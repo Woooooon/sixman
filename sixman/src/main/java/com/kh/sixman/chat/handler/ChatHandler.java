@@ -6,11 +6,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.kh.sixman.chat.service.ChatService;
 import com.kh.sixman.chat.vo.ChatRoomVo;
 import com.kh.sixman.member.vo.MemberVo;
 
@@ -38,7 +40,7 @@ public class ChatHandler extends TextWebSocketHandler{
 		log.info("Chat Socket 연결");
 		log.info("id : " + session.getId());
 
-		userSessionsMap.put(curMember.getNo(), session);			
+		userSessionsMap.put(curMember.getNo(), session);		
 		
 		Set<String> keySet = userSessionsMap.keySet();
 		for(String key : keySet) {
@@ -57,7 +59,6 @@ public class ChatHandler extends TextWebSocketHandler{
 				memberWS.sendMessage(new TextMessage("#####"+curRoom.getBeforeJoin()));
 			}
 		}
-		
 	}
 	
 	@Override

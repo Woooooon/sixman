@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.sixman.chat.vo.ChatRoomVo;
 import com.kh.sixman.chat.vo.ChatVo;
+import com.kh.sixman.common.AttachmentVo;
 import com.kh.sixman.member.vo.MemberVo;
 
 @Repository
@@ -57,8 +58,8 @@ public class ChatDao {
 		return sst.update("chatMapper.createChat", map);
 	}
 
-	public int chat(SqlSessionTemplate sst, Map<String, Object> map) {
-		return sst.insert("chatMapper.chat", map);
+	public int chat(SqlSessionTemplate sst, ChatVo cvo) {
+		return sst.insert("chatMapper.chat", cvo);
 	}
 
 	public int join(SqlSessionTemplate sst, Map<String, String> map) {
@@ -91,6 +92,10 @@ public class ChatDao {
 
 	public int chatOut(SqlSessionTemplate sst, Map<String, String> map) {
 		return sst.delete("chatMapper.chatOut", map);
+	}
+
+	public int insertFile(SqlSessionTemplate sst, AttachmentVo vo) {
+		return sst.insert("chatMapper.insertFile", vo);
 	}
 
 }
