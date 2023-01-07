@@ -108,4 +108,12 @@ public class AddressDao {
 		return sst.delete("addressMapper.deleteReciveAddress", reciveNo);
 	}
 
+	public ReciverVo selectReciveInfo(SqlSessionTemplate sst, Map<String, String> map) {
+		return sst.selectOne("addressMapper.selectReciveInfo", map);
+	}
+
+	public int updateReciveAddress(SqlSessionTemplate sst, Map<String, String> map) {
+		return sst.update("addressMapper.updateReciveAddress", map);
+	}
+
 }

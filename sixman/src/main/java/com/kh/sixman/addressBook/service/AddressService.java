@@ -171,4 +171,16 @@ public class AddressService {
 		log.info("result " + insertAddress * deleteReciveAddress);
 		return insertAddress * deleteReciveAddress;
 	}
+
+	public List<AddressVo> reciveDetailList(String addressNo) {
+		return addressDao.selectReciveAddressList(sst, addressNo);
+	}
+
+	public ReciverVo selectReciveInfo(Map<String, String> map) {
+		return addressDao.selectReciveInfo(sst, map);
+	}
+
+	public int updateReciveAddress(Map<String, String> map) {
+		return addressDao.updateReciveAddress(sst, map);
+	}
 }

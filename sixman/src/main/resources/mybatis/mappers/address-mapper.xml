@@ -445,6 +445,38 @@
 		</foreach>
 	</delete>
 	
+	<select id="selectReciveInfo" resultType="ReciverVo">
+		SELECT 
+		    R.NO,
+		    R.RECIVER_NO,
+		    R.SENDER_NO,
+		    M.NAME AS SENDER_NAME,
+		    M.TEAM_NAME AS SENDER_TEAM,
+		    M.DEPT_NAME AS SENDER_DEPT,
+		    M.POSITION_NAME AS SENDER_POSITION,
+		    R.CHECK_YN,
+		    R.SEND_ADDRESS,
+		    R.ENROLL_DATE
+		FROM 
+		R_ADDRESS R
+		JOIN 
+		(
+		    SELECT
+		        M.NO
+		        , M.NAME
+		        , D.NAME AS DEPT_NAME
+		        , T.NAME AS TEAM_NAME
+		        , P.POSITION AS POSITION_NAME
+		    FROM MEMBER M
+		    JOIN POSITION P ON P.NO = M.POSITION_NO
+		    JOIN DEPARTMENT D ON D.NO = M.DEPT_NO
+		    LEFT JOIN DEPARTMENT T ON T.NO = M.TEAM_NO
+		    WHERE M.RESIGNATION_YN = 'N'
+		)M ON M.NO = R.SENDER_NO
+		WHERE R.NO = #{reciveNo}
+		AND R.RECIVER_NO = #{no}
+	</select>
+	
 	<delete id="deleteReciveAddressAll">
 		DELETE 
 		FROM R_ADDRESS
@@ -483,6 +515,14 @@
 		AND "USER_NO" = #{userNo}
 	</update>
 	
+	<update id="updateReciveAddress">
+		UPDATE R_ADDRESS
+		SET 
+			"SEND_ADDRESS" = #{addressNo}
+		WHERE "NO" = #{no}
+		AND "RECIVER_NO" = #{userNo}
+	</update>
+	
 	<select id="getFileNo" resultType="String">
 		SELECT 
 			NO
@@ -498,29 +538,6 @@
 		WHERE "ADDRESS_NO" = #{no}
 	</update>
 	
-	<select id="getCompany" resultType="CompanyVo">
-		select
-			C.NO,
-			C.NAME,
-			C.LICENSE,
-			C.ADDRESS,
-			C.PHONE,
-			A.NO AS LOGO_NO,
-			A.CHANGE_NAME AS LOGO_NAME
-		from COMPANY C
-		LEFT JOIN 
-		(
-			SELECT
-				*
-			FROM COMPANYLOGO_A
-			WHERE COMPANY_NO = #{no}
-			AND THUMB_YN = 'Y'
-		) A ON C.NO = A.COMPANY_NO
-		WHERE C.NO = #{no}
-		<if test="license != null and license != ''">
-		AND C.LICENSE = #{license}
-		</if>
-	</select>
 	
 	<insert id="upload">
 		INSERT INTO ADDRESS_A

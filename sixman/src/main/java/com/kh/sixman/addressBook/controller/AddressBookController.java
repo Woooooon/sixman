@@ -480,6 +480,51 @@ public class AddressBookController {
 		return "내 주소록에 새로운 주소가 추가 되었습니다.";
 	}
 			
+	@GetMapping("recive/detail")
+	public String reciveDetail(HttpSession session, Model model, String reciveNo) {
+		//로그인한 유저의 세션 가져오기
+		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
 
+		//로그인 유저의 seqNo 가져오기
+		String no = loginMember.getNo();
+		
+		//로그인 유저마다 주소록이 별개이므로 검색 시 userNo 추가 WHERE문
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("no", no);
+		map.put("reciveNo", reciveNo);
+		
+		ReciverVo reciveInfo = addressService.selectReciveInfo(map);
+		
+		String addressNo = reciveInfo.getSendAddress();
+		List<AddressVo> reciveAddressList = addressService.reciveDetailList(addressNo);
+	    
+		log.info("reciveAddressList : " + reciveAddressList );
+		
+		model.addAttribute("reciveInfo", reciveInfo);
+		model.addAttribute("reciveAddressList", reciveAddressList);
+		
+		return "addressBook/reciveAddress";
+	}
 	
+
+	@PostMapping(value = "recive/detail/delete", produces = "application/json; charset=utf8")
+	@ResponseBody
+	public String deleteReciveDetailAddress(HttpSession session, String no, String addressNo) {
+		//로그인한 유저의 세션 가져오기
+		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+
+		//로그인 유저의 seqNo 가져오기
+		String userNo = loginMember.getNo();
+				
+		Map<String , String> map = new HashMap<String, String>();
+		map.put("no", no);
+		map.put("addressNo", addressNo);
+		map.put("userNo", userNo);
+		
+		int result = addressService.updateReciveAddress(map);
+		
+		if(result != 1) return null;
+				
+		return "삭제 요청을 완료했습니다.";
+	}
 }
