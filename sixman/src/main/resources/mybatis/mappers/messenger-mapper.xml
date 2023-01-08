@@ -36,31 +36,91 @@
 	
 	<insert id="makechatroom_joo">
 		INSERT INTO CHAT_ROOM
+		(
+		CHAT_ROOM_NO
+		, ADMIN
+		, ENROLL_DATE
+		, DELETE_YN
+		)
 		VALUES
 		(
 		    SEQ_CHAT_ROOM_NO.NEXTVAL 
-		    , #{loginMember.id}
+		    , #{adminNo}
 		    , SYSDATE
 		    , 'N'
 		)
 	</insert>
 	
-<!-- 	<insert id="makechatroomsetting"> -->
-<!-- 		INSERT INTO CHAT_ROOM_SETTING( -->
-<!-- 		    CHAT_ROOM_NO -->
-<!-- 		    , MEMBER_NO -->
-<!-- 		    , FIX_YN -->
-<!-- 		    , ALARM_YN -->
-<!-- 		    , NAME -->
-<!-- 		) -->
-<!-- 		VALUES -->
-<!-- 		( -->
-<!-- 		    SEQ_CHAT_ROOM_NO.NEXTVAL() -->
-<!-- 		    , 1 -->
-<!-- 		    , 2 -->
-<!-- 		    , 'N' -->
-<!-- 		    , 'N' -->
-<!-- 		) -->
-<!-- 	</insert> -->
+	<insert id="makechatroomsetting">
+		INSERT INTO CHAT_ROOM_SETTING(
+		    CHAT_ROOM_NO
+		    , MEMBER_NO
+		    , FIX_YN
+		    , ALARM_YN
+		    , NAME
+		)
+		VALUES
+		(
+			(
+				SELECT MAX(CHAT_ROOM_NO) FROM CHAT_ROOM WHERE ADMIN=#{adminNo}
+			)
+			, #{memberNo}
+		    , 'N'
+		    , 'N'
+		    , #{name}
+		)
+	</insert>
+	
+	<insert id="makechatroomstart">
+		INSERT INTO CHAT_CONTENT(
+		    CHAT_NUM
+			, MEMBER_NO
+			, CHAT_ROOM_NO
+			, CONTENT
+			, WRITE_TIME
+			, DELETE_YN
+			, ARE_YOU_FIRST
+		)
+		VALUES
+		(
+			SEQ_CHAT_CONTENT_NO.NEXTVAL
+			, #{adminNo}
+			, (
+				SELECT MAX(CHAT_ROOM_NO) FROM CHAT_ROOM WHERE ADMIN=#{adminNo}
+			  )
+			, (SELECT NAME FROM MEMBER WHERE NO=#{adminNo}) || '님이 대화방을 생성하셨습니다~'
+			, SYSDATE
+		    , 'N'
+		    , 'Y'
+		)
+	</insert>
+	
+	<select id="ReadChatRoomList" resultType="ReadChatRoomListVo"> <!-- 여기서부터는 나중에.... -->
+		
+		SELECT CONTENT as chatcontent, TO_CHAR(WRITE_TIME, 'PM HH:MI') as lastsendTime, CHANGE_NAME as profilePath
+		, (
+		    SELECT NAME
+		    FROM CHAT_ROOM_SETTING
+		    WHERE CHAT_ROOM_SETTING.CHAT_ROOM_NO = CHAT_CONTENT.CHAT_ROOM_NO
+		) AS chatroomName
+		FROM CHAT_CONTENT, PROFILE_A order by write_time desc
+<!-- 	AND MEMBER.ID NOT IN('testfirst') -->
+
+	</select>
+	
+		<select id="ReadChatRoomData" resultType="ChatRoomDataVo"> <!-- 여기서부터는 나중에.... -->
+				
+					
+		SELECT CHAT_INDEX as chatRoomIndex, CHAT_ROOM_NO as chatRoomNumber, chatroomName  FROM(
+		SELECT ROW_NUMBER() OVER(ORDER BY WRITE_TIME DESC) -1  AS CHAT_INDEX, CHAT_ROOM_NO, WRITE_TIME, TO_CHAR(WRITE_TIME, 'PM HH:MI') as lastsendTime, CHANGE_NAME as profilePath
+		, 
+		(
+		    SELECT NAME
+		    FROM CHAT_ROOM_SETTING
+		    WHERE CHAT_ROOM_SETTING.CHAT_ROOM_NO = CHAT_CONTENT.CHAT_ROOM_NO
+		) AS chatroomName
+		FROM CHAT_CONTENT FULL OUTER JOIN PROFILE_A ON CHAT_CONTENT.MEMBER_NO = #{loginMemberNo})
+
+	</select>
 	
 </mapper>

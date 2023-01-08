@@ -11,8 +11,8 @@ import com.kh.sixman.member.vo.MemberVo;
 import com.kh.sixman.messenger.dao.MakeRoomDao;
 import com.kh.sixman.messenger.vo.DefineChatNameVo;
 
-
 @Service
+
 public class MakeRoomFirstService {
 	
 	@Autowired
@@ -21,13 +21,13 @@ public class MakeRoomFirstService {
 	@Autowired
 	private SqlSessionTemplate sst;
 	
-	@Transactional
-	public int makechatroom(HttpSession session, DefineChatNameVo dchatnvo) {
+	
+	public void makechatroom(HttpSession session, DefineChatNameVo dchatnvo) {
 		
 //	 	MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
 
 		// TODO Auto-generated method stub
-		return dao.makechatroom(sst, dchatnvo);
+		dao.makechatroom(sst, dchatnvo);
 //		return dao.makechatroomsetting(sst, dchatnvo);
 	}
 //	

@@ -1,0 +1,19 @@
+diff a/sixman/src/main/java/com/kh/sixman/messenger/controller/WhoChatFirstController.java b/sixman/src/main/java/com/kh/sixman/messenger/controller/WhoChatFirstController.java	(rejected hunks)
+@@ -54,12 +54,14 @@
+ 	
+ 	@ResponseBody
+ 	@PostMapping("chatwantfirst2")
+-	public String method2(HttpSession session, DefineChatNameVo dchatnvo) {
++	public int method2(HttpSession session, DefineChatNameVo dchatnvo) {
+ 		System.out.println(dchatnvo);
++		
++		
+ //		
+-//		makeroom.makechatroom(dchatnvo);
++		int result = makeroom.makechatroom(session, dchatnvo);
+ ////		
+-		return null;
++		return result;
+ 		
+ 	}
+ 
