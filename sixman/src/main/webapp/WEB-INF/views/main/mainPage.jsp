@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="<c:url value='resources/css/mainPage.css'/>">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-<script defer src="${path}/resources/js/schedule/calendar.js"></script>
+<script defer src="${path}\resources\js\main\maincalendar.js"></script>
 </head>
 <script>
     window.addEventListener('load', ()=>{

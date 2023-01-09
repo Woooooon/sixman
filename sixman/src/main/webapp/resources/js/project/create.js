@@ -149,41 +149,37 @@ function openWindowPop(){
 
 //자식창에서 멤버 객체 배열 받은 함수
 function childValue(memberArr){
-    createMemberBox();
+    
     for(let i = 0; i < memberArr.length; i++){
         const memb = memberArr[i];
+
         console.log(memb);
+        
+        const divbox = document.createElement('div');
+        divbox.classList.add('member');
+    
+        let text = "";
+    
+        
+        text += `<input type='text' value="${memb.dept}" name='deptmem'>`;
+        text += `<input type='text' value="${memb.team}" name='teammem'>`;
+        text += `<input type='text' value="${memb.name}" name='prjmem'>`;
+        text += `<input type='hidden' value="${memb.no}" name='memberNo'>`
+    
+        text += `<span class='material-symbols-outlined'> close </span>`;
+        divbox.innerHTML = text;
+    
+        divbox.querySelector('span').addEventListener('click', ()=>{
+            divbox.remove();
+        })
+    
+        memberbox.append(divbox);
     }
+
     
 }
 
-//담당자, 직급, 이름 선택시 memberbox 에 생성되는 div값
-function createMemberBox() {
-    const divbox = document.createElement('div');
-    divbox.classList.add('member');
 
-    let text = "";
-
-    for(let i = 0; i < selects.length; i++){
-        const item = selects[i];
-        if(i!=selects.length-1){
-            text += '';
-        }
-    }
-
-    const list = document.querySelector('.list-name');
-    text += `<input type='text' value="${list.innerHTML}" name='prjmem'>`;
-    text += `<input type='hidden' value="${list.innerHTML}" name='memberNo'>`
-
-    text += `<span class='material-symbols-outlined'> close </span>`;
-    divbox.innerHTML = text;
-
-    divbox.querySelector('span').addEventListener('click', ()=>{
-        divbox.remove();
-    })
-
-    memberbox.append(divbox);
-}
 
 //-----------------------------------------------
 

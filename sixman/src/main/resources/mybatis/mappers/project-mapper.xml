@@ -54,6 +54,7 @@
     </select>
     
     <insert id="insertPrjMember">
+    	
 		INSERT INTO PROJECT_MEMBER 
 		(  
 		    NO
@@ -68,6 +69,7 @@
 		    , #{memberNo}
 		    , SYSDATE
 		)
+		
     </insert>
     
     
