@@ -10,13 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.kh.sixman.addressBook.vo.AddressVo;
-import com.kh.sixman.addressBook.vo.SortationVo;
 import com.kh.sixman.common.AttachmentVo;
 import com.kh.sixman.document.dao.DocumentDao;
 import com.kh.sixman.document.dao.DocumentFileDao;
-import com.kh.sixman.document.vo.Criteria;
-import com.kh.sixman.document.vo.DocumentSaveVo;
 import com.kh.sixman.document.vo.DocumentVo;
 
 

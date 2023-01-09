@@ -7,12 +7,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.kh.sixman.addressBook.vo.AddressVo;
-import com.kh.sixman.addressBook.vo.SortationVo;
-import com.kh.sixman.document.vo.Criteria;
-import com.kh.sixman.document.vo.DocumentSaveVo;
 import com.kh.sixman.document.vo.DocumentVo;
-import com.kh.sixman.notice.vo.NoticeVo;
 
 import lombok.extern.slf4j.Slf4j;
 
