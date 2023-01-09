@@ -53,7 +53,7 @@
                 <div id="send-member">
                     <p>보낸사람</p>
                     <input type="email" readonly value="${vo.userEmail}">
-                    <div class="btn"><span class="material-symbols-outlined"> add </span><p>주소록</p></div>
+                    <div class="btn" onclick="location.href='/sixman/address/add?email=${vo.userEmail}'"><span class="material-symbols-outlined"> add </span><p>주소록</p></div>
                     <p>받는사람</p>
                     <div id="members">
                         <c:forEach items="${vo.sender}" var="sender">
@@ -85,12 +85,14 @@
             </div>
         </div>
         <div id="board-footer">
-        	<c:if test="${empty save}">
-	            <div class="btn" onclick="location.href='/sixman/mail/reWrite?no=${vo.mailNo}'"><p>다시쓰기</p></div>
-        	</c:if>
-       		<c:if test="${not empty save}">
-            	<div class="btn" onclick="location.href='/sixman/mail/reWrite?no=${vo.mailNo}&save=true'"><p>다시쓰기</p></div>
-        	</c:if>
+            <c:if tes="${vo.userEmail == loginMember.email}">
+                <c:if test="${empty save}">
+                    <div class="btn" onclick="location.href='/sixman/mail/reWrite?no=${vo.mailNo}'"><p>다시쓰기</p></div>
+                </c:if>
+                <c:if test="${not empty save}">
+                    <div class="btn" onclick="location.href='/sixman/mail/reWrite?no=${vo.mailNo}&save=true'"><p>다시쓰기</p></div>
+                </c:if>
+            </c:if>
         </div>
     </div>
 
