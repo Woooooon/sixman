@@ -38,6 +38,8 @@
 .box-header{
     display: flex;
     margin: 15px;
+    font-weight: bold;
+    font-size: 17px;
 }
 
 .box-header > span {
@@ -48,10 +50,25 @@
     margin-top: 4px;
 }
 
+.box-geader a:visited {
+    color: #12887A;
+}
+
+.box-geader a:hover {
+    color: #62C276;
+}
+
+.box-geader a:active {
+    color: #6FA8B5;
+}
+
+/* 즐겨찾기 */
+
 .favorite {
+    display: flex;
     width: 30px;
     height: 30px;
-    margin-top: 10px;
+    margin-top: 5px;
     margin-left: 2px;
     cursor: pointer;
     font-size: 30px;
@@ -59,8 +76,21 @@
 
 .like {
    color: #12887A;;
-   --text-shadow: 1px 1px 1px yellow;
+   text-shadow: 1px 1px 1px yellow;
 }
+
+.favorite input[type=checkbox] {
+    display: none;
+}
+
+.favorite label{
+    cursor: pointer;
+}
+
+
+
+/**/
+
 
 .hidden {
     width: 100%;
@@ -118,12 +148,29 @@
     padding-top: 5px;
 }
 
-.status-progress {
+.progressBar {
     width: 220px;
     height: 12px;
     border-radius: 15px;
     background-color: #d9d9d9;
     margin: 30px 15px 10px;
+}
+
+.guage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: repeating-linear-gradient(
+    to left,
+    #12887A,
+    #2fa597,
+    #59c0b4);
+    box-shadow: 0 5px 5px -6px #12887A, 0 3px 7px #2fa597;
+    border-radius: 15px;
+    color: #fff;
+    height: 100%;
+    width: 0;
+    transition: 1s ease 0.3s;
 }
 
 .ing {

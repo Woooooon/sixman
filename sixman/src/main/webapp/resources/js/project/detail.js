@@ -13,8 +13,18 @@ function changeGuage(){
 }
 
 valueinput.addEventListener("keyup", function() {
+    
+    const onlynumber = $(valueinput).val(replace(/^[0-9]*$/));
+
+    if(!onlynumber){
+        alert('숫자만 입력 가능합니다.');
+    }
+      
     finalValue = parseInt(valueinput.value, 10);
     console.log("finalValue" + finalValue);
+    if(valueinput.value < 101){
+        popup.alertPop('100이상 입력 불가함.');
+    }
     changeGuage();
 });
 

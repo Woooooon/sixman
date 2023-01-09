@@ -15,6 +15,7 @@
 		    , P.END_DATE
 		    , P.STATUS
 		    , P.FAVORITES_YN
+		    , P.PROGRESS
 		FROM PROJECT P
 		LEFT JOIN MEMBER M ON M.NO = P.WRITER
 		LEFT JOIN MEMBER M2 ON M2.NO = P.LEADER
@@ -160,6 +161,18 @@
     		STATUS = #{status}
     		, PROGRESS = #{progress}
     		, CONTENT = #{content}
+    	WHERE NO = #{no}
+    </update>
+    
+    <update id="insertFavorite">
+    	UPDATE PROJECT 
+    	SET FAVORITES_YN = 'Y'  
+    	WHERE NO = #{no}
+    </update>
+    
+    <update id="deleteFavorite">
+    	UPDATE PROJECT
+    	SET FAVORITES_YN = 'N'
     	WHERE NO = #{no}
     </update>
     

@@ -22,7 +22,7 @@ public class ProjectVo {
 	private String startDate;
 	private String endDate;
 	private String consentYn;
-	private String favoiretsYn;
+	private String favoritesYn;
 	private String filePath;
 	private String status;
 	private String completeYn;

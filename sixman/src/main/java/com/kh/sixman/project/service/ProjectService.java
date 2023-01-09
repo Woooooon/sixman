@@ -58,12 +58,24 @@ public class ProjectService {
 		return pdao.selectMembersubList(sst, no);
 	}
 
+	//프로젝트 멤버 불러오기
 	public List<MemberVo> selectPrjMember(String no) {
 		return pdao.selectPrjMember(sst, no);
 	}
 
+	//프로젝트 수정하기
 	public int updatePrj(ProjectVo vo) {
 		return pdao.updatePrj(sst, vo);
+	}
+
+	//프로젝트 즐겨찾기 추가
+	public int insertFavorite(String no) {
+		return pdao.insertFavorite(sst, no);
+	}
+
+	//프로젝트 즐겨찾기 삭제
+	public int deleteFavorite(String no) {
+		return pdao.deleteFavorite(sst, no);
 	}
 
 

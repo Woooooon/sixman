@@ -135,6 +135,28 @@ selects.forEach(function (element, index, array) {
     })
 });
 
+// 조직도 popup
+const openPop = document.querySelector('.plusmem');
+
+//자식창 오픈
+openPop.addEventListener('click', ()=>{
+    openWindowPop();
+});
+
+function openWindowPop(){
+    window.open('/sixman/employee/popup', '조직도 팝업', 'top=0, left=8000, height=500, status=no, toolbar=no, resizable=no');
+}
+
+//자식창에서 멤버 객체 배열 받은 함수
+function childValue(memberArr){
+    createMemberBox();
+    for(let i = 0; i < memberArr.length; i++){
+        const memb = memberArr[i];
+        console.log(memb);
+    }
+    
+}
+
 //담당자, 직급, 이름 선택시 memberbox 에 생성되는 div값
 function createMemberBox() {
     const divbox = document.createElement('div');
@@ -144,15 +166,14 @@ function createMemberBox() {
 
     for(let i = 0; i < selects.length; i++){
         const item = selects[i];
-        const v = item.querySelector('.selected-option');
-        const leader = item.querySelector('input[type=hidden]');
-        leader.value = v.innerHTML;
-        text += `<input type='text' value="${v.innerHTML}" name='prjmem'>`;
-        text += `<input type='hidden' value="${v.innerHTML}" name='memberNo'>`
         if(i!=selects.length-1){
             text += '';
         }
     }
+
+    const list = document.querySelector('.list-name');
+    text += `<input type='text' value="${list.innerHTML}" name='prjmem'>`;
+    text += `<input type='hidden' value="${list.innerHTML}" name='memberNo'>`
 
     text += `<span class='material-symbols-outlined'> close </span>`;
     divbox.innerHTML = text;
@@ -273,14 +294,6 @@ fileBtn.addEventListener('click',()=>{
     });
 
 });
-
-
-//현재 모든 부서, 직급, 멤버 정보 다 받았음 화면에
-//이걸 가지고 부서를 클릭 했을 때, 해당 부서에 있는 멤버 전체를 확인한 후
-//멤버 부서 == 현재 클릭한 부서인 인원의 직급들만 출력
-//이름도 마찬가지로 멤버 부서 == 선택 부서 , 멤버 직급 == 선택 직급 이면
-//위의 2가지 정보가 일치하는 멤버의 이름을 이름 칸에 appendChild
-
 
 
 
