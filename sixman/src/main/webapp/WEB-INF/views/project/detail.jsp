@@ -22,7 +22,7 @@
                 <div class="prj-title">${prj.title}</div>
                 <div class="detail-btn">
                     <input class="btn" type="submit" value="수정하기" />
-                    <button class="c-btn" type="button" onclick="location.href='${path}/prject/delete'">삭제하기</button>
+                    <button class="c-btn" type="button" onclick='history.back()'>취소하기</button>
                 </div>
             </div>
             <div class="status">
