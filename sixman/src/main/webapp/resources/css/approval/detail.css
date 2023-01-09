@@ -24,6 +24,7 @@
     border: 1px solid #ddd;
     min-height: 500px;
     margin-bottom: 20px;
+    padding: 20px;
 }
 
 #header-title{
@@ -41,4 +42,232 @@
 #header-title input{
     height: 100%;
     font-size: 1.2em;
+}
+
+.docbox .btn{
+    width: 30px;
+    height: 30px;
+}
+.approval-content{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-bottom: none;
+
+}
+#sub-box{
+    gap: 0;
+}
+#write-title{
+    margin-bottom: 20px;
+}
+
+#header-title{
+    width: 100%;
+    height: 40px;
+}
+
+#header-title div{
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    /* justify-content: center; */
+}
+
+#header-title input{
+    height: 100%;
+    font-size: 1.2em;
+}
+
+.doc-member-item div:nth-child(2){
+    height: 150px;
+    width: 150px;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+.doc-member-item div:nth-child(3){
+   
+    border-bottom: 1px solid #ddd;
+}
+
+.doc-member-item{
+    display: flex;
+    flex-direction: column;   
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    
+}
+.doc-member-item div{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
+.doc-member-item:last-of-type{
+    border-right: 1px solid #ddd;
+}
+
+.writeno div:nth-child(1){
+    background-color: #f5f5f5;
+}
+
+.doc-member-item div:nth-child(1){
+    background-color: #f5f5f5;
+}
+
+#doc-header{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    border: 1px solid #ddd;
+}
+
+#title-box{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    height: 50px;
+    border-bottom: 1px solid #ddd;
+}
+
+#doc-menu-box{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    /* background-color: #f5f5f5; */
+    height: 50px;
+}
+
+#doc-menu-box > div:nth-of-type(1){
+    height: 100%;
+    width: 30%;
+    display: flex;
+    align-items: center;
+}
+
+#doc-menu-box > div:nth-of-type(2){
+    height: 100%;
+    width: 70%;
+    display: flex;
+    align-items: center;
+}
+
+#doc-menu-box > div >div:nth-of-type(1),
+#title-box > div:nth-of-type(1){
+    width: 170px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #ddd;
+    padding: 20px;
+    height: 100%;
+    background-color: #f5f5f5;
+}
+
+#doc-menu-box select,
+#date-box input,
+#title-input{
+    height: 100%;
+    border: none;
+    background: none;
+    outline: none;
+}
+
+#title-input{
+    width: 85%;
+    margin: auto;
+    /* background-color: white; */
+}
+
+#date-box{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    width: 50%;
+    margin: auto;
+}
+
+#doc-menu-box select{
+    width: 50%;
+    margin: auto;
+    text-align: center;
+}
+
+#doc-menu-box > div:last-of-type > div:nth-of-type(1){
+    border-left: 1px solid #ddd;
+}
+
+.writeno div:nth-child(1){
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    
+}
+.writeno div:nth-child(2){
+
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}   
+
+.writelist{
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid #ddd;
+}   
+
+#file-box{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    height: 50px;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+
+.header-item-title{
+    width: 170px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1em;
+    font-weight: 300;
+    color: black;
+    border-right: 1px solid #ddd;
+    height: 100%;
+}
+
+#file-box .header-item-title{
+    position: relative;
+    width: 170px;
+    gap: 20px;
+    background-color: #f5f5f5;
+}
+
+#file-box .btn{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    right: 20px;
+}
+
+#file-list{
+    width: 85%;
+    border-radius: 0;
+    margin: auto;
+    border: none;
+    height: 50px;
+    overflow: auto;
 }
