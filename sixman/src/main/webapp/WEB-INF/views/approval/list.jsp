@@ -44,96 +44,30 @@
                         </div>
                     </div>
                     <div class="list-main">
-                        <div class="list-item">
-                            <span>타입</span>
-                            <span>상태</span>
-                            <span>제목</span>
-                            <span>기안자</span>
-                            <span>기안일</span>
+                        <c:forEach items="${list}" var="vo">
+
+                        <div class="list-item" onclick="location.href='/sixman/approval/detail?no=${vo.no}'">
+                            <span>${vo.typeName }</span>
+                            <span>${vo.state }</span>
+                            <span>${vo.title }</span>
+                            <span>${vo.sendName }</span>
+                            <span>${vo.enrollDate }</span>
                         </div>
-                        <div class="list-item">
-                            <span>타입</span>
-                            <span>상태</span>
-                            <span>제목</span>
-                            <span>기안자</span>
-                            <span>기안일</span>
-                        </div>
-                        <div class="list-item">
-                            <span>타입</span>
-                            <span>상태</span>
-                            <span>제목</span>
-                            <span>기안자</span>
-                            <span>기안일</span>
-                        </div>
-                        <div class="list-item">
-                            <span>타입</span>
-                            <span>상태</span>
-                            <span>제목</span>
-                            <span>기안자</span>
-                            <span>기안일</span>
-                        </div>
-                        <div class="list-item">
-                            <span>타입</span>
-                            <span>상태</span>
-                            <span>제목</span>
-                            <span>기안자</span>
-                            <span>기안일</span>
-                        </div>
-                        <div class="list-item">
-                            <span>타입</span>
-                            <span>상태</span>
-                            <span>제목</span>
-                            <span>기안자</span>
-                            <span>기안일</span>
-                        </div>
-                        <div class="list-item">
-                            <span>타입</span>
-                            <span>상태</span>
-                            <span>제목</span>
-                            <span>기안자</span>
-                            <span>기안일</span>
-                        </div>
-                        <div class="list-item">
-                            <span>타입</span>
-                            <span>상태</span>
-                            <span>제목</span>
-                            <span>기안자</span>
-                            <span>기안일</span>
-                        </div>
-                        <div class="list-item">
-                            <span>타입</span>
-                            <span>상태</span>
-                            <span>제목</span>
-                            <span>기안자</span>
-                            <span>기안일</span>
-                        </div>
-                        <div class="list-item">
-                            <span>타입</span>
-                            <span>상태</span>
-                            <span>제목</span>
-                            <span>기안자</span>
-                            <span>기안일</span>
-                        </div>
-                        <div class="list-item">
-                            <span>타입</span>
-                            <span>상태</span>
-                            <span>제목</span>
-                            <span>기안자</span>
-                            <span>기안일</span>
-                        </div>
-                        <div class="list-item">
-                            <span>타입</span>
-                            <span>상태</span>
-                            <span>제목</span>
-                            <span>기안자</span>
-                            <span>기안일</span>
-                        </div>
+
+                        </c:forEach>
                     </div>
                 </div>
 
                 <div class="list-footer">
 
                     <div class="page-box">
+                        <span class="material-symbols-outlined" <c:if test="${pv.currentPage ne 1}">onclick="location.href='/sixman/approval/list?p=1&'"</c:if>> keyboard_double_arrow_left </span>
+                        <span class="material-symbols-outlined" <c:if test="${pv.currentPage ne 1}">onclick="location.href='/sixman/approval/list?p=${pv.currentPage - 1}'"</c:if>> chevron_left </span>
+                        <c:forEach var="i" begin="${pv.startPage}" end="${pv.endPage}">
+                        <div class="page-btn <c:if test="${i eq pv.currentPage}"> checked-p-btn</c:if>" onclick="location.href='/sixman/approval/list?p=${i}'">${i}</div>
+                        </c:forEach>
+                        <span class="material-symbols-outlined" <c:if test="${pv.maxPage ne pv.currentPage}">onclick="location.href='/sixman/approval/list?p=${pv.currentPage + 1}'"</c:if>> chevron_right </span>
+                        <span class="material-symbols-outlined" <c:if test="${pv.maxPage ne 1}">onclick="location.href='/sixman/approval/list?p=${pv.maxPage}'"</c:if>> keyboard_double_arrow_right </span>
                     </div>
 
                     <div class="write-btn btn" onclick="location.href='/sixman/approval/write'">

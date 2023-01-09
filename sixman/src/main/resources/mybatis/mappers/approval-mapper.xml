@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="approvalMapper">
+	
+	<update id="createLine">
+	
+		INSERT ALL
+		INTO APP_NO
+		VALUES 
+		(
+			SEQ_APP_NO_NO.NEXTVAL
+			, ${loginNo}
+		)
+		<foreach collection="dataList" item="vo">
+		INTO APRPROVAL
+		VALUES
+		(
+			GET_SEQ_NO('SEQ_APRPROVAL_NO')
+			, ${vo.appMan}
+			, SEQ_APP_NO_NO.NEXTVAL
+			, ${vo.pri}
+		)
+		</foreach>
+		SELECT * FROM DUAL
+		
+	</update>
+	
+	<select id="getLineNo" resultType="String">
+		SELECT NO FROM APP_NO WHERE M_NO = ${no}
+	</select>
+	
+	<select id="getLineList" resultType="com.kh.sixman.temp.approval.vo.ApprovalVo">
+	
+		SELECT 
+		    AP.NO
+		    , M.NAME
+		    , D.NAME AS DEPT_NAME
+		    , T.NAME AS TEAM_NAME
+		    , P.POSITION AS POSITION_NAME
+		    , AP.A_MAN AS APP_MAN
+		    , AP.A_NO AS APP_NO
+		    , AP.PRI
+		FROM APP_NO A
+		JOIN APRPROVAL AP ON A.NO = AP.A_NO
+		JOIN MEMBER M ON AP.A_MAN = M.NO
+		JOIN POSITION P ON P.NO = M.POSITION_NO
+		JOIN DEPARTMENT D ON D.NO = M.DEPT_NO
+		LEFT JOIN DEPARTMENT T ON T.NO = M.TEAM_NO
+		WHERE A_NO = ${no}
+	
+	</select>
+	
+	<update id="write">
+	
+		INSERT ALL
+		INTO DOCUMENT
+		(
+			NO
+			,AP_NO
+			,SEND_PAY
+			,"TYPE"
+			,"TITLE"
+			,"CONTENT"
+			,D_YN
+			,D_SAVE
+			,ENROLL_DATE
+			,MODIFY_DATE
+			,START_DATE
+			,END_DATE
+		)
+		VALUES
+		(
+			SEQ_DOCUMENT_NO.NEXTVAL
+			, ${apNo}
+			, ${sendPay}
+			, ${type}
+			, #{title}
+			, #{content}
+			, 'N'
+			<if test="dSave!='임시저장'">
+			, 'N'
+			</if>
+			<if test="dSave=='임시저장'">
+			, 'Y'
+			</if>
+			, SYSDATE
+			, SYSDATE
+			, #{startDate}
+			, #{endDate}
+		)
+		<foreach collection="docSaveNo" item="dNo">
+		INTO DOC_SAVE
+		VALUES
+		(
+			GET_SEQ_NO('SEQ_DOC_SAVE_NO')
+			, ${dNo}
+			, SEQ_DOCUMENT_NO.NEXTVAL
+			, 'N'
+			, 'N'
+		)
+		</foreach>
+		SELECT * FROM DUAL
+	</update>
+	
+	<select id="selectDocument" resultType="com.kh.sixman.temp.approval.vo.ApprovalDocumentVo">
+		SELECT 
+			D.NO
+			,D.AP_NO
+			,D.SEND_PAY
+			,D.TYPE
+			,M.NAME AS SEND_NAME
+			,D.TITLE
+			,T.NAME AS TYPE_NAME
+			,D.CONTENT
+			,D.D_YN
+			,D.D_SAVE
+			,D.ENROLL_DATE
+			,D.MODIFY_DATE
+			,D.START_DATE
+			,D.END_DATE
+			,D.REFER
+			,D.SEND_NAME
+			,CASE 
+			WHEN YC.COUNT IS NULL THEN '결재대기'
+			WHEN YC.COUNT = C.COUNT THEN '결재완료'
+			ELSE '결재중'
+			END STATE
+		FROM
+		DOC_SAVE DS
+		JOIN DOCUMENT D ON DS.DOC_NO = D.NO
+		JOIN APRPROVAL A ON DS.AP_NO = A.NO
+		JOIN TYPE_A T ON D.TYPE = T.NO
+		JOIN MEMBER M ON D.SEND_PAY = M.NO
+        LEFT JOIN (SELECT COUNT(*) AS COUNT, DOC_NO FROM DOC_SAVE WHERE STATE = 'Y' GROUP BY DOC_NO) YC ON DS.DOC_NO = YC.DOC_NO
+        LEFT JOIN (SELECT COUNT(*) AS COUNT, DOC_NO FROM DOC_SAVE WHERE STATE = 'N' GROUP BY DOC_NO) NC ON DS.DOC_NO = NC.DOC_NO
+        LEFT JOIN (SELECT COUNT(*) AS COUNT, DOC_NO FROM DOC_SAVE GROUP BY DOC_NO) C ON DS.DOC_NO = C.DOC_NO
+        LEFT JOIN 
+        (    
+            SELECT MIN(PRI) AS MP, DOC_NO FROM DOC_SAVE DS
+            JOIN APRPROVAL A ON DS.AP_NO = A.NO
+            JOIN MEMBER M ON A.A_MAN = M.NO
+            WHERE STATE = 'N'
+            GROUP BY DOC_NO
+        ) MIN ON DS.DOC_NO = MIN.DOC_NO
+		WHERE A.A_MAN = ${no}
+        AND PRI <= MP
+	</select>
+	
+	<select id="selectOne" resultType="com.kh.sixman.temp.approval.vo.ApprovalDocumentVo">
+		SELECT 
+			D.NO
+			,D.AP_NO
+			,D.SEND_PAY
+			,D.TYPE
+			,M.NAME AS SEND_NAME
+			,D.TITLE
+			,T.NAME AS TYPE_NAME
+			,D.CONTENT
+			,D.D_YN
+			,D.D_SAVE
+			,D.ENROLL_DATE
+			,D.MODIFY_DATE
+			,D.START_DATE
+			,D.END_DATE
+			,D.REFER
+			,D.SEND_NAME
+			,CASE 
+			WHEN YC.COUNT IS NULL THEN '결재대기'
+			WHEN YC.COUNT = C.COUNT THEN '결재완료'
+			ELSE '결재중'
+			END STATE
+		FROM
+		DOCUMENT D
+		JOIN TYPE_A T ON D.TYPE = T.NO
+		JOIN MEMBER M ON D.SEND_PAY = M.NO
+		LEFT JOIN (SELECT COUNT(*) AS COUNT, DOC_NO FROM DOC_SAVE WHERE STATE = 'Y' GROUP BY DOC_NO) YC ON D.DOC_NO = YC.DOC_NO
+        LEFT JOIN (SELECT COUNT(*) AS COUNT, DOC_NO FROM DOC_SAVE WHERE STATE = 'N' GROUP BY DOC_NO) NC ON D.DOC_NO = NC.DOC_NO
+        LEFT JOIN (SELECT COUNT(*) AS COUNT, DOC_NO FROM DOC_SAVE GROUP BY DOC_NO) C ON D.DOC_NO = C.DOC_NO
+		WHERE D.NO = ${no}
+	</select>
+	
+	<select id="countDocument" resultType="int">
+		SELECT COUNT(*) FROM
+		DOC_SAVE DS
+		JOIN DOCUMENT D ON DS.DOC_NO = D.NO
+		JOIN APRPROVAL A ON DS.AP_NO = A.NO
+		WHERE A.A_MAN = ${no}
+	</select>
+	
+	<select id="getLineFromDocument" resultType="com.kh.sixman.temp.approval.vo.ApprovalVo">
+		SELECT 
+		    AP.NO
+		    , M.NAME
+		    , D.NAME AS DEPT_NAME
+		    , T.NAME AS TEAM_NAME
+		    , P.POSITION AS POSITION_NAME
+		    , AP.A_MAN AS APP_MAN
+		    , AP.A_NO AS APP_NO
+		    , AP.PRI
+            , DS.STATE
+		FROM DOCUMENT D
+        JOIN DOC_SAVE DS ON D.NO = DS.DOC_NO
+        JOIN APRPROVAL AP ON AP.NO = DS.AP_NO
+		JOIN MEMBER M ON AP.A_MAN = M.NO
+		JOIN POSITION P ON P.NO = M.POSITION_NO
+		JOIN DEPARTMENT D ON D.NO = M.DEPT_NO
+		LEFT JOIN DEPARTMENT T ON T.NO = M.TEAM_NO
+		WHERE D.NO = ${no}
+		ORDER BY PRI
+	</select>
+	
+	<update id="check">
+		UPDATE DOC_SAVE
+		SET STATE = 'Y'
+		WHERE NO = ${no}
+	</update>
+
+</mapper>
