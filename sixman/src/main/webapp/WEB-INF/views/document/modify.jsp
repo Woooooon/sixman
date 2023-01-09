@@ -38,8 +38,7 @@
                 </div>
                 <div class="writeno">
                     <div>기안일</div>
-                   
-                    <div></div>
+                    <div type="text" name="enrollDate">${dvo.enrollDate}</div>
                 </div>
                 <div class="writeno">
                     <div>기안자</div>
@@ -47,7 +46,7 @@
                 </div>
                 <div class="writeno">
                     <div>참조자</div>
-                    <input type="text" name="refer" value="입력해주세요.">
+                    <input type="text" name="refer" value="${dvo.refer}">
                 </div>
             </div>
             <div class="docbox">
@@ -71,7 +70,7 @@
         <div id="write-header">
             <div id="header-title">
                 <div class="header-item-title">제목</div>
-                <input type="text" name="title">
+                <input type="text" name="title" value="${dvo.title}">
             </div>
             <div id="file-box">
                 <div class="header-item-title">파일추가
@@ -84,8 +83,7 @@
         <textarea name="content" id="summernote"></textarea>
         <div id="btn-box">
             <!-- <input name="subit" class="c-btn" type="submit" value="반려하기"> -->
-            <input name="submit" class="btn" type="submit" value="작성하기">
-            <input name="submit" class="c-btn" type="submit" value="임시저장">
+            <input name="submit" class="btn" type="submit" value="수정 완료">
         </div>
     </div>
 </form>

@@ -67,14 +67,11 @@
                     <input type="checkbox" name="RowCheck"value="${dvo.no}">
                     <p>${dvo.no}</p>
                     <p>${dvo.type}</p>
-                    <div class="text_ct"><a href="${path}/document/detail?no=${dvo.no}">${dvo.title}</a></div>
-                    <!-- <p  class="text_ct"><a href="${path}/document/detail?no=${dvo.no}">${dvo.title}</a></p> -->
-                    <!-- <p><fmt:formatDate value="${dvo.enrollDate}" partern="yyyy/MM/dd"/></p> -->
-                    <p>${dvo.enrollDate}</p>
+                    <p>${dvo.title}</p>
+                    <p partern="yyyy/MM/dd">${dvo.enrollDate}</p>
                     <p>${dvo.state}</p>
                 </div>
                 
-          
             </c:forEach>
             
           
@@ -86,13 +83,15 @@
 
         <div class="page-box">
             <div class="page-box">
-                <span class="material-symbols-outlined" <c:if test="${pv.currentPage ne 1}">onclick="location.href='/sixman/document/first?page=1&&keyword=${keyword}'"</c:if>> keyboard_double_arrow_left </span>
-                <span class="material-symbols-outlined" <c:if test="${pv.currentPage ne 1}">onclick="location.href='/sixman/document/first?page=${pv.currentPage - 1}&&keyword=${keyword}'"</c:if>> chevron_left </span>
-                <c:forEach var="i" begin="${pv.startPage}" end="${pv.endPage}">
-                            <div class="page-btn <c:if test="${i eq pv.currentPage}"> checked-p-btn</c:if>" onclick="location.href='/sixman/document/first?page=${i}&&keyword=${keyword}'">${i}</div>
-                            </c:forEach>
-                            <span class="material-symbols-outlined" <c:if test="${pv.maxPage ne pv.currentPage}">onclick="location.href='/sixman/document/first?page=${pv.currentPage + 1}&&keyword=${keyword}'"</c:if>> chevron_right </span>
-                            <span class="material-symbols-outlined" <c:if test="${pv.maxPage ne 1}">onclick="location.href='/sixman/document/first?page=${pv.maxPage}&&keyword=${keyword}'"</c:if>> keyboard_double_arrow_right </span>
+                <span class="material-symbols-outlined"> keyboard_double_arrow_left </span>
+                <span class="material-symbols-outlined"> chevron_left </span>
+                <div class="page-btn checked-p-btn">1</div>
+                <div class="page-btn">2</div>
+                <div class="page-btn">3</div>
+                <div class="page-btn">4</div>
+                <div class="page-btn">5</div>
+                <span class="material-symbols-outlined"> chevron_right </span>
+                <span class="material-symbols-outlined"> keyboard_double_arrow_right </span>
             </div>
          
         </div>

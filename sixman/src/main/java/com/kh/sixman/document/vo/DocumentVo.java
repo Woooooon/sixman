@@ -9,7 +9,7 @@ import com.kh.sixman.common.AttachmentVo;
 import lombok.Data;
 
 @Data
-public class DocumentVo {
+public class DocumentVo{
 
     private String no;
     private String mNo;

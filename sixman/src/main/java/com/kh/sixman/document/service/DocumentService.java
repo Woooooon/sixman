@@ -10,12 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kh.sixman.addressBook.vo.AddressVo;
+import com.kh.sixman.addressBook.vo.SortationVo;
 import com.kh.sixman.common.AttachmentVo;
 import com.kh.sixman.document.dao.DocumentDao;
 import com.kh.sixman.document.dao.DocumentFileDao;
+import com.kh.sixman.document.vo.Criteria;
 import com.kh.sixman.document.vo.DocumentSaveVo;
 import com.kh.sixman.document.vo.DocumentVo;
-import com.kh.sixman.notice.vo.NoticeVo;
+
+
 
 @Service
 public class DocumentService {
@@ -27,6 +31,8 @@ public class DocumentService {
    @Autowired
    private DocumentFileDao fdao;
    
+  
+   
    //게시글 작성
    @Transactional
    public int write(DocumentVo dvo) {
@@ -37,6 +43,7 @@ public class DocumentService {
       int result3 = dao.writesv(sst, dvo);
       
       String no = dao.getDocuementNo(sst, dvo);
+      
       List<AttachmentVo> fileLists = dvo.getFileList();
       int result2 = 1;
       if(fileLists != null) {
@@ -51,7 +58,7 @@ public class DocumentService {
          result2= fdao.uploadAll(sst,map);
       }
       	return result1  * result2 * result3;
-//      	return result1  * result3;
+//      	return result1  * result2;
    }
 
 
@@ -106,7 +113,54 @@ public List<DocumentVo> selectList(String keyword, RowBounds rb) {
 
 
 public List<DocumentVo> selectDocumentList() {
+	
 	return dao.selectDcList(sst);
 }
+
+
+
+public List<DocumentVo> selectdsList() {
+	return dao.selectdsList(sst);
+}
+
+
+
+//결재선페이지 APP_NO 불러오기
+public List<DocumentVo> selectapList() {
+	return dao.selectapList(sst);
+}
+
+
+
+public Object delete(String no) {
+	return dao.delete(sst, no);
+}
+
+
+
+public int countingList(Map<String, String> search) {
+	return dao.countingList(sst, search);
+}
+
+
+
+public List<DocumentVo> selectDocumentList(RowBounds rb, Map<String, String> search) {
+	return dao.selectDocumentList(sst,rb,search);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

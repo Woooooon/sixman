@@ -1,11 +1,15 @@
 package com.kh.sixman.document.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.sixman.addressBook.vo.AddressVo;
+import com.kh.sixman.addressBook.vo.SortationVo;
+import com.kh.sixman.document.vo.Criteria;
 import com.kh.sixman.document.vo.DocumentSaveVo;
 import com.kh.sixman.document.vo.DocumentVo;
 import com.kh.sixman.notice.vo.NoticeVo;
@@ -45,26 +49,56 @@ public class DocumentDao {
 
 
 	public int viewCount(SqlSessionTemplate sst, String no) {
-		return sst.update("DocumentMapper.viewCount", no);
+		return sst.update("documentMapper.viewCount", no);
 		
 	}
 
 
 	public DocumentVo selectOne(SqlSessionTemplate sst, String no) {
-		return sst.selectOne("DocumentMapper.selectOne", no);
+		log.debug("dvo: " + no);
+		return sst.selectOne("documentMapper.selectOne", no);
 	}
 
 
 	public List<DocumentVo> nextAndPre(SqlSessionTemplate sst, String no) {
-		return sst.selectList("DocumentMapper.nextAndPre", no);
+		return sst.selectList("documentMapper.nextAndPre", no);
 	}
 
 	public int writesv(SqlSessionTemplate sst, DocumentVo dvo) {
-		return sst.insert("DocumentMapper.stateis",dvo);
+		return sst.insert("documentMapper.stateis",dvo);
 	}
 
 	public List<DocumentVo> selectDcList(SqlSessionTemplate sst) {
+		
 		return sst.selectList("documentMapper.docuselect");
 	}
+
+	public List<DocumentVo> selectdsList(SqlSessionTemplate sst) {
+		return sst.selectList("documenMapper.approveDS");
+	}
+
+	public List<DocumentVo> selectapList(SqlSessionTemplate sst) {
+		return sst.selectList("documentMapper.approveAP");
+	}
+
+
+	public Object delete(SqlSessionTemplate sst,String no) {
+		return sst.delete("documentMapper.delete",no);
+	}
+
+	public int countingList(SqlSessionTemplate sst, Map<String, String> search) {
+		return sst.selectOne("documentMapper.countDocument",search);
+	}
+
+	public List<DocumentVo> selectDocumentList(SqlSessionTemplate sst, RowBounds rb, Map<String, String> search) {
+		return sst.selectList("documentMapper.selectDocumentList" , search, rb);
+	}
+
+	
+
+
+
+
+	
 
 }
