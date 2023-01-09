@@ -6,11 +6,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.kh.sixman.chat.service.ChatService;
 import com.kh.sixman.chat.vo.ChatRoomVo;
 import com.kh.sixman.member.vo.MemberVo;
 
@@ -20,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ChatHandler extends TextWebSocketHandler{
 	
 	// 1:1로 할 경우
-	private Map<String, Map<String, Object>> userSessionsMap = new HashMap<String, Map<String, Object>>();
+	private Map<String, WebSocketSession> userSessionsMap = new HashMap<String, WebSocketSession>();
 	
 	private Map<String, Object> getHTTPSession(WebSocketSession session) {
 		Map<String, Object> httpSession = session.getAttributes();
@@ -30,37 +32,33 @@ public class ChatHandler extends TextWebSocketHandler{
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		Map<String, Object> httpSession = getHTTPSession(session);
-		ChatRoomVo curRoom = (ChatRoomVo) httpSession.get("room");
 		MemberVo curMember = (MemberVo)httpSession.get("loginMember");
+		if(curMember==null) return; 
+		
+		ChatRoomVo curRoom = (ChatRoomVo) httpSession.get("room");
 		
 		log.info("Chat Socket 연결");
 		log.info("id : " + session.getId());
 
-		if(httpSession.get("loginMember")!=null) {
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("httpSession", httpSession);
-			map.put("session", session);
-			userSessionsMap.put(curMember.getNo(), map);			
-		}
+		userSessionsMap.put(curMember.getNo(), session);		
 		
 		Set<String> keySet = userSessionsMap.keySet();
-		
 		for(String key : keySet) {
-			if(key.equals(curMember.getNo())) {continue;}
 			
-			Map<String, Object> map = userSessionsMap.get(key);
+			if(key.equals(curMember.getNo())) continue;
 			
-			Map<String, Object> hs =  (Map<String, Object>) map.get("httpSession");
-			ChatRoomVo roomVo = (ChatRoomVo) hs.get("room");
+			WebSocketSession memberWS = userSessionsMap.get(key);
+			Map<String, Object> memberHS = getHTTPSession(memberWS);
+			
+			ChatRoomVo roomVo = (ChatRoomVo) memberHS.get("room");
+			if(roomVo==null) continue;
+			
 			String room = roomVo.getChatRoomNo();
-			WebSocketSession ss = (WebSocketSession) map.get("session");
 			
 			if(room.equals(curRoom.getChatRoomNo())) {
-				System.out.println("보냄");
-				ss.sendMessage(new TextMessage("#####"));
+				memberWS.sendMessage(new TextMessage("#####"+curRoom.getBeforeJoin()));
 			}
 		}
-		
 	}
 	
 	@Override
@@ -78,33 +76,32 @@ public class ChatHandler extends TextWebSocketHandler{
 	
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-		log.info("{}로부터 받은 메세지 {}", session.getId(), message.getPayload());
+		log.info("chat {}로부터 받은 메세지 {}", session.getId(), message.getPayload());
+		
 		Map<String, Object> httpSession = getHTTPSession(session);
-		ChatRoomVo curRoom = (ChatRoomVo)httpSession.get("room");
-		List<MemberVo> members = curRoom.getMembers();
+		ChatRoomVo curRoom = (ChatRoomVo)httpSession.get("room"); //보낸사람 채팅방정보
+		List<MemberVo> members = curRoom.getMembers(); //보낸사람 채팅방의 맴버들
 		
 		String msg = message.getPayload();
 		String msgs[] = msg.split("#");
 		
 		String roomNo = msgs[2];	
 		
-		
 		int inMemberCount = -1;
-		Set<String> keySet = userSessionsMap.keySet();
 		
 		List<WebSocketSession> sessions = new ArrayList<>();
 		
+		Set<String> keySet = userSessionsMap.keySet();
 		for(String key : keySet) {
-			Map<String, Object> map = userSessionsMap.get(key);
+			WebSocketSession memberWS = userSessionsMap.get(key);
+			Map<String, Object> memberHS = getHTTPSession(memberWS);
 			
-			Map<String, Object> hs =  (Map<String, Object>) map.get("httpSession");
-			ChatRoomVo roomVo = (ChatRoomVo) hs.get("room");
+			ChatRoomVo roomVo = (ChatRoomVo) memberHS.get("room");//다른사람 접속한 룸 정보
 			String room = roomVo.getChatRoomNo();
-			WebSocketSession ss = (WebSocketSession) map.get("session");
 			
 			if(room.equals(roomNo)) {
 				inMemberCount++;
-				sessions.add(ss);
+				sessions.add(memberWS);
 			}
 		}
 		

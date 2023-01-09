@@ -11,13 +11,26 @@ const optionInner = document.querySelector('#option-inner');
 const chatMemberPanel = document.querySelector('#m-chat-member-panel');
 const memberInner = document.querySelector('#member-inner');
 
+optionPanel.addEventListener('click', (e)=>{
+    if (e.target !== e.currentTarget) return;
+    closeOption();
+});
+chatMemberPanel.addEventListener('click', (e)=>{
+    if (e.target !== e.currentTarget) return;
+    closeChatMember();
+});
+
 function closeAll() {
     if(chatSocket){
+        closeSearchBar();
+
         chatSocket.close();
         chatSocket = null;
-        closeChat();
+
         socket.close();
         connectSC();
+
+        closeChat();
     }
     panels.forEach(element => {
         element.style.display = "none";
@@ -37,9 +50,14 @@ msgBtn.addEventListener('click', ()=>{
     if(msgBtn.classList.contains('open')){
         msgBtn.classList.remove('open');
         outer.style.right = '-400px';
+        closeAll();
     }else{
         msgBtn.classList.add('open');
         outer.style.right = '0';
+        setTimeout(() => {
+            openChatAjax();
+            chatListPanel.style.display = "block";
+        }, 200);
     }
 
 });
@@ -167,13 +185,13 @@ function chatAjax(formData, beforeMsg, msg, afterMsg) {
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
                 if (httpRequest.status === 200) {
                     const result = httpRequest.response;
-
+                    console.log(result);
                     if(result.changeName){
-                        const fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/gi;
+                        const fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp)$/gi;
                         if(result.changeName.match(fileForm)){
-                            chatSocket.send(beforeMsg + result.changeName + afterMsg + "#Y");
+                            chatSocket.send(beforeMsg + result.fileNo + ":" + result.changeName + afterMsg + "#Y");
                         }else{
-                            chatSocket.send(beforeMsg + result.originName + afterMsg + "#Y");
+                            chatSocket.send(beforeMsg + result.fileNo + ":" + result.originName + afterMsg + "#Y");
                         }
                     }
 
@@ -188,7 +206,7 @@ function chatAjax(formData, beforeMsg, msg, afterMsg) {
     httpRequest.send(formData);
 }
 
-openChatAjax();
+// openChatAjax();
 function openChatAjax() {
     const httpRequest = new XMLHttpRequest();
     httpRequest.onreadystatechange = () => {
@@ -280,8 +298,8 @@ function openChat() {
     closeAll();
     setTimeout(() => {
         openChatAjax();
-    }, 500);
-    chatListPanel.style.display = "block";
+        chatListPanel.style.display = "block";
+    }, 200);
 }
 
 //제작페이지 이동
@@ -441,22 +459,23 @@ function createChatRoom(no) {
                         }
                         name = chat.memberName;
 
-                        let time = `<div class="chat-date">${chat.writeTime}</div>`;
-                        if(writeTime == chat.writeTime){
+                        const chatTime = chat.writeTime.substring(2, 16);
+                        let time = `<div class="chat-date">${chatTime}</div>`;
+                        if(writeTime == chatTime){
                             const dates = document.querySelectorAll('.chat-date');
                             if(dates!=null && dates.length != 0){
                                 dates[dates.length-1].remove();
                             }
                         }
-                        writeTime = chat.writeTime;
+                        writeTime = chatTime;
 
                         let count = '';
                         if(chat.nonCount>0){
-                            count = `<div class="chat-count">${chat.nonCount}</div>`;
+                            count = `<div class="chat-count" date="${chat.writeTime}">${chat.nonCount}</div>`;
                         }
 
                         if(chat.fileName!=null && typeof(chat.fileName)!=undefined){
-                            const fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/gi;
+                            const fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp)$/gi;
                             let file = '';
                             let fileDiv = document.createElement('div');
                             if(chat.fileName.match(fileForm)){
@@ -464,9 +483,8 @@ function createChatRoom(no) {
                                 fileDiv.innerHTML = file;
                                 imgBox.append(fileDiv);
                             }else{
-                                file = `<span onclick="openFile(${chat.fileNo}, this.cloneNode(true))" class="material-symbols-outlined"> upload_file </span><span>${chat.originName}</span>`;
-                                fileDiv.innerHTML = file;
-                                nonImgBox.append(fileDiv);
+                                file = `<div class="file-div" onclick="openFile(${chat.fileNo}, this.cloneNode(true))"><span class="material-symbols-outlined"> upload_file </span><span>${chat.originName}</span></div>`;
+                                nonImgBox.innerHTML += file;
                             }
                             text =
                                 `
@@ -512,6 +530,8 @@ function createChatRoom(no) {
                         }
                     }
 
+                    const outBtn = document.querySelector('#option-footer span');
+                    outBtn.onclick = ()=>{outChat(result.chatRoomNo)};
                     const optionBox = document.querySelector('#m-option-panel #option-box');
                     const optionBtns = optionBox.querySelectorAll('input[type=checkbox]');  
                     optionBtns[0].checked = (result.fixYn == 'Y') ? true : false;
@@ -528,7 +548,7 @@ function createChatRoom(no) {
 
                     optionBtns[1].onchange = ()=>{
                         const no = result.chatRoomNo;
-                        if(optionBtns[0].checked){
+                        if(optionBtns[1].checked){
                             setAlarm(no, 'Y');
                         }else{
                             setAlarm(no, 'N');
@@ -600,23 +620,60 @@ function createChatRoom(no) {
 }
 
 const searchInput = document.querySelector('#search-box input');
+
+function setSearch() {
+    searchInput.onkeyup = (e)=>{
+        if(e.keyCode != 13){
+            return;
+        }
+        search();
+    };
+    searchInput.onchange = null;
+}
+
 function search() {
+    if(searchInput.value==null||searchInput.value==''){
+        return;
+    }
+
     const msgs = document.querySelectorAll('.chat-msg');
+    const findMsgs = [];
+
     for (let index = msgs.length-1; index >= 0; index--) {
         const element = msgs[index];
-        const text = element.innerHTML;
-
-        if(searchInput.value==null||searchInput.value==''){
-            break;
-        }
+        const text = element.innerText;
 
         if(text.includes(searchInput.value)){
-            chatMain.scrollTop = text.scrollHeight; 
-            selectRange(element);
-            break;
+            findMsgs.push(element);
         }
-        chatMain.scrollTop = chatMain.scrollHeight; 
     }
+
+    console.log(findMsgs);
+
+    if(findMsgs.length==0){
+        return;
+    }
+
+    const firstElement = findMsgs[0];
+    selectRange(firstElement);
+    chatMain.scrollTop = firstElement.offsetTop - 400;
+
+    let i = 1;
+    searchInput.onkeyup = (e)=>{
+        if(e.keyCode != 13){
+            return;
+        }
+        
+        if(i >= findMsgs.length){return;}
+
+        const nextElement = findMsgs[i];
+        selectRange(nextElement);
+        chatMain.scrollTop = nextElement.offsetTop - 400;
+
+        i++;
+    };
+
+    searchInput.onchange = ()=>{setSearch();}
 }
 
 function selectRange(obj) {
@@ -634,6 +691,7 @@ function selectRange(obj) {
 
 function openOption() {
     optionPanel.style.display = "flex";
+    closeSearchBar();
     setTimeout(() => {
         optionInner.style.right = "0";
     }, 10);
@@ -648,6 +706,7 @@ function closeOption() {
 
 function openChatMember() {
     chatMemberPanel.style.display = "flex";
+    closeSearchBar();
     setTimeout(() => {
         memberInner.style.left = "0";
     }, 10);
@@ -683,38 +742,36 @@ function openProfile(no) {
     const httpRequest = new XMLHttpRequest();
     httpRequest.onreadystatechange = () => {
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
-                if (httpRequest.status === 200) {
+            if (httpRequest.status === 200) {
 
-                    const result = httpRequest.response;
+                const result = httpRequest.response;
 
-                    let checked = "";
-                    if(result.bookmark == 'Y'){
-                        checked = "checked";
-                    }
-
-                    let text = 
-                    `
-                    <div>
-                        <label class="material-symbols-outlined"> grade <input type="checkbox" onchange="bookMark('${result.no}',this)" ${checked}></label>
-                        <span class="material-symbols-outlined" onclick="closeProfile()"> close </span>
-                    </div>
-                    <div>
-                        <img src="/sixman/resources/img/profile/${result.fileName}">
-                        <div><p>${result.authorizeName}</p> <div>${result.teamName}</div></div>
-                        <div><p>${result.name}</p> <div>${result.positionName}</div></div>
-                    </div>
-                    <div>
-                        <span class="material-symbols-outlined" onclick="/sixman/mail/write?email=${result.email}"> mail </span>
-                        <span class="material-symbols-outlined"> group_add </span>
-                        <span class="material-symbols-outlined"> forum </span>
-                    </div>
-                    `
-
-                    pofilePanel.innerHTML = text;
-
-                } else {
-                    console.log("채팅 리스트 에이젝스 실패");
+                let checked = "";
+                if(result.bookmark == 'Y'){
+                    checked = "checked";
                 }
+
+                let text = 
+                `
+                <div>
+                    <label class="material-symbols-outlined"> grade <input type="checkbox" onchange="bookMark('${result.no}',this)" ${checked}></label>
+                    <span class="material-symbols-outlined" onclick="closeProfile()"> close </span>
+                </div>
+                <div>
+                    <img src="/sixman/resources/img/profile/${result.fileName}">
+                    <div><p>${result.deptName}</p> <div>${result.teamName}</div></div>
+                    <div><p>${result.name}</p> <div>${result.positionName}</div></div>
+                </div>
+                <div>
+                    <span class="material-symbols-outlined" onclick="location.href='/sixman/mail/write?email=${result.email}'"> mail </span>
+                    <span class="material-symbols-outlined"> group_add </span>
+                    <span class="material-symbols-outlined" onclick="createChatRoom(${result.no})"> forum </span>
+                </div>
+                `
+
+                pofilePanel.innerHTML = text;
+
+            }
         }
     };
 
@@ -739,14 +796,20 @@ searchBtn.addEventListener('click', ()=>{
     }else{
         searchBar.classList.add('open');
         searchBar.style.display = "flex";
+        setSearch();
     }
 });
+
+function closeSearchBar() {
+    searchBar.classList.remove('open');
+    searchBar.style.display = "none";
+}
 
 const fileBox = document.querySelector('#chat-file-box');
 function readURL(input) {
     if (input.files && input.files[0]) {
         const fileName = input.value;
-        const fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/gi;
+        const fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp)$/gi;
         if(!fileName.match(fileForm)){
             document.getElementById('preview').innerHTML = `<span class="material-symbols-outlined"> upload_file </span><span> ${fileName.substring(fileName.lastIndexOf('\\')+1)} </span>`;
             fileBox.style.display = 'flex';
@@ -826,4 +889,24 @@ function bookMark(no, obj) {
     httpRequest.open('post', '/sixman/bookMark');
     httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
     httpRequest.send(`no=${no}&bookMark=${mark}`);
+}
+
+function outChat(no) {
+    popup.confirmPop("나가기", "정말로 채팅방을 나가시겠습니까?", ()=>{
+
+        const httpRequest = new XMLHttpRequest();
+        httpRequest.onreadystatechange = () => {
+            if (httpRequest.readyState === XMLHttpRequest.DONE) {
+                if (httpRequest.status === 200) {
+
+                    openChat();
+
+                }
+            }
+        };
+        httpRequest.open('post', '/sixman/outChat');
+        httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
+        httpRequest.send(`no=${no}`);
+
+    });
 }

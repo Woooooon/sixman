@@ -4,6 +4,14 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="chatMapper">
 
+	<delete id="chatOut">
+	
+		DELETE CHAT_ROOM_SETTING
+		WHERE CHAT_ROOM_NO = ${no}
+		AND MEMBER_NO = ${loginNo}
+	
+	</delete>
+
 	<insert id="inBookMark">
 		INSERT INTO BOOKMARK
 		VALUES
@@ -24,6 +32,13 @@
 	
 		UPDATE CHAT_ROOM_SETTING
 		SET LAST_JOIN_TIME = SYSDATE
+		, BEFORE_JOIN = 
+		(
+			SELECT LAST_JOIN_TIME 
+			FROM CHAT_ROOM_SETTING
+			WHERE CHAT_ROOM_NO = ${no} 
+			AND MEMBER_NO = ${loginNo}
+		)
 		WHERE CHAT_ROOM_NO = ${no}
 		AND MEMBER_NO = ${loginNo}
 	
@@ -65,6 +80,7 @@
 		    , ALARM_YN
 		    , NAME
 		    , LAST_JOIN_TIME
+		    , BEFORE_JOIN
 		FROM CHAT_ROOM_SETTING
 		WHERE MEMBER_NO = ${no}
 		ORDER BY FIX_YN DESC
@@ -151,6 +167,7 @@
 		    , ALARM_YN
 		    , NAME
 		    , LAST_JOIN_TIME
+		    , BEFORE_JOIN
 		FROM CHAT_ROOM_SETTING
 		WHERE MEMBER_NO = ${loginNo}
 		AND CHAT_ROOM_NO = ${no}
@@ -186,6 +203,7 @@
 	    WHERE LAST_JOIN_TIME <![CDATA[<]]> #{cv.writeTime}
 	    AND CHAT_ROOM_NO = ${cv.chatRoomNo}
 	    AND NOT MEMBER_NO = ${loginNo}
+	    AND NOT MEMBER_NO = ${cv.memberNo}
 	</select>
 
 	<select id="getBookMark" resultType="MemberVo">
@@ -361,6 +379,7 @@
 		SELECT 
 		    M.NO
 		    , M.NAME
+		    , M.EMAIL
 		    , D.NO AS DEPT_NO
 		    , D.NAME AS DEPT_NAME
 		    , T.NO AS TEAM_NO
@@ -394,6 +413,7 @@
 		SELECT 
 		    M.NO
 		    , M.NAME
+		    , M.EMAIL
 		    , D.NO AS DEPT_NO
 		    , D.NAME AS DEPT_NAME
 		    , T.NO AS TEAM_NO
@@ -455,7 +475,7 @@
 				SEQ_CHAT_ROOM_NO.NEXTVAL
 				, ${n}
 				, 'N'
-				, 'N'
+				, 'Y'
 				, '${loginMember.name}의 메신저'
 				, SYSDATE
 			)
@@ -464,8 +484,10 @@
 	</update>
 	
 	<insert id="chat">
-		INSERT ALL
-		INTO CHAT_CONTENT
+		<selectKey keyProperty="chatNum" resultType="String" order="BEFORE">
+			SELECT SEQ_CHAT_CONTENT_NO.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO CHAT_CONTENT
 		(
 			CHAT_NUM
 			, MEMBER_NO
@@ -476,34 +498,37 @@
 		)
 		VALUES
 		(
-			SEQ_CHAT_CONTENT_NO.NEXTVAL
-			, ${no}
-			, ${room}
-			, #{msg}
+			${chatNum}
+			, ${memberNo}
+			, ${chatRoomNo}
+			, #{content}
 			, SYSDATE
 			, 'N'
 		)
-		<if test="file!=null">
-			INTO CHAT_A
-			(
-				NO
-				, CHAT_NO
-				, ORIGIN_NAME
-				, CHANGE_NAME
-				, FILE_PATH
-				, ENROLL_DATE
-			)
-			VALUES
-			(
-				SEQ_CHAT_A_NO.NEXTVAL,
-				SEQ_CHAT_CONTENT_NO.NEXTVAL,
-				#{file.originName},
-				#{file.changeName},
-				#{file.filePath},
-				SYSDATE
+	</insert>
+	
+	<insert id="insertFile">
+		<selectKey keyProperty="no" resultType="String" order="BEFORE">
+			SELECT SEQ_CHAT_A_NO.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO CHAT_A
+		(
+			NO
+			, CHAT_NO
+			, ORIGIN_NAME
+			, CHANGE_NAME
+			, FILE_PATH
+			, ENROLL_DATE
 		)
-		</if>
-		select * from dual
+		VALUES
+		(
+			${no},
+			${subNo},
+			#{originName},
+			#{changeName},
+			#{filePath},
+			SYSDATE
+		)
 	</insert>
 	
 </mapper>

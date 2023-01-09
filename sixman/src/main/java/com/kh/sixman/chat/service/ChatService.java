@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kh.sixman.chat.dao.ChatDao;
 import com.kh.sixman.chat.vo.ChatRoomVo;
 import com.kh.sixman.chat.vo.ChatVo;
+import com.kh.sixman.common.AttachmentVo;
 import com.kh.sixman.member.vo.MemberVo;
 
 @Service
@@ -96,7 +97,7 @@ public class ChatService {
 			if(cv.getMemberNo().equals(map.get("loginNo"))) {
 				cv.setIsMe("Y");
 			}
-			cv.setWriteTime(cv.getWriteTime().substring(2, 16));
+//			cv.setWriteTime(cv.getWriteTime().substring(2, 16));
 			
 		}
 		
@@ -114,8 +115,8 @@ public class ChatService {
 		return chatDao.createChat(sst, map);
 	}
 
-	public int chatOut(String loginNo, String no) {
-		return 0;
+	public int chatOut(String loginNo, Map<String, String> map) {
+		return chatDao.chatOut(sst, map);
 	}
 
 	public int setFix(Map<String, String> map) {
@@ -141,8 +142,23 @@ public class ChatService {
 	}
 
 	@Transactional
-	public int chat(Map<String, Object> map) {
-		return chatDao.chat(sst, map);
+	public String chat(Map<String, Object> map) {
+		String fileNO = null;
+		
+		ChatVo cvo = new ChatVo();
+		cvo.setMemberNo((String)map.get("no"));
+		cvo.setChatRoomNo((String)map.get("room"));
+		cvo.setContent((String)map.get("msg"));
+		
+		int result = chatDao.chat(sst, cvo);
+		if(result==1&&map.get("file")!=null) {
+			AttachmentVo vo = (AttachmentVo) map.get("file");
+			vo.setSubNo(cvo.getChatNum());
+			chatDao.insertFile(sst, vo);
+			fileNO = vo.getNo();
+			System.out.println(fileNO);
+		}
+		return fileNO;
 	}
 
 	public int join(Map<String, String> map) {

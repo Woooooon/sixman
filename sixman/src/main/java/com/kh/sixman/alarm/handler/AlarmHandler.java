@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class AlarmHandler extends TextWebSocketHandler{
 	
-	private Map<String, Map<String, Object>> userSessionsMap = new HashMap<String, Map<String, Object>>();
+	private Map<String, WebSocketSession> userSessionsMap = new HashMap<String, WebSocketSession>();
 	
 	@Autowired
 	private ChatService chatService;
@@ -33,16 +33,13 @@ public class AlarmHandler extends TextWebSocketHandler{
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		Map<String, Object> httpSession = getHTTPSession(session);
+		MemberVo curMember = (MemberVo)httpSession.get("loginMember");
 		
-		log.info("Chat Socket 연결");
+		log.info("Socket 연결");
 		log.info("id : " + session.getId());
 
-		if(httpSession.get("loginMember")!=null) {
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("httpSession", httpSession);
-			map.put("session", session);
-			MemberVo curMember = (MemberVo)httpSession.get("loginMember");
-			userSessionsMap.put(curMember.getNo(), map);			
+		if(curMember!=null) {
+			userSessionsMap.put(curMember.getNo(), session);			
 		}
 	}
 	
@@ -51,7 +48,7 @@ public class AlarmHandler extends TextWebSocketHandler{
 		Map<String, Object> httpSession = getHTTPSession(session);
 		MemberVo curMember = (MemberVo)httpSession.get("loginMember");
 		
-		log.info("Chat Socket 종료");
+		log.info("Socket 종료");
 		log.info("id : " + session.getId());//현재 접속한 사람
 		
 		if(curMember!=null) {
@@ -63,7 +60,7 @@ public class AlarmHandler extends TextWebSocketHandler{
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		log.info("{}로부터 받은 메세지 {}", session.getId(), message.getPayload());
 		Map<String, Object> httpSession = getHTTPSession(session);
-		
+				
 		String msg = message.getPayload();
 		String msgs[] = msg.split("#");
 		
@@ -71,57 +68,41 @@ public class AlarmHandler extends TextWebSocketHandler{
 		String sendMsg = msgs[2];
 		String sender = msgs[3];
 		
+		TextMessage text = new TextMessage(type+"#"+sendMsg);
 		//메일일때
 		if("MAIL".equals(type)) {
+			
 			Set<String> keySet = userSessionsMap.keySet();
-			TextMessage text = new TextMessage(type+"#"+sendMsg);
 			for(String key : keySet) {
-				Map<String, Object> map = userSessionsMap.get(key);
+				WebSocketSession memberWS = userSessionsMap.get(key);
+				Map<String, Object> memberHS = getHTTPSession(memberWS);
+				MemberVo vo =  (MemberVo) memberHS.get("loginMember");
 				
-				Map<String, Object> hs =  (Map<String, Object>) map.get("httpSession");
-				MemberVo vo =  (MemberVo) hs.get("loginMember");
-				WebSocketSession ss = (WebSocketSession) map.get("session");
-				
-				if(vo.getEmail().equals(sender)) {
-					ss.sendMessage(text);
+				if(sender.equals(vo.getEmail())) {
+					memberWS.sendMessage(text);
 				}
 			}
 		}
 		
 		if("CHAT".equals(type)) {			
-			ChatRoomVo curRoom = (ChatRoomVo)httpSession.get("room");
+			ChatRoomVo curRoom = (ChatRoomVo) httpSession.get("room");
 			List<MemberVo> members = curRoom.getMembers();
-			
-			MemberVo curMember = (MemberVo)httpSession.get("loginMember");
-			
-			TextMessage text = new TextMessage(type+"#"+sendMsg);
-			
+
 			for(MemberVo vo : members) {
-				Map<String, Object> map = userSessionsMap.get(vo.getNo());
+				WebSocketSession memberWs = userSessionsMap.get(vo.getNo());
+				if(memberWs==null) continue;
 				
-				if(map==null) {continue;}
-				
-				Map<String, Object> hs =  (Map<String, Object>) map.get("httpSession");
-				ChatRoomVo roomVo = (ChatRoomVo) hs.get("room");
-				if(roomVo==null) {continue;}
-				String room = roomVo.getChatRoomNo();
-								
-				WebSocketSession ss = (WebSocketSession) map.get("session");
-				
-				if(sender.equals(room)) {
-					continue;
-				}
+				Map<String, Object> memberHS = getHTTPSession(memberWs);
+				ChatRoomVo memberRoom = (ChatRoomVo) memberHS.get("room");
+				if(memberRoom==null || memberRoom.getChatRoomNo()!=sender) continue;
 				
 				Map<String,String> temp = new HashMap<>();
-				temp.put("loginNo", curMember.getNo());
-				temp.put("no", roomVo.getChatRoomNo());
+				temp.put("loginNo", vo.getNo());
+				temp.put("no", sender);
 				ChatRoomVo crv = chatService.getChatSetting(temp);
+				if("N".equals(crv.getAlarmYn())) continue;
 				
-				if("N".equals(crv.getAlarmYn())) {
-					continue;
-				}
-				
-				ss.sendMessage(text);
+				memberWs.sendMessage(text);
 			}
 		}
 		

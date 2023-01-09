@@ -69,7 +69,7 @@
                     <div>Member</div>
                     <div id="ml-search">
                         <input type="text" placeholder="이름검색">
-                        <span class="material-symbols-outlined"> search </span>
+                        <span class="material-symbols-outlined" onclick="searchMemberList('m-list-panel')"> search </span>
                     </div>
                 </article>
                 <article class="ml-main">
@@ -121,7 +121,7 @@
                     <div id="ml-menu-box">
                         <div id="ml-search">
                             <input type="text" placeholder="검색">
-                            <span class="material-symbols-outlined"> search </span>
+                            <span class="material-symbols-outlined" onclick="searchChatList()"> search </span>
                         </div>
                         <span onclick="openCreate()" class="material-symbols-outlined"> add </span>
                     </div>
@@ -164,6 +164,9 @@
                         <div class="file-box">
 
                         </div>
+                    </div>
+                    <div id="option-footer">
+                        <span class="material-symbols-outlined">logout</span>
                     </div>
                 </div>
             </section>
@@ -237,7 +240,7 @@
                         <div>Create</div>
                         <div id="ml-search">
                             <input type="text" placeholder="이름검색">
-                            <span class="material-symbols-outlined"> search </span>
+                            <span class="material-symbols-outlined" onclick="searchMemberList('m-create-panel')"> search </span>
                         </div>
                     </div>
                     <div id="chat-member-list">
@@ -314,7 +317,7 @@
 
     menuMap.set("전자문서", [
         {icon: "home_storage", title: "전자문서"},
-        {title: "기안문서함", url: "${path}/document/first"},
+        {title: "기안문서함", url: "${path}/approval/list"},
         {title: "결재문서함", url: "${path}/document/payment"},
         {title: "참조문서함", url: "${path}/document/reference"},
         {title: "임시보관함", url: "${path}/document/keep"}
@@ -434,8 +437,6 @@
         const type = datas[0];
         const msg = datas[1];
         
-        console.log(data);
-        
         if(type=='CHAT'){
             notify(type, msg);
             return;
@@ -489,16 +490,14 @@
         var options = {
             body: msg
         }
-        
+
         // 데스크탑 알림 요청
         var notification = new Notification(title, options);
-
-        console.log('msg');
         
-        // 3초뒤 알람 닫기
+        // 5초뒤 알람 닫기
         setTimeout(function(){
             notification.close();
-        }, 3000);
+        }, 5000);
     }
 
     //채팅
@@ -515,10 +514,8 @@
     function chatOnMessage(m) {
         const data = m.data;
 
-        console.log(data);
-
-        if(data=='#####'){
-            chatCountDown();
+        if(data.substring(0,5)=='#####'){
+            chatCountDown(data.substring(5));
             return;
         }
 
@@ -531,11 +528,6 @@
         const isfile = datas[5];
         const count = datas[6];
 
-        // if(isfile=='Y'){
-        //     createChatRoom(room);
-        //     return;
-        // }
-
         if(no=='${loginMember.no}'){
             chatInHTML(name, msg, 'right', sysdate, count, isfile);
         }else{
@@ -544,16 +536,28 @@
 
     }
 
-    function chatCountDown() {
+    function chatCountDown(date) {
         const counts = document.querySelectorAll('.chat-count');
+        const beforeDate = new Date(date);
         counts.forEach(element => {
-            if(parseInt(element.innerHTML) - 1 > 0){
+            const eDate = new Date(element.getAttribute("date"));
+
+            if(eDate > beforeDate){
+                if(parseInt(element.innerHTML) - 1 > 0){
                 element.innerHTML = parseInt(element.innerHTML) - 1;
-            }else{
-                element.innerHTML = '';
+                }else{
+                    element.innerHTML = '';
+                }
             }
         });
+        
     }
+    const chatInput = document.querySelector('#chat-input');
+    chatInput.addEventListener("keyup", (e)=>{
+        if(e.keyCode == 13){
+            chat();
+        }
+    });
 
     function chat() {
         const chatInput = document.querySelector('#chat-input');
@@ -583,7 +587,7 @@
     function getSysdate() {
         let today = new Date();   
 
-        var year = ('0' + (today.getFullYear())).slice(-2);
+        var year = (today.getFullYear());
         var month = ('0' + (today.getMonth() + 1)).slice(-2);
         var day = ('0' + today.getDate()).slice(-2);
         
@@ -591,8 +595,9 @@
 
         var hours = ('0' + today.getHours()).slice(-2); 
         var minutes = ('0' + today.getMinutes()).slice(-2);
+        var seconds = ('0' + today.getSeconds()).slice(-2);
         
-        var timeString = hours + ':' + minutes
+        var timeString = hours + ':' + minutes + ':' + seconds;
         
         //23-01-03 11:09
         const sysdate = dateString+' '+timeString;
@@ -633,8 +638,9 @@
             arrow = '<div class="chat-arrow-'+right+'"></div>';
         }
 
-        let time = '<div class="chat-date">'+sysdate+'</div>';
-        if(lastDate == sysdate){
+        const chatTime = sysdate.substring(2, 16);
+        let time = '<div class="chat-date">'+chatTime+'</div>';
+        if(lastDate == chatTime){
             if(dates!=null && dates.length != 0){
                 dates[dates.length-1].remove();
             }
@@ -642,16 +648,17 @@
 
         let count = '';
         if(lastCount>0){
-            count = '<div class="chat-count">'+lastCount+'</div>';
+            count = '<div class="chat-count" date="'+sysdate+'">'+lastCount+'</div>';
         }
 
         if(isfile=="Y"){
-            const fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/gi;
+            const fileString = msg.split(":");
+            const fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp)$/gi;
             let file = '';
-            if(msg.match(fileForm)){
-                file = '<img src=/sixman/resources/chat/'+msg+'>';
+            if(fileString[1].match(fileForm)){
+                file = '<img onclick="openFile('+fileString[0]+', this.cloneNode(true))" src=/sixman/resources/chat/'+fileString[1]+'>';
             }else{
-                file = '<span class="material-symbols-outlined"> upload_file </span><span>'+msg+'</span>';
+                file = '<div class="file-div" onclick="openFile('+fileString[0]+', this.cloneNode(true))"><span class="material-symbols-outlined"> upload_file </span><span>'+fileString[1]+'</span></div>';
             }
             div.innerHTML = '<div class="chat-msg">' + arrow + file + '</div><div class="chat-info">' + count + time + '</div>';
         }else{
@@ -663,5 +670,47 @@
         chatMain.scrollTop = chatMain.scrollHeight;
     }
 
+    function searchChatList() {
+        //m-list-panel
+        const input = document.querySelector('#m-chatList-panel #ml-search input');
+        const text = input.value;
+    
+        const items = document.querySelectorAll('.mc-list-item');
+        items.forEach(element => {
+            const elementText = element.querySelector('.mc-list-item-header p').innerText;
+            if(elementText.includes(text)){
+                element.style.display = "flex";
+            }else{
+                element.style.display = "none";
+            }
+        });
+    }
+
+
+    function searchMemberList(panelName) {
+        //m-list-panel
+        const input = document.querySelector('#'+panelName+' #ml-search input');
+        const text = input.value;
+    
+        const items = document.querySelectorAll('.ml-list-item');
+        items.forEach(element => {
+            const elementText = element.querySelector('div').innerText;
+            if(elementText.includes(text)){
+                element.style.display = "flex";
+            }else{
+                element.style.display = "none";
+            }
+        });
+
+        const bookMarkBox = document.querySelector('#'+panelName+' #ml-bookmark .ml-list-title input');
+        const teamBox = document.querySelector('#'+panelName+' #ml-team .ml-list-title input');
+        const allBox = document.querySelector('#'+panelName+' #ml-all .ml-list-title input');
+
+        if (bookMarkBox) {
+            bookMarkBox.checked = true;
+            teamBox.checked = true;
+            allBox.checked = false;
+        }
+    }
 </script>
 </html>

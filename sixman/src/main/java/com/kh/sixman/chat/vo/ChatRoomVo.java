@@ -19,6 +19,7 @@ public class ChatRoomVo {
 	private String fixYn;
 	private String alarmYn;
 	private String lastJoinTime;
+	private String beforeJoin;
 	private String lastMsg;
 	private String lastMsgTime;
 	private String notReadCount;
