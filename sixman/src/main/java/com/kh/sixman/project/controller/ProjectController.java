@@ -54,11 +54,12 @@ public class ProjectController {
 		
 		//로그인 멤버 정보 꺼내기
 		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
-
+		
 		List<ProjectVo> prjList = ps.selectList(Integer.parseInt(loginMember.getNo()));
 		session.setAttribute("prjList", prjList);
 	
 		return "project/allprj";
+		
 	}
 	
 	//프로젝트 생성(화면)
@@ -87,8 +88,8 @@ public class ProjectController {
 	//프로젝트 생성(찐)
 	@PostMapping("create")
 	public String create(ProjectVo vo, HttpSession session) {
-		log.info("vo :::" + vo);
 		int result = ps.insertPrjOne(vo);
+
 		if(result != 1) {
 			return "errorPage";
 		}

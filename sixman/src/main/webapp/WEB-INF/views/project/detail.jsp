@@ -157,8 +157,8 @@
                 <input type="date">
             </div>
             <div class="hidden"></div>
-            <div class="contentbox">
-                <textarea name="content" class="content"></textarea>
+            <div class="checkbox-add">
+                <button class="btn" type="button" value="추가하기" onclick="addcheckbox();" id="addbtn">추가하기</button>
             </div>
             <div class="footer-btn">
                 <button class="btn" type="button">수정하기</button>

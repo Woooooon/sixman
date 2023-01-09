@@ -26,11 +26,6 @@ public class ProjectDao {
 		return sst.selectOne("projectMapper.selectOne", no);
 	}
 
-	//프로젝트 번호 받아오기
-	public String getno(SqlSessionTemplate sst, ProjectVo vo) {
-		return sst.selectOne("projectMapper.selectPrjNo", vo);
-	}
-
 	//프로젝트 멤버 insert
 	public int insertAllMember(SqlSessionTemplate sst, ProjectVo vo) {
 		return sst.insert("projectMapper.insertPrjMember", vo);
@@ -39,7 +34,6 @@ public class ProjectDao {
 	//프로젝트 디테일 멤버 셀렉트
 	public List<ProjectVo> selectMembers(SqlSessionTemplate sst, String no) {
 		return sst.selectList("projectMapper.selectMembers", no);
-		
 	}
 
 	//프로젝트 멤버 읽어오기
@@ -70,6 +64,11 @@ public class ProjectDao {
 	//프로젝트 즐겨찾기 삭제
 	public int deleteFavorite(SqlSessionTemplate sst, String no) {
 		return sst.update("projectMapper.deleteFavorite", no);
+	}
+
+	//프로젝트 생성할 때 번호 받기
+	public ProjectVo selectPrjNo(SqlSessionTemplate sst, ProjectVo vo) {
+		return sst.selectOne("projectMapper.selectPrjNo", vo);
 	}
 
 }

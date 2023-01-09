@@ -101,6 +101,31 @@ window.addEventListener("keyup", e => {
     }
 })
 
+function addcheckbox(){
+    const addbtn = document.querySelector("#addbtn");
+    const checkbox = document.querySelector(".checkbox-add");
+
+    addbtn.addEventListener('click', (e)=>{
+        console.log("1");
+        let text = "";
+
+        text += `<label>`;
+        const todobox = document.createElement('input');
+        const todoname = document.createElement('input');
+        todobox.classList.add('todocheck');
+        todoname.classList.add('todoname');
+
+        todobox.setAttribute("type", "checkbox");
+        todobox.setAttribute("value", "test");
+        todoname.setAttribute("type", "text");
+        todoname.setAttribute("name", "todoname");
+        text += `</label>`;
+        checkbox.append(todobox);
+        checkbox.append(todoname);
+
+    })
+}
+
 
 
 
