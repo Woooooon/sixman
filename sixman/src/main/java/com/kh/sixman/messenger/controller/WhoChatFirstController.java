@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.kh.sixman.member.vo.MemberVo;
 import com.kh.sixman.messenger.service.ChatWantFirstService;
 import com.kh.sixman.messenger.service.MakeRoomFirstService;
@@ -75,30 +76,32 @@ public class WhoChatFirstController {
 		
 	}
 	
-	@ResponseBody
-	@GetMapping("getchatroomList")
-//	public List<ReadChatRoomListVo> chatroomList() {
-	public List<ReadChatRoomListVo> chatroomList(HttpSession session) {
-		
-		ReadChatRoomListVo readchatroomlistdata = new ReadChatRoomListVo();
-		
-		List<ReadChatRoomListVo> showchatroomlistReady = chatWfs.readchatroomlist(readchatroomlistdata);
-		System.out.println(showchatroomlistReady);
-		session.setAttribute("showchatroomlistReady", showchatroomlistReady);
-		return showchatroomlistReady;
-		
-	}
+//	@ResponseBody
+//	@GetMapping("getchatroomList")
+////	public List<ReadChatRoomListVo> chatroomList() {
+//	public List<ReadChatRoomListVo> chatroomList(HttpSession session) {
+//		
+//		ReadChatRoomListVo readchatroomlistdata = new ReadChatRoomListVo();
+//		
+//		List<ReadChatRoomListVo> showchatroomlistReady = chatWfs.readchatroomlist(readchatroomlistdata);
+//		System.out.println(showchatroomlistReady);
+//		session.setAttribute("showchatroomlistReady", showchatroomlistReady);
+//		return showchatroomlistReady;
+//		
+//	}
 	
-	@ResponseBody
-	@GetMapping("readchatroomList")
-	public List<ReadChatRoomListVo> readchatroomList(HttpSession session) {
-		
-//		session.getAttribute("showchatroomlistReady");
-		List<ReadChatRoomListVo> a_chatroomlist = (List<ReadChatRoomListVo>) session.getAttribute("showchatroomlistReady");
-		System.out.println("last : " + a_chatroomlist);
-		session.setAttribute("a_chatroomlist", a_chatroomlist);
-		return a_chatroomlist;
-	}
+//	@ResponseBody
+//	@GetMapping("readchatroomList")
+//	public String readchatroomList(HttpSession session) {
+//		
+//		Gson gson = new Gson();
+//		
+////		session.getAttribute("showchatroomlistReady");
+//		String a_chatroomlist = gson.toJson(session.getAttribute("showchatroomlistReady"));
+//		System.out.println("last : " + a_chatroomlist);
+//		session.setAttribute("a_chatroomlist", a_chatroomlist);
+//		return a_chatroomlist;
+//	}
 	
 	@ResponseBody
 	@GetMapping("chatroom")
@@ -111,6 +114,23 @@ public class WhoChatFirstController {
 		System.out.println(chatRoomDataReady);
 		session.setAttribute("chatRoomDataReady", chatRoomDataReady);
 		return chatRoomDataReady;
+		
+	}
+	
+	@ResponseBody
+	@GetMapping("getchatroomList")
+//	public List<ReadChatRoomListVo> chatroomList() {
+	public String chatroomList(HttpSession session) {
+		Gson gson = new Gson();
+		ReadChatRoomListVo readchatroomlistdata = new ReadChatRoomListVo();
+		
+		
+		String showchatroomlistReady = gson.toJson(chatWfs.readchatroomlist(readchatroomlistdata));
+		
+//		byte[] utf8Json = jsonstring
+		System.out.println(showchatroomlistReady);
+		session.setAttribute("showchatroomlistReady", showchatroomlistReady);
+		return showchatroomlistReady;
 		
 	}
 

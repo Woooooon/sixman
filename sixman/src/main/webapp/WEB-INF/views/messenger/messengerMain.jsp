@@ -51,40 +51,40 @@
 						</div>
 						<div class="chatlist-big" id="chatlist-big">
 						
-						<c:forEach items="${showchatroomlistReady}" var="chatroom">
+						<c:forEach items="${a_chatroomlist}" var="chatroom">
 							<div class="chatroom-list-box-ajax">
 								
 								
 									<div class="with-chat-data01" id="with-chat-data01">
 										<div class="square-first" style="">
-											<img alt="" src="/sixman/resources/img/profile/${chatroom.profilePath }" class="square-img">
+<%-- 											<img alt="" src="/sixman/resources/img/profile/${chatroom.profilePath }" class="square-img"> --%>
 										</div>
 										<div class="chatroom-list-two-to-two">
 											<div class="with-chat-subroomname2">
-												<c:choose>
-													<c:when test="${fn:length(chatroom.chatroomName)>15}">
-														<c:out value="${fn:substring(chatroom.chatroomName,0,12)}.."></c:out>
-													</c:when>
-													<c:otherwise>
-														<c:out value="${chatroom.chatroomName}"></c:out>
-													</c:otherwise>
-												</c:choose>
+<%-- 												<c:choose> --%>
+<%-- 													<c:when test="${fn:length(chatroom.chatroomName)>15}"> --%>
+<%-- 														<c:out value="${fn:substring(chatroom.chatroomName,0,12)}.."></c:out> --%>
+<%-- 													</c:when> --%>
+<%-- 													<c:otherwise> --%>
+<%-- 														<c:out value="${chatroom.chatroomName}"></c:out> --%>
+<%-- 													</c:otherwise> --%>
+<%-- 												</c:choose> --%>
 											</div>
 											<div class="chat-others-profile01">
 <!-- 												<div class="with-chat-name01">정인제</div> -->
 <!-- 												<div class="with-chat-grade01">과장</div> -->
 
 											</div>
-											<div class="chatroom-alarm-content"><c:choose>
-													<c:when test="${fn:length(chatroom.chatcontent)>28}">
-														<c:out value="${fn:substring(chatroom.chatcontent,0,27)}.."></c:out>
-													</c:when>
-													<c:otherwise>
-														<c:out value="${chatroom.chatcontent}"></c:out>
-													</c:otherwise>
-												</c:choose></div>
+<%-- 											<div class="chatroom-alarm-content"><c:choose> --%>
+<%-- 													<c:when test="${fn:length(chatroom.chatcontent)>28}"> --%>
+<%-- 														<c:out value="${fn:substring(chatroom.chatcontent,0,27)}.."></c:out> --%>
+<%-- 													</c:when> --%>
+<%-- 													<c:otherwise> --%>
+<%-- 														<c:out value="${chatroom.chatcontent}"></c:out> --%>
+<%-- 													</c:otherwise> --%>
+<%-- 												</c:choose></div> --%>
 											<br>
-											<div class="chatroom-alarm-content">${chatroom.lastsendTime }</div>
+<%-- 											<div class="chatroom-alarm-content">${chatroom.lastsendTime }</div> --%>
 										</div>
 										<div class="chatroom-exit-button">
 											<span class="material-symbols-outlined" id="chatroom-exit-icon">exit_to_app</span>
@@ -1086,7 +1086,7 @@
 		<script type="text/javascript">
 			const messenger = document.getElementById('messenger-whole');
 			const messengericon = document.getElementById('msg'); <!-- 메신저 표시  -->
-			
+			const chatroomAlls = document.querySelectorAll(".chatting-room");
 			const chatListAll = document.querySelectorAll(".chatroom-list-box-ajax");
 			
 			
@@ -1094,46 +1094,69 @@
 			messengericon.onclick = function () {
 				$('.messenger-whole').toggle();
 				$('.chatroomlist-first-page').show();
+				$(chatroomAlls).hide();
 				$('.chatroom-list-box-ajax').hide();
 				$.ajax({
 					url:"/sixman/getchatroomList",
+					contentType : "application/json; charset=UTF-8",
 // 					method:"get",
 // 					data : {
 						
 // 					}
-					success:function(x){
-						alert("성공");
-						alert('${showchatroomlistReady}');
+					success:function(data){
+// 						alert("성공");
+						method:"post",
+						alert('${a_chatroomlist}');
 // 						$('.chatroomlist-first-page').on('load', function(){$('.chatroomlist-first-page').show();});
 // 						$('.chatroomlist-first-page').load(window.location.href + '.chatroomlist-first-page');
 // 						$(chatListAll).show();
-						lastreadchat_d();
+// 						lastreadchat_d();
+						
+						
+// 						$(chatListAll).show();
+						
+// 						var chatlist = JSON.stringify(${a_chatroomlist});
+						
+// 						$.each(data, function(key, value){
+// 							alert('key : ' +key, 'value = ' + value);
+// 						});
+						
+						console.log(ParseJSON(data));
+// 						console.log($('a_chatroomlist').chatroomName);
+						
+						$.each($('a_chatroomlist'), function(key, value){
+							console.log(key + ':' + value);
+						});
+						
 					}, error:function(){
 						alert("메세지 로딩에 실패했습니다.. 잠시 후에 다시 이용해주세요");
 					}
 				});
-// 				$('.chatroom-list-box-ajax').show();
+				$(chatListAll).show();
 			}
 			
-			function lastreadchat_d(){
-				$.ajax({
-					url:"/sixman/readchatroomList",
-					success: function() {
-// 						alert(chatListAll);
+// 			function lastreadchat_d(){
+// 				$.ajax({
+// 					url:"/sixman/readchatroomList",
+// 					success: function() {
+// // 						alert(chatListAll);
+// // 						$('.chatroom-list-box-ajax').show();
+// // 						$(chatListAll).show();
+						
+// // 						const chatListbig = document.getElementById('chatlist-big');
+// // 						chatListbig.remove();
+						
+// // 						$('.chatroom-list-space').after('<div id="chatlist-big">ㅇㅇ</div>');
+// 						$(chatroomAlls).hide();
 // 						$('.chatroom-list-box-ajax').show();
-// 						$(chatListAll).show();
-						alert('연결');
-						alert('안녕'+'${a_chatroomlist}');
-						const chatListbig = document.getElementById('chatlist-big');
-						chatListbig.remove();
+// // 						alert('연결');
+// // 						alert('안녕'+'${a_chatroomlist}');
 						
-						$('.chatroom-list-space').after('<div id="chatlist-big">ㅇㅇ</div>');
-						
-					}, error: function(){
-						alert('에러');
-					}
-				})
-			}
+// 					}, error: function(){
+// 						alert('에러');
+// 					}
+// 				})
+// 			}
 
 			
 			
@@ -1144,7 +1167,7 @@
 			function qwe_chat_onclick() {
 // 				alert('ㅇㅇ');
 				$('.chatroomlist-first-page').hide();
-				$('.whochat-page-first').hide();
+				$(chatroomAlls).hide();
 // 				function 
 			$.ajax({
 // 				url:"http://127.0.0.1:8888/sixman/chat/chatwantfirst",
@@ -1152,6 +1175,7 @@
 // 				type:"POST" ,
 				success:function(x){
 					$('.whochat-page-first').show();
+					$('.chatting-room').hide;
 				},
 				error:function(){
 						alert("연결x");
@@ -1254,8 +1278,8 @@
 						data : {chatRoomIndex : index
 						},
 						success : function(){
-							alert("채팅룸받아오는거성공");
-							alert(index);
+// 							alert("채팅룸받아오는거성공");
+// 							alert(index);
 							$('.chatroomlist-first-page').hide();
 							$('.chatting-room').show();
 							$(chatRoomOne).hide();
