@@ -105,5 +105,9 @@ public class AttendanceService {
 		
 	}
 
+	public int updateMember(AttendanceVo vo) {
+		return dao.updateMember(sst,vo);
+	}
+
 
 }

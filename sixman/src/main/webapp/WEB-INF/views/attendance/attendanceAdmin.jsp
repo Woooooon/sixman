@@ -205,7 +205,7 @@
 }
 #date-btn{
     /* padding-right: 15px; */
-    width: 100px;
+    width: 80px;
     border: none;
 }
 
@@ -351,7 +351,8 @@
     align-items: center;
 }
 
-#date-btn{
+#date-btnModal{
+    border: none;
     width: 100%;
     height: 100%;
     font-size: 1.5em;;
@@ -374,14 +375,11 @@
                         <span id="close" class="material-symbols-outlined"> close </span>
                     </div>
                 </div>
-                <c:forEach items="${selectMemberList}" var="x">
-
-                </c:forEach>
-                <div id="timemodal1">2022-12-29</div>
-                <div id="timemodal2">상태: 정상출근</div>
-                <div id="timemodal3"  contenteditable="true">시작 시간: 09:30</div>
-                <div id="timemodal4"  contenteditable="true">종료 시간: 18:30</div>
-                <div><input class="btn" id="date-btn" type="submit" value="수정"></div>
+                <div id="timemodal1"><input type="text" id="workDay" name="workDay" style="border: none; width: 100px; font-size: 1em;"></div>
+                <div id="timemodal2">상태: 정상 출근</div>
+                <div id="timemodal3">시작 시간:  <input type="text" id="start" name="start" style="border: none; width: 70px; font-size: 1em;"> </div>
+                <div id="timemodal4">종료 시간:  <input type="text" id="end" name="end" style="border: none; width: 70px; font-size: 1em;"></div>
+                <div><input class="btn" id="date-btnModal" type="submit" value="수정"></div>
                 <div></div>
             </form>
             
@@ -425,14 +423,14 @@
                         <p>추가근무시간</p>
                         <p>총 근무시간</p>
                     </div>
-                    <c:forEach items="${selectMemberList}" var="x">
+                    <c:forEach items="${selectMemberList}" var="xq">
                         <div class="list-item">
-                            <p>${x.workDay}</p>
-                            <p>${x.name}</p>
-                            <p>${x.start}</p>
-                            <p>${x.end}</p>
+                            <p>${xq.workDay}</p>
+                            <p>${xq.name}</p>
+                            <p>${xq.start}</p>
+                            <p>${xq.end}</p>
                             <p></p>
-                            <p></p>
+                            <p>${xq.workTime}</p>
                         </div>
                     </c:forEach>
 
@@ -524,27 +522,57 @@
         document.querySelector(".share-modal").style.display = "none"
     })
   
-    //모달 열기
-    // document.querySelector(".list-item").addEventListener("click", () => {
-    //     document.querySelector(".share-modal").style.display = "flex"
-    // })
-
-
-    
     // 모달 모두열기
     var modalAll = document.querySelectorAll(".list-item");
     
-    for (i = 0; i < modalAll.length; i++) {
+    for (let i = 0; i < modalAll.length; i++) {
         modalAll[i].addEventListener("click", () => {
         document.querySelector(".share-modal").style.display = "flex"
     })
     }
 
-    // modalAll.addEventListener("click", () => {
-    //     console.log(modalAll.length)
-    //     document.querySelector(".share-modal").style.display = "flex"
-    // })
+
+
+    //모달 클릭햇을때 값
+    const abcArray = document.querySelectorAll('.list-item');
+
+    for(let i = 0; i < abcArray.length; i++){
+        abcArray[i].addEventListener('click',function(x){
+
+            resultArray = x.currentTarget.innerText;
+
+            const a = resultArray.split('\n\n');
+
+            document.getElementById('workDay').value = a[0];
+            
+            document.getElementById('start').value = a[2];
+
+            document.getElementById('end').value = a[3];
+            
+        });
+    }
+
+
+
+
+
+   
+
+
+
     
+
+
+
+
+
+
+    
+
+
+
+
+
 
 </script>
 

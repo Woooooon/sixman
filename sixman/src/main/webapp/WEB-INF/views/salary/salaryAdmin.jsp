@@ -33,7 +33,7 @@
 }
 #search-box form{
     display: grid;
-    grid-template-columns: 1fr 0.3fr 0.1fr 0.3fr 6fr;
+    grid-template-columns: 0.6fr 0.8fr 0.3fr 0.1fr 0.3fr 4fr 2fr;
 }
 #search-box div{
     display: flex;
@@ -338,13 +338,116 @@
             </div>
         </div>
     </div>
+
+     <!-- 위에는 리스트모달---------------------------------------------아래는 급여모달--------------- -->
+    <div class="share-modal">
+        <div id="modal">
+            <div id="modal-1"> 
+                <div id="modal-header">&nbsp&nbsp&nbsp&nbsp 2022년 10월분 급여명세서</div>
+                <div>
+                    <span id="close" class="material-symbols-outlined"> close </span>
+                </div>
+            </div>
+            <div id="modal-2" class="box">
+                <div id="modal-2-1">
+                    <div>성명: ${loginMember.name}</div>
+                    <div>사번: ${loginMember.no}</div>
+                    <div>입사날짜: 2022-01-02</div>
+                    <div>이메일: ${loginMember.email}</div>
+                </div>
+                <div id="modal-2-2">
+                    <div>직급: ${loginMember.positionName}</div>
+                    <div>부서: ${loginMember.teamName}</div>
+                    <div>은행명: ${loginMember.bankName}</div>
+                    <div>계좌번호: ${loginMember.account}</div>
+                </div>
+            </div>
+            <div id="modal-3" class="box">
+                <div id="modal-3-1">
+                    <div>연장근로시간</div>
+                    <div>휴일근로시간</div>
+                    <div>총 근로시간</div>
+                    <div>통상시급(원)</div>
+                </div>
+                <div id="modal-3-2">
+                    <div>22</div>
+                    <div>6</div>
+                    <div>170</div>
+                    <div>10,000</div>
+                </div>
+            </div>
+            <div id="modal-4" class="box">
+                <div id="modal-4-1">
+                    <div>지급내역</div>
+                    <div>지급액(원)</div>
+                    <div>공제내역</div>
+                    <div>공제액(원)</div>
+                </div>
+                <div id="modal-4-2">
+                    <div>기본급</div>
+                    <div>1,000,000</div>
+                    <div>국민연금</div>
+                    <div>20,000</div>
+                </div>
+                <div id="modal-4-3">
+                    <div>연장근로수당</div>
+                    <div>1,000,000</div>
+                    <div>건강보험</div>
+                    <div>20,000</div>
+                </div>
+                <div id="modal-4-4">
+                    <div>휴일근로수당</div>
+                    <div>200,000</div>
+                    <div>고용보험</div>
+                    <div>20,000</div>
+                </div>
+                <div id="modal-4-5">
+                    <div>식대보조금</div>
+                    <div>100,000</div>
+                    <div>장기요양보험료</div>
+                    <div>20,000</div>
+                </div>
+                <div id="modal-4-6">
+                    <div></div>
+                    <div></div>
+                    <div>소득세</div>
+                    <div>20,000</div>
+                </div>
+                <div id="modal-4-7">
+                    <div></div>
+                    <div></div>
+                    <div>지방소득세</div>
+                    <div>20,000</div>
+                </div>
+                <div id="modal-4-8">
+                    <div></div>
+                    <div></div>
+                    <div id="modal-4-8-1">공제액계</div>
+                    <div id="modal-4-8-2">120,000</div>
+                </div>
+                <div id="modal-4-9">
+                    <div>지급액계</div>
+                    <div>1,400,000</div>
+                    <div>차인지급액</div>
+                    <div>1,370,000</div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- 위에는 모달 -->
 <main class="main-box">
     <div id="main-content">
         <div>
             <div id="search-box" class="box">
-                <form action="/sixman/salary/salary" method="get">
-                    <div id="search-font">검색기간</div>
+                <form action="/sixman/salary/salaryAdmin" method="get">
+                    <div id="search-font">사원이름</div>
+                    <div>
+                        <select name="name" id="" style="font-size: 1em; width:80px; height:30px;">
+                            <c:forEach items="${memberList}" var="x">
+                                <option>${x.name}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
                     <div id="date">
                         <input id="start-month" type="month" name="startDay" style="width: 110px;" value="2022-01">
                         ~
@@ -353,6 +456,7 @@
                     <div></div>
                     <div><input class="btn" id="date-btn" type="submit" value="검색"></div>
                     <div></div>
+                    <div class="btn" id="moneyModal">월급주기</div>
                 </form>
     
             </div>
@@ -363,12 +467,12 @@
                     <div class="first-item">
                         <p>날짜</p>
                         <p>성명</p>
+                        <p>직급</p>
+                        <p>부서</p>
                         <p>총 근무시간</p>
-                        <p>연장+식대보조금(원)</p>
+                        <p>은행</p>
+                        <p>계좌번호</p>
                         <p>기본급(원)</p>
-                        <p>지급액계</p>
-                        <p>공제액계(원)</p>
-                        <p>차인지급액(원)</p>
                     </div>
                     <c:forEach items="${voList}" var="x">
                         <div class="list-item"> 
@@ -424,6 +528,11 @@
         document.querySelector(".share-modal").style.display = "flex"
     })
     }
+
+    //월급주기 모달 열기
+    document.querySelector("#moneyModal").addEventListener("click", () => {
+        document.querySelector(".share-modal").style.display = "flex"
+    })
 
 
     </script>

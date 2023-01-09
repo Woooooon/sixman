@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="salaryMapper">
+	
+	
+	<select id="searchSelectList" resultType="com.kh.sixman.salary.vo.SalaryVo">
+	SELECT 
+		S.NO,
+		S.MEMBER_NO,
+	    M.NAME,
+		S.BASE_PAY,
+		S.PLUS_PAY,
+		S.REST_PAY,
+		S.EAT_PAY,
+		S.HOLIDAY_PAY,
+		S.BONUS_PAY,
+		S.NATIONAL_PAY,
+		S.HEALTH_PAY,
+		S.EMP_PAY,
+		S.INCOME_PAY,
+		S.LOCAL_PAY,
+		S.SALARY_PAY,
+		S.MINUS_PAY,
+		S.REAL_PAY,
+		TO_CHAR("PAY_DATE", 'YYYY-MM') AS "PAY_DATE"
+	FROM SALARY S
+	, MEMBER M
+	WHERE S.MEMBER_NO = M.NO
+	AND M.NAME = #{name}
+	AND PAY_DATE BETWEEN TO_DATE(#{startDay},'YYYY-MM') AND TO_DATE(#{endDay},'YYYY-MM')
+	</select>
+	
+	<!-- 아래는 admin  -->
+	
+	<select id="listMember" resultType="com.kh.sixman.salary.vo.SalaryVo">
+		SELECT *
+		FROM MEMBER
+	</select>
+
+
+
+</mapper>

@@ -1,5 +1,6 @@
 package com.kh.sixman.attendance.controller;
 
+import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,12 +27,15 @@ import com.kh.sixman.common.PageVo;
 import com.kh.sixman.mail.vo.MailVo;
 import com.kh.sixman.member.vo.MemberVo;
 
+import oracle.jdbc.proxy.annotation.Post;
+
 @RequestMapping("attendance")
 @Controller
 public class AttendanceController {
 	
 	@Autowired
 	private AttendanceService service;
+	
 	Date date = new Date();
 	SimpleDateFormat day = new SimpleDateFormat("yyyy-MM-dd");
 	SimpleDateFormat time = new SimpleDateFormat("HH:mm");
@@ -162,27 +166,53 @@ public class AttendanceController {
 		model.addAttribute("selectMemberList", selectMemberList);
 
 		//출퇴근시간
-		WorkTimeVo workVo = new WorkTimeVo();
-		workVo.setWorkDay(today);
-		workVo.setName(vo.getName());
-		WorkTimeVo todayWork = service.AdminTodayWork(workVo);
-		model.addAttribute("todayWork", todayWork);
+//		WorkTimeVo workVo = new WorkTimeVo();
+//		workVo.setWorkDay(today);
+//		workVo.setName(vo.getName());
+//		WorkTimeVo todayWork = service.AdminTodayWork(workVo);
+//		model.addAttribute("todayWork", todayWork);
 		model.addAttribute("pv", pv);
 		
 		return "attendance/attendanceAdmin";
 	}
 	
 	@PostMapping("admin")
-	
+	public String admin2(@RequestParam Map<String, String> map, Model model, AttendanceVo vo) throws Exception{
+		
+		System.out.println(vo);
+		
+		int update = service.updateMember(vo);
+		
+		//실시간시간출력
+		Date date = new Date();
+		SimpleDateFormat day = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat time = new SimpleDateFormat("HH:mm");
+		
+		model.addAttribute("day", day.format(date) );
+		model.addAttribute("time", time.format(date) );
+		
+		 //맴버선택
+		List<MemberVo> memberList = service.ListMember();
+		model.addAttribute("memberList", memberList);
+		
+		
+		//출퇴근시간
+//		WorkTimeVo workVo = new WorkTimeVo();
+//		workVo.setWorkDay(today);
+//		workVo.setName(vo.getName());
+//		WorkTimeVo todayWork = service.AdminTodayWork(workVo);
+//		model.addAttribute("todayWork", todayWork);
+		
+		
+		return "attendance/attendanceAdmin";
+//		return "redirect:/attendance/admin?page=1&name=yang&start=2020-01-01&end=2023-01-13";
+	}
 	
 	
 	
 	@GetMapping("calendar")
 	public String calendar(@RequestParam Map<String, String> map, Model model, AttendanceVo vo){
 		
-		String selectMemberList = "qweasd";
-		
-		model.addAttribute("selectMemberList", selectMemberList);
 		
 		return "attendance/attendanceCalendar";
 	}
