@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
@@ -116,9 +117,10 @@ public class WhoChatFirstController {
 		return chatRoomDataReady;
 		
 	}
-	
+//	, method=RequestMethod.POST
 	@ResponseBody
 	@GetMapping("getchatroomList")
+//	@GetMapping(value = "getchatroomList", produces="application/json;charset=UTF-8")
 //	public List<ReadChatRoomListVo> chatroomList() {
 	public String chatroomList(HttpSession session) {
 		Gson gson = new Gson();

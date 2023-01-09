@@ -1105,8 +1105,8 @@
 // 					}
 					success:function(data){
 // 						alert("성공");
-						method:"post",
-						alert('${a_chatroomlist}');
+// 						method:"post"
+// 						alert('${a_chatroomlist}');
 // 						$('.chatroomlist-first-page').on('load', function(){$('.chatroomlist-first-page').show();});
 // 						$('.chatroomlist-first-page').load(window.location.href + '.chatroomlist-first-page');
 // 						$(chatListAll).show();
@@ -1120,13 +1120,17 @@
 // 						$.each(data, function(key, value){
 // 							alert('key : ' +key, 'value = ' + value);
 // 						});
-						
-						console.log(ParseJSON(data));
+						var chatlist = JSON.parse(data);
+						var chatlistCnt = Object.keys(chatlist).length;
+						alert("개수 : " + chatlistCnt);
+// 						alert(chatlist);
+						console.log(JSON.parse(data));
 // 						console.log($('a_chatroomlist').chatroomName);
+// 						$("c:forEach items="${a_chatroomlist}" var="chatroom">").replaceAll(c:forEach items=chatlist var="chatroom">);
 						
-						$.each($('a_chatroomlist'), function(key, value){
-							console.log(key + ':' + value);
-						});
+// 						$.each(chatlist), function(key, value){
+// 							console.log(key + ':' + value);
+// 						};
 						
 					}, error:function(){
 						alert("메세지 로딩에 실패했습니다.. 잠시 후에 다시 이용해주세요");
