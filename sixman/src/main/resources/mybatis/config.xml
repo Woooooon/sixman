@@ -31,6 +31,9 @@
 		<typeAlias type="com.kh.sixman.chat.vo.ChatRoomVo" alias="ChatRoomVo"/>
 		<typeAlias type="com.kh.sixman.chat.vo.ChatVo" alias="ChatVo"/>
 		<typeAlias type="com.kh.sixman.messenger.vo.ChatCreateRoomMemberVo" alias="ChatCreateRoomMemberVo"/>
+		<typeAlias type="com.kh.sixman.messenger.vo.DefineChatNameVo" alias="DefineChatNameVo"/>
+		<typeAlias type="com.kh.sixman.messenger.vo.ReadChatRoomListVo" alias="ReadChatRoomListVo"/>
+		<typeAlias type="com.kh.sixman.messenger.vo.ChatRoomDataVo" alias="ChatRoomDataVo"/>
 	</typeAliases> 
 
 
