@@ -62,4 +62,14 @@ public class ProjectDao {
 		return sst.update("projectMapper.updatePrj", vo);
 	}
 
+	//프로젝트 즐겨찾기 추가
+	public int insertFavorite(SqlSessionTemplate sst, String no) {
+		return sst.update("projectMapper.insertFavorite", no);
+	}
+
+	//프로젝트 즐겨찾기 삭제
+	public int deleteFavorite(SqlSessionTemplate sst, String no) {
+		return sst.update("projectMapper.deleteFavorite", no);
+	}
+
 }

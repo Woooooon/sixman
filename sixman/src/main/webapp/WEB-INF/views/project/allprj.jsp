@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="${path}\resources\css\project\allprj.css">
 <script defer src="${path}\resources\js\project\allprj.js"></script>
 </head>
-<body>
+<body link="#12887A" vlink="#62C276" alink="blue">
     <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
     <main class="main-box">
         <div class="hidden"></div>
@@ -30,7 +30,10 @@
 	                            <span class="material-symbols-outlined">public</span>
 	                            <a href="${path}/project/detail?no=${list.no}"><p>${list.title}</a></p>
 	                        </div>
-	                        <div class="favorite"><span class="material-symbols-outlined normal">star</span></div>
+							<div class="favorite">
+								<input type="checkbox" id="check_favorite${list.no}" value="${list.no}">
+								<label for="check_favorite${list.no}" class="normal"><span class="material-symbols-outlined">star</span></label>
+							</div>
 	                    </div>
 	                    <div class="box-body">
 	                        <div class="date">
@@ -45,10 +48,21 @@
 	                        </div>
 	                        <div class="leader">
 	                            <span class="material-symbols-outlined">person</span>
-	                            <p>${list.leader }</p>
-	                            <div class="status done"></div>
+	                            <p>${list.leader}</p>
+								<c:if test="${list.status eq 'I'}">
+	                            <div class="status ing">진행중</div>
+								</c:if>
+								<c:if test="${list.status eq 'D'}">
+	                            <div class="status delay">지연중</div>
+								</c:if>
+								<c:if test="${list.status eq 'C'}">
+	                            <div class="status complete">완 료</div>
+								</c:if>
 	                        </div>
-	                        <div class="status-progress"></div>
+							<div class="progressBar">
+								<div class="guage" value="${list.progress}">${list.progress}</div>
+								<input type="hidden" id="progress_val" class="status-progress${list.no}" value="${list.progress}">
+							</div>
 	                    </div>
 	                </div>
    				</c:forEach>
