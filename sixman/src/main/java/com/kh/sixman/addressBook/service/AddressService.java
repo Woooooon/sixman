@@ -40,7 +40,11 @@ public class AddressService {
 	public List<SortationVo> sortationList(String no) {
 		return addressDao.sortationList(sst,no);
 	}
-
+	
+	public int insertSortation(SortationVo vo) {
+		return addressDao.insertSortation(sst, vo);
+	}
+	
 	public List<AddressVo> selectAddressListAll(String no) {
 		return addressDao.selectAddressListAll(sst,no);
 	}
@@ -135,8 +139,8 @@ public class AddressService {
 	
 	@Transactional
 	public int insertReciveAddress(List<Map<String, String>> reciveDatalist, String no) {
-		int insertAddress = 0;
-		int deleteReciveAddress = 0;
+		int insertAddress = 1;
+		int deleteReciveAddress = 1;
 		int cardFileResult = 1;
 		
 		for(Map<String, String> AddressMap : reciveDatalist) {
@@ -168,8 +172,8 @@ public class AddressService {
 			deleteReciveAddress = addressDao.deleteReciveAddress(sst, reciveNo);
 		}
 		
-		log.info("result " + insertAddress * deleteReciveAddress);
-		return insertAddress * deleteReciveAddress;
+		log.info("result " + insertAddress * deleteReciveAddress * cardFileResult);
+		return insertAddress * deleteReciveAddress * cardFileResult;
 	}
 
 	public List<AddressVo> reciveDetailList(String addressNo) {
@@ -180,7 +184,58 @@ public class AddressService {
 		return addressDao.selectReciveInfo(sst, map);
 	}
 
-	public int updateReciveAddress(Map<String, String> map) {
-		return addressDao.updateReciveAddress(sst, map);
+	public int updateReciveAddress(ReciverVo vo) {
+		int updateReciveAddress = 1;
+		int deleteReciveAddress = 1;
+		
+		if(vo.getSendAddress() == "") {
+			deleteReciveAddress = addressDao.deleteReciveAddress(sst, vo.getNo());
+		}
+		
+		if(vo.getSendAddress() != "") {
+			updateReciveAddress = addressDao.updateReciveAddress(sst, vo);
+		}
+		
+		return deleteReciveAddress * updateReciveAddress;
+	}
+
+	public int insertReciveDetailAddress(ReciverVo vo, String insertNum) {
+		int cardFileResult = 1;
+		int insertAddress = 1;
+		int deleteReciveAddress = 1;
+		int updateReciveAddress = 1;
+		
+		List<AddressVo> voList = addressDao.selectReciveAddressList(sst, insertNum);
+		
+		for(AddressVo addressVo : voList) {
+			addressVo.setUserNo(vo.getReciverNo());
+			addressVo.setSortationNo("1");
+			addressVo.setComment(null);
+			
+			log.info("AddressVo " + vo);
+			
+			insertAddress = addressDao.insertAddress(sst, addressVo);
+			
+			if(addressVo.getFileName() != null) {
+				AttachmentVo cardFile = new AttachmentVo();
+				String ano = addressDao.getNo(sst);
+				cardFile.setSubNo(ano);
+				cardFile.setChangeName(addressVo.getFileName());
+				cardFile.setOriginName(addressVo.getFileName());
+				cardFile.setFilePath("C:\\dev\\sixman\\sixman/src/main/webapp/resources/img/address/");
+				log.info("cardFile : " + cardFile);
+				cardFileResult = addressDao.upload(sst, cardFile);
+			}
+		}
+		
+		if(vo.getSendAddress() == "") {
+			deleteReciveAddress = addressDao.deleteReciveAddress(sst, vo.getNo());
+		}
+		
+		if(vo.getSendAddress() != "") {
+			updateReciveAddress = addressDao.updateReciveAddress(sst, vo);
+		}
+		
+		return updateReciveAddress * insertAddress * cardFileResult * deleteReciveAddress;
 	}
 }

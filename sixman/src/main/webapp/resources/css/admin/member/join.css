@@ -49,17 +49,17 @@
     padding: 0px 0px 5px 20px;
 }
 .header > label {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 600;
 }
 .header > span {
-    font-size: 28px;
-    margin-right: 10px;
+    font-size: 23px;
+    margin-right: 5px;
     color: var(--main-color);
 }
 #companyLogo {
     margin: 0px 0px 10px 10px;
-    width: 100px;
+    width: 10 0px;
 }
 
 #companyLogo > img {
@@ -244,15 +244,27 @@
     padding: 10px;
 }
 .title {
-    color: var(--main-color);
-    font-size: 20px;
-    font-weight: 600;
-    border-bottom: 1px solid var(--main-color);
-    padding-bottom: 10px;
     display: flex;
+    justify-content: flex-start;
     align-items: center;
+    border-bottom: 1px solid var(--main-color-dark);
+    padding: 3px 0;
+    margin-bottom: 10px;
     justify-content: space-between;
 }
+
+.title h2 span {
+    color: var(--main-color);
+    margin-right: 5px;
+}
+
+.title h2 {
+    font-size: 15px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
 .title > input {
     display: none;
 }
@@ -278,9 +290,22 @@
 .addfile > span {
     margin-left: 10px;
     padding: 5px 0 5px 0;
+    font-size: 13px;
 }
 
+.fileInThis {
+    font-weight: 700;
+    color: var(--main-color-dark);
+}
+
+#file-info > label {
+    font-size: 13px;
+    text-align: center;
+}
+#file-info > .checked > span,
 #file-info > span {
+    font-size: 18px;
+    color: var(--bo-60);
     margin-left: 20px;
 }
 
@@ -301,22 +326,26 @@
     color: #fff;
     display: flex;
     align-items: center;
+    font-size: 13px;
 }
 
 .plus span {
     margin-right: 5px;
-    font-size: 15px;
+    font-size: 13px;
 }
 .plus:hover {
     background-color: #17a897;
 }
+
 .remove {
     display: flex;
+    align-items: center;
     color: #9d9d9d;
     border: 1px solid #fff;
     background: none;
     cursor: pointer;
     padding: 3px 10px;
+    font-size: 13px;
 }
 
 .remove span {
@@ -388,8 +417,6 @@ select {
 .error:focus {
     outline-color: #e85c5c;
 }
-
-
 
 /* 부서목록 */
 

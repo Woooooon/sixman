@@ -420,11 +420,11 @@ public class AddressBookController {
 		
 		for(ReciverVo vo : reciveList) {
 			String addressNo = vo.getSendAddress();
-			String senderNo = vo.getSenderNo();
+			String userNo = vo.getSenderNo();
 		
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("no", addressNo);
-			map.put("userNo", senderNo);
+			map.put("userNo", userNo);
 			
 			List<AddressVo> addressVo = addressService.getAddressAll(map);
 			
@@ -488,14 +488,19 @@ public class AddressBookController {
 		//로그인 유저의 seqNo 가져오기
 		String no = loginMember.getNo();
 		
-		//로그인 유저마다 주소록이 별개이므로 검색 시 userNo 추가 WHERE문
+		//로그인 유저마다 주소록이 별개이므로 검색 시 reciveNo 추가 WHERE문
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("no", no);
 		map.put("reciveNo", reciveNo);
 		
+		log.info("map : " + map );
+		
 		ReciverVo reciveInfo = addressService.selectReciveInfo(map);
+		log.info("reciveInfo : " + reciveInfo );
 		
 		String addressNo = reciveInfo.getSendAddress();
+		log.info("addressNo : " + addressNo );
+		
 		List<AddressVo> reciveAddressList = addressService.reciveDetailList(addressNo);
 	    
 		log.info("reciveAddressList : " + reciveAddressList );
@@ -509,22 +514,43 @@ public class AddressBookController {
 
 	@PostMapping(value = "recive/detail/delete", produces = "application/json; charset=utf8")
 	@ResponseBody
-	public String deleteReciveDetailAddress(HttpSession session, String no, String addressNo) {
+	public String deleteReciveDetailAddress(HttpSession session, String no, String modifySendAddress) {
 		//로그인한 유저의 세션 가져오기
 		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
 
 		//로그인 유저의 seqNo 가져오기
 		String userNo = loginMember.getNo();
 				
-		Map<String , String> map = new HashMap<String, String>();
-		map.put("no", no);
-		map.put("addressNo", addressNo);
-		map.put("userNo", userNo);
+		ReciverVo vo = new ReciverVo();
+		vo.setNo(no);
+		vo.setSendAddress(modifySendAddress);
+		vo.setReciverNo(userNo);
 		
-		int result = addressService.updateReciveAddress(map);
+		int result = addressService.updateReciveAddress(vo);
 		
-		if(result != 1) return null;
+		if(result < 1) return null;
 				
 		return "삭제 요청을 완료했습니다.";
+	}
+	
+	@PostMapping(value = "recive/detail/insert", produces = "application/json; charset=utf8")
+	@ResponseBody
+	public String insertReciveDetailAddress(HttpSession session, String no, String modifySendAddress,String insertNum) {
+		//로그인한 유저의 세션 가져오기
+		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+
+		//로그인 유저의 seqNo 가져오기
+		String userNo = loginMember.getNo();
+		
+		ReciverVo vo = new ReciverVo();
+		vo.setNo(no);
+		vo.setSendAddress(modifySendAddress);
+		vo.setReciverNo(userNo);
+		
+		int result = addressService.insertReciveDetailAddress(vo, insertNum);
+		
+		if(result < 1) return null;
+				
+		return "내 주소록에 추가 되었습니다.";
 	}
 }

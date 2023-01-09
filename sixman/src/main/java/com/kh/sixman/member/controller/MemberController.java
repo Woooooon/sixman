@@ -50,7 +50,7 @@ public final class MemberController {
 		}
 		
 		if(loginMember == null) {
-			model.addAttribute("alert", "존재하지 않는 회원입니다.");
+			model.addAttribute("alert", "아이디, 비밀번호가 일치 하지 않거나 존재하지 않는 회원입니다.");
 			return "member/login";
 		}
 		
@@ -61,6 +61,7 @@ public final class MemberController {
 			return "redirect:/member/switch";
 		}
 		
+		model.addAttribute("alert", "");
 		return "redirect:/main";
 	}
 	
@@ -76,7 +77,7 @@ public final class MemberController {
 		int updatePwd = memberService.updatePwd(loginMember.getNo(), pwd);
 		
 		if(updatePwd != 1) {
-			model.addAttribute("msg", "비밀번호 변경에 실패 하였습니다.");
+			model.addAttribute("alert", "비밀번호 변경에 실패 하였습니다.");
 			return "redirect:/member/switch";
 		}
 		

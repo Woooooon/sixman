@@ -403,6 +403,27 @@
 		select * from dual
 	</update>
 	
+	<insert id="uploadDefaultPic">
+		INSERT INTO PROFILE_A
+		(
+			"NO",
+			"ORIGIN_NAME",
+			"MEMBER_NO",
+			"CHANGE_NAME",
+			"FILE_PATH",
+			"ENROLL_DATE"
+		)
+		VALUES
+		(
+			SEQ_PROFILE_A_NO.NEXTVAL,
+			#{originName},
+			${subNo},
+			#{changeName},
+			#{filePath},
+			SYSDATE
+		)
+	</insert>
+	
 	<select id="selectFileOne" resultType="AttachmentVo">
 		select 
 			"NO",

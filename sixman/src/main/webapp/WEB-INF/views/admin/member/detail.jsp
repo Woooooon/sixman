@@ -96,23 +96,25 @@
                 <section id="member-wrap">
                     <form action="/sixman/admin/member/detail?no=${selectMember.no}" method="POST" enctype="multipart/form-data" id="form">
                         <article id="member-info" class="box">
-                            <figure id="companyLogo">
-                                <img alt="기업로고" src="<c:url value='/resources/img/google.png'/>" />
-                            </figure>
+                            <c:if test="${not empty company.name}">
+                                <figure id="companyLogo">
+                                    <img src="/sixman/resources/img/logo/${company.logoName}" alt="기업로고" />
+                                </figure>
+                            </c:if>
+                            <c:if test="${empty company.name}">
+                                <figure id="companyLogo">
+                                    <img src="/sixman/resources/img/defaultCompany.png" alt="기업로고" />
+                                </figure>
+                            </c:if>
                             <div class="header">
                                 <span class="material-symbols-outlined">person_add</span>
-                                <label>상세 페이지</label>
+                                <label>${selectMember.name}님의 상세 페이지</label>
                             </div>
                             <div class="wrap">
                                 <div class="info-wrap">
                                     <div class="left-info">
                                         <div id="profile-view">
-                                            <c:if test="${empty selectMember.fileName}">
-                                        		<img src="/sixman/resources/img/defaultProfilePic.png" alt="" class="image-box"/>
-                                        	</c:if>
-                                        	<c:if test="${not empty selectMember.fileName}">
-                                            	<img src="/sixman/resources/img/profile/${selectMember.fileName}" alt="" class="image-box"/>
-                                            </c:if>
+                                            <img src="/sixman/resources/img/profile/${selectMember.fileName}" alt="" class="image-box"/>
                                         </div>
                                         <div id="dept" class="write">
                                             <label for="">부 서</label>
@@ -198,27 +200,30 @@
                         <article id="file-wrap">
                             <div id="required-file" class="box">
                                 <div class="title">
-                                    <h2>중요파일 등록</h2>
+                                    <h2><span class="material-symbols-outlined">demography</span>중요파일</h2>
                                 </div>
                                 <div id="profile-pic">
                                     <div class="addfile" id="profile-wrap">
                                         <span>프로필사진</span>
-                                        <c:if test="${empty selectMember.fileNo}">
+                                        <c:if test="${selectMember.fileName eq 'defaultProfilePic.png'}">
                                         <button type="button" class="plus" id="add-pic">
                                             <span class="material-symbols-outlined">add</span>
                                             추 가
                                         </button>
                                         </c:if>
-                                        <c:if test="${not empty selectMember.fileNo}">
+                                        <c:if test="${selectMember.fileName ne 'defaultProfilePic.png'}">
                                         <button type="button" class="plus" id="add-pic">
                                             <span class="material-symbols-outlined">add</span>
                                             변 경
                                         </button>
                                         </c:if>
                                     </div>
-                                    <c:if test="${not empty selectMember.fileNo}">
+                                    <c:if test="${selectMember.fileName eq 'defaultProfilePic.png'}">
+                                        <input type="checkbox" class="hide" name="profileNo" value="${selectMember.fileNo}"/> 
+                                    </c:if>
+                                    <c:if test="${selectMember.fileName ne 'defaultProfilePic.png'}">
                                     <input type="checkbox" class="hide" name="profileNo" value="${selectMember.fileNo}"/> 
-                                    <div id="file-info" class="profileInfo"> 
+                                    <div id="file-info"" class="profileInfo"> 
                                         <div class="checked"> 
                                             <span class="material-symbols-outlined">image</span> 
                                         </div> 
@@ -250,7 +255,7 @@
                                     </div>
                                     <c:forEach items="${selectMember.resumeFileInfo}" var="i">
                                     <input type="checkbox" class="hide" name="resumeNo" value="${i.no}"/> 
-                                    <div id="file-info" class="resumeInfo"> 
+                                    <div id="file-info"" class="resumeInfo"> 
                                         <div class="checked"> 
                                             <span class="material-symbols-outlined">draft</span> 
                                         </div> 
@@ -282,7 +287,7 @@
                                     </div>
                                     <c:forEach items="${selectMember.accountFileInfo}" var="i">
                                     <input type="checkbox" class="hide" name="accountNo" value="${i.no}"/> 
-                                    <div id="file-info" class="accountInfo"> 
+                                    <div id="file-info"" class="accountInfo"> 
                                         <div class="checked"> 
                                             <span class="material-symbols-outlined">draft</span> 
                                         </div> 
@@ -298,7 +303,7 @@
                             </div>
                             <div id="attachment-file" class="box">
                                 <div class="title">
-                                    <h2>첨부파일</h2>
+                                    <h2><span class="material-symbols-outlined">attach_file</span>첨부파일</h2>
                                     <div id="controller">
                                         <input type="checkbox" class="all_check" />
                                         <span id="add-attfile" class="material-symbols-outlined">add_circle</span>
@@ -310,7 +315,7 @@
                                     <c:forEach items="${selectMember.evidenceFileList}" var="i">
                                         <input type="checkbox" class="hide attcheck" name="evidenceNo" value="${i.no}"/> 
                                         <div class="att-wrap">
-                                            <div id="file-info"> 
+                                            <div class="file-info"> 
                                                 <div class="checked"> 
                                                     <input type="checkbox" class="check_list savaAtt" value="${i.no}"/> 
                                                     <span class="material-symbols-outlined">draft</span> 

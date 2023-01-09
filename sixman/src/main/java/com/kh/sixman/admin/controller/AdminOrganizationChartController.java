@@ -85,7 +85,7 @@ public class AdminOrganizationChartController {
 		model.addAttribute("newbieList", newbieList);
 		model.addAttribute("MemberList", MemberList);
 		model.addAttribute("memberListAll", memberListAll);
-		
+		model.addAttribute("alert", "");
 		
 		return "admin/organizationChart/list";
 	}

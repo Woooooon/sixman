@@ -10,6 +10,13 @@
         <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
         <script src="https://kit.fontawesome.com/ae846b135b.js" crossorigin="anonymous"></script>
     </head>
+    <script>
+        window.onload = ()=>{
+            if ('${alert}' != '') {
+                popup.warningPop('경고', '${alert}');
+            }
+        }
+    </script>
     <body>
         <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
 
@@ -109,9 +116,16 @@
                         </form>
                     </header>
                     <article id="employee-list" class="box">
-                        <figure id="companyLogo">
-                            <img alt="기업로고" src="<c:url value='/resources/img/google.png'/>" />
-                        </figure>
+                        <c:if test="${not empty company.name}">
+                                <figure id="companyLogo">
+                                    <img src="/sixman/resources/img/logo/${company.logoName}" alt="기업로고" />
+                                </figure>
+                            </c:if>
+                            <c:if test="${empty company.name}">
+                                <figure id="companyLogo">
+                                    <img src="/sixman/resources/img/defaultCompany.png" alt="기업로고" />
+                                </figure>
+                            </c:if>
                         <div class="header">
                             <div class="title">
                                 <span class="material-symbols-outlined">diversity_3</span>
@@ -187,7 +201,7 @@
                 <aside id="detail-wrap">
                     <div id="newbie" class="box">
                         <div class="side-title">
-                            <p>최근 입사 한 사원</p>
+                            <h2><span class="material-symbols-outlined">child_care</span>최근 입사 한 사원</h2>
                         </div>
                         <span class="material-symbols-outlined" id="prev"> chevron_left </span>
                         <span class="material-symbols-outlined" id="next"> chevron_right </span>
@@ -222,7 +236,7 @@
                     </div>
                     <div id="select-wrap" class="box">
                         <div class="side-title sep">
-                            <p>선택된 사원목록</p>
+                            <h2><span class="material-symbols-outlined">person_pin</span>선택된 사원목록</h2>
                         </div>
                     </div>
                 </aside>

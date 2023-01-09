@@ -60,22 +60,31 @@ function deleteFile() {
 
         target.addEventListener('click', () => {
             popup.confirmPop('주의', '저장된 파일을 삭제하시겠습니까?', () => {
-                parentElem.remove();
-                inputBox.checked = true;
                 if (parentElem.classList.contains('profileInfo')) {
                     defaulltPic.setAttribute('src', '/sixman/resources/img/defaultProfilePic.png');
                     profileBtn.innerHTML = '<span class="material-symbols-outlined">add</span>추 가';
+                    parentElem.remove();
+                    inputBox.checked = true;
                 }
                 if (parentElem.classList.contains('resumeInfo')) {
                     resumeBtn.innerHTML = '<span class="material-symbols-outlined">add</span>추 가';
+                    parentElem.remove();
+                    inputBox.checked = true;
                 }
                 if (parentElem.classList.contains('accountInfo')) {
                     accountBtn.innerHTML = '<span class="material-symbols-outlined">add</span>추 가';
+                    parentElem.remove();
+                    inputBox.checked = true;
+                }
+                if (parentElem.classList.contains('file-info')) {
+                    parentElem.parentElement.previousElementSibling.checked = true;
+                    parentElem.closest('.att-wrap').remove();
                 }
             });
         });
     });
 }
+
 deleteFile();
 
 //패턴 매치 test
@@ -212,57 +221,67 @@ addProFile();
 //첨부 파일 선택 제거
 attFileDelete.addEventListener('click', () => {
     const checkBox = document.querySelectorAll('.att-wrap:has(input:checked)');
-
+    if (checkBox.length == 0) return;
     popup.confirmPop('제안', '선택 된 모든 파일을 지우시겠습니까 ?', () => {
         checkBox.forEach((selectBox) => {
-            selectBox.previousElementSibling.remove();
+            selectBox.previousElementSibling.setAttribute('checked', 'checked');
             selectBox.remove();
         });
     });
 });
+
 //첨부파일 추가
 attBtn.addEventListener('click', () => {
     const attWrap = document.querySelectorAll('.att-wrap');
     const inputFile = document.createElement('input');
-    if (attWrap.length < 10) {
-        inputFile.setAttribute('type', 'file');
-        inputFile.setAttribute('name', 'evidenceFile');
-        inputFile.style.display = 'none';
 
-        attBox.append(inputFile);
+    console.log(attWrap);
 
-        inputFile.click();
-
-        inputFile.addEventListener('change', () => {
-            if (inputFile.value != null) {
-                const div = document.createElement('div');
-                div.classList.add('att-wrap');
-                div.innerHTML =
-                    '<div id="file-info">' +
-                    '<div class="checked">' +
-                    '<input type="checkbox" class="check_list"/>' +
-                    '<span class="material-symbols-outlined">draft</span>' +
-                    '</div>' +
-                    '<label for="">' +
-                    inputFile.value.substring(inputFile.value.lastIndexOf('\\') + 1) +
-                    '</label>' +
-                    '<button type="button" class="remove">' +
-                    '<span id="remove-file" class="material-symbols-outlined">remove</span>삭 제' +
-                    '</button>' +
-                    '</div>';
-
-                div.querySelector('.remove').addEventListener('click', () => {
-                    div.remove();
-                    inputFile.remove();
-                });
-
-                attBox.append(div);
-            }
-        });
-    } else {
+    if (attWrap.length == 10) {
         popup.alertPop('안내', '첨부자료는 10개까지 등록 가능합니다.');
+        return;
     }
+
+    inputFile.setAttribute('type', 'file');
+    inputFile.setAttribute('name', 'evidenceFile');
+    inputFile.style.display = 'none';
+
+    attBox.append(inputFile);
+
+    inputFile.click();
+
+    inputFile.addEventListener('change', () => {
+        if (inputFile.value != null) {
+            const div = document.createElement('div');
+            div.classList.add('att-wrap');
+            div.innerHTML =
+                '<div class="file-info">' +
+                '<div class="checked">' +
+                '<input type="checkbox" class="check_list"/>' +
+                '<span class="material-symbols-outlined">draft</span>' +
+                '</div>' +
+                '<label for="">' +
+                inputFile.value.substring(inputFile.value.lastIndexOf('\\') + 1) +
+                '</label>' +
+                '<button type="button" class="remove">' +
+                '<span id="remove-file" class="material-symbols-outlined">remove</span>삭 제' +
+                '</button>' +
+                '</div>';
+
+            div.querySelector('.remove').addEventListener('click', () => {
+                div.remove();
+                inputFile.remove();
+            });
+
+            div.querySelector('.check_list').addEventListener('change', function () {
+                checkBoxToggle('.all_check', '.check_list');
+            });
+
+            attBox.append(div);
+        }
+    });
 });
+
 //프로필 사진 추가
 function addProFile() {
     const saveData = document.querySelector('.profileInfo');
@@ -287,7 +306,7 @@ function addProFile() {
                 const div = document.createElement('div');
                 div.classList.add('pic-wrap');
                 div.innerHTML =
-                    '<div id="file-info" class="profileInfo">' +
+                    '<div class="file-info" class="profileInfo">' +
                     '<span class="material-symbols-outlined">image</span>' +
                     '<label for="">' +
                     inputFile.value.substring(inputFile.value.lastIndexOf('\\') + 1) +
@@ -303,14 +322,18 @@ function addProFile() {
                     inputFile.remove();
                     profileBtn.innerHTML = '<span class="material-symbols-outlined">add</span>추 가';
                 });
+
                 if (beforInputFile != undefined) {
                     beforInputFile.remove();
                 }
 
                 profileBox.append(div);
-                checkInput.checked = true;
                 profileBtn.innerHTML = '<span class="material-symbols-outlined">add</span>변 경';
-                saveData.remove();
+                checkInput.checked = true;
+
+                if (saveData != null) {
+                    saveData.remove();
+                }
             }
         });
         fileView();
@@ -338,7 +361,7 @@ function addFile(elem, parentElem, className, fileKind, fileName, fileId, divCla
                 const div = document.createElement('div');
                 div.classList.add(className);
                 div.innerHTML =
-                    '<div id="file-info" class=' +
+                    '<div class="file-info" class=' +
                     divClass +
                     '>' +
                     '<span class="material-symbols-outlined">' +
@@ -362,9 +385,11 @@ function addFile(elem, parentElem, className, fileKind, fileName, fileId, divCla
                 if (beforInputFile != undefined) {
                     beforInputFile.remove();
                 }
-                checkInput.checked = true;
                 parentElem.append(div);
-                saveData.remove();
+                if (saveData != null) {
+                    checkInput.checked = true;
+                    saveData.remove();
+                }
             }
         });
     });

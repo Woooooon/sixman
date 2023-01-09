@@ -154,7 +154,7 @@ function removeDeptAjax(elem) {
                 success: (msg) => {
                     popup.alertPop('성공', msg);
                     parentDiv.remove();
-                    teamInput.innerHTML = '';
+                    teamListBox.innerHTML = '';
                 },
                 error: (error) => {
                     console.log(error);

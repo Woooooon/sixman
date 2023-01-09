@@ -461,6 +461,11 @@ a {
 .red {
     color: #e85c5c;
 }
+
+#red {
+    color: #e85c5c;
+}
+
 #logo {
     overflow: hidden;
 }

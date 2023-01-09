@@ -97,9 +97,16 @@
                 <section id="member-wrap">
                     <form action="/sixman/admin/member/join" method="POST" enctype="multipart/form-data" id="form">
                         <article id="member-info" class="box">
-                            <figure id="companyLogo">
-                                <img alt="기업로고" src="<c:url value='/resources/img/google.png'/>" />
-                            </figure>
+                            <c:if test="${not empty company.name}">
+                                <figure id="companyLogo">
+                                    <img src="/sixman/resources/img/logo/${company.logoName}" alt="기업로고" />
+                                </figure>
+                            </c:if>
+                            <c:if test="${empty company.name}">
+                                <figure id="companyLogo">
+                                    <img src="/sixman/resources/img/defaultCompany.png" alt="기업로고" />
+                                </figure>
+                            </c:if>
                             <div class="header">
                                 <span class="material-symbols-outlined">person_add</span>
                                 <label>사원 등록</label>
@@ -188,7 +195,7 @@
                         <article id="file-wrap">
                             <div id="required-file" class="box">
                                 <div class="title">
-                                    <h2>중요파일 등록</h2>
+                                    <h2><span class="material-symbols-outlined">demography</span>중요파일</h2>
                                 </div>
                                 <div id="profile-pic">
                                     <div class="addfile">
@@ -220,7 +227,7 @@
                             </div>
                             <div id="attachment-file" class="box">
                                 <div class="title">
-                                    <h2>첨부파일</h2>
+                                    <h2><span class="material-symbols-outlined">attach_file</span>첨부파일</h2>
                                     <div id="controller">
                                         <input type="checkbox" class="all_check" />
                                         <span id="add-attfile" class="material-symbols-outlined">add_circle</span>

@@ -7,6 +7,7 @@ public class SortationVo {
 	 
     private String no;
     private String highNo;
+    private String userNo;
     private String name;
 	
 }

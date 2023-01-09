@@ -63,7 +63,7 @@
                                             </div>
                                         </div>
                                     </c:if>
-                                    <c:if test="${i.addressList.size() > 3}">
+                                    <c:if test="${i.addressList.size() > 2}">
                                         <div class="card-top grid">
                                             <c:forEach items="${i.addressList}" var="j" end="3">
                                                 <div class="card-img">
@@ -87,7 +87,7 @@
                                     </div>
                                     <div class="show-date">
                                         <p class="card-date">${i.enrollDate}</p>
-                                        <a id="card-detail" href="/sixman/address/recive/detail?no=${i.no}">자세히</a>
+                                        <a id="card-detail" href="/sixman/address/recive/detail?reciveNo=${i.no}">자세히</a>
                                     </div>
                                 </div>
                             </div>

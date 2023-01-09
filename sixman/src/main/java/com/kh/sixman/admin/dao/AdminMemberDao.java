@@ -7,6 +7,7 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.sixman.addressBook.vo.SortationVo;
 import com.kh.sixman.common.AttachmentVo;
 import com.kh.sixman.common.AuthorizeVo;
 import com.kh.sixman.common.BankVo;
@@ -78,4 +79,9 @@ public class AdminMemberDao {
 		return sst.update("memberMapper.updateMemberDetail", vo);
 	}
 
+	public int upload(SqlSessionTemplate sst, AttachmentVo defaultPic) {
+		return sst.insert("memberMapper.uploadDefaultPic", defaultPic);
+	}
+	
+	
 }

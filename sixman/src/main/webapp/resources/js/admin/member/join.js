@@ -192,6 +192,11 @@ attBtn.addEventListener('click', () => {
                     inputFile.remove();
                 });
 
+                const checkBox = div.querySelector('.check_list');
+                checkBox.addEventListener('change', function () {
+                    checkBoxToggle('.all_check', '.check_list');
+                });
+
                 attBox.append(div);
             }
         });
@@ -235,8 +240,9 @@ function addProFile() {
                     div.remove();
                     inputFile.remove();
                     profileBtn.style.display = 'flex';
+                    profileBox.querySelector('span').classList.remove('fileInThis');
                 });
-
+                profileBox.querySelector('span').classList.add('fileInThis');
                 profileBox.append(div);
             }
         });
@@ -278,8 +284,10 @@ function addFile(elem, parentElem, className, fileKind, fileName, fileId) {
                     div.remove();
                     inputFile.remove();
                     elem.style.display = 'flex';
+                    parentElem.querySelector('span').classList.remove('fileInThis');
                 });
 
+                parentElem.querySelector('span').classList.add('fileInThis');
                 parentElem.append(div);
             }
         });
@@ -287,10 +295,10 @@ function addFile(elem, parentElem, className, fileKind, fileName, fileId) {
     });
 }
 
-//카카오지도
+//카카오주소
 document.getElementById('address_kakao').addEventListener('click', function () {
     //주소입력칸을 클릭하면
-    //카카오 지도 발생
+    //카카오 주소 발생
     new daum.Postcode({
         oncomplete: function (data) {
             document.getElementById('address').value = data.address; // 주소 넣기
@@ -310,4 +318,50 @@ function fileView() {
         };
         reader.readAsDataURL(fileDOM.files[0]);
     });
+}
+
+checkBoxToggleEvent('.all_check', '.check_list');
+
+//전체석택
+function checkBoxToggleEvent(all_selector, check_selector) {
+    const selectAll = document.querySelector(all_selector);
+
+    selectAll.addEventListener('change', function () {
+        checkAllToggle(all_selector);
+    });
+
+    const checkBox = document.querySelectorAll(check_selector);
+    checkBox.forEach((el_check) => {
+        el_check.addEventListener('change', function () {
+            checkBoxToggle(all_selector, check_selector);
+        });
+    });
+}
+
+function checkAllToggle(all_selector) {
+    const selectAll = document.querySelector(all_selector);
+    const none_check = document.querySelectorAll('.check_list:not(:checked)');
+    const is_check = document.querySelectorAll('.check_list:checked');
+
+    const is_Allcheck = selectAll.checked;
+    if (is_Allcheck === true) {
+        none_check.forEach((check) => {
+            check.click();
+        });
+    } else {
+        is_check.forEach((check) => {
+            check.click();
+        });
+    }
+}
+
+function checkBoxToggle(all_selector, check_selector) {
+    const selectAll = document.querySelector(all_selector);
+    const checkbox_ln = document.querySelectorAll(check_selector + ':enabled').length;
+    const check_ln = document.querySelectorAll(check_selector + ':checked:enabled').length;
+    if (checkbox_ln === check_ln) {
+        selectAll.checked = true;
+    } else {
+        selectAll.checked = false;
+    }
 }

@@ -70,16 +70,28 @@ public class AdminMemberController {
 		
 		String rootPath = session.getServletContext().getRealPath("/");
 		
-		List<AttachmentVo> picFileInfo = FileUnit.uploadFile(vo.getPicFile(), rootPath, "sixman/src/main/webapp/resources/img/profile");
-		List<AttachmentVo> resumeFileInfo = FileUnit.uploadFile(vo.getResumeFile(), rootPath, "upload/resume");
-		List<AttachmentVo> accountFileInfo = FileUnit.uploadFile(vo.getAccountFile(), rootPath, "upload/account");
-		List<AttachmentVo> evidenceFileList = FileUnit.uploadFile(vo.getEvidenceFile(), rootPath, "upload/evidence");
+		if(vo.getPicFile() != null) {
+			List<AttachmentVo> picFileInfo = FileUnit.uploadFile(vo.getPicFile(), rootPath, "sixman/src/main/webapp/resources/img/profile");
+			vo.setPicFileInfo(picFileInfo);
+		}
+		
+		if(vo.getResumeFile() != null) {
+			List<AttachmentVo> resumeFileInfo = FileUnit.uploadFile(vo.getResumeFile(), rootPath, "upload/resume");
+			vo.setResumeFileInfo(resumeFileInfo);
+		}
+		
+		if(vo.getAccountFile() != null) {
+			List<AttachmentVo> accountFileInfo = FileUnit.uploadFile(vo.getAccountFile(), rootPath, "upload/account");
+			vo.setAccountFileInfo(accountFileInfo);
+		}
+		
+		if(vo.getEvidenceFile() != null) {
+			List<AttachmentVo> evidenceFileList = FileUnit.uploadFile(vo.getEvidenceFile(), rootPath, "upload/evidence");
+			vo.setEvidenceFileList(evidenceFileList);
+			
+		}
 		
 		vo.setPwd(vo.getId());
-		vo.setPicFileInfo(picFileInfo);
-		vo.setResumeFileInfo(resumeFileInfo);
-		vo.setAccountFileInfo(accountFileInfo);
-		vo.setEvidenceFileList(evidenceFileList);
 		
 		int result = adminMemberService.join(vo);
 		
@@ -125,16 +137,28 @@ public class AdminMemberController {
 		
 		String rootPath = session.getServletContext().getRealPath("/");
 		
-		List<AttachmentVo> picFileInfo = FileUnit.uploadFile(vo.getPicFile(), rootPath, "sixman/src/main/webapp/resources/img/profile");
-		List<AttachmentVo> resumeFileInfo = FileUnit.uploadFile(vo.getResumeFile(), rootPath, "upload/resume");
-		List<AttachmentVo> accountFileInfo = FileUnit.uploadFile(vo.getAccountFile(), rootPath, "upload/account");
-		List<AttachmentVo> evidenceFileList = FileUnit.uploadFile(vo.getEvidenceFile(), rootPath, "upload/evidence");
+
+		if(vo.getPicFile() != null) {
+			List<AttachmentVo> picFileInfo = FileUnit.uploadFile(vo.getPicFile(), rootPath, "sixman/src/main/webapp/resources/img/profile");
+			vo.setPicFileInfo(picFileInfo);
+		}
 		
+		if(vo.getResumeFile() != null) {
+			List<AttachmentVo> resumeFileInfo = FileUnit.uploadFile(vo.getResumeFile(), rootPath, "upload/resume");
+			vo.setResumeFileInfo(resumeFileInfo);
+		}
+		
+		if(vo.getAccountFile() != null) {
+			List<AttachmentVo> accountFileInfo = FileUnit.uploadFile(vo.getAccountFile(), rootPath, "upload/account");
+			vo.setAccountFileInfo(accountFileInfo);
+		}
+		
+		if(vo.getEvidenceFile() != null) {
+			List<AttachmentVo> evidenceFileList = FileUnit.uploadFile(vo.getEvidenceFile(), rootPath, "upload/evidence");
+			vo.setEvidenceFileList(evidenceFileList);
+			
+		}
 		vo.setNo(no);
-		vo.setPicFileInfo(picFileInfo);
-		vo.setResumeFileInfo(resumeFileInfo);
-		vo.setAccountFileInfo(accountFileInfo);
-		vo.setEvidenceFileList(evidenceFileList);
 		
 		log.info("profileNo :" + profileNo);
 		log.info("accountNo :" + accountNo);
@@ -145,11 +169,19 @@ public class AdminMemberController {
 
 		int result = adminMemberService.updateMemberDetail(vo, profileNo, accountNo, resumeNo, evidenceNo);
 		
-		if(result > 0) {
-			return "redirect:/admin/employee/list"; 
+		if(result < 1) {
+			String errorMsg = "Failed to update member information.";
+			String title = "죄송합니다. 회원 정보를 수정하지 못하였습니다.";
+			String msg = "파일 등록에 실패 하셨거나,<br>요청하신 정보 저장을 실패하어 페이지를 불러올 수 없습니다.";
+			
+			model.addAttribute("errorMsg", errorMsg);
+			model.addAttribute("title", title);
+			model.addAttribute("msg", msg);
+			return "common/error";
 		}
 		
-		return "redirect:/main/mainPage";
+		model.addAttribute("alert", vo.getName() + "님 의 정보를 수정하였습니다.");
+		return "redirect:/admin/employee/list"; 
 	}
 	
 	

@@ -112,8 +112,12 @@ public class AddressDao {
 		return sst.selectOne("addressMapper.selectReciveInfo", map);
 	}
 
-	public int updateReciveAddress(SqlSessionTemplate sst, Map<String, String> map) {
-		return sst.update("addressMapper.updateReciveAddress", map);
+	public int updateReciveAddress(SqlSessionTemplate sst, ReciverVo vo) {
+		return sst.update("addressMapper.updateReciveAddress", vo);
+	}
+
+	public int insertSortation(SqlSessionTemplate sst, SortationVo vo) {
+		return sst.insert("addressMapper.insertSortation", vo);
 	}
 
 }

@@ -518,9 +518,9 @@
 	<update id="updateReciveAddress">
 		UPDATE R_ADDRESS
 		SET 
-			"SEND_ADDRESS" = #{addressNo}
+			"SEND_ADDRESS" = #{sendAddress}
 		WHERE "NO" = #{no}
-		AND "RECIVER_NO" = #{userNo}
+		AND "RECIVER_NO" = #{reciverNo}
 	</update>
 	
 	<select id="getFileNo" resultType="String">

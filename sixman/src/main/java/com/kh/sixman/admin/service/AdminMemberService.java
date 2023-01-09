@@ -10,6 +10,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kh.sixman.addressBook.service.AddressService;
+import com.kh.sixman.addressBook.vo.SortationVo;
 import com.kh.sixman.admin.dao.AdminMemberDao;
 import com.kh.sixman.common.AttachmentVo;
 import com.kh.sixman.common.AuthorizeVo;
@@ -17,8 +19,12 @@ import com.kh.sixman.common.BankVo;
 import com.kh.sixman.common.FileUnit;
 import com.kh.sixman.member.vo.MemberVo;
 
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 @Service
 public class AdminMemberService {
+	@Autowired
+	private AddressService addressService;
 	
 	@Autowired
 	private AdminMemberDao adminMemberDao;
@@ -46,7 +52,9 @@ public class AdminMemberService {
 		vo.setPwd(newPwd);
 		
 		int join = adminMemberDao.join(sst, vo);
+		
 		String no = adminMemberDao.getMemberNo(sst, vo);
+		
 		
 		List<AttachmentVo> picFile = vo.getPicFileInfo();
 		List<AttachmentVo> resumeFile = vo.getResumeFileInfo();
@@ -57,6 +65,16 @@ public class AdminMemberService {
 		int resumeFileUploadResult = 1;
 		int accountFileUploadResult = 1;
 		int evidenceFileUploadResult = 1;
+		
+		if(picFile == null) {
+			AttachmentVo defaultPic = new AttachmentVo();
+			defaultPic.setFilePath("C:\\dev\\sixman\\sixman/src/main/webapp/resources/img/");
+			defaultPic.setOriginName("defaultProfilePic.png");
+			defaultPic.setChangeName("defaultProfilePic.png");
+			defaultPic.setSubNo(no);
+			
+			picFileUploadResult = adminMemberDao.upload(sst, defaultPic);
+		}
 		
 		if(picFile != null) {
 			Map<String,Object> picFileUpload = dbUploadFile(picFile, no, "PROFILE");
@@ -134,9 +152,11 @@ public class AdminMemberService {
 		if(profileNo != null) {
 			attVo = adminMemberDao.getFileOne(sst, no,"PROFILE");
 			fileResult = adminMemberDao.delete(sst, attVo.getNo(),"PROFILE");
-			
-			if(fileResult == 1) {
-				FileUnit.deleteFile(attVo.getFilePath()+attVo.getChangeName());
+				
+			if(!attVo.getOriginName().equals("defaultProfilePic.png")) {
+				if(fileResult == 1) {
+					FileUnit.deleteFile(attVo.getFilePath()+attVo.getChangeName());
+				}
 			}
 			
 		}

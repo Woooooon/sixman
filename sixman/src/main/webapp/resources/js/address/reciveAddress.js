@@ -1,4 +1,4 @@
-checkBoxToggleEvent('.selectAll','.cardCheck');
+checkBoxToggleEvent('.selectAll', '.cardCheck');
 
 //전체석택
 function checkBoxToggleEvent(all_selector, check_selector) {
@@ -46,18 +46,21 @@ function checkBoxToggle(all_selector, check_selector) {
 
 //전체선택된것 삭제
 document.querySelector('.delete').addEventListener('click', () => {
+    const modifyBox = document.querySelectorAll('.card-item:has(input:not(:checked))');
+
     const selectBox = document.querySelectorAll('.card-item:has(input:checked)');
     const reciveNo = document.querySelector('#reciveInfo').value;
-    let selectCardNumList = "";
 
-    for (let index = 0; index < selectBox.length; index++) {
-        selectCardNumList += selectBox[index].querySelector('input[type="checkbox"]').value;
-        console.log(selectCardNumList);
-        if (index != selectBox.length - 1) {
-            selectCardNumList += ',';
+    let modifyNumList = '';
+
+    for (let index = 0; index < modifyBox.length; index++) {
+        modifyNumList += modifyBox[index].querySelector('input[type="checkbox"]').value;
+
+        if (index != modifyBox.length - 1) {
+            modifyNumList += ',';
         }
     }
-    console.log(selectCardNumList);
+
     if (selectBox.length < 1) return;
     popup.confirmPop('주의', '삭제하시겠습니까?', () => {
         $.ajax({
@@ -66,14 +69,72 @@ document.querySelector('.delete').addEventListener('click', () => {
             traditional: true,
             data: {
                 no: reciveNo,
-                addressNo: selectCardNumList,
+                modifySendAddress: modifyNumList,
             },
             dataType: 'text',
             success: (msg) => {
-                popup.alertPop('성공', msg);
-
                 selectBox.forEach((selectBox) => {
                     selectBox.remove();
+                });
+                popup.alertPop('성공', msg, () => {
+                    if (modifyBox.length < 1) {
+                        location.href = '/sixman/address/recive';
+                    }
+                });
+            },
+            error: function (error) {
+                console.log('error: ' + error);
+            },
+        });
+    });
+});
+
+//전체선택된것 주소록 추가
+document.querySelector('.insert').addEventListener('click', () => {
+    const modifyBox = document.querySelectorAll('.card-item:has(input:not(:checked))');
+
+    const selectBox = document.querySelectorAll('.card-item:has(input:checked)');
+    const reciveNo = document.querySelector('#reciveInfo').value;
+
+    let modifyNumList = '';
+
+    for (let index = 0; index < modifyBox.length; index++) {
+        modifyNumList += modifyBox[index].querySelector('input[type="checkbox"]').value;
+
+        if (index != modifyBox.length - 1) {
+            modifyNumList += ',';
+        }
+    }
+
+    let insertNumList = '';
+    for (let index = 0; index < selectBox.length; index++) {
+        insertNumList += selectBox[index].querySelector('input[type="checkbox"]').value;
+
+        if (index != selectBox.length - 1) {
+            insertNumList += ',';
+        }
+    }
+
+    if (selectBox.length < 1) return;
+    popup.confirmPop('추가하시겠습니까?', '추가 된 주소는 내 주소록에 추가 됩니다.', () => {
+        $.ajax({
+            url: '/sixman/address/recive/detail/insert',
+            method: 'POST',
+            traditional: true,
+            data: {
+                no: reciveNo,
+                modifySendAddress: modifyNumList,
+                insertNum: insertNumList,
+            },
+            dataType: 'text',
+            success: (msg) => {
+                selectBox.forEach((selectBox) => {
+                    selectBox.remove();
+                });
+                popup.alertPop('성공', msg, () => {
+                    if (modifyBox.length < 1) {
+                        location.href = '/sixman/address/recive';
+                    }
                 });
             },
             error: function (error) {

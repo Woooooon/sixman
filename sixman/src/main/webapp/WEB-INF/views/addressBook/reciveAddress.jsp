@@ -25,7 +25,7 @@
                     <div class="body-controller">
                         <input type="checkbox" class="selectAll" id="selectAll" />
                         <label for="selectAll">전체선택</label>
-                        <a href="/sixman/address/add"><span class="material-symbols-outlined"> add_box </span></a>
+                        <span class="material-symbols-outlined insert"> download_for_offline </span>
                         <span class="material-symbols-outlined delete"> delete </span>
                     </div>
                     <div class="body">
@@ -51,7 +51,6 @@
                                         <strong>Mail.</strong>
                                         <a id="card-email" href="/sixman/mail/write?email=${i.email}">${i.email}</a>
                                     </div>
-                                    <a id="card-detail" href="/sixman/address/detail?no=${i.no}">자세히</a>
                                 </div>
                             </div>
                         </c:forEach>

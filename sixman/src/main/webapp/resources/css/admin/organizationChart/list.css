@@ -148,7 +148,6 @@ p[name='imgName'] {
     padding: 10px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
     align-items: center;
     position: relative;
 }
@@ -166,12 +165,12 @@ p[name='imgName'] {
 
 #prev {
     position: absolute;
-    top: 50%;
+    top: 60%;
     left: 0;
 }
 #next {
     position: absolute;
-    top: 50%;
+    top: 60%;
     right: 0px;
 }
 
@@ -386,38 +385,33 @@ p[name='imgName'] {
 .list-item:hover {
     border-bottom: 1px solid var(--main-color);
 }
-
 .side-title {
-    width: 100%;
-    color: var(--main-color);
-    font-size: 18px;
-    font-weight: 600;
-    border-bottom: 1px solid var(--main-color);
-    padding-bottom: 4px;
     display: flex;
+    justify-content: flex-start;
+    width: 100%;
     align-items: center;
+    border-bottom: 1px solid var(--main-color-dark);
+    padding: 3px 0;
+    margin-bottom: 10px;
     justify-content: space-between;
 }
 
-.side-title p {
+.side-title h2 span {
+    color: var(--main-color);
+    margin-right: 5px;
+}
+
+.side-title h2 {
     font-size: 15px;
-    color: var(--main-color);
-}
-
-.side-title span {
-    font-size: 18px;
-    color: var(--bo-40);
-    cursor: pointer;
-}
-
-.side-title span:hover {
-    color: var(--main-color);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
 }
 
 .select-employee-list {
     display: flex;
     width: 100%;
-    height: 8%;
+    height: 9%;
     border-bottom: 1px solid var(--bo-20);
     padding: 5px 5px 3px 5px;
     justify-content: space-between;
@@ -439,15 +433,27 @@ p[name='imgName'] {
     width: 90%;
 }
 
-.newbie-pic,
-.select-employee-pic {
-    width: 30px;
-    height: 30px;
+.newbie-pic {
+    width: 45px;
+    height: 45px;
     border-radius: 50px;
     border: 1px solid var(--bo-20);
 }
 
-.newbie-pic img,
+.select-employee-pic {
+    width: 45px;
+    height: 45px;
+    border-radius: 50px;
+    border: 1px solid var(--bo-20);
+}
+
+.newbie-pic img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    border-radius: 50px;
+}
+
 .select-employee-pic > img {
     width: 100%;
     height: 100%;
@@ -458,6 +464,7 @@ p[name='imgName'] {
     margin-left: 10px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 5px 0;
 }
 

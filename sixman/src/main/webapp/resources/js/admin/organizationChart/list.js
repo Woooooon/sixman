@@ -1,4 +1,5 @@
 memberSelectController();
+
 function memberSelectController() {
     const memberDept = document.querySelectorAll('.list-item select[name="deptNo"]');
     memberDept.forEach((target) => {
@@ -198,10 +199,12 @@ removeMember.addEventListener('click', () => {
     popup.confirmPop('제안', '선택된 사원을 퇴사 처리하시겠습니까?', () => {
         const checkBox = document.querySelectorAll('.list-item:has(input:checked)');
         let memberArray = [];
+
         checkBox.forEach((box) => {
             const selectMemberNum = box.querySelector('input[type="checkbox"]').value;
             memberArray.push(selectMemberNum);
         });
+
         console.log(memberArray);
         $.ajax({
             url: '/sixman/admin/member/delete',
