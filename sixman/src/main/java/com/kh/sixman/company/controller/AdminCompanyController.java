@@ -38,7 +38,7 @@ public class AdminCompanyController {
 		model.addAttribute("deptList", deptList);
 		model.addAttribute("positionList", positionList);
 		
-		return "admin/company/test";
+		return "admin/company/edit";
 	}
 	
 	@PostMapping("admin/company/edit")
