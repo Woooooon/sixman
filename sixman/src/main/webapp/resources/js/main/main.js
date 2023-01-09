@@ -258,6 +258,7 @@ function alarmAjax() {
                         </div>
                         <span class="t-btn material-symbols-outlined"> close </span>
                         `;
+                    }
 
                     div.innerHTML = item;
 
@@ -276,6 +277,7 @@ function alarmAjax() {
             } else {
                 // alert('Request Error!');
             }
+            
         }
     };
 
@@ -309,5 +311,3 @@ function checkAjax(no, type) {
     httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
     httpRequest.send(`no=${no}&type=${type}`);
 }
-
-//
