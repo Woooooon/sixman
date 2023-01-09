@@ -90,6 +90,17 @@ public class WhoChatFirstController {
 	}
 	
 	@ResponseBody
+	@GetMapping("readchatroomList")
+	public List<ReadChatRoomListVo> readchatroomList(HttpSession session) {
+		
+//		session.getAttribute("showchatroomlistReady");
+		List<ReadChatRoomListVo> a_chatroomlist = (List<ReadChatRoomListVo>) session.getAttribute("showchatroomlistReady");
+		System.out.println("last : " + a_chatroomlist);
+		session.setAttribute("a_chatroomlist", a_chatroomlist);
+		return a_chatroomlist;
+	}
+	
+	@ResponseBody
 	@GetMapping("chatroom")
 	public List<ChatRoomDataVo> chatroom(HttpSession session, ChatRoomDataVo vo){
 		System.out.println("채팅룸 인덱스 : " + vo.getChatRoomIndex());
@@ -103,4 +114,6 @@ public class WhoChatFirstController {
 		
 	}
 
+	
+	
 }

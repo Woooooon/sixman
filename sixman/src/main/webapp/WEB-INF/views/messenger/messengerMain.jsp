@@ -49,7 +49,7 @@
 							<input type="text" name="wantchatdata" id="wantchatdata">
 							<input type="submit" class="btn" value="검색">
 						</div>
-						<div class="chatlist-big">
+						<div class="chatlist-big" id="chatlist-big">
 						
 						<c:forEach items="${showchatroomlistReady}" var="chatroom">
 							<div class="chatroom-list-box-ajax">
@@ -225,40 +225,40 @@
 									</div>
 									
 								</div>
-	<!-- 							<div class="textbox-messenger-area3"> -->
-	<!-- 								<div class="showup" id="showup02"> -->
-	<!-- 									<span class="material-symbols-outlined" style="font-size:50px" id="chatsetting-slide01">expand_more</span> -->
-	<!-- 									<div class="chatsetting-02-subtitle" id="subtitle1">친구 목록</div> -->
-	<!-- 								</div> -->
-	<!-- 								<div class="team-people-data"> -->
-	<!-- 									<div class="team-whole-data"> -->
-	<!-- 										<div class="team-area">영업부</div> -->
-	<!-- 										<div class="team-name">영업 2팀</div> -->
-	<!-- 									</div> -->
-	<!-- 									<div class='bottom-area2' id='ba'></div> -->
-	<!-- 									<div class="with-chat-data"> -->
-	<!-- 										<div class="square" style=""></div> -->
-	<!-- 										<div class="with-chat-name">구기석</div> -->
-	<!-- 										<div class="with-chat-grade">부장</div> -->
-	<!-- 										<input type="checkbox" class="checkbox-square-one" name="withfriend01"> -->
-	<!-- 									</div> -->
-	<!-- 									<div class="bottom-area2"></div> -->
-	<!-- 									<div class="with-chat-data"> -->
-	<!-- 										<div class="square" style=""></div> -->
-	<!-- 										<div class="with-chat-name">구기석</div> -->
-	<!-- 										<div class="with-chat-grade">부장</div> -->
-	<!-- 										<input type="checkbox" class="checkbox-square-one" name="withfriend01"> -->
-	<!-- 									</div> -->
-	<!-- 									<div class="bottom-area2"></div> -->
-	<!-- 									<div class="with-chat-data"> -->
-	<!-- 										<div class="square" style=""></div> -->
-	<!-- 										<div class="with-chat-name">구기석</div> -->
-	<!-- 										<div class="with-chat-grade">부장</div> -->
-	<!-- 										<input type="checkbox" class="checkbox-square-one" name="withfriend01"> -->
-	<!--  									</div> -->
-	<!-- 									<div class="bottom-area2"></div> -->
-	<!-- 								</div> -->
-	<!-- 							</div> -->
+<!-- 								<div class="textbox-messenger-area3"> -->
+<!-- 									<div class="showup" id="showup02"> -->
+<!-- 										<span class="material-symbols-outlined" style="font-size:50px" id="chatsetting-slide01">expand_more</span> -->
+<!-- 										<div class="chatsetting-02-subtitle" id="subtitle1">친구 목록</div> -->
+<!-- 									</div> -->
+<!-- 									<div class="team-people-data"> -->
+<!-- 										<div class="team-whole-data"> -->
+<!-- 											<div class="team-area">영업부</div> -->
+<!-- 											<div class="team-name">영업 2팀</div> -->
+<!-- 										</div> -->
+<!-- 										<div class='bottom-area2' id='ba'></div> -->
+<!-- 										<div class="with-chat-data"> -->
+<!-- 											<div class="square" style=""></div> -->
+<!-- 											<div class="with-chat-name">구기석</div> -->
+<!-- 											<div class="with-chat-grade">부장</div> -->
+<!-- 											<input type="checkbox" class="checkbox-square-one" name="withfriend01"> -->
+<!-- 										</div> -->
+<!-- 										<div class="bottom-area2"></div> -->
+<!-- 										<div class="with-chat-data"> -->
+<!-- 											<div class="square" style=""></div> -->
+<!-- 											<div class="with-chat-name">구기석</div> -->
+<!-- 											<div class="with-chat-grade">부장</div> -->
+<!-- 											<input type="checkbox" class="checkbox-square-one" name="withfriend01"> -->
+<!-- 										</div> -->
+<!-- 										<div class="bottom-area2"></div> -->
+<!-- 										<div class="with-chat-data"> -->
+<!-- 											<div class="square" style=""></div> -->
+<!-- 											<div class="with-chat-name">구기석</div> -->
+<!-- 											<div class="with-chat-grade">부장</div> -->
+<!-- 											<input type="checkbox" class="checkbox-square-one" name="withfriend01"> -->
+<!-- 	 									</div> -->
+<!-- 										<div class="bottom-area2"></div> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
 								<div class="chatting-button-list01">
 									<div class="chatbutton01">
 										<input type="submit" class="btn" value="이전 화면" id="makingroom-first-leave">
@@ -1086,6 +1086,10 @@
 		<script type="text/javascript">
 			const messenger = document.getElementById('messenger-whole');
 			const messengericon = document.getElementById('msg'); <!-- 메신저 표시  -->
+			
+			const chatListAll = document.querySelectorAll(".chatroom-list-box-ajax");
+			
+			
 
 			messengericon.onclick = function () {
 				$('.messenger-whole').toggle();
@@ -1102,12 +1106,33 @@
 						alert('${showchatroomlistReady}');
 // 						$('.chatroomlist-first-page').on('load', function(){$('.chatroomlist-first-page').show();});
 // 						$('.chatroomlist-first-page').load(window.location.href + '.chatroomlist-first-page');
-						$('.chatroom-list-box-ajax').show();
+// 						$(chatListAll).show();
+						lastreadchat_d();
 					}, error:function(){
 						alert("메세지 로딩에 실패했습니다.. 잠시 후에 다시 이용해주세요");
 					}
 				});
 // 				$('.chatroom-list-box-ajax').show();
+			}
+			
+			function lastreadchat_d(){
+				$.ajax({
+					url:"/sixman/readchatroomList",
+					success: function() {
+// 						alert(chatListAll);
+// 						$('.chatroom-list-box-ajax').show();
+// 						$(chatListAll).show();
+						alert('연결');
+						alert('안녕'+'${a_chatroomlist}');
+						const chatListbig = document.getElementById('chatlist-big');
+						chatListbig.remove();
+						
+						$('.chatroom-list-space').after('<div id="chatlist-big">ㅇㅇ</div>');
+						
+					}, error: function(){
+						alert('에러');
+					}
+				})
 			}
 
 			
@@ -1209,7 +1234,8 @@
 			<!-- 채팅방 목록 화면에서 채팅 화면으로 진입-->
 			
 			//인덱스 배열
-			const chatListAll = document.querySelectorAll(".chatroom-list-two-to-two");
+// 			const chatListAll = document.querySelectorAll(".chatroom-list-two-to-two");
+
 			const chatRoomAll = document.querySelectorAll(".chatting-room");
 // // 			const chatListAllIndex = document.querySelectorAll(".with-chat-subroomname2").index;
 // // 			const chatRoomAllIndex = document.querySelectorAll(".chatting-room").index();
@@ -1289,61 +1315,6 @@
 // 					test[i].alert(this(index));
 // 				}
 // 			}
-			
-			
-			
-			
-			
-			
-			
-			
-			
-// 			for(int i=0; i<chatListAllIndex; i++){
-// 				chatListAll[i].onclick = function () {
-// 					$('.chatroomlist-first-page').hide();
-// 					$(chatRoomAll[i]).show();
-// 				 } 	
-// 			}
-
-
-
-
-
-
-// 			${'.with-chat-subroomname2'}.onclick = function () {
-// //  				var chatrn = $(this).index();
-// 				${'.chatroomlist-first-page'}.hide();
-// 				${'.chatting-room'}.show();
-// //  				alert(chatListAllIndex);
-// //  				var indexchatr = $(this).index();
-// //  				alert(indexchatr);
-//  			 } 	
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-
-			
-			
-			
-// 			${".with-chat-subroomname2"}.click(function(){
-				
-// 			})
-			
-
-			
-			
-			
-			
-			
 			
 			
 			
