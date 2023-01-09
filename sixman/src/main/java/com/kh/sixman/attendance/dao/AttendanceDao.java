@@ -54,6 +54,10 @@ public class AttendanceDao {
 		return sst.selectOne("attendanceMapper.adminCountList", vo);
 	}
 
+	public int updateMember(SqlSessionTemplate sst, AttendanceVo vo) {
+		return sst.update("attendanceMapper.updateMember", vo);
+	}
+
 
 
 }

@@ -103,7 +103,7 @@
 	
 	<select id="selectMemberList" resultType="com.kh.sixman.attendance.vo.AttendanceVo">
 			SELECT 
-			M.NO
+			A.NO
 			,M.NAME
 			,A.MEMBER_NO
 			,A.STATUS
@@ -144,6 +144,14 @@
 	</select>
 	
 
+	<update id="updateMember">
+		UPDATE ATTENDANCE
+		SET
+		"START" = TO_DATE(#{start}, 'HH24:MI'),
+		"END" = TO_DATE(#{end}, 'HH24:MI')
+		WHERE "WORK_DAY" = #{workDay}
+			
+	</update>
 
 
 </mapper>
