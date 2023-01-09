@@ -145,7 +145,7 @@
             GROUP BY DOC_NO
         ) MIN ON DS.DOC_NO = MIN.DOC_NO
 		WHERE A.A_MAN = ${no}
-        AND PRI <= MP
+        AND PRI  <![CDATA[<=]]>  MP
 	</select>
 	
 	<select id="selectOne" resultType="com.kh.sixman.temp.approval.vo.ApprovalDocumentVo">
