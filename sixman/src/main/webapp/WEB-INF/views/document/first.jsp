@@ -5,6 +5,7 @@
 
 <!DOCTYPE html>
 <html>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <head>
 <meta charset="UTF-8">
 <title>기안문서함1</title>
@@ -96,6 +97,7 @@
             </div>
          
         </div>
+        <textarea name="content" id="summernote">${vo.content}</textarea>
 
         <div class="docu-write">
             <!-- <button onclick="" id="documentwrite"><a href="">결재 상신</a></button> -->

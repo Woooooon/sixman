@@ -226,7 +226,7 @@
 			TITLE = #{title}
 			,CONTENT = #{content}
 			,REFER = #{refer}
-			,ENROLL_DATE = #{enrollDate}
+			
 		WHERE NO = #{no}
 			
 			

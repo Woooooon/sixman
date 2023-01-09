@@ -48,22 +48,7 @@ public class DocumentController {
    @Autowired
    private DocumentBoardService dbs;
    
-//   @RequestMapping(value="/board/boardList")
-//   public ModelAndView openBoardList(Criteria cri) throws Exception {
-//           
-//       ModelAndView mav = new ModelAndView("/board/boardList");
-//           
-//       PageMaker pageMaker = new PageMaker();
-//       pageMaker.setCri(cri);
-//       pageMaker.setTotalCount(100);
-//           
-//       List<Map<String,Object>> list = ds.selectBoardList(cri);
-//       mav.addObject("list", list);
-//       mav.addObject("pageMaker", pageMaker);
-//           
-//       return mav;
-//           
-//   }
+
 
    
 
@@ -117,13 +102,22 @@ public class DocumentController {
 	 
    
    //기안문서함(화면)
-   @GetMapping("")
+   @GetMapping("page")
 //   public String First(String listType,Model model) {
-   public String First(Model model  ) {
+   public String First(Model model ,HttpServletRequest request ) {
 	   
 	
 	   List<DocumentVo> dvo = ds.selectDocumentList();
 	   model.addAttribute("dvo", dvo);
+	   
+	   
+	   
+	   
+	   String[] valueArr = request.getParameterValues("valueArr");
+       int size = valueArr.length;
+       for(int i=0; i<size; i++) {
+       	ds.delete(valueArr[i]);
+       }
 	   
 
       return "document/first";
@@ -149,7 +143,7 @@ public class DocumentController {
 		Map<String, Object> map = new HashMap<>();
 		
 		map.put("pv", pv);
-		map.put("list", list);
+		map.put("dvo", list);
 		map.put("listCount", listCount);
 		
 		Gson gson = new GsonBuilder().create();
@@ -198,20 +192,20 @@ public class DocumentController {
    
 
    // 게시물 삭제
-   @RequestMapping(value = "document/first", method = RequestMethod.GET)
+   @RequestMapping(value = "firstdelete", method = RequestMethod.GET)
    public String postdelete(String no) throws Exception {
    	ds.delete(no);
       return "document/first";
    }
 
    //게시물 선택삭제
-   @RequestMapping("")
+   @RequestMapping(value = "deletecheck", method = RequestMethod.GET)
    public String ajaxTest(HttpServletRequest request) throws Exception {
 
-       String[] ajaxMsg = request.getParameterValues("valueArr");
-       int size = ajaxMsg.length;
+       String[] valueArr = request.getParameterValues("valueArr");
+       int size = valueArr.length;
        for(int i=0; i<size; i++) {
-       	ds.delete(ajaxMsg[i]);
+      	ds.delete(valueArr[i]);
        }
        return "document/first";
    }
@@ -297,6 +291,8 @@ public class DocumentController {
 
 
 	   
+	   
+	   
       return "document/write";
    }
 
@@ -341,6 +337,7 @@ public class DocumentController {
       dvo.setSendPay(loginMember.getNo());
       dvo.setFileList(fileList);
       
+      
       int result = ds.write(dvo);
       
       if(result > 0) {
@@ -350,6 +347,9 @@ public class DocumentController {
       }
       
    }
+   
+   
+   
 
 
    
