@@ -10,12 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kh.sixman.addressBook.vo.AddressVo;
+import com.kh.sixman.addressBook.vo.SortationVo;
 import com.kh.sixman.common.AttachmentVo;
 import com.kh.sixman.document.dao.DocumentDao;
 import com.kh.sixman.document.dao.DocumentFileDao;
+import com.kh.sixman.document.vo.Criteria;
 import com.kh.sixman.document.vo.DocumentSaveVo;
 import com.kh.sixman.document.vo.DocumentVo;
-import com.kh.sixman.notice.vo.NoticeVo;
 
 
 
@@ -28,6 +30,8 @@ public class DocumentService {
    private DocumentDao dao;
    @Autowired
    private DocumentFileDao fdao;
+   
+  
    
    //게시글 작성
    @Transactional
@@ -131,6 +135,27 @@ public List<DocumentVo> selectapList() {
 public Object delete(String no) {
 	return dao.delete(sst, no);
 }
+
+
+
+public int countingList(Map<String, String> search) {
+	return dao.countingList(sst, search);
+}
+
+
+
+public List<DocumentVo> selectDocumentList(RowBounds rb, Map<String, String> search) {
+	return dao.selectDocumentList(sst,rb,search);
+}
+
+
+
+
+
+
+
+
+
 
 
 

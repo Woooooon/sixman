@@ -104,7 +104,7 @@
     </select>
     
     
-    <select id="selectList" parameterType="String" resultType="DocumentVo">
+  <select id="selectList" parameterType="String" resultType="DocumentVo">
         SELECT *
         FROM DOCUMENT
         <trim prefix="WHERE" prefixOverrides="OR||AND">
@@ -116,7 +116,7 @@
 	        </if>
 	        AND DELETE_YN = 'N' 
 		</trim>
-        order by enroll_date 
+        order by no DESC, enroll_date
     </select>
     
 <!--    <update id="viewCount">
@@ -154,7 +154,7 @@
 	</select>
 
 <select id="docuselect"  resultType="DocumentVo">
-	 SELECT  
+	  SELECT  
 		D.NO
         ,S.DOC_NO
 		,D.ENROLL_DATE
@@ -162,8 +162,9 @@
 		,D.TITLE
 		,S.STATE
 	FROM
-		DOCUMENT D
-	LEFT OUTER JOIN DOC_SAVE S ON D.NO =S.DOC_NO
+		DOCUMENT D 
+	LEFT OUTER JOIN DOC_SAVE S ON D.NO =S.DOC_NO 
+    ORDER BY NO DESC
 
 </select>
 
@@ -206,7 +207,160 @@
 
 </delete>
 
+<select id="detail" parameterType="int" resultType="DocumentVo">
+	SELECT 
+		NO
+		,ENROLL_DATE
+		,SEND_PAY
+		,REFER
+		,CONTENT
+		,TITLE
+	FROM
+		DOCUMENT
+	WHERE NO = #{no}
+</select>
+<!-- 게시글 수정 -->
+<update id="modify" parameterType="DocumentVo">
+	UPDATE DOCUMENT
+		SET
+			TITLE = #{title}
+			,CONTENT = #{content}
+			,REFER = #{refer}
+			,ENROLL_DATE = #{enrollDate}
+		WHERE NO = #{no}
+			
+			
+	
+</update>
 
+<!-- <select id="selectBoardList" resultType="hashmap" parameterType="hashmap"> -->
+<!--     <![CDATA[ -->
+<!--         SELECT -->
+<!--             * -->
+<!--         FROM -->
+<!--             DOCUMENT -->
+<!--         WHERE -->
+<!--             D_YN = 'N' -->
+<!--         ORDER BY IDX DESC -->
+<!--         LIMIT #{pageStart}, #{perPageNum} -->
+<!--     ]]> -->
+<!-- </select> -->
+
+
+
+ <select id="countDocument" resultType="int" >
+	
+	SELECT COUNT(*)
+	FROM DOCUMENT D
+	LEFT JOIN TYPE_A A ON  A.NO = D.TYPE
+	LEFT JOIN DOC_SAVE S ON S.DOC_NO = D.NO
+	WHERE D.SEND_PAY = #{no}
+	AND D.D_YN = 'N'
+	
+	<if test="keyword != null and keyword !=''" >
+		AND D.NO LIKE '%${keyword}%'
+		OR D.TITLE LIKE '%${keyword}%'
+		OR D.ENROLL_DATE LIKE '%${keyword}%'
+		OR S.STATE LIKE '%${keyword}%'
+		OR A.NO  LIKE '%${keyword}%'
+		OR D.SEND_PAY LIKE '%${keyword}%'
+		OR D.CONTENT LIKE '%${keyword}%'
+		OR D.REFER LIKE '%${keyword}%'
+		
+	</if>   
+	
+</select>
+
+<select id="selectDocumentList" resultType="DocumentVo" >
+	SELECT
+		D.NO
+		,D.SEND_PAY
+		,D.AP_NO
+		,D.TYPE
+		,D.TITLE
+		,D.CONTENT
+		,D.D_YN
+		,D.D_SAVE
+		,D.ENROLL_DATE
+		,D.MODIFY_DATE
+		,D.START_DATE
+		,D.END_DATE
+		,D.REFER
+		,A.NO
+		,S.DOC_NO
+		,S.STATE
+		
+		FROM DOCUMENT D
+		LEFT JOIN DOC_SAVE S ON D.NO = S.DOC_NO
+		LEFT JOIN TYPE_A A ON A.NO = D.TYPE
+		
+		WHERE D.SEND_PAY = #{no}
+		AND D.D_YN = 'N'
+
+		
+	 	<if test="keyword != null and keyword !=''" >
+			AND D.NO LIKE '%${keyword}%'
+			OR D.TITLE LIKE '%${keyword}%'
+			OR D.ENROLL_DATE LIKE '%${keyword}%'
+			OR S.STATE LIKE '%${keyword}%'
+			OR A.NO  LIKE '%${keyword}%'
+		</if> 
+		
+</select>
+
+<select id="documentList" resultType="DocumentVo">
+	SELECT 
+		NO
+		,SEND_PAY
+		,TYPE
+		,TITLE
+		,ENROLL_DATE
+	FROM DOCUMENT
+	WHERE SEND_PAY = #{no}
+		
+</select>
+
+<select id="selectDocumentListAll" resultType="DocumentVo">
+	SELECT
+		D.NO
+		,D.SEND_PAY
+		,D.AP_NO
+		,D.TYPE
+		,D.TITLE
+		,D.CONTENT
+		,D.D_YN
+		,D.D_SAVE
+		,D.ENROLL_DATE
+		,D.MODIFY_DATE
+		,D.START_DATE
+		,D.END_DATE
+		,D.REFER
+		,S.AP_NO
+		,S.DOC_NO
+		,S.STATE
+		,S.A_YN
+		,A.USER_NO
+		,A.TYPE_NO
+		,A.NAME
+		FROM DOCUMENT D
+		LEFT JOIN DOC_SAVE S ON DOC_NO = D.NO
+		LEFT JOIN TYPE_A A ON A.NO = D.TYPE
+		WHERE D.SEND_PAY = #{no}
+		AND D.D_YN = 'N'
+<!-- 		<if test="keyword != null and keyword !='' " > -->
+<!-- 			AND D.TITLE LIKE '%${keyword}%' -->
+<!-- 			ON D.CONTENT LIKE '%${keyword}%' -->
+<!-- 			ON D.D_YN LIKE '%${keyword}%' -->
+<!-- 			ON D_SAVE LIKE '%${keyword}%' -->
+<!-- 			ON ENROLL_DATE LIKE '%${keyword}%' -->
+<!-- 			ON MODIFY_DATE LIKE '%${keyword}%' -->
+<!-- 			ON START_DATE LIKE '%${keyword}%' -->
+<!-- 			ON END_DATE LIKE '%${keyword}%' -->
+<!-- 			ON REFER LIKE '%${keyword}%' -->
+<!-- 			ON A.TYPE_NO LIKE '%${keyword}%' -->
+<!-- 			ON A.NAME LIKE '%${keyword}%' -->
+<!-- 		</if> -->
+</select> 
 
 
 
@@ -318,42 +472,42 @@
 <!--         select * from dual; -->
 <!--     </update> -->
     
-<!--     <select id="countList" resultType="int"> -->
-<!-- 	    SELECT COUNT(*) -->
-<!-- 	    FROM -->
-<!-- 	    ( -->
-<!-- 	    <trim prefixOverrides="UNION ALL"> -->
-<!-- 	    <if test="!'기안문서함'.equals(type)"> -->
-<!-- 	        select  -->
-<!-- 	            D.NO AS DOCUMENT_NO -->
-<!-- 	            ,D.SEND_PAY AS M_NO -->
-<!-- 	            ,MM.NAME AS SEND_NAME -->
-<!-- 	            ,D.D_YN -->
-<!-- 	            ,D.TITLE -->
-<!-- 	            ,D.CONTENT -->
-<!-- 	            ,D.START_DATE -->
-<!-- 	            ,T.NO AS TYPE_NO -->
-<!-- 	            ,T.NAME AS TYPE_NAME -->
-<!-- 	            ,'Y' as ISSENDER  -->
-<!-- 	            ,'Y' as A_YN -->
-<!-- 	        from DOCUMENT D -->
-<!-- 	        join member mm on mm.no = D.SEND_PAY -->
-<!-- 	        LEFT JOIN DOC_A DA ON D.NO = DA.DOCUMENT_NO -->
-<!-- 	        LEFT JOIN TYPE_A T ON T.NO = DA.TYPE_NO -->
-<!-- 	        WHERE MM.NO = ${mNo} -->
-<!-- 	        AND (USER_NO = ${mNo} OR M_NO IS NULL) -->
-<!-- 	        AND  -->
-<!-- 		    <if test="'임시보관함'.equals(typeName)"> -->
-<!-- 		    	D_SAVE = 'Y' -->
-<!-- 		    </if> -->
-<!-- 		    <if test="!'임시보관함'.equals(typeName)"> -->
-<!-- 		    	D_SAVE = 'N' -->
-<!-- 		    </if> -->
-<!-- 		</if> -->
-<!-- 		</trim> -->
+  <!--    <select id="countList" resultType="int"> 
+	    SELECT COUNT(*)
+	    FROM
+	    (
+	    <trim prefixOverrides="UNION ALL">
+	    <if test="!'기안문서함'.equals(type)">
+	        select 
+	            D.NO AS DOCUMENT_NO
+	            ,D.SEND_PAY AS M_NO
+	            ,MM.NAME AS SEND_NAME
+	            ,D.D_YN
+	            ,D.TITLE
+	            ,D.CONTENT
+	            ,D.START_DATE
+	            ,T.NO AS TYPE_NO
+	            ,T.NAME AS TYPE_NAME
+	            ,'Y' as ISSENDER 
+	            ,'Y' as A_YN
+	        from DOCUMENT D
+	        join member mm on mm.no = D.SEND_PAY
+	        LEFT JOIN DOC_A DA ON D.NO = DA.DOCUMENT_NO
+	        LEFT JOIN TYPE_A T ON T.NO = DA.TYPE_NO
+	        WHERE MM.NO = ${mNo}
+	        AND (USER_NO = ${mNo} OR M_NO IS NULL)
+	        AND 
+		    <if test="'임시보관함'.equals(typeName)">
+		    	D_SAVE = 'Y'
+		    </if>
+		    <if test="!'임시보관함'.equals(typeName)">
+		    	D_SAVE = 'N'
+		    </if>
+		</if>
+		</trim>
 		
 		
-<!-- 	</select> -->
+	</select>  -->
 	
 	
 </mapper>

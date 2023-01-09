@@ -1,11 +1,15 @@
 package com.kh.sixman.document.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.sixman.addressBook.vo.AddressVo;
+import com.kh.sixman.addressBook.vo.SortationVo;
+import com.kh.sixman.document.vo.Criteria;
 import com.kh.sixman.document.vo.DocumentSaveVo;
 import com.kh.sixman.document.vo.DocumentVo;
 import com.kh.sixman.notice.vo.NoticeVo;
@@ -80,7 +84,18 @@ public class DocumentDao {
 
 	public Object delete(SqlSessionTemplate sst,String no) {
 		return sst.delete("documentMapper.delete",no);
-	} 
+	}
+
+	public int countingList(SqlSessionTemplate sst, Map<String, String> search) {
+		return sst.selectOne("documentMapper.countDocument",search);
+	}
+
+	public List<DocumentVo> selectDocumentList(SqlSessionTemplate sst, RowBounds rb, Map<String, String> search) {
+		return sst.selectList("documentMapper.selectDocumentList" , search, rb);
+	}
+
+	
+
 
 
 
