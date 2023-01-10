@@ -182,7 +182,7 @@
 }
 
 #address-wrap > button:hover {
-    background-color: #17a897;
+    background-color: var(--main-color-dark);
 }
 
 .info-wrap {
@@ -222,7 +222,7 @@
 }
 
 #submit > input:hover {
-    background-color: #17a897;
+    background-color: var(--main-color-dark);
 }
 #file-wrap {
     width: 25%;
@@ -334,7 +334,7 @@
     font-size: 13px;
 }
 .plus:hover {
-    background-color: #17a897;
+    background-color: var(--main-color-dark);
 }
 
 .remove {
@@ -391,7 +391,7 @@
 
 input,
 select {
-    outline-color: #17a897;
+    outline-color: var(--main-color-dark);
 }
 
 .dept-guide {

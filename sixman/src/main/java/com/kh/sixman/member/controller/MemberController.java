@@ -55,7 +55,6 @@ public final class MemberController {
 			return "redirect:/member/switch";
 		}
 		
-		model.addAttribute("alert", "");
 		return "redirect:/main";
 	}
 	

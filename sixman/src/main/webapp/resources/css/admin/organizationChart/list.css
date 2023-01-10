@@ -93,7 +93,7 @@ p[name='imgName'] {
     border: 1px solid var(--bo-40);
     border-radius: 3px;
     text-align: center;
-    outline-color: #17a897;
+    outline-color: var(--main-color-dark);
 }
 
 #search-content input[type='submit'] {
@@ -106,7 +106,7 @@ p[name='imgName'] {
 }
 
 #search-content input[type='submit']:hover {
-    background-color: #17a897;
+    background-color: var(--main-color-dark);
 }
 
 #search-controller {
@@ -293,7 +293,7 @@ p[name='imgName'] {
 }
 
 .add-emp:hover {
-    background-color: #17a897;
+    background-color: var(--main-color-dark);
 }
 .list-item button,
 .remove-emp {
@@ -328,7 +328,7 @@ p[name='imgName'] {
 
 .view-controller button:hover span {
     color: var(--main-color);
-    border: 1px solid #17a897;
+    border: 1px solid var(--main-color-dark);
 }
 
 .view-controller button > span {

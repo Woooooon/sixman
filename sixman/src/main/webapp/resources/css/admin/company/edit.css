@@ -144,7 +144,7 @@ input[name='edit'] {
 }
 
 .info-item:has(input:focus) label {
-    color: #17a897;
+    color: var(--main-color-dark);
 }
 
 .address-info {
@@ -165,7 +165,7 @@ input[name='edit'] {
 }
 input[type='submit']:hover,
 .address-info button:hover {
-    background-color: #17a897;
+    background-color: var(--main-color-dark);
 }
 
 input[type='submit'] {
@@ -202,13 +202,14 @@ input[type='submit'] {
 .info-item.address-info input {
     width: 70%;
 }
-#preview {
+#preview-logo {
     position: absolute;
     top: 2px;
     left: 30px;
     width: 130px;
     height: 30px;
 }
+
 #img-box {
     width: 130px;
     height: 30px;
@@ -256,7 +257,7 @@ label[for='companyLogo']:hover {
     justify-content: center;
     align-items: center;
     display: flex;
-    color: #17a897;
+    color: var(--main-color-dark);
 }
 
 .edit-content > div:has(input[name='edit']:checked) {
@@ -402,7 +403,7 @@ label[for='companyLogo']:hover {
 .position-insert input[type='button']:hover,
 .dept-insert input[type='button']:hover,
 .team-insert input[type='button']:hover {
-    background-color: #17a897;
+    background-color: var(--main-color-dark);
 }
 
 #deptNo {

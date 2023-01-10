@@ -35,7 +35,7 @@
                             <form action="/sixman/admin/company/edit" method="POST" enctype="multipart/form-data" id="form">
                                 <div id="company-pic">
                                     <img src="/sixman/resources/img/companyLogoSet.png" alt="" />
-                                    <div id="preview">
+                                    <div id="preview-logo">
                                         <c:if test="${not empty company.logoName}">
                                             <img src="/sixman/resources/img/logo/${company.logoName}" name="companyLogo" id="img-box" />
                                         </c:if>

@@ -182,7 +182,7 @@
 }
 
 #address-wrap > button:hover {
-    background-color: #17a897;
+    background-color: var(--main-color-dark);
 }
 
 .info-wrap {
@@ -223,7 +223,7 @@
 }
 
 #submit > #submitBtn:hover {
-    background-color: #17a897;
+    background-color: var(--main-color-dark);
 }
 
 #submit > input[type='button'] {
@@ -354,7 +354,7 @@
     font-size: 13px;
 }
 .plus:hover {
-    background-color: #17a897;
+    background-color: var(--main-color-dark);
 }
 
 .remove {
@@ -414,7 +414,7 @@
 
 input,
 select {
-    outline-color: #17a897;
+    outline-color: var(--main-color-dark);
 }
 
 .write .error {

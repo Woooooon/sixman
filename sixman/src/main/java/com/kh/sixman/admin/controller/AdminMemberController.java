@@ -222,5 +222,4 @@ public class AdminMemberController {
 		return "퇴사 요철을 완료했습니다.";
 	}
 	
-	
 }

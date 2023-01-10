@@ -165,9 +165,9 @@
                                     </c:forEach>
                                     </select>
                                     <select name="deptNo" id="">
-                                    	<option value="1">부서 발령 전</option>
+                                        <option value="1">부서 발령 전</option>
                                         <c:forEach items="${deptList}" var="j">
-                                        <option value="${j.deptNo}" <c:if test="${j.deptNo eq i.deptNo}">selected</c:if>>${j.deptName}</option>
+                                            <option value="${j.deptNo}" <c:if test="${j.deptNo eq i.deptNo}">selected</c:if>>${j.deptName}</option>
                                         </c:forEach>
                                     </select>
                                     <select name="teamNo" id="">

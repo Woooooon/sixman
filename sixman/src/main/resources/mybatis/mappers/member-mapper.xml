@@ -332,6 +332,7 @@
 		)
 		where rownum <![CDATA[<]]> 11
 		
+		
 	</select>
 
 	<update id="updateMember">
