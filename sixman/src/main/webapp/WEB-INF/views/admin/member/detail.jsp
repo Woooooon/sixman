@@ -14,7 +14,7 @@
     </head>
 
     <body>
-        <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
+        <%@include file="/WEB-INF/views/common/tempMenuBar.jsp" %>
         <main id="main-page" class="main-box">
             <div id="main-box-2">
                 <aside id="dept-wrap" class="box">

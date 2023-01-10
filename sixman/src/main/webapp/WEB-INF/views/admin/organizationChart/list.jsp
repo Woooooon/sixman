@@ -18,7 +18,7 @@
         }
     </script>
     <body>
-        <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
+        <%@include file="/WEB-INF/views/common/tempMenuBar.jsp" %>
 
         <main id="main-page" class="main-box">
             <div class="main-box-2">

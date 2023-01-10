@@ -14,7 +14,7 @@
         <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     </head>
     <body>
-        <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
+        <%@include file="/WEB-INF/views/common/tempMenuBar.jsp" %>
 
         <main id="main-page" class="main-box">
             <div class="main-box-2">
