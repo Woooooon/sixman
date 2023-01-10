@@ -1160,16 +1160,21 @@
 										console.log("roomname :" + element.chatroomName); 
 										console.log("lastsendTime :" + element.lastsendTime);  
 									});
-
-									//첫번째 div 수정
+									
 									const chat_l_val_one = document.querySelectorAll(".square-first"); // later
 									const chat_l_val_two = document.querySelectorAll(".with-chat-subroomname2");
 									const chat_l_val_three = document.querySelectorAll(".chatroom-alarm-content");
 									const chat_l_val_four = document.querySelectorAll(".chatroom-alarm-time");
 									
-									$(chat_l_val_two)[0].innerText = chatlist[0].chatroomName;
-									$(chat_l_val_three)[0].innerText = chatlist[0].chatcontent;
-									$(chat_l_val_four)[0].innerText = chatlist[0].lastsendTime;
+									for(let i = 0; i < chatlist.lenght; i++){
+										//요소추가
+										const element = chatlist[i];	
+										$(chat_l_val_two)[i].innerText = chatlist[i].chatroomName;
+										$(chat_l_val_three)[i].innerText = chatlist[i].chatcontent;
+										$(chat_l_val_four)[i].innerText = chatlist[i].lastsendTime;
+									}
+
+									//첫번째 div 수정
 									
 // 									for(let i=1;i<index;i++){
 // 									if(){
