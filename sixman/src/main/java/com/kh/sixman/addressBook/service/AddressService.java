@@ -238,4 +238,8 @@ public class AddressService {
 		
 		return updateReciveAddress * insertAddress * cardFileResult * deleteReciveAddress;
 	}
+
+	public SortationVo defaultSortation() {
+		return addressDao.defaultSortation(sst);
+	}
 }

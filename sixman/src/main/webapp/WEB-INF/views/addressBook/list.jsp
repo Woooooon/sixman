@@ -46,7 +46,6 @@
                         <p>주소록</p>
                     </div>
                     <div class="sortation-list">
-
                     	<c:forEach items="${sortationList}" var="j">
                             <c:if test="${j.no ne 1 }">
                                 <ul>
@@ -71,30 +70,26 @@
                                 </ul>
                             </c:if>
                     	</c:forEach>
-                        <c:forEach items="${sortationList}" var="j">
-                            <c:if test="${j.no eq 1 }">
-                                <ul>
-                                    <div class="sortation-item">
-                                        <label for="sortationNo${j.no}">
-                                            <input type="checkbox" id="sortationNo${j.no}">
-                                            <div class="toggleBtn">
-                                                <span class="material-symbols-outlined">change_history</span>
-                                            </div>
-                                            ${j.name}
-                                        </label>
+                        <ul>
+                            <div class="sortation-item">
+                                <label for="sortationNo${defaultSortation.no}">
+                                    <input type="checkbox" id="sortationNo${defaultSortation.no}">
+                                    <div class="toggleBtn">
+                                        <span class="material-symbols-outlined">change_history</span>
                                     </div>
-                                    <c:forEach items="${addressListAll}" var="i">
-                                        <c:if test="${j.no eq i.sortationNo}">
-                                            <li>
-                                                <div class="address-item">
-                                                    <a href="/sixman/address/detail?no=${i.sortationNo}"><span class="material-symbols-outlined">storefront</span>${i.company}</a>
-                                                </div>
-                                            </li>													
-                                        </c:if>
-                                    </c:forEach>
-                                </ul>
-                            </c:if>
-                    	</c:forEach>
+                                    ${defaultSortation.name}
+                                </label>
+                            </div>
+                            <c:forEach items="${addressListAll}" var="i">
+                                <c:if test="${defaultSortation.no eq i.sortationNo}">
+                                    <li>
+                                        <div class="address-item">
+                                            <a href="/sixman/address/detail?no=${i.sortationNo}"><span class="material-symbols-outlined">storefront</span>${i.company}</a>
+                                        </div>
+                                    </li>													
+                                </c:if>
+                            </c:forEach>
+                        </ul>
                     </div>
                 </aside>
                 <section id="addressBook-wrap" class="box">

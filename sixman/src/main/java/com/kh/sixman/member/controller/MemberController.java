@@ -37,17 +37,7 @@ public final class MemberController {
 	@PostMapping("")
 	public String login(MemberVo vo, HttpSession session, Model model) {
 		
-		String loginAdminId = vo.getId();
-		
-		String adminId = "admin";
-		
-		MemberVo loginMember = null;
-
-		loginMember = memberService.adminLogin(vo);
-		
-		if(!adminId.equals(loginAdminId)) {
-			loginMember = memberService.login(vo);
-		}
+		MemberVo loginMember = memberService.login(vo);
 		
 		if(loginMember == null) {
 			model.addAttribute("alert", "아이디, 비밀번호가 일치 하지 않거나 존재하지 않는 회원입니다.");
@@ -55,6 +45,10 @@ public final class MemberController {
 		}
 		
 		session.setAttribute("loginMember", loginMember);
+		
+		if(loginMember.getAuthorizeNo().equals("3")) {
+			return "redirect:/admin/employee/list";
+		}
 		
 		//아이디 비번 일치했을 시 비번 최신화 
 		if(vo.getId().equals(vo.getPwd())) {

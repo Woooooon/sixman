@@ -82,11 +82,7 @@ public class MemberService {
 	}
 
 
-	public MemberVo adminLogin(MemberVo vo) {
-		MemberVo dbMember = memberDao.selelctOneMember(vo, sst);
-		
-		return dbMember;
-	}
+
 
 
 	

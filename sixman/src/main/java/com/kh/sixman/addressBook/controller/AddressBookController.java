@@ -82,6 +82,7 @@ public class AddressBookController {
 		
 		//카테고리 구분 userNo 전달
 		List<SortationVo> sortationList = addressService.sortationList(no);
+		SortationVo defaultSortation = addressService.defaultSortation();
 		
 		//카테고리 구분 마다 각 주소록 데이터 있어야 함 전체조회
 		List<AddressVo> addressListAll = addressService.selectAddressListAll(no);
@@ -91,6 +92,7 @@ public class AddressBookController {
 		model.addAttribute("pv", pv);
 		
 		model.addAttribute("addressList", addressList);
+		model.addAttribute("defaultSortation", defaultSortation);
 		model.addAttribute("addressListAll", addressListAll);
 		model.addAttribute("sortationList", sortationList);
 		
@@ -288,6 +290,7 @@ public class AddressBookController {
 		
 		//카테고리 구분 userNo 전달
 		List<SortationVo> sortationList = addressService.sortationList(no);
+		SortationVo defaultSortation = addressService.defaultSortation();
 		
 		//카테고리 구분 마다 각 주소록 데이터 있어야 함 전체조회
 		List<AddressVo> dlelteAddressListAll = addressService.selectDeleteAddressListAll(no);
@@ -298,6 +301,7 @@ public class AddressBookController {
 		
 		model.addAttribute("dlelteAddressList", dlelteAddressList);
 		model.addAttribute("dlelteAddressListAll", dlelteAddressListAll);
+		model.addAttribute("defaultSortation", defaultSortation);
 		model.addAttribute("sortationList", sortationList);
 		
 		return "addressBook/bin";

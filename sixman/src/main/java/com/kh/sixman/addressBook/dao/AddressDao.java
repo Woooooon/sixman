@@ -120,4 +120,8 @@ public class AddressDao {
 		return sst.insert("addressMapper.insertSortation", vo);
 	}
 
+	public SortationVo defaultSortation(SqlSessionTemplate sst) {
+		return sst.selectOne("addressMapper.defaultSortation");
+	}
+
 }

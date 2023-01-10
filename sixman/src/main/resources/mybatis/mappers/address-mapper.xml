@@ -313,6 +313,15 @@
 		WHERE USER_NO = #{no}
 	</select>
 	
+	<select id="defaultSortation" resultType="SortationVo">
+		SELECT 
+		    NO,
+		    HIGH_NO,
+		    NAME
+		FROM ADDRESS_SORTATION
+		WHERE NO = 1
+	</select>
+	
 	<insert id="sendAddress">
 		insert all
 			<foreach collection="list" item="vo" separator=" ">

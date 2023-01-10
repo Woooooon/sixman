@@ -32,8 +32,12 @@ const modal = document.querySelector('.share-modal');
 const share = document.querySelectorAll('.share');
 const closeBtn = document.querySelector('#close-modal');
 const deleteBtn = document.querySelector('.delete');
-console.log(deleteBtn);
+
+
 closeBtn.addEventListener('click', () => {
+    document.querySelector('input[name="reciver"]').value = "";
+    document.querySelector('#reciverName').value = "";
+    
     modal.classList.add('close');
 });
 
