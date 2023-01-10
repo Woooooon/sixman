@@ -1107,3 +1107,9 @@ input[id="chat-setting-check02"]{
 .chatroom-alarm-time{
 	font-size:12px;
 	width:80%;
+}
+
+.chatlistnull{
+	margin: 10%;
+    text-align: center;
+}

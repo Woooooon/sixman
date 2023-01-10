@@ -37,6 +37,8 @@
 							<div id='main-center-text1'>현재 대화 목록이 없습니다.</div>
 							<div id='main-center-text2'>대화하고 싶으신 분과 대화방을 열여보세요~</div>
 						</div>
+						
+
 
 						<div class="chatroom-list-space">
 							<!-- <div class="chatroom-introduce">대화방 목록</div> -->
@@ -62,6 +64,7 @@
 									
 			
 										<div class="chatroom-list-box">
+											
 											
 											<div class="with-chat-data02" id="with-chat-data01">
 												<div class="square-first" style=""></div>
@@ -1031,8 +1034,8 @@
 						</div>
 					</div>
 					
-				<!-- <h1 id="target">ttttt</h1> -->
-				
+<!-- 				<h1 id="target">ttttt</h1> -->
+					<div class="chatlistnull"></div>
 <!-- 				<div class="chatroom-test"  -->
 <!-- 				style="margin:20%; -->
 <!--  				width:80%;   -->
@@ -1101,30 +1104,37 @@
 						console.log(chatlist);
 						
 						//잘새겨듣자
-						// const target = document.querySelector("#target");
-						// target.innerText = chatlist[0].chatcontent;
-
+// 						const target = document.querySelector("#target");
+// 						target.innerText = chatlist[0].chatcontent;
+// 						target.innerText = "1";
 						
 						//만약 없어서 null로 나온다면? 바로 대체문구 삽입
 
 						//채팅리스트상자 맨위 클래스
-						const target_chat = document.querySelector('.chatlist-big');
-						$('.chatroom-list-box').hide;
-						if (chatlistCnt == null) {
-							
-							//target_chat.innerHTML(<div style="margin:20%; text-align : center;">"아직 생성한 채팅방이 없습니다. 같은 회사원분들끼리 대화해보세요!"</div>);
-						} else {
+						//const target_chat = document.querySelector('.chatroom-list-box');
+						
+						//첫 json객체 널일 경우
+						const target_chat = document.querySelector(".chatlistnull");
+// 						//$('.chatroom-list-two-to-two').hide;
+// 						alert(chatlistCnt + ": 최종확인");
+						if (chatlistCnt == 0) {
+// 							target_chat.innerText("아직 생성한 채팅방이 없습니다. 같은 회사원분들끼리 대화해보세요!");
+							//배열 널일 경우 확인
+							alert(chatlistCnt + ": 최종확인");
+							//텍스트 대체
+							target_chat.innerText = "아직 생성한 채팅방이 없습니다. 같은 회사원분들끼리 대화해보세요!";
+						}else{
 
 								//상자들
 								
-								const target1 = document.querySelector(".square-first");
-								const target2 = document.querySelector(".with-chat-subroomname2");
-								// const target3 = document.querySelector(".with-chat-name01");
-								// const target4 = document.querySelector(".with-chat-grade01");
-								const target5 = document.querySelector(".chatroom-alarm-content");
-								const target6 = document.querySelector(".chatroom-alarm-time");
+// 								const target1 = document.querySelector(".square-first");
+// 								const target2 = document.querySelector(".with-chat-subroomname2");
+// 								// const target3 = document.querySelector(".with-chat-name01");
+// 								// const target4 = document.querySelector(".with-chat-grade01");
+// 								const target5 = document.querySelector(".chatroom-alarm-content");
+// 								const target6 = document.querySelector(".chatroom-alarm-time");
 								
-								$('.with-chat-data02').hide();
+// 								$('.with-chat-data02').hide();
 								//교체
 								// $(target2)[0].innerText = chatlist[0].chatroomName;
 								// $(target5)[0].innerText = chatlist[0].chatcontent;
@@ -1134,7 +1144,7 @@
 								// $(target5)[0].innerText = chatlist[0].chatcontent;
 								// $(target6)[0].innerText = chatlist[0].lastsendTime;
 								
-								//$('.with-chat-data02').show();
+								$('.with-chat-data02').show(); // 더미데이터 이용
 
 								//노드 복제
 								
@@ -1145,23 +1155,52 @@
 									// const newchatlistn = chatlistnode.cloneNode(true);
 									// // //붙여넣기
 									// chatlistnode.after(newchatlistn);
-									chatlistCnt.forEach(element => {
-									console.log(element.chatcontent);
-									console.log(element.chatroomName); 
-									console.log(element.lastsendTime);  
+									chatlist.forEach(element => {
+										console.log("content :" + element.chatcontent);
+										console.log("roomname :" + element.chatroomName); 
+										console.log("lastsendTime :" + element.lastsendTime);  
 									});
 
-									for (let index = 0; index < chatlistCnt; index++) {
-										const element = index;
-										alert("count : "+element)
-										if( index < chatlistCnt ){
-										//복사
-										const newchatlistn = chatlistnode.cloneNode(true);
-										// //붙여넣기
-										chatlistnode.after(newchatlistn);
-										element[index].show();
-										}
-									}
+									//첫번째 div 수정
+									const chat_l_val_one = document.querySelectorAll(".square-first"); // later
+									const chat_l_val_two = document.querySelectorAll(".with-chat-subroomname2");
+									const chat_l_val_three = document.querySelectorAll(".chatroom-alarm-content");
+									const chat_l_val_four = document.querySelectorAll(".chatroom-alarm-time");
+									
+									$(chat_l_val_two)[0].innerText = chatlist[0].chatroomName;
+									$(chat_l_val_three)[0].innerText = chatlist[0].chatcontent;
+									$(chat_l_val_four)[0].innerText = chatlist[0].lastsendTime;
+									
+// 									for(let i=1;i<index;i++){
+// 									if(){
+// 											//노드 복사
+// 											const copy_chat_list_box = chatlistnodes[0].cloneNode(true);
+// 											//노드 붙여넣기
+// 											chatlistnodes[0].after(copy_chat_list_box);
+// 											//값 수정
+// 											$(chat_l_val_two)[1].innerText = chatlist[1].chatroomName;
+// 											$(chat_l_val_three)[1].innerText = chatlist[1].chatcontent;
+// 											$(chat_l_val_four)[1].innerText = chatlist[1].lastsendTime;
+// 	// 									}
+// 									}
+									//index 1 ~ chatlistCnt까지 테이블 복제하고 수정
+// 									nodeClone();
+									
+									
+									
+										alert('준비?');
+// 										for (let index = 0; index < chatlistCnt; index++) {
+// 											const element = index;
+// 											alert("count : "+element)
+// 											if( index < chatlistCnt ){
+// 											//복사
+// 											const newchatlistn = chatlistnode.cloneNode(true);
+// 											// //붙여넣기
+// 											chatlistnode.after(newchatlistn);
+// 											element[index].show();
+// 											}
+// 										}
+									
 
 									
 									
@@ -1213,6 +1252,7 @@
 // 				alert('ㅇㅇ');
 				$('.chatroomlist-first-page').hide();
 				$(chatroomAlls).hide();
+				$('.chatlistnull').hide();
 // 				function 
 			$.ajax({
 // 				url:"http://127.0.0.1:8888/sixman/chat/chatwantfirst",
@@ -1305,7 +1345,7 @@
 			<!-- 채팅방 목록 화면에서 채팅 화면으로 진입-->
 			
 			//인덱스 배열
-// 			const chatListAll = document.querySelectorAll(".chatroom-list-two-to-two");
+			//const chatListAll = document.querySelectorAll(".chatroom-list-two-to-two");
 
 			const chatRoomAll = document.querySelectorAll(".chatting-room");
 // // 			const chatListAllIndex = document.querySelectorAll(".with-chat-subroomname2").index;
