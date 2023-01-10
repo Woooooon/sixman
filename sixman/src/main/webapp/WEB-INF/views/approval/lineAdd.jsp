@@ -142,7 +142,7 @@
         const items = document.querySelectorAll('.item');
         items.forEach(element => {
             const temp = {
-                "aMan" : element.querySelector('input[name=aMan]').value,
+                "appMan" : element.querySelector('input[name=aMan]').value,
                 "pri" : element.querySelector('input[name=pri]').value
             };
             formData.push(temp);

@@ -37,7 +37,7 @@
             <div id="wirte-box">
                 <p>받는사람</p>
                 <div></div>
-                <div id="resive-member"><input id="email-input" type="text" value="${email}"><div class="btn"><p>주소록</p></div></div>
+                <div id="resive-member"><input id="email-input" type="text" value="${email}"><div class="btn" onclick="openWindowPop()"><p>주소록</p></div></div>
                 <div id="members">
                 	<c:forEach items="${vo.sender}" var="sender">
                 		<div class="members-item"><input type="email" name="sender" value="${sender}"><span class="t-btn material-symbols-outlined">close</span></div>
@@ -120,5 +120,35 @@
 
         sendMsg('${loginMember.name}', titleInput.value, 'MAIL', sender);
     });
+
+    function openWindowPop() {
+    window.open('/sixman/employee/popup', '조직도 팝업', 'top=0, left=8000, width=800, height=500, status=no, menubar=no, toolbar=no, resizable=no');
+    }
+
+    function childValue(memberArr) {  
+        memberArr.forEach(element => {
+            const inputMail = document.createElement('input');
+            inputMail.setAttribute('type','email');
+            inputMail.setAttribute('name','sender');
+
+            const email = element.email;
+
+            const span = document.createElement('span');
+            span.classList.add('t-btn');
+            span.classList.add('material-symbols-outlined');
+            span.innerHTML = 'close';
+
+            const div = document.createElement('div');
+            div.classList.add('members-item');
+            div.append(inputMail, span);
+
+            span.addEventListener('click', ()=>{
+                div.remove();
+            });
+
+            document.querySelector('#members').append(div);
+        });
+    }
+
 </script>
 </html>
