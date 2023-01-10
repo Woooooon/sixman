@@ -788,8 +788,8 @@ function closeProfile() {
 }
 
 const searchBar = document.querySelector('#search-box');
-const searchBtn = document.querySelector('#search-btn');
-searchBtn.addEventListener('click', ()=>{
+const chatSearchBtn = document.querySelector('#search-btn');
+chatSearchBtn.addEventListener('click', ()=>{
     if(searchBar.classList.contains('open')){
         searchBar.classList.remove('open');
         searchBar.style.display = "none";

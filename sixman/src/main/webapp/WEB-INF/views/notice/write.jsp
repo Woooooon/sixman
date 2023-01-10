@@ -21,7 +21,7 @@
 </head>
 <body>
 
-<%@include file="/WEB-INF/views/common/menuBar.jsp" %>
+<%@include file="/WEB-INF/views/common/tempMenuBar.jsp" %>
 <main class="main-box">
 
     <form action="" method="post" enctype="multipart/form-data">

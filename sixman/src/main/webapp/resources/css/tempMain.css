@@ -3,14 +3,14 @@ html {
     overflow-x: hidden;
 }
 body {
-    --main-color: gray;
-    --main-color-dark: rgb(86, 86, 86);
+    --main-color: #217af4;
+    --main-color-dark: #0455c7;
     --bo-20: rgba(0, 0, 0, 0.2);
     --bo-40: rgba(0, 0, 0, 0.4);
     --bo-60: rgba(0, 0, 0, 0.6);
     --bo-80: rgba(0, 0, 0, 0.8);
     font-family: Pretendard;
-    accent-color: #12887a;
+    accent-color: #217af4;
 }
 body * {
     box-sizing: border-box;
@@ -222,7 +222,7 @@ a {
     color: white;
 }
 .btn:hover {
-    background-color: #17a897;
+    background-color: #0455c7;
     color: white;
 }
 .c-btn {

@@ -14,6 +14,7 @@
     transition: 0.5s;
 
     overflow: hidden;
+    background-color: white;
 }
 #m-outer span:not(.member-item){
     cursor: pointer;

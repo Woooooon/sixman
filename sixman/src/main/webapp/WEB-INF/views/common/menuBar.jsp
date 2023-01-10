@@ -54,6 +54,9 @@
             <li><a>주소록</a></li>
             <li><a>일정</a></li>
             <li><a>급여</a></li>
+            <c:if test="${loginMember.authorizeNo==3}">
+                <li><a href="/sixman/admin/employee/list">관리자페이지 전환</a></li>
+            </c:if>
         </ul>
         <section id="menu-footer">
             <a href="" class="material-symbols-outlined">logout</a>

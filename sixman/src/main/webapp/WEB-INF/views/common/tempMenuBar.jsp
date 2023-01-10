@@ -8,7 +8,7 @@
 	<meta charset="UTF-8">
 	<title>육남상사</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="stylesheet" href="${path}/resources/css/main.css">
+    <link rel="stylesheet" href="${path}/resources/css/tempMain.css">
     <link rel="stylesheet" href="${path}/resources/css/reset.css">
     <link rel="stylesheet" href="${path}/resources/css/chat.css">
     <script defer src="${path}/resources/js/main/main.js"></script>
@@ -41,17 +41,15 @@
         <ul id="menu-list">
             <li><a>공지사항</a></li>
             <li><a>근태관리</a></li>
-            <li><a>프로젝트</a></li>
             <li><a>전자문서</a></li>
-            <li><a>메일함</a></li>
             <li><a>조직도</a></li>
-            <li><a>주소록</a></li>
             <li><a>일정</a></li>
             <li><a>급여</a></li>
+            <li><a href="/sixman/main">일반페이지 전환</a></li>
         </ul>
         <section id="menu-footer">
             <a href="" class="material-symbols-outlined">logout</a>
-            <div id="foot-logo" onclick="location.href='${path}/main'"></div>
+            <div id="foot-logo" onclick="location.href='${path}/admin/employee/list'"></div>
         </section>
     </aside>
     <aside id="side-menu">
@@ -299,7 +297,8 @@
 
     menuMap.set("공지사항", [
         {icon: "event_note", title: "공지사항"},
-        {title: "공지사항", url: "${path}/notice/list"}
+        {title: "공지사항", url: "${path}/notice/list"},
+        {title: "공지사항 작성", url: "${path}/admin/notice/write"}
     ]);
 
     menuMap.set("근태관리", [
@@ -309,46 +308,22 @@
         {title: "관리자페이지 ", url: "${path}/attendance/admin"}
     ]);
 
-    menuMap.set("프로젝트", [
-        {icon: "groups", title: "프로젝트"},
-        {title: "프로젝트", url: "${path}/project/allprj"},
-        {title: "프로젝트 생성", url: "${path}/project/create"}
-    ]);
-
     menuMap.set("전자문서", [
         {icon: "home_storage", title: "전자문서"},
-        {title: "기안문서함", url: "${path}/approval/list"},
-        {title: "결재문서함", url: "${path}/document/payment"},
-        {title: "참조문서함", url: "${path}/document/reference"},
-        {title: "임시보관함", url: "${path}/document/keep"}
-    ]);
-
-    menuMap.set("메일함", [
-        {icon: "mail", title: "메일함"},
-        {title: "메일작성", url: "${path}/mail/write"},
-        {title: "전체메일함", url: "${path}/mail/list"},
-        {title: "받은메일함", url: "${path}/mail/list?listType=받은메일함"},
-        {title: "보낸메일함", url: "${path}/mail/list?listType=보낸메일함"},
-        {title: "임시보관함", url: "${path}/mail/list?listType=임시보관함"},
-        {title: "휴지통", url: "${path}/mail/list?listType=휴지통"}
+        {title: "문서관리", url: ""},
+        {title: "양식관리", url: ""},
     ]);
 
     menuMap.set("조직도", [
         {icon: "account_tree", title: "조직도"},
-        {title: "조직도", url: "${path}/employee/list"}
-    ]);
-
-    menuMap.set("주소록", [
-        {icon: "contacts", title: "주소록"},
-        {title: "내 주소록", url: "${path}/address"},
-        {title: "주소록 추가", url: "${path}/add"},
-        {title: "주소록 받아오기", url: "${path}/receive"}
+        {title: "조직도", url: "${path}/admin/employee/list"},
+        {title: "사원등록", url: "${path}/admin/member/join"}
     ]);
 
     menuMap.set("일정", [
         {icon: "calendar_month", title: "일정"},
-        {title: "일정", url: "${path}/schedule/calendar"},
-        {title: "주간일정", url: "${path}/schedule/weeks"}
+        {title: "일정관리", url: ""},
+        {title: "전체일정등록", url: ""}
     ]);
 
     menuMap.set("급여", [
