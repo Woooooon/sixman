@@ -1185,6 +1185,8 @@
 									const chat_l_val_four = document.querySelectorAll(".chatroom-alarm-time");
 									
 									for(let i = 0; i < chatlist.lenght; i++){
+										//테이블 chatlist-big안에 붙여넣기하고, 왜 못하지?
+										$(".chatlist-big").prepend(copy_chat_list_box);
 										//요소추가
 										const element = chatlist[i];	
 										$(chat_l_val_two)[i].innerText = chatlist[i].chatroomName;
@@ -1304,12 +1306,41 @@
 					console.log(chatwantlist);
 					
 					alert("확인");
+
+					const wantchating_one = chatwantlist[0].profileName;
+
+
+					alert(wantchating_one);
+					//document.getElementsByClassName("want_all_chat_profileNo").value=
 					
-					
+
+					//document.getElementsByClassName("want_all_chat_img").src="/sixman/resources/img/profile/wantchatimg_one/";
+
+					//document.getElementsByClassName().src="/sixman/resources/img/profile/wantchatimg_one/chatwantlist[0].profileName";
+
 					$(want_all_chat_deptName_one)[0].innerText = chatwantlist[0].deptName;
 					$(want_all_chat_teamName_one)[0].innerText = chatwantlist[0].teamName;
 					$(want_all_chat_people_name)[0].innerText = chatwantlist[0].name;
 					$(want_all_chat_position_one)[0].innerText = chatwantlist[0].position;
+
+					//const alarm = document.getElementsBytagName('input').item('want_all_chat_profileNo',0).value;
+
+					const alarm11 = chatwantlist[0].profileNo;
+					alert(alarm11);
+
+					//멤버 넘버 가져오기
+					document.getElementById('want_all_chat_profileNo').value= chatwantlist[0].profileNo;
+					//alert(alarm2);
+					
+
+
+
+
+
+
+
+
+
 
 					//img src
 					//$(want_all_chat_deptName_one)[0].getElementsByTagName("img").setattri
