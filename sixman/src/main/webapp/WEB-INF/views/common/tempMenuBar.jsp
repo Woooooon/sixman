@@ -303,9 +303,7 @@
 
     menuMap.set("근태관리", [
         {icon: "approval", title: "근태관리"},
-        {title: "근태현황", url: "${path}/attendance/calender"},
-        {title: "일별근무시간", url: "${path}/attendance/board?page=1"},
-        {title: "관리자페이지 ", url: "${path}/attendance/admin"}
+        {title: "근태관리 ", url: "${path}/attendance/admin?page=1&name="}
     ]);
 
     menuMap.set("전자문서", [
@@ -328,7 +326,7 @@
 
     menuMap.set("급여", [
         {icon: "calculate", title: "급여"},
-        {title: "급여관리", url: "${path}/salary/salary"}
+        {title: "급여관리", url: "${path}/salary/salaryAdmin"}
     ]);
 
     const menuListBox = document.querySelector('#menu-list');

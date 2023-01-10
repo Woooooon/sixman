@@ -76,9 +76,6 @@
 		    WHERE "THUMB_YN" = 'Y'
 		) F ON M.NO = F.MEMBER_NO
 		WHERE M.ID = #{id}
-		<if test="id.equals('admin')">
-			AND M.PWD = #{pwd}
-		</if>
 		AND M.RESIGNATION_YN = 'N'	
 	</select>
 	
