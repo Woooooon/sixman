@@ -158,7 +158,7 @@
             </div>
             <div class="hidden"></div>
             <div class="checkbox-add">
-                <button class="btn" type="button" value="추가하기" onclick="addcheckbox();" id="addbtn">추가하기</button>
+                <button class="btn" type="button" onclick="addcheckbox();" id="addbtn">추가하기</button>
             </div>
             <div class="footer-btn">
                 <button class="btn" type="button">수정하기</button>

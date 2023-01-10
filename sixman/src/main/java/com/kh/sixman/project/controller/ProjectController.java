@@ -25,6 +25,7 @@ import com.kh.sixman.position.service.PositionService;
 import com.kh.sixman.position.vo.PositionVo;
 import com.kh.sixman.project.service.ProjectService;
 import com.kh.sixman.project.vo.ProjectVo;
+import com.kh.sixman.project.vo.TodoVo;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -111,6 +112,9 @@ public class ProjectController {
 		List<MemberVo> members = ps.selectPrjMember(prj.getNo());
 //		prj.setMemberList(members);
 		log.info("member : " + members);
+		
+		//프로젝트 상세보기 할 때, todo리스트 가져오기
+		//List<TodoVo> todo = ps.selectTodoList();
 		
 		session.setAttribute("members", members);
 		session.setAttribute("prj", prj);
