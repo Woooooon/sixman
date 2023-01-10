@@ -141,11 +141,11 @@
 		LEFT JOIN POSITION P ON P.NO = M.POSITION_NO
 		LEFT JOIN AUTHORIZE A ON A.NO = M. AUTHORIZE_NO
 		WHERE M.RESIGNATION_YN = 'N'
-		<if test=" no != 5">
+		<if test=" no != ''">
 		AND TEAM_NO = #{no}
 		AND AUTHORIZE_NO = '2'
 		</if>
-		<if test="no == 5">
+		<if test="no == ''">
 		AND M.DEPT_NO = #{no}
 		AND AUTHORIZE_NO = '2'
 		</if>
@@ -180,6 +180,41 @@
     	SET FAVORITES_YN = 'N'
     	WHERE NO = #{no}
     </update>
+    
+    <select id="selectTodoList" resultType="com.kh.sixman.project.vo.TodoVo">
+    	SELECT 
+		    T.NO
+		    , T.PRJ_NO
+		    , M.NAME
+		    , T.TITLE
+		    , T.CONTENT
+		FROM TODO T
+		LEFT JOIN MEMBER M ON M.NO = T.NAME
+    	WHERE T.PRJ_NO = #{no}
+    </select>
+    
+    <insert id="todoPlus">
+    	INSERT ALL
+    	<foreach collection="content" item="c" separator=" ">
+	    	INTO TODO
+	    	(
+	    		NO
+	    		, PRJ_NO
+	    		, NAME
+	    		, TITLE
+	    		, CONTENT
+	    	)
+	    	VALUES
+	    	(
+	    		get_seq_no('SEQ_TODO_NO')
+	    		, #{no}
+	    		, #{name}
+	    		, #{title}
+	    		, #{c}
+	    	)
+    	</foreach>
+    	SELECT * FROM DUAL
+    </insert>
     
     
 </mapper>

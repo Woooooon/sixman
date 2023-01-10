@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.sixman.member.vo.MemberVo;
 import com.kh.sixman.project.vo.ProjectVo;
+import com.kh.sixman.project.vo.TodoVo;
 
 @Repository
 public class ProjectDao {
@@ -69,6 +70,16 @@ public class ProjectDao {
 	//프로젝트 생성할 때 번호 받기
 	public ProjectVo selectPrjNo(SqlSessionTemplate sst, ProjectVo vo) {
 		return sst.selectOne("projectMapper.selectPrjNo", vo);
+	}
+
+	//todo리스트 전체 가져오기
+	public List<TodoVo> selectTodolist(SqlSessionTemplate sst, String no) {
+		return sst.selectList("projectMapper.selectTodoList", no);
+	}
+
+	//todo 추가하기
+	public int todoPlus(SqlSessionTemplate sst, TodoVo vo) {
+		return sst.insert("projectMapper.todoPlus", vo);
 	}
 
 }

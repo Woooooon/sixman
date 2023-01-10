@@ -111,27 +111,69 @@ addbtn.addEventListener('click', (e)=>{
 
     let text = "";
     
-    text += `<label>`;
-    const todobox = document.createElement('input');
-    const todoname = document.createElement('input');
-    todobox.classList.add('todocheck');
-    todoname.classList.add('todoname');
+    const div = document.createElement('div');
+    div.setAttribute('class', 'toDoItem');
 
-    todobox.setAttribute("type", "checkbox");
-    todobox.setAttribute("value", "test");
-    todoname.setAttribute("type", "text");
-    todoname.setAttribute("name", "todoname");
-    todoname.setAttribute("placeholder", "할일을 입력하세요.");
+    div.innerHTML = 
+    '<input type="checkbox">' +
+
+    '<input type="text" name="todocontent" class ="todocontent"placeholder="할일을 입력하세요.">';
+
     
-    text += `</label>`;
     
-    checkbox.append(todobox);
-    checkbox.append(todoname);
-
-
+    checkbox.append(div);
 })
 
+document.getElementById('todoDate').value = new Date().toISOString().substring(0, 10);
 
+//todo 생성 하면 ajax로 보내보자
+
+function addTodo(){
+
+    if($('.todo-box').length <= 5){
+
+    }
+
+    
+    console.log($('#prjNo').val());
+    console.log($('#todoTitle').val());
+    console.log($('#todowriter').text());
+    console.log($('#todowriter').attr('class'));
+
+    const todocont = document.querySelectorAll('.todocontent');
+    const toDoItem = document.querySelectorAll('.toDoItem');
+    console.log(todocont);
+    
+    const arr = [];
+    todocont.forEach(i => {
+        arr.push(i.value);
+    })
+
+    console.log(arr);
+
+    $.ajax({
+        url:'/sixman/project/todoplus',
+        method : 'GET',
+        data : {
+            no : $('#prjNo').val(),
+            title : $('#todoTitle').val(),
+            name : $('#todowriter').attr('class'),
+            content : arr
+        },
+        success : function(){
+            $('#todoTitle').val(''),
+            toDoItem.forEach(i => {
+                i.remove();
+            })
+            modalOff();
+           
+        },
+        error : function(){
+            alert("fail....");
+        }
+    });
+
+}
 
 
 

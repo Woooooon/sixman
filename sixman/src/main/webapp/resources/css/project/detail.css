@@ -42,7 +42,7 @@ input[type='radio'] {
 .status {
     margin: 10px;
     display: flex;
-    color: #aaa;
+    --color: #aaa;
 }
 
 .status-1 {
@@ -116,7 +116,7 @@ label {
 .member {
     display: flex;
     margin: 10px;
-    color: #aaa;
+    --color: #aaa;
     font-size: 17px;
 }
 
@@ -141,7 +141,7 @@ label {
 .date {
     display: flex;
     margin: 10px;
-    color: #aaa;
+    --color: #aaa;
     font-size: 17px;
 }
 
@@ -169,7 +169,7 @@ label {
 .percent {
     display: flex;
     margin: 10px;
-    color: #aaa;
+    --color: #aaa;
     font-size: 17px;
 }
 
@@ -209,7 +209,7 @@ label {
 .inputcontainer {
     display: flex;
     margin: 10px;
-    color: #aaa;
+    --color: #aaa;
     font-size: 17px;
     width: 50%;
 }
@@ -258,7 +258,7 @@ input::-webkit-inner-spin-button {
 .todo {
     display: flex;
     margin: 10px;
-    color: #aaa;
+    --color: #aaa;
     font-size: 17px;
 }
 
@@ -272,7 +272,7 @@ input::-webkit-inner-spin-button {
 }
 
 a{
-    color: #aaa;
+    color: blue;
     font-weight: bold;
 }
 

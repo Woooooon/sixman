@@ -108,16 +108,22 @@ public class ProjectController {
 		//번호에 맞는 프로젝트 하나 조회
 		ProjectVo prj = ps.selectOnePrj(no);
 		log.info("prj : " + prj);
+		
 		//프로젝트에 들어간 멤버 조회
 		List<MemberVo> members = ps.selectPrjMember(prj.getNo());
-//		prj.setMemberList(members);
-		log.info("member : " + members);
+		log.info("members : " + members);
 		
 		//프로젝트 상세보기 할 때, todo리스트 가져오기
-		//List<TodoVo> todo = ps.selectTodoList();
+		List<TodoVo> todo = ps.selectTodoList(no);
+		log.info("todo : " + todo);
+		if(todo == null) {
+
+		}
 		
+		session.setAttribute("todo", todo);
 		session.setAttribute("members", members);
 		session.setAttribute("prj", prj);
+		
 		return "project/detail";
 	}
 	
