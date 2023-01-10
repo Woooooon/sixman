@@ -10,7 +10,10 @@ import com.kh.sixman.member.vo.MemberVo;
 import com.kh.sixman.project.dao.ProjectDao;
 import com.kh.sixman.project.vo.ProjectVo;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class ProjectService {
 	
 	@Autowired
@@ -33,11 +36,14 @@ public class ProjectService {
 		 int result = pdao.insertPrjOne(sst, vo);
 		
 		 //디비에 저장한 프로젝트 읽어오기
+		 ProjectVo prjno = pdao.selectPrjNo(sst, vo);
+		 
+		 vo.setNo(prjno.getNo());
 		 
 		 //프로젝트에 저장된 멤버 들 저장
 		 int memberInsertList = pdao.insertAllMember(sst, vo);
 
-		 return result * memberInsertList;
+		 return result * memberInsertList / memberInsertList;
 		 //return result;
 	}
 

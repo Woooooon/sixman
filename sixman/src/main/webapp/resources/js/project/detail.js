@@ -102,6 +102,37 @@ window.addEventListener("keyup", e => {
 })
 
 
+const addbtn = document.querySelector("#addbtn");
+const checkbox = document.querySelector(".checkbox-add");
+
+addbtn.addEventListener('click', (e)=>{
+    
+    e.stopPropagation();
+
+    let text = "";
+    
+    text += `<label>`;
+    const todobox = document.createElement('input');
+    const todoname = document.createElement('input');
+    todobox.classList.add('todocheck');
+    todoname.classList.add('todoname');
+
+    todobox.setAttribute("type", "checkbox");
+    todobox.setAttribute("value", "test");
+    todoname.setAttribute("type", "text");
+    todoname.setAttribute("name", "todoname");
+    todoname.setAttribute("placeholder", "할일을 입력하세요.");
+    
+    text += `</label>`;
+    
+    checkbox.append(todobox);
+    checkbox.append(todoname);
+
+
+})
+
+
+
 
 
 

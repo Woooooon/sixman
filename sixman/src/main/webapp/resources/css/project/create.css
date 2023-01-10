@@ -197,7 +197,9 @@ option {
     color: #2e7aff;
 }
 
-input[name='prjmem'] {
+input[name='prjmem'],
+input[name='teammem'],
+input[name='deptmem'] {
     outline: none;
     border: none;
     color: #2e7aff;

@@ -46,16 +46,10 @@
 			)   
     </insert>
     
-    <select id="selectPrjNo" resultType="projectVo">
-    	SELECT
-    		NO
-    	FROM PROJECT
-    	WHERE = #{no}	
-    </select>
-    
     <insert id="insertPrjMember">
-    	
-		INSERT INTO PROJECT_MEMBER 
+    	INSERT ALL
+    	<foreach collection="memberNo" item="member">
+		INTO PROJECT_MEMBER 
 		(  
 		    NO
 		    , PRJ_NO
@@ -64,13 +58,24 @@
 		)
 		VALUES
 		(
-		    SEQ_PROJECT_MEMBER_NO.NEXTVAL
+		    get_seq_no('SEQ_PROJECT_MEMBER_NO')
 		    , #{no}
-		    , #{memberNo}
+		    , #{member}
 		    , SYSDATE
 		)
-		
+		</foreach>
+		SELECT * FROM DUAL
     </insert>
+    
+    <select id="selectPrjNo" resultType="ProjectVo">
+    	SELECT 
+		    NO 
+		FROM PROJECT 
+		WHERE LEADER = #{leader}
+		AND WRITER = #{writer}
+		AND TITLE = #{title}
+		AND END_DATE = #{endDate}
+    </select>
     
     
     <select id="selectOne" resultType="ProjectVo">
@@ -97,9 +102,7 @@
 			FROM PROJECT_MEMBER PM
 			LEFT JOIN MEMBER M ON M.NO = PM.MEM_NO
 			LEFT JOIN PROJECT P ON P.NO = PM.PRJ_NO
-    	<foreach collection="list" item="member" open="(" close=")" separator=",">
-			WHERE PM.PRJ_NO = #{memberno}
-    	</foreach>
+			WHERE PM.PRJ_NO = #{no}
     </select>
     
    	<select id="selectMemberList" resultType="MemberVo">

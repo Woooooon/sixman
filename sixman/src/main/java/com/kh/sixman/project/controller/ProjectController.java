@@ -25,6 +25,7 @@ import com.kh.sixman.position.service.PositionService;
 import com.kh.sixman.position.vo.PositionVo;
 import com.kh.sixman.project.service.ProjectService;
 import com.kh.sixman.project.vo.ProjectVo;
+import com.kh.sixman.project.vo.TodoVo;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -54,11 +55,12 @@ public class ProjectController {
 		
 		//로그인 멤버 정보 꺼내기
 		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
-
+		
 		List<ProjectVo> prjList = ps.selectList(Integer.parseInt(loginMember.getNo()));
 		session.setAttribute("prjList", prjList);
 	
 		return "project/allprj";
+		
 	}
 	
 	//프로젝트 생성(화면)
@@ -87,8 +89,8 @@ public class ProjectController {
 	//프로젝트 생성(찐)
 	@PostMapping("create")
 	public String create(ProjectVo vo, HttpSession session) {
-		log.info("vo :::" + vo);
 		int result = ps.insertPrjOne(vo);
+
 		if(result != 1) {
 			return "errorPage";
 		}
@@ -110,6 +112,9 @@ public class ProjectController {
 		List<MemberVo> members = ps.selectPrjMember(prj.getNo());
 //		prj.setMemberList(members);
 		log.info("member : " + members);
+		
+		//프로젝트 상세보기 할 때, todo리스트 가져오기
+		//List<TodoVo> todo = ps.selectTodoList();
 		
 		session.setAttribute("members", members);
 		session.setAttribute("prj", prj);
