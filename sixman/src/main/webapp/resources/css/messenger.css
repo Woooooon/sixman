@@ -1103,3 +1103,7 @@ input[id="chat-setting-check02"]{
 /* 	margin-bottom:6%; */
 	margin-top:20%;
 }
+
+.chatroom-alarm-time{
+	font-size:12px;
+	width:80%;

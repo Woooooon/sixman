@@ -10,7 +10,8 @@ public class messengerMain {
 
 	//메신저 화면
 	@GetMapping("/")
-	public String messengerMain() {
+	public String main() {
+		System.out.println("messenger > main ~~~");
 		return "/messenger/messengerMain";
 	}
 //	

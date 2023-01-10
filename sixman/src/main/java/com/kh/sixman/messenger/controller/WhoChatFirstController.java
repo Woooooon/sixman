@@ -32,12 +32,18 @@ public class WhoChatFirstController {
 //	@Autowired
 //	public ReadChatRoomListVo readchatroomlistvo;
 	
-	@Autowired
-	private ChatWantFirstService chatWfs;
+	private final ChatWantFirstService chatWfs;
 	
+	private final MakeRoomFirstService makeroom;
+
 	@Autowired
-	private MakeRoomFirstService makeroom;
-	
+	public WhoChatFirstController(ChatWantFirstService chatWfs, MakeRoomFirstService makeroom) {
+		super();
+		System.out.println("컨트롤러 생성자 ::: " + chatWfs);
+		this.chatWfs = chatWfs;
+		this.makeroom = makeroom;
+	}
+
 //	@Autowired
 //	private DefineChatNameVo dchatnvo;
 	
@@ -117,21 +123,31 @@ public class WhoChatFirstController {
 		return chatRoomDataReady;
 		
 	}
+	
+	
+	
 //	, method=RequestMethod.POST
 	@ResponseBody
-	@GetMapping("getchatroomList")
-//	@GetMapping(value = "getchatroomList", produces="application/json;charset=UTF-8")
+//	@GetMapping("getchatroomList")
+	@GetMapping(value = "getchatroomList", produces="application/json; charset=utf8")
 //	public List<ReadChatRoomListVo> chatroomList() {
 	public String chatroomList(HttpSession session) {
 		Gson gson = new Gson();
 		ReadChatRoomListVo readchatroomlistdata = new ReadChatRoomListVo();
 		
-		
+		readchatroomlistdata.getChatcontent();
+		System.out.println("chatWfs ::: " + chatWfs);
 		String showchatroomlistReady = gson.toJson(chatWfs.readchatroomlist(readchatroomlistdata));
 		
 //		byte[] utf8Json = jsonstring
-		System.out.println(showchatroomlistReady);
+		System.out.println("json : " + showchatroomlistReady);
 		session.setAttribute("showchatroomlistReady", showchatroomlistReady);
+		
+//		gson.fromJson(showchatroomlistReady, getClass());
+		
+		
+
+		
 		return showchatroomlistReady;
 		
 	}

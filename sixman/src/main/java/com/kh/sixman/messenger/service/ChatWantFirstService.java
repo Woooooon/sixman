@@ -20,6 +20,12 @@ public class ChatWantFirstService {
 	
 	@Autowired
 	private WhoChatFirstDao dao;
+	
+	
+
+	public ChatWantFirstService(SqlSessionTemplate sst, WhoChatFirstDao dao) {
+		System.out.println("service 생성 ~~~ !");
+	}
 
 	public List<ChatCreateRoomMemberVo> chatfirst(ChatCreateRoomMemberVo vo) {
 		
