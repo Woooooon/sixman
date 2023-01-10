@@ -85,7 +85,7 @@
             </div>
         </div>
         <div id="board-footer">
-            <c:if tes="${vo.userEmail == loginMember.email}">
+            <c:if test="${vo.userEmail == loginMember.email}">
                 <c:if test="${empty save}">
                     <div class="btn" onclick="location.href='/sixman/mail/reWrite?no=${vo.mailNo}'"><p>다시쓰기</p></div>
                 </c:if>
