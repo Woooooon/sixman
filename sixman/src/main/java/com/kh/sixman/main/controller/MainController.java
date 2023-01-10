@@ -30,6 +30,7 @@ public class MainController {
 	public String tempMain() {
 		return "main/tempMain";
 	}
+	
 	@GetMapping("main")
 	public String main(HttpSession session, Model model) {
 		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");

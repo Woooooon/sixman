@@ -94,7 +94,7 @@ public class AlarmHandler extends TextWebSocketHandler{
 				
 				Map<String, Object> memberHS = getHTTPSession(memberWs);
 				ChatRoomVo memberRoom = (ChatRoomVo) memberHS.get("room");
-				if(memberRoom==null || memberRoom.getChatRoomNo()!=sender) continue;
+				if(memberRoom!=null && memberRoom.getChatRoomNo()!=sender) continue;
 				
 				Map<String,String> temp = new HashMap<>();
 				temp.put("loginNo", vo.getNo());

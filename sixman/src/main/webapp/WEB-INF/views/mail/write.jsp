@@ -132,6 +132,7 @@
             inputMail.setAttribute('name','sender');
 
             const email = element.email;
+            inputMail.value = email
 
             const span = document.createElement('span');
             span.classList.add('t-btn');

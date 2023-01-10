@@ -258,21 +258,21 @@ function alarmAjax() {
                         </div>
                         <span class="t-btn material-symbols-outlined"> close </span>
                         `;
+                        div.innerHTML = item;
+    
+                        div.querySelector('.item-div').addEventListener('click', () => {
+                            checkAjax(vo.no, vo.type);
+                            f();
+                        });
+    
+                        div.querySelector('span').addEventListener('click', () => {
+                            div.remove();
+                            checkAjax(vo.no, vo.type);
+                        });
+    
+                        box.append(div);
                     }
-
-                    div.innerHTML = item;
-
-                    div.querySelector('.item-div').addEventListener('click', () => {
-                        checkAjax(vo.no, vo.type);
-                        f();
-                    });
-
-                    div.querySelector('span').addEventListener('click', () => {
-                        div.remove();
-                        checkAjax(vo.no, vo.type);
-                    });
-
-                    box.append(div);
+                    
                 }
             } else {
                 // alert('Request Error!');
