@@ -43,14 +43,18 @@ public class WhoChatFirstController {
 		this.chatWfs = chatWfs;
 		this.makeroom = makeroom;
 	}
+	
+	//gson 라이브러리
+	Gson gson = new Gson();
 
 //	@Autowired
 //	private DefineChatNameVo dchatnvo;
 	
+	//채팅 누구랑 하고 싶은지 보여주기
 	@ResponseBody
-	@GetMapping("chatwantfirst")
+	@GetMapping(value = "chatwantfirst", produces="application/json; charset=utf8")
 //	public String method(HttpServletResponse resp) throws Exception {
-	public List<ChatCreateRoomMemberVo> method(HttpSession session){
+	public String method(HttpSession session){
 		//DB
 
 		 	MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
@@ -62,7 +66,7 @@ public class WhoChatFirstController {
 //			String name = "심영";
 //			whoChatfirst.setName(name);
 			
-			List<ChatCreateRoomMemberVo> whoChatFirst = chatWfs.chatfirst(whoChatfirst);
+			String whoChatFirst = gson.toJson(chatWfs.chatfirst(whoChatfirst)) ;
 			System.out.println(whoChatFirst);
 			session.setAttribute("whoChatfirst", whoChatFirst);
 			
@@ -125,14 +129,14 @@ public class WhoChatFirstController {
 	}
 	
 	
-	
+// 리스트 카운트 및 보여주기(첫화면)
 //	, method=RequestMethod.POST
 	@ResponseBody
 //	@GetMapping("getchatroomList")
 	@GetMapping(value = "getchatroomList", produces="application/json; charset=utf8")
 //	public List<ReadChatRoomListVo> chatroomList() {
 	public String chatroomList(HttpSession session) {
-		Gson gson = new Gson();
+
 		ReadChatRoomListVo readchatroomlistdata = new ReadChatRoomListVo();
 		
 		readchatroomlistdata.getChatcontent();

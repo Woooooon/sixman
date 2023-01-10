@@ -156,26 +156,26 @@
 		
 									<div class="bottom-area2"></div>	
 									
-									<c:forEach items="${whoChatfirst}" var="mo">
+<%-- 									<c:forEach items="${whoChatfirst}" var="mo"> --%>
 										
 										<div class="with-chat-data">
 											<div class="square" style="">
-												<img class="square-img" src="/sixman/resources/img/profile/${mo.profileName}" />
+												<img class="square-img" src="/sixman/resources/img/profile/" />
 											</div>
-											<div class="chat-deptname-area-version2" style="margin-left:6%;width:40%;position:absolute;">${mo.deptName}</div>
+											<div class="chat-deptname-area-version2" style="margin-left:6%;width:40%;position:absolute;"><div class="want_all_chat_deptName"></div></div>
 	<%-- 										${whoChatfirst.deptName} --%>
-											<div class="chat-teamname-area-version2">${mo.teamName}</div>
+											<div class="chat-teamname-area-version2"><div class="want_all_chat_teamName"></div></div>
 	<%-- 										${whoChatfirst.teamName} --%>
-											<div class="with-chat-name">${mo.name}</div>
+											<div class="with-chat-name"><div class="want_all_chat_people_name"></div></div>
 	<%-- 										${whoChatfirst.name} --%>
-											<div class="with-chat-grade">${mo.position}</div>
+											<div class="with-chat-grade"><div class="want_all_chat_position"></div></div>
 	<%-- 										${whoChatfirst.position} --%>
-											<input type="radio" class="checkbox-square-one" name="withfriend01" value="${mo.profileNo}">
+											<input type="radio" id="want_all_chat_profileNo" class="want_all_chat_profileNo" name="withfriend01" value="">
 										</div>
 										
 										<div class="bottom-area2"></div>
 										
-									</c:forEach>	
+<%-- 									</c:forEach>	 --%>
 										
 <!-- 									<div class="bottom-area2"></div> -->
 										
@@ -1035,7 +1035,7 @@
 					</div>
 					
 <!-- 				<h1 id="target">ttttt</h1> -->
-					<div class="chatlistnull"></div>
+					<div class="chatlistnull">아직 생성한 채팅방이 없습니다. 같은 회사원분들끼리 대화해보세요!</div>
 <!-- 				<div class="chatroom-test"  -->
 <!-- 				style="margin:20%; -->
 <!--  				width:80%;   -->
@@ -1064,9 +1064,24 @@
 			const chatroomAlls = document.querySelectorAll(".chatting-room");
 			const chatListAll = document.querySelectorAll(".chatroom-list-box-ajax");
 			
+			//먼저 채팅리스트박스 선언
+			const chatlistnode = document.querySelector('.chatroom-list-box');
+			const chatlistnodes = document.querySelectorAll('.chatroom-list-box');
 			
-
+			//채팅검색박스
+			const chatlistsearch = document.querySelector('.chatroomlist-first-page>.chatroom-list-space');
+			
+			//테이블 복사해서 다른데다 옮기기 1158
+			//노드 복사
+			const copy_chat_list_box = chatlistnode.cloneNode(true);
+			
+			//테이블 없애기
+			$(chatlistnode).remove();
 			messengericon.onclick = function loadchatlist() {
+				
+				
+				
+				
 				$('.messenger-whole').toggle();
 				$('.chatroomlist-first-page').show();
 				$(chatroomAlls).hide();
@@ -1121,9 +1136,13 @@
 // 							target_chat.innerText("아직 생성한 채팅방이 없습니다. 같은 회사원분들끼리 대화해보세요!");
 							//배열 널일 경우 확인
 							alert(chatlistCnt + ": 최종확인");
-							//텍스트 대체
-							target_chat.innerText = "아직 생성한 채팅방이 없습니다. 같은 회사원분들끼리 대화해보세요!";
+							//기타 테이블 없애기
+							$(chatlistsearch).remove();
+
+// 							target_chat.innerText = "아직 생성한 채팅방이 없습니다. 같은 회사원분들끼리 대화해보세요!";
 						}else{
+// 							//텍스트 지우기
+							$(target_chat).hide();
 
 								//상자들
 								
@@ -1148,8 +1167,7 @@
 
 								//노드 복제
 								
-									const chatlistnode = document.querySelector('.chatroom-list-box');
-									const chatlistnodes = document.querySelectorAll('.chatroom-list-box');
+									
 									
 									// //복사
 									// const newchatlistn = chatlistnode.cloneNode(true);
@@ -1250,7 +1268,20 @@
 			
 			
 			<!-- 채팅방 목록 화면에서 채팅방 생성 화면으로.. -->
+			
+			//생성 버튼
 			const qwe = document.querySelector('#qwe');
+			
+			//불러오기 밑밥 깔기 - queryselectorall은 맨 위에 것만 가져옴
+			const want_all_chat_img_one = document.querySelectorAll(".want_all_chat_img");
+
+			const want_all_chat_deptName_one = document.querySelectorAll(".want_all_chat_deptName");
+			const want_all_chat_teamName_one = document.querySelectorAll(".want_all_chat_teamName");
+			const want_all_chat_people_name = document.querySelectorAll(".want_all_chat_people_name");
+			const want_all_chat_position_one = document.querySelectorAll(".want_all_chat_position");
+
+			const want_all_chat_profileNo_one = document.querySelectorAll(".want_all_chat_profileNo");
+			
 
 // 			qwe.onclick = function () {
 			qwe.onclick = function qwe_chat_onclick() {
@@ -1263,11 +1294,32 @@
 // 				url:"http://127.0.0.1:8888/sixman/chat/chatwantfirst",
 				url:"/sixman/chatwantfirst",
 // 				type:"POST" ,
-				success:function(x){
+				success:function(data){
 					$('.whochat-page-first').show();
 					$('.chatting-room').hide;
+					
+					const chatwantlist = JSON.parse(JSON.stringify(data));
 // 					location.reload(true);
 // 					$('messenger-whole').show();
+					console.log(chatwantlist);
+					
+					alert("확인");
+					
+					
+					$(want_all_chat_deptName_one)[0].innerText = chatwantlist[0].deptName;
+					$(want_all_chat_teamName_one)[0].innerText = chatwantlist[0].teamName;
+					$(want_all_chat_people_name)[0].innerText = chatwantlist[0].name;
+					$(want_all_chat_position_one)[0].innerText = chatwantlist[0].position;
+
+					//img src
+					//$(want_all_chat_deptName_one)[0].getElementsByTagName("img").setattri
+
+					//input type.value
+
+// 					forEach() =>{
+						
+// 					};
+					
 				},
 				error:function(){
 						alert("연결x");
@@ -1284,6 +1336,10 @@
 				$('.whochat-page-first').hide();
 				$('#qwe').show();
 				$('.chatroomlist-first-page').show();
+				$(".chatlistnull").show();
+				
+
+
 			}
 
 			<!-- 채팅방 생성 중 친구초대 화면에서 채팅방 이름 생성 화면으로 -->
@@ -1334,7 +1390,10 @@
 					}
 				});
 				$('.define-chatroomname').hide();
-				$('.chatroomlist-first-page').show();
+				if(chatListAll==null){
+					$('.chatroomlist-first-page').show();
+				}
+				
 // 				$('.chatroomlist-first-page').load(location.href + '.chatroomlist-first-page');
 			});
 // 				

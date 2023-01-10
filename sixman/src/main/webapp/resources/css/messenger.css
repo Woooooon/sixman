@@ -1113,3 +1113,9 @@ input[id="chat-setting-check02"]{
 	margin: 10%;
     text-align: center;
 }
+
+.want_all_chat_profileNo{
+	width:48px;
+	height:48px;
+	margin-right:16%;
+	}
