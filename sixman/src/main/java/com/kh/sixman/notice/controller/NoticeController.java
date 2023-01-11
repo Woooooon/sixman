@@ -103,6 +103,17 @@ public class NoticeController {
 		return json;
 	}
 	
+	@GetMapping(value = "getNotice", produces = "application/json; charset=utf8")
+	@ResponseBody
+	public String getNotice() {
+	    RowBounds rb2 = new RowBounds(0 , 7);
+	    List<NoticeVo> noticelist = ns.selectList("", rb2);
+	    
+		Gson gson = new GsonBuilder().create();
+		String json = gson.toJson(noticelist);
+		return json;
+	}
+	
 	@PostMapping("admin/notice/delete")
 	public String delete(String no) {
 		

@@ -340,5 +340,43 @@
         location.href = '/sixman/member/switch?mypage="변경요청"';
     })
 
+    scrolling();
+    function scrolling() {
+        const eventBox = document.querySelector('#event-msg-box > div');
+        let top = 0;
+        setInterval(() => {
+            if(top==-140){
+                top=0;
+            }else{
+                top -= 35;
+            }
+            eventBox.style.top = top+"px";
+        }, 2000);
+    }
+
+    const httpRequest = new XMLHttpRequest();
+    httpRequest.onreadystatechange = () => {
+        if (httpRequest.readyState === XMLHttpRequest.DONE) {
+                if (httpRequest.status === 200) {
+                    
+                    const result = httpRequest.response;
+                    let text = '';
+                    result.forEach(element => {
+                        text += `<div>[공지사항] `+element.title+` `+element.enrollDate+`</div>`;
+                    });
+
+                    const eventBox = document.querySelector('#event-msg-box>div');
+                    eventBox.innerHTML = text;
+                } else {
+
+                }
+        }
+    };
+
+    httpRequest.open('get', '/sixman/getNotice');
+    httpRequest.responseType = "json";
+    httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
+    httpRequest.send();
+
 </script>
 </html>

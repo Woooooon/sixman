@@ -53,7 +53,7 @@
                 <div id="send-member">
                     <p>보낸사람</p>
                     <input type="email" readonly value="${vo.userEmail}">
-                    <div class="btn" onclick="location.href='/sixman/address/add?email=${vo.userEmail}'"><span class="material-symbols-outlined"> add </span><p>주소록</p></div>
+                    <div class="btn" onclick="location.href='/sixman/address/add?emailToAddress=${vo.userEmail}'"><span class="material-symbols-outlined"> add </span><p>주소록</p></div>
                     <p>받는사람</p>
                     <div id="members">
                         <c:forEach items="${vo.sender}" var="sender">
