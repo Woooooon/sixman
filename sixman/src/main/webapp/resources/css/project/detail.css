@@ -281,12 +281,14 @@ a:hover{
 }
 
 .todo-list {
-    display: flex;
-    width: 60%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    width: 30%;
 }
 
 .todo-box {
-    width: 300px;
+    width: 270px;
     height: 180px;
     border-radius: 5px;
     box-shadow: 1px 1px #D3D3D3;
