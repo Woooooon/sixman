@@ -126,7 +126,7 @@ function favorite(){
 
 //checked = like , unchecked = normal
 
-// progress 수치 받아오면 그만큼 게이지올리기 아직 복사만 해옴
+// progress 수치 받아오면 그만큼 게이지올리기
 progress();
 
 function progress(){

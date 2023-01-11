@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.sixman.member.vo.MemberVo;
 import com.kh.sixman.project.dao.ProjectDao;
 import com.kh.sixman.project.vo.ProjectVo;
+import com.kh.sixman.project.vo.TodoVo;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -82,6 +83,17 @@ public class ProjectService {
 	//프로젝트 즐겨찾기 삭제
 	public int deleteFavorite(String no) {
 		return pdao.deleteFavorite(sst, no);
+	}
+
+	//to-do리스트가져오기
+	public List<TodoVo> selectTodoList(String no) {	
+		//todo 리스트 전체 가져오기	
+		return pdao.selectTodolist(sst, no);
+	}
+
+	//todo추가하기
+	public int todoPlus(TodoVo vo) {
+		return pdao.todoPlus(sst, vo);
 	}
 
 

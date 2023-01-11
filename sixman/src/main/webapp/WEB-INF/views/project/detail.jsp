@@ -10,6 +10,7 @@
 <title>프로젝트 상세보기</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <link rel="stylesheet" href="${path}\resources\css\project\detail.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script defer src="${path}\resources\js\project\detail.js"></script>
 </head>
 <body>
@@ -18,7 +19,7 @@
 	<main class="main-box">
         <div class="box detail-box">
             <div class="head">
-            	<input type="hidden" value="${prj.no}" name="no">
+            	<input type="hidden" value="${prj.no}" name="no" id="prjNo">
                 <div class="prj-title">${prj.title}</div>
                 <div class="detail-btn">
                     <input class="btn" type="submit" value="수정하기" />
@@ -93,30 +94,23 @@
             </div>
             <div class="hidden"></div>
             <div class="todo-list">
-                <div class="todo-box">
-                    <div class="todo-title">제목제목</div>
-                    <div class="todo-writer">김민우</div>
-                    <progress value="30" max="100"></progress>
-                    <div class="todo"><input type="checkbox">숨쉬기 성공</div>
-                    <div class="todo"><input type="checkbox" checked>잠자기 실패</div>
-                    <div class="todo"><input type="checkbox">밥먹기 성공</div>
-                </div>
-                <div class="todo-box">
-                    <div class="todo-title">제목제목</div>
-                    <div class="todo-writer">김민우</div>
-                    <progress value="60" max="100"></progress>
-                    <div class="todo"><input type="checkbox" checked>숨쉬기 성공</div>
-                    <div class="todo"><input type="checkbox">잠자기 실패</div>
-                    <div class="todo"><input type="checkbox"checked>밥먹기 성공</div>
-                </div>
-                <div class="todo-box">
-                    <div class="todo-title">제목제목</div>
-                    <div class="todo-writer">김민우</div>
-                    <progress value="30" max="100"></progress>
-                    <div class="todo"><input type="checkbox">숨쉬기 성공</div>
-                    <div class="todo"><input type="checkbox">잠자기 실패</div>
-                    <div class="todo"><input type="checkbox"checked>밥먹기 성공</div>
-                </div>
+                <c:forEach var="todo" items="${todo}">
+                    <div class="todo-box">
+                        <div class="todo-title"><a href="#">${todo.title}</a></div>
+                        <div class="todo-writer">${todo.name}</div>
+                        <progress value="30" max="100"></progress>
+
+                            <div class="todo-content">
+                                <c:if test="${todo.checkboxYn eq 'Y'}">
+                                    <input type="checkbox" checked>${todo.content}
+                                </c:if>
+                                <c:if test="${todo.checkboxYn eq 'N'}">
+                                    <input type="checkbox">${todo.content}
+                                </c:if>
+                            </div>
+
+                    </div>
+                </c:forEach>
             </div>
             
         </div><!--detail box-->
@@ -126,7 +120,7 @@
     <div id="modal" class="modal-overlay">
         <div class="modal-window">
             <div class="title">
-                <p>TO-DO 제목란</p>
+                <input type="text" id="todoTitle" name="todoTitle">
                 <div class="close-area"><span class="material-symbols-outlined">close</span></div>
             </div>
             <div class="status">
@@ -146,7 +140,7 @@
                     <p>인원</p>
                 </div>
                 <div class="member-list">
-                    <div class="name">김민우</div>
+                    <div class="${loginMember.no}" id="todowriter">${loginMember.name}</div>
                 </div>
             </div>
             <div class="date">
@@ -154,15 +148,15 @@
                     <span class="material-symbols-outlined">calendar_today</span>
                     <p>날짜</p>
                 </div>
-                <input type="date">
+                <input type="date" id="todoDate">
             </div>
             <div class="hidden"></div>
             <div class="checkbox-add">
                 <button class="btn" type="button" onclick="addcheckbox();" id="addbtn">추가하기</button>
             </div>
             <div class="footer-btn">
-                <button class="btn" type="button">수정하기</button>
-                <button class="c-btn" type="button">삭제하기</button>
+                <button class="btn" type="button" onclick="addTodo();">생성하기</button>
+                <button class="c-btn" type="button" onclick="history.back()"></button>
             </div>
         </div>
     </div>
