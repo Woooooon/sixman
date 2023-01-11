@@ -24,7 +24,6 @@ $('select[name="deptNo"]').on('change', () => {
                 console.log('팀 조회 성공');
                 teamList.forEach((element) => {
                     const option = document.createElement('option');
-                    console.log("옵션 생성 성공");
                     option.setAttribute('value', element.teamNo);
                     option.innerHTML = element.teamName;
                     $('select[name="teamNo"]').append(option);
@@ -52,7 +51,6 @@ $('select[name="teamNo"]').on('change', () => {
                 console.log('멤버 조회 성공');
                 teamList.forEach((element) => {
                     const option = document.createElement('option');
-                    console.log("멤버 옵션 생성 성공");
                     option.setAttribute('value', element.no);
                     option.innerHTML = element.name;
                     $('select[name="leader"]').append(option);
@@ -75,9 +73,6 @@ function memberListAjax(){
 
     let no = teamNo != null ? teamNo : deptNo;
     
-    console.log("팀 번호 : "+teamNo);
-    console.log("=====");
-    console.log("부서 번호 : "+deptNo);
     $.ajax({
         url: '/sixman/project/memberlist',
         method: 'POST',
@@ -85,10 +80,10 @@ function memberListAjax(){
             no: no
         },
         success: (teamList) => {
-            console.log('멤버 조회 성공');
+            
             teamList.forEach((element) => {
                 const option = document.createElement('option');
-                console.log("멤버 옵션 생성 성공");
+                
                 option.setAttribute('value', element.no);
                 option.setAttribute('leader', element.no);
                 option.innerHTML = element.name + ' ' + element.positionName;
@@ -151,9 +146,13 @@ function openWindowPop(){
 function childValue(memberArr){
     
     for(let i = 0; i < memberArr.length; i++){
+        if(memberArr.length < 10){
+            popup.alertPop('프로젝트 최대 인원은 10명입니다.', "최대 9명만 추가 가능합니다.");
+            break;
+        }
         const memb = memberArr[i];
 
-        console.log(memb);
+        console.log(memberArr.length);
         
         const divbox = document.createElement('div');
         divbox.classList.add('member');
@@ -174,6 +173,7 @@ function childValue(memberArr){
         })
     
         memberbox.append(divbox);
+
     }
 
     

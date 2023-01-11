@@ -184,6 +184,8 @@ option {
 }
 
 .team-member-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #d3d3d3;
@@ -193,8 +195,11 @@ option {
 }
 
 .member {
+    padding-top: 5px;
     display: flex;
     color: #2e7aff;
+    text-align: center;
+    vertical-align: middle;
 }
 
 input[name='prjmem'],
