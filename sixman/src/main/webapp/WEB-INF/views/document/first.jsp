@@ -175,7 +175,7 @@ function selectAll(selectAll)  {
                 success: function(jdata){
                     if(jdata = 1){
                         alert("삭제성공!");
-                        location.replace("list") //리스트 페이지로 새로고침
+                        location.replace("first") //리스트 페이지로 새로고침
                     }
                     else{
                         alert("삭제실패");

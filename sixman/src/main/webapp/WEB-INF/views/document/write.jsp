@@ -51,9 +51,11 @@
                 </div>
             </div>
             <div class="docbox">
-                <div>직급</div>
+                <div class="ppp">
+                    <div>직급</div>
                     <div class="btn" ><button id="che" type="button" onclick="changeByJS()"><span id="ptagchange" class="material-symbols-outlined" id="pchange"> add </span></button> </div>
-                <div>심원용</div>
+                    <div>심원용</div>
+                </div>
             </div>
         </div>
         <div id="write-header">
@@ -84,7 +86,7 @@
         <div id="btn-box">
             <!-- <input name="subit" class="c-btn" type="submit" value="반려하기"> -->
             <input name="submit" class="btn" type="submit" value="작성하기">
-            <input name="submit" class="c-btn" type="submit" value="임시저장">
+            
         </div>
     </div>
 </form>
