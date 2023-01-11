@@ -110,9 +110,10 @@
 
     menuMap.set("주소록", [
         {icon: "contacts", title: "주소록"},
-        {title: "내 주소록", url: "${path}/sixman/address"},
-        {title: "주소록 추가", url: "${path}/sixman/add"},
-        {title: "주소록 받아오기", url: "${path}/sixman/receive"}
+        {title: "내 주소록", url: "${path}/address"},
+        {title: "주소록 추가", url: "${path}/address/add"},
+        {title: "주소록 받아오기", url: "${path}/address/recive"},
+        {title: "휴지통", url: "${path}/address/bin"}
     ]);
 
     menuMap.set("일정", [

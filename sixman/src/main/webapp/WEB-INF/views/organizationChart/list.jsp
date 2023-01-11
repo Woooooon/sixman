@@ -134,6 +134,7 @@
                             <label for="member${i.no}">
                                 <div class="list-item">
                                     <input type="radio" id="member${i.no}" name="memberInfo" />
+                                    <input type="text" class="list-phone" value="${i.phone}"/>
                                     <p class="hide list-file">${i.fileName}</p>
                                     <p class="hide list-no">${i.no}</p>
                                     <p class="hide list-email">${i.email}</p>
@@ -191,8 +192,8 @@
                             <p id="emp-position">${loginMember.positionName}</p>
                         </div>
                         <div id="detail-controller">
-                            <a id="emp-email" href="/sixman/mail/write?email="><span class="material-symbols-outlined">mail</span></a>
-                            <a id="emp-add" href=""><span class="material-symbols-outlined">group_add</span></a>
+                            <a id="emp-email" href="/sixman/mail/write?email=${loginMember.email}"><span class="material-symbols-outlined">mail</span></a>
+                            <a id="emp-add" href="/sixman/address/add?email=${loginMember.email}&name=${loginMember.name}&position=${loginMember.positionName}&company=${company.name}&phone=${loginMember.phone}"><span class="material-symbols-outlined">group_add</span></a>
                             <a id="emp-chat" href=""><span class="material-symbols-outlined">sms</span></a>
                         </div>
                     </div>
@@ -203,20 +204,20 @@
                         </div>
                         <div class="dept-list-wrap">
                             <c:forEach items="${deptMemberList}" var="i">
-                            <div class="dept-detail-list">
-                                <div class="dept-employee-detail">
-                                    <div class="dept-employee-pic">
-                                        <img src="<c:url value='/resources/img/profile/${i.fileName}'/>" alt="" />
+                                <div class="dept-detail-list">
+                                    <div class="dept-employee-detail">
+                                        <div class="dept-employee-pic">
+                                            <img src="<c:url value='/resources/img/profile/${i.fileName}'/>" alt="" />
+                                        </div>
+                                        <p>${i.name}</p>
+                                        <p>${i.positionName}</p>
                                     </div>
-                                    <p>${i.name}</p>
-                                    <p>${i.positionName}</p>
+                                    <div class="dept-list-controller">
+                                        <a href="/sixman/mail/write?email=${i.email}"><span class="material-symbols-outlined">mail</span></a>
+                                        <a href=""><span class="material-symbols-outlined">group_add</span></a>
+                                        <a href=""><span class="material-symbols-outlined">sms</span></a>
+                                    </div>
                                 </div>
-                                <div class="dept-list-controller">
-                                    <a href="/sixman/mail/write?email=${i.email}"><span class="material-symbols-outlined">mail</span></a>
-                                    <a href=""><span class="material-symbols-outlined">group_add</span></a>
-                                    <a href=""><span class="material-symbols-outlined">sms</span></a>
-                                </div>
-                            </div>
                             </c:forEach>
                         </div>
                     </div>

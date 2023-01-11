@@ -27,6 +27,7 @@ import com.kh.sixman.addressBook.vo.SortationVo;
 import com.kh.sixman.common.AttachmentVo;
 import com.kh.sixman.common.FileUnit;
 import com.kh.sixman.common.PageVo;
+import com.kh.sixman.company.vo.CompanyVo;
 import com.kh.sixman.member.vo.MemberVo;
 
 import lombok.extern.slf4j.Slf4j;
@@ -102,7 +103,13 @@ public class AddressBookController {
 	
 
 	@GetMapping("add")
-	public String add(HttpSession session, Model model, String email) {
+	public String add(HttpSession session, Model model, String emailToAddress, AddressVo vo) {
+
+		if(vo != null) {
+			CompanyVo company = (CompanyVo)session.getAttribute("company");
+			vo.setCompany(company.getName());
+		}
+		
 		//로그인한 유저의 세션 가져오기
 		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
 
@@ -118,7 +125,8 @@ public class AddressBookController {
 		model.addAttribute("defaultSortation", defaultSortation);
 		model.addAttribute("sortationList", sortationList);
 		model.addAttribute("addressListAll", addressListAll);
-		model.addAttribute("email", email);
+		model.addAttribute("email", emailToAddress);
+		model.addAttribute("reciveInfo", vo);
 		
 		return "addressBook/add";
 	}
@@ -564,4 +572,39 @@ public class AddressBookController {
 		return "내 주소록에 추가 되었습니다.";
 	}
 	
+	@GetMapping("popup")
+	public String popup(HttpSession session, Model model, String emailToAddress, AddressVo vo) {
+		
+		//로그인한 유저의 세션 가져오기
+		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+
+		//로그인 유저의 seqNo 가져오기
+		String no = loginMember.getNo();
+		
+		List<SortationVo> sortationList = addressService.sortationList(no);
+		model.addAttribute("sortationList", sortationList);
+
+		
+		return "addressBook/popup";
+	}
+	
+	@PostMapping(value = "category", produces = "application/json; charset=utf8")
+	@ResponseBody
+	public String popupResult(HttpSession session, Model model, String deleteNo, String[] createNo) {
+		
+		//로그인한 유저의 세션 가져오기
+		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+
+		//로그인 유저의 seqNo 가져오기
+		String userNo = loginMember.getNo();
+		
+		log.info("deleteNo : " + deleteNo );
+		log.info("createNo : " + createNo );
+
+		int result = addressService.updateCategory(deleteNo, createNo, userNo);
+		
+		if(result < 1)return null;
+		
+		return "카테고리 수정을 완료하였습니다.";
+	}
 }

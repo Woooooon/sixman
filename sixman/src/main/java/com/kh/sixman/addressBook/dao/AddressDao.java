@@ -124,4 +124,18 @@ public class AddressDao {
 		return sst.selectOne("addressMapper.defaultSortation");
 	}
 
+	public int deleteSortation(SqlSessionTemplate sst, Map<String, String> map) {
+		return sst.delete("addressMapper.deleteSortation", map);
+	}
+
+	public int createSortation(SqlSessionTemplate sst, List<SortationVo> voList) {
+		return sst.insert("addressMapper.insertAllSortation", voList);
+	}
+
+	public int updateAddressSortation(SqlSessionTemplate sst, Map<String, String> map) {
+		return sst.update("addressMapper.updateAddressSortation", map);
+	}
+
+	
+
 }

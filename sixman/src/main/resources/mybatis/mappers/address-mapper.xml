@@ -438,6 +438,29 @@
 		)
 	</insert>
 	
+	<insert id="insertAllSortation">
+		insert all
+		<foreach collection="list" item="vo" separator=" ">
+			INTO 
+			ADDRESS_SORTATION
+			(
+			    NO,
+			    HIGH_NO,
+			    USER_NO,
+			    NAME
+			)
+			VALUES
+			(
+			    SEQ_ADDRESS_SORTATION_NO.NEXTVAL,
+			    #{vo.highNo},
+			    #{vo.userNo},
+			    #{vo.name}
+			)
+		</foreach>
+		
+		select * from dual
+	</insert>
+	
 	<update id="updateDeleteAddressAll">
 		UPDATE ADDRESS_BOOK
 		SET DELETE_YN = 'Y'
@@ -446,12 +469,26 @@
 		</foreach>
 	</update>
 	
+	<delete id="updateAddressSortation">
+		UPDATE ADDRESS_BOOK
+		SET SORTATION_NO = 1
+		WHERE SORTATION_NO IN ( #{deleteNo} )
+		AND USER_NO = #{userNo}
+	</delete>
+	
 	<delete id="deleteAddress">
 		DELETE 
 		FROM ADDRESS_BOOK
 		<foreach collection="list" item="no" open="WHERE NO IN(" close=")" separator=",">
 			#{no}
 		</foreach>
+	</delete>
+	
+	<delete id="deleteSortation">
+		DELETE 
+		FROM ADDRESS_SORTATION
+		WHERE NO IN ( #{deleteNo} )
+		AND USER_NO = #{userNo}
 	</delete>
 	
 	<select id="selectReciveInfo" resultType="ReciverVo">

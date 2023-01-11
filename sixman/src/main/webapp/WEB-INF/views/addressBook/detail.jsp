@@ -18,8 +18,11 @@
             <div class="main-box-2">
                 <aside id="myaddress-wrap" class="box">
                     <div class="sortation-title">
-                        <span class="material-symbols-outlined"> contacts </span>
-                        <p>주소록</p>
+                        <div class="title-sor">
+                            <span class="material-symbols-outlined"> contacts </span>
+                            <p>주소록</p>
+                        </div>
+                        <span class="material-symbols-outlined" id="cateSet">auto_fix</span>
                     </div>
                     <div class="sortation-list">
                     	<c:forEach items="${sortationList}" var="j">
@@ -76,12 +79,7 @@
                     <div class="body">
                         <form action="/sixman/address/detail" method="POST" enctype="multipart/form-data" id="form">
                             <div id="card-pic">
-                                <c:if test="${not empty selectAddress.fileName}">
-                                    <img src="<c:url value='/resources/img/address/${selectAddress.fileName}'/>" alt="" class="image-box" />
-                                </c:if>
-                                <c:if test="${empty selectAddress.fileName}">
-                                    <img src="<c:url value='/resources/img/defaultAddress.png'/>" alt="" class="image-box" />
-                                </c:if>
+                                <img src="<c:url value='/resources/img/address/${selectAddress.fileName}'/>" alt="" class="image-box" />
                             </div>
                             <div id="pic-controller">
                                 <label for="pic-add" onchange="readURL(this)">

@@ -75,17 +75,19 @@
                         </div>
                         <div class="dept-wrap">
                             <div class="dept-list">
-                                <c:forEach items="${deptList}" var="i">
-                                    <div class="dept-item">
-                                        <input type="radio" id="deptNo${i.deptNo}" name="deptNo" />
-                                        <p class="deptNo">${i.deptNo}</p>
-                                        <label for="deptNo${i.deptNo}" class="show-team">
-                                            <span class="material-symbols-outlined"> bookmark </span>
-                                            <p class="deptName">${i.deptName}</p>
-                                        </label>
-                                        <span class="material-symbols-outlined remove-dept"> do_not_disturb_on </span>
-                                    </div>
-                                </c:forEach>
+                                <div>
+                                    <c:forEach items="${deptList}" var="i">
+                                        <div class="dept-item">
+                                            <input type="radio" id="deptNo${i.deptNo}" name="deptNo" />
+                                            <p class="deptNo">${i.deptNo}</p>
+                                            <label for="deptNo${i.deptNo}" class="show-team">
+                                                <span class="material-symbols-outlined"> bookmark </span>
+                                                <p class="deptName">${i.deptName}</p>
+                                            </label>
+                                            <span class="material-symbols-outlined remove-dept"> do_not_disturb_on </span>
+                                        </div>
+                                    </c:forEach>
+                                </div>
                             </div>
                             <div class="dept-insert">
                                 <input type="text" id="newDeptName" />
@@ -99,7 +101,7 @@
                             <p>팀 설정</p>
                         </div>
                         <div class="team-wrap">
-                            <div class="team-list"></div>
+                            <div class="team-list"><div></div></div>
                             <div class="team-insert">
                                 <input type="text" id="newTeamName" readonly />
                                 <input type="text" id="deptNo" />
@@ -114,18 +116,20 @@
                         </div>
                         <div class="position-wrap">
                             <div class="position-list">
-                                <c:forEach items="${positionList}" var="i">
-                                    <c:if test="${i.no ne 1}">
-                                        <div class="position-item">
-                                            <p class="positionNo">${i.no}</p>
-                                            <div>
-                                                <span class="material-symbols-outlined"> assignment_ind </span>
-                                                <p class="positionName">${i.position}</p>
+                                <div>
+                                    <c:forEach items="${positionList}" var="i">
+                                        <c:if test="${i.no ne 1}">
+                                            <div class="position-item">
+                                                <p class="positionNo">${i.no}</p>
+                                                <div>
+                                                    <span class="material-symbols-outlined"> assignment_ind </span>
+                                                    <p class="positionName">${i.position}</p>
+                                                </div>
+                                                <span class="material-symbols-outlined remove-position"> do_not_disturb_on </span>
                                             </div>
-                                            <span class="material-symbols-outlined remove-position"> do_not_disturb_on </span>
-                                        </div>
-                                    </c:if>
-                                </c:forEach>
+                                        </c:if>
+                                    </c:forEach>
+                                </div>
                             </div>
                             <div class="position-insert">
                                 <input type="text" id="newPositionName" />

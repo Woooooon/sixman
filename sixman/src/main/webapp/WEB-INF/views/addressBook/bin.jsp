@@ -16,8 +16,11 @@
             <div class="main-box-2">
                 <aside id="myaddress-wrap" class="box">
                     <div class="sortation-title">
-                        <span class="material-symbols-outlined"> contacts </span>
-                        <p>주소록</p>
+                        <div class="title-sor">
+                            <span class="material-symbols-outlined"> contacts </span>
+                            <p>주소록</p>
+                        </div>
+                        <span class="material-symbols-outlined" id="cateSet">auto_fix</span>
                     </div>
                     <div class="sortation-list">
                     	<c:forEach items="${sortationList}" var="j">

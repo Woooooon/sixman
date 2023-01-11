@@ -10,13 +10,6 @@
         <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
         <script src="https://kit.fontawesome.com/ae846b135b.js" crossorigin="anonymous"></script>
     </head>
-    <script>
-        window.onload = ()=>{
-            if ('${alert}' != '') {
-                popup.warningPop('경고', '${alert}');
-            }
-        }
-    </script>
     <body>
         <%@include file="/WEB-INF/views/common/tempMenuBar.jsp" %>
 

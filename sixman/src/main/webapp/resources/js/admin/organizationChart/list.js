@@ -123,10 +123,8 @@ function checkBoxToggle(all_selector, check_selector) {
     const checkbox_ln = document.querySelectorAll(check_selector + ':enabled').length;
     const check_ln = document.querySelectorAll(check_selector + ':checked:enabled').length;
     if (checkbox_ln === check_ln) {
-        selectAll.setAttribute('checked', 'checked');
         selectAll.checked = true;
     } else {
-        selectAll.removeAttribute('checked', 'checked');
         selectAll.checked = false;
     }
 }
@@ -196,8 +194,9 @@ function selectMember(selectAll, checkbox) {
 
 //전체선택된것 삭제
 removeMember.addEventListener('click', () => {
-    popup.confirmPop('제안', '선택된 사원을 퇴사 처리하시겠습니까?', () => {
-        const checkBox = document.querySelectorAll('.list-item:has(input:checked)');
+    const checkBox = document.querySelectorAll('.list-item:has(input:checked)');
+    if (checkBox.length < 1) return;
+    popup.confirmPop('주의', '선택된 사원을 퇴사 처리하시겠습니까?', () => {
         let memberArray = [];
 
         checkBox.forEach((box) => {

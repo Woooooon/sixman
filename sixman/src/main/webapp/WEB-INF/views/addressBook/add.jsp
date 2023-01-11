@@ -18,8 +18,11 @@
             <div class="main-box-2">
                 <aside id="myaddress-wrap" class="box">
                     <div class="sortation-title">
-                        <span class="material-symbols-outlined"> contacts </span>
-                        <p>주소록</p>
+                        <div class="title-sor">
+                            <span class="material-symbols-outlined"> contacts </span>
+                            <p>주소록</p>
+                        </div>
+                        <span class="material-symbols-outlined" id="cateSet">auto_fix</span>
                     </div>
                     <div class="sortation-list">
                     	<c:forEach items="${sortationList}" var="j">
@@ -88,11 +91,11 @@
                                 <div class="info-box left">
                                     <label for="">
                                         <p>* 상 호</p>
-                                        <input type="text" name="company" placeholder="필수 입력 사항입니다"/>
+                                        <input type="text" name="company" value="${reciveInfo.company}" placeholder="필수 입력 사항입니다"/>
                                     </label>
                                     <label for="">
                                         <p>* 성 명</p>
-                                        <input type="text" name="name" placeholder="영문 또는 한글로 작성 해주세요."/>
+                                        <input type="text" name="name" value="${reciveInfo.name}" placeholder="영문 또는 한글로 작성 해주세요."/>
                                     </label>
                                 </div>
                                 <div class="info-box right">
@@ -107,18 +110,18 @@
                                     </label>
                                     <label for="">
                                         <p>직 급</p>
-                                        <input type="text" name="position" placeholder="영문 또는 한글로 작성 해주세요."/>
+                                        <input type="text" name="position" value="${reciveInfo.position}" placeholder="영문 또는 한글로 작성 해주세요."/>
                                     </label>
                                 </div>
                             </div>
                             <div id="card-phone-email">
                                 <label for="">
                                     <p>* 연락처</p>
-                                    <input type="text" name="phone" placeholder="'-'제외 후 입력 해 주세요."/>
+                                    <input type="text" name="phone" value="${reciveInfo.phone}" placeholder="'-'제외 후 입력 해 주세요."/>
                                 </label>
                                 <label for="">
                                     <p>E-MAIL</p>
-                                    <input type="text" name="email" value="${email}" placeholder="Sixman@SIXMAN.com"/>
+                                    <input type="text" name="email" <c:if test="${not empty email}">value="${email}"</c:if> <c:if test="${empty email}"> value="${reciveInfo.email}" </c:if> placeholder="Sixman@SIXMAN.com"/>
                                 </label>
                             </div>
                             <div id="card-info-address">

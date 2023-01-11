@@ -70,7 +70,7 @@ $('#address_kakao').click(function () {
 
 //subList 함수 호출
 subDeptList();
-const teamListBox = document.querySelector('.team-list');
+const teamListBox = document.querySelector('.team-list > div');
 
 //로드시 기존 deptlist에 subList 불러오는 이벤트 주입
 function subDeptList() {

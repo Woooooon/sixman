@@ -1,6 +1,10 @@
 const openPop = document.querySelector('#reciverName');
-
+const cateSet = document.querySelector('#cateSet');
 //자식창 오픈
+cateSet.addEventListener('click', () => {
+    window.open('/sixman/address/popup', '카테고리 설정', 'top=0, left=500, width=315, height=400, status=no, menubar=no, toolbar=no, resizable=no');
+});
+
 openPop.addEventListener('click', () => {
     openWindowPop();
 });

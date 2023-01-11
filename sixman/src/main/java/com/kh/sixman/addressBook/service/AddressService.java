@@ -1,5 +1,7 @@
 package com.kh.sixman.addressBook.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -251,5 +253,43 @@ public class AddressService {
 
 	public SortationVo defaultSortation() {
 		return addressDao.defaultSortation(sst);
+	}
+	
+	@Transactional
+	public int updateCategory(String deleteNo, String[] createNo, String userNo) {
+		int deleteResult = 1;
+		int createResult = 1;
+		int updateAddressSortaiton = 1;
+		
+		if(deleteNo != null) {
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("deleteNo", deleteNo);
+			map.put("userNo", userNo);
+			
+			updateAddressSortaiton = addressDao.updateAddressSortation(sst, map);
+			log.info("업데이트된 주소 : " + updateAddressSortaiton);
+			
+			deleteResult = addressDao.deleteSortation(sst, map);
+			
+			log.info("삭제된 카테고리 : " + deleteResult);
+		}
+		
+		if(createNo != null) {
+			
+			List<SortationVo> voList = new ArrayList<SortationVo>();
+			for(String name : createNo) {
+				SortationVo vo = new SortationVo();
+				vo.setUserNo(userNo);
+				vo.setHighNo("1");
+				vo.setName(name);
+				
+				voList.add(vo);
+				log.info("추가된 카테고리 : " + vo);
+			}
+			
+			createResult = addressDao.createSortation(sst, voList);
+		}
+		
+		return deleteResult * createResult * updateAddressSortaiton;
 	}
 }

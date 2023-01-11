@@ -217,38 +217,44 @@ function alarmAjax() {
                             };
                             break;
                     }
-                    
+
                     const box = document.querySelector('#alarm-box #inner-box');
-                    while (box.firstChild) { 
+                    while (box.firstChild) {
                         box.removeChild(box.firstChild);
                     }
 
-                    for(vo of result){
-
+                    for (vo of result) {
                         let msg = ``;
                         let f = null;
                         switch (vo.type) {
                             case 'MAIL':
                                 msg = `${vo.senderName}(이)가 메일을 보냈습니다. "${vo.title}"`;
-                                f = ()=>{location.href='/sixman/mail/detail?no='+vo.no;}
+                                f = () => {
+                                    location.href = '/sixman/mail/detail?no=' + vo.no;
+                                };
                                 break;
                             case 'DOCUMENT':
                                 msg = `${vo.senderName}(이)가 결재를 요청하였습니다. "${vo.title}"`;
-                                f = ()=>{location.href='';}
+                                f = () => {
+                                    location.href = '';
+                                };
                                 break;
                             case 'ADDRESS':
                                 msg = `${vo.senderName}(이)가 주소록을 공유하였습니다. "${vo.title}"`;
-                                f = ()=>{location.href='';}
+                                f = () => {
+                                    location.href = '';
+                                };
                                 break;
                             case 'SCHEDULE':
                                 msg = `${vo.senderName}(이)가 일정을 공유하였습니다. "${vo.title}"`;
-                                f = ()=>{location.href='';}
+                                f = () => {
+                                    location.href = '';
+                                };
                                 break;
                         }
                         const div = document.createElement('div');
                         div.classList.add('alarm-item');
-                        const item = 
-                        `            
+                        const item = `            
                         <div class="item-div">
                             <div class="item-header">
                                 <div>[${vo.type}]</div>
@@ -259,25 +265,23 @@ function alarmAjax() {
                         <span class="t-btn material-symbols-outlined"> close </span>
                         `;
                         div.innerHTML = item;
-    
+
                         div.querySelector('.item-div').addEventListener('click', () => {
                             checkAjax(vo.no, vo.type);
                             f();
                         });
-    
+
                         div.querySelector('span').addEventListener('click', () => {
                             div.remove();
                             checkAjax(vo.no, vo.type);
                         });
-    
+
                         box.append(div);
                     }
-                    
                 }
             } else {
                 // alert('Request Error!');
             }
-            
         }
     };
 

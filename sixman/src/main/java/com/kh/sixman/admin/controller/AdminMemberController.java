@@ -180,7 +180,6 @@ public class AdminMemberController {
 			return "common/error";
 		}
 		
-		model.addAttribute("alert", vo.getName() + "님 의 정보를 수정하였습니다.");
 		return "redirect:/admin/employee/list"; 
 	}
 	
