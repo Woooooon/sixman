@@ -2,6 +2,9 @@
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 	
+	<%@ page import = "com.kh.sixman.messenger.vo.ReadChatRoomListVo" %>
+	<%@ page import = "com.google.gson.Gson" %>
+	<%@ page import = "com.kh.sixman.messenger.controller.WhoChatFirstController" %>
 
 
 		<!DOCTYPE html>
@@ -34,6 +37,8 @@
 							<div id='main-center-text1'>현재 대화 목록이 없습니다.</div>
 							<div id='main-center-text2'>대화하고 싶으신 분과 대화방을 열여보세요~</div>
 						</div>
+						
+
 
 						<div class="chatroom-list-space">
 							<!-- <div class="chatroom-introduce">대화방 목록</div> -->
@@ -49,96 +54,49 @@
 							<input type="text" name="wantchatdata" id="wantchatdata">
 							<input type="submit" class="btn" value="검색">
 						</div>
-						<div class="chatlist-big" id="chatlist-big">
-						
-						<c:forEach items="${showchatroomlistReady}" var="chatroom">
-							<div class="chatroom-list-box-ajax">
-								
-								
-									<div class="with-chat-data01" id="with-chat-data01">
-										<div class="square-first" style="">
-											<img alt="" src="/sixman/resources/img/profile/${chatroom.profilePath }" class="square-img">
-										</div>
-										<div class="chatroom-list-two-to-two">
-											<div class="with-chat-subroomname2">
-												<c:choose>
-													<c:when test="${fn:length(chatroom.chatroomName)>15}">
-														<c:out value="${fn:substring(chatroom.chatroomName,0,12)}.."></c:out>
-													</c:when>
-													<c:otherwise>
-														<c:out value="${chatroom.chatroomName}"></c:out>
-													</c:otherwise>
-												</c:choose>
+							<div class="chatlist-big" id="chatlist-big">
+							
+									<%
+			// 							ReadChatRoomListVo chatrlist = Gson.fromJson(showchatroomlistReady, ReadChatRoomListVo.class);
+			// 							System.out.println("최종본 : "+ chatrlist);
+			
+									%>
+									
+			
+										<div class="chatroom-list-box">
+											
+											
+											<div class="with-chat-data02" id="with-chat-data01">
+												<div class="square-first" style=""></div>
+												<div class="chatroom-list-two-to-two" id="chatroom-list-two-to-two">
+													<div class="with-chat-subroomname2">야 지금 뭐해?</div>
+													<div class="chat-others-profile01">
+														<div class="with-chat-name01"></div>
+														<div class="with-chat-grade01"></div>
+<!-- 														구기석 부장 -->
+													</div>
+													<div class="chatroom-alarm-content">님께서 첨부파일을 보내셨습니다.</div>
+													<br>
+													<div class="chatroom-alarm-time">오후 2:12</div>
+												</div>
+												<div class="chatroom-exit-button">
+													<span class="material-symbols-outlined" id="chatroom-exit-icon">exit_to_app</span>
+												</div>
+												
 											</div>
-											<div class="chat-others-profile01">
-<!-- 												<div class="with-chat-name01">정인제</div> -->
-<!-- 												<div class="with-chat-grade01">과장</div> -->
-
-											</div>
-											<div class="chatroom-alarm-content"><c:choose>
-													<c:when test="${fn:length(chatroom.chatcontent)>28}">
-														<c:out value="${fn:substring(chatroom.chatcontent,0,27)}.."></c:out>
-													</c:when>
-													<c:otherwise>
-														<c:out value="${chatroom.chatcontent}"></c:out>
-													</c:otherwise>
-												</c:choose></div>
-											<br>
-											<div class="chatroom-alarm-content">${chatroom.lastsendTime }</div>
-										</div>
-										<div class="chatroom-exit-button">
-											<span class="material-symbols-outlined" id="chatroom-exit-icon">exit_to_app</span>
-										</div>
-									</div>
-								
-								
-									<div class="with-chat-data01-1" id="with-chat-data01-1" style="display:none" >
-											<div class="width-chat-subroomname2-1">해당 대화창을 삭제하시겠습니까?</div>
-											<div class="button-list-chatroom-delete">
-												<button type="button" class="btn" id="deletechatroom-ok">예</button>
-												<button type="button" class="btn" id="deletechatroom-no">아니오</button>
+											<div class="with-chat-data02-1" id="with-chat-data01-1" style="display:none" >
+													<div class="width-chat-subroomname2-1">해당 대화창을 삭제하시겠습니까?</div>
+													<div class="button-list-chatroom-delete">
+														<button type="button" class="btn" id="deletechatroom-ok">예</button>
+														<button type="button" class="btn" id="deletechatroom-no">아니오</button>
+													</div>
+													
 											</div>
 											
-									</div>
-								<div class='bottom-area-chatlist' id='ba'></div>
-							</div>
-						</c:forEach>
-							<div class="chatroom-list-box">
-								
-								<div class="with-chat-data02" id="with-chat-data01">
-									<div class="square-first" style=""></div>
-									<div class="chatroom-list-two-to-two" id="chatroom-list-two-to-two">
-										<div class="with-chat-subroomname2">야 지금 뭐해?</div>
-										<div class="chat-others-profile01">
-											<div class="with-chat-name01">구기석</div>
-											<div class="with-chat-grade01">부장</div>
-										</div>
-										<div class="chatroom-alarm-content">님께서 첨부파일을 보내셨습니다.</div>
-										<br>
-										<div class="chatroom-alarm-content">오후 2:12</div>
-									</div>
-									<div class="chatroom-exit-button">
-										<span class="material-symbols-outlined" id="chatroom-exit-icon">exit_to_app</span>
-									</div>
-									
-								</div>
-								<div class="with-chat-data02-1" id="with-chat-data01-1" style="display:none" >
-										<div class="width-chat-subroomname2-1">해당 대화창을 삭제하시겠습니까?</div>
-										<div class="button-list-chatroom-delete">
-											<button type="button" class="btn" id="deletechatroom-ok">예</button>
-											<button type="button" class="btn" id="deletechatroom-no">아니오</button>
 										</div>
 										
+										<div class='bottom-area-chatlist' id='ba'></div>
 								</div>
-								
-							</div>
-							<div class='bottom-area-chatlist' id='ba'></div>
-						</div>
-								
-							</div>
-							
-							
-						</div>
 						
 
 					</div>
@@ -199,26 +157,26 @@
 		
 									<div class="bottom-area2"></div>	
 									
-									<c:forEach items="${whoChatfirst}" var="mo">
+<%-- 									<c:forEach items="${whoChatfirst}" var="mo"> --%>
 										
 										<div class="with-chat-data">
 											<div class="square" style="">
-												<img class="square-img" src="/sixman/resources/img/profile/${mo.profileName}" />
+												<img class="square-img" src="/sixman/resources/img/profile/" />
 											</div>
-											<div class="chat-deptname-area-version2" style="margin-left:6%;width:40%;position:absolute;">${mo.deptName}</div>
+											<div class="chat-deptname-area-version2" style="margin-left:6%;width:40%;position:absolute;"><div class="want_all_chat_deptName"></div></div>
 	<%-- 										${whoChatfirst.deptName} --%>
-											<div class="chat-teamname-area-version2">${mo.teamName}</div>
+											<div class="chat-teamname-area-version2"><div class="want_all_chat_teamName"></div></div>
 	<%-- 										${whoChatfirst.teamName} --%>
-											<div class="with-chat-name">${mo.name}</div>
+											<div class="with-chat-name"><div class="want_all_chat_people_name"></div></div>
 	<%-- 										${whoChatfirst.name} --%>
-											<div class="with-chat-grade">${mo.position}</div>
+											<div class="with-chat-grade"><div class="want_all_chat_position"></div></div>
 	<%-- 										${whoChatfirst.position} --%>
-											<input type="radio" class="checkbox-square-one" name="withfriend01" value="${mo.profileNo}">
+											<input type="radio" id="want_all_chat_profileNo" class="want_all_chat_profileNo" name="withfriend01" value="">
 										</div>
 										
 										<div class="bottom-area2"></div>
 										
-									</c:forEach>	
+<%-- 									</c:forEach>	 --%>
 										
 <!-- 									<div class="bottom-area2"></div> -->
 										
@@ -1077,7 +1035,25 @@
 						</div>
 					</div>
 					
+<!-- 				<h1 id="target">ttttt</h1> -->
+					<div class="chatlistnull">아직 생성한 채팅방이 없습니다. 같은 회사원분들끼리 대화해보세요!</div>
+<!-- 				<div class="chatroom-test"  -->
+<!-- 				style="margin:20%; -->
+<!--  				width:80%;   -->
+<!--  				height:20%;   -->
+<!-- 				background-color: #ff0000;  -->
+<!-- 				border:1px solid #ff0000;"> -->
+<!-- 				</div> -->
+
+<!-- 				<div class="chatroom-list-two-to-two"> -->
+<!-- 					<div class="with-chat-subroomname2"></div> -->
+<!-- 					<div class="chat-others-profile01"></div> -->
+<!-- 					<div class="chatroom-alarm-content"></div> -->
+<!-- 				</div> -->
+<!-- 				<div class="chatroom-alarm-content"></div> -->
 				</main>
+				
+				
 
 
 		</body>
@@ -1086,72 +1062,311 @@
 		<script type="text/javascript">
 			const messenger = document.getElementById('messenger-whole');
 			const messengericon = document.getElementById('msg'); <!-- 메신저 표시  -->
+			const chatroomAlls = document.querySelectorAll(".chatting-room");
+			//const chatListAll = document.querySelectorAll(".chatroom-list-box-ajax");
 			
-			const chatListAll = document.querySelectorAll(".chatroom-list-box-ajax");
+			//먼저 채팅리스트박스 선언
+			const chatlistnode = document.querySelector('.chatroom-list-box');
+			const chatlistnodes = document.querySelectorAll('.chatroom-list-box');
 			
+			//채팅검색박스
+			const chatlistsearch = document.querySelector('.chatroomlist-first-page>.chatroom-list-space');
 			
-
-			messengericon.onclick = function () {
+			//테이블 복사해서 다른데다 옮기기 1158
+			//노드 복사
+			var copy_chat_list_box = chatlistnode.cloneNode(true);
+			
+			//테이블 없애기
+			//$(chatlistnode).remove();
+			
+			//채팅방 전부 선언
+			const chatListAll = document.querySelectorAll(".chatroom-list-two-to-two");
+			
+			messengericon.onclick = function loadchatlist() {
+				
+				
+				
+				//전체화면 토글
 				$('.messenger-whole').toggle();
+				
+				
 				$('.chatroomlist-first-page').show();
+				$(chatroomAlls).hide();
 				$('.chatroom-list-box-ajax').hide();
 				$.ajax({
 					url:"/sixman/getchatroomList",
+					contentType : "application/json; charset=UTF-8",
 // 					method:"get",
 // 					data : {
 						
 // 					}
-					success:function(x){
-						alert("성공");
-						alert('${showchatroomlistReady}');
+					success:function(data){
+// 						alert("성공");
+// 						method:"post"
+// 						alert('${a_chatroomlist}');
 // 						$('.chatroomlist-first-page').on('load', function(){$('.chatroomlist-first-page').show();});
 // 						$('.chatroomlist-first-page').load(window.location.href + '.chatroomlist-first-page');
 // 						$(chatListAll).show();
-						lastreadchat_d();
+// 						lastreadchat_d();
+						
+						
+// 						$(chatListAll).show();
+						
+// 						var chatlist = JSON.stringify(${a_chatroomlist});
+						
+// 						$.each(data, function(key, value){
+// 							alert('key : ' +key, 'value = ' + value);
+// 						});
+						var chatlist = JSON.parse(JSON.stringify(data));
+						var chatlistCnt = Object.keys(chatlist).length;
+
+						alert("개수 : " + chatlistCnt); // 개수
+
+// 						alert(chatlist);
+						console.log(chatlist);
+						
+						//잘새겨듣자
+// 						const target = document.querySelector("#target");
+// 						target.innerText = chatlist[0].chatcontent;
+// 						target.innerText = "1";
+						
+						//만약 없어서 null로 나온다면? 바로 대체문구 삽입
+
+						//채팅리스트상자 맨위 클래스
+						//const target_chat = document.querySelector('.chatroom-list-box');
+						
+						//첫 json객체 널일 경우
+						const target_chat = document.querySelector(".chatlistnull");
+						$(".chatlistnull").show();
+// 						//$('.chatroom-list-two-to-two').hide;
+// 						alert(chatlistCnt + ": 최종확인");
+						if (chatlistCnt == 0) {
+// 							target_chat.innerText("아직 생성한 채팅방이 없습니다. 같은 회사원분들끼리 대화해보세요!");
+							//배열 널일 경우 확인
+							alert(chatlistCnt + ": 최종확인");
+							//기타 테이블 없애기
+							//$(chatlistsearch).remove();
+
+// 							target_chat.innerText = "아직 생성한 채팅방이 없습니다. 같은 회사원분들끼리 대화해보세요!";
+						}else{
+// 							//텍스트 지우기
+							$(target_chat).hide();
+
+								//상자들
+								
+// 								const target1 = document.querySelector(".square-first");
+// 								const target2 = document.querySelector(".with-chat-subroomname2");
+// 								// const target3 = document.querySelector(".with-chat-name01");
+// 								// const target4 = document.querySelector(".with-chat-grade01");
+// 								const target5 = document.querySelector(".chatroom-alarm-content");
+// 								const target6 = document.querySelector(".chatroom-alarm-time");
+								
+// 								$('.with-chat-data02').hide();
+								//교체
+								// $(target2)[0].innerText = chatlist[0].chatroomName;
+								// $(target5)[0].innerText = chatlist[0].chatcontent;
+								// $(target6)[0].innerText = chatlist[0].lastsendTime;
+
+								// $(target2)[0].innerText = chatlist[0].chatroomName;
+								// $(target5)[0].innerText = chatlist[0].chatcontent;
+								// $(target6)[0].innerText = chatlist[0].lastsendTime;
+								
+								//$('.with-chat-data02').show(); // 더미데이터 이용
+
+								//노드 복제
+								
+									
+									
+									// //복사
+									// const newchatlistn = chatlistnode.cloneNode(true);
+									// // //붙여넣기
+									// chatlistnode.after(newchatlistn);
+									chatlist.forEach(element => {
+										console.log("content :" + element.chatcontent);
+										console.log("roomname :" + element.chatroomName); 
+										console.log("lastsendTime :" + element.lastsendTime);  
+									});
+									
+									const chat_l_val_one = document.querySelectorAll(".square-first"); // later
+									const chat_l_val_two = document.querySelectorAll(".with-chat-subroomname2");
+									const chat_l_val_three = document.querySelectorAll(".chatroom-alarm-content");
+									const chat_l_val_four = document.querySelectorAll(".chatroom-alarm-time");
+									
+									for(let i = 0; i < chatlist.length; i++){
+										
+										
+										
+										//요소추가
+										const element = chatlist[i];	
+										$(chat_l_val_two)[i].innerText = chatlist[i].chatroomName;
+										$(chat_l_val_three)[i].innerText = chatlist[i].chatcontent;
+										$(chat_l_val_four)[i].innerText = chatlist[i].lastsendTime;
+										
+// 										//테이블 chatlist-big안에 붙여넣기하고, 왜 못하지?
+// 										$(".chatlist-big").append($(copy_chat_list_box));
+										
+// 										chatlist.forEach(element => {
+// 											$(chatlistnode).remove();
+// 										});
+									}
+
+									//첫번째 div 수정
+									
+// 									for(let i=1;i<index;i++){
+// 									if(){
+// 											//노드 복사
+// 											const copy_chat_list_box = chatlistnodes[0].cloneNode(true);
+// 											//노드 붙여넣기
+// 											chatlistnodes[0].after(copy_chat_list_box);
+// 											//값 수정
+// 											$(chat_l_val_two)[1].innerText = chatlist[1].chatroomName;
+// 											$(chat_l_val_three)[1].innerText = chatlist[1].chatcontent;
+// 											$(chat_l_val_four)[1].innerText = chatlist[1].lastsendTime;
+// 	// 									}
+// 									}
+									//index 1 ~ chatlistCnt까지 테이블 복제하고 수정
+// 									nodeClone();
+									
+									
+									
+										alert('준비?');
+// 										for (let index = 0; index < chatlistCnt; index++) {
+// 											const element = index;
+// 											alert("count : "+element)
+// 											if( index < chatlistCnt ){
+// 											//복사
+// 											const newchatlistn = chatlistnode.cloneNode(true);
+// 											// //붙여넣기
+// 											chatlistnode.after(newchatlistn);
+// 											element[index].show();
+// 											}
+// 										}
+									
+
+									
+									
+			// 						console.log($('a_chatroomlist').chatroomName);
+			// 						$("c:forEach items="${a_chatroomlist}" var="chatroom">").replaceAll(c:forEach items=chatlist var="chatroom">);
+									
+			// 						$.each(chatlist), function(key, value){
+			// 							console.log(key + ':' + value);
+			// 						};
+							}
+						
 					}, error:function(){
 						alert("메세지 로딩에 실패했습니다.. 잠시 후에 다시 이용해주세요");
 					}
 				});
-// 				$('.chatroom-list-box-ajax').show();
+				$(chatListAll).show();
 			}
 			
-			function lastreadchat_d(){
-				$.ajax({
-					url:"/sixman/readchatroomList",
-					success: function() {
-// 						alert(chatListAll);
+// 			function lastreadchat_d(){
+// 				$.ajax({
+// 					url:"/sixman/readchatroomList",
+// 					success: function() {
+// // 						alert(chatListAll);
+// // 						$('.chatroom-list-box-ajax').show();
+// // 						$(chatListAll).show();
+						
+// // 						const chatListbig = document.getElementById('chatlist-big');
+// // 						chatListbig.remove();
+						
+// // 						$('.chatroom-list-space').after('<div id="chatlist-big">ㅇㅇ</div>');
+// 						$(chatroomAlls).hide();
 // 						$('.chatroom-list-box-ajax').show();
-// 						$(chatListAll).show();
-						alert('연결');
-						alert('안녕'+'${a_chatroomlist}');
-						const chatListbig = document.getElementById('chatlist-big');
-						chatListbig.remove();
+// // 						alert('연결');
+// // 						alert('안녕'+'${a_chatroomlist}');
 						
-						$('.chatroom-list-space').after('<div id="chatlist-big">ㅇㅇ</div>');
-						
-					}, error: function(){
-						alert('에러');
-					}
-				})
-			}
+// 					}, error: function(){
+// 						alert('에러');
+// 					}
+// 				})
+// 			}
 
 			
 			
 			<!-- 채팅방 목록 화면에서 채팅방 생성 화면으로.. -->
+			
+			//생성 버튼
 			const qwe = document.querySelector('#qwe');
+			
+			//불러오기 밑밥 깔기 - queryselectorall은 맨 위에 것만 가져옴
+			const want_all_chat_img_one = document.querySelectorAll(".want_all_chat_img");
+
+			const want_all_chat_deptName_one = document.querySelectorAll(".want_all_chat_deptName");
+			const want_all_chat_teamName_one = document.querySelectorAll(".want_all_chat_teamName");
+			const want_all_chat_people_name = document.querySelectorAll(".want_all_chat_people_name");
+			const want_all_chat_position_one = document.querySelectorAll(".want_all_chat_position");
+
+			const want_all_chat_profileNo_one = document.querySelectorAll(".want_all_chat_profileNo");
+			
 
 // 			qwe.onclick = function () {
-			function qwe_chat_onclick() {
+			qwe.onclick = function qwe_chat_onclick() {
 // 				alert('ㅇㅇ');
 				$('.chatroomlist-first-page').hide();
-				$('.whochat-page-first').hide();
+				$(chatroomAlls).hide();
+				$('.chatlistnull').hide();
 // 				function 
 			$.ajax({
 // 				url:"http://127.0.0.1:8888/sixman/chat/chatwantfirst",
 				url:"/sixman/chatwantfirst",
 // 				type:"POST" ,
-				success:function(x){
+				success:function(data){
 					$('.whochat-page-first').show();
+					$('.chatting-room').hide;
+					
+					const chatwantlist = JSON.parse(JSON.stringify(data));
+// 					location.reload(true);
+// 					$('messenger-whole').show();
+					console.log(chatwantlist);
+					
+					alert("확인");
+
+					const wantchating_one = chatwantlist[0].profileName;
+
+
+					alert(wantchating_one);
+					//document.getElementsByClassName("want_all_chat_profileNo").value=
+					
+
+					//document.getElementsByClassName("want_all_chat_img").src="/sixman/resources/img/profile/wantchatimg_one/";
+
+					//document.getElementsByClassName().src="/sixman/resources/img/profile/wantchatimg_one/chatwantlist[0].profileName";
+
+					$(want_all_chat_deptName_one)[0].innerText = chatwantlist[0].deptName;
+					$(want_all_chat_teamName_one)[0].innerText = chatwantlist[0].teamName;
+					$(want_all_chat_people_name)[0].innerText = chatwantlist[0].name;
+					$(want_all_chat_position_one)[0].innerText = chatwantlist[0].position;
+
+					//const alarm = document.getElementsBytagName('input').item('want_all_chat_profileNo',0).value;
+
+					const alarm11 = chatwantlist[0].profileNo;
+					alert(alarm11);
+
+					//멤버 넘버 가져오기
+					document.getElementById('want_all_chat_profileNo').value= chatwantlist[0].profileNo;
+					//alert(alarm2);
+					
+
+
+
+
+
+
+
+
+
+
+					//img src
+					//$(want_all_chat_deptName_one)[0].getElementsByTagName("img").setattri
+
+					//input type.value
+
+// 					forEach() =>{
+						
+// 					};
+					
 				},
 				error:function(){
 						alert("연결x");
@@ -1168,6 +1383,10 @@
 				$('.whochat-page-first').hide();
 				$('#qwe').show();
 				$('.chatroomlist-first-page').show();
+				
+				
+
+
 			}
 
 			<!-- 채팅방 생성 중 친구초대 화면에서 채팅방 이름 생성 화면으로 -->
@@ -1218,7 +1437,10 @@
 					}
 				});
 				$('.define-chatroomname').hide();
-				$('.chatroomlist-first-page').show();
+				if(chatListAll==null){
+					$('.chatroomlist-first-page').show();
+				}
+				
 // 				$('.chatroomlist-first-page').load(location.href + '.chatroomlist-first-page');
 			});
 // 				
@@ -1234,7 +1456,7 @@
 			<!-- 채팅방 목록 화면에서 채팅 화면으로 진입-->
 			
 			//인덱스 배열
-// 			const chatListAll = document.querySelectorAll(".chatroom-list-two-to-two");
+			//const chatListAll = document.querySelectorAll(".chatroom-list-two-to-two");
 
 			const chatRoomAll = document.querySelectorAll(".chatting-room");
 // // 			const chatListAllIndex = document.querySelectorAll(".with-chat-subroomname2").index;
@@ -1254,13 +1476,16 @@
 						data : {chatRoomIndex : index
 						},
 						success : function(){
-							alert("채팅룸받아오는거성공");
+// 							alert("채팅룸받아오는거성공");
 							alert(index);
+							//$('.chatroomlist-first-page').hide();
+							//$('.chatting-room').show();
 							$('.chatroomlist-first-page').hide();
-							$('.chatting-room').show();
 							$(chatRoomOne).hide();
-							$('.chatroomlist-first-page').hide();
+							//chatroomAlls
+							$(chatroomAlls[index]).show();
 							$(chatRoomOne[index]).show();
+							//if())
 // 							$.ajax({
 // 									url:"/sixman/chatroom",
 // 									success : function (){

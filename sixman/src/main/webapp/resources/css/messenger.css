@@ -1103,3 +1103,19 @@ input[id="chat-setting-check02"]{
 /* 	margin-bottom:6%; */
 	margin-top:20%;
 }
+
+.chatroom-alarm-time{
+	font-size:12px;
+	width:80%;
+}
+
+.chatlistnull{
+	margin: 10%;
+    text-align: center;
+}
+
+.want_all_chat_profileNo{
+	width:48px;
+	height:48px;
+	margin-right:16%;
+	}
