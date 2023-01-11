@@ -24,18 +24,18 @@
 }
 
 
-#search-box{
+#search-box2{
 	padding: 20px;
     display: flex;
     width: 100%;
     height: 100%;
     gap: 0px
 }
-#search-box form{
+#search-box2 form{
     display: grid;
     grid-template-columns: 0.6fr 0.8fr 0.3fr 0.1fr 0.3fr 4fr 2fr;
 }
-#search-box div{
+#search-box2 div{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -556,7 +556,7 @@
 <main class="main-box">
     <div id="main-content">
         <div>
-            <div id="search-box" class="box">
+            <div id="search-box2" class="box">
                 <form action="/sixman/salary/salaryAdmin" method="get">
                     <div id="search-font">사원이름</div>
                     <div>

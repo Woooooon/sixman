@@ -29,17 +29,17 @@
     gap: 30px
 }
 
-#search-box{
+#search-box2{
 	padding: 20px;
     display: flex;
     width: 100%;
     height: 100%;
 }
-#search-box{
+#search-box2{
     display: grid;
     grid-template-columns: 1fr 0.7fr 1fr 1fr 2fr 0.2fr 1fr 4fr;
 }
-#search-box div{
+#search-box2 div{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -412,7 +412,7 @@
     <div id="main-content">
         <div>
             <form action="/sixman/attendance/admin" method="get">
-                <div id="search-box" class="box">
+                <div id="search-box2" class="box">
                     <input type="hidden" name="page" value="1">
                     <div id="search-name">사원이름</div>
                     <div>   
