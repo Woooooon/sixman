@@ -5,6 +5,7 @@
 
 <!DOCTYPE html>
 <html>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <head>
 <meta charset="UTF-8">
 <title>기안문서함1</title>
@@ -96,6 +97,7 @@
             </div>
          
         </div>
+       
 
         <div class="docu-write">
             <!-- <button onclick="" id="documentwrite"><a href="">결재 상신</a></button> -->
@@ -150,7 +152,7 @@ function selectAll(selectAll)  {
         });
     });
     function deleteValue(){
-        var url = "document/first";
+        var url = "first";
         var valueArr = new Array();
         var list = $("input[name='RowCheck']");
         for(var i=0; i< list.length; i++){

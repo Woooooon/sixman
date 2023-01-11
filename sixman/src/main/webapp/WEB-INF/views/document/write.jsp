@@ -51,21 +51,9 @@
                 </div>
             </div>
             <div class="docbox">
-                <div class="ppp">
-                    <div>직급</div>
-                    <div class="btn"><span class="material-symbols-outlined"> add </span> </div>
-                    <div>심원용</div>
-                </div>
-                <div class="ppp">
-                    <div>직급</div>
-                    <div class="btn"><span class="material-symbols-outlined"> add </span> </div>
-                    <div>심투용</div>
-                </div>
-                <div class="ppp">
-                    <div>직급</div>
-                    <div class="btn"><span class="material-symbols-outlined"> add </span> </div>
-                    <div>심삼용</div>
-                </div>
+                <div>직급</div>
+                    <div class="btn" ><button id="che" type="button" onclick="changeByJS()"><span id="ptagchange" class="material-symbols-outlined" id="pchange"> add </span></button> </div>
+                <div>심원용</div>
             </div>
         </div>
         <div id="write-header">
@@ -77,11 +65,22 @@
                 <div class="header-item-title">파일추가
                     <div id="file-btn" class="btn"><span class="material-symbols-outlined"> add </span></div>
                 </div>
+                <div id="file-box">
+                    <c:if test="${not empty save}">
+                        <c:forEach items="${dvo.fileList}" var="fv">
+                            <div class="file-item">
+                                <p>${fv.originName}</p>
+                                <span class='material-symbols-outlined' onclick="deleteFile(this, ${fv.no}, 'DOCUMENT')"> close </span>
+                            </div>
+                        </c:forEach>
+                    </c:if>
+                </div>
+                
                 <div id="file-list"></div>
 
             </div>
         </div>
-        <textarea name="content" id="summernote"></textarea>
+        <textarea name="content" id="summernote">${dvo.content}</textarea>
         <div id="btn-box">
             <!-- <input name="subit" class="c-btn" type="submit" value="반려하기"> -->
             <input name="submit" class="btn" type="submit" value="작성하기">
@@ -115,4 +114,24 @@
 
    
 </script>
+
+<script>
+    $(document).ready(function(){
+        $("button").click(function(){
+            $("#pchange").html("<span class="material-symbols-outlined">done </span>");
+        });
+    });
+</script>
+
+<script>
+    $("#che").click(function(){
+    $(".ptagchange").text("check");
+    });
+
+    function changeByJS() {
+    let x = document.getElementsByClassName("ptagchange")[0];
+    x.innerText="checkon"; 
+    }
+
+    </script>
 </html>

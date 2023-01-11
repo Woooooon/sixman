@@ -80,7 +80,7 @@
 
             </div>
         </div>
-        <textarea name="content" id="summernote"></textarea>
+        <textarea name="content" id="summernote">${dvo.content}</textarea>
         <div id="btn-box">
             <!-- <input name="subit" class="c-btn" type="submit" value="반려하기"> -->
             <input name="submit" class="btn" type="submit" value="수정 완료">

@@ -210,7 +210,6 @@
 <select id="detail" parameterType="int" resultType="DocumentVo">
 	SELECT 
 		NO
-		,ENROLL_DATE
 		,SEND_PAY
 		,REFER
 		,CONTENT
@@ -226,7 +225,7 @@
 			TITLE = #{title}
 			,CONTENT = #{content}
 			,REFER = #{refer}
-			,ENROLL_DATE = #{enrollDate}
+			
 		WHERE NO = #{no}
 			
 			
