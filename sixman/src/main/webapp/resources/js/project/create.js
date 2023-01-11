@@ -146,10 +146,11 @@ function openWindowPop(){
 function childValue(memberArr){
     
     for(let i = 0; i < memberArr.length; i++){
-        if(memberArr.length < 10){
+        if(memberArr.length > 9){
             popup.alertPop('프로젝트 최대 인원은 10명입니다.', "최대 9명만 추가 가능합니다.");
             break;
         }
+        
         const memb = memberArr[i];
 
         console.log(memberArr.length);

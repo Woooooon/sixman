@@ -99,13 +99,20 @@
                         <div class="todo-title"><a href="#">${todo.title}</a></div>
                         <div class="todo-writer">${todo.name}</div>
                         <progress value="30" max="100"></progress>
-
+                        <div class="toDoItem">
+                            <input type="checkbox" checked>
+                            <div>${todo.content}</div>
+                        </div>
                             <div class="todo-content">
                                 <c:if test="${todo.checkboxYn eq 'Y'}">
-                                    <input type="checkbox" checked>${todo.content}
+                                    <div class="toDoItem">
+                                        <input type="checkbox" checked>${todo.content}
+                                    </div>
                                 </c:if>
                                 <c:if test="${todo.checkboxYn eq 'N'}">
-                                    <input type="checkbox">${todo.content}
+                                    <div class="toDoItem">
+                                        <input type="checkbox" checked>zz${todo.content}
+                                    </div>
                                 </c:if>
                             </div>
 
