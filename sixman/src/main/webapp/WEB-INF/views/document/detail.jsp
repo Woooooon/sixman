@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<link rel="stylesheet" href="${path}/resources/css/document/documentdetail.css">
+<link rel="stylesheet" href="${path}/resources/css/document/documentwrite.css">
 
 <!-- 섬머노트 -->
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
@@ -25,7 +25,7 @@
 <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
 
 <div class="main-box">
-    <form action="" id="docuhi" method="POST" enctype="multipart/form-data" >
+    < action="" id="docuhi" method="POST" enctype="multipart/form-data" >
     <div id="sub-box" class="box">
         <div id="write-title">결제문서작성</div>
         <div id="write-box" class="box2">
@@ -72,11 +72,10 @@
         <textarea name="content" id="summernote">${dvo.content}</textarea>
         <div id="btn-box">
             <!-- <input name="subit" class="c-btn" type="submit" value="반려하기"> -->
-            <a href="${path}/document/modify?no=${dvo.no}"><input name="submit" class="btn" type="submit" value="수정하기"></a>
-            
-           
+        <a href="${path}/document/modify?no=${dvo.no}"><input name="submit" id="qwer"  class="btn"  value="수정하기"></a>
         </div>
     </div>
+    
 </form>
 </div>
 
@@ -104,4 +103,15 @@
 
    
 </script>
+<script>
+    $("#che").click(function(){
+    $(".ptagchange").text("check");
+    });
+
+    function changeByJS() {
+    let x = document.getElementsByClassName("ptagchange")[0];
+    x.innerText="checkon"; 
+    }
+
+    </script>
 </html>

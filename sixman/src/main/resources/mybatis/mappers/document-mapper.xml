@@ -226,6 +226,7 @@
 			TITLE = #{title}
 			,CONTENT = #{content}
 			,REFER = #{refer}
+			,ENROLL_DATE= SYSDATE
 			
 			
 		WHERE NO = #{no}
@@ -253,8 +254,8 @@
 	
 	SELECT COUNT(*)
 	FROM DOCUMENT D
-<!-- 	LEFT JOIN TYPE_A A ON  A.NO = D.TYPE -->
-<!-- 	LEFT JOIN DOC_SAVE S ON S.DOC_NO = D.NO -->
+	LEFT JOIN TYPE_A A ON  A.NO = D.TYPE
+	LEFT JOIN DOC_SAVE S ON S.DOC_NO = D.NO
 	WHERE D.SEND_PAY = #{no}
 	AND D.D_YN = 'N'
 	
@@ -262,8 +263,8 @@
 		AND D.NO LIKE '%${keyword}%'
 		OR D.TITLE LIKE '%${keyword}%'
 		OR D.ENROLL_DATE LIKE '%${keyword}%'
-<!-- 		OR S.STATE LIKE '%${keyword}%' -->
-<!-- 		OR A.NO  LIKE '%${keyword}%' -->
+		OR S.STATE LIKE '%${keyword}%'
+		OR A.NO  LIKE '%${keyword}%'
 		OR D.SEND_PAY LIKE '%${keyword}%'
 		OR D.CONTENT LIKE '%${keyword}%'
 		OR D.REFER LIKE '%${keyword}%'
@@ -280,9 +281,12 @@
 		,D.TYPE
 		,D.TITLE
 		,D.D_YN
-	
+		,D.D_SAVE
 		,D.ENROLL_DATE
-	
+		,D.MODIFY_DATE
+		,D.START_DATE
+		,D.END_DATE
+		,D.REFER
 		,A.NO
 		,S.DOC_NO
 		,S.STATE
