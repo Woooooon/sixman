@@ -33,9 +33,10 @@
                 <span class="material-symbols-outlined"> sms </span>
             </article>
             <article id="my-img" class="center">
-                <span class="material-symbols-outlined"> person </span>
+                <img src="/sixman/resources/img/profile/${loginMember.fileName}" alt="">
             </article>
         </section>
+
     </header>
     <div id="alarm-box">
         <div id="inner-box">
