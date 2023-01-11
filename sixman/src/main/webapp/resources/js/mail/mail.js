@@ -59,7 +59,7 @@ function createMailItem(params) {
         emailInput.value = '';
     }else{
         if(email==''){return}
-        alert("이메일 형식을 확인해주세요");
+        popup.warningPop("EMAIL", "이메일 형식을 확인해주세요");
         return;
     }
 
