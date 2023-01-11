@@ -5,6 +5,8 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.google.gson.JsonElement;
+import com.kh.sixman.messenger.vo.ChatContent;
 import com.kh.sixman.messenger.vo.ChatCreateRoomMemberVo;
 import com.kh.sixman.messenger.vo.ChatRoomDataVo;
 import com.kh.sixman.messenger.vo.ReadChatRoomListVo;
@@ -27,6 +29,11 @@ public class WhoChatFirstDao {
 		// TODO Auto-generated method stub
 		System.out.println(vo);
 		return sst.selectList("messengerMapper.ReadChatRoomData", vo);
+	}
+
+	public JsonElement sendMessageContent(SqlSessionTemplate sst, ChatContent vo) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

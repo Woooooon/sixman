@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 import com.kh.sixman.member.vo.MemberVo;
 import com.kh.sixman.messenger.service.ChatWantFirstService;
 import com.kh.sixman.messenger.service.MakeRoomFirstService;
+import com.kh.sixman.messenger.vo.ChatContent;
 import com.kh.sixman.messenger.vo.ChatCreateRoomMemberVo;
 import com.kh.sixman.messenger.vo.ChatRoomDataVo;
 import com.kh.sixman.messenger.vo.DefineChatNameVo;
@@ -73,6 +74,8 @@ public class WhoChatFirstController {
 			return whoChatFirst;
 	}
 	
+	
+	//채팅방이름?
 	@ResponseBody
 	@PostMapping("chatwantfirst2")
 	public void method2(HttpSession session, DefineChatNameVo dchatnvo) {
@@ -87,33 +90,8 @@ public class WhoChatFirstController {
 		
 	}
 	
-//	@ResponseBody
-//	@GetMapping("getchatroomList")
-////	public List<ReadChatRoomListVo> chatroomList() {
-//	public List<ReadChatRoomListVo> chatroomList(HttpSession session) {
-//		
-//		ReadChatRoomListVo readchatroomlistdata = new ReadChatRoomListVo();
-//		
-//		List<ReadChatRoomListVo> showchatroomlistReady = chatWfs.readchatroomlist(readchatroomlistdata);
-//		System.out.println(showchatroomlistReady);
-//		session.setAttribute("showchatroomlistReady", showchatroomlistReady);
-//		return showchatroomlistReady;
-//		
-//	}
 	
-//	@ResponseBody
-//	@GetMapping("readchatroomList")
-//	public String readchatroomList(HttpSession session) {
-//		
-//		Gson gson = new Gson();
-//		
-////		session.getAttribute("showchatroomlistReady");
-//		String a_chatroomlist = gson.toJson(session.getAttribute("showchatroomlistReady"));
-//		System.out.println("last : " + a_chatroomlist);
-//		session.setAttribute("a_chatroomlist", a_chatroomlist);
-//		return a_chatroomlist;
-//	}
-	
+	//대화 틀 보내기
 	@ResponseBody
 	@GetMapping("chatroom")
 	public List<ChatRoomDataVo> chatroom(HttpSession session, ChatRoomDataVo vo){
@@ -127,6 +105,7 @@ public class WhoChatFirstController {
 		return chatRoomDataReady;
 		
 	}
+	
 	
 	
 // 리스트 카운트 및 보여주기(첫화면)
@@ -154,6 +133,22 @@ public class WhoChatFirstController {
 		
 		return showchatroomlistReady;
 		
+	}
+	
+	//메신저 보내기
+	@GetMapping(value="chatroom/sendmessage", produces="application/json; charset=utf8")
+	public String sendMessageText(HttpSession session) {
+		ChatContent sendMessageData = new ChatContent();
+		
+//		//로그인멤버
+//		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+//		
+//		
+//		
+//		String sendMessageAction = gson.toJson(chatWfs.sendMessageContent(sendMessageData));
+//		return sendMessageAction;
+	
+		return "test!!!";
 	}
 
 	
