@@ -18,14 +18,15 @@ function childValue(memberArr) {
         reciver += memberArr[index].no;
         reciverName += memberArr[index].name;
 
-        if (!index == memberArr.length - 1) {
+        if (index != memberArr.length - 1) {
             reciver += ',';
-            reciverName += ',';
+            reciverName += ', ';
         }
-
-        document.querySelector('input[name="reciver"]').value = reciver;
-        document.querySelector('#reciverName').value = reciverName;
     }
+    console.log(reciver);
+    console.log(reciverName);
+    document.querySelector('input[name="reciver"]').value = reciver;
+    document.querySelector('#reciverName').value = reciverName;
 }
 
 const modal = document.querySelector('.share-modal');
@@ -33,11 +34,10 @@ const share = document.querySelectorAll('.share');
 const closeBtn = document.querySelector('#close-modal');
 const deleteBtn = document.querySelector('.delete');
 
-
 closeBtn.addEventListener('click', () => {
-    document.querySelector('input[name="reciver"]').value = "";
-    document.querySelector('#reciverName').value = "";
-    
+    document.querySelector('input[name="reciver"]').value = '';
+    document.querySelector('#reciverName').value = '';
+
     modal.classList.add('close');
 });
 

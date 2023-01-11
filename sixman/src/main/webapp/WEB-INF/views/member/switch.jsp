@@ -17,11 +17,11 @@
             <div id="main-box-2">
                 <section id="switch-wrap" class="box">
                     <form action="" method="post">
-                        <div class="header">
-                            <span class="material-symbols-outlined"> lock </span>
-                            <h2>비밀번호 재설정</h2>
-                        </div>
                         <div class="body">
+                            <div class="header">
+                                <span class="material-symbols-outlined"> lock </span>
+                                <h2>비밀번호 재설정</h2>
+                            </div>
                             <div class="newpwd">
                                 <input type="password" placeholder="새 비밀번호" name="pwd" id="pwd" class="success" />
                                 <p id="p1-comment"></p>
@@ -31,15 +31,17 @@
                                 <p id="p2-comment"></p>
                             </div>
                         </div>
-                        <div class="footer">
-                            <span>
-                                신규 회원의 비밀번호는 ID와 일치 하기
-                                <br />
-                                때문에 보안성이 떨어집니다.
-                                <br />
-                                반드시 변경하시고 이용해 주세요.
-                            </span>
-                        </div>
+                        <c:if test="${mypage eq null}">
+                            <div class="footer">
+                                <span>
+                                    신규 회원의 비밀번호는 ID와 일치 하기
+                                    <br />
+                                    때문에 보안성이 떨어집니다.
+                                    <br />
+                                    반드시 변경하시고 이용해 주세요.
+                                </span>
+                            </div>
+                        </c:if>
                         <input type="submit" value="변 경" />
                     </form>
                 </section>
@@ -47,7 +49,8 @@
         </main>
     </body>
 </html>
-
-<script>
-    popup.alertPop('어서오세요.', '${loginMember.name}님 귀하의 입사를 축하드립니다.');
-</script>
+<c:if test="${mypage eq null}">
+    <script>
+        popup.alertPop('어서오세요.', '${loginMember.name}님 귀하의 입사를 축하드립니다.');
+    </script>
+</c:if>

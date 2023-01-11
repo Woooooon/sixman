@@ -133,8 +133,6 @@
                             </div>
                             <div class="controller-wrap">
                                 <div class="view-controller">
-                                    <button><span class="material-symbols-outlined">format_list_bulleted</span></button>
-                                    <button><span class="material-symbols-outlined">account_tree</span></button>
                                 </div>
                                 <div class="employee-controller">
                                     <a href="/sixman/admin/member/join" class="add-emp">사원 등록</a>

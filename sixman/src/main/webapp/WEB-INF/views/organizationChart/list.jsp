@@ -35,7 +35,7 @@
                                     <c:if test="${j.deptNo eq i.deptNo and empty i.teamName}">
                                         <li>
                                             <div class="memberList-item">
-                                                <a href="/sixman/admin/member/detail?no=${i.no}"><span class="material-symbols-outlined">account_box</span>${i.name} ${i.positionName}</a>
+                                                <p><span class="material-symbols-outlined">account_box</span>${i.name} ${i.positionName}</p>
                                             </div>
                                         </li>													
                                     </c:if>
@@ -57,7 +57,7 @@
 													<c:if test="${l.teamNo eq i.teamNo}">
 														<li>
 					                                        <div class="memberList-item">
-					                                            <a href=""><span class="material-symbols-outlined">account_box</span>${i.name} ${i.positionName}</a>
+					                                            <p><span class="material-symbols-outlined">account_box</span>${i.name} ${i.positionName}</p>
 					                                        </div>
 					                                    </li>													
 													</c:if>
@@ -108,16 +108,17 @@
                     </header>
                     <article id="employee-list" class="box">
                         <figure id="companyLogo">
-                            <img alt="기업로고" src="<c:url value='/resources/img/google.png'/>" />
+                            <c:if test="${not empty company.logoName}">
+                                <img src="/sixman/resources/img/logo/${company.logoName}" alt="" id="headerLogo">
+                            </c:if>
+                            <c:if test="${empty company.logoName}">
+                                <img src="/sixman/resources/img/defaultCompany.png" alt="" id="headerLogo">
+                            </c:if>
                         </figure>
                         <div class="header">
                             <div class="title">
                                 <span class="material-symbols-outlined">diversity_3</span>
                                 <label>조직도</label>
-                            </div>
-                            <div class="view-controller">
-                                <button><span class="material-symbols-outlined">format_list_bulleted</span></button>
-                                <button><span class="material-symbols-outlined">account_tree</span></button>
                             </div>
                         </div>
                         <div id="employee-info-wrap">
@@ -165,8 +166,13 @@
                 </section>
                 <aside id="detail-wrap">
                     <div id="employee-detail" class="box">
-                        <figure id="companyLogo">
-                            <img alt="기업로고" src="<c:url value='/resources/img/google.png'/>" />
+                        <figure id="companyLogo-detail">
+                            <c:if test="${not empty company.logoName}">
+                                <img src="/sixman/resources/img/logo/${company.logoName}" alt="" id="headerLogo">
+                            </c:if>
+                            <c:if test="${empty company.logoName}">
+                                <img src="/sixman/resources/img/defaultCompany.png" alt="" id="headerLogo">
+                            </c:if>
                         </figure>
                         <div id="employee-pic">
                             <c:if test="${empty loginMember.fileName}">
@@ -176,15 +182,17 @@
                                 <img id="emp-img" src="<c:url value='/resources/img/profile/${loginMember.fileName}'/>" alt="" />
                             </c:if>
                         </div>
-                        <p id="emp-dept">${loginMember.deptName}</p>
+                        <div id="emp-deptInfo">
+                            <p id="emp-dept">${loginMember.deptName}</p>
+                            <p id="emp-team">${loginMember.teamName}</p>
+                        </div>
                         <div id="employee-name">
                             <p id="emp-name">${loginMember.name}</p>
                             <p id="emp-position">${loginMember.positionName}</p>
                         </div>
-                        <p id="emp-team">${loginMember.teamName}</p>
                         <div id="detail-controller">
                             <a id="emp-email" href="/sixman/mail/write?email="><span class="material-symbols-outlined">mail</span></a>
-                            <a id="emp-share" href=""><span class="material-symbols-outlined">group_add</span></a>
+                            <a id="emp-add" href=""><span class="material-symbols-outlined">group_add</span></a>
                             <a id="emp-chat" href=""><span class="material-symbols-outlined">sms</span></a>
                         </div>
                     </div>
@@ -194,31 +202,22 @@
                             <h3>${loginMember.teamName}</h3>
                         </div>
                         <div class="dept-list-wrap">
-                        <c:forEach items="${deptMemberList}" var="i">
-                        <div class="dept-detail-list">
-                            <div class="dept-employee-detail">
-                                <div class="dept-employee-pic">
-                                	<c:if test="${empty i.fileName}">
-		                                <img src="<c:url value='/resources/img/defaultProfilePic.png'/>" alt="" />
-		                            </c:if>
-		                            <c:if test="${not empty i.fileName}">
-		                                <img src="<c:url value='/resources/img/profile/${i.fileName}'/>" alt="" />
-		                            </c:if>
+                            <c:forEach items="${deptMemberList}" var="i">
+                            <div class="dept-detail-list">
+                                <div class="dept-employee-detail">
+                                    <div class="dept-employee-pic">
+                                        <img src="<c:url value='/resources/img/profile/${i.fileName}'/>" alt="" />
+                                    </div>
+                                    <p>${i.name}</p>
+                                    <p>${i.positionName}</p>
                                 </div>
-                                <p>${i.name}</p>
-                                <p>${i.positionName}</p>
+                                <div class="dept-list-controller">
+                                    <a href="/sixman/mail/write?email=${i.email}"><span class="material-symbols-outlined">mail</span></a>
+                                    <a href=""><span class="material-symbols-outlined">group_add</span></a>
+                                    <a href=""><span class="material-symbols-outlined">sms</span></a>
+                                </div>
                             </div>
-                            <div class="dept-list-controller">
-                                <a href="/sixman/mail/write?email=${i.email}"><span class="material-symbols-outlined">mail</span></a>
-                                <a href=""><span class="material-symbols-outlined">group_add</span></a>
-                                <a href=""><span class="material-symbols-outlined">sms</span></a>
-                            </div>
-                        </div>
-                        </c:forEach>
-                        </div>
-                        <div id="list-controller">
-                            <span class="material-symbols-outlined"> chevron_left </span>
-                            <span class="material-symbols-outlined"> chevron_right </span>
+                            </c:forEach>
                         </div>
                     </div>
                 </aside>

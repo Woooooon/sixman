@@ -48,7 +48,7 @@
             <li><a href="/sixman/main">일반페이지 전환</a></li>
         </ul>
         <section id="menu-footer">
-            <a href="" class="material-symbols-outlined">logout</a>
+            <a href="/sixman/logout" class="material-symbols-outlined">logout</a>
             <div id="foot-logo" onclick="location.href='${path}/admin/employee/list'"></div>
         </section>
     </aside>

@@ -34,6 +34,14 @@ public final class MemberController {
 		return "member/login";
 	}
 	
+   //로그아웃
+	@GetMapping("logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		
+	return "redirect:/";
+	}
+	
 	@PostMapping("")
 	public String login(MemberVo vo, HttpSession session, Model model) {
 		
@@ -59,7 +67,10 @@ public final class MemberController {
 	}
 	
 	@GetMapping("member/switch")
-	public String switchPwd () {
+	public String switchPwd (Model model, String mypage) {
+		
+		
+		model.addAttribute("mypage", mypage);
 		return "member/switch";
 	}
 	

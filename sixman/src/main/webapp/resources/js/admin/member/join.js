@@ -117,6 +117,12 @@ form.onsubmit = () => {
     const checkBirthday = birthday.classList.contains('error');
     const checkEmail = email.classList.contains('error');
 
+    if (username.value == '' || id.value == '') {
+        doubleMatch(id, idRegex, '영문, 숫자만 작성하세요.');
+        doubleMatch(username, nameRegex, '한글 또는 영어만 작성하세요.');
+        return false;
+    }
+
     if (checkId) {
         return false;
     }

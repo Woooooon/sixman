@@ -62,7 +62,7 @@
                                         <c:if test="${j.no eq i.sortationNo}">
                                             <li>
                                                 <div class="address-item">
-                                                    <a href="/sixman/address/detail?no=${i.sortationNo}"><span class="material-symbols-outlined">storefront</span>${i.company}</a>
+                                                    <a href="/sixman/address/detail?no=${i.no}"><span class="material-symbols-outlined">storefront</span>${i.company}</a>
                                                 </div>
                                             </li>													
                                         </c:if>
@@ -84,7 +84,7 @@
                                 <c:if test="${defaultSortation.no eq i.sortationNo}">
                                     <li>
                                         <div class="address-item">
-                                            <a href="/sixman/address/detail?no=${i.sortationNo}"><span class="material-symbols-outlined">storefront</span>${i.company}</a>
+                                            <a href="/sixman/address/detail?no=${i.no}"><span class="material-symbols-outlined">storefront</span>${i.company}</a>
                                         </div>
                                     </li>													
                                 </c:if>

@@ -30,12 +30,7 @@
                 <span class="material-symbols-outlined"> sms </span>
             </article>
             <article id="my-img" class="center">
-                <c:if test="${empty loginMember.fileName}">
-                    <span class="material-symbols-outlined"> person </span>
-                </c:if>
-                <c:if test="${not empty loginMember.fileName}">
-                    <img src="/sixman/resources/img/profile/${loginMember.fileName}" alt="">
-                </c:if>
+                <img src="/sixman/resources/img/profile/${loginMember.fileName}" alt="">
             </article>
         </section>
     </header>
@@ -59,7 +54,7 @@
             </c:if>
         </ul>
         <section id="menu-footer">
-            <a href="" class="material-symbols-outlined">logout</a>
+            <a href="/sixman/logout" class="material-symbols-outlined">logout</a>
             <div id="foot-logo" onclick="location.href='${path}/main'"></div>
         </section>
     </aside>
@@ -339,6 +334,10 @@
         }, 3000);
     }
 
+    const switchPwd = document.querySelector('#my-img');
+    switchPwd.addEventListener('click', ()=>{
+        location.href = '/sixman/member/switch?mypage="변경요청"';
+    })
 
 </script>
 </html>

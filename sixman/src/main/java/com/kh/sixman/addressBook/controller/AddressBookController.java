@@ -102,7 +102,7 @@ public class AddressBookController {
 	
 
 	@GetMapping("add")
-	public String add(HttpSession session, Model model) {
+	public String add(HttpSession session, Model model, String email) {
 		//로그인한 유저의 세션 가져오기
 		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
 
@@ -113,9 +113,12 @@ public class AddressBookController {
 		
 		//카테고리 구분 마다 각 주소록 데이터 있어야 함 전체조회
 		List<AddressVo> addressListAll = addressService.selectAddressListAll(no);
+		SortationVo defaultSortation = addressService.defaultSortation();
 		
+		model.addAttribute("defaultSortation", defaultSortation);
 		model.addAttribute("sortationList", sortationList);
 		model.addAttribute("addressListAll", addressListAll);
+		model.addAttribute("email", email);
 		
 		return "addressBook/add";
 	}
@@ -185,7 +188,9 @@ public class AddressBookController {
 			model.addAttribute("msg", msg);
 			return "common/error";
 		}
+		SortationVo defaultSortation = addressService.defaultSortation();
 		
+		model.addAttribute("defaultSortation", defaultSortation);
 		model.addAttribute("selectAddress", selectAddress);
 		model.addAttribute("sortationList", sortationList);
 		model.addAttribute("addressListAll", addressListAll);
@@ -291,6 +296,7 @@ public class AddressBookController {
 		//카테고리 구분 userNo 전달
 		List<SortationVo> sortationList = addressService.sortationList(no);
 		SortationVo defaultSortation = addressService.defaultSortation();
+		
 		
 		//카테고리 구분 마다 각 주소록 데이터 있어야 함 전체조회
 		List<AddressVo> dlelteAddressListAll = addressService.selectDeleteAddressListAll(no);
@@ -557,4 +563,5 @@ public class AddressBookController {
 				
 		return "내 주소록에 추가 되었습니다.";
 	}
+	
 }

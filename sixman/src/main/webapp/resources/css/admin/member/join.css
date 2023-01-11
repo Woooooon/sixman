@@ -530,6 +530,7 @@ select {
 .teamList-item ~ li,
 .deptList-item ~ li {
     max-height: 0px;
+    transition: 0.3s ease-in-out;
     overflow: hidden;
 }
 

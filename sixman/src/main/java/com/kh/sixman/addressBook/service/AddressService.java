@@ -53,6 +53,7 @@ public class AddressService {
 	public int insertAddress(AddressVo vo) {
 		
 		int insertAddress = addressDao.insertAddress(sst, vo);
+		String no = addressDao.getNo(sst);
 		
 		
 		AttachmentVo cardFile = vo.getCardFileInfo();
@@ -60,13 +61,22 @@ public class AddressService {
 		int cardFileResult = 1;
 		
 		if(cardFile != null) {
-			String no = addressDao.getNo(sst);
 			cardFile.setSubNo(no);
-			
 			cardFileResult = addressDao.upload(sst, cardFile);
 		}
 		
+		if(cardFile == null) {
+			AttachmentVo attVo = new AttachmentVo();
+			
+			attVo.setSubNo(no);
+			attVo.setOriginName("defaultAddressPic.png");
+			attVo.setChangeName("defaultAddressPic.png");
+			attVo.setFilePath("C:\\dev\sixman\sixman/src/main/webapp/resources/img/address");
+			
+			cardFileResult = addressDao.upload(sst, attVo);
+		} 
 		
+	
 		return insertAddress * cardFileResult;
 	}
 

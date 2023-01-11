@@ -1,154 +1,173 @@
 .main-box-2 {
     display: flex;
-    justify-content: center;
     width: 100%;
     height: 100%;
     gap: 40px;
 }
-.dept-title {
+
+#form {
+    width: 80%;
+    height: 100%;
+    padding: 20px;
+}
+
+.infoList {
+    width: 20%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 40px;
+}
+
+.infoList > div {
+    height: 100%;
+    width: 100%;
+    padding: 10px;
     display: flex;
-    justify-content: flex-start;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.edit-title {
+    display: flex;
     align-items: center;
     border-bottom: 1px solid var(--main-color-dark);
-    padding: 3px 0;
-    margin-bottom: 10px;
-}
-
-.dept-title span {
-    color: var(--main-color);
-    margin-right: 5px;
-}
-
-.dept-title p {
-    font-size: 15px;
+    padding: 5px;
+    font-size: 16px;
     font-weight: 600;
 }
-.edit-wrap {
+
+.edit-title span {
+    font-size: 24px;
+    margin-right: 5px;
+    color: var(--main-color);
+}
+
+.infoList > div .edit-title {
+    width: 100%;
+    height: 13%;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--main-color-dark);
+    padding: 5px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.infoList > div .edit-title span {
+    font-size: 24px;
+    margin-right: 5px;
+    color: var(--main-color);
+}
+
+.company-edit-wrap {
+    width: 100%;
+    height: 100%;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.company-Info {
     width: 100%;
     display: flex;
-    padding: 20px;
-    gap: 40px;
+    flex-direction: column;
+    gap: 30px;
+    margin-bottom: 50px;
 }
 
-.edit-menu {
-    height: 100%;
-    width: 15%;
-    padding: 20px;
+.company-app {
+    width: 100%;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 30px;
 }
 
-.edit-menu ul li {
-    padding: 10px;
-    font-size: 15px;
-    font-weight: 600;
+#previewLogo {
+    position: absolute;
+    top: 5px;
+    left: 30px;
+    z-index: 999;
+    width: 150px;
+    height: 40px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#img-box {
+    width: 150px;
+    max-height: 40px;
+    object-fit: fill;
+}
+
+label[for='companyLogo'] {
+    position: absolute;
+    top: 12px;
+    left: 225px;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    padding: 3px;
+    border: none;
+    background-color: var(--main-color);
     cursor: pointer;
+    border-radius: 2px;
+    font-size: 13px;
 }
 
-.edit-menu ul li label {
-    cursor: pointer;
+.company-edit-wrap input {
+    outline-color: var(--main-color);
+    padding: 5px;
 }
 
-.edit-content {
-    width: 85%;
-    height: 100%;
+label[for='companyLogo'] span {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 900;
 }
 
-input[name='edit'] {
+label[for='companyLogo']:hover {
+    background-color: var(--main-color-dark);
+    color: #000;
+    font-weight: 500;
+}
+
+#companyLogo {
     display: none;
 }
 
-.edit-company {
-    width: 100%;
-    height: 100%;
+#essential-info {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-.edit-position {
+    justify-content: space-between;
     width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
-.edit-dept {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    gap: 50px;
-    padding: 100px 200px;
+#essential-info input {
+    width: 250px;
 }
 
-.edit-menu ul li:hover label {
-    color: var(--main-color-dark);
-    font-weight: 700;
-}
-.edit-company form {
-    width: 100%;
-    padding: 0px 200px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
+.info-item.address-info input {
+    width: 70%;
 }
 
-#company-info {
-    width: 60%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-}
-
-#map {
-    width: 100%;
-    height: 200px;
-    padding: 30px;
-}
-
-.info-item {
-    position: relative;
-    display: grid;
-    width: 100%;
-    grid-template-columns: 1.5fr 7fr;
-    gap: 5px;
-    font-size: 14px;
-    align-items: center;
-    color: var(--bo-60);
-}
-
-.info-item .error {
-    border: 2px solid #e85c5c;
-    border-radius: 2px;
-}
-
-.error:focus {
-    outline-color: #e85c5c;
-}
-
-.info-item input {
-    margin-left: 10px;
-    padding: 3px;
-    outline-color: var(--main-color);
-}
-.info-item p {
-    position: absolute;
-    bottom: -15px;
-    left: 23%;
-    font-size: 12px;
-    color: #e85c5c;
-}
-
-.info-item:has(input:focus) label {
-    color: var(--main-color-dark);
+#company-phone-edit {
+    margin-left: 12px;
 }
 
 .address-info {
     position: relative;
+}
+
+.address-info label {
+    margin: 0px 22px 0px 12px;
 }
 
 .address-info button {
@@ -156,145 +175,46 @@ input[name='edit'] {
     top: 0;
     right: 0px;
     width: 80px;
-    padding: 3px;
+    padding: 8px 10px;
     border: none;
     background-color: var(--main-color);
     color: #fff;
     cursor: pointer;
     border-radius: 2px;
 }
+
 input[type='submit']:hover,
 .address-info button:hover {
     background-color: var(--main-color-dark);
 }
 
 input[type='submit'] {
-    width: 80px;
-    padding: 5px 15px;
+    align-self: flex-end;
+    width: 100px;
+    padding: 10px 20px;
     border: none;
     background-color: var(--main-color);
     color: #fff;
     cursor: pointer;
     border-radius: 2px;
     font-size: 17px;
+    font-weight: 600;
 }
 
-#companyLogo {
-    display: none;
-}
-
-#company-pic {
-    position: relative;
-    width: 300px;
-    height: 200px;
-    box-shadow: 0px 0px 3px 1px var(--bo-60);
-    overflow: hidden;
-}
-
-#company-pic img {
+#map {
     width: 100%;
-    height: 100%;
-}
-
-.info-item input {
-    width: 50%;
-}
-.info-item.address-info input {
-    width: 70%;
-}
-#preview-logo {
-    position: absolute;
-    top: 2px;
-    left: 30px;
-    width: 130px;
-    height: 30px;
-}
-
-#img-box {
-    width: 130px;
-    height: 30px;
-    object-fit: fill;
-}
-
-#company-name-edit {
-    position: relative;
-}
-
-#company-name-edit input {
-    width: 50%;
-}
-label[for='companyLogo'] {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 80px;
-    padding: 3px;
-    border: none;
-    border: 1px solid var(--bo-40);
-    color: var(--bo-60);
-    cursor: pointer;
-    border-radius: 2px;
-    font-size: 13px;
-}
-
-label[for='companyLogo'] span {
-    font-size: 15px;
-}
-
-label[for='companyLogo']:hover {
-    border: 1px solid var(--main-color);
-    color: #000;
-    font-weight: 500;
-}
-
-#local {
-    width: 70px;
-    font-size: 13px;
-    padding: 5px;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    color: var(--main-color-dark);
-}
-
-.edit-content > div:has(input[name='edit']:checked) {
-    display: flex;
-}
-
-.edit-content > div:has(input[name='edit']) {
-    display: none;
+    height: 90%;
+    padding: 30px;
 }
 
 .position-wrap,
 .team-wrap,
 .dept-wrap {
-    width: 30%;
+    width: 100%;
+    height: 90%;
     display: flex;
     flex-direction: column;
     gap: 10px;
-}
-
-#position-title,
-#dept-title,
-#team-title {
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    gap: 5px;
-    font-size: 15px;
-}
-
-#position-title span,
-#dept-title span,
-#team-title span {
-    display: flex;
-    align-items: flex-end;
-    gap: 5px;
-    font-size: 20px;
-    color: var(--main-color-dark);
 }
 
 .position-list,
@@ -302,12 +222,38 @@ label[for='companyLogo']:hover {
 .dept-list {
     padding: 10px;
     width: 100%;
-    height: 200px;
+    height: 90%;
     display: flex;
     flex-direction: column;
     gap: 5px;
     border: 1px solid var(--bo-20);
+    overflow-y: scroll;
 }
+
+#deptNo {
+    display: none;
+}
+
+.position-list::-webkit-scrollbar,
+.team-list::-webkit-scrollbar,
+.dept-list::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* .position-list::-webkit-scrollbar {
+    width: 8px; 
+}
+
+.position-list::-webkit-scrollbar-thumb {
+    height: 10px; 
+    background: #217af4; 
+
+    border-radius: 10px;
+}
+
+.position-list::-webkit-scrollbar-track {
+    background: rgba(33, 122, 244, 0.1); 
+} */
 
 .position-item,
 .dept-item,
@@ -378,6 +324,7 @@ label[for='companyLogo']:hover {
 .dept-insert,
 .team-insert {
     width: 100%;
+    height: 15%;
     display: flex;
     gap: 10px;
 }
@@ -404,8 +351,4 @@ label[for='companyLogo']:hover {
 .dept-insert input[type='button']:hover,
 .team-insert input[type='button']:hover {
     background-color: var(--main-color-dark);
-}
-
-#deptNo {
-    display: none;
 }

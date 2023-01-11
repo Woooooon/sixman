@@ -186,6 +186,11 @@ document.querySelector('#submitBtn').addEventListener('click', () => {
         const checkBirthday = birthday.classList.contains('error');
         const checkEmail = email.classList.contains('error');
 
+        if (username.value == '') {
+            doubleMatch(username, nameRegex, '한글 또는 영어만 작성하세요.');
+            return false;
+        }
+
         if (checkId) {
             return false;
         }
