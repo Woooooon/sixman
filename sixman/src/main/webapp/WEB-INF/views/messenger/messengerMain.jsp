@@ -1035,6 +1035,19 @@
 						</div>
 					</div>
 					
+					<!-- 테스트 -->
+					<h1 class="testtest1">testtest1</h1>
+					<h1 class="testtest2">testtest2</h1>
+					<h1 class="testtest3">testtest3</h1>
+					
+					<h1 class="testtest1">testtest1</h1>
+					<h1 class="testtest2">testtest2</h1>
+					<h1 class="testtest3">testtest3</h1>
+					
+					<h1 class="testtest1">testtest1</h1>
+					<h1 class="testtest2">testtest2</h1>
+					<h1 class="testtest3">testtest3</h1>
+					
 <!-- 				<h1 id="target">ttttt</h1> -->
 					<div class="chatlistnull">아직 생성한 채팅방이 없습니다. 같은 회사원분들끼리 대화해보세요!</div>
 <!-- 				<div class="chatroom-test"  -->
@@ -1074,10 +1087,12 @@
 			
 			//테이블 복사해서 다른데다 옮기기 1158
 			//노드 복사
-			var copy_chat_list_box = chatlistnode.cloneNode(true);
+			//var copy_chat_list_box = chatlistnode.cloneNode(true);
+			
+			var copy_chat_list_box = $('.chatroom-list-box').clone();
 			
 			//테이블 없애기
-			//$(chatlistnode).remove();
+			$(chatlistnodes).hide();
 			
 			//채팅방 전부 선언
 			const chatListAll = document.querySelectorAll(".chatroom-list-two-to-two");
@@ -1181,35 +1196,154 @@
 									// const newchatlistn = chatlistnode.cloneNode(true);
 									// // //붙여넣기
 									// chatlistnode.after(newchatlistn);
+									
+									
 									chatlist.forEach(element => {
+										//향상된 for문으로 콘솔 출력
 										console.log("content :" + element.chatcontent);
 										console.log("roomname :" + element.chatroomName); 
-										console.log("lastsendTime :" + element.lastsendTime);  
+										console.log("lastsendTime :" + element.lastsendTime);
 									});
 									
+									
+									//객체 변수 선언
 									const chat_l_val_one = document.querySelectorAll(".square-first"); // later
 									const chat_l_val_two = document.querySelectorAll(".with-chat-subroomname2");
 									const chat_l_val_three = document.querySelectorAll(".chatroom-alarm-content");
 									const chat_l_val_four = document.querySelectorAll(".chatroom-alarm-time");
 									
+									
+									//확인 알람
+									
+									alert("카운트 개수 : " + chatlist.length);
+									//chatlist.length는 정상출력, 4
+									alert("chatroomName 1번째 :"+chatlist[0].chatroomName);
+									//정상출력중..
+									
+									
+									
+									
+									
+									
+									
+									
+// 									0
+// 									1
+// 									2
+									
+// 									0
+// 									1
+// 									2
+									
+// 									0
+// 									1
+// 									2
+									
+									
+									//for문 시작
 									for(let i = 0; i < chatlist.length; i++){
-										
-										
-										
-										//요소추가
+										//0~chatlist.length 즉 현재 3까지 해당 작업 반복
+										$(chatlistnodes[i]).show();
 										const element = chatlist[i];	
-										$(chat_l_val_two)[i].innerText = chatlist[i].chatroomName;
-										$(chat_l_val_three)[i].innerText = chatlist[i].chatcontent;
-										$(chat_l_val_four)[i].innerText = chatlist[i].lastsendTime;
+										//alert(i);
+										//$(element).clone();
+//$(chatlistnodes).hide();
 										
-// 										//테이블 chatlist-big안에 붙여넣기하고, 왜 못하지?
-// 										$(".chatlist-big").append($(copy_chat_list_box));
+//테이블 chatlist-big안에 붙여넣기하고, 왜 못하지?
+//$(".chatlist-big").append($(copy_chat_list_box));
+										
+										
+										
+										
+										
+										//chatlistnodes의 i번째 요소 출력
+										
+										//document.querySelectorAll('.chatroom-list-box')가 chatlistnodes, 즉 단일 한개
+										
+// 										0번째 작업 - 코드3줄반영, 0번째 요소 출력
+// 										1번째 작업 - 코드3줄반영, 1번째 요소 출력
+// 										2번째 작업 - 코드3줄반영, 2번째 요소 출력
+										//근데 왜 첫번째 요소만 출력하지..? 두번째 요소에서 문제 생겼나..?
+										
+										
+										//요소 추가 - 이게 문제였는듯..
+// 										const element = chatlist[i];	
+// 										$(chat_l_val_two)[i].innerText = chatlist[i].chatroomName;
+// 										$(chat_l_val_three)[i].innerText = chatlist[i].chatcontent;
+// 										$(chat_l_val_four)[i].innerText = chatlist[i].lastsendTime;
+										
+										//$(copy_chat_list_box).appendTo($(".chatlist-big"));
+										
+										//$('#testtest1')[i].innerText = chatlist[i].chatroomName;
+										
+										//복사
+										//$('.chatroom-list-box').clone()
+										//var clonechatlist = _.cloneDeep($(chatlistnode));
+										//alert($(clonechatlist));
+										//$(clonechatlist).appendTo($(".chatlist-big"));
+										
+// 										$('.chatroom-list-box').clone().appendTo($(".chatlist-big"));
+// 										$('.chatroom-list-box')[0].show();
 										
 // 										chatlist.forEach(element => {
 // 											$(chatlistnode).remove();
 // 										});
 									}
+									
+									alert("덮어쓸 데이터 : "+chatlist[0].chatroomName);
+									//덮어쓸 데이터 정상출력
+									
+									//테스트 div태그 정상덮어쓰기중..
+									$(".testtest1")[0].innerText = chatlist[0].chatroomName;
+									$(".testtest1")[1].innerText = chatlist[0].chatcontent;
+									$(".testtest1")[2].innerText = chatlist[0].lastsendTime;
+									
+// 									$(".testtest2")[0].innerText = chatlist[1].chatroomName;
+// 									$(".testtest2")[1].innerText = chatlist[1].chatcontent;
+// 									$(".testtest2")[2].innerText = chatlist[1].lastsendTime;
+									
+// 									$(".testtest3")[0].innerText = chatlist[2].chatroomName;
+// 									$(".testtest3")[1].innerText = chatlist[2].chatcontent;
+// 									$(".testtest3")[2].innerText = chatlist[2].lastsendTime;
 
+// 									012
+// 									012
+// 									012
+
+//testtest
+					
+// 									$(".testtest1")[0].innerText = chatlist[0].chatroomName;
+// 									$(".testtest1")[0].innerText = chatlist[0].chatcontent;
+// 									$(".testtest1")[0].innerText = chatlist[0].lastsendTime;
+									
+// 									$(".testtest2")[1].innerText = chatlist[1].chatroomName;
+// 									$(".testtest2")[1].innerText = chatlist[1].chatcontent;
+// 									$(".testtest2")[1].innerText = chatlist[1].lastsendTime;
+									
+// 									$(".testtest3")[2].innerText = chatlist[2].chatroomName;
+// 									$(".testtest3")[2].innerText = chatlist[2].chatcontent;
+// 									$(".testtest3")[2].innerText = chatlist[2].lastsendTime;
+
+									
+									
+									
+									
+// 									for(const i=0;i<2;i++){
+// 										const test = chatlist[i].chatroomName;
+// 										const test1 = chatlist[i].chatcontent;
+// 										const test2 = chatlist[i].lastsendTime;
+// 										for(const y=0;y<2;y++){
+// 											const test11 = $(".testtest1");
+// 											const test22 = $(".testtest2");
+// 											const test33 = $(".testtest3");
+// 											for(const z=0;z<2;z++){
+// 												const test11 = $(".testtest1")[y].innerText = $(test);
+// 												const test22 = $(".testtest1")[y].innerText = $(test1);
+// 												const test33 = $(".testtest1")[y].innerText = $(test2);
+// 											}
+// 										}
+// 									}
+									
 									//첫번째 div 수정
 									
 // 									for(let i=1;i<index;i++){
@@ -1229,7 +1363,7 @@
 									
 									
 									
-										alert('준비?');
+										//alert('준비?');
 // 										for (let index = 0; index < chatlistCnt; index++) {
 // 											const element = index;
 // 											alert("count : "+element)
