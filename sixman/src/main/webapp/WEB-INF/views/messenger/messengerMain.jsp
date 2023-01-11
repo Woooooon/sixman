@@ -94,6 +94,7 @@
 											</div>
 											
 										</div>
+										
 										<div class='bottom-area-chatlist' id='ba'></div>
 								</div>
 						
@@ -1062,7 +1063,7 @@
 			const messenger = document.getElementById('messenger-whole');
 			const messengericon = document.getElementById('msg'); <!-- 메신저 표시  -->
 			const chatroomAlls = document.querySelectorAll(".chatting-room");
-			const chatListAll = document.querySelectorAll(".chatroom-list-box-ajax");
+			//const chatListAll = document.querySelectorAll(".chatroom-list-box-ajax");
 			
 			//먼저 채팅리스트박스 선언
 			const chatlistnode = document.querySelector('.chatroom-list-box');
@@ -1073,16 +1074,22 @@
 			
 			//테이블 복사해서 다른데다 옮기기 1158
 			//노드 복사
-			const copy_chat_list_box = chatlistnode.cloneNode(true);
+			var copy_chat_list_box = chatlistnode.cloneNode(true);
 			
 			//테이블 없애기
-			$(chatlistnode).remove();
+			//$(chatlistnode).remove();
+			
+			//채팅방 전부 선언
+			const chatListAll = document.querySelectorAll(".chatroom-list-two-to-two");
+			
 			messengericon.onclick = function loadchatlist() {
 				
 				
 				
-				
+				//전체화면 토글
 				$('.messenger-whole').toggle();
+				
+				
 				$('.chatroomlist-first-page').show();
 				$(chatroomAlls).hide();
 				$('.chatroom-list-box-ajax').hide();
@@ -1130,6 +1137,7 @@
 						
 						//첫 json객체 널일 경우
 						const target_chat = document.querySelector(".chatlistnull");
+						$(".chatlistnull").show();
 // 						//$('.chatroom-list-two-to-two').hide;
 // 						alert(chatlistCnt + ": 최종확인");
 						if (chatlistCnt == 0) {
@@ -1137,7 +1145,7 @@
 							//배열 널일 경우 확인
 							alert(chatlistCnt + ": 최종확인");
 							//기타 테이블 없애기
-							$(chatlistsearch).remove();
+							//$(chatlistsearch).remove();
 
 // 							target_chat.innerText = "아직 생성한 채팅방이 없습니다. 같은 회사원분들끼리 대화해보세요!";
 						}else{
@@ -1163,7 +1171,7 @@
 								// $(target5)[0].innerText = chatlist[0].chatcontent;
 								// $(target6)[0].innerText = chatlist[0].lastsendTime;
 								
-								$('.with-chat-data02').show(); // 더미데이터 이용
+								//$('.with-chat-data02').show(); // 더미데이터 이용
 
 								//노드 복제
 								
@@ -1184,14 +1192,22 @@
 									const chat_l_val_three = document.querySelectorAll(".chatroom-alarm-content");
 									const chat_l_val_four = document.querySelectorAll(".chatroom-alarm-time");
 									
-									for(let i = 0; i < chatlist.lenght; i++){
-										//테이블 chatlist-big안에 붙여넣기하고, 왜 못하지?
-										$(".chatlist-big").prepend(copy_chat_list_box);
+									for(let i = 0; i < chatlist.length; i++){
+										
+										
+										
 										//요소추가
 										const element = chatlist[i];	
 										$(chat_l_val_two)[i].innerText = chatlist[i].chatroomName;
 										$(chat_l_val_three)[i].innerText = chatlist[i].chatcontent;
 										$(chat_l_val_four)[i].innerText = chatlist[i].lastsendTime;
+										
+// 										//테이블 chatlist-big안에 붙여넣기하고, 왜 못하지?
+// 										$(".chatlist-big").append($(copy_chat_list_box));
+										
+// 										chatlist.forEach(element => {
+// 											$(chatlistnode).remove();
+// 										});
 									}
 
 									//첫번째 div 수정
@@ -1367,7 +1383,7 @@
 				$('.whochat-page-first').hide();
 				$('#qwe').show();
 				$('.chatroomlist-first-page').show();
-				$(".chatlistnull").show();
+				
 				
 
 
@@ -1461,12 +1477,15 @@
 						},
 						success : function(){
 // 							alert("채팅룸받아오는거성공");
-// 							alert(index);
+							alert(index);
+							//$('.chatroomlist-first-page').hide();
+							//$('.chatting-room').show();
 							$('.chatroomlist-first-page').hide();
-							$('.chatting-room').show();
 							$(chatRoomOne).hide();
-							$('.chatroomlist-first-page').hide();
+							//chatroomAlls
+							$(chatroomAlls[index]).show();
 							$(chatRoomOne[index]).show();
+							//if())
 // 							$.ajax({
 // 									url:"/sixman/chatroom",
 // 									success : function (){
