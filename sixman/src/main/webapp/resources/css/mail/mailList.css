@@ -45,6 +45,12 @@ input[type=checkbox]{
     color: var(--bo-40);
 }
 
+.list-item p:nth-of-type(2){
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
+}
 
 
 .category-btn{

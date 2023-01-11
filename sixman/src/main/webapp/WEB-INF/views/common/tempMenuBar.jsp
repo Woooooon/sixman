@@ -18,7 +18,11 @@
 </head>
 <body>
 	<header id="main-header">
-        <section id="logo"></section>
+        <section id="logo">
+            <c:if test="${not empty company.logoName}">
+                <img src="/sixman/resources/img/logo/${company.logoName}" alt="" id="headerLogo">
+            </c:if>
+        </section>
         <section id="event-msg-box"></section>
         <section id="my-menu">
             <article id="alarm" class="center">
@@ -29,9 +33,10 @@
                 <span class="material-symbols-outlined"> sms </span>
             </article>
             <article id="my-img" class="center">
-                <span class="material-symbols-outlined"> person </span>
+                <img src="/sixman/resources/img/profile/${loginMember.fileName}" alt="">
             </article>
         </section>
+
     </header>
     <div id="alarm-box">
         <div id="inner-box">
@@ -315,7 +320,8 @@
     menuMap.set("조직도", [
         {icon: "account_tree", title: "조직도"},
         {title: "조직도", url: "${path}/admin/employee/list"},
-        {title: "사원등록", url: "${path}/admin/member/join"}
+        {title: "사원등록", url: "${path}/admin/member/join"},
+        {title: "기업정보", url: "${path}/admin/company/edit"}
     ]);
 
     menuMap.set("일정", [
@@ -405,12 +411,13 @@
 
     function onMessage(m) {
         const data = m.data;
-
+        console.log(data);
         const datas = data.split('#');
         const type = datas[0];
         const msg = datas[1];
         
         if(type=='CHAT'){
+            openChatAjax();
             notify(type, msg);
             return;
         }
