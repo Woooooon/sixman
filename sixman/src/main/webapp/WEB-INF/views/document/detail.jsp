@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<link rel="stylesheet" href="${path}/resources/css/document/documentwrite.css">
+<link rel="stylesheet" href="${path}/resources/css/document/documentdetail.css">
 
 <!-- 섬머노트 -->
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
@@ -51,18 +51,8 @@
             <div class="docbox">
                 <div class="ppp">
                     <div>직급</div>
-                    <div class="btn"><span class="material-symbols-outlined"> add </span> </div>
+                    <div class="btn" ><button id="che" type="button" onclick="changeByJS()"><span id="ptagchange" class="material-symbols-outlined" id="pchange"> add </span></button> </div>
                     <div>심원용</div>
-                </div>
-                <div class="ppp">
-                    <div>직급</div>
-                    <div class="btn"><span class="material-symbols-outlined"> add </span> </div>
-                    <div>심투용</div>
-                </div>
-                <div class="ppp">
-                    <div>직급</div>
-                    <div class="btn"><span class="material-symbols-outlined"> add </span> </div>
-                    <div>심삼용</div>
                 </div>
             </div>
         </div>
@@ -80,9 +70,9 @@
             </div>
         </div>
         <textarea name="content" id="summernote">${dvo.content}</textarea>
-        <a id="btn-box">
+        <div id="btn-box">
             <!-- <input name="subit" class="c-btn" type="submit" value="반려하기"> -->
-            <a href="${path}/document/modify?no=${dvo.no}"><input name="submit" class="btn" value="수정하기"></a>
+            <a href="${path}/document/modify?no=${dvo.no}"><input name="submit" class="btn" type="submit" value="수정하기"></a>
             
            
         </div>

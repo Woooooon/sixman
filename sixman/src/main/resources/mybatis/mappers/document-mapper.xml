@@ -214,6 +214,7 @@
 		,REFER
 		,CONTENT
 		,TITLE
+		,ENROLL_DATE
 	FROM
 		DOCUMENT
 	WHERE NO = #{no}
@@ -225,6 +226,7 @@
 			TITLE = #{title}
 			,CONTENT = #{content}
 			,REFER = #{refer}
+			
 			
 		WHERE NO = #{no}
 			
@@ -251,8 +253,8 @@
 	
 	SELECT COUNT(*)
 	FROM DOCUMENT D
-	LEFT JOIN TYPE_A A ON  A.NO = D.TYPE
-	LEFT JOIN DOC_SAVE S ON S.DOC_NO = D.NO
+<!-- 	LEFT JOIN TYPE_A A ON  A.NO = D.TYPE -->
+<!-- 	LEFT JOIN DOC_SAVE S ON S.DOC_NO = D.NO -->
 	WHERE D.SEND_PAY = #{no}
 	AND D.D_YN = 'N'
 	
@@ -260,8 +262,8 @@
 		AND D.NO LIKE '%${keyword}%'
 		OR D.TITLE LIKE '%${keyword}%'
 		OR D.ENROLL_DATE LIKE '%${keyword}%'
-		OR S.STATE LIKE '%${keyword}%'
-		OR A.NO  LIKE '%${keyword}%'
+<!-- 		OR S.STATE LIKE '%${keyword}%' -->
+<!-- 		OR A.NO  LIKE '%${keyword}%' -->
 		OR D.SEND_PAY LIKE '%${keyword}%'
 		OR D.CONTENT LIKE '%${keyword}%'
 		OR D.REFER LIKE '%${keyword}%'
@@ -277,14 +279,10 @@
 		,D.AP_NO
 		,D.TYPE
 		,D.TITLE
-		,D.CONTENT
 		,D.D_YN
-		,D.D_SAVE
+	
 		,D.ENROLL_DATE
-		,D.MODIFY_DATE
-		,D.START_DATE
-		,D.END_DATE
-		,D.REFER
+	
 		,A.NO
 		,S.DOC_NO
 		,S.STATE
@@ -319,47 +317,6 @@
 		
 </select>
 
-<select id="selectDocumentListAll" resultType="DocumentVo">
-	SELECT
-		D.NO
-		,D.SEND_PAY
-		,D.AP_NO
-		,D.TYPE
-		,D.TITLE
-		,D.CONTENT
-		,D.D_YN
-		,D.D_SAVE
-		,D.ENROLL_DATE
-		,D.MODIFY_DATE
-		,D.START_DATE
-		,D.END_DATE
-		,D.REFER
-		,S.AP_NO
-		,S.DOC_NO
-		,S.STATE
-		,S.A_YN
-		,A.USER_NO
-		,A.TYPE_NO
-		,A.NAME
-		FROM DOCUMENT D
-		LEFT JOIN DOC_SAVE S ON DOC_NO = D.NO
-		LEFT JOIN TYPE_A A ON A.NO = D.TYPE
-		WHERE D.SEND_PAY = #{no}
-		AND D.D_YN = 'N'
-<!-- 		<if test="keyword != null and keyword !='' " > -->
-<!-- 			AND D.TITLE LIKE '%${keyword}%' -->
-<!-- 			ON D.CONTENT LIKE '%${keyword}%' -->
-<!-- 			ON D.D_YN LIKE '%${keyword}%' -->
-<!-- 			ON D_SAVE LIKE '%${keyword}%' -->
-<!-- 			ON ENROLL_DATE LIKE '%${keyword}%' -->
-<!-- 			ON MODIFY_DATE LIKE '%${keyword}%' -->
-<!-- 			ON START_DATE LIKE '%${keyword}%' -->
-<!-- 			ON END_DATE LIKE '%${keyword}%' -->
-<!-- 			ON REFER LIKE '%${keyword}%' -->
-<!-- 			ON A.TYPE_NO LIKE '%${keyword}%' -->
-<!-- 			ON A.NAME LIKE '%${keyword}%' -->
-<!-- 		</if> -->
-</select> 
 
 
 
