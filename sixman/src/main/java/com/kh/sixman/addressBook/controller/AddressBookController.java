@@ -1,7 +1,6 @@
 package com.kh.sixman.addressBook.controller;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -284,10 +283,10 @@ public class AddressBookController {
 		
 		//페이징 셋
 		int pageLimit = 5;
-		int boardLimit = 10;
+		int boardLimit = 12;
 		
 		//총 주소록 개수
-		int listCount = addressService.countList(search);
+		int listCount = addressService.deleteCountList(search);
 		
 		log.info("listCount : " + listCount);
 		
@@ -296,10 +295,9 @@ public class AddressBookController {
 	    PageVo pv = new PageVo(listCount,Integer.parseInt(page),pageLimit,boardLimit);
 	    RowBounds rb = new RowBounds(offset , boardLimit);
 
-	    //각페이지마다 리스트 8개씩 
+	    //각페이지마다 리스트 13개씩 
 		List<AddressVo> dlelteAddressList = addressService.selectDlelteAddressList(rb, search);
-		
-//		log.info("memberList size : " + AddressList.size());
+
 		
 		//카테고리 구분 userNo 전달
 		List<SortationVo> sortationList = addressService.sortationList(no);

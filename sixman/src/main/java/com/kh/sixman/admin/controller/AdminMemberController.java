@@ -218,7 +218,7 @@ public class AdminMemberController {
 			return null;
 		}
 		
-		return "퇴사 요철을 완료했습니다.";
+		return "퇴사 요청을 완료했습니다.";
 	}
 	
 }

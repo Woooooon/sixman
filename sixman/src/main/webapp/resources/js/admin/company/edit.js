@@ -138,7 +138,7 @@ function removeDept() {
 }
 //부서 제거 ajax
 function removeDeptAjax(elem) {
-    const teamInput = document.querySelector('#newTeamName');
+    // const teamInput = document.querySelector('#newTeamName');
     const parentDiv = elem.parentElement;
     const no = parentDiv.querySelector('p[class=deptNo]').innerHTML;
 
@@ -373,11 +373,8 @@ const phoneRegex = /^\d{2,3}\d{3,4}\d{4}$/;
 const numRegex = /^[0-9]+$/;
 
 form.onsubmit = () => {
-    if (companyName.value == '') {
+    if (companyName.value == '' && license.value == '') {
         nullCheck(companyName);
-    }
-
-    if (license.value == '') {
         nullCheck(license);
     }
 
@@ -405,64 +402,44 @@ companyName.addEventListener('blur', () => {
 });
 
 license.addEventListener('blur', () => {
-    doubleMatch(license, numRegex, '제시한 형식에 맞게 작성하세요');
+    match(license, numRegex);
 });
 
 phone.addEventListener('blur', () => {
-    match(phone, phoneRegex, '제시한 형식에 맞게 작성하세요');
+    match(phone, phoneRegex);
 });
 
 function nullCheck(elem) {
-    const errors = elem.parentElement.querySelectorAll('p');
-    errors.forEach((error) => {
-        error.remove();
-        elem.classList.remove('error');
-    });
+    elem.classList.remove('error');
 
     if (elem.value == '') {
-        const errorMsg = document.createElement('p');
-        errorMsg.innerText = '필수입력 항목입니다.';
-        elem.parentElement.append(errorMsg);
         elem.classList.add('error');
         return;
     }
 }
 
-function doubleMatch(elem, regex, messege) {
-    const errors = elem.parentElement.querySelectorAll('p');
-    errors.forEach((error) => {
-        error.remove();
-    });
+function doubleMatch(elem, regex) {
+    error.remove();
 
     if (elem.value == '') {
-        const errorMsg = document.createElement('p');
-        errorMsg.innerText = '필수입력 항목입니다.';
-        elem.parentElement.append(errorMsg);
         elem.classList.add('error');
         return;
     }
 
-    match(elem, regex, messege);
+    match(elem, regex);
 }
 
-function match(elem, regx, messege) {
+function match(elem, regx) {
     elem.classList.remove('error');
 
     const value = elem.value;
 
     if (value != '') {
         if (!regx.test(value)) {
-            const errorMsg = document.createElement('p');
-            errorMsg.innerText = messege;
-            elem.parentElement.append(errorMsg);
             elem.classList.add('error');
             return;
         }
     }
-    const errors = elem.parentElement.querySelectorAll('p');
-    errors.forEach((error) => {
-        error.remove();
-    });
 }
 
 fileView();

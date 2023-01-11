@@ -191,7 +191,6 @@
 }
 
 /* 카테목록 */
-
 .title-sor {
     display: flex;
     align-items: center;
@@ -214,7 +213,6 @@
     padding: 3px 0;
     margin-bottom: 10px;
 }
-
 .sortation-title span {
     color: var(--main-color);
     margin-right: 5px;

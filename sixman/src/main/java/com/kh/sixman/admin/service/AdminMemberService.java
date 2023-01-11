@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.sixman.addressBook.service.AddressService;
-import com.kh.sixman.addressBook.vo.SortationVo;
 import com.kh.sixman.admin.dao.AdminMemberDao;
 import com.kh.sixman.common.AttachmentVo;
 import com.kh.sixman.common.AuthorizeVo;
@@ -23,9 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class AdminMemberService {
-	@Autowired
-	private AddressService addressService;
-	
+
 	@Autowired
 	private AdminMemberDao adminMemberDao;
 	

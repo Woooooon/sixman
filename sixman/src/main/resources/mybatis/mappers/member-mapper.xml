@@ -16,7 +16,7 @@
 			AND ${category} LIKE '%${keyword}%'
 		</if >
 		<if test="keyword != null and keyword !='' and category == null" >
-			AND M.ID LIKE '%${keyword}%'
+			AND (M.ID LIKE '%${keyword}%'
 		    OR M.NAME LIKE '%${keyword}%' 
 		    OR M.EMAIL LIKE '%${keyword}%'
 		    OR M.BIRTHDAY LIKE '%${keyword}%'
@@ -24,7 +24,7 @@
 		    OR T.NAME LIKE '%${keyword}%'
 		    OR P.POSITION LIKE '%${keyword}%'
 		    OR A.RANK LIKE '%${keyword}%'
-		    OR M.JOIN_DATE LIKE '%${keyword}%'
+		    OR M.JOIN_DATE LIKE '%${keyword}%')
 		</if> 
 	</select>
 	
@@ -260,7 +260,7 @@
 			AND ${category} LIKE '%${keyword}%'
 		</if >
 		<if test="keyword != null and keyword !='' and category == null" >
-			AND M.ID LIKE '%${keyword}%'
+			AND (M.ID LIKE '%${keyword}%'
 		    OR M.NAME LIKE '%${keyword}%' 
 		    OR M.EMAIL LIKE '%${keyword}%'
 		    OR M.BIRTHDAY LIKE '%${keyword}%'
@@ -268,7 +268,7 @@
 		    OR T.NAME LIKE '%${keyword}%'
 		    OR P.POSITION LIKE '%${keyword}%'
 		    OR A.RANK LIKE '%${keyword}%'
-		    OR M.JOIN_DATE LIKE '%${keyword}%'
+		    OR M.JOIN_DATE LIKE '%${keyword}%')
 		</if> 
 		<if test="loginTeamNo == null and loginDeptNo != null">
 			AND M.NO != #{loginNo}

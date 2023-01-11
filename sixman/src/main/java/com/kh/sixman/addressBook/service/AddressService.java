@@ -33,6 +33,9 @@ public class AddressService {
 	public int countList(Map<String, String> search) {
 		return addressDao.countList(sst, search);
 	}
+	public int deleteCountList(Map<String, String> search) {
+		return addressDao.deleteCountList(sst, search);
+	}
 
 	public List<AddressVo> selectAddressList(RowBounds rb, Map<String, String> search) {
 		
@@ -267,11 +270,11 @@ public class AddressService {
 			map.put("userNo", userNo);
 			
 			updateAddressSortaiton = addressDao.updateAddressSortation(sst, map);
-			log.info("업데이트된 주소 : " + updateAddressSortaiton);
+			log.info("업데이트된 주소 개수: " + updateAddressSortaiton);
 			
 			deleteResult = addressDao.deleteSortation(sst, map);
 			
-			log.info("삭제된 카테고리 : " + deleteResult);
+			log.info("삭제된 카테고리 개수: " + deleteResult);
 		}
 		
 		if(createNo != null) {
@@ -292,4 +295,6 @@ public class AddressService {
 		
 		return deleteResult * createResult * updateAddressSortaiton;
 	}
+
+	
 }

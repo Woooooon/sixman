@@ -18,7 +18,11 @@ public class AddressDao {
 	public int countList(SqlSessionTemplate sst, Map<String, String> search) {
 		return sst.selectOne("addressMapper.countAddress", search);
 	}
-
+	
+	public int deleteCountList(SqlSessionTemplate sst, Map<String, String> search) {
+		return sst.selectOne("addressMapper.deleteCountList", search);
+	}
+	
 	public List<AddressVo> selectAddressList(SqlSessionTemplate sst, RowBounds rb, Map<String, String> search) {
 		return sst.selectList("addressMapper.selectAddressList", search, rb);
 	}
@@ -135,6 +139,8 @@ public class AddressDao {
 	public int updateAddressSortation(SqlSessionTemplate sst, Map<String, String> map) {
 		return sst.update("addressMapper.updateAddressSortation", map);
 	}
+
+	
 
 	
 

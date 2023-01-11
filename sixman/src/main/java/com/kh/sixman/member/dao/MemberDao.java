@@ -30,8 +30,6 @@ public class MemberDao {
 
 	public List<MemberVo> selectMemberList(SqlSessionTemplate sst, Map<String, String> search, RowBounds rb) {
 		List<MemberVo> test = sst.selectList("memberMapper.selectMemberList",search, rb);
-		log.info("search :" + search );
-		log.info("list :" + test );	
 		return test;
 	}
 

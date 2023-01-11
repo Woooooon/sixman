@@ -249,20 +249,11 @@ input[type='submit'] {
     width: 5px;
 }
 
-/* .position-list::-webkit-scrollbar {
-    width: 8px; 
+.error {
+    border: 2px solid #e85c5c;
+    padding: 5px;
+    outline-style: #e85c5c;
 }
-
-.position-list::-webkit-scrollbar-thumb {
-    height: 10px; 
-    background: #217af4; 
-
-    border-radius: 10px;
-}
-
-.position-list::-webkit-scrollbar-track {
-    background: rgba(33, 122, 244, 0.1); 
-} */
 
 .position-item,
 .dept-item,

@@ -200,7 +200,7 @@
                             <ul class="newbie-list">
                                 <c:forEach items="${newbieList}" var="i">
                                 <li class="newbie-box" id="asd">
-                                    <a href="" class="newbie-detail">
+                                    <a href="/sixman/admin/member/detail?no=${i.no}" class="newbie-detail">
                                         <div class="newbie-pic">
                                         	<c:if test="${empty i.fileName}">
                                         		<img src="/sixman/resources/img/defaultProfilePic.png" alt="" />
