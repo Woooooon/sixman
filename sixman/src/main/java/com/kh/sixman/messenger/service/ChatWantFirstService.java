@@ -6,7 +6,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.gson.JsonElement;
 import com.kh.sixman.messenger.dao.WhoChatFirstDao;
+import com.kh.sixman.messenger.vo.ChatContent;
 import com.kh.sixman.messenger.vo.ChatCreateRoomMemberVo;
 import com.kh.sixman.messenger.vo.ChatRoomDataVo;
 import com.kh.sixman.messenger.vo.DefineChatNameVo;
@@ -40,6 +42,11 @@ public class ChatWantFirstService {
 	public List<ChatRoomDataVo> readchatroomdata(ChatRoomDataVo vo) {
 		// TODO Auto-generated method stub
 		return dao.readchatroomdata(sst, vo);
+	}
+
+	public JsonElement sendMessageContent(ChatContent vo) {
+		// TODO Auto-generated method stub
+		return dao.sendMessageContent(sst, vo);
 	}
 
 
