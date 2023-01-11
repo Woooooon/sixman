@@ -24,12 +24,18 @@
 		S.SALARY_PAY,
 		S.MINUS_PAY,
 		S.REAL_PAY,
-		TO_CHAR("PAY_DATE", 'YYYY-MM') AS "PAY_DATE"
+		TO_CHAR("PAY_DATE", 'YYYY-MM') AS "PAY_DATE",
+		S.LONG_PAY,
+	    S.WORK_TIME,
+	    S.HOUR_MONEY,
+	    S.WORKMORE_TIME,
+	    S.HOLIDAY_TIME
 	FROM SALARY S
 	, MEMBER M
 	WHERE S.MEMBER_NO = M.NO
 	AND M.NAME = #{name}
 	AND PAY_DATE BETWEEN TO_DATE(#{startDay},'YYYY-MM') AND TO_DATE(#{endDay},'YYYY-MM')
+	ORDER BY "PAY_DATE" DESC
 	</select>
 	
 	<!-- 아래는 admin  -->
@@ -38,6 +44,25 @@
 		SELECT *
 		FROM MEMBER
 	</select>
+	
+	<insert id="insertSalary">
+
+	INSERT INTO SALARY
+	(
+		"NO","MEMBER_NO","BASE_PAY","PLUS_PAY","REST_PAY","EAT_PAY","HOLIDAY_PAY","BONUS_PAY",
+		"NATIONAL_PAY","HEALTH_PAY","EMP_PAY","INCOME_PAY","LOCAL_PAY","SALARY_PAY","MINUS_PAY","REAL_PAY","PAY_DATE","LONG_PAY",
+		"WORK_TIME","HOUR_MONEY","WORKMORE_TIME","HOLIDAY_TIME"
+	)
+	VALUES
+	(
+		SEQ_SALARY_NO.NEXTVAL,
+		(SELECT NO FROM MEMBER WHERE NAME=#{name})
+		,${basePay},${plusPay},${restPay},${eatPay},${holidayPay},${bonusPay},${nationalPay},${healthPay},${empPay},
+		${incomePay},${localPay},${salaryPay},${minusPay},${realPay},TO_DATE(#{payDate},'YYYY-MM'),
+		${longPay},${workTime},${hourMoney},${workmoreTime},${holidayTime}
+	)
+
+	</insert>
 
 
 

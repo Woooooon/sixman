@@ -14,6 +14,7 @@
 			,A.WORK_DAY
 			,TO_CHAR(A."START", 'HH24:MI') AS "START"
 			,TO_CHAR(A."END", 'HH24:MI') AS "END"
+			,A.WORKOVER_TIME
 			,A.WORK_TIME
 			FROM MEMBER M
 			, ATTENDANCE A
@@ -110,6 +111,7 @@
 			,A.WORK_DAY
 			,TO_CHAR(A."START", 'HH24:MI') AS "START"
 			,TO_CHAR(A."END", 'HH24:MI') AS "END"
+			,A.WORKOVER_TIME
 			,A.WORK_TIME
 			FROM MEMBER M
 			, ATTENDANCE A
@@ -148,7 +150,9 @@
 		UPDATE ATTENDANCE
 		SET
 		"START" = TO_DATE(#{start}, 'HH24:MI'),
-		"END" = TO_DATE(#{end}, 'HH24:MI')
+		"END" = TO_DATE(#{end}, 'HH24:MI'),
+		"WORKOVER_TIME" = ${workoverTime},
+		"WORK_TIME" = ${workTime}
 		WHERE "WORK_DAY" = #{workDay}
 			
 	</update>

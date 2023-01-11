@@ -161,11 +161,32 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
-#restinfo1, #restinfo2, #restinfo3,#restinfo4,#restinfo5{
+#restinfo2, #restinfo3{
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 50px;
+    background-color: #E2E2E2;
+}
+#restinfo1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 65px;
+    background-color: #E2E2E2;
+}
+#restinfo4{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 58px;
+    background-color: #E2E2E2;
+}
+#restinfo5{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
     background-color: #E2E2E2;
 }
 #restinfo-title1,#restinfo-title2,#restinfo-title3,#restinfo-title4,#restinfo-title5{
@@ -311,6 +332,7 @@
 <body>
 
     <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
+    
 <main class="main-box">
     <div id="main-content">
         <div>
@@ -322,7 +344,7 @@
                     <div class="btn">3개월</div>
                     <div class="btn">1년</div>
                     <div id="date">
-                        <input id="start-day" type="date" style="width: 100px;" name="start" value="2020-01-01">
+                        <input id="start-day" type="date" style="width: 100px;" name="start" value="2022-01-01">
                         ~
                         <input id="end-day" type="date" style="width: 100px;" name="end">
                     </div>
@@ -348,7 +370,7 @@
                                 <p>${x.name}</p>
                                 <p>${x.start}</p>
                                 <p>${x.end}</p>
-                                <p></p>
+                                <p>${x.workoverTime}</p>
                                 <p>${x.workTime}</p>
                             </div>
                         </c:forEach>
@@ -381,13 +403,9 @@
         <div id="work-week" class="box">
             <div id="week-header">이번주 근로시간</div>
             <div id="select-week">
-                <select name="category">
-                    <option value="first">2022-11-28 ~ 2022-12-04</option>
-                    <option value="second">2022-12-05 ~ 2022-12-11</option>
-                    <option value="third">2022-12-12 ~ 2022-12-18</option>
-                    <option value="four">2022-12-18 ~ 2022-12-25</option>
-                    <option value="four">2022-12-26 ~ 2023-01-01</option>
-                </select>
+                <input id="start-day" type="date" style="width: 100px;" name="start" value="2022-01-08">
+                        ~
+                <input id="end-day" type="date" style="width: 100px;" name="end" value="2023-01-14">
             </div>
             <div id="work-time">
                 소정 근로시간 &nbsp&nbsp&nbsp&nbsp<progress max="100" value="70" style="width:140px; height: 35px;"></progress>
@@ -400,7 +418,7 @@
             <div id="information-header">내 휴가 정보</div>
             <div id="restinfo1" class="box">
                 <div id="restinfo-title1">입사일</div>
-                <div>2019-10-01</div>
+                <div>2022-01-02</div>
             </div>
             <div id="restinfo2" class="box">
                 <div id="restinfo-title2">연차휴가</div>
@@ -430,7 +448,6 @@
     var now_utc = Date.now()
     var timeOff = new Date().getTimezoneOffset()*60000;
     var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
-    console.log(today)
     document.getElementById("end-day").setAttribute("max", today);
     document.getElementById("start-day").setAttribute("max", today);
 
@@ -451,10 +468,7 @@
     var end = document.getElementById('end123');
 
     var result = start-end;
-    console.log(start[2]);
-    console.log(start[1]);
-    console.log(start[0]);
-    console.log(result);
+ 
 
 </script>
 

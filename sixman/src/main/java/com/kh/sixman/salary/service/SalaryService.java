@@ -26,4 +26,8 @@ public class SalaryService {
 		return dao.ListMember(sst);
 	}
 
+	public int insertSalary(SalaryVo vo) {
+		return dao.insertSalary(sst, vo);
+	}
+
 }

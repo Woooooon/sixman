@@ -197,10 +197,13 @@
     grid-template-rows: 1fr 1fr;
 }
 
-#modal-2-1,#modal-2-2,#modal-3-2,#modal-4-2,#modal-4-3,#modal-4-4,#modal-4-5,#modal-4-6,#modal-4-7, #modal-4-8{
+#modal-2-1,#modal-3-2,#modal-4-2,#modal-4-3,#modal-4-4,#modal-4-5,#modal-4-6,#modal-4-7, #modal-4-8{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    
+    grid-template-columns: 1fr 1fr 1fr 1fr;   
+}
+#modal-2-2{
+    display: grid;
+    grid-template-columns: 1fr 1fr 0.5fr 1.5fr;   
 }
 
 #modal-2-1 div,#modal-2-2 div,#modal-3-2 div,#modal-4-2 div,#modal-4-3 div,#modal-4-4 div,#modal-4-5 div,#modal-4-6 div,#modal-4-7 div, #modal-4-8 div{
@@ -247,7 +250,7 @@
     <div class="share-modal">
         <div id="modal">
             <div id="modal-1"> 
-                <div id="modal-header">&nbsp&nbsp&nbsp&nbsp 2022년 10월분 급여명세서</div>
+                <div id="modal-header">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <input type="text" id="workDay" style="border: none; font-size:1.2em;font-weight:600; width:290px;"></div>
                 <div>
                     <span id="close" class="material-symbols-outlined"> close </span>
                 </div>
@@ -257,13 +260,14 @@
                     <div>성명: ${loginMember.name}</div>
                     <div>사번: ${loginMember.no}</div>
                     <div>입사날짜: 2022-01-02</div>
-                    <div>이메일: ${loginMember.email}</div>
+                    <div>계좌번호: ${loginMember.account}</div>
                 </div>
                 <div id="modal-2-2">
                     <div>직급: ${loginMember.positionName}</div>
-                    <div>부서: ${loginMember.teamName}</div>
+                    <div>부서: 물류부</div>
                     <div>은행명: ${loginMember.bankName}</div>
-                    <div>계좌번호: ${loginMember.account}</div>
+                    <div>이메일: ${loginMember.email}</div>
+                    
                 </div>
             </div>
             <div id="modal-3" class="box">
@@ -274,10 +278,10 @@
                     <div>통상시급(원)</div>
                 </div>
                 <div id="modal-3-2">
-                    <div>22</div>
-                    <div>6</div>
-                    <div>170</div>
-                    <div>10,000</div>
+                    <div>2</div>
+                    <div>0</div>
+                    <div><input type="text" id="workTime" style="border: none; width: 30px; font-size: 1em;"></div>
+                    <div>17045</div>
                 </div>
             </div>
             <div id="modal-4" class="box">
@@ -289,51 +293,51 @@
                 </div>
                 <div id="modal-4-2">
                     <div>기본급</div>
-                    <div>1,000,000</div>
+                    <div><input type="text" id="basePayjs" style="border: none; width: 67px; font-size: 1em;"></div>
                     <div>국민연금</div>
-                    <div>20,000</div>
+                    <div>122050</div>
                 </div>
                 <div id="modal-4-3">
                     <div>연장근로수당</div>
-                    <div>1,000,000</div>
+                    <div>0</div>
                     <div>건강보험</div>
-                    <div>20,000</div>
+                    <div>88245</div>
                 </div>
                 <div id="modal-4-4">
                     <div>휴일근로수당</div>
-                    <div>200,000</div>
-                    <div>고용보험</div>
-                    <div>20,000</div>
+                    <div>0</div>
+                    <div>장기요양보험료</div>
+                    <div>10825</div>
                 </div>
                 <div id="modal-4-5">
                     <div>식대보조금</div>
-                    <div>100,000</div>
-                    <div>장기요양보험료</div>
-                    <div>20,000</div>
+                    <div>176000</div>
+                    <div>고용보험</div>
+                    <div>23600</div>
                 </div>
                 <div id="modal-4-6">
                     <div></div>
                     <div></div>
                     <div>소득세</div>
-                    <div>20,000</div>
+                    <div>151885</div>
                 </div>
                 <div id="modal-4-7">
                     <div></div>
                     <div></div>
                     <div>지방소득세</div>
-                    <div>20,000</div>
+                    <div>15185</div>
                 </div>
                 <div id="modal-4-8">
                     <div></div>
                     <div></div>
                     <div id="modal-4-8-1">공제액계</div>
-                    <div id="modal-4-8-2">120,000</div>
+                    <div id="modal-4-8-2"><input type="text" id="minusPayjs" style="border: none; width: 60px; font-size: 1em; background-color:#E2E2E2 ;"></div>
                 </div>
                 <div id="modal-4-9">
                     <div>지급액계</div>
-                    <div>1,400,000</div>
+                    <div><input type="text" id="plustotalPayjs" style="border: none; width: 67px; font-size: 1em;  font-weight:600; background-color:#E2E2E2 ;"></div>
                     <div>차인지급액</div>
-                    <div>1,370,000</div>
+                    <div><input type="text" id="totalPayjs" style="border: none; width: 67px; font-size: 1em;  font-weight:600; background-color:#E2E2E2 ;"></div>
                 </div>
             </div>
         </div>
@@ -374,8 +378,8 @@
                         <div class="list-item"> 
                             <p>${x.payDate}</p> 
                             <p>${x.name}</p> 
-                            <p>167</p> 
-                            <p>${x.holidayPay + x.bonusPay+x.eatPay}</p> 
+                            <p>${x.workTime}</p> 
+                            <p>${x.eatPay}</p> 
                             <p>${x.basePay}</p> 
                             <p>${x.basePay + x.holidayPay + x.bonusPay + x.eatPay}</p> 
                             <p>${x.minusPay}</p> 
@@ -388,10 +392,10 @@
                     <span class="material-symbols-outlined"> keyboard_double_arrow_left </span>
                     <span class="material-symbols-outlined"> chevron_left </span>
                     <div class="page-btn checked-p-btn">1</div>
-                    <div class="page-btn">2</div>
+                    <!-- <div class="page-btn">2</div>
                     <div class="page-btn">3</div>
                     <div class="page-btn">4</div>
-                    <div class="page-btn">5</div>
+                    <div class="page-btn">5</div> -->
                     <span class="material-symbols-outlined"> chevron_right </span>
                     <span class="material-symbols-outlined"> keyboard_double_arrow_right </span>
                 </div>
@@ -424,6 +428,37 @@
         document.querySelector(".share-modal").style.display = "flex"
     })
     }
+
+     //모달 클릭햇을때 값
+     const abcArray = document.querySelectorAll('.list-item');
+
+    for(let i = 0; i < abcArray.length; i++){
+        abcArray[i].addEventListener('click',function(x){
+
+            resultArray = x.currentTarget.innerText;
+
+            const a = resultArray.split('\n\n');
+            
+            var abc = document.getElementById('workDay').value = a[0];
+            var abc2 = abc+('월 급여명세서');
+
+
+            document.getElementById('workDay').value = abc2;
+            
+            document.getElementById('workTime').value = a[2];
+
+            // document.getElementById('plusPayjs').value = a[3];
+
+            document.getElementById('basePayjs').value = a[4];
+
+            document.getElementById('plustotalPayjs').value = a[5];
+
+            document.getElementById('totalPayjs').value = a[7];
+
+            document.getElementById('minusPayjs').value = a[6];
+            
+        });
+}
 
 
     </script>

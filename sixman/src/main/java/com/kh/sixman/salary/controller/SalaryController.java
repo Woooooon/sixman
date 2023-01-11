@@ -52,6 +52,24 @@ public class SalaryController {
 		return("salary/salaryAdmin");
 	}
 	
+	@PostMapping("salary/salaryAdmin")
+	public String salaryAdmin2(@RequestParam Map<String, String> map ,Model model, SalaryVo vo, HttpSession session) {
+		
+		System.out.println(vo);
+		
+		int result = service.insertSalary(vo);
+		
+		 //맴버선택
+		List<MemberVo> memberList = service.ListMember();
+		model.addAttribute("memberList", memberList);
+		
+		List<SalaryVo> voList = service.searchSelectList(vo);
+		
+		model.addAttribute("voList", voList);
+	
+		return("salary/salaryAdmin");
+	}
+	
 	
 	
 	

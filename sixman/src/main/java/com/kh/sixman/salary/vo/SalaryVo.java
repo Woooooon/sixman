@@ -4,26 +4,35 @@ import lombok.Data;
 
 @Data
 public class SalaryVo {
+	
+	private String workTime;
+	private String hourMoney;
+	private String payDate;
 
 	private String name;
-	private String no;
+	private int no;
+	private String email;
 	private String memberNo;
-	private String basePay;
-	private String plusPay;
-	private String restPay;
-	private String eatPay;
-	private String holidayPay;
-	private String bonusPay;
-	private String nationalPay;
-	private String healthPay;
-	private String empPay;
-	private String incomePay;
-	private String localPay;
-	private String salaryPay;
-	private String minusPay;
-	private String realPay;
-	private String payDate;
-	
+	private int basePay;
+	private int plusPay;
+	private int restPay;
+	private int eatPay;
+	private int holidayPay;
+	private int bonusPay;
+	private int nationalPay;
+	private int healthPay;
+	private int empPay;
+	private int incomePay;
+	private int longPay;
+	private int localPay;
+	private int salaryPay;
+	private int minusPay;
+	private int realPay;
+	private int workmoreTime;
+	private int holidayTime;
+
+	private String bankName;
+	private String position;
 	
 	private String startDay;
 	private String endDay;

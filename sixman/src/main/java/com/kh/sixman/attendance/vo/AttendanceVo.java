@@ -14,6 +14,7 @@ public class AttendanceVo {
 	private String workDay;
 	private String start;
 	private String end;
+	private String workoverTime;
 	private String workTime;
-
+	
 }

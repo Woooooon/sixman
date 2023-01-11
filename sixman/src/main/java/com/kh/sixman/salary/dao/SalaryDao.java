@@ -19,4 +19,8 @@ public class SalaryDao {
 		return sst.selectList("salaryMapper.listMember");
 	}
 
+	public int insertSalary(SqlSessionTemplate sst, SalaryVo vo) {
+		return sst.insert("salaryMapper.insertSalary",vo);
+	}
+
 }

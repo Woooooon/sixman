@@ -160,11 +160,32 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
-#restinfo1, #restinfo2, #restinfo3,#restinfo4,#restinfo5{
+#restinfo2, #restinfo3{
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 50px;
+    background-color: #E2E2E2;
+}
+#restinfo1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 65px;
+    background-color: #E2E2E2;
+}
+#restinfo4{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 58px;
+    background-color: #E2E2E2;
+}
+#restinfo5{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
     background-color: #E2E2E2;
 }
 #restinfo-title1,#restinfo-title2,#restinfo-title3,#restinfo-title4,#restinfo-title5{
@@ -325,7 +346,7 @@
 
 .share-modal #modal {
     width: 15%;
-    height: 35%;
+    height: 45%;
     background-color: #fff;
     box-shadow: 0px 0px 4px 1px var(--bo-40);
     padding: 10px;
@@ -333,7 +354,7 @@
 
 #modal form{
     display: grid;
-    grid-template-rows: 1fr 1.5fr 1.5fr 1.5fr 1.5fr 2fr 0.5fr;
+    grid-template-rows: 1fr 1.5fr 1.5fr 1.5fr 1.5fr 1.5fr 1.5fr 2fr 0.5fr;
     gap: 10px;
 }
 #modal-close{
@@ -344,7 +365,7 @@
     font-size: 1.5em;
 }
 
-#timemodal1,#timemodal2,#timemodal3,#timemodal4,#timemodal5{
+#timemodal1,#timemodal2,#timemodal3,#timemodal4,#timemodal5,#timemodal6{
     display: flex;
     font-size: 1.5em;
     justify-content: center;
@@ -379,6 +400,8 @@
                 <div id="timemodal2">상태: 정상 출근</div>
                 <div id="timemodal3">시작 시간:  <input type="text" id="start" name="start" style="border: none; width: 70px; font-size: 1em;"> </div>
                 <div id="timemodal4">종료 시간:  <input type="text" id="end" name="end" style="border: none; width: 70px; font-size: 1em;"></div>
+                <div id="timemodal5">추가근무시간: <input type="text" name="workoverTime" id="plusWork" style="border: none; width: 30px; font-size: 1em;"></div>
+                <div id="timemodal6">총 근무시간: <input type="text" name="workTime" id="totalWork" style="border: none; width: 30px; font-size: 1em;"></div>
                 <div><input class="btn" id="date-btnModal" type="submit" value="수정"></div>
                 <div></div>
             </form>
@@ -402,7 +425,7 @@
                     <div></div>
                     <div id="search-font">검색기간</div>
                     <div id="date">
-                        <input id="start-day" type="date" style="width: 100px;" name="start" value="2020-01-01">
+                        <input id="start-day" type="date" style="width: 100px;" name="start" value="2022-01-01">
                         ~
                         <input id="end-day" type="date" style="width: 100px;" name="end">
                     </div>
@@ -429,7 +452,7 @@
                             <p>${xq.name}</p>
                             <p>${xq.start}</p>
                             <p>${xq.end}</p>
-                            <p></p>
+                            <p>${xq.workoverTime}</p>
                             <p>${xq.workTime}</p>
                         </div>
                     </c:forEach>
@@ -455,20 +478,16 @@
             <div id="date-box">${day}</div>
             <div id="time-box">${time}</div>
             <div id="result-box">
-                <div>시작: ${todayWork.start}</div>
-                <div>종료: ${todayWork.end}</div>
+                <!-- <div>시작: ${todayWork.start}</div>
+                <div>종료: ${todayWork.end}</div> -->
             </div>
         </div>
         <div id="work-week" class="box">
             <div id="week-header">이번주 근로시간</div>
             <div id="select-week">
-                <select name="category">
-                    <option value="first">2022-11-28 ~ 2022-12-04</option>
-                    <option value="second">2022-12-05 ~ 2022-12-11</option>
-                    <option value="third">2022-12-12 ~ 2022-12-18</option>
-                    <option value="four">2022-12-18 ~ 2022-12-25</option>
-                    <option value="four">2022-12-26 ~ 2023-01-01</option>
-                </select>
+                <input id="start-day" type="date" style="width: 100px;" name="start" value="2022-01-08">
+                ~
+                <input id="end-day" type="date" style="width: 100px;" name="end" value="2023-01-14">
             </div>
             <div id="work-time">
                 소정 근로시간 &nbsp&nbsp&nbsp&nbsp<progress max="100" value="70" style="width:140px; height: 35px;"></progress>
@@ -478,10 +497,10 @@
             </div>
         </div>
         <div id="rest-information" class="box">
-            <div id="information-header">ㅇㅇㅇ의 휴가 정보</div>
+            <div id="information-header"> 휴가 정보</div>
             <div id="restinfo1" class="box">
                 <div id="restinfo-title1">입사일</div>
-                <div>2019-10-01</div>
+                <div>2022-01-02</div>
             </div>
             <div id="restinfo2" class="box">
                 <div id="restinfo-title2">연차휴가</div>
@@ -510,7 +529,6 @@
     var now_utc = Date.now()
     var timeOff = new Date().getTimezoneOffset()*60000;
     var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
-    console.log(today)
     document.getElementById("end-day").setAttribute("max", today);
     document.getElementById("start-day").setAttribute("max", today);
 
@@ -548,6 +566,10 @@
             document.getElementById('start').value = a[2];
 
             document.getElementById('end').value = a[3];
+
+            document.getElementById('plusWork').value = a[4];
+
+            document.getElementById('totalWork').value = a[5];
             
         });
     }
