@@ -97,7 +97,7 @@
             </div>
          
         </div>
-        <textarea name="content" id="summernote">${vo.content}</textarea>
+       
 
         <div class="docu-write">
             <!-- <button onclick="" id="documentwrite"><a href="">결재 상신</a></button> -->
@@ -152,7 +152,7 @@ function selectAll(selectAll)  {
         });
     });
     function deleteValue(){
-        var url = "document/first";
+        var url = "first";
         var valueArr = new Array();
         var list = $("input[name='RowCheck']");
         for(var i=0; i< list.length; i++){

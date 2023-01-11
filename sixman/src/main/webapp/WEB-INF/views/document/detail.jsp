@@ -79,11 +79,11 @@
 
             </div>
         </div>
-        <textarea name="content" id="summernote"></textarea>
+        <textarea name="content" id="summernote">${dvo.content}</textarea>
         <a id="btn-box">
             <!-- <input name="subit" class="c-btn" type="submit" value="반려하기"> -->
             <a href="${path}/document/modify?no=${dvo.no}"><input name="submit" class="btn" value="수정하기"></a>
-            <a href="${path}/document/modify?no=${dvo.no}"></a><input name="submit" class="btn" type="submit" value="작성하기"></a>
+            
            
         </div>
     </div>

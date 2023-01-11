@@ -51,21 +51,9 @@
                 </div>
             </div>
             <div class="docbox">
-                <div class="ppp">
-                    <div>직급</div>
-                    <div class="btn" ><button onclick="toggleImg()"><span class="material-symbols-outlined" id="pchange"> add </span></button> </div>
-                    <div>심원용</div>
-                </div>
-                <div class="ppp">
-                    <div>직급</div>
-                    <div class="btn" ><button onclick="toggleImg()"><span class="material-symbols-outlined"> add </span></button> </div>
-                    <div>심투용</div>
-                </div>
-                <div class="ppp">
-                    <div>직급</div>
-                    <div class="btn" ><button onclick="toggleImg()"><span class="material-symbols-outlined"> add </span></button> </div>
-                    <div>심삼용</div>
-                </div>
+                <div>직급</div>
+                    <div class="btn" ><button id="che" type="button" onclick="changeByJS()"><span id="ptagchange" class="material-symbols-outlined" id="pchange"> add </span></button> </div>
+                <div>심원용</div>
             </div>
         </div>
         <div id="write-header">
@@ -134,4 +122,16 @@
         });
     });
 </script>
+
+<script>
+    $("#che").click(function(){
+    $(".ptagchange").text("check");
+    });
+
+    function changeByJS() {
+    let x = document.getElementsByClassName("ptagchange")[0];
+    x.innerText="checkon"; 
+    }
+
+    </script>
 </html>
