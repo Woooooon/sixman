@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.sixman.common.AttachmentVo;
+import com.kh.sixman.project.vo.TodoVo;
 
 import lombok.Data;
 
@@ -51,4 +52,5 @@ public class MemberVo {
 	private List<MultipartFile> evidenceFile;
 	private List<AttachmentVo> evidenceFileList;
 	
+	private List<TodoVo> todoList;
 }

@@ -8,7 +8,7 @@ import lombok.Data;
 public class TodoVo {
 
 	private String no;
-	private String pmNo;
+	private String prjNo;
 	private String name;
 	private String title;
 	private String[] content;

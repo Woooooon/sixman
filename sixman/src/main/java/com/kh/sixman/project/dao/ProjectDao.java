@@ -1,6 +1,7 @@
 package com.kh.sixman.project.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -9,7 +10,10 @@ import com.kh.sixman.member.vo.MemberVo;
 import com.kh.sixman.project.vo.ProjectVo;
 import com.kh.sixman.project.vo.TodoVo;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Repository
+@Slf4j
 public class ProjectDao {
 
 	//프로젝트 전체 확인
@@ -73,8 +77,11 @@ public class ProjectDao {
 	}
 
 	//todo리스트 전체 가져오기
-	public List<TodoVo> selectTodolist(SqlSessionTemplate sst, String no) {
-		return sst.selectList("projectMapper.selectTodoList", no);
+	public List<TodoVo> selectTodolist(SqlSessionTemplate sst, Map<String, String> pmap) {
+		log.info("dao map : " + pmap);
+		List<TodoVo> x = sst.selectList("projectMapper.selectTodoList", pmap);
+		log.info("dao result : " + x);
+		return x;
 	}
 
 	//todo 추가하기
