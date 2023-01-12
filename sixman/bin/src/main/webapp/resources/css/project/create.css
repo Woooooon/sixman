@@ -37,7 +37,7 @@
     margin-right: 20px;
 }
 
-input[name='prj_name']{
+input[name='title']{
     width: 400px;    
     height: 40px;
     border: 1px solid #d3d3d3;
@@ -80,10 +80,10 @@ input[name='prj_name']{
 
 /* 일정 */
 
-input[name='prjDate1'],
-input[name='prjDate2'] {
+#startDate,
+#endDate {
     --margin-top: 11px;
-    width: 150px;
+    width: 135px;
     height: 40px;
     border-radius: 5px;
     border: 1px solid #aaa;
@@ -94,57 +94,46 @@ input[name='prjDate2'] {
     margin: 10px;
 }
 
+.prj2 {
+    margin-left: 35px;
+    border-color: #2fa597;
+}
+
+.writer1 {
+    margin-left: 25px;
+    margin-right: 50px;
+}
+
+.plusm {
+    width: 120px;
+}
+
 
 /* 팀 select */
 
-.hide{
-    display: none;
-}
-/* .show{
-    display: block;
-} */
-
-.select{
-    position: relative;
-    padding: 5px 10px;
+select {
+    outline: none;
     width: 150px;
     height: 40px;
     border-radius: 5px;
     border:1px solid #d3d3d3;
     background-color: #ffffff;
-    background-image: url("https://img.icons8.com/material-rounded/24/000000/expand-arrow.png");
-    background-repeat: no-repeat;
-    background-position: 96% center;
     cursor: pointer;
-}
-
-.select > span {
-    display: flex;
-    justify-content: center;
-    padding-top: 5px;
-    padding-right: 7px;
-}
-
-.select ul{
-    position: absolute;
-    top: 39px;
-    left: 1px;
-    width: 100%;
-    border:1px solid #d3d3d3;
-    border-radius: 5px;
-    background-color: #ffffff;
-    cursor: pointer;
-    z-index: 1;
-}
-.select ul li{
-    padding: 10px;
+    font-size: 16px;
     text-align: center;
 }
 
-.select ul li:hover{
-    background-color: floralwhite;
+select option {
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #2fa597;
+    border-bottom: 1px dashed #2fa597;
+    transition: .3s ease-in;
 }
 
+option {
+    border-radius: 5px;
+}
 
 /* 첨부파일 */
 
@@ -195,6 +184,8 @@ input[name='prjDate2'] {
 }
 
 .team-member-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #d3d3d3;
@@ -204,8 +195,23 @@ input[name='prjDate2'] {
 }
 
 .member {
+    padding-top: 5px;
     display: flex;
     color: #2e7aff;
+    text-align: center;
+    vertical-align: middle;
+}
+
+input[name='prjmem'],
+input[name='teammem'],
+input[name='deptmem'] {
+    outline: none;
+    border: none;
+    color: #2e7aff;
+    text-align: center;
+    width: 60px;
+    height: 25px;
+    font-size: 15px;
 }
 
 /* 프로젝트 내용 */
@@ -324,7 +330,7 @@ input[name='prjDate2'] {
     width: 30px;
     height: 30px;
     display: block;
-    background-color: #FF0000;
+    background-color: #2fa597;
     border-radius: 50%;
     content: '';
 }

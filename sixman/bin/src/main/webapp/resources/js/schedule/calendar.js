@@ -1,4 +1,5 @@
 let date = new Date();
+console.log(date);
 
 const renderCalender = () =>{
     const viewYear  = date.getFullYear();
@@ -6,25 +7,14 @@ const renderCalender = () =>{
 
     document.querySelector('.year-month').textContent = `${viewYear}년 ${viewMonth + 1}월`;
 
-    console.log(viewYear);
-
     const prevLast = new Date(viewYear, viewMonth , 0);
     const thisLast = new Date(viewYear, viewMonth + 1 , 0);
-
-    console.log('prevLast : ' + prevLast);
-    console.log('thisLast : ' + thisLast);
 
     const PLDate = prevLast.getDate();
     const PLDay = prevLast.getDay();
 
-    console.log('PLDate : ' + PLDate);
-    console.log('PLDay : ' + PLDay);
-
     const TLDate = thisLast.getDate();
     const TLDay = thisLast.getDay();
-
-    console.log('TLDate : ' + TLDate);
-    console.log('TLDay : ' + TLDay);
 
     const prevDates = [];
     const thisDates = [...Array(TLDate + 1).keys()].slice(1);
@@ -39,19 +29,11 @@ const renderCalender = () =>{
     for(let i = 1; i < 7 - TLDay; i++) {
         nextDates.push(i);
     }
-    console.log('----------------');    
-    console.log(prevDates);
-    console.log('----------------');
-    console.log(thisDates);
-    console.log('----------------');
-    console.log(nextDates);
-    console.log('----------------');
 
     const dates = prevDates.concat(thisDates, nextDates);
     const firstDateIndex = dates.indexOf(1);
     const lastDateIndex = dates.lastIndexOf(TLDate);
 
-    console.log(dates);
     dates.forEach((date, i) => {
         const condition = i >= firstDateIndex && i < lastDateIndex + 1
                           ? 'this'
@@ -89,3 +71,36 @@ const goToday = () => {
     renderCalender();
 };
 
+// modal
+
+const modal = document.getElementById("modal");
+
+function modalOn() {
+    modal.style.display = "flex"
+}
+
+function isModalOn() {
+    return modal.style.display === "flex"
+}
+function modalOff() {
+    modal.style.display = "none"
+}
+const btnModal = document.getElementById("btn-modal")
+btnModal.addEventListener("click", e => {
+    modalOn()
+})
+const closeBtn = modal.querySelector(".close-area")
+closeBtn.addEventListener("click", e => {
+    modalOff()
+})
+modal.addEventListener("click", e => {
+    const evTarget = e.target
+    if(evTarget.classList.contains("modal-overlay")) {
+        modalOff()
+    }
+})
+window.addEventListener("keyup", e => {
+    if(isModalOn() && e.key === "Escape") {
+        modalOff()
+    }
+})

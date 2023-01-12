@@ -103,7 +103,32 @@
         </section>
         <section id="g-col-3">
             <article class="box"></article>
-            <article class="box"></article>
+            <article class="box">
+                <div id="dept-detail">
+                    <div id="dept-detail-title">
+                        <h2>${loginMember.deptName}</h2>
+                        <h3>${loginMember.teamName}</h3>
+                    </div>
+                    <div class="dept-list-wrap">
+                        <c:forEach items="${deptMemberList}" var="i">
+                            <div class="dept-detail-list">
+                                <div class="dept-employee-detail">
+                                    <div class="dept-employee-pic">
+                                        <img src="<c:url value='/resources/img/profile/${i.fileName}'/>" alt="" />
+                                    </div>
+                                    <p>${i.name}</p>
+                                    <p>${i.positionName}</p>
+                                </div>
+                                <div class="dept-list-controller">
+                                    <a href="/sixman/mail/write?email=${i.email}"><span class="material-symbols-outlined">mail</span></a>
+                                    <a href="/sixman/address/add?email=${i.email}&name=${i.name}&position=${i.positionName}&company=${i.name}&phone=${i.phone}"><span class="material-symbols-outlined">group_add</span></a>
+                                    <a href=""><span class="material-symbols-outlined">sms</span></a>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </div>
+                </div>
+            </article>
         </section>
     </div>
 </main>

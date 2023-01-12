@@ -31,6 +31,7 @@
 }
 
 #search-box{
+    gap: 10px;
 	padding: 20px;
     display: flex;
     width: 100%;
@@ -89,14 +90,15 @@
     justify-content: center;
     gap: 30px;
 }
-#btn-box > .btn{
+#btn-box > form > .btn{
     width: 120px;
     height: 70px;
     cursor: pointer;
     font-size: 1.7em;
     font-weight: 500;
+    border: none;
 }
-#btn-box > .c-btn{
+#btn-box > form > .c-btn{
     width: 120px;
     height: 70px;
     cursor: pointer;
@@ -159,11 +161,32 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
-#restinfo1, #restinfo2, #restinfo3,#restinfo4,#restinfo5{
+#restinfo2, #restinfo3{
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 50px;
+    background-color: #E2E2E2;
+}
+#restinfo1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 65px;
+    background-color: #E2E2E2;
+}
+#restinfo4{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 58px;
+    background-color: #E2E2E2;
+}
+#restinfo5{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
     background-color: #E2E2E2;
 }
 #restinfo-title1,#restinfo-title2,#restinfo-title3,#restinfo-title4,#restinfo-title5{
@@ -298,36 +321,37 @@
     color: black
 }
 
+#date-btn{
+    /* padding-right: 15px; */
+    width: 100px;
+    border: none;
+}
+
 </style>
 
 <body>
 
     <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
+    
 <main class="main-box">
     <div id="main-content">
         <div>
-            <div id="search-box" class="box">
-                <div id="search-font">검색기간</div>
-                <div>
-                    <button>7일</button>
+            <form action="/sixman/attendance/board3" method="post">
+                <div id="search-box" class="box">
+                    <div id="search-font">검색기간</div>
+                    <div class="btn">7일</div>
+                    <div class="btn">1개월</div>
+                    <div class="btn">3개월</div>
+                    <div class="btn">1년</div>
+                    <div id="date">
+                        <input id="start-day" type="date" style="width: 100px;" name="start" value="2022-01-01">
+                        ~
+                        <input id="end-day" type="date" style="width: 100px;" name="end">
+                    </div>
+                    <div><input class="btn" id="date-btn" type="submit" value="검색"></div>
+                    <div></div>
                 </div>
-                <div>
-                    <button>1개월</button>
-                </div>
-                <div>
-                    <button>3개월</button>
-                </div>
-                <div>
-                    <button>1년</button>
-                </div>
-                <div id="date">
-                    <input id="start-day" type="date" style="width: 100px;">
-                    ~
-                    <input id="end-day" type="date" style="width: 100px;">
-                </div>
-                <div class="btn">검색</div>
-                <div></div>
-            </div>
+            </form>         
         </div>
         <div>
             <div id="notice-box" class="box">
@@ -340,23 +364,25 @@
                         <p>추가근무시간</p>
                         <p>총 근무시간</p>
                     </div>
-                    <div class="list-item"> <p>2022-11-28</p> <p>양수철</p> <p>09:00</p> <p>18:00</p> <p>0</p> <p>8</p></div>
-                    <div class="list-item"> <p>2022-11-27</p> <p>양수철</p> <p>09:00</p> <p>18:00</p> <p>0</p> <p>8</p></div>
-                    <div class="list-item"> <p>2022-11-26</p> <p>양수철</p> <p>09:00</p> <p>18:00</p> <p>0</p> <p>8</p></div>
-                    <div class="list-item"> <p>2022-11-25</p> <p>양수철</p> <p>09:00</p> <p>18:00</p> <p>0</p> <p>8</p></div>
-                    <div class="list-item"> <p>2022-11-24</p> <p>양수철</p> <p>09:00</p> <p>18:00</p> <p>0</p> <p>8</p></div>
-                    
+                        <c:forEach items="${voList}" var="x">
+                            <div class="list-item">
+                                <p>${x.workDay}</p>
+                                <p>${x.name}</p>
+                                <p>${x.start}</p>
+                                <p>${x.end}</p>
+                                <p>${x.workoverTime}</p>
+                                <p>${x.workTime}</p>
+                            </div>
+                        </c:forEach>
                 </div>
                 <div class="page-box">
-                    <span class="material-symbols-outlined"> keyboard_double_arrow_left </span>
-                    <span class="material-symbols-outlined"> chevron_left </span>
-                    <div class="page-btn checked-p-btn">1</div>
-                    <div class="page-btn">2</div>
-                    <div class="page-btn">3</div>
-                    <div class="page-btn">4</div>
-                    <div class="page-btn">5</div>
-                    <span class="material-symbols-outlined"> chevron_right </span>
-                    <span class="material-symbols-outlined"> keyboard_double_arrow_right </span>
+                	<span class="material-symbols-outlined" <c:if test="${pv.currentPage ne 1}">onclick="location.href='/sixman/attendance/board?page=1'"</c:if>> keyboard_double_arrow_left </span>
+                    <span class="material-symbols-outlined" <c:if test="${pv.currentPage ne 1}">onclick="location.href='/sixman/attendance/board?page=${pv.currentPage - 1}'"</c:if>> chevron_left </span>
+                    <c:forEach var="i" begin="${pv.startPage}" end="${pv.endPage}">
+                    <div class="page-btn <c:if test="${i eq pv.currentPage}"> checked-p-btn</c:if>" onclick="location.href='/sixman/attendance/board?page=${i}'">${i}</div>
+                    </c:forEach>
+                    <span class="material-symbols-outlined" <c:if test="${pv.maxPage ne pv.currentPage}">onclick="location.href='/sixman/attendance/board?page=${pv.currentPage + 1}'"</c:if>> chevron_right </span>
+                    <span class="material-symbols-outlined" <c:if test="${pv.maxPage ne 1 and pv.maxPage eq pv.currentPage}">onclick="location.href='/sixman/attendance/board?page=${pv.maxPage}'"</c:if>> keyboard_double_arrow_right </span>
                 </div>
             </div>
         </div>
@@ -366,24 +392,20 @@
             <div id="date-box">${day}</div>
             <div id="time-box">${time}</div>
             <div id="btn-box">
-                <div id="start-btn" class="btn">출근</div>
-                <div id="end-btn" class="c-btn">퇴근</div>
+                <form action="/sixman/attendance/board" method="post"><input type="submit" name="" id="start-btn" class="btn" value="출근"></form>
+                <form action="/sixman/attendance/board2" method="post"><input type="submit" name="" id="end-btn" class="c-btn" value="퇴근"></form>
             </div>
             <div id="result-box">
-                <div>시작: &nbsp<input type="text" style="width: 50px; height: 25px;"></div>
-                <div>종료: &nbsp<input type="text" style="width: 50px; height: 25px;"></div>
+                <div>시작: ${todayWork.start}</div>
+                <div>종료: ${todayWork.end}</div>
             </div>
         </div>
         <div id="work-week" class="box">
             <div id="week-header">이번주 근로시간</div>
             <div id="select-week">
-                <select name="category">
-                    <option value="first">2022-11-28 ~ 2022-12-04</option>
-                    <option value="second">2022-12-05 ~ 2022-12-11</option>
-                    <option value="third">2022-12-12 ~ 2022-12-18</option>
-                    <option value="four">2022-12-18 ~ 2022-12-25</option>
-                    <option value="four">2022-12-26 ~ 2023-01-01</option>
-                </select>
+                <input id="start-day" type="date" style="width: 100px;" name="start" value="2022-01-08">
+                        ~
+                <input id="end-day" type="date" style="width: 100px;" name="end" value="2023-01-14">
             </div>
             <div id="work-time">
                 소정 근로시간 &nbsp&nbsp&nbsp&nbsp<progress max="100" value="70" style="width:140px; height: 35px;"></progress>
@@ -396,7 +418,7 @@
             <div id="information-header">내 휴가 정보</div>
             <div id="restinfo1" class="box">
                 <div id="restinfo-title1">입사일</div>
-                <div>2019-10-01</div>
+                <div>2022-01-02</div>
             </div>
             <div id="restinfo2" class="box">
                 <div id="restinfo-title2">연차휴가</div>
@@ -426,7 +448,6 @@
     var now_utc = Date.now()
     var timeOff = new Date().getTimezoneOffset()*60000;
     var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
-    console.log(today)
     document.getElementById("end-day").setAttribute("max", today);
     document.getElementById("start-day").setAttribute("max", today);
 
@@ -434,17 +455,20 @@
     document.getElementById('end-day').value = new Date().toISOString().substring(0, 10);
 
     //출근버튼
-    document.querySelector("#start-btn").addEventListener("click", () => {
-        popup.alertPop("출근","시간나오게");
-    })
+    // document.querySelector("#start-btn").addEventListener("click", () => {
+    //     popup.alertPop("출근","시간나오게");
+    // })
 
     //퇴근버튼
-    document.querySelector("#end-btn").addEventListener("click", () => {
-        popup.alertPop("퇴근","시간나오게");
-    })
+    // document.querySelector("#end-btn").addEventListener("click", () => {
+    //     popup.alertPop("퇴근","시간나오게");
+    // })
 
+    var start = document.getElementById('start123');
+    var end = document.getElementById('end123');
 
-
+    var result = start-end;
+ 
 
 </script>
 

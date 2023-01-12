@@ -49,17 +49,17 @@
     padding: 0px 0px 5px 20px;
 }
 .header > label {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 600;
 }
 .header > span {
-    font-size: 28px;
-    margin-right: 10px;
+    font-size: 23px;
+    margin-right: 5px;
     color: var(--main-color);
 }
 #companyLogo {
     margin: 0px 0px 10px 10px;
-    width: 100px;
+    width: 10 0px;
 }
 
 #companyLogo > img {
@@ -79,11 +79,19 @@
     height: 200px;
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
 }
 
 .write {
     font-size: 17px;
+    position: relative;
+}
+
+.write p {
+    position: absolute;
+    color: #e85c5c;
+    font-size: 12px;
+    bottom: -15px;
+    left: 90px;
 }
 
 .write input {
@@ -145,7 +153,7 @@
 
 #bank > input {
     margin-left: 90px;
-    margin-top: 20px;
+    margin-top: 25px;
 }
 
 #profile-view > img {
@@ -174,7 +182,7 @@
 }
 
 #address-wrap > button:hover {
-    background-color: #17a897;
+    background-color: var(--main-color-dark);
 }
 
 .info-wrap {
@@ -190,6 +198,7 @@
 
 .right-info {
     width: 50%;
+    margin-top: 3px;
     display: flex;
     flex-direction: column;
     gap: 25px;
@@ -213,7 +222,7 @@
 }
 
 #submit > input:hover {
-    background-color: #17a897;
+    background-color: var(--main-color-dark);
 }
 #file-wrap {
     width: 25%;
@@ -235,15 +244,27 @@
     padding: 10px;
 }
 .title {
-    color: var(--main-color);
-    font-size: 20px;
-    font-weight: 600;
-    border-bottom: 1px solid var(--main-color);
-    padding-bottom: 10px;
     display: flex;
+    justify-content: flex-start;
     align-items: center;
+    border-bottom: 1px solid var(--main-color-dark);
+    padding: 3px 0;
+    margin-bottom: 10px;
     justify-content: space-between;
 }
+
+.title h2 span {
+    color: var(--main-color);
+    margin-right: 5px;
+}
+
+.title h2 {
+    font-size: 15px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
 .title > input {
     display: none;
 }
@@ -269,9 +290,22 @@
 .addfile > span {
     margin-left: 10px;
     padding: 5px 0 5px 0;
+    font-size: 13px;
 }
 
+.fileInThis {
+    font-weight: 700;
+    color: var(--main-color-dark);
+}
+
+#file-info > label {
+    font-size: 13px;
+    text-align: center;
+}
+#file-info > .checked > span,
 #file-info > span {
+    font-size: 18px;
+    color: var(--bo-60);
     margin-left: 20px;
 }
 
@@ -292,22 +326,26 @@
     color: #fff;
     display: flex;
     align-items: center;
+    font-size: 13px;
 }
 
 .plus span {
     margin-right: 5px;
-    font-size: 15px;
+    font-size: 13px;
 }
 .plus:hover {
-    background-color: #17a897;
+    background-color: var(--main-color-dark);
 }
+
 .remove {
     display: flex;
+    align-items: center;
     color: #9d9d9d;
     border: 1px solid #fff;
     background: none;
     cursor: pointer;
     padding: 3px 10px;
+    font-size: 13px;
 }
 
 .remove span {
@@ -353,7 +391,7 @@
 
 input,
 select {
-    outline-color: #17a897;
+    outline-color: var(--main-color-dark);
 }
 
 .dept-guide {
@@ -370,4 +408,133 @@ select {
 .dept-guide p {
     font-size: 14px;
     font-weight: 600;
+}
+
+.write .error {
+    border: 1px solid #e85c5c;
+}
+
+.error:focus {
+    outline-color: #e85c5c;
+}
+
+/* 부서목록 */
+
+.dept-title {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: 1px solid var(--main-color-dark);
+    padding: 3px 0;
+    margin-bottom: 10px;
+}
+
+.dept-title span {
+    color: var(--main-color);
+    margin-right: 5px;
+}
+
+.dept-title p {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.teamList-item,
+.deptList-item {
+    width: 70%;
+    border: 1px solid var(--main-color);
+    border-radius: 2px;
+    margin: 4px 0;
+    transition: 0.2s ease-in-out;
+}
+
+.teamList-item label > input,
+.deptList-item label > input {
+    display: none;
+}
+
+.teamList-item .toggleBtn,
+.deptList-item .toggleBtn {
+    padding: 3px 4px;
+    display: flex;
+    background-color: var(--main-color);
+    align-items: center;
+    color: #fff;
+    margin-right: 5px;
+    transition: 0.2s ease-in-out;
+}
+
+.teamList-item .toggleBtn > span,
+.deptList-item .toggleBtn > span {
+    font-size: 15px;
+    transition: 0.4s ease-in-out;
+}
+
+.teamList-item > label,
+.deptList-item > label {
+    width: 100%;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.teamList-item {
+    margin-left: 23px;
+}
+
+.teamList-item ~ li > .memberList-item {
+    width: 70%;
+    border: 1px solid var(--main-color);
+    border-radius: 2px;
+    margin: 4px 0;
+    margin-left: 46px;
+}
+
+.deptList-item ~ li > .memberList-item {
+    width: 70%;
+    border: 1px solid var(--main-color);
+    border-radius: 2px;
+    margin: 4px 0;
+    margin-left: 23px;
+}
+
+.memberList-item > a {
+    font-size: 12px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #000;
+}
+.memberList-item > a > span {
+    margin-right: 4px;
+    color: var(--main-color);
+}
+
+.teamList-item:has(input:checked),
+.deptList-item:has(input:checked) {
+    border: 1px solid var(--main-color-dark);
+    background-color: var(--main-color-dark);
+    color: #fff;
+}
+
+.teamList-item:has(input:checked) .toggleBtn,
+.deptList-item:has(input:checked) .toggleBtn {
+    background-color: var(--main-color-dark);
+}
+.teamList-item:has(input:checked) .toggleBtn span,
+.deptList-item:has(input:checked) .toggleBtn span {
+    transform: rotate(180deg);
+}
+
+.teamList-item ~ li,
+.deptList-item ~ li {
+    max-height: 0px;
+    transition: 0.3s ease-in-out;
+    overflow: hidden;
+}
+
+.teamList-item:has(input:checked) ~ li,
+.deptList-item:has(input:checked) ~ li {
+    max-height: none;
 }

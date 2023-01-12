@@ -58,11 +58,14 @@ public class AddressDao {
 	public int updateDeleteAddress(SqlSessionTemplate sst, List<String> no) {
 		return sst.update("addressMapper.updateDeleteAddressAll", no);
 	}
-
+	
 	public int deleteAddress(SqlSessionTemplate sst, List<String> no) {
-		return sst.update("addressMapper.deleteAddress", no);
+		return sst.delete("addressMapper.deleteAddress", no);
 	}
-
+	
+	public int deleteAddressPic(SqlSessionTemplate sst, List<String> no) {
+		return sst.delete("addressMapper.deleteAddressPic", no);
+	}
 	
 	public AddressVo getAddress(SqlSessionTemplate sst, Map<String, String> map) {
 		return sst.selectOne("addressMapper.getAddress", map);
@@ -139,6 +142,8 @@ public class AddressDao {
 	public int updateAddressSortation(SqlSessionTemplate sst, Map<String, String> map) {
 		return sst.update("addressMapper.updateAddressSortation", map);
 	}
+
+	
 
 	
 

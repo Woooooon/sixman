@@ -82,7 +82,7 @@
                                     <c:if test="${i.deptNo eq 1}">
                                         <li>
                                             <div class="memberList-item">
-                                                <a href=""><span class="material-symbols-outlined">account_box</span>${i.name} ${i.positionName}</a>
+                                                <p><span class="material-symbols-outlined">account_box</span>${i.name} ${i.positionName}</p>
                                             </div>
                                         </li>													
                                     </c:if>
@@ -108,12 +108,7 @@
                     </header>
                     <article id="employee-list" class="box">
                         <figure id="companyLogo">
-                            <c:if test="${not empty company.logoName}">
-                                <img src="/sixman/resources/img/logo/${company.logoName}" alt="" id="headerLogo">
-                            </c:if>
-                            <c:if test="${empty company.logoName}">
-                                <img src="/sixman/resources/img/defaultCompany.png" alt="" id="headerLogo">
-                            </c:if>
+                            <img src="/sixman/resources/img/defaultCompany.png" alt="" id="headerLogo">
                         </figure>
                         <div class="header">
                             <div class="title">
@@ -214,7 +209,7 @@
                                     </div>
                                     <div class="dept-list-controller">
                                         <a href="/sixman/mail/write?email=${i.email}"><span class="material-symbols-outlined">mail</span></a>
-                                        <a href=""><span class="material-symbols-outlined">group_add</span></a>
+                                        <a href="/sixman/address/add?email=${i.email}&name=${i.name}&position=${i.positionName}&company=${i.name}&phone=${i.phone}"><span class="material-symbols-outlined">group_add</span></a>
                                         <a href=""><span class="material-symbols-outlined">sms</span></a>
                                     </div>
                                 </div>

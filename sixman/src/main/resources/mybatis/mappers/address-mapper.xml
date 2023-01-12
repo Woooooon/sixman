@@ -471,6 +471,14 @@
 		</foreach>
 	</delete>
 	
+	<delete id="deleteAddressPic">
+		DELETE 
+		FROM ADDRESS_A
+		<foreach collection="list" item="no" open="WHERE ADDRESS_NO IN(" close=")" separator=",">
+			#{no}
+		</foreach>
+	</delete>
+	
 	<delete id="deleteSortation">
 		DELETE 
 		FROM ADDRESS_SORTATION

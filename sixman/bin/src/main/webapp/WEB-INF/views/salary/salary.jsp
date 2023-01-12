@@ -31,7 +31,7 @@
     height: 100%;
     gap: 0px
 }
-#search-box{
+#search-box form{
     display: grid;
     grid-template-columns: 1fr 0.3fr 0.1fr 0.3fr 6fr;
 }
@@ -50,7 +50,7 @@
 
 
 #notice-box{
-    padding: 20px;
+    padding: 40px;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -129,6 +129,11 @@
     color: black
 }
 
+#date-btn{
+    width: 80px;
+    border: none;
+}
+
 /*-------------------------------------------------  모달창     ------------------------------------------------    */
 
 .share-modal.close {
@@ -192,10 +197,13 @@
     grid-template-rows: 1fr 1fr;
 }
 
-#modal-2-1,#modal-2-2,#modal-3-2,#modal-4-2,#modal-4-3,#modal-4-4,#modal-4-5,#modal-4-6,#modal-4-7, #modal-4-8{
+#modal-2-1,#modal-3-2,#modal-4-2,#modal-4-3,#modal-4-4,#modal-4-5,#modal-4-6,#modal-4-7, #modal-4-8{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    
+    grid-template-columns: 1fr 1fr 1fr 1fr;   
+}
+#modal-2-2{
+    display: grid;
+    grid-template-columns: 1fr 1fr 0.5fr 1.5fr;   
 }
 
 #modal-2-1 div,#modal-2-2 div,#modal-3-2 div,#modal-4-2 div,#modal-4-3 div,#modal-4-4 div,#modal-4-5 div,#modal-4-6 div,#modal-4-7 div, #modal-4-8 div{
@@ -231,6 +239,8 @@
 
 
 
+
+
 </style>
 
 <body>
@@ -240,23 +250,24 @@
     <div class="share-modal">
         <div id="modal">
             <div id="modal-1"> 
-                <div id="modal-header">&nbsp&nbsp&nbsp&nbsp 2022년 10월분 급여명세서</div>
+                <div id="modal-header">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <input type="text" id="workDay" style="border: none; font-size:1.2em;font-weight:600; width:290px;"></div>
                 <div>
                     <span id="close" class="material-symbols-outlined"> close </span>
                 </div>
             </div>
             <div id="modal-2" class="box">
                 <div id="modal-2-1">
-                    <div>성명: 심원용</div>
-                    <div>생년월일: 2002-01-01</div>
-                    <div>입사날짜: 2019-0321</div>
-                    <div>이메일: abc@naver.com</div>
+                    <div>성명: ${loginMember.name}</div>
+                    <div>사번: ${loginMember.no}</div>
+                    <div>입사날짜: 2022-01-02</div>
+                    <div>계좌번호: ${loginMember.account}</div>
                 </div>
                 <div id="modal-2-2">
-                    <div>직책: 차장</div>
-                    <div>부서: 제1영업</div>
-                    <div>은행명: 국민은행</div>
-                    <div>계좌번호: 00-00-0000000</div>
+                    <div>직급: ${loginMember.positionName}</div>
+                    <div>부서: 물류부</div>
+                    <div>은행명: ${loginMember.bankName}</div>
+                    <div>이메일: ${loginMember.email}</div>
+                    
                 </div>
             </div>
             <div id="modal-3" class="box">
@@ -267,10 +278,10 @@
                     <div>통상시급(원)</div>
                 </div>
                 <div id="modal-3-2">
-                    <div>22</div>
-                    <div>6</div>
-                    <div>170</div>
-                    <div>11,123</div>
+                    <div>2</div>
+                    <div>0</div>
+                    <div><input type="text" id="workTime" style="border: none; width: 30px; font-size: 1em;"></div>
+                    <div>17045</div>
                 </div>
             </div>
             <div id="modal-4" class="box">
@@ -282,68 +293,72 @@
                 </div>
                 <div id="modal-4-2">
                     <div>기본급</div>
-                    <div>1,000,000</div>
+                    <div><input type="text" id="basePayjs" style="border: none; width: 67px; font-size: 1em;"></div>
                     <div>국민연금</div>
-                    <div>20,000</div>
+                    <div>122050</div>
                 </div>
                 <div id="modal-4-3">
                     <div>연장근로수당</div>
-                    <div>1,000,000</div>
+                    <div>0</div>
                     <div>건강보험</div>
-                    <div>20,000</div>
+                    <div>88245</div>
                 </div>
                 <div id="modal-4-4">
                     <div>휴일근로수당</div>
-                    <div>200,000</div>
-                    <div>고용보험</div>
-                    <div>20,000</div>
+                    <div>0</div>
+                    <div>장기요양보험료</div>
+                    <div>10825</div>
                 </div>
                 <div id="modal-4-5">
                     <div>식대보조금</div>
-                    <div>100,000</div>
-                    <div>장기요양보험료</div>
-                    <div>20,000</div>
+                    <div>176000</div>
+                    <div>고용보험</div>
+                    <div>23600</div>
                 </div>
                 <div id="modal-4-6">
                     <div></div>
                     <div></div>
                     <div>소득세</div>
-                    <div>20,000</div>
+                    <div>151885</div>
                 </div>
                 <div id="modal-4-7">
                     <div></div>
                     <div></div>
                     <div>지방소득세</div>
-                    <div>20,000</div>
+                    <div>15185</div>
                 </div>
                 <div id="modal-4-8">
                     <div></div>
                     <div></div>
                     <div id="modal-4-8-1">공제액계</div>
-                    <div id="modal-4-8-2">120,000</div>
+                    <div id="modal-4-8-2"><input type="text" id="minusPayjs" style="border: none; width: 60px; font-size: 1em; background-color:#E2E2E2 ;"></div>
                 </div>
                 <div id="modal-4-9">
                     <div>지급액계</div>
-                    <div>1,400,000</div>
+                    <div><input type="text" id="plustotalPayjs" style="border: none; width: 67px; font-size: 1em;  font-weight:600; background-color:#E2E2E2 ;"></div>
                     <div>차인지급액</div>
-                    <div>1,370,000</div>
+                    <div><input type="text" id="totalPayjs" style="border: none; width: 67px; font-size: 1em;  font-weight:600; background-color:#E2E2E2 ;"></div>
                 </div>
             </div>
         </div>
     </div>
+    <!-- 위에는 모달 -->
 <main class="main-box">
     <div id="main-content">
         <div>
             <div id="search-box" class="box">
-                <div id="search-font">검색기간</div>
-                <div id="date">
-                    <input id="start-month" type="month" style="width: 110px;">
-                    ~
-                    <input id="end-month" type="month" style="width: 110px;">
-                </div>
-                <div></div>
-                <div class="btn">검색</div>
-                <div></div>
+                <form action="/sixman/salary/salary" method="get">
+                    <div id="search-font">검색기간</div>
+                    <div id="date">
+                        <input id="start-month" type="month" name="startDay" style="width: 110px;" value="2022-01">
+                        ~
+                        <input id="end-month" type="month" name="endDay" style="width: 110px;">
+                    </div>
+                    <div></div>
+                    <div><input class="btn" id="date-btn" type="submit" value="검색"></div>
+                    <div></div>
+                </form>
+    
             </div>
         </div>
         <div>
@@ -353,27 +368,34 @@
                         <p>날짜</p>
                         <p>성명</p>
                         <p>총 근무시간</p>
-                        <p>연장+휴일근로수당(원)</p>
+                        <p>연장+식대보조금(원)</p>
                         <p>기본급(원)</p>
                         <p>지급액계</p>
                         <p>공제액계(원)</p>
                         <p>차인지급액(원)</p>
                     </div>
-                    <div class="list-item"> <p>2022-11</p> <p>심원용</p> <p>09:00</p> <p>300,000</p> <p>1,000,000</p> <p>1,400,000</p> <p>130,000</p> <p>1,370,000</p></div>
-                    <div class="list-item"> <p>2022-10</p> <p>심원용</p> <p>09:00</p> <p>300,000</p> <p>1,000,000</p> <p>1,400,000</p> <p>130,000</p> <p>1,370,000</p></div>
-                    <div class="list-item"> <p>2022-09 </p> <p>심원용</p> <p>09:00</p> <p>300,000</p> <p>1,000,000</p> <p>1,400,000</p> <p>130,000</p> <p>1,370,000</p></div>
-                    <div class="list-item"> <p>2022-08</p> <p>심원용</p> <p>09:00</p> <p>300,000</p> <p>1,000,000</p> <p>1,400,000</p> <p>130,000</p> <p>1,370,000</p></div>
-                    <div class="list-item"> <p>2022-07</p> <p>심원용</p> <p>09:00</p> <p>300,000</p> <p>1,000,000</p> <p>1,400,000</p> <p>130,000</p> <p>1,370,000</p></div>
-                   
+                    <c:forEach items="${voList}" var="x">
+                        <div class="list-item"> 
+                            <p>${x.payDate}</p> 
+                            <p>${x.name}</p> 
+                            <p>${x.workTime}</p> 
+                            <p>${x.eatPay}</p> 
+                            <p>${x.basePay}</p> 
+                            <p>${x.basePay + x.holidayPay + x.bonusPay + x.eatPay}</p> 
+                            <p>${x.minusPay}</p> 
+                            <p>${x.realPay}</p>
+                        </div>
+                    </c:forEach>
+       
                 </div>
                 <div class="page-box">
                     <span class="material-symbols-outlined"> keyboard_double_arrow_left </span>
                     <span class="material-symbols-outlined"> chevron_left </span>
                     <div class="page-btn checked-p-btn">1</div>
-                    <div class="page-btn">2</div>
+                    <!-- <div class="page-btn">2</div>
                     <div class="page-btn">3</div>
                     <div class="page-btn">4</div>
-                    <div class="page-btn">5</div>
+                    <div class="page-btn">5</div> -->
                     <span class="material-symbols-outlined"> chevron_right </span>
                     <span class="material-symbols-outlined"> keyboard_double_arrow_right </span>
                 </div>
@@ -398,10 +420,45 @@
         document.querySelector(".share-modal").style.display = "none"
     })
   
-    //모달 열기
-    document.querySelector(".list-item").addEventListener("click", () => {
+    //모달 모두열기
+    var modalAll = document.querySelectorAll(".list-item");
+    
+    for (let i = 0; i < modalAll.length; i++) {
+        modalAll[i].addEventListener("click", () => {
         document.querySelector(".share-modal").style.display = "flex"
     })
+    }
+
+     //모달 클릭햇을때 값
+     const abcArray = document.querySelectorAll('.list-item');
+
+    for(let i = 0; i < abcArray.length; i++){
+        abcArray[i].addEventListener('click',function(x){
+
+            resultArray = x.currentTarget.innerText;
+
+            const a = resultArray.split('\n\n');
+            
+            var abc = document.getElementById('workDay').value = a[0];
+            var abc2 = abc+('월 급여명세서');
+
+
+            document.getElementById('workDay').value = abc2;
+            
+            document.getElementById('workTime').value = a[2];
+
+            // document.getElementById('plusPayjs').value = a[3];
+
+            document.getElementById('basePayjs').value = a[4];
+
+            document.getElementById('plustotalPayjs').value = a[5];
+
+            document.getElementById('totalPayjs').value = a[7];
+
+            document.getElementById('minusPayjs').value = a[6];
+            
+        });
+}
 
 
     </script>

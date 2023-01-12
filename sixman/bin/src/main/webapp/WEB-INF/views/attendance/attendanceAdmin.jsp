@@ -29,17 +29,17 @@
     gap: 30px
 }
 
-#search-box{
+#search-box2{
 	padding: 20px;
     display: flex;
     width: 100%;
     height: 100%;
 }
-#search-box{
+#search-box2{
     display: grid;
     grid-template-columns: 1fr 0.7fr 1fr 1fr 2fr 0.2fr 1fr 4fr;
 }
-#search-box div{
+#search-box2 div{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -53,7 +53,7 @@
 }
 
 #notice-box{
-    padding: 20px;
+    padding: 40px;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -160,11 +160,32 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
-#restinfo1, #restinfo2, #restinfo3,#restinfo4,#restinfo5{
+#restinfo2, #restinfo3{
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 50px;
+    background-color: #E2E2E2;
+}
+#restinfo1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 65px;
+    background-color: #E2E2E2;
+}
+#restinfo4{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 58px;
+    background-color: #E2E2E2;
+}
+#restinfo5{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
     background-color: #E2E2E2;
 }
 #restinfo-title1,#restinfo-title2,#restinfo-title3,#restinfo-title4,#restinfo-title5{
@@ -204,8 +225,9 @@
     width: 100px;
 }
 #date-btn{
-    padding-right: 15px;
-    width: 100px;
+    /* padding-right: 15px; */
+    width: 80px;
+    border: none;
 }
 
 .search-bar{
@@ -324,15 +346,15 @@
 
 .share-modal #modal {
     width: 15%;
-    height: 35%;
+    height: 45%;
     background-color: #fff;
     box-shadow: 0px 0px 4px 1px var(--bo-40);
     padding: 10px;
 }
 
-#modal{
+#modal form{
     display: grid;
-    grid-template-rows: 1fr 1.5fr 1.5fr 1.5fr 1.5fr 2fr 0.5fr;
+    grid-template-rows: 1fr 1.5fr 1.5fr 1.5fr 1.5fr 1.5fr 1.5fr 2fr 0.5fr;
     gap: 10px;
 }
 #modal-close{
@@ -343,11 +365,18 @@
     font-size: 1.5em;
 }
 
-#timemodal1,#timemodal2,#timemodal3,#timemodal4,#timemodal5{
+#timemodal1,#timemodal2,#timemodal3,#timemodal4,#timemodal5,#timemodal6{
     display: flex;
     font-size: 1.5em;
     justify-content: center;
     align-items: center;
+}
+
+#date-btnModal{
+    border: none;
+    width: 100%;
+    height: 100%;
+    font-size: 1.5em;;
 }
 
 
@@ -355,49 +384,56 @@
 
 <body>
 
-    <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
+    <%@include file="/WEB-INF/views/common/tempMenuBar.jsp" %>
 
 <main class="main-box">
     <div class="share-modal">
         <div id="modal">
-            <div id="modal-close"> 
-                <div></div>
-                <div>
-                    <span id="close" class="material-symbols-outlined"> close </span>
+            <form action="/sixman/attendance/admin" method="post">
+                <div id="modal-close"> 
+                    <div></div>
+                    <div>
+                        <span id="close" class="material-symbols-outlined"> close </span>
+                    </div>
                 </div>
-            </div>
-            <div id="timemodal1">2022-12-29</div>
-            <div id="timemodal2"  contenteditable="true">상태: 지각</div>
-            <div id="timemodal3"  contenteditable="true">시작 시간: 09:30</div>
-            <div id="timemodal4"  contenteditable="true">종료 시간: 18:30</div>
-            <div id="timemodal5" class="btn">수정</div>
-            <div></div>
+                <div id="timemodal1"><input type="text" id="workDay" name="workDay" style="border: none; width: 100px; font-size: 1em;"></div>
+                <div id="timemodal2">상태: 정상 출근</div>
+                <div id="timemodal3">시작 시간:  <input type="text" id="start" name="start" style="border: none; width: 70px; font-size: 1em;"> </div>
+                <div id="timemodal4">종료 시간:  <input type="text" id="end" name="end" style="border: none; width: 70px; font-size: 1em;"></div>
+                <div id="timemodal5">추가근무시간: <input type="text" name="workoverTime" id="plusWork" style="border: none; width: 30px; font-size: 1em;"></div>
+                <div id="timemodal6">총 근무시간: <input type="text" name="workTime" id="totalWork" style="border: none; width: 30px; font-size: 1em;"></div>
+                <div><input class="btn" id="date-btnModal" type="submit" value="수정"></div>
+                <div></div>
+            </form>
+            
         </div>
     </div>
     <!-- 위에는 모달 -->
     <div id="main-content">
         <div>
-            <div id="search-box" class="box">
-                <div id="search-name">사원이름</div>
-                <div>   
-                    <select name="" id="" style="font-size: 1em; width:80px; height:30px;">
-                        <option value="first">심원용</option>
-                        <option value="second">양수철</option>
-                        <option value="third">김수철</option>
-                        <option value="four">김철수</option>
-                    </select>
+            <form action="/sixman/attendance/admin" method="get">
+                <div id="search-box2" class="box">
+                    <input type="hidden" name="page" value="1">
+                    <div id="search-name">사원이름</div>
+                    <div>   
+                        <select name="name" id="" style="font-size: 1em; width:80px; height:30px;">
+                            <c:forEach items="${memberList}" var="x">
+                                <option>${x.name}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                    <div></div>
+                    <div id="search-font">검색기간</div>
+                    <div id="date">
+                        <input id="start-day" type="date" style="width: 100px;" name="start" value="2022-01-01">
+                        ~
+                        <input id="end-day" type="date" style="width: 100px;" name="end">
+                    </div>
+                    <div></div>
+                    <div><input class="btn" id="date-btn" type="submit" value="검색"></div>
+                    <div></div>
                 </div>
-                <div></div>
-                <div id="search-font">검색기간</div>
-                <div id="date">
-                    <input id="start-day" type="date" style="width: 100px;">
-                    ~
-                    <input id="end-day" type="date" style="width: 100px;">
-                </div>
-                <div></div>
-                <div id="date-btn" class="btn">검색</div>
-                <div></div>
-            </div>
+            </form>
         </div>
         <div>
             <div id="notice-box" class="box">
@@ -410,23 +446,26 @@
                         <p>추가근무시간</p>
                         <p>총 근무시간</p>
                     </div>
-                    <div class="list-item"> <p>2022-11-28</p> <p>심원용</p> <p>09:00</p> <p>18:00</p> <p>0</p> <p>8</p></div>
-                    <div class="list-item"> <p>2022-11-27</p> <p>심원용</p> <p>09:00</p> <p>18:00</p> <p>0</p> <p>8</p></div>
-                    <div class="list-item"> <p>2022-11-26</p> <p>심원용</p> <p>09:00</p> <p>18:00</p> <p>0</p> <p>8</p></div>
-                    <div class="list-item"> <p>2022-11-25</p> <p>심원용</p> <p>09:00</p> <p>18:00</p> <p>0</p> <p>8</p></div>
-                    <div class="list-item"> <p>2022-11-24</p> <p>심원용</p> <p>09:00</p> <p>18:00</p> <p>0</p> <p>8</p></div>
-                   
+                    <c:forEach items="${selectMemberList}" var="xq">
+                        <div class="list-item">
+                            <p>${xq.workDay}</p>
+                            <p>${xq.name}</p>
+                            <p>${xq.start}</p>
+                            <p>${xq.end}</p>
+                            <p>${xq.workoverTime}</p>
+                            <p>${xq.workTime}</p>
+                        </div>
+                    </c:forEach>
+
                 </div>
                 <div class="page-box">
-                    <span class="material-symbols-outlined"> keyboard_double_arrow_left </span>
-                    <span class="material-symbols-outlined"> chevron_left </span>
-                    <div class="page-btn checked-p-btn">1</div>
-                    <div class="page-btn">2</div>
-                    <div class="page-btn">3</div>
-                    <div class="page-btn">4</div>
-                    <div class="page-btn">5</div>
-                    <span class="material-symbols-outlined"> chevron_right </span>
-                    <span class="material-symbols-outlined"> keyboard_double_arrow_right </span>
+                    <span class="material-symbols-outlined" <c:if test="${pv.currentPage ne 1}">onclick="location.href='/sixman/attendance/admin?page=1'"</c:if>> keyboard_double_arrow_left </span>
+                    <span class="material-symbols-outlined" <c:if test="${pv.currentPage ne 1}">onclick="location.href='/sixman/attendance/admin?page=${pv.currentPage - 1}'"</c:if>> chevron_left </span>
+                    <c:forEach var="i" begin="${pv.startPage}" end="${pv.endPage}">
+                    <div class="page-btn <c:if test="${i eq pv.currentPage}"> checked-p-btn</c:if>" onclick="location.href='/sixman/attendance/adminpage=${i}'">${i}</div>
+                    </c:forEach>
+                    <span class="material-symbols-outlined" <c:if test="${pv.maxPage ne pv.currentPage}">onclick="location.href='/sixman/attendance/admin?page=${pv.currentPage + 1}'"</c:if>> chevron_right </span>
+                    <span class="material-symbols-outlined" <c:if test="${pv.maxPage ne 1 and pv.maxPage eq pv.currentPage}">onclick="location.href='/sixman/attendance/admin?page=${pv.maxPage}'"</c:if>> keyboard_double_arrow_right </span>
                 </div>
             </div>
         </div>
@@ -436,23 +475,19 @@
             <div id="btn-box">
                 관리자 페이지
             </div>
-            <div id="date-box">2022-11-30</div>
-            <div id="time-box">11:00</div>
+            <div id="date-box">${day}</div>
+            <div id="time-box">${time}</div>
             <div id="result-box">
-                <div>시작: &nbsp<input type="text" style="width: 50px; height: 25px;"></div>
-                <div>종료: &nbsp<input type="text" style="width: 50px; height: 25px;"></div>
+                <!-- <div>시작: ${todayWork.start}</div>
+                <div>종료: ${todayWork.end}</div> -->
             </div>
         </div>
         <div id="work-week" class="box">
             <div id="week-header">이번주 근로시간</div>
             <div id="select-week">
-                <select name="category">
-                    <option value="first">2022-11-28 ~ 2022-12-04</option>
-                    <option value="second">2022-12-05 ~ 2022-12-11</option>
-                    <option value="third">2022-12-12 ~ 2022-12-18</option>
-                    <option value="four">2022-12-18 ~ 2022-12-25</option>
-                    <option value="four">2022-12-26 ~ 2023-01-01</option>
-                </select>
+                <input id="start-day" type="date" style="width: 100px;" name="start" value="2022-01-08">
+                ~
+                <input id="end-day" type="date" style="width: 100px;" name="end" value="2023-01-14">
             </div>
             <div id="work-time">
                 소정 근로시간 &nbsp&nbsp&nbsp&nbsp<progress max="100" value="70" style="width:140px; height: 35px;"></progress>
@@ -462,10 +497,10 @@
             </div>
         </div>
         <div id="rest-information" class="box">
-            <div id="information-header">ㅇㅇㅇ의 휴가 정보</div>
+            <div id="information-header"> 휴가 정보</div>
             <div id="restinfo1" class="box">
                 <div id="restinfo-title1">입사일</div>
-                <div>2019-10-01</div>
+                <div>2022-01-02</div>
             </div>
             <div id="restinfo2" class="box">
                 <div id="restinfo-title2">연차휴가</div>
@@ -494,7 +529,6 @@
     var now_utc = Date.now()
     var timeOff = new Date().getTimezoneOffset()*60000;
     var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
-    console.log(today)
     document.getElementById("end-day").setAttribute("max", today);
     document.getElementById("start-day").setAttribute("max", today);
 
@@ -506,10 +540,61 @@
         document.querySelector(".share-modal").style.display = "none"
     })
   
-    //모달 열기
-    document.querySelector(".list-item").addEventListener("click", () => {
+    // 모달 모두열기
+    var modalAll = document.querySelectorAll(".list-item");
+    
+    for (let i = 0; i < modalAll.length; i++) {
+        modalAll[i].addEventListener("click", () => {
         document.querySelector(".share-modal").style.display = "flex"
     })
+    }
+
+
+
+    //모달 클릭햇을때 값
+    const abcArray = document.querySelectorAll('.list-item');
+
+    for(let i = 0; i < abcArray.length; i++){
+        abcArray[i].addEventListener('click',function(x){
+
+            resultArray = x.currentTarget.innerText;
+
+            const a = resultArray.split('\n\n');
+
+            document.getElementById('workDay').value = a[0];
+            
+            document.getElementById('start').value = a[2];
+
+            document.getElementById('end').value = a[3];
+
+            document.getElementById('plusWork').value = a[4];
+
+            document.getElementById('totalWork').value = a[5];
+            
+        });
+    }
+
+
+
+
+
+   
+
+
+
+    
+
+
+
+
+
+
+    
+
+
+
+
+
 
 </script>
 

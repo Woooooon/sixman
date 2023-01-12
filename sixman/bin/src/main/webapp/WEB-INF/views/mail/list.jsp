@@ -10,8 +10,9 @@
 <link rel="stylesheet" href="${path}/resources/css/list.css">
 <link rel="stylesheet" href="${path}/resources/css/mail/mailList.css">
 <script defer src="${path}/resources/js/mail/mailList.js"></script>
+<script defer src="${path}/resources/js/mail/mailAjax.js"></script>
 <script>
-	window.onload = ()=>{
+	window.addEventListener('load', function() {
 		let listType = '${listType}';
 		if(listType!=null){
 			if(listType == '') {listType = null;}
@@ -19,7 +20,7 @@
 		}else{
 			mailAjax(1);
 		}
-	}
+	});
 </script>
 </head>
 <body>
@@ -55,15 +56,14 @@
                     <input type="checkbox">
                     <c:choose>
                     	<c:when test="${listType == '임시보관함'}">
-		                    <p>전송</p>
 		                    <p onclick="deleteAjax()">삭제</p>
                     	</c:when>
                     	<c:when test="${listType == '휴지통'}">
-		                    <p>복원</p>
-		                    <p>영구삭제</p>
+		                    <p onclick="restoreAjax()">복원</p>
+		                    <p onclick="realDelete()">영구삭제</p>
                     	</c:when>
                     	<c:otherwise>
-	                    	<p>읽음</p>
+	                    	<p onclick="updateRead()">읽음</p>
 		                    <p onclick="deleteAjax()">삭제</p>
 		                    <div class="category-btn">
 		                    	이동
@@ -73,12 +73,12 @@
 		                            </div>
 		                            <div class="category-footer">
 										<div class="c-btn create-btn"><p>추가</p></div>
-		                                <div class="btn"><p>이동</p></div>
+		                                <div class="btn" onclick="changeCategory()"><p>이동</p></div>
 		                            </div>
 		                        </div>
 		                    </div>
-		                    <c:if test="${not empty listType}"><div id="mail-count"><p class="hilight">50</p></div></c:if>
-		                    <c:if test="${empty listType}"><div id="mail-count"><p class="hilight">50</p>/<p>100</p>안읽은 메일</div></c:if>
+		                    <c:if test="${not empty listType}"><div id="mail-count"><p class="hilight" id="mail-list-count"></p></div></c:if>
+		                    <c:if test="${empty listType}"><div id="mail-count"><p class="hilight" id="mail-non-count">50</p>/<p id="mail-list-count"></p>안읽은 메일</div></c:if>
                     	</c:otherwise>
                     </c:choose>
                 </div>
@@ -89,10 +89,10 @@
 							필터
 	                        <span class="material-symbols-outlined"> arrow_drop_down </span>
 	                        <div id="category-box2" style="display: none;">
-	                            <div class="category-items">
-	                                <button>모든메일</button>
-	                                <button>읽은메일만</button>
-	                                <button>안읽은메일만</button>
+	                            <div class="category-items" id="filter-box">
+									<label><input type="radio" name="filter">모든메일</label>
+									<label><input type="radio" name="filter" value="읽은메일">읽은메일만</label>
+									<label><input type="radio" name="filter" value="안읽은메일">안읽은메일만</label>
 	                            </div>
 	                        </div>
 	                    </div>

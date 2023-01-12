@@ -8,7 +8,7 @@ function deletePage(no) {
 
     form.appendChild(objs);
     form.setAttribute('method', 'post'); //get,post 가능
-    form.setAttribute('action', "/sixman/notice/delete"); //보내는 url
+    form.setAttribute('action', "/sixman/admin/notice/delete"); //보내는 url
     document.body.appendChild(form);
     form.submit(); 
     form.remove();

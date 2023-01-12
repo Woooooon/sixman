@@ -6,13 +6,35 @@
 	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/spring/root-context.xml</param-value>
+		<param-value>
+			/WEB-INF/spring/root-context.xml
+			classpath:spring/email/email-config.xml
+		</param-value>
 	</context-param>
 	
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	
+	<error-page>
+		<error-code>404</error-code>
+		<location>/error?code=404</location>
+	</error-page>
+	
+	<error-page>
+		<error-code>405</error-code>
+		<location>/error?code=405</location>
+	</error-page>
+	
+	<error-page>
+		<error-code>500</error-code>
+		<location>/error?code=500</location>
+	</error-page>
+	
+	<error-page>
+		<location>/error?code=ERR</location>
+	</error-page>
 
 	<!-- Processes application requests -->
 	<servlet>
@@ -23,14 +45,14 @@
 			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
+		<async-supported>true</async-supported>
 	</servlet>
 		
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	
-	
+
 	<filter>
 		<filter-name>Encoding Filter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -43,5 +65,6 @@
 		<filter-name>Encoding Filter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+		
 
 </web-app>

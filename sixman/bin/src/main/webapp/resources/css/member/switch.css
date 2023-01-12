@@ -15,42 +15,34 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 20px 30px;
     gap: 10px;
 }
 
 .header {
     display: flex;
-    justify-content: center;
     align-items: center;
-    color: #3d3d3d;
+    padding: 5px;
+    border-bottom: 1px solid var(--main-color-dark);
 }
+
 .header span {
-    font-size: 30px;
+    font-size: 29px;
+    color: var(--main-color);
 }
+
 .header h2 {
-    font-weight: 800;
-    font-size: 22px;
+    font-weight: 900;
+    font-size: 18px;
 }
 
 .body {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 30px;
 }
 
-.body input {
-    font-size: 17px;
-    padding: 10px;
-    border: none;
-    border-bottom: 1px solid var(--bo-20);
-    outline-style: none;
-    margin-bottom: 2px;
-}
-.body input:first-child {
-    margin-bottom: 10px;
-}
 .body input:focus {
     border-bottom: 1px solid var(--main-color);
 }
@@ -74,4 +66,34 @@ input[type='submit'] {
 
 input[type='submit']:hover {
     background-color: #17a897;
+}
+.success {
+    width: 100%;
+    font-size: 17px;
+    padding: 10px;
+    border: none;
+    outline-style: none;
+    border-bottom: 1px solid var(--bo-20);
+}
+.success.error {
+    border-bottom: 1px solid #e85c5c;
+}
+
+.success.error:focus {
+    border-bottom: 1px solid #e85c5c;
+}
+
+.newpwd,
+.newpwdCheck {
+    position: relative;
+    width: 100%;
+}
+
+#p1-comment,
+#p2-comment {
+    position: absolute;
+    bottom: -17px;
+    left: 0;
+    font-size: 11px;
+    color: #e85c5c;
 }

@@ -15,13 +15,30 @@
 		<typeAlias type="com.kh.sixman.notice.vo.NoticeVo" alias="NoticeVo"/>
 		<typeAlias type="com.kh.sixman.common.AttachmentVo" alias="AttachmentVo"/>
 		<typeAlias type="com.kh.sixman.mail.vo.MailVo" alias="mailVo"/>
-		<typeAlias type="com.kh.sixman.member.vo.BankVo" alias="BankVo"/>
-		<typeAlias type="com.kh.sixman.member.vo.AuthorizeVo" alias="AuthorizeVo"/>
+		<typeAlias type="com.kh.sixman.common.BankVo" alias="BankVo"/>
+		<typeAlias type="com.kh.sixman.common.AuthorizeVo" alias="AuthorizeVo"/>
 		<typeAlias type="com.kh.sixman.member.vo.MemberVo" alias="MemberVo"/>
+		<typeAlias type="com.kh.sixman.position.vo.PositionVo" alias="PositionVo"/>
+		<typeAlias type="com.kh.sixman.document.vo.DocumentVo" alias="DocumentVo"/>
+		<typeAlias type="com.kh.sixman.dept.vo.DeptVo" alias="DeptVo"/>
+		<typeAlias type="com.kh.sixman.alarm.vo.AlarmVo" alias="AlarmVo"/>
+		<typeAlias type="com.kh.sixman.project.vo.ProjectVo" alias="ProjectVo"/>
+		<typeAlias type="com.kh.sixman.schedule.vo.ScheduleVo" alias="ScheduleVo"/>
+		<typeAlias type="com.kh.sixman.company.vo.CompanyVo" alias="CompanyVo"/>
+		<typeAlias type="com.kh.sixman.addressBook.vo.AddressVo" alias="AddressVo"/>
+		<typeAlias type="com.kh.sixman.addressBook.vo.ReciverVo" alias="ReciverVo"/>
+		<typeAlias type="com.kh.sixman.addressBook.vo.SortationVo" alias="SortationVo"/>
+		<typeAlias type="com.kh.sixman.chat.vo.ChatRoomVo" alias="ChatRoomVo"/>
+		<typeAlias type="com.kh.sixman.chat.vo.ChatVo" alias="ChatVo"/>
+		<typeAlias type="com.kh.sixman.messenger.vo.ChatCreateRoomMemberVo" alias="ChatCreateRoomMemberVo"/>
+		<typeAlias type="com.kh.sixman.messenger.vo.DefineChatNameVo" alias="DefineChatNameVo"/>
+		<typeAlias type="com.kh.sixman.messenger.vo.ReadChatRoomListVo" alias="ReadChatRoomListVo"/>
+		<typeAlias type="com.kh.sixman.messenger.vo.ChatRoomDataVo" alias="ChatRoomDataVo"/>
 	</typeAliases> 
 
 
 </configuration>
+
 
 
 

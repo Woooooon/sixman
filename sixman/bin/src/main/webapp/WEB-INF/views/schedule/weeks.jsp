@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>주간 일정</title>
 <link rel="stylesheet" href="${path}\resources\css\schedule\weeks.css">
+<script defer src="${path}/resources/js/schedule/weeks.js"></script>
 </head>
 <body>  
     <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
@@ -19,7 +20,7 @@
                 </div>
                 <div class="week-name">
                 <button class="prevweek wbtn">&lt;</button>
-                <div class="week">11월 3주차</div>
+                <div class="week"></div>
                 <button class="prevweek wbtn">&gt;</button>
                 </div>
                 <div>

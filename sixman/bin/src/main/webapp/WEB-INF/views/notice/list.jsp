@@ -12,16 +12,27 @@
 </head>
 <body>
 
-<%@include file="/WEB-INF/views/common/menuBar.jsp" %>
+<c:if test="${loginMember.authorizeNo==3}">
+    <%@include file="/WEB-INF/views/common/tempMenuBar.jsp" %>
+</c:if>
+<c:if test="${loginMember.authorizeNo!=3}">
+    <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
+</c:if>
+
 <main class="main-box">
 	<div id="notice-box" class="box">
         <div class="title-box">
             <div class="b-title">공지사항</div>
-            <div class="b-page-count hilight">50</div>
+            <div id="list-count" class="b-page-count hilight"></div>
         </div>
         <div class="header-box">
-            <a href="/sixman/notice/write" class="btn" onclick="location.href='/sixman/notice/write'"><span class="material-symbols-outlined"> add </span><p>글쓰기</p></a>
-            <div class="search-bar"><input id="search-input" type="text" placeholder="검색"><span id="search-btn" class="material-symbols-outlined"> search </span></div>
+            <c:if test="${loginMember.authorizeNo==3}">
+                <a href="/sixman/admin/notice/write" class="btn"><span class="material-symbols-outlined"> add </span><p>글쓰기</p></a>
+            </c:if>
+            <c:if test="${loginMember.authorizeNo!=3}">
+                <div></div>
+            </c:if>
+                <div class="search-bar"><input id="search-input" type="text" placeholder="검색"><span id="search-btn" class="material-symbols-outlined"> search </span></div>
         </div>
         <div class="list-box">
         </div>

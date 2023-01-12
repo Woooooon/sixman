@@ -158,12 +158,26 @@
 
 </div>
 </main>
-
-
-
-
-
-
-    
 </body>
+<!-- <script>
+function checkbox(){
+  var checkArr =[]; //배열초기화
+  $("input[name='approvemy']:checked ").each(function(i)){
+    checkArr.push($(this).val()); //체크된 것만 값을 뽑아서 배열에 push
+  }
+
+  $.ajax({
+    url:"${path}/document/approvemy"
+    ,type : 'post'
+    , dataType : 'text'
+    , data : {
+        apprmyArr : checkArr //스프링에서 value값으로 줄것 :apprmyArr
+    }
+  });
+}
+
+</script> -->
+<!-- 순서 이름 직책 부서-->
+
+
 </html>

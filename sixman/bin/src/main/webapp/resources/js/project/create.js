@@ -9,14 +9,102 @@ document.querySelector('#startDate').setAttribute("min", today);
 // document.querySelector('#endDate').setAttribute("max", endline + 60);
  
 //---------------------------------------------------------------
+
+//팀 목록 조회하기
+$('select[name="deptNo"]').on('change', () => {
+    $('select[name="teamNo"]').html('');
+    if ($('select[name="deptNo"]').val() != 1) {
+        $.ajax({
+            url: '/sixman/dept/sublist',
+            method: 'POST',
+            data: {
+                no: $('select[name="deptNo"]').val(),
+            },
+            success: (teamList) => {
+                console.log('팀 조회 성공');
+                teamList.forEach((element) => {
+                    const option = document.createElement('option');
+                    option.setAttribute('value', element.teamNo);
+                    option.innerHTML = element.teamName;
+                    $('select[name="teamNo"]').append(option);
+                });
+                memberListAjax();
+            },
+            error: (teamList) => {
+                console.log('팀 조회 에러');
+            },
+        });
+    }
+});
+
+//멤버 목록 조회하기
+$('select[name="teamNo"]').on('change', () => {
+    $('select[name="leader"]').html('');
+    if ($('select[name="leader"]').val() != 1) {
+        $.ajax({
+            url: '/sixman/project/memberlist',
+            method: 'POST',
+            data: {
+                no: $('select[name="teamNo"]').val(),
+            },
+            success: (teamList) => {
+                console.log('멤버 조회 성공');
+                teamList.forEach((element) => {
+                    const option = document.createElement('option');
+                    option.setAttribute('value', element.no);
+                    option.innerHTML = element.name;
+                    $('select[name="leader"]').append(option);
+
+                });
+            },
+            error: (teamList) => {
+                console.log('멤버 조회 에러');
+            },
+        });
+    }
+});
+
+
+//팀에 속해 있는 멤버 목록 조회하기
+function memberListAjax(){
+    $('select[name="leader"]').html('');
+    const teamNo = $('select[name="teamNo"]').val();
+    const deptNo = $('select[name="deptNo"]').val();
+
+    let no = teamNo != null ? teamNo : deptNo;
+    
+    $.ajax({
+        url: '/sixman/project/memberlist',
+        method: 'POST',
+        data: {
+            no: no
+        },
+        success: (teamList) => {
+            
+            teamList.forEach((element) => {
+                const option = document.createElement('option');
+                
+                option.setAttribute('value', element.no);
+                option.setAttribute('leader', element.no);
+                option.innerHTML = element.name + ' ' + element.positionName;
+                $('select[name="leader"]').append(option);
+
+            });
+        },
+        error: (teamList) => {
+            console.log('멤버 옵션 조회 에러');
+        },
+    });
+}
+
 //팀 목록 select 박스 보이게하기
 const selects = document.querySelectorAll('.select');
 const memberbox = document.querySelector('.team-member-box');
 
 selects.forEach(function (element, index, array) {
     const value = element.querySelector('.selected-option');
-    const option = element.querySelector('ul');
-    const opts = option.querySelectorAll('li');
+    const option = element.querySelector('select');
+    const opts = option.querySelectorAll('option');
 
     element.addEventListener('click', (e)=>{
         e.stopPropagation();
@@ -42,84 +130,57 @@ selects.forEach(function (element, index, array) {
     })
 });
 
-function createMemberBox() {
-    const divbox = document.createElement('div');
-    divbox.classList.add('member');
+// 조직도 popup
+const openPop = document.querySelector('.plusmem');
 
-    let text = "";
+//자식창 오픈
+openPop.addEventListener('click', ()=>{
+    openWindowPop();
+});
 
-    for(let i = 0; i < selects.length; i++){
-        const item = selects[i];
-        const v = item.querySelector('.selected-option');
-        text += `<p>${v.innerHTML}</p>`;
-        if(i!=selects.length-1){
-            text += ' / ';
-        }
-    }
-
-    text += `<span class='material-symbols-outlined'> close </span>`;
-    divbox.innerHTML = text;
-
-    divbox.querySelector('span').addEventListener('click', ()=>{
-        divbox.remove();
-    })
-
-    memberbox.append(divbox);
+function openWindowPop(){
+    window.open('/sixman/employee/popup', '조직도 팝업', 'top=0, left=8000, height=500, status=no, toolbar=no, resizable=no');
 }
 
-// selects.forEach(element => {
-//     const value = element.querySelector('.selected-option');
-//     const option = element.querySelector('ul');
-//     const opts = element.querySelectorAll('li');
-
-//     element.addEventListener('click', ()=>{
+//자식창에서 멤버 객체 배열 받은 함수
+function childValue(memberArr){
+    
+    for(let i = 0; i < memberArr.length; i++){
+        if(memberArr.length > 9){
+            popup.alertPop('프로젝트 최대 인원은 10명입니다.', "최대 9명만 추가 가능합니다.");
+            break;
+        }
         
-//         if(option.classList.contains('hide')){
-//             option.classList.remove('hide');
-//             option.classList.add('show');
-//             selectOpt(opts, value, option);
-//         }else{
-//             option.classList.add('hide');
-//             option.classList.remove('show');
-//         }
+        const memb = memberArr[i];
+
+        console.log(memberArr.length);
         
-//         const divbox = document.createElement('div');
-//         divbox.classList.add('member');
-//         divbox.innerHTML = `<p>${value.value}</p>`
-//                          +"<span class='material-symbols-outlined'> close </span>";
+        const divbox = document.createElement('div');
+        divbox.classList.add('member');
+    
+        let text = "";
+    
+        
+        text += `<input type='text' value="${memb.dept}" name='deptmem'>`;
+        text += `<input type='text' value="${memb.team}" name='teammem'>`;
+        text += `<input type='text' value="${memb.name}" name='prjmem'>`;
+        text += `<input type='hidden' value="${memb.no}" name='memberNo'>`
+    
+        text += `<span class='material-symbols-outlined'> close </span>`;
+        divbox.innerHTML = text;
+    
+        divbox.querySelector('span').addEventListener('click', ()=>{
+            divbox.remove();
+        })
+    
+        memberbox.append(divbox);
 
-//         divbox.querySelector('span').addEventListener('click', ()=>{
-//             divbox.remove();
-//             value.remove();
-//         })
+    }
 
-//         memberbox.append(divbox);
-//     })
-// });
-
-// if(inputFile.value!=null){
-//     const div = document.createElement('div');
-//     div.classList.add('file-item');
-//     div.innerHTML = `<p>${inputFile.value.substring(inputFile.value.lastIndexOf('\\')+1)}</p>`
-//                 +"<span class='material-symbols-outlined'> close </span>";
-
-//     div.querySelector('span').addEventListener('click', ()=>{
-//         div.remove();
-//         inputFile.remove();
-//     });
-
-//     fileBox.append(div);
-// }
+    
+}
 
 
-//인원 선택 하면 team-member-box 로 넘기기
-// const team = document.querySelector('#teamvalue').value;
-// const reader = document.querySelector('#readervalue').value;
-// const member = document.querySelector('#membervalue').value;
-
-// console.log(team);
-// console.log(reader);
-// console.log(member);
 
 //-----------------------------------------------
 
@@ -130,7 +191,7 @@ const renderCalender = () =>{
     const viewYear  = date.getFullYear();
     const viewMonth = date.getMonth();
 
-    document.querySelector('.year-month').textContent = `${viewYear}년 ${viewMonth + 1}월`;
+    document.querySelector('.year-month').innerHTML = `${viewYear}년 ${viewMonth + 1}월`;
 
     const prevLast = new Date(viewYear, viewMonth , 0);
     const thisLast = new Date(viewYear, viewMonth + 1 , 0);
@@ -230,4 +291,7 @@ fileBtn.addEventListener('click',()=>{
     });
 
 });
+
+
+
 

@@ -11,54 +11,36 @@
     <link rel="stylesheet" href="${path}/resources/css/main.css">
     <link rel="stylesheet" href="${path}/resources/css/reset.css">
     <script src="${path}/resources/js/main/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 </head>
 <body>
-
 	<header id="main-header">
-        <section id="logo"></section>
+        <section id="logo">
+            <c:if test="${not empty company.logoName}">
+                <img src="/sixman/resources/img/logo/${company.logoName}" alt="" id="headerLogo">
+            </c:if>
+        </section>
         <section id="event-msg-box"></section>
         <section id="my-menu">
             <article id="alarm" class="center">
                 <span class="material-symbols-outlined"> notifications </span>
-                <div id="alarm-count">1</div>
+                <div id="alarm-count"></div>
             </article>
             <article id="msg" class="center">
                 <span class="material-symbols-outlined"> sms </span>
             </article>
             <article id="my-img" class="center">
-                <span class="material-symbols-outlined"> person </span>
+                <img src="/sixman/resources/img/profile/${loginMember.fileName}" alt="">
             </article>
         </section>
     </header>
     <div id="alarm-box">
         <div id="inner-box">
-
-            <div class="alarm-item">
-                <div>
-                    <div class="item-header">
-                        <div>[카테고리]</div>
-                        <div>2022:00:00:00</div>
-                    </div>
-                    <div class="item-title">ooo님이 보낸메일 "제목 제sadfasdf목 제목"</div>
-                </div>
-                <span class="t-btn material-symbols-outlined"> close </span>
-            </div>
-
-            <div class="alarm-item">
-                <div>
-                    <div class="item-header">
-                        <div>[카테고리]</div>
-                        <div>2022:00:00:00</div>
-                    </div>
-                    <div class="item-title">ooo님이 보낸메일 "제목 제sadfasdf목 제목"</div>
-                </div>
-                <span class="t-btn material-symbols-outlined"> close </span>
-            </div>
-
         </div>
     </div>
     <aside id="main-aside">
         <ul id="menu-list">
+            <li><a>공지사항</a></li>
             <li><a>근태관리</a></li>
             <li><a>프로젝트</a></li>
             <li><a>전자문서</a></li>
@@ -67,10 +49,13 @@
             <li><a>주소록</a></li>
             <li><a>일정</a></li>
             <li><a>급여</a></li>
+            <c:if test="${loginMember.authorizeNo==3}">
+                <li><a href="/sixman/admin/employee/list">관리자페이지 전환</a></li>
+            </c:if>
         </ul>
         <section id="menu-footer">
-            <a href="" class="material-symbols-outlined">logout</a>
-            <div id="foot-logo"></div>
+            <a href="/sixman/logout" class="material-symbols-outlined">logout</a>
+            <div id="foot-logo" onclick="location.href='${path}/main'"></div>
         </section>
     </aside>
     <aside id="side-menu">
@@ -84,26 +69,28 @@
 <script>
     const menuMap = new Map();
 
+    menuMap.set("공지사항", [
+        {icon: "event_note", title: "공지사항"},
+        {title: "공지사항", url: "${path}/notice/list"}
+    ]);
+
     menuMap.set("근태관리", [
         {icon: "approval", title: "근태관리"},
-        {title: "", url: ""},
-        {title: "", url: ""},
-        {title: "", url: ""},
-        {title: "", url: ""}
+        {title: "근태현황", url: "${path}/attendance/board?page=1"}
     ]);
 
     menuMap.set("프로젝트", [
         {icon: "groups", title: "프로젝트"},
-        {title: "", url: ""},
-        {title: "", url: ""},
-        {title: "", url: ""}
+        {title: "프로젝트", url: "${path}/project/allprj"},
+        {title: "프로젝트 생성", url: "${path}/project/create"}
     ]);
 
     menuMap.set("전자문서", [
         {icon: "home_storage", title: "전자문서"},
-        {title: "", url: ""},
-        {title: "", url: ""},
-        {title: "", url: ""}
+        {title: "기안문서함", url: "${path}/document/first"},
+        {title: "결재문서함", url: "${path}/document/payment"},
+        {title: "참조문서함", url: "${path}/document/reference"},
+        {title: "임시보관함", url: "${path}/document/keep"}
     ]);
 
     menuMap.set("메일함", [
@@ -118,29 +105,26 @@
 
     menuMap.set("조직도", [
         {icon: "account_tree", title: "조직도"},
-        {title: "", url: ""},
-        {title: "", url: ""},
-        {title: "", url: ""}
+        {title: "조직도", url: "${path}/employee/list"}
     ]);
 
     menuMap.set("주소록", [
         {icon: "contacts", title: "주소록"},
-        {title: "", url: ""},
-        {title: "", url: ""},
-        {title: "", url: ""}
+        {title: "내 주소록", url: "${path}/address"},
+        {title: "주소록 추가", url: "${path}/address/add"},
+        {title: "주소록 받아오기", url: "${path}/address/recive"},
+        {title: "휴지통", url: "${path}/address/bin"}
     ]);
 
     menuMap.set("일정", [
         {icon: "calendar_month", title: "일정"},
         {title: "일정", url: "${path}/schedule/calendar"},
-        {title: "주간일정", url: ""},
+        {title: "주간일정", url: "${path}/schedule/weeks"}
     ]);
 
     menuMap.set("급여", [
         {icon: "calculate", title: "급여"},
-        {title: "", url: ""},
-        {title: "", url: ""},
-        {title: "", url: ""}
+        {title: "급여현황", url: "${path}/salary/salary"}
     ]);
 
     const menuListBox = document.querySelector('#menu-list');
@@ -213,12 +197,186 @@
         });
     })
 
-    const alarmItems = document.querySelectorAll('.alarm-item');
-    alarmItems.forEach(element => {
-        element.querySelector('span').addEventListener('click', ()=>{
-            element.remove();
+    window.onload = ()=>{
+        alarmAjax();
+        connectSC();
+    }
+
+    // 웹소켓
+    var socket = null;
+
+    function connectSC() {
+        socket = new SockJS("${path}/alarmSocket");
+
+        
+        socket.onmessage = onMessage;
+        socket.onopen = onOpen;
+        socket.onclose = onClose;
+
+        // console.log(socket);
+    }
+
+    function onMessage(m) {
+        const data = m.data;
+        const curMember = '${loginMember.no}';
+
+        const datas = data.split('#');
+        const type = datas[0];
+        const msg = datas[1];
+        const no = datas[2];
+
+        // console.log(data);
+
+        let f = null;
+        switch (type) {
+            case 'MAIL':
+                f = ()=>{location.href='/sixman/mail/detail?no=';}
+                break;
+            case 'DOCUMENT':
+                f = ()=>{location.href='';}
+                break;
+            case 'ADRESS':
+                f = ()=>{location.href='';}
+                break;
+            case 'SCHEDULE':
+                f = ()=>{location.href='';}
+                break;
+        }
+
+        const today = new Date();
+
+        const div = document.createElement('div');
+        div.classList.add('alarm-item');
+
+        const item = 
+        '<div class="item-div"><div class="item-header"><div>['+type+']</div><div>'+today.toLocaleTimeString()+'</div></div><div class="item-title">'+msg+'</div></div><span class="t-btn material-symbols-outlined"> close </span>'
+        div.innerHTML = item;
+
+        div.querySelector('.item-div').addEventListener('click', ()=>{
+            checkAjax(no, type);
+            f();
         });
-    });
+
+        div.querySelector('span').addEventListener('click', ()=>{
+            div.remove();
+            checkAjax(no, type);
+        });
+
+        const itemCount = document.querySelector('#alarm-count');
+
+        itemCount.style.display = 'flex';
+        if(itemCount.innerText=='' ||itemCount.innerText == null){
+            itemCount.innerText = 1;
+        }else{
+            itemCount.innerText = parseInt(itemCount.innerText) + 1;
+        }
+
+        const box = document.querySelector('#alarm-box #inner-box');
+        box.prepend(div);
+
+        notify(type, msg);
+    }
+
+    function onOpen(params) {
+            
+    }
+
+    function onClose(params) {
+            
+    }
+
+    function sendMsg(name, title, type, sender) {
+
+        let msg = ``;
+        switch (type) {
+            case 'MAIL':
+                msg = name + '(이)가 메일을 보냈습니다. "' + title + '"';
+                break;
+            case 'DOCUMENT':
+                msg = name + '(이)가 결재를 요청하였습니다. "' + title + '"';
+                break;
+            case 'ADRESS':
+                msg = name + '(이)가 주소록을 공유하였습니다. "' + title + '"';
+                break;
+            case 'SCHEDULE':
+                msg = name + '(이)가 일정을 공유하였습니다. "' + title + '"';
+                break;
+        }
+        
+        socket.send('${loginMember.no}#'+ type + '#' + msg + '#' + sender);
+    }
+
+    function getNotificationPermission() {
+        // 브라우저 지원 여부 체크
+        if (!("Notification" in window)) {
+            alert("데스크톱 알림을 지원하지 않는 브라우저입니다.");
+        }
+        // 데스크탑 알림 권한 요청
+        Notification.requestPermission(function (result) {
+            // 권한 거절
+            if(result == 'denied') {
+                popup.alertPop("알림을 차단하셨습니다.", "브라우저의 사이트 설정에서 변경하실 수 있습니다.");
+                return false;
+            }
+        });
+    }
+
+    function notify(title, msg) {
+        var options = {
+            body: msg
+        }
+        
+        // 데스크탑 알림 요청
+        var notification = new Notification(title, options);
+        
+        // 3초뒤 알람 닫기
+        setTimeout(function(){
+            notification.close();
+        }, 3000);
+    }
+
+    const switchPwd = document.querySelector('#my-img');
+    switchPwd.addEventListener('click', ()=>{
+        location.href = '/sixman/member/switch?mypage="변경요청"';
+    })
+
+    scrolling();
+    function scrolling() {
+        const eventBox = document.querySelector('#event-msg-box > div');
+        let top = 0;
+        setInterval(() => {
+            if(top==-140){
+                top=0;
+            }else{
+                top -= 35;
+            }
+            eventBox.style.top = top+"px";
+        }, 2000);
+    }
+
+    const httpRequest = new XMLHttpRequest();
+    httpRequest.onreadystatechange = () => {
+        if (httpRequest.readyState === XMLHttpRequest.DONE) {
+                if (httpRequest.status === 200) {
+                    
+                    const result = httpRequest.response;
+                    let text = '';
+                    result.forEach(element => {
+                        text += `<div>[공지사항] `+element.title+` `+element.enrollDate+`</div>`;
+                    });
+
+                    const eventBox = document.querySelector('#event-msg-box>div');
+                    eventBox.innerHTML = text;
+                } else {
+
+                }
+        }
+    };
+
+    httpRequest.open('get', '/sixman/getNotice');
+    httpRequest.responseType = "json";
+    httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
+    httpRequest.send();
 
 </script>
 </html>

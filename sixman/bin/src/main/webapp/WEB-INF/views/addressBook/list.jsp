@@ -5,21 +5,19 @@
         <meta charset="UTF-8" />
         <title>Insert title here</title>
         <link rel="stylesheet" href="<c:url value='/resources/css/addressBook/list.css'/>" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
-        <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-        <link rel="stylesheet" href="/sixman\resources\jstree\default\style.min.css" />
-        <script src="https://kit.fontawesome.com/ae846b135b.js" crossorigin="anonymous"></script>
         <script defer src="<c:url value='/resources/js/address/list.js'/>"></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+        <script src="https://kit.fontawesome.com/ae846b135b.js" crossorigin="anonymous"></script>
     </head>
     <body>
         <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
         <div class="share-modal close">
-            <form action="">
+            <form action="/sixman/address/send" method='POST'>
                 <div class="receiver">
                     <label for="">받는사람</label>
-                    <input type="text" />
+                    <input type="text" name="reciver"/>
+                    <input type="text" id="reciverName"/>
                     <input type="submit" value="전 송" />
                     <span class="material-symbols-outlined" id="close-modal"> close </span>
                 </div>
@@ -33,99 +31,67 @@
                         <p>구 분</p>
                         <p>상 호</p>
                         <p>이 름</p>
-                        <p>직 급</p>
                         <p>연락처</p>
-                    </div>
-                    <div class="list-item">
-                        <input type="checkbox" value="" name="" checked />
-                        <p>거래처</p>
-                        <p>요기요</p>
-                        <p>윤태원</p>
-                        <p>사원</p>
-                        <p>010-8888-6666</p>
-                    </div>
-                    <div class="list-item">
-                        <input type="checkbox" value="" name="" checked />
-                        <p>거래처</p>
-                        <p>요기요</p>
-                        <p>윤태원</p>
-                        <p>사원</p>
-                        <p>010-8888-6666</p>
-                    </div>
-                    <div class="list-item">
-                        <input type="checkbox" value="" name="" checked />
-                        <p>거래처</p>
-                        <p>요기요</p>
-                        <p>윤태원</p>
-                        <p>사원</p>
-                        <p>010-8888-6666</p>
-                    </div>
-                    <div class="list-item">
-                        <input type="checkbox" value="" name="" checked />
-                        <p>거래처</p>
-                        <p>요기요</p>
-                        <p>윤태원</p>
-                        <p>사원</p>
-                        <p>010-8888-6666</p>
-                    </div>
-                    <div class="list-item">
-                        <input type="checkbox" value="" name="" checked />
-                        <p>거래처</p>
-                        <p>요기요</p>
-                        <p>윤태원</p>
-                        <p>사원</p>
-                        <p>010-8888-6666</p>
-                    </div>
-                    <div class="list-item">
-                        <input type="checkbox" value="" name="" checked />
-                        <p>거래처</p>
-                        <p>요기요</p>
-                        <p>윤태원</p>
-                        <p>사원</p>
-                        <p>010-8888-6666</p>
+                        <p>EMAIL</p>
                     </div>
                 </div>
-                <div class="page-box">
-                    <span class="material-symbols-outlined"> keyboard_double_arrow_left </span>
-                    <span class="material-symbols-outlined"> chevron_left </span>
-                    <div class="page-btn checked-p-btn">1</div>
-                    <div class="page-btn">2</div>
-                    <div class="page-btn">3</div>
-                    <div class="page-btn">4</div>
-                    <div class="page-btn">5</div>
-                    <span class="material-symbols-outlined"> chevron_right </span>
-                    <span class="material-symbols-outlined"> keyboard_double_arrow_right </span>
-                </div>
+                
             </form>
         </div>
         <main id="main-page" class="main-box">
             <div class="main-box-2">
                 <aside id="myaddress-wrap" class="box">
-                    <div class="dept-guide">
-                        <span class="material-symbols-outlined"> contacts </span>
-                        <p>주소록</p>
+                    <div class="sortation-title">
+                        <div class="title-sor">
+                            <span class="material-symbols-outlined"> contacts </span>
+                            <p>주소록</p>
+                        </div>
+                        <span class="material-symbols-outlined" id="cateSet">auto_fix</span>
                     </div>
-                    <div id="jstree">
-                        <ul>
-                            <li data-jstree='{"icon":"fa fa-folder-open icon-color"}'>
-                                <input type="text" value="거래처" disabled />
+                    <div class="sortation-list">
+                    	<c:forEach items="${sortationList}" var="j">
+                            <c:if test="${j.no ne 1 }">
                                 <ul>
-                                    <li data-jstree='{"icon":"fa fa-folder icon-color"}'>
-                                        <input type="text" value="영업 2팀" disabled />
-                                        <ul>
-                                            <li data-jstree='{"icon":"fa fa-user icon-color"}'>윤태원</li>
-                                            <li data-jstree='{"icon":"fa fa-user icon-color"}'>구기석</li>
-                                        </ul>
-                                    </li>
-                                    <li data-jstree='{"icon":"fa fa-folder icon-color"}'>
-                                        <input type="text" value="영업 3팀" disabled />
-                                        <ul>
-                                            <li data-jstree='{"icon":"fa fa-user icon-color"}'>윤태원</li>
-                                            <li data-jstree='{"icon":"fa fa-user icon-color"}'>구기석</li>
-                                        </ul>
-                                    </li>
+                                    <div class="sortation-item">
+                                        <label for="sortationNo${j.no}">
+                                            <input type="checkbox" id="sortationNo${j.no}">
+                                            <div class="toggleBtn">
+                                                <span class="material-symbols-outlined">change_history</span>
+                                            </div>
+                                            ${j.name}
+                                        </label>
+                                    </div>
+                                    <c:forEach items="${addressListAll}" var="i">
+                                        <c:if test="${j.no eq i.sortationNo}">
+                                            <li>
+                                                <div class="address-item">
+                                                    <a href="/sixman/address/detail?no=${i.no}"><span class="material-symbols-outlined">storefront</span>${i.company}</a>
+                                                </div>
+                                            </li>													
+                                        </c:if>
+                                    </c:forEach>
                                 </ul>
-                            </li>
+                            </c:if>
+                    	</c:forEach>
+                        <ul>
+                            <div class="sortation-item">
+                                <label for="sortationNo${defaultSortation.no}">
+                                    <input type="checkbox" id="sortationNo${defaultSortation.no}">
+                                    <div class="toggleBtn">
+                                        <span class="material-symbols-outlined">change_history</span>
+                                    </div>
+                                    ${defaultSortation.name}
+                                </label>
+                            </div>
+                            <c:forEach items="${addressListAll}" var="i">
+                                <c:if test="${defaultSortation.no eq i.sortationNo}">
+                                    <li>
+                                        <div class="address-item">
+                                            <a href="/sixman/address/detail?no=${i.no}"><span class="material-symbols-outlined">storefront</span>${i.company}</a>
+                                        </div>
+                                    </li>													
+                                </c:if>
+                            </c:forEach>
                         </ul>
                     </div>
                 </aside>
@@ -138,14 +104,15 @@
                         <div class="address-search">
                             <form action="">
                                 <select name="category" id="">
-                                    <option value="">이 름</option>
-                                    <option value="">연락처</option>
-                                    <option value="">직 급</option>
-                                    <option value="">이메일</option>
-                                    <option value="">주 소</option>
-                                    <option value="">구 분</option>
+                                    <option value="a.name">이 름</option>
+                                    <option value="a.phone">연락처</option>
+                                    <option value="a.position">직 급</option>
+                                    <option value="a.email">이메일</option>
+                                    <option value="a.address">주 소</option>
+                                    <option value="a.company">상 호</option>
+                                    <option value="s.name">구 분</option>
                                 </select>
-                                <input type="text" />
+                                <input type="text" name="keyword"/>
                                 <input type="submit" value="검 색" />
                             </form>
                         </div>
@@ -158,414 +125,45 @@
                         <span class="material-symbols-outlined share" id="checkShare"> share </span>
                     </div>
                     <div class="body">
-                        <label for="selectOne">
-                            <div class="card-container">
-                                <div class="card">
-                                    <input type="checkbox" class="selectOne" id="selectOne" />
-                                    <div class="card-front">
-                                        <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
-                                        <div class="card-sortation">
-                                            <p>거래처</p>
-                                        </div>
+	                    <c:forEach items="${addressList}" var="i">
+	                        <div class="card-item">
+	                            <input type="checkbox" id="cardNo${i.no}" class="cardCheck" value="${i.no}"/>
+	                            <div class="card-sortation">
+	                                <p>${i.sortationName}</p>
+	                            </div>
+	                            <div class="card-top">
+	                                <label for="cardNo${i.no}">
+	                                    <img src="/sixman/resources/img/address/${i.fileName}" alt="명함사진" />
+	                                </label>
+	                            </div>
+	                            <div class="card-bottom">
+	                                <div class="essential-info">
+	                                    <p id="card-name">${i.name}</p>
+	                                    <p id="card-company"><i class="fa-solid fa-building"></i>${i.company}</p>
+	                                </div>
+	                                <p id="card-address">${i.address}</p>
+	                                <div class="info-phone">
+                                        <strong>Tel.</strong>
+                                        <p id="card-phone">${i.phone}</p>
                                     </div>
-                                    <div class="card-back">
-                                        <div class="info-wrap">
-                                            <p>요기요</p>
-                                            <div class="card-sortation">
-                                                <p>거래처</p>
-                                            </div>
-                                            <div class="card-info">
-                                                <p>윤태원</p>
-                                                <p>사원</p>
-                                            </div>
-                                            <p>010-8888-6666</p>
-                                            <p>asd@gmail.com</p>
-                                            <p>서울시 역삼동 어쩌고저쩌고 여기저기 어디저기</p>
-                                        </div>
-                                        <div class="card-controller">
-                                            <a href=""><span class="material-symbols-outlined"> mail </span></a>
-                                            <span class="material-symbols-outlined share"> share </span>
-                                            <a href=""><span class="material-symbols-outlined"> edit </span></a>
-                                        </div>
+	                                <div class="info-email">
+                                        <strong>Mail.</strong>
+                                        <a id="card-email" href="/sixman/mail/write?email=${i.email}">${i.email}</a>
                                     </div>
-                                </div>
-                            </div>
-                        </label>
-                        <label for="a11">
-                            <div class="card-container">
-                                <div class="card">
-                                    <input type="checkbox" class="selectOne" id="a11" />
-                                    <div class="card-front">
-                                        <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
-                                        <div class="card-sortation">
-                                            <p>거래처</p>
-                                        </div>
-                                    </div>
-                                    <div class="card-back">
-                                        <div class="info-wrap">
-                                            <p>요기요</p>
-                                            <div class="card-sortation">
-                                                <p>거래처</p>
-                                            </div>
-                                            <div class="card-info">
-                                                <p>윤태원</p>
-                                                <p>사원</p>
-                                            </div>
-                                            <p>010-8888-6666</p>
-                                            <p>asd@gmail.com</p>
-                                            <p>서울시 역삼동 어쩌고저쩌고 여기저기 어디저기</p>
-                                        </div>
-                                        <div class="card-controller">
-                                            <a href=""><span class="material-symbols-outlined"> mail </span></a>
-                                            <span class="material-symbols-outlined share"> share </span>
-                                            <a href=""><span class="material-symbols-outlined"> edit </span></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </label>
-                        <label for="a10">
-                            <div class="card-container">
-                                <div class="card">
-                                    <input type="checkbox" class="selectOne" id="a10" />
-                                    <div class="card-front">
-                                        <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
-                                        <div class="card-sortation">
-                                            <p>거래처</p>
-                                        </div>
-                                    </div>
-                                    <div class="card-back">
-                                        <div class="info-wrap">
-                                            <p>요기요</p>
-                                            <div class="card-sortation">
-                                                <p>거래처</p>
-                                            </div>
-                                            <div class="card-info">
-                                                <p>윤태원</p>
-                                                <p>사원</p>
-                                            </div>
-                                            <p>010-8888-6666</p>
-                                            <p>asd@gmail.com</p>
-                                            <p>서울시 역삼동 어쩌고저쩌고 여기저기 어디저기</p>
-                                        </div>
-                                        <div class="card-controller">
-                                            <a href=""><span class="material-symbols-outlined"> mail </span></a>
-                                            <span class="material-symbols-outlined share"> share </span>
-                                            <a href=""><span class="material-symbols-outlined"> edit </span></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </label>
-                        <label for="a9">
-                            <div class="card-container">
-                                <div class="card">
-                                    <input type="checkbox" class="selectOne" id="a9" />
-                                    <div class="card-front">
-                                        <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
-                                        <div class="card-sortation">
-                                            <p>거래처</p>
-                                        </div>
-                                    </div>
-                                    <div class="card-back">
-                                        <div class="info-wrap">
-                                            <p>요기요</p>
-                                            <div class="card-sortation">
-                                                <p>거래처</p>
-                                            </div>
-                                            <div class="card-info">
-                                                <p>윤태원</p>
-                                                <p>사원</p>
-                                            </div>
-                                            <p>010-8888-6666</p>
-                                            <p>asd@gmail.com</p>
-                                            <p>서울시 역삼동 어쩌고저쩌고 여기저기 어디저기</p>
-                                        </div>
-                                        <div class="card-controller">
-                                            <a href=""><span class="material-symbols-outlined"> mail </span></a>
-                                            <span class="material-symbols-outlined share"> share </span>
-                                            <a href=""><span class="material-symbols-outlined"> edit </span></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </label>
-                        <label for="a8">
-                            <div class="card-container">
-                                <div class="card">
-                                    <input type="checkbox" class="selectOne" id="a8" />
-                                    <div class="card-front">
-                                        <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
-                                        <div class="card-sortation">
-                                            <p>거래처</p>
-                                        </div>
-                                    </div>
-                                    <div class="card-back">
-                                        <div class="info-wrap">
-                                            <p>요기요</p>
-                                            <div class="card-sortation">
-                                                <p>거래처</p>
-                                            </div>
-                                            <div class="card-info">
-                                                <p>윤태원</p>
-                                                <p>사원</p>
-                                            </div>
-                                            <p>010-8888-6666</p>
-                                            <p>asd@gmail.com</p>
-                                            <p>서울시 역삼동 어쩌고저쩌고 여기저기 어디저기</p>
-                                        </div>
-                                        <div class="card-controller">
-                                            <a href=""><span class="material-symbols-outlined"> mail </span></a>
-                                            <span class="material-symbols-outlined share"> share </span>
-                                            <a href=""><span class="material-symbols-outlined"> edit </span></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </label>
-                        <label for="a7">
-                            <div class="card-container">
-                                <div class="card">
-                                    <input type="checkbox" class="selectOne" id="a7" />
-                                    <div class="card-front">
-                                        <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
-                                        <div class="card-sortation">
-                                            <p>거래처</p>
-                                        </div>
-                                    </div>
-                                    <div class="card-back">
-                                        <div class="info-wrap">
-                                            <p>요기요</p>
-                                            <div class="card-sortation">
-                                                <p>거래처</p>
-                                            </div>
-                                            <div class="card-info">
-                                                <p>윤태원</p>
-                                                <p>사원</p>
-                                            </div>
-                                            <p>010-8888-6666</p>
-                                            <p>asd@gmail.com</p>
-                                            <p>서울시 역삼동 어쩌고저쩌고 여기저기 어디저기</p>
-                                        </div>
-                                        <div class="card-controller">
-                                            <a href=""><span class="material-symbols-outlined"> mail </span></a>
-                                            <span class="material-symbols-outlined share"> share </span>
-                                            <a href=""><span class="material-symbols-outlined"> edit </span></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </label>
-                        <label for="a6">
-                            <div class="card-container">
-                                <div class="card">
-                                    <input type="checkbox" class="selectOne" id="a6" />
-                                    <div class="card-front">
-                                        <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
-                                        <div class="card-sortation">
-                                            <p>거래처</p>
-                                        </div>
-                                    </div>
-                                    <div class="card-back">
-                                        <div class="info-wrap">
-                                            <p>요기요</p>
-                                            <div class="card-sortation">
-                                                <p>거래처</p>
-                                            </div>
-                                            <div class="card-info">
-                                                <p>윤태원</p>
-                                                <p>사원</p>
-                                            </div>
-                                            <p>010-8888-6666</p>
-                                            <p>asd@gmail.com</p>
-                                            <p>서울시 역삼동 어쩌고저쩌고 여기저기 어디저기</p>
-                                        </div>
-                                        <div class="card-controller">
-                                            <a href=""><span class="material-symbols-outlined"> mail </span></a>
-                                            <span class="material-symbols-outlined share"> share </span>
-                                            <a href=""><span class="material-symbols-outlined"> edit </span></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </label>
-                        <label for="a5">
-                            <div class="card-container">
-                                <div class="card">
-                                    <input type="checkbox" class="selectOne" id="a5" />
-                                    <div class="card-front">
-                                        <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
-                                        <div class="card-sortation">
-                                            <p>거래처</p>
-                                        </div>
-                                    </div>
-                                    <div class="card-back">
-                                        <div class="info-wrap">
-                                            <p>요기요</p>
-                                            <div class="card-sortation">
-                                                <p>거래처</p>
-                                            </div>
-                                            <div class="card-info">
-                                                <p>윤태원</p>
-                                                <p>사원</p>
-                                            </div>
-                                            <p>010-8888-6666</p>
-                                            <p>asd@gmail.com</p>
-                                            <p>서울시 역삼동 어쩌고저쩌고 여기저기 어디저기</p>
-                                        </div>
-                                        <div class="card-controller">
-                                            <a href=""><span class="material-symbols-outlined"> mail </span></a>
-                                            <span class="material-symbols-outlined share"> share </span>
-                                            <a href=""><span class="material-symbols-outlined"> edit </span></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </label>
-                        <label for="a4">
-                            <div class="card-container">
-                                <div class="card">
-                                    <input type="checkbox" class="selectOne" id="a4" />
-                                    <div class="card-front">
-                                        <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
-                                        <div class="card-sortation">
-                                            <p>거래처</p>
-                                        </div>
-                                    </div>
-                                    <div class="card-back">
-                                        <div class="info-wrap">
-                                            <p>요기요</p>
-                                            <div class="card-sortation">
-                                                <p>거래처</p>
-                                            </div>
-                                            <div class="card-info">
-                                                <p>윤태원</p>
-                                                <p>사원</p>
-                                            </div>
-                                            <p>010-8888-6666</p>
-                                            <p>asd@gmail.com</p>
-                                            <p>서울시 역삼동 어쩌고저쩌고 여기저기 어디저기</p>
-                                        </div>
-                                        <div class="card-controller">
-                                            <a href=""><span class="material-symbols-outlined"> mail </span></a>
-                                            <span class="material-symbols-outlined share"> share </span>
-                                            <a href=""><span class="material-symbols-outlined"> edit </span></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </label>
-                        <label for="a3">
-                            <div class="card-container">
-                                <div class="card">
-                                    <input type="checkbox" class="selectOne" id="a3" />
-                                    <div class="card-front">
-                                        <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
-                                        <div class="card-sortation">
-                                            <p>거래처</p>
-                                        </div>
-                                    </div>
-                                    <div class="card-back">
-                                        <div class="info-wrap">
-                                            <p>요기요</p>
-                                            <div class="card-sortation">
-                                                <p>거래처</p>
-                                            </div>
-                                            <div class="card-info">
-                                                <p>윤태원</p>
-                                                <p>사원</p>
-                                            </div>
-                                            <p>010-8888-6666</p>
-                                            <p>asd@gmail.com</p>
-                                            <p>서울시 역삼동 어쩌고저쩌고 여기저기 어디저기</p>
-                                        </div>
-                                        <div class="card-controller">
-                                            <a href=""><span class="material-symbols-outlined"> mail </span></a>
-                                            <span class="material-symbols-outlined share"> share </span>
-                                            <a href=""><span class="material-symbols-outlined"> edit </span></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </label>
-                        <label for="a2">
-                            <div class="card-container">
-                                <div class="card">
-                                    <input type="checkbox" class="selectOne" id="a2" />
-                                    <div class="card-front">
-                                        <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
-                                        <div class="card-sortation">
-                                            <p>거래처</p>
-                                        </div>
-                                    </div>
-                                    <div class="card-back">
-                                        <div class="info-wrap">
-                                            <p>요기요</p>
-                                            <div class="card-sortation">
-                                                <p>거래처</p>
-                                            </div>
-                                            <div class="card-info">
-                                                <p>윤태원</p>
-                                                <p>사원</p>
-                                            </div>
-                                            <p>010-8888-6666</p>
-                                            <p>asd@gmail.com</p>
-                                            <p>서울시 역삼동 어쩌고저쩌고 여기저기 어디저기</p>
-                                        </div>
-                                        <div class="card-controller">
-                                            <a href=""><span class="material-symbols-outlined"> mail </span></a>
-                                            <span class="material-symbols-outlined share"> share </span>
-                                            <a href=""><span class="material-symbols-outlined"> edit </span></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </label>
-                        <label for="a1">
-                            <div class="card-container">
-                                <div class="card">
-                                    <input type="checkbox" class="selectOne" id="a1" />
-                                    <div class="card-front">
-                                        <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
-                                        <div class="card-sortation">
-                                            <p>거래처</p>
-                                        </div>
-                                    </div>
-                                    <div class="card-back">
-                                        <div class="info-wrap">
-                                            <p>요기요</p>
-                                            <div class="card-sortation">
-                                                <p>거래처</p>
-                                            </div>
-                                            <div class="card-info">
-                                                <p>윤태원</p>
-                                                <p>사원</p>
-                                            </div>
-                                            <p>010-8888-6666</p>
-                                            <p>asd@gmail.com</p>
-                                            <p>서울시 역삼동 어쩌고저쩌고 여기저기 어디저기</p>
-                                        </div>
-                                        <div class="card-controller">
-                                            <a href=""><span class="material-symbols-outlined"> mail </span></a>
-                                            <span class="material-symbols-outlined share"> share </span>
-                                            <a href=""><span class="material-symbols-outlined"> edit </span></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </label>
+	                                <a id="card-detail" href="/sixman/address/detail?no=${i.no}">자세히</a>
+	                            </div>
+	                        </div>
+                        </c:forEach>
                     </div>
                     <div class="footer">
                         <div class="page-box">
-                            <span class="material-symbols-outlined"> keyboard_double_arrow_left </span>
-                            <span class="material-symbols-outlined"> chevron_left </span>
-                            <div class="page-btn checked-p-btn">1</div>
-                            <div class="page-btn">2</div>
-                            <div class="page-btn">3</div>
-                            <div class="page-btn">4</div>
-                            <div class="page-btn">5</div>
-                            <span class="material-symbols-outlined"> chevron_right </span>
-                            <span class="material-symbols-outlined"> keyboard_double_arrow_right </span>
+                            <span class="material-symbols-outlined" <c:if test="${pv.currentPage ne 1}">onclick="location.href='/sixman/address?page=1&&category=${category}&&keyword=${keyword}'"</c:if>> keyboard_double_arrow_left </span>
+                            <span class="material-symbols-outlined" <c:if test="${pv.currentPage ne 1}">onclick="location.href='/sixman/address?page=${pv.currentPage - 1}&&category=${category}&&keyword=${keyword}'"</c:if>> chevron_left </span>
+                            <c:forEach var="i" begin="${pv.startPage}" end="${pv.endPage}">
+                            <div class="page-btn <c:if test="${i eq pv.currentPage}"> checked-p-btn</c:if>" onclick="location.href='/sixman/address?page=${i}&&category=${category}&&keyword=${keyword}'">${i}</div>
+                            </c:forEach>
+                            <span class="material-symbols-outlined" <c:if test="${pv.maxPage ne pv.currentPage}">onclick="location.href='/sixman/address?page=${pv.currentPage + 1}&&category=${category}&&keyword=${keyword}'"</c:if>> chevron_right </span>
+                            <span class="material-symbols-outlined" <c:if test="${pv.maxPage ne 1}">onclick="location.href='/sixman/address?page=${pv.maxPage}&&category=${category}&&keyword=${keyword}'"</c:if>> keyboard_double_arrow_right </span>
                         </div>
                     </div>
                 </section>
@@ -573,335 +171,3 @@
         </main>
     </body>
 </html>
-
-<!-- 
-<div class="card-container">
-    <div class="card">
-        <div class="card-front">
-            <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
-            <div class="card-sortation">
-                <p>거래처</p>
-            </div>
-        </div>
-        <div class="card-back">
-            <div class="info-wrap">
-                <p>요기요</p>
-                <div class="card-sortation">
-                    <p>거래처</p>
-                </div>
-                <div class="card-info">
-                    <p>윤태원</p>
-                    <p>사원</p>
-                </div>
-                <p>010-8888-6666</p>
-                <p>asd@gmail.com</p>
-                <p>서울시 역삼동 어쩌고저쩌고 여기저기 어디저기</p>
-            </div>
-            <div class="card-controller">
-                <a href=""><span class="material-symbols-outlined"> mail </span></a>
-                <a href=""><span class="material-symbols-outlined"> share </span></a>
-                <a href=""><span class="material-symbols-outlined"> edit </span></a>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="card-container">
-    <div class="card">
-        <div class="card-front">
-            <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
-            <div class="card-sortation">
-                <p>거래처</p>
-            </div>
-        </div>
-        <div class="card-back">
-            <div class="info-wrap">
-                <p>요기요</p>
-                <div class="card-sortation">
-                    <p>거래처</p>
-                </div>
-                <div class="card-info">
-                    <p>윤태원</p>
-                    <p>사원</p>
-                </div>
-                <p>010-8888-6666</p>
-                <p>asd@gmail.com</p>
-                <p>서울시 역삼동 어쩌고저쩌고 여기저기 어디저기</p>
-            </div>
-            <div class="card-controller">
-                <a href=""><span class="material-symbols-outlined"> mail </span></a>
-                <a href=""><span class="material-symbols-outlined"> share </span></a>
-                <a href=""><span class="material-symbols-outlined"> edit </span></a>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="card-container">
-    <div class="card">
-        <div class="card-front">
-            <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
-            <div class="card-sortation">
-                <p>거래처</p>
-            </div>
-        </div>
-        <div class="card-back">
-            <div class="info-wrap">
-                <p>요기요</p>
-                <div class="card-sortation">
-                    <p>거래처</p>
-                </div>
-                <div class="card-info">
-                    <p>윤태원</p>
-                    <p>사원</p>
-                </div>
-                <p>010-8888-6666</p>
-                <p>asd@gmail.com</p>
-                <p>서울시 역삼동 어쩌고저쩌고 여기저기 어디저기</p>
-            </div>
-            <div class="card-controller">
-                <a href=""><span class="material-symbols-outlined"> mail </span></a>
-                <a href=""><span class="material-symbols-outlined"> share </span></a>
-                <a href=""><span class="material-symbols-outlined"> edit </span></a>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="card-container">
-    <div class="card">
-        <div class="card-front">
-            <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
-            <div class="card-sortation">
-                <p>거래처</p>
-            </div>
-        </div>
-        <div class="card-back">
-            <div class="info-wrap">
-                <p>요기요</p>
-                <div class="card-sortation">
-                    <p>거래처</p>
-                </div>
-                <div class="card-info">
-                    <p>윤태원</p>
-                    <p>사원</p>
-                </div>
-                <p>010-8888-6666</p>
-                <p>asd@gmail.com</p>
-                <p>서울시 역삼동 어쩌고저쩌고 여기저기 어디저기</p>
-            </div>
-            <div class="card-controller">
-                <a href=""><span class="material-symbols-outlined"> mail </span></a>
-                <a href=""><span class="material-symbols-outlined"> share </span></a>
-                <a href=""><span class="material-symbols-outlined"> edit </span></a>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="card-container">
-    <div class="card">
-        <div class="card-front">
-            <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
-            <div class="card-sortation">
-                <p>거래처</p>
-            </div>
-        </div>
-        <div class="card-back">
-            <div class="info-wrap">
-                <p>요기요</p>
-                <div class="card-sortation">
-                    <p>거래처</p>
-                </div>
-                <div class="card-info">
-                    <p>윤태원</p>
-                    <p>사원</p>
-                </div>
-                <p>010-8888-6666</p>
-                <p>asd@gmail.com</p>
-                <p>서울시 역삼동 어쩌고저쩌고 여기저기 어디저기</p>
-            </div>
-            <div class="card-controller">
-                <a href=""><span class="material-symbols-outlined"> mail </span></a>
-                <a href=""><span class="material-symbols-outlined"> share </span></a>
-                <a href=""><span class="material-symbols-outlined"> edit </span></a>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="card-container">
-    <div class="card">
-        <div class="card-front">
-            <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
-            <div class="card-sortation">
-                <p>거래처</p>
-            </div>
-        </div>
-        <div class="card-back">
-            <div class="info-wrap">
-                <p>요기요</p>
-                <div class="card-sortation">
-                    <p>거래처</p>
-                </div>
-                <div class="card-info">
-                    <p>윤태원</p>
-                    <p>사원</p>
-                </div>
-                <p>010-8888-6666</p>
-                <p>asd@gmail.com</p>
-                <p>서울시 역삼동 어쩌고저쩌고 여기저기 어디저기</p>
-            </div>
-            <div class="card-controller">
-                <a href=""><span class="material-symbols-outlined"> mail </span></a>
-                <a href=""><span class="material-symbols-outlined"> share </span></a>
-                <a href=""><span class="material-symbols-outlined"> edit </span></a>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="card-container">
-    <div class="card">
-        <div class="card-front">
-            <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
-            <div class="card-sortation">
-                <p>거래처</p>
-            </div>
-        </div>
-        <div class="card-back">
-            <div class="info-wrap">
-                <p>요기요</p>
-                <div class="card-sortation">
-                    <p>거래처</p>
-                </div>
-                <div class="card-info">
-                    <p>윤태원</p>
-                    <p>사원</p>
-                </div>
-                <p>010-8888-6666</p>
-                <p>asd@gmail.com</p>
-                <p>서울시 역삼동 어쩌고저쩌고 여기저기 어디저기</p>
-            </div>
-            <div class="card-controller">
-                <a href=""><span class="material-symbols-outlined"> mail </span></a>
-                <a href=""><span class="material-symbols-outlined"> share </span></a>
-                <a href=""><span class="material-symbols-outlined"> edit </span></a>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="card-container">
-    <div class="card">
-        <div class="card-front">
-            <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
-            <div class="card-sortation">
-                <p>거래처</p>
-            </div>
-        </div>
-        <div class="card-back">
-            <div class="info-wrap">
-                <p>요기요</p>
-                <div class="card-sortation">
-                    <p>거래처</p>
-                </div>
-                <div class="card-info">
-                    <p>윤태원</p>
-                    <p>사원</p>
-                </div>
-                <p>010-8888-6666</p>
-                <p>asd@gmail.com</p>
-                <p>서울시 역삼동 어쩌고저쩌고 여기저기 어디저기</p>
-            </div>
-            <div class="card-controller">
-                <a href=""><span class="material-symbols-outlined"> mail </span></a>
-                <a href=""><span class="material-symbols-outlined"> share </span></a>
-                <a href=""><span class="material-symbols-outlined"> edit </span></a>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="card-container">
-    <div class="card">
-        <div class="card-front">
-            <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
-            <div class="card-sortation">
-                <p>거래처</p>
-            </div>
-        </div>
-        <div class="card-back">
-            <div class="info-wrap">
-                <p>요기요</p>
-                <div class="card-sortation">
-                    <p>거래처</p>
-                </div>
-                <div class="card-info">
-                    <p>윤태원</p>
-                    <p>사원</p>
-                </div>
-                <p>010-8888-6666</p>
-                <p>asd@gmail.com</p>
-                <p>서울시 역삼동 어쩌고저쩌고 여기저기 어디저기</p>
-            </div>
-            <div class="card-controller">
-                <a href=""><span class="material-symbols-outlined"> mail </span></a>
-                <a href=""><span class="material-symbols-outlined"> share </span></a>
-                <a href=""><span class="material-symbols-outlined"> edit </span></a>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="card-container">
-    <div class="card">
-        <div class="card-front">
-            <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
-            <div class="card-sortation">
-                <p>거래처</p>
-            </div>
-        </div>
-        <div class="card-back">
-            <div class="info-wrap">
-                <p>요기요</p>
-                <div class="card-sortation">
-                    <p>거래처</p>
-                </div>
-                <div class="card-info">
-                    <p>윤태원</p>
-                    <p>사원</p>
-                </div>
-                <p>010-8888-6666</p>
-                <p>asd@gmail.com</p>
-                <p>서울시 역삼동 어쩌고저쩌고 여기저기 어디저기</p>
-            </div>
-            <div class="card-controller">
-                <a href=""><span class="material-symbols-outlined"> mail </span></a>
-                <a href=""><span class="material-symbols-outlined"> share </span></a>
-                <a href=""><span class="material-symbols-outlined"> edit </span></a>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="card-container">
-    <div class="card">
-        <div class="card-front">
-            <img src="<c:url value='/resources/img/jang.jpg'/>" alt="" />
-            <div class="card-sortation">
-                <p>거래처</p>
-            </div>
-        </div>
-        <div class="card-back">
-            <div class="info-wrap">
-                <p>요기요</p>
-                <div class="card-sortation">
-                    <p>거래처</p>
-                </div>
-                <div class="card-info">
-                    <p>윤태원</p>
-                    <p>사원</p>
-                </div>
-                <p>010-8888-6666</p>
-                <p>asd@gmail.com</p>
-                <p>서울시 역삼동 어쩌고저쩌고 여기저기 어디저기</p>
-            </div>
-            <div class="card-controller">
-                <a href=""><span class="material-symbols-outlined"> mail </span></a>
-                <a href=""><span class="material-symbols-outlined"> share </span></a>
-                <a href=""><span class="material-symbols-outlined"> edit </span></a>
-            </div>
-        </div>
-    </div>
-</div> -->

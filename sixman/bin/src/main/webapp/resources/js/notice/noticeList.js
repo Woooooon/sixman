@@ -13,6 +13,8 @@ function noticeListAjax(page, keyword) {
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
                 if (httpRequest.status === 200) {
                 var result = httpRequest.response;
+                const pv = result.pv;
+                const listCount = result.listCount;
 
                 const listBox = document.querySelector('.list-box');
 
@@ -24,13 +26,11 @@ function noticeListAjax(page, keyword) {
                     if(vo.inportantYn=="Y"){
                         importantClass = " class='important'>중요<";
                     }else{
-                        importantClass = `>${i+1}<`;
+                        importantClass = `>${i+1+(pv.currentPage - 1) * 15}<`;
                     }
                     text += `<div class='list-item' onclick="location.href='/sixman/notice/detail?no=${vo.no}'"> <p${importantClass}/p> <p>${vo.title}</p> <p>${vo.enrollDate}</p> <p>${vo.view}</p> </div>`
                 }
                 listBox.innerHTML = text;
-
-                const pv = result.pv;
 
                 const pageBox = document.querySelector('.page-box');
 
@@ -56,11 +56,12 @@ function noticeListAjax(page, keyword) {
                 text2 += `<span class="material-symbols-outlined" onclick="noticeListAjax(${pv.maxPage},${keyword})"> keyboard_double_arrow_right </span>`;
 
                 pageBox.innerHTML = text2;
-                
+
+                document.querySelector("#list-count").innerHTML = listCount;
                 document.querySelector("#search-input").value = keyword;
 
                 } else {
-                alert('Request Error!');
+                // alert('Request Error!');
                 }
         }
     };

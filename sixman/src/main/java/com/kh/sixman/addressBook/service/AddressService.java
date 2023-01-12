@@ -89,8 +89,11 @@ public class AddressService {
 		return addressDao.updateDeleteAddress(sst, no);
 	}
 	
+	@Transactional
 	public int deleteAddress(List<String> no) {
-		return addressDao.deleteAddress(sst, no);
+		int deleteAddressPic =  addressDao.deleteAddressPic(sst, no);
+		int deleteAddress = addressDao.deleteAddress(sst, no);
+		return deleteAddressPic * deleteAddress;
 	}
 
 	public AddressVo getAddress(Map<String, String> map) {

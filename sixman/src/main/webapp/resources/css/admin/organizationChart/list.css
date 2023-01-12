@@ -242,16 +242,11 @@ p[name='imgName'] {
 }
 
 #companyLogo {
-    margin-left: 10px;
-    padding-top: 20px;
-    width: 150px;
-    height: 30px;
+    height: 70px;
 }
 
 #companyLogo > img {
-    width: 130px;
-    height: 30px;
-    object-fit: fill;
+    height: 100%;
 }
 
 .header {
