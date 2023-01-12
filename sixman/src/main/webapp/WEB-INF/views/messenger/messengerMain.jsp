@@ -1406,6 +1406,7 @@
 				const wantchat2 = $('.define-roomname').val();
 // 				alert(wantchat2);
 				$('.chatroomlist-first-page').hide();
+				$('.chatroomlist-first-page').show();
 				
 				$.ajax({
 					url:"/sixman/chatwantfirst2",
