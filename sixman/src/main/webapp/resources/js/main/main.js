@@ -202,13 +202,13 @@ function alarmAjax() {
                         case 'DOCUMENT':
                             msg = `${vo.senderName}(이)가 결재를 요청하였습니다. "${vo.title}"`;
                             f = () => {
-                                location.href = '';
+                                location.href = '/sixman/document/first';
                             };
                             break;
                         case 'ADDRESS':
                             msg = `${vo.senderName}(이)가 주소록을 공유하였습니다. "${vo.title}"`;
                             f = () => {
-                                location.href = '';
+                                location.href = '/sixman/address/recive';
                             };
                             break;
                         case 'SCHEDULE':

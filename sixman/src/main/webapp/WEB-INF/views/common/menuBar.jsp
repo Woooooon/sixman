@@ -20,7 +20,9 @@
                 <img src="/sixman/resources/img/logo/${company.logoName}" alt="" id="headerLogo">
             </c:if>
         </section>
-        <section id="event-msg-box"></section>
+        <section id="event-msg-box">
+            <div></div>
+        </section>
         <section id="my-menu">
             <article id="alarm" class="center">
                 <span class="material-symbols-outlined"> notifications </span>
@@ -230,13 +232,13 @@
         let f = null;
         switch (type) {
             case 'MAIL':
-                f = ()=>{location.href='/sixman/mail/detail?no=';}
+                f = ()=>{location.href='/sixman/mail/detail?no='+no;}
                 break;
             case 'DOCUMENT':
-                f = ()=>{location.href='';}
+                f = ()=>{location.href='/sixman/document/first';}
                 break;
             case 'ADRESS':
-                f = ()=>{location.href='';}
+                f = ()=>{location.href='/sixman/address/recive';}
                 break;
             case 'SCHEDULE':
                 f = ()=>{location.href='';}

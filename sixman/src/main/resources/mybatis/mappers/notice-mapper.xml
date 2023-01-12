@@ -31,7 +31,7 @@
 	        </if>
 	        AND DELETE_YN = 'N' 
 		</trim>
-        order by inportant_yn DESC, enroll_date
+        order by inportant_yn DESC, enroll_date DESC
     </select>
     
     <insert id="write">
