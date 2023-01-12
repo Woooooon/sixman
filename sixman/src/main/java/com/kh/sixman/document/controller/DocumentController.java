@@ -110,6 +110,7 @@ public class DocumentController {
      
 
       return "document/first";
+      
    }
   
    
@@ -270,8 +271,53 @@ public class DocumentController {
    
    //결재문서함(화면)
    @GetMapping("payment")
-   public String mainDocu() {
-      return "document/payment";
+   public String mainDocu(HttpSession session,Model model, String page, String keyword ) {
+	      //로그인한 유저의 세션 가져오기
+	      MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+
+	      //로그인 유저의 seqNo 가져오기
+	      String no = loginMember.getNo();
+	      
+	      //page요청이 없으면 기본값으로 1설정
+	      if(page == null) {
+	         page = "1";
+	      }
+	      
+	      log.info(keyword);
+
+	      //로그인 유저마다 주소록이 별개이므로 검색 시 userNo 추가 WHERE문
+	      Map<String, String> search = new HashMap<String, String>();
+	      search.put("keyword", keyword);
+	      search.put("no", no);
+	      
+	      //페이징 셋
+	      int pageLimit = 5;
+	      int boardLimit = 10;
+	      
+	      //총 주소록 개수
+	      int listCount = ds.countingList(search);
+	      
+	      log.info("listCount : " + listCount);
+	      
+	       int offset = (Integer.parseInt(page)-1) * boardLimit;
+	       
+	       PageVo pv = new PageVo(listCount,Integer.parseInt(page),pageLimit,boardLimit);
+	       RowBounds rb = new RowBounds(offset , boardLimit);
+
+	       //각페이지마다 리스트 8개씩 
+	      List<DocumentVo> documentList = ds.selectDocumentList(rb, search);
+	      log.info("documentList" + documentList);
+	      
+
+	      model.addAttribute("keyword", keyword);
+	      model.addAttribute("pv", pv);
+	      
+	      model.addAttribute("dvo", documentList);
+	      
+
+	      
+	      return "document/payment";
+	   
    }
    //결재문서함 (찐)
    @PostMapping("payment")
@@ -281,7 +327,48 @@ public class DocumentController {
    
    //참조문서함(화면)
    @GetMapping("reference")
-   public String Reference() {
+   public String Reference(HttpSession session,Model model, String page, String keyword ) {
+	      //로그인한 유저의 세션 가져오기
+	      MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+
+	      //로그인 유저의 seqNo 가져오기
+	      String no = loginMember.getNo();
+	      
+	      //page요청이 없으면 기본값으로 1설정
+	      if(page == null) {
+	         page = "1";
+	      }
+	      
+	      log.info(keyword);
+
+	      //로그인 유저마다 주소록이 별개이므로 검색 시 userNo 추가 WHERE문
+	      Map<String, String> search = new HashMap<String, String>();
+	      search.put("keyword", keyword);
+	      search.put("no", no);
+	      
+	      //페이징 셋
+	      int pageLimit = 5;
+	      int boardLimit = 10;
+	      
+	      //총 주소록 개수
+	      int listCount = ds.countingList(search);
+	      
+	      log.info("listCount : " + listCount);
+	      
+	       int offset = (Integer.parseInt(page)-1) * boardLimit;
+	       
+	       PageVo pv = new PageVo(listCount,Integer.parseInt(page),pageLimit,boardLimit);
+	       RowBounds rb = new RowBounds(offset , boardLimit);
+
+	       //각페이지마다 리스트 8개씩 
+	      List<DocumentVo> documentList = ds.selectDocumentList(rb, search);
+	      log.info("documentList" + documentList);
+	      
+
+	      model.addAttribute("keyword", keyword);
+	      model.addAttribute("pv", pv);
+	      
+	      model.addAttribute("dvo", documentList);
       return "document/reference";
    }
    //참조문서함 (찐)
@@ -293,7 +380,48 @@ public class DocumentController {
    
    //임시보관함(화면)
    @GetMapping("keep")
-   public String Keep() {
+   public String Keep(HttpSession session,Model model, String page, String keyword ) {
+	      //로그인한 유저의 세션 가져오기
+	      MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+
+	      //로그인 유저의 seqNo 가져오기
+	      String no = loginMember.getNo();
+	      
+	      //page요청이 없으면 기본값으로 1설정
+	      if(page == null) {
+	         page = "1";
+	      }
+	      
+	      log.info(keyword);
+
+	      //로그인 유저마다 주소록이 별개이므로 검색 시 userNo 추가 WHERE문
+	      Map<String, String> search = new HashMap<String, String>();
+	      search.put("keyword", keyword);
+	      search.put("no", no);
+	      
+	      //페이징 셋
+	      int pageLimit = 5;
+	      int boardLimit = 10;
+	      
+	      //총 주소록 개수
+	      int listCount = ds.countingList(search);
+	      
+	      log.info("listCount : " + listCount);
+	      
+	       int offset = (Integer.parseInt(page)-1) * boardLimit;
+	       
+	       PageVo pv = new PageVo(listCount,Integer.parseInt(page),pageLimit,boardLimit);
+	       RowBounds rb = new RowBounds(offset , boardLimit);
+
+	       //각페이지마다 리스트 8개씩 
+	      List<DocumentVo> documentList = ds.selectDocumentList(rb, search);
+	      log.info("documentList" + documentList);
+	      
+
+	      model.addAttribute("keyword", keyword);
+	      model.addAttribute("pv", pv);
+	      
+	      model.addAttribute("dvo", documentList);
       return "document/keep";
    }
    //임시보관함 (찐)
