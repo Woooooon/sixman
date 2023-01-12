@@ -288,18 +288,19 @@ a:hover{
 }
 
 .todo-box {
-    width: 270px;
-    height: 180px;
+    width: 15vw;
     border-radius: 5px;
     box-shadow: 1px 1px #D3D3D3;
     margin: 0px 10px 0 10px;
     padding: 10px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
     border: 1px solid #D3D3D3;
 }
 
+.todo-head {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
 
 .todo-title {
     margin: 5px;
@@ -310,6 +311,17 @@ a:hover{
     margin: 5px;
     color: #aaa;
     font-size: 17px;
+}
+
+.todo-cont-list {
+    display: flex;
+    align-items: center;
+    margin: 5px;
+}
+
+.todo-item {
+    vertical-align: middle;
+    padding-left: 5px;
 }
 
 /* modal */
@@ -347,19 +359,14 @@ a:hover{
     padding-top: 80px;
     padding-left: 40px;
     padding-bottom: 20px;
-    --display: inline; 
     display: flex;
     font-size: 35px;
     font-weight: bolder;
     justify-content: space-between;
-
 }
 
 #modal span {
-    --display: inline;
-    --float: right;
-    padding-right: 40px;
-    cursor: pointer;
+    padding-right: 20px;
 }
 
 #modal .status {
@@ -370,18 +377,18 @@ a:hover{
 
 #modal .member {
     display: flex;
-    margin-left: 40px;
+    margin-left: 20px;
     margin-bottom: 30px;
 }
 
 #modal .date {
     display: flex;
-    margin-left: 40px;
+    margin-left: 20px;
     margin-bottom: 30px;
 }
 
 #modal input{
-    margin-left: 30px;
+    margin-left: 25px;
     border: none;
     outline: 1px #aaa;
 }
@@ -389,10 +396,6 @@ a:hover{
 #modal .hidden{
     margin-left: 40px;
     width: 84%;
-}
-
-#modal .status-btn {
-    display: flex;
 }
 
 #modal .contentbox {
@@ -417,4 +420,17 @@ a:hover{
 .footer-btn .c-btn {
     margin-right: 15px;
 }
- 
+
+#modal input[name=todoTitle] {
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    outline: none;
+    width: 35vw;
+    height: 5vh;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+#modal .checkbox-add {
+    margin-left: 40px;
+}

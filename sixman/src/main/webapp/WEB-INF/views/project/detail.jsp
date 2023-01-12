@@ -94,28 +94,26 @@
             </div>
             <div class="hidden"></div>
             <div class="todo-list">
-                <c:forEach var="todo" items="${todo}">
+                <c:forEach var="vo" items="${members}">
                     <div class="todo-box">
-                        <div class="todo-title"><a href="#">${todo.title}</a></div>
-                        <div class="todo-writer">${todo.name}</div>
-                        <progress value="30" max="100"></progress>
-                        <div class="toDoItem">
-                            <input type="checkbox" checked>
-                            <div>${todo.content}</div>
+                        <div class="todo-head">
+                            <div class="todo-title"><a href="#">${vo.todoList[0].title}</a></div>
+                            <div class="todo-writer">${vo.name}</div>
                         </div>
-                            <div class="todo-content">
+                        <c:forEach var="todo" items="${vo.todoList}">
+                            <div class="todo-cont-list">
+                                <input type="checkbox">
+                                <div class="todo-item">${todo.content}</div>
                                 <c:if test="${todo.checkboxYn eq 'Y'}">
-                                    <div class="toDoItem">
-                                        <input type="checkbox" checked>${todo.content}
-                                    </div>
+                                    <input type="checkbox" checked>
+                                    <div>${todo.content}</div>
                                 </c:if>
                                 <c:if test="${todo.checkboxYn eq 'N'}">
-                                    <div class="toDoItem">
-                                        <input type="checkbox" checked>zz${todo.content}
-                                    </div>
+                                    <input type="checkbox">
+                                <div>${todo.content}</div>
                                 </c:if>
                             </div>
-
+                        </c:forEach>
                     </div>
                 </c:forEach>
             </div>
@@ -129,17 +127,6 @@
             <div class="title">
                 <input type="text" id="todoTitle" name="todoTitle">
                 <div class="close-area"><span class="material-symbols-outlined">close</span></div>
-            </div>
-            <div class="status">
-                <div class="status-1">
-                    <span class="material-symbols-outlined">wb_incandescent</span>
-                    <p>상태</p>
-                </div>
-                <div class="status-btn">
-                    <div class="ing backgray">진행중</div>
-                    <div class="delay backgray">지연중</div>
-                    <div class="complete backgray">완료</div>
-                </div>
             </div>
             <div class="member">
                 <div class="member-1">
@@ -157,10 +144,11 @@
                 </div>
                 <input type="date" id="todoDate">
             </div>
-            <div class="hidden"></div>
             <div class="checkbox-add">
-                <button class="btn" type="button" onclick="addcheckbox();" id="addbtn">추가하기</button>
+                <button class="btn" type="button" onclick="addcheckbox();" id="addbtn">TO-DO 추가하기</button>
             </div>
+            <div class="box-list"></div>
+            <div class="hidden"></div>
             <div class="footer-btn">
                 <button class="btn" type="button" onclick="addTodo();">생성하기</button>
                 <button class="c-btn" type="button" onclick="history.back()"></button>

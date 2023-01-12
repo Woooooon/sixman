@@ -1,6 +1,8 @@
 package com.kh.sixman.project.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +53,8 @@ public class ProjectService {
 	//프로젝트 디테일
 	public ProjectVo selectOnePrj(String no) {
 		//프로젝트 select
-		return pdao.selectOnePrj(sst, no);
+		ProjectVo prj = pdao.selectOnePrj(sst, no);
+		return prj;
 		
 	}
 
@@ -67,7 +70,20 @@ public class ProjectService {
 
 	//프로젝트 멤버 불러오기
 	public List<MemberVo> selectPrjMember(String no) {
-		return pdao.selectPrjMember(sst, no);
+		List<MemberVo> list =  pdao.selectPrjMember(sst, no);
+		log.info("list : " + list);
+		
+		for(MemberVo vo : list) {
+			Map<String, String> pmap = new HashMap<String, String>();
+			pmap.put("no", no);
+			pmap.put("mno", vo.getNo());
+
+			List<TodoVo> temp = pdao.selectTodolist(sst, pmap);
+			log.info("temp : " + temp);
+			vo.setTodoList(temp);
+		}
+		
+		return list;
 	}
 
 	//프로젝트 수정하기
@@ -83,12 +99,6 @@ public class ProjectService {
 	//프로젝트 즐겨찾기 삭제
 	public int deleteFavorite(String no) {
 		return pdao.deleteFavorite(sst, no);
-	}
-
-	//to-do리스트가져오기
-	public List<TodoVo> selectTodoList(String no) {	
-		//todo 리스트 전체 가져오기	
-		return pdao.selectTodolist(sst, no);
 	}
 
 	//todo추가하기

@@ -104,6 +104,7 @@ window.addEventListener("keyup", e => {
 
 const addbtn = document.querySelector("#addbtn");
 const checkbox = document.querySelector(".checkbox-add");
+const boxlist = document.querySelector(".box-list");
 
 addbtn.addEventListener('click', (e)=>{
     
@@ -121,7 +122,7 @@ addbtn.addEventListener('click', (e)=>{
 
     
     
-    checkbox.append(div);
+    boxlist.append(div);
 })
 
 document.getElementById('todoDate').value = new Date().toISOString().substring(0, 10);

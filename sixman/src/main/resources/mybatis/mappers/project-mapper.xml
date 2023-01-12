@@ -7,7 +7,7 @@
 	<select id="selectList" resultType="ProjectVo">
 		SELECT 
 		    P.NO  
-		    , M2.NAME AS LEADER
+		    ,M2.NAME LEADER
 		    , M.NAME NAME
 		    , P.TITLE
 		    , P.CONTENT
@@ -17,8 +17,9 @@
 		    , P.FAVORITES_YN
 		    , P.PROGRESS
 		FROM PROJECT P
-		LEFT JOIN MEMBER M ON M.NO = P.WRITER
-		LEFT JOIN MEMBER M2 ON M2.NO = P.LEADER
+		LEFT JOIN PROJECT_MEMBER PM ON P.NO = PM.PRJ_NO
+		LEFT JOIN MEMBER M ON M.NO = PM.MEM_NO
+		LEFT JOIN MEMBER M2 ON M2.NO = PM.MEM_NO
 		WHERE M.NO = #{no}
 		ORDER BY NO DESC
 	</select>
@@ -153,7 +154,7 @@
     
     <select id="selectPrjMember" resultType="MemberVo">
     	SELECT 
-		    PM.NO
+		    PM.MEM_NO AS NO
 		    , M.NAME
 		FROM MEMBER M
 		LEFT JOIN PROJECT_MEMBER PM ON M.NO = PM.MEM_NO
@@ -182,15 +183,18 @@
     </update>
     
     <select id="selectTodoList" resultType="com.kh.sixman.project.vo.TodoVo">
-    	SELECT 
-		    T.NO
-		    , T.PRJ_NO
+    	SELECT
+		    PM.PRJ_NO
+		    , PM.MEM_NO
 		    , M.NAME
 		    , T.TITLE
 		    , T.CONTENT
-		FROM TODO T
-		LEFT JOIN MEMBER M ON M.NO = T.NAME
-    	WHERE T.PRJ_NO = #{no}
+		FROM PROJECT_MEMBER PM
+		LEFT JOIN PROJECT P ON P.NO = PM.PRJ_NO
+		LEFT JOIN MEMBER M ON M.NO = PM.MEM_NO
+		LEFT JOIN TODO T ON P.NO = T.PRJ_NO
+		WHERE PM.PRJ_NO = #{no}
+		AND PM.MEM_NO = #{mno}
     </select>
     
     <insert id="todoPlus">

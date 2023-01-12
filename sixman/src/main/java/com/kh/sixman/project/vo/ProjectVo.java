@@ -31,6 +31,7 @@ public class ProjectVo {
 	private List<AttachmentVo> prjfileList;
 	
 	private List<MemberVo> memberList;
+	private List<List<TodoVo>> todoList;
 	private List<String> memberNo;
 	
 	
