@@ -146,6 +146,12 @@ public List<DocumentVo> selectDocumentList(RowBounds rb, Map<String, String> sea
 
 
 
+public Object deleteSave(String no) {
+	return dao.deleteSave(sst,no);
+}
+
+
+
 
 
 

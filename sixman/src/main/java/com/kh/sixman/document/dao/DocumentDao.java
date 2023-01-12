@@ -89,6 +89,10 @@ public class DocumentDao {
 		return sst.selectList("documentMapper.selectDocumentList" , search, rb);
 	}
 
+	public Object deleteSave(SqlSessionTemplate sst, String no) {
+		return sst.delete("documentMapper.deleteSave",no);
+	}
+
 	
 
 

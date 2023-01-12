@@ -200,7 +200,8 @@ public class DocumentController {
     //게시물 삭제
    @RequestMapping(value = "firstdelete", method = RequestMethod.GET)
    public String postdelete(String no) throws Exception {
-         ds.delete(no);
+	     ds.deleteSave(no);
+	     ds.delete(no);
       return "document/first";
    }
 
@@ -224,6 +225,7 @@ public class DocumentController {
        int size = valueArr.length;
        System.out.println(valueArr[0]);
        for(int i=0; i<size; i++) {
+    	  ds.deleteSave(valueArr[i]);
           ds.delete(valueArr[i]);
        }
       

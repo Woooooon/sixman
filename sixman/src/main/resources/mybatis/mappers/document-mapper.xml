@@ -198,12 +198,24 @@
 		
 </select>
 
+
+<delete id="deleteSave">
+DELETE FROM
+DOC_SAVE
+
+WHERE
+NO = #{no}
+
+</delete>
+
 <delete id="delete">
 
 	DELETE FROM
-	DOCUMENT
+	DOCUMENT 
+
 	WHERE
 	NO = #{no}
+	
 
 </delete>
 
