@@ -3,10 +3,13 @@ class Popup {
         this.timer = 200;
 
         this.section = document.createElement('section');
-        this.section.classList.add('popup-section');
+        this.section.classList.add('popup-mini-section');
+        this.miniSection = document.createElement('section');
+        this.miniSection.classList.add('popup-mini-section');
 
         this.itemBox = document.createElement('div');
         this.itemBox.classList.add('popup-item');
+
     }
 
     createYesBtn() {
@@ -57,7 +60,7 @@ class Popup {
         this.open();
     }
 
-    warningPop(title, text, callback) {
+    warningPop(title, text, callback, mini) {
         if (text == null || text.trim() == '') return;
 
         this.itemBox.innerHTML =
@@ -68,8 +71,7 @@ class Popup {
         this.createYesBtn();
         this.createBtnBox();
         this.btnBox.append(this.yesBtn);
-        this.itemBox.append(this.btnBox);
-
+        
         if (callback) {
             this.yesBtn.addEventListener('click', () => {
                 setTimeout(() => {
@@ -78,10 +80,12 @@ class Popup {
             });
         }
 
-        this.open();
+        this.itemBox.append(this.btnBox);
+
+        this.open(mini);
     }
 
-    confirmPop(title, text, callback, color) {
+    confirmPop(title, text, callback, color, mini) {
         if (text == null || text.trim() == '') return;
         if (callback == null || typeof callback != 'function') return;
 
@@ -91,7 +95,7 @@ class Popup {
             `<div class='popup-text'>${text}</div>`;
 
         if (color) {
-            this.itemBox.querySelector('span').classList.add('red');
+            this.itemBox.querySelector('span').id = 'red';
         }
 
         this.createYesBtn();
@@ -107,45 +111,34 @@ class Popup {
         this.btnBox.append(this.yesBtn);
         this.btnBox.append(this.noBtn);
         this.itemBox.append(this.btnBox);
-        this.open();
+        this.open(mini);
     }
 
-    alertPop(title, text, callback) {
-        if (text == null || text.trim() == '') return;
-
-        this.itemBox.innerHTML =
-            '<span class="material-symbols-outlined"> task_alt </span>' + `<div class='popup-title'>${title}</div>` + `<div class='popup-text'>${text}</div>`;
-        this.createYesBtn();
-        this.createBtnBox();
-        this.btnBox.append(this.yesBtn);
-        this.itemBox.append(this.btnBox);
-
-        if (callback) {
-            this.yesBtn.addEventListener('click', () => {
-                setTimeout(() => {
-                    callback();
-                }, this.timer);
-            });
+    open(mini) {
+        let w = '600px';
+        let h = '300px';
+        if(mini){
+            w = '230px';
+            h = '120px';
         }
-
-        this.open();
-    }
-
-    open() {
-        this.section.append(this.itemBox);
+        if (mini) {
+            this.miniSection.append(this.itemBox);
+        }else{
+            this.section.append(this.itemBox);
+        }
         this.itemBox.animate(
             [
                 {
                     // 초기상태
                     opacity: 0,
-                    width: '600px',
+                    width: w,
                     height: '0',
                 },
                 {
                     // 마지막상태
                     opacity: 1,
-                    width: '600px',
-                    height: '300px',
+                    width: w,
+                    height: h,
                 },
             ],
             {
@@ -154,24 +147,31 @@ class Popup {
                 fill: 'forwards',
             }
         );
-        document.querySelector('body').append(this.section);
+        if (mini) {
+            document.querySelector('body').append(this.miniSection);
+        }else{
+            document.querySelector('body').append(this.section);
+        }
     }
 
     close() {
         this.itemBox.animate(
             [
                 {
-                    opacity: 1,
-                    width: '600px',
-                    height: '300px',
+                    // // 마지막상태
+                    // opacity: 1,
+                    // width: '600px',
+                    // height: '300px',
                 },
                 {
+                    // 마지막상태
                     opacity: 0,
                     width: '600px',
                     height: '0',
                 },
             ],
             {
+                // 옵션
                 duration: this.timer,
                 fill: 'forwards',
             }
@@ -179,6 +179,7 @@ class Popup {
 
         setTimeout(() => {
             this.section.remove();
+            this.miniSection.remove();
         }, this.timer);
     }
 }

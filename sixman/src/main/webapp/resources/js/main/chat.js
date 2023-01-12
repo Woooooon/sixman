@@ -782,7 +782,7 @@ function openProfile(no) {
                 <div>
                     <span class="material-symbols-outlined" onclick="location.href='/sixman/mail/write?email=${result.email}'"> mail </span>
                     <span class="material-symbols-outlined"> group_add </span>
-                    <span class="material-symbols-outlined" onclick="createChatRoom(${result.no})"> forum </span>
+                    <span class="material-symbols-outlined" onclick="joinAndCreate(${result.no})"> forum </span>
                 </div>
                 `
 

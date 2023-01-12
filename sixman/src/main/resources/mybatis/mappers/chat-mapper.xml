@@ -446,6 +446,9 @@
 	</select>
 	
 	<update id="createChat">
+		<selectKey keyProperty="rno" resultType="String" order="BEFORE">
+			SELECT SEQ_CHAT_ROOM_NO.NEXTVAL FROM DUAL
+		</selectKey>
 		INSERT ALL
 		INTO CHAT_ROOM 
 		(
@@ -455,7 +458,7 @@
 		)
 		VALUES 
 		(
-			SEQ_CHAT_ROOM_NO.NEXTVAL
+			${rno}
 			, ${loginMember.no}
 			, SYSDATE
 			, 'N'
@@ -472,7 +475,7 @@
 			)
 			VALUES
 			(
-				SEQ_CHAT_ROOM_NO.NEXTVAL
+				${rno}
 				, ${n}
 				, 'N'
 				, 'Y'
