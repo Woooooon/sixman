@@ -101,7 +101,7 @@
 
 #img-box {
     width: 150px;
-    max-height: 40px;
+    height: 40px;
     object-fit: fill;
 }
 

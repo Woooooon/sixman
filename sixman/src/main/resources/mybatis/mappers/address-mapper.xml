@@ -15,13 +15,13 @@
 			AND ${category} LIKE '%${keyword}%'
 		</if >
 		<if test="keyword != null and keyword !='' and category == null" >
-			AND A.NAME LIKE '%${keyword}%'
+			AND (M.NAME LIKE '%${keyword}%'
 		    OR A.PHONE LIKE '%${keyword}%' 
 		    OR A.EMAIL LIKE '%${keyword}%'
 		    OR A.COMPANY LIKE '%${keyword}%'
 		    OR A.POSITION LIKE '%${keyword}%'
 		    OR A.ADDRESS LIKE '%${keyword}%'
-		    OR S.NAME LIKE '%${keyword}%'
+		    OR S.NAME LIKE '%${keyword}%')
 		</if> 
 	</select>
 	
@@ -36,13 +36,13 @@
 			AND ${category} LIKE '%${keyword}%'
 		</if >
 		<if test="keyword != null and keyword !='' and category == null" >
-			AND A.NAME LIKE '%${keyword}%'
+			AND (M.NAME LIKE '%${keyword}%'
 		    OR A.PHONE LIKE '%${keyword}%' 
 		    OR A.EMAIL LIKE '%${keyword}%'
 		    OR A.COMPANY LIKE '%${keyword}%'
 		    OR A.POSITION LIKE '%${keyword}%'
 		    OR A.ADDRESS LIKE '%${keyword}%'
-		    OR S.NAME LIKE '%${keyword}%'
+		    OR S.NAME LIKE '%${keyword}%')
 		</if> 
 	</select>
 	
@@ -119,13 +119,13 @@
 			AND ${category} LIKE '%${keyword}%'
 		</if >
 		<if test="keyword != null and keyword !='' and category == null" >
-			AND A.NAME LIKE '%${keyword}%'
+			AND (M.NAME LIKE '%${keyword}%'
 		    OR A.PHONE LIKE '%${keyword}%' 
 		    OR A.EMAIL LIKE '%${keyword}%'
 		    OR A.COMPANY LIKE '%${keyword}%'
 		    OR A.POSITION LIKE '%${keyword}%'
 		    OR A.ADDRESS LIKE '%${keyword}%'
-		    OR S.NAME LIKE '%${keyword}%'
+		    OR S.NAME LIKE '%${keyword}%')
 		</if> 
 	</select>
 	
@@ -205,13 +205,13 @@
 			AND ${category} LIKE '%${keyword}%'
 		</if >
 		<if test="keyword != null and keyword !='' and category == null" >
-			AND A.NAME LIKE '%${keyword}%'
+			AND (M.NAME LIKE '%${keyword}%'
 		    OR A.PHONE LIKE '%${keyword}%' 
 		    OR A.EMAIL LIKE '%${keyword}%'
 		    OR A.COMPANY LIKE '%${keyword}%'
 		    OR A.POSITION LIKE '%${keyword}%'
 		    OR A.ADDRESS LIKE '%${keyword}%'
-		    OR S.NAME LIKE '%${keyword}%'
+		    OR S.NAME LIKE '%${keyword}%')
 		</if> 
 	</select>
 	
@@ -354,13 +354,13 @@
 			AND ${category} LIKE '%${keyword}%'
 		</if >
 		<if test="keyword != null and keyword !='' and category == null" >
-			AND A.NAME LIKE '%${keyword}%'
+			AND (M.NAME LIKE '%${keyword}%'
 		    OR A.PHONE LIKE '%${keyword}%' 
 		    OR A.EMAIL LIKE '%${keyword}%'
 		    OR A.COMPANY LIKE '%${keyword}%'
 		    OR A.POSITION LIKE '%${keyword}%'
 		    OR A.ADDRESS LIKE '%${keyword}%'
-		    OR S.NAME LIKE '%${keyword}%'
+		    OR S.NAME LIKE '%${keyword}%')
 		</if> 
 	</select>
 	
@@ -397,13 +397,13 @@
 			AND ${category} LIKE '%${keyword}%'
 		</if >
 		<if test="keyword != null and keyword !='' and category == null" >
-			AND M.NAME LIKE '%${keyword}%'
+			AND (M.NAME LIKE '%${keyword}%'
 		    OR A.PHONE LIKE '%${keyword}%' 
 		    OR A.EMAIL LIKE '%${keyword}%'
 		    OR A.COMPANY LIKE '%${keyword}%'
 		    OR A.POSITION LIKE '%${keyword}%'
 		    OR A.ADDRESS LIKE '%${keyword}%'
-		    OR S.NAME LIKE '%${keyword}%'
+		    OR S.NAME LIKE '%${keyword}%')
 		</if> 
 	</select>
 	

@@ -91,7 +91,7 @@
                                 <div class="info-box left">
                                     <label for="">
                                         <p>* 상 호</p>
-                                        <input type="text" name="company" value="${reciveInfo.company}" placeholder="필수 입력 사항입니다"/>
+                                        <input type="text" name="company" <c:if test="${not empty reciveInfo.name}"> value="${reciveInfo.company}" </c:if>placeholder="필수 입력 사항입니다"/>
                                     </label>
                                     <label for="">
                                         <p>* 성 명</p>
