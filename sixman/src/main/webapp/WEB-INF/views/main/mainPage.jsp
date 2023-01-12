@@ -26,12 +26,12 @@
     <div id="main-page2">
         <section id="g-col-1">
             <article id="main-box1" class="box">
-                <div id="time-box">11월 11일 11:00</div>
+                <div id="date-box" style="font-size: 1.3em; font-weight: 350; color: var(--main-color-dark);">${day}</div>
+                <div id="time-box" style="font-size: 2.7em;">${time}</div>
                 <div id="btn-box">
                     <div class="btn"><p>출 근</p></div>
                     <div class="btn"><p>퇴 근</p></div>
                 </div>
-                <div id="status-box"></div>
             </article>
             <article id="main-box2" class="box">
                 <div id="main-mail">

@@ -1,5 +1,7 @@
 package com.kh.sixman.main.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -75,7 +77,19 @@ public class MainController {
 			
 			//modelList
 		    model.addAttribute("noticelist", noticelist);
+
 		    model.addAttribute("deptMemberList", deptMemberList);
+
+		    
+			//실시간시간출력
+			Date date = new Date();
+			SimpleDateFormat day = new SimpleDateFormat("yyyy-MM-dd");
+			SimpleDateFormat time = new SimpleDateFormat("HH:mm");
+			
+			model.addAttribute("day", day.format(date) );
+			model.addAttribute("time", time.format(date) );
+		    
+
 		}
 		return "main/mainPage";
 	}
