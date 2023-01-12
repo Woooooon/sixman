@@ -25,7 +25,7 @@
 <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
 
 <div class="main-box">
-    < action="" id="docuhi" method="POST" enctype="multipart/form-data" >
+    <form action="" id="docuhi" method="POST" enctype="multipart/form-data" >
     <div id="sub-box" class="box">
         <div id="write-title">결제문서작성</div>
         <div id="write-box" class="box2">
@@ -49,7 +49,7 @@
                 </div>
             </div>
             <div class="docbox">
-                <div class="ppp">
+                 <div class="ppp">
                     <div>직급</div>
                     <div class="btn" ><button id="che" type="button" onclick="changeByJS()"><span id="ptagchange" class="material-symbols-outlined" id="pchange"> add </span></button> </div>
                     <div>심원용</div>
@@ -70,12 +70,13 @@
             </div>
         </div>
         <textarea name="content" id="summernote">${dvo.content}</textarea>
-        <div id="btn-box">
+        <a id="btn-box">
             <!-- <input name="subit" class="c-btn" type="submit" value="반려하기"> -->
-        <a href="${path}/document/modify?no=${dvo.no}"><input name="submit" id="qwer"  class="btn"  value="수정하기"></a>
+            <a href="${path}/document/modify?no=${dvo.no}"><input name="submit" class="btn" value="수정하기"></a>
+            
+           
         </div>
     </div>
-    
 </form>
 </div>
 
@@ -103,15 +104,15 @@
 
    
 </script>
-<script>
-    $("#che").click(function(){
-    $(".ptagchange").text("check");
-    });
+ <script>
+        $("#che").click(function(){
+        $(".ptagchange").text("check");
+        });
+        
+        function changeByJS() {
+        let x = document.getElementsByClassName("ptagchange")[0];
+        x.innerText="checkon"; 
+        }
 
-    function changeByJS() {
-    let x = document.getElementsByClassName("ptagchange")[0];
-    x.innerText="checkon"; 
-    }
-
-    </script>
+        </script>
 </html>

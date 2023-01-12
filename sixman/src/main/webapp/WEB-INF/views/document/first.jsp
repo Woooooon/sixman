@@ -8,7 +8,7 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <head>
 <meta charset="UTF-8">
-<title>기안문서함1</title>
+<title>기안문서함</title>
 <link rel="stylesheet" href="<c:url value='/resources/css/document1.css'/>">
 <link rel="stylesheet" href="<c:url value='/resources/css/document2.css'/>">
 
