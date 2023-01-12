@@ -365,6 +365,12 @@ a {
     align-items: center;
     padding: 5px;
     padding-left: 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#inner-box::-webkit-scrollbar{
+    width: 0;
 }
 
 .alarm-item {
@@ -375,6 +381,7 @@ a {
     align-items: center;
     gap: 5px;
     cursor: pointer;
+    padding: 5px 0;
 }
 
 .alarm-item:hover {

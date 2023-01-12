@@ -207,7 +207,6 @@ function alarmAjax() {
                     box.removeChild(box.firstChild);
                 }
 
-
                 for (vo of result) {
                     let msg = ``;
                     let f = null;
@@ -237,31 +236,24 @@ function alarmAjax() {
                             };
                             break;
                     }
-                    const div = document.createElement('div');
-                    div.classList.add('alarm-item');
+
+                    const tempDiv = document.createElement('div');
+                    tempDiv.classList.add('alarm-item');
+
                     const item = `            
-                    <div class="item-div">
+                    <div class="item-div" onclick="clickF(${vo.no},'${vo.type}',null,${f})">
                         <div class="item-header">
                             <div>[${vo.type}]</div>
                             <div>${vo.enrollDate}</div>
                         </div>
                         <div class="item-title">${msg}</div>
                     </div>
-                    <span class="t-btn material-symbols-outlined"> close </span>
+                    <span class="t-btn material-symbols-outlined" onclick="clickF(${vo.no},'${vo.type}',this)"> close </span>
                     `;
-                    div.innerHTML = item;
 
-                    div.querySelector('.item-div').addEventListener('click', () => {
-                        checkAjax(vo.no, vo.type);
-                        f();
-                    });
+                    tempDiv.innerHTML = item;
 
-                    div.querySelector('span').addEventListener('click', () => {
-                        div.remove();
-                        checkAjax(vo.no, vo.type);
-                    });
-
-                    box.append(div);
+                    box.append(tempDiv);
                 }
                 
             }else {
@@ -274,6 +266,18 @@ function alarmAjax() {
     httpRequest.responseType = 'json';
     httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
     httpRequest.send();
+}
+
+function clickF(no, type, ob, func) {
+    checkAjax(no, type);
+
+    if(ob){
+        ob.closest('.alarm-item').remove();
+    }
+
+    if(func){
+        func();
+    }
 }
 
 function checkAjax(no, type) {
