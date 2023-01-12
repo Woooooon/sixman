@@ -14,7 +14,12 @@
 </head>
 <body>
 
-<%@include file="/WEB-INF/views/common/menuBar.jsp" %>
+<c:if test="${loginMember.authorizeNo==3}">
+    <%@include file="/WEB-INF/views/common/tempMenuBar.jsp" %>
+</c:if>
+<c:if test="${loginMember.authorizeNo!=3}">
+    <%@include file="/WEB-INF/views/common/menuBar.jsp" %>
+</c:if>
 <main class="main-box">
 
 	<div id="notice-box" class="box">
