@@ -20,6 +20,8 @@ import com.kh.sixman.member.service.MemberService;
 import com.kh.sixman.member.vo.MemberVo;
 import com.kh.sixman.notice.service.NoticeService;
 import com.kh.sixman.notice.vo.NoticeVo;
+import com.kh.sixman.project.service.ProjectService;
+import com.kh.sixman.project.vo.ProjectVo;
 
 @Controller
 public class MainController {
@@ -30,6 +32,8 @@ public class MainController {
 	private MailService mailService;
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private ProjectService ps;
 	
 	@GetMapping("tempMain")
 	public String tempMain() {
@@ -89,6 +93,10 @@ public class MainController {
 			model.addAttribute("day", day.format(date) );
 			model.addAttribute("time", time.format(date) );
 		    
+			//프로젝트
+			List<ProjectVo> prjList = ps.selectList(Integer.parseInt(loginMember.getNo()));
+			System.out.println("prjList : " + prjList);
+			model.addAttribute("prjList", prjList);
 
 		}
 		return "main/mainPage";

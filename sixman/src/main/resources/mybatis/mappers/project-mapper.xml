@@ -5,7 +5,7 @@
 <mapper namespace="projectMapper">
 	
 	<select id="selectList" resultType="ProjectVo">
-		SELECT 
+		<!-- SELECT 
 		    P.NO  
 		    ,M2.NAME LEADER
 		    , M.NAME NAME
@@ -20,6 +20,22 @@
 		LEFT JOIN PROJECT_MEMBER PM ON P.NO = PM.PRJ_NO
 		LEFT JOIN MEMBER M ON M.NO = PM.MEM_NO
 		LEFT JOIN MEMBER M2 ON M2.NO = PM.MEM_NO
+		WHERE M.NO = #{no}
+		ORDER BY NO DESC -->
+		SELECT 
+		    P.NO  
+		    , M2.NAME AS LEADER
+		    , M.NAME NAME
+		    , P.TITLE
+		    , P.CONTENT
+		    , P.START_DATE
+		    , P.END_DATE
+		    , P.STATUS
+		    , P.FAVORITES_YN
+		    , P.PROGRESS
+		FROM PROJECT P
+		LEFT JOIN MEMBER M ON M.NO = P.WRITER
+		LEFT JOIN MEMBER M2 ON M2.NO = P.LEADER
 		WHERE M.NO = #{no}
 		ORDER BY NO DESC
 	</select>

@@ -104,14 +104,6 @@
                             <div class="todo-cont-list">
                                 <input type="checkbox">
                                 <div class="todo-item">${todo.content}</div>
-                                <c:if test="${todo.checkboxYn eq 'Y'}">
-                                    <input type="checkbox" checked>
-                                    <div>${todo.content}</div>
-                                </c:if>
-                                <c:if test="${todo.checkboxYn eq 'N'}">
-                                    <input type="checkbox">
-                                <div>${todo.content}</div>
-                                </c:if>
                             </div>
                         </c:forEach>
                     </div>

@@ -306,3 +306,29 @@
     border-radius: 50%;
     content: '';
 }
+
+#prj-box {
+    padding-left: 20px;
+    height: 100%;
+}
+
+#prj-box p {
+    width: 90%;
+    padding: 5px 0;
+    margin: 10px 0;
+    border-bottom: 1px solid var(--main-color);
+    font-size: 1.2em;
+    font-weight: 500;
+    color: var(--main-color);
+}
+
+.prjlist {
+    width: 100%;
+    height: 3vh;
+    display: flex;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 1em;
+    font-weight: 500;
+    margin-top: 5px;
+}

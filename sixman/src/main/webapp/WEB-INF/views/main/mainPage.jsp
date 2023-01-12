@@ -99,10 +99,19 @@
                     <div class="dates"></div>
                 </div>
             </article>
-            <article class="box"></article>
+            
         </section>
         <section id="g-col-3">
-            <article class="box"></article>
+            <article class="box">
+                <div id="prj-box">
+                    <p>프로젝트</p>
+                    <div class="prj-list-wrap">
+                        <c:forEach items="${prjList}" var="p" end="6">
+                            <div class="prjlist">★ ${p.title}</div>
+                        </c:forEach>
+                    </div>
+                </div>
+            </article>
             <article class="box">
                 <div id="dept-detail">
                     <div id="dept-detail-title">
