@@ -54,6 +54,7 @@
             <li><a>조직도</a></li>
             <li><a>일정</a></li>
             <li><a>급여</a></li>
+            <li><a>기업설정</a></li>
             <li><a href="/sixman/main">일반페이지 전환</a></li>
         </ul>
         <section id="menu-footer">
@@ -325,7 +326,6 @@
         {icon: "account_tree", title: "조직도"},
         {title: "조직도", url: "${path}/admin/employee/list"},
         {title: "사원등록", url: "${path}/admin/member/join"},
-        {title: "기업정보", url: "${path}/admin/company/edit"}
     ]);
 
     menuMap.set("일정", [
@@ -337,6 +337,11 @@
     menuMap.set("급여", [
         {icon: "calculate", title: "급여"},
         {title: "급여관리", url: "${path}/salary/salaryAdmin"}
+    ]);
+
+    menuMap.set("기업설정", [
+        {icon: "card_travel", title: "기업설정"},
+        {title: "기업설정", url: "${path}/admin/company/edit"}
     ]);
 
     const menuListBox = document.querySelector('#menu-list');

@@ -394,6 +394,23 @@ function createChat() {
     }, 500);
 }
 
+function joinAndCreate(no) {
+    const httpRequest = new XMLHttpRequest();
+    httpRequest.onreadystatechange = () => {
+        if (httpRequest.readyState === XMLHttpRequest.DONE) {
+                if (httpRequest.status === 200) {
+
+                    const rno = httpRequest.responseText;
+                    joinChat(rno);
+
+                }
+        }
+    }
+    httpRequest.open('post', '/sixman/createChat');
+    httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
+    httpRequest.send(`no=${no}`);
+}
+
 const fileBoxBtn = document.querySelectorAll('#containner-box div:not(.file-box)');
 fileBoxBtn.forEach(element => {
     element.addEventListener('click', ()=>{

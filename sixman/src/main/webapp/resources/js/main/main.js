@@ -110,6 +110,27 @@ class Popup {
         this.open();
     }
 
+    alertPop(title, text, callback) {
+        if (text == null || text.trim() == '') return;
+
+        this.itemBox.innerHTML =
+            '<span class="material-symbols-outlined"> task_alt </span>' + `<div class='popup-title'>${title}</div>` + `<div class='popup-text'>${text}</div>`;
+        this.createYesBtn();
+        this.createBtnBox();
+        this.btnBox.append(this.yesBtn);
+        this.itemBox.append(this.btnBox);
+
+        if (callback) {
+            this.yesBtn.addEventListener('click', () => {
+                setTimeout(() => {
+                    callback();
+                }, this.timer);
+            });
+        }
+
+        this.open();
+    }
+
     open() {
         this.section.append(this.itemBox);
         this.itemBox.animate(
@@ -140,20 +161,17 @@ class Popup {
         this.itemBox.animate(
             [
                 {
-                    // 마지막상태
                     opacity: 1,
                     width: '600px',
                     height: '300px',
                 },
                 {
-                    // 마지막상태
                     opacity: 0,
                     width: '600px',
                     height: '0',
                 },
             ],
             {
-                // 옵션
                 duration: this.timer,
                 fill: 'forwards',
             }

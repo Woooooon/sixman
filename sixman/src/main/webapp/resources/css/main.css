@@ -428,9 +428,6 @@ a {
     padding: 30px 50px;
     border-radius: 5px;
 
-    width: 600px;
-    height: 300px;
-
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1.5fr 1fr 1fr 2fr;
