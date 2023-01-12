@@ -333,7 +333,7 @@
 
 
 .with-chat-grade{
-	margin-right:10%;
+	margin-right:2%;
 	margin-top:6%;
 	width:25%;
 	margin-left:auto;
@@ -421,7 +421,7 @@
 
 .chatbutton01>.btn{
 	border:1px solid white;
-	padding:16%;
+	padding:16%;padding-top: 4%;
 }
 
 
@@ -1064,7 +1064,7 @@ input[id="chat-setting-check02"]{
 }
 
 .chat-teamname-area-version2{
-	margin-left:36%;
+	margin-left:42%;
 	width:40%;
 	position:absolute;
 }

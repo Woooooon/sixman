@@ -4,6 +4,11 @@
 <c:set var = "path" value = "${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
+
+<style>
+
+</style>
+
 <head>
 	<meta charset="UTF-8">
 	<title>육남상사</title>
@@ -12,8 +17,12 @@
     <link rel="stylesheet" href="${path}/resources/css/reset.css">
     <script src="${path}/resources/js/main/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    
+    
 </head>
 <body>
+<%-- 	<%@include file="/WEB-INF/views/messenger/test.jsp" %> include test완료 --%>
+		<%@include file="/WEB-INF/views/messenger/messengerMain.jsp" %>
 	<header id="main-header">
         <section id="logo">
             <c:if test="${not empty company.logoName}">
@@ -69,6 +78,13 @@
 	
 </body>
 <script>
+
+	const messengericon1111 = document.getElementById('msg');
+	messengericon1111.onclick = () => {
+		loadchatlist();
+	}
+
+		
     const menuMap = new Map();
 
     menuMap.set("공지사항", [
@@ -380,5 +396,31 @@
     httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
     httpRequest.send();
 
+    
+    
+//  include test완료
+// 	const messengerIcon = document.getElementById('msg');
+// 	const yolocall = document.getElementById('yoloyolo');
+	
+// 	messengerIcon.onclick = function loadchatlist() {
+// 		alert('test완료');
+// 		$(yolocall).show();
+// 		testtestee();
+// 	}
+
+// 	const messenger = document.getElementById('messenger-whole');
+// 	messenger.hide();
+//  	const messengericon1111 = document.getElementById('msg');
+ 	
+//  	//const messengerMenuBar = document.getElementById('messenger-whole');
+//  	//messengerMenuBar.hide();
+//  	messengericon1111.click = funnction(){
+//  		alert('2');
+//  	};
+    
+    
+    
+    
+    
 </script>
 </html>
