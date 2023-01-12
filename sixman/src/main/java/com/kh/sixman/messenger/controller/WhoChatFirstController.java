@@ -138,7 +138,7 @@ public class WhoChatFirstController {
 	//메신저 보내기
 	@GetMapping(value="chatroom/sendmessage", produces="application/json; charset=utf8")
 	public String sendMessageText(HttpSession session) {
-		ChatContent sendMessageData = new ChatContent();
+		//ChatContent sendMessageData = new ChatContent();
 		
 //		//로그인멤버
 //		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");

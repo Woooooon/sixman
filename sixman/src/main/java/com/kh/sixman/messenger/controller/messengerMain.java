@@ -33,4 +33,10 @@ public class messengerMain {
 //		return "/messenger/chattingRoom";
 //	}
 //		
+	//메신저 호출테스트1 화면
+	@GetMapping("/yolo")
+	public String yolocall() {
+		System.out.println("messenger > yolo ~~~");
+		return "/messenger/test";
+	}
 }
