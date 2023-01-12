@@ -3,7 +3,7 @@ class Popup {
         this.timer = 200;
 
         this.section = document.createElement('section');
-        this.section.classList.add('popup-mini-section');
+        this.section.classList.add('popup-section');
         this.miniSection = document.createElement('section');
         this.miniSection.classList.add('popup-mini-section');
 
