@@ -380,6 +380,57 @@
 }
 
 
+.progress {
+    margin-left: 25px;
+    background-color: #D3D3D3;
+    border-radius: 15px;
+    height: 20px;
+    width: 300px;
+}
+
+.progress-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: repeating-linear-gradient(
+    to left,
+    #12887A,
+    #2fa597,
+    #59c0b4);
+    box-shadow: 0 5px 5px -6px #12887A, 0 3px 7px #2fa597;
+    border-radius: 15px;
+    color: #fff;
+    height: 100%;
+    width: 0;
+    transition: 1s ease 0.3s;
+}
+
+.progress {
+    margin-left: 25px;
+    background-color: #D3D3D3;
+    border-radius: 15px;
+    height: 20px;
+    width: 130px;
+}
+
+.progress-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: repeating-linear-gradient(
+    to left,
+    #12887A,
+    #2fa597,
+    #59c0b4);
+    box-shadow: 0 5px 5px -6px #12887A, 0 3px 7px #2fa597;
+    border-radius: 15px;
+    color: #fff;
+    height: 100%;
+    width: 0;
+    transition: 1s ease 0.3s;
+}
+
+
 </style>
 
 <body>
@@ -490,10 +541,16 @@
                 <input id="end-day" type="date" style="width: 100px;" name="end" value="2023-01-14">
             </div>
             <div id="work-time">
-                소정 근로시간 &nbsp&nbsp&nbsp&nbsp<progress max="100" value="70" style="width:140px; height: 35px;"></progress>
+                총 근무시간 &nbsp&nbsp 
+                <div class="progress">
+                    <div class="progress-bar" style="width:80%;">80%</div>
+                </div>
             </div>
             <div id="work-time2">
-                소정 외근로시간&nbsp&nbsp<progress max="100" value="10" style="width:140px; height:35px;"></progress>
+                추가 근무시간                
+                <div class="progress">
+                    <div class="progress-bar" style="width:30%;">30%</div>
+                </div>
             </div>
         </div>
         <div id="rest-information" class="box">
@@ -574,24 +631,25 @@
         });
     }
 
+    //progress
+    var start = document.getElementById('start123');
+    var end = document.getElementById('end123');
 
-
-
-
-   
-
-
-
+    var result = start-end;
     
 
+    const progress = document.querySelector('.progress-bar');
+    const valueinput = document.querySelector('.valueinput');
+    const maxIntput = document.querySelector('.maxinput');
 
+    let finalValue = valueinput.value;
+    let max = 100;
+    changeGuage()
 
-
-
-
-    
-
-
+    function changeGuage(){
+    progress.style.width = `${(finalValue / max) * 100}%`;
+    progress.innerText = `${Math.ceil((finalValue / max) * 100)}%`;
+    }
 
 
 
