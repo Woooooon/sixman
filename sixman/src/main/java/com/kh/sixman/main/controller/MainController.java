@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.kh.sixman.mail.service.MailService;
 import com.kh.sixman.mail.vo.MailVo;
+import com.kh.sixman.member.service.MemberService;
 import com.kh.sixman.member.vo.MemberVo;
 import com.kh.sixman.notice.service.NoticeService;
 import com.kh.sixman.notice.vo.NoticeVo;
@@ -25,6 +26,8 @@ public class MainController {
 	private NoticeService noticeService;
 	@Autowired
 	private MailService mailService;
+	@Autowired
+	private MemberService memberService;
 	
 	@GetMapping("tempMain")
 	public String tempMain() {
@@ -61,7 +64,18 @@ public class MainController {
 		    RowBounds rb2 = new RowBounds(0 , 7);
 		    List<NoticeVo> noticelist = noticeService.selectList("", rb2);
 		    
+		    //내 부서원 목록
+		    Map<String, String> map = new HashMap<String, String>();
+			map.put("loginDeptNo", loginMember.getDeptNo());
+			map.put("loginTeamNo", loginMember.getTeamNo());
+			map.put("loginNo", loginMember.getNo());
+			
+			List<MemberVo> deptMemberList = memberService.selectdeptMemberList(map);
+		    
+			
+			//modelList
 		    model.addAttribute("noticelist", noticelist);
+		    model.addAttribute("deptMemberList", deptMemberList);
 		}
 		return "main/mainPage";
 	}

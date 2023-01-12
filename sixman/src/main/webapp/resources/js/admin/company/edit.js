@@ -267,7 +267,7 @@ $('#insertDept').click(() => {
                     removeDeptAjax(removeBtn);
                 });
 
-                $('.dept-list').append(div);
+                $('.dept-list > div').append(div);
                 $('#newDeptName').val('');
             },
             error: (error) => {
@@ -353,7 +353,7 @@ $('#insertPosition').click(() => {
                     removePositionAjax(removeBtn);
                 });
 
-                document.querySelector('.position-list').append(item);
+                document.querySelector('.position-list > div').append(item);
                 $('#newPositionName').val('');
             },
             error: (error) => {

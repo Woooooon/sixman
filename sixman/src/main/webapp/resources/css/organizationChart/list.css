@@ -182,28 +182,19 @@
 }
 
 #companyLogo {
-    margin: 0px 0px 10px 10px;
     width: 100px;
-    height: 40px;
+    height: 30px;
     overflow: hidden;
-}
-
-#companyLogo > img {
-    max-width: 100px;
-    max-height: 40px;
-    object-fit: fill;
 }
 
 #companyLogo-detail {
-    width: 100px;
-    height: 40px;
-    overflow: hidden;
+    height: 50px;
 }
-
+#companyLogo-detail > img {
+    height: 100%;
+}
 #companyLogo > img {
-    max-width: 100px;
-    max-height: 40px;
-    object-fit: fill;
+    height: 100%;
 }
 
 .header {
@@ -298,7 +289,7 @@
 .list-item:has(input:checked) {
     border-bottom: 1px solid var(--main-color);
 }
-
+/* 
 #dept-detail-title {
     width: 100%;
     height: 10%;
@@ -402,6 +393,106 @@
 
 #list-controller span:hover {
     color: #000;
+} */
+
+/* 부서원리스트 */
+#dept-detail {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    gap: 10px;
+}
+
+#dept-detail-title {
+    width: 100%;
+    color: var(--main-color);
+    font-size: 1.1em;
+    font-weight: 500;
+    border-bottom: 1px solid var(--main-color);
+    padding: 5px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+#dept-detail-title h3 {
+    font-size: 14px;
+    color: var(--bo-60);
+}
+
+.dept-list-wrap {
+    width: 100%;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    overflow-y: scroll;
+}
+
+.dept-list-wrap::-webkit-scrollbar {
+    width: 3px;
+}
+
+
+.dept-detail-list {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    border-bottom: 1px solid var(--bo-20);
+    padding: 5px 5px 10px 5px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dept-employee-detail {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dept-employee-detail > p:nth-child(2) {
+    font-size: 15px;
+    margin: 0 4px;
+}
+
+.dept-employee-detail > p:nth-child(3) {
+    font-size: 12px;
+}
+
+.dept-employee-pic {
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    border: 1px solid var(--bo-20);
+    overflow: hidden;
+}
+
+.dept-employee-pic > img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50px;
+    object-fit: fill;
+}
+
+.dept-list-controller {
+    display: flex;
+    align-items: flex-end;
+    font-size: 13px;
+}
+
+.dept-list-controller a > span {
+    font-size: 17px;
+    color: var(--bo-60);
+}
+
+.dept-list-controller a {
+    text-decoration: none;
+}
+
+.dept-list-controller a:nth-child(2) {
+    margin: 0 5px;
 }
 
 /* page */
