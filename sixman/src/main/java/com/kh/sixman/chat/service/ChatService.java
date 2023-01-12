@@ -107,11 +107,7 @@ public class ChatService {
 		return vo;
 	}
 
-	public int createChat(MemberVo loginMember, Set<String> no) {
-		Map<String, Object> map = new HashMap<>();
-		map.put("loginMember", loginMember);
-		no.add(loginMember.getNo());
-		map.put("no", no);
+	public int createChat(Map<String, Object> map) {
 		return chatDao.createChat(sst, map);
 	}
 

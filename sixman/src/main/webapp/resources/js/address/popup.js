@@ -49,7 +49,7 @@ removeCate.forEach((removeBtn) => {
             deleteList.push(cateNo);
             parentElem.parentElement.remove();
             console.log(deleteList);
-        });
+        }, true, true);
     });
 });
 
@@ -79,5 +79,5 @@ submit.addEventListener('click', () => {
                 console.warn('error: ' + error);
             },
         });
-    });
+    }, false, true);
 });

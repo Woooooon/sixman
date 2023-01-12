@@ -412,7 +412,8 @@ a {
     font-weight: 700;
 }
 
-.popup-section {
+.popup-section ,
+.popup-mini-section {
     position: fixed;
     top: 0;
     width: 100vw;
@@ -443,6 +444,11 @@ a {
     overflow: hidden;
 }
 
+.popup-mini-section .popup-item{
+    gap: 5px;
+    padding: 10px;
+}
+
 .popup-item span,
 .popup-item .popup-title,
 .popup-text {
@@ -454,11 +460,19 @@ a {
     font-size: 5em;
 }
 
+.popup-mini-section .popup-item span{
+    font-size: 1.5em;
+}
+
 .popup-item .popup-title {
     font-weight: 700;
     font-size: 2em;
     color: var(--bo-80);
     justify-self: start;
+}
+
+.popup-mini-section .popup-item .popup-title{
+    font-size: 0.5em;
 }
 
 .popup-item .popup-text {
@@ -468,6 +482,11 @@ a {
     font-size: 1.2em;
 }
 
+.popup-mini-section .popup-item .popup-text{
+    font-size: 0.7em;
+    color: var(--bo-80);
+}
+
 .popup-item .popup-btn-box {
     display: flex;
     justify-content: center;
@@ -475,6 +494,11 @@ a {
     gap: 20px;
     width: 100%;
     height: 100%;
+}
+
+.popup-mini-section .popup-item .popup-btn-box{
+    height: 80%;
+    font-size: 0.5em;
 }
 
 .popup-item #yesBtn,

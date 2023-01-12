@@ -125,13 +125,23 @@ public class ChatController {
 		chatService.join(map);
 	}
 	
+	@ResponseBody
 	@PostMapping(value = "createChat")
-	public void createChat(@RequestParam Set<String> no, HttpSession session) {
+	public String createChat(@RequestParam Set<String> no, HttpSession session) {
 		MemberVo loginMember = getLoginMember(session);
-		int result = chatService.createChat(loginMember, no);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("loginMember", loginMember);
+		no.add(loginMember.getNo());
+		map.put("no", no);
+		
+		int result = chatService.createChat(map);
+		
 		if(result!=1) {
 			log.error("createChat 등록 실패");
 		}
+		
+		return (String) map.get("rno");
 	}
 	
 	@PostMapping(value = "bookMark")
