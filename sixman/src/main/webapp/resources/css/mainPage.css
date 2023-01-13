@@ -446,4 +446,37 @@
     height: 100%;
     width: 0;
     transition: 1s ease 0.3s;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 1em;
+    font-weight: 500;
+    margin-top: 5px;
+}
+
+
+
+/*  */
+#scadual-box{
+    display: flex;
+    gap: 10px;
+}
+
+#scadual-box > div{
+    width: 50%;
+}
+
+#scadual-box .box-item{
+    grid-template-columns: 0.5fr 10fr 2fr;
+    padding-left: 20px;
+}
+
+#scadual-box .box-item > div:nth-of-type(1){
+    width: 5px;
+    height: 100%;
+    background-color: var(--main-color);
+    border-radius: 2px;
+}
+
+#scadual-box .box-item > div:nth-of-type(3){
+    color: var(--bo-40);
 }
