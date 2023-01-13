@@ -99,7 +99,43 @@
                     <div class="dates"></div>
                 </div>
             </article>
-            
+            <article class="box" id="scadual-box">
+                <div>
+                    <div class="box-title">오늘일정</div>
+                    <div class="item-box">
+                         <div class="box-item">
+                            <div></div>
+                            <div>프로젝트 발표 준비</div>
+                            <div>09:00</div>
+                         </div>
+                         <div class="box-item">
+                            <div></div>
+                            <div>프로젝트 발표</div>
+                            <div>11:20</div>
+                         </div>
+                         <div class="box-item">
+                            <div></div>
+                            <div>뒷풀이</div>
+                            <div>17:00</div>
+                         </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="box-title">내일일정</div>
+                    <div class="item-box">
+                        <div class="box-item">
+                            <div></div>
+                            <div>끝장나게 숨쉬기</div>
+                            <div>08:00</div>
+                         </div>
+                        <div class="box-item">
+                            <div></div>
+                            <div>신나게 놀기</div>
+                            <div>14:00</div>
+                         </div>
+                    </div>
+                </div>
+            </article>
         </section>
         <section id="g-col-3">
             <article class="box">
