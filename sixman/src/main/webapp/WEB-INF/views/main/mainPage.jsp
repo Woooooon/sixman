@@ -104,11 +104,33 @@
         <section id="g-col-3">
             <article class="box">
                 <div id="prj-box">
-                    <p>프로젝트</p>
-                    <div class="prj-list-wrap">
-                        <c:forEach items="${prjList}" var="p" end="6">
-                            <div class="prjlist">★ ${p.title}</div>
-                        </c:forEach>
+                    <div class="prj-title">
+                        <p>프로젝트</p>
+                        <div class="prj-status">
+                            <c:if test="${prjList[1].status eq 'C' }"><p>완료</p></c:if>
+                        </div>
+                    </div>
+                    <div class="prj-detail-wrap">
+                        <div class="prj-detail-title">
+                            <p> ${prjList[1].title} </p>
+                            <div class="prj-detail-leader"><p>리더 </p> <span>${prjList[1].leader}</span></div>
+                        </div>
+                        <div class="progressBar">
+                            <div class="guage" value="${prjList[1].progress}">${prjList[1].progress}</div>
+                            <input type="hidden" id="progress_val" value="${prjList[1].progress}">
+                        </div>
+                        <div class="dateBox">
+                            <c:choose>
+                                <c:when test="${fn:length(prjList[1].startDate) > 12 }">
+                                    <div class="prj-detail-startDate"><p>시작 :</p><span><c:out value="${fn:substring(prjList[1].startDate, 0, 10)}" /></span></div>
+                                </c:when>
+                            </c:choose>
+                            <c:choose>
+                                <c:when test="${fn:length(prjList[1].endDate) > 12 }">
+                                    <div class="prj-detail-endDate"><p>마감 :</p> <span><c:out value="${fn:substring(prjList[1].endDate, 0, 10)}" /></span></div>
+                                </c:when>
+                            </c:choose>
+                        </div>
                     </div>
                 </div>
             </article>

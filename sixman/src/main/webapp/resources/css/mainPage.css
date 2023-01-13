@@ -308,27 +308,142 @@
 }
 
 #prj-box {
-    padding-left: 20px;
+    padding: 20px;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-#prj-box p {
-    width: 90%;
-    padding: 5px 0;
-    margin: 10px 0;
+
+.prj-title {
+    display: flex;
+    justify-content: space-between;
+    height: 10%;
+    width: 100%;
+    align-items: center;
     border-bottom: 1px solid var(--main-color);
+    padding-bottom: 3px;
+}
+
+.prj-title > p{
     font-size: 1.2em;
     font-weight: 500;
     color: var(--main-color);
 }
 
-.prjlist {
-    width: 100%;
-    height: 3vh;
+.prj-title > div{
     display: flex;
-    text-align: center;
-    vertical-align: middle;
-    font-size: 1em;
-    font-weight: 500;
-    margin-top: 5px;
+    justify-content: center;
+}
+
+
+.prj-title > div > p{
+    background-color: #17a897;
+    color: #fff;
+    font-size: 14px;
+    padding: 5px 11px;
+    border-radius: 50px;
+    margin-bottom: 3px;
+}
+
+.prj-detail-wrap{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 20px;
+    width: 100%;
+    height: 90%;
+}
+
+.prj-detail-title{
+    width: 100%;
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--main-color-dark);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.prj-detail-progress{
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.dateBox{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.prj-detail-leader{
+    display: flex;
+    gap: 10px;
+}
+.prj-detail-startDate,
+.prj-detail-endDate {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.prj-detail-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 70%;
+}
+
+/* #prj-detail-progress{
+
+} */
+.prj-detail-leader p{
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.prj-detail-leader span{
+    font-size: 12px;
+    font-weight: 900;
+    color: var(--main-color-dark);
+}
+
+.prj-detail-startDate p,
+.prj-detail-endDate p {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.prj-detail-startDate span,
+.prj-detail-endDate span {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--bo-40);
+}
+
+
+.progressBar {
+    width: 100%;
+    height: 15px;
+    border-radius: 15px;
+    background-color: #d9d9d9;
+}
+
+.guage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: repeating-linear-gradient(
+    to left,
+    #12887A,
+    #2fa597,
+    #59c0b4);
+    box-shadow: 0 5px 5px -6px #12887A, 0 3px 7px #2fa597;
+    border-radius: 15px;
+    color: #fff;
+    height: 100%;
+    width: 0;
+    transition: 1s ease 0.3s;
 }

@@ -70,3 +70,26 @@ const goToday = () => {
     date = new Date();
     renderCalender();
 };
+
+progress();
+
+function progress(){
+
+  const progress = document.querySelectorAll('.progressBar');
+  
+  let max = 100;
+  progress.forEach(box => {
+ 
+    const guage = box.querySelector('.guage');
+    const bbox = box.querySelector('input[type="hidden"]').value;
+ 
+    changeGuage();
+    
+    function changeGuage(){
+      guage.style.width = `${(bbox / max) * 100}%`;
+      guage.innerText = `${Math.ceil((bbox / max) * 100)}%`;
+    }
+
+  })
+
+}
